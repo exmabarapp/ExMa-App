@@ -1,0 +1,22 @@
+ExMa Bar – App
+==============
+
+Aktualisieren auf GitHub Pages:
+1. Auf github.com das Repository der App öffnen.
+2. "Add file" -> "Upload files".
+3. ALLE Dateien dieses Ordners (entpackt!) markieren und hineinziehen.
+   Es gibt keine Unterordner. Gleichnamige Dateien werden dabei ersetzt.
+4. "Commit changes" klicken. Nach 1-2 Minuten ist die neue Version online.
+Der Link bleibt gleich. Installierte Apps holen sich die neue Version beim nächsten Öffnen.
+
+Inhalte:
+Alle Abende, Drinks, Preise, Links und die Getränkekarte stehen in index.html ganz oben
+im Abschnitt "INHALTE". Neue Abende einfach in EVENTS ergänzen – die Reihenfolge ergibt
+sich aus dem Datum, der nächste Abend erscheint automatisch zuerst.
+Bei jeder neuen Version in sw.js die Zahl bei VERSION erhöhen.
+
+Firebase (gemeinsame Zahlen, Bestenliste, Wünsche, Team-Login):
+- Projekt: exma-bar-app (console.firebase.google.com)
+- Sicherheitsregeln: Inhalt von firestore.rules unter Firestore Database -> Regeln einfügen
+- Team-Konto: club@ba-glauchau.de, Passwort = "exma-team-" + PIN (aktuell PIN 9876)
+  PIN ändern = in Firebase unter Authentication -> Nutzer das Passwort ändern.

@@ -1,0 +1,88 @@
+rules_version = '2';
+// Sicherheitsregeln für die ExMa-Bar-App
+// Gäste: dürfen alle Zahlen lesen, alle 20 Sekunden genau einen Drink eintragen,
+//        sich in die Beerpong-Bestenliste eintragen und Wünsche abschicken.
+// Team (Konto club@ba-glauchau.de): darf alles zählen, zurücksetzen, Wünsche lesen und löschen.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isTeam() { return signedIn() && request.auth.token.email == "club@ba-glauchau.de"; }
+
+    function guestDoc() { return /databases/$(database)/documents/gaeste/$(request.auth.uid); }
+
+    // genau ein Drink: Abend- und Semesterzähler derselben Sorte +1 und eine Matrikel +1
+    function oneDrink() {
+      let n = request.resource.data;
+      let o = resource.data;
+      let d = n.diff(o).affectedKeys();
+      return d.size() == 3
+        && d.hasOnly(['h_bier', 'h_mische', 'h_shot', 's_bier', 's_mische', 's_shot', 'm_24', 'm_25', 'm_26'])
+        && (d.hasAll(['h_bier', 's_bier']) || d.hasAll(['h_mische', 's_mische']) || d.hasAll(['h_shot', 's_shot']))
+        && d.hasAny(['m_24', 'm_25', 'm_26'])
+        && (!d.hasAny(['h_bier'])   || n.h_bier   == o.h_bier + 1)
+        && (!d.hasAny(['h_mische']) || n.h_mische == o.h_mische + 1)
+        && (!d.hasAny(['h_shot'])   || n.h_shot   == o.h_shot + 1)
+        && (!d.hasAny(['s_bier'])   || n.s_bier   == o.s_bier + 1)
+        && (!d.hasAny(['s_mische']) || n.s_mische == o.s_mische + 1)
+        && (!d.hasAny(['s_shot'])   || n.s_shot   == o.s_shot + 1)
+        && (!d.hasAny(['m_24'])     || n.m_24     == o.m_24 + 1)
+        && (!d.hasAny(['m_25'])     || n.m_25     == o.m_25 + 1)
+        && (!d.hasAny(['m_26'])     || n.m_26     == o.m_26 + 1)
+        // im selben Schritt muss der Gast seinen Zeitstempel setzen (Sperrzeit wird dort geprüft)
+        && getAfter(guestDoc()).data.letzter == request.time;
+    }
+
+    match /live/stats {
+      allow read: if true;
+      allow create: if isTeam();
+      allow update: if isTeam() || (signedIn() && oneDrink());
+      allow delete: if false;
+    }
+
+    match /gaeste/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['letzter'])
+        && request.resource.data.letzter == request.time
+        && (resource == null || resource.data.letzter + duration.value(20, 's') <= request.time);
+    }
+
+    match /beerpong/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['name', 'cups', 'ms', 'at', 'uid'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 16
+        && request.resource.data.cups is int && request.resource.data.cups >= 0 && request.resource.data.cups <= 300
+        && request.resource.data.ms is int && request.resource.data.ms >= request.resource.data.cups * 1500
+        && request.resource.data.at == request.time
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeam();
+    }
+
+    match /busfahrer/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['name', 'score', 'at', 'uid'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 16
+        && request.resource.data.score is int && request.resource.data.score >= 1 && request.resource.data.score <= 51
+        && request.resource.data.at == request.time
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeam();
+    }
+
+    match /wuensche/{id} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['art', 'wunsch', 'name', 'studiengang', 'at'])
+        && request.resource.data.art in ['Drink', 'Motto']
+        && request.resource.data.wunsch is string
+        && request.resource.data.wunsch.size() >= 3 && request.resource.data.wunsch.size() <= 400
+        && request.resource.data.name is string && request.resource.data.name.size() <= 60
+        && request.resource.data.studiengang is string && request.resource.data.studiengang.size() <= 60
+        && request.resource.data.at == request.time;
+      allow read, delete: if isTeam();
+    }
+  }
+}
