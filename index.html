@@ -601,25 +601,30 @@ a { color: inherit; }
   font-variant-numeric: tabular-nums;
 }
 
-/* Happy Hour */
+/* Happy Hour: Zeitleiste oben und Angebote in einem gemeinsamen Rahmen */
+.hh-card {
+  border-radius: 24px; overflow: hidden;
+  border: 1.5px solid var(--a3);
+  background: var(--night-2);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--a3) 22%, transparent);
+}
 .hh {
-  padding: 22px 20px 20px;
-  border-radius: 28px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px;
+  padding: 11px 16px 12px;
   background:
     repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 12px, transparent 12px 24px),
     linear-gradient(160deg, color-mix(in srgb, var(--a3) 85%, #000) 0%, color-mix(in srgb, var(--a2) 70%, #000) 100%);
 }
-.hh .label { font-family: var(--f-script); font-size: 32px; line-height: 1; color: #fff; text-shadow: 0 0 14px rgba(255,255,255,.6); }
-.hh .time { margin-top: 8px; font-family: var(--f-display); font-size: clamp(38px, 12vw, 56px); line-height: .95; font-variant-numeric: tabular-nums; }
-.hh .chip { margin-top: 14px; border-color: rgba(255,255,255,.6); background: rgba(0,0,0,.25); }
-.offers { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.hh .label { font-family: var(--f-script); font-size: 19px; line-height: 1; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,.5); }
+.hh .time { margin-top: 3px; font-family: var(--f-display); font-size: 26px; line-height: 1; font-variant-numeric: tabular-nums; }
+.hh .time small { margin-left: 6px; font-family: var(--f-body); font-size: 14px; font-weight: 800; letter-spacing: .04em; }
+.hh .chip { margin: 0; border-color: rgba(255,255,255,.6); background: rgba(0,0,0,.25); }
+.offers { list-style: none; margin: 0; padding: 0; display: grid; }
 .offers li {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 14px 16px;
-  border-radius: 18px;
-  background: var(--night-2);
-  border: 1px solid var(--line);
 }
+.offers li + li { border-top: 1px solid var(--line); }
 .offers b { font-weight: 800; font-size: 16px; }
 .offers span { display: block; color: var(--dim); font-size: 13px; margin-top: 2px; }
 .offers .p { text-align: right; font-variant-numeric: tabular-nums; flex: none; }
@@ -1014,6 +1019,23 @@ a { color: inherit; }
   100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .tile-banner { animation: none; } }
+.app.game-solo > *:not(.view-game):not(.view-bus) { visibility: hidden !important; }
+.app.game-solo > *:not(.view-game):not(.view-bus) * { animation-play-state: paused !important; }
+/* PayPal-Kachel im Hauptmenü */
+.mtile.tile-pay { padding: 0; display: flex; flex-direction: column; background: linear-gradient(160deg, #ffdb70 0%, #ffc439 45%, #f2a900 100%); border-color: #ffe7a0; box-shadow: 0 0 22px rgba(255,196,57,.35); color: #0b2a6b; }
+.tile-pay .pay-main { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; padding: 14px 12px 10px; color: inherit; text-decoration: none; }
+.pp-head { display: flex; align-items: center; gap: 6px; }
+.pp-mark svg { display: block; width: 40px; height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.18)); }
+.pp-word { font: italic 900 27px/1 Verdana, "DejaVu Sans", Arial, sans-serif; letter-spacing: -.03em; }
+.pp-word i { font-style: inherit; }
+.pp-word i:first-child { color: #003087; }
+.pp-word i:last-child { color: #0079c1; }
+.tile-pay b { font-family: var(--f-display); font-weight: 400; font-size: 21px; line-height: 1.02; text-transform: uppercase; color: #0b2a6b; }
+.tile-pay small { display: block; max-width: calc(100% - 40px); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: rgba(11,42,107,.8); }
+.tile-pay .pp-go { position: absolute; right: 10px; bottom: 10px; width: 32px; height: 32px; border-radius: 50%; background: #003087; color: #fff; display: grid; place-items: center; }
+.tile-pay .pp-go svg { width: 16px; height: 16px; }
+.tile-pay .legal-links { display: flex; gap: 12px; padding: 8px 12px 10px; border-top: 1px solid rgba(0,48,135,.2); }
+.tile-pay .legal-links a { font-size: 11.5px; font-weight: 700; color: rgba(11,42,107,.78); text-decoration: none; min-height: 22px; display: flex; align-items: center; }
 /* ---------- Busfahrer (Höher oder Tiefer) ---------- */
 .view-bus {
   z-index: 30; opacity: 0; pointer-events: none; transform: none; transition: opacity .4s ease;
@@ -1156,12 +1178,6 @@ a { color: inherit; }
 .tile-rank .crowns svg { width: 22px; height: 22px; filter: drop-shadow(0 0 6px rgba(255,207,74,.7)); }
 .tile-game { background: linear-gradient(180deg, rgba(18,4,31,0) 30%, rgba(18,4,31,.85)), linear-gradient(180deg, #ffb347, #ff5f6d 45%, #7b2cff); border: 1.5px solid #2ff3e0; box-shadow: 0 0 16px rgba(47,243,224,.35); }
 .tile-game .ball { position: absolute; right: 10px; top: 10px; width: 30px; height: 30px; animation: ballHop 1.2s ease-in-out infinite; }
-.tile-info { padding: 12px; display: grid; align-content: space-between; gap: 6px; }
-.tile-info a { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; min-height: 30px; }
-.tile-info a svg { width: 18px; height: 18px; flex: none; color: #9fe3ff; }
-.tile-info a span { overflow-wrap: anywhere; line-height: 1.25; }
-.tile-info .legal-links { display: flex; gap: 10px; font-size: 12px; color: rgba(255,255,255,.65); border-top: 1px solid rgba(255,255,255,.12); padding-top: 8px; }
-.tile-info .legal-links a { font-size: 12px; font-weight: 600; min-height: 24px; color: rgba(255,255,255,.75); }
 
 
 .menu-head .app-pill {
@@ -1218,12 +1234,12 @@ a { color: inherit; }
 }
 @keyframes tapRipple { 0%, 20% { opacity: 0; transform: scale(.8); } 25% { opacity: .9; } 60%, 100% { opacity: 0; transform: scale(1.7); } }
 /* passende Kachel blinkt kurz weiß auf: oben links, oben rechts, unten rechts, unten links */
-.menu-grid > .tile-ev, .menu-grid > .tile-info, .menu-grid > .tile-split .tile-btn {
+.menu-grid > .tile-ev, .menu-grid > .tile-pay, .menu-grid > .tile-split .tile-btn {
   outline: 2px solid rgba(255,255,255,0); outline-offset: 2px;
   animation: tileFlash 8s linear infinite;
 }
 .menu-grid > .mtile:nth-child(2) { animation-delay: 2s; }
-.menu-grid > .tile-info { animation-delay: 4s; }
+.menu-grid > .tile-pay { animation-delay: 4s; }
 .menu-grid > .tile-split .tile-btn { animation-delay: 6s; }
 @keyframes tileFlash {
   0%, 26%, 100% { outline-color: rgba(255,255,255,0); }
@@ -2218,14 +2234,18 @@ function renderDetail(ev) {
     <section class="block" id="s-happy" aria-labelledby="h-happy">
       <h3 class="sec-title" id="h-happy">Happy Hour</h3>
       ${ev.happyHour.platzhalter ? noteHTML("Beispielinhalte: Die Happy Hour für diesen Abend folgt noch.") : ""}
+      <div class="hh-card">
       <div class="hh">
-        <div class="label">${esc(ev.wdLong)}, ${esc(ev.dm)}</div>
-        <div class="time">${esc(ev.happyHour.von)}–${esc(ev.happyHour.bis)}</div>
+        <div>
+          <div class="label">${esc(ev.wdLong)}, ${esc(ev.dm)}</div>
+          <div class="time">${esc(ev.happyHour.von)}–${esc(ev.happyHour.bis)}<small>Uhr</small></div>
+        </div>
         <span id="hhChip">${chip(hhStatus(ev))}</span>
       </div>
       <ul class="offers">${ev.happyHour.angebote.map((a) => `
         <li${a.animation ? ' class="offer-anim"' : ""}>${a.animation === "bier" ? beerAnim() : a.animation === "mische" ? mixAnim() : ""}<div><b>${esc(a.name)}</b><span>${esc(a.info || "")}</span></div>
         <div class="p">${a.preis != null ? `<strong>${euro(a.preis)}</strong>${a.statt ? `<s>statt ${euro(a.statt)}</s>` : ""}${a.zusatz ? `<small>${esc(a.zusatz)}</small>` : ""}` : `<strong>${esc(a.text || "")}</strong>`}</div></li>`).join("")}</ul>
+      </div>
       ${nextLabel("s-happy")}
     </section>` : "";
 
@@ -2981,6 +3001,7 @@ const Game = (() => {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height;
     cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    tableCv = null;
   }
   const fmt = (ms) => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
   function hud() {
@@ -3038,7 +3059,7 @@ const Game = (() => {
     return { x, z, h };
   }
   function launch(xl, zl) {
-    ball = { xl, zl, t: 0, dur: 760 + Math.min(zl, 1.2) * 300, apex: 1.25 * (.55 + Math.min(zl, 1.2) * .5), phase: "fly", checked: false, x: 0, z: 0, h: .55, k: 0 };
+    ball = { xl, zl, t: 0, dur: 600 + Math.min(zl, 1.2) * 240, apex: 1.25 * (.55 + Math.min(zl, 1.2) * .5), phase: "fly", checked: false, x: 0, z: 0, h: .55, k: 0 };
   }
   /* Prüfen, sobald der Ball beim Herunterfallen die Höhe des Becherrands erreicht */
   function checkRim(pos) {
@@ -3133,7 +3154,18 @@ const Game = (() => {
   }
 
   /* ---------- Zeichnen ---------- */
+  /* Der Tisch ändert sich nie: einmal in ein Zwischenbild zeichnen, danach nur noch kopieren (spart viel Rechenzeit) */
+  let tableCv = null;
   function drawTable() {
+    if (!tableCv || tableCv.width !== cv.width || tableCv.height !== cv.height) {
+      tableCv = document.createElement("canvas");
+      tableCv.width = cv.width; tableCv.height = cv.height;
+      const tc = tableCv.getContext("2d"); tc.setTransform(dpr, 0, 0, dpr, 0, 0);
+      paintTable(tc);
+    }
+    ctx.drawImage(tableCv, 0, 0, W, H);
+  }
+  function paintTable(ctx) {
     const bg = ctx.createLinearGradient(0, 0, 0, H);
     bg.addColorStop(0, "#12041f"); bg.addColorStop(.45, "#3a0b55"); bg.addColorStop(.62, "#8a1270"); bg.addColorStop(1, "#12041f");
     ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
@@ -3214,7 +3246,7 @@ const Game = (() => {
   let last = 0;
   function frame(now) {
     if (!running) return;
-    const dt = Math.min(50, now - (last || now)); last = now;
+    const dt = Math.min(120, now - (last || now)); last = now;
     if (!over) $("bpTime").textContent = fmt(now - tStart);
     /* bewegliche Becher */
     cups.forEach((c) => {
@@ -3324,6 +3356,7 @@ const Game = (() => {
       running = true;
       app.classList.add("is-game");
       $("game").setAttribute("aria-hidden", "false");
+      soloView(true);
       resize(); reset(); last = 0;
       raf = requestAnimationFrame(frame);
     },
@@ -3332,12 +3365,30 @@ const Game = (() => {
       running = false; cancelAnimationFrame(raf); clearInterval(topTimer);
       app.classList.remove("is-game");
       $("game").setAttribute("aria-hidden", "true");
+      soloView(false);
     }
   };
 })();
 
 
 
+
+
+/* Während eines Minispiels: Seiten dahinter ausblenden und deren Animationen anhalten (flüssigeres Spiel) */
+let soloTimer = 0;
+function soloView(on) {
+  clearTimeout(soloTimer);
+  const svgs = document.querySelectorAll(".view-hero svg, .view-detail svg");
+  if (on) {
+    soloTimer = setTimeout(() => {
+      app.classList.add("game-solo");
+      svgs.forEach((s) => { if (s.pauseAnimations) s.pauseAnimations(); });
+    }, 480);
+  } else {
+    app.classList.remove("game-solo");
+    if (!reduceMotion) svgs.forEach((s) => { if (s.unpauseAnimations) s.unpauseAnimations(); });
+  }
+}
 
 /* ================= Busfahrer: Höher oder Tiefer ================= */
 const busAt = (e) => (e.at && e.at.toMillis ? e.at.toMillis() : (typeof e.at === "number" ? e.at : Date.now()));
@@ -3449,7 +3500,7 @@ const Bus = (() => {
         <input id="busName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(store.get("exmaBusName") || "")}">
         <div class="row2"><button class="ghost" id="busAgain" type="button">Neu mischen</button><button class="primary" id="busSave" type="button">Eintragen</button></div>
         <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>`
-        : `<div class="row2"><button class="ghost" id="busTop" type="button">Top 10</button><button class="primary" id="busAgain" type="button">Neu mischen</button></div>`}
+        : `<div class="row2"><button class="ghost" id="busAgain" type="button">Neu mischen</button><button class="primary" id="busTop" type="button">Top 10</button></div>`}
         ${canSave ? `<button class="linkbtn" id="busTop" type="button">Top 10 ansehen</button>` : ""}
       </div>`;
     $("busAgain").addEventListener("click", newGame);
@@ -3500,6 +3551,7 @@ const Bus = (() => {
       running = true;
       app.classList.add("is-bus");
       $("bus").setAttribute("aria-hidden", "false");
+      soloView(true);
       newGame();
     },
     close() {
@@ -3507,6 +3559,7 @@ const Bus = (() => {
       running = false;
       app.classList.remove("is-bus");
       $("bus").setAttribute("aria-hidden", "true");
+      soloView(false);
     }
   };
 })();
@@ -3599,10 +3652,13 @@ function buildMenu() {
         <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Bus&shy;fahrer</b></span></a>
       </div>
     </div>
-    <div class="mtile tile-info">
-      <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>${esc(CLUB.handle)}</span></a>
-      <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>${esc(CLUB.email)}</span></a>
-      <a href="#paypal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg><span>PayPal</span></a>
+    <div class="mtile tile-pay">
+      <a class="pay-main" href="#paypal" aria-label="Mit PayPal bezahlen">
+        <span class="pp-head"><span class="pp-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg></span><span class="pp-word"><i>Pay</i><i>Pal</i></span></span>
+        <b>Bargeldlos<br>bezahlen</b>
+        <small>QR-Code scannen oder direkt antippen</small>
+        <i class="pp-go">${ICON_ARROW}</i>
+      </a>
       <div class="legal-links"><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a></div>
     </div>`;
   g.querySelectorAll(".tile-ev").forEach((t) => {
