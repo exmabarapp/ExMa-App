@@ -1352,6 +1352,86 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
 }
+
+/* ===== Neues Hauptmenü zum Scrollen ===== */
+.view-menu { display: block; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.menu-head { position: sticky; top: calc(-14px - var(--safe-t)); z-index: 8; margin: calc(-14px - var(--safe-t)) -14px 0; padding: calc(14px + var(--safe-t)) 18px 12px; background: linear-gradient(180deg, rgba(7,6,15,.96) 70%, rgba(7,6,15,0)); }
+.menu-grid { display: flex !important; flex-direction: column; gap: 12px; flex: none !important; }
+#tapHint { display: none !important; }
+.hm-hero .tile-ev { height: min(58vh, 500px); min-height: 360px; padding: 16px; border-radius: 28px; }
+.hm-hero .tile-label { font-size: 12px; }
+.hm-hero .tile-ev .chip { font-size: 12px; padding: 5px 11px; }
+.hm-hero .tile-sub { font-size: 26px; }
+.hm-hero .tile-date b { font-size: 24px; }
+.hm-hero .tile-date span { font-size: 12px; }
+.hm-hero .tile-extra { font-size: 12px; padding: 7px 11px; }
+.hm-hero .tile-go { margin-top: 12px; font-size: 16px; gap: 10px; }
+.hm-hero .tile-go > span { margin-right: auto; }
+.hm-hero .tile-go i { width: 38px; height: 38px; }
+.hm-hero .tile-scene svg { top: -6%; }
+.tile-cal { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--a1); background: rgba(5,8,22,.45); color: var(--a1); font: 800 13px var(--f-body); }
+.tile-cal svg { width: 15px; height: 15px; }
+.hm-next { position: relative; overflow: hidden; isolation: isolate; display: flex; align-items: center; gap: 10px; min-height: 96px; padding: 12px 14px; border-radius: 22px; background: var(--night); border: 1px solid color-mix(in srgb, var(--a1) 45%, transparent); box-shadow: 0 0 18px color-mix(in srgb, var(--a3) 22%, transparent); cursor: pointer; }
+.hm-next .tile-scene { position: absolute; top: 0; bottom: 0; right: 0; width: 62%; z-index: -2; }
+.hm-next .tile-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hm-next::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--night) 34%, color-mix(in srgb, var(--night) 55%, transparent) 62%, rgba(0,0,0,.15)); }
+.hm-next-txt { flex: 1; min-width: 0; }
+.hm-next h3 { margin: 4px 0 2px; font-family: var(--f-display); font-weight: 400; font-size: 24px; line-height: 1; text-transform: uppercase; color: #fff; text-shadow: 0 0 12px var(--a3); white-space: nowrap; }
+.hm-next-txt > span { font-size: 12.5px; font-weight: 800; color: var(--a1); text-shadow: 0 1px 3px #000; }
+.hm-next .tile-reg { flex: none; font-size: 12px; padding: 7px 11px; }
+.hm-go { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--frost); color: var(--night); display: grid; place-items: center; }
+.hm-go svg { width: 16px; height: 16px; }
+.hm-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.hm-quick .tile-btn { height: 118px; border-radius: 22px; }
+.hm-quick.party .tile-btn { height: 132px; }
+.hm-quick .tile-rank b { font-size: 16px; }
+.hm-pay { justify-content: space-between; }
+.tile-btn.hm-pay .pp-mark svg { display: block; width: 34px; height: 34px; }
+.hm-pay .hm-pay-txt { display: block; margin-top: auto; }
+.hm-pay .pp-word { font-size: 24px; display: block; }
+.hm-pay small { display: block; margin-top: 3px; font-size: 12px; font-weight: 800; color: rgba(11,42,107,.8); }
+.tile-btn.hm-pay .pp-go { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; }
+.hm-party { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 18px; text-decoration: none; color: #fff; background: linear-gradient(90deg, rgba(255,46,136,.28), rgba(255,138,61,.2)); border: 1.5px solid #ff2e88; box-shadow: 0 0 18px rgba(255,46,136,.35); }
+.hm-party b { font-family: var(--f-display); font-weight: 400; text-transform: uppercase; font-size: 16px; }
+.hm-party > span:not(.hm-live) { flex: 1; font-size: 13px; font-weight: 800; color: #ffd0e4; }
+.hm-party i { width: 28px; height: 28px; border-radius: 50%; background: #fff; color: #12041f; display: grid; place-items: center; }
+.hm-party i svg { width: 14px; height: 14px; }
+.hm-live { width: 10px; height: 10px; border-radius: 50%; background: #ff2e88; animation: livePulse 1.6s infinite; }
+@keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255,46,136,.7); } 70% { box-shadow: 0 0 0 10px rgba(255,46,136,0); } 100% { box-shadow: 0 0 0 0 rgba(255,46,136,0); } }
+.hm-sec { margin: 14px 2px -2px; font-family: var(--f-display); font-weight: 400; font-size: 18px; text-transform: uppercase; color: #fff; letter-spacing: .02em; }
+.hm-sec small { margin-left: 6px; font-family: var(--f-body); font-size: 12px; font-weight: 700; text-transform: none; color: rgba(255,255,255,.55); letter-spacing: 0; }
+.hm-games { display: grid; grid-auto-flow: column; grid-auto-columns: 44%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; }
+.hm-games::-webkit-scrollbar { display: none; }
+.hm-games .tile-btn { height: 168px; border-radius: 20px; scroll-snap-align: start; }
+.hm-games .tile-btn b { font-size: 16px; }
+.hm-games .tile-btn small { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.75); }
+.hm-couch { height: 112px; border-radius: 20px; }
+.hm-couch .couch-art { left: auto !important; right: 4px; transform: none !important; height: 86% !important; bottom: 4px !important; }
+.tile-btn.hm-couch > span:last-child { order: 0 !important; margin-top: auto !important; }
+.hm-couch b { font-size: 16px !important; white-space: normal !important; max-width: 48%; }
+.hm-empty { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 18px; border: 1px dashed rgba(255,255,255,.22); color: rgba(255,255,255,.7); font-size: 13.5px; line-height: 1.4; }
+.hm-empty svg { width: 26px; height: 26px; flex: none; color: rgba(255,255,255,.5); }
+.hm-past { display: grid; grid-auto-flow: column; grid-auto-columns: 46%; gap: 10px; overflow-x: auto; margin: 0 -14px; padding: 0 14px; }
+.hm-past-item { display: block; padding: 14px; border-radius: 18px; background: var(--night); border: 1px solid color-mix(in srgb, var(--a1) 40%, transparent); color: #fff; text-decoration: none; }
+.hm-past-item b { display: block; font-family: var(--f-display); font-weight: 400; text-transform: uppercase; font-size: 16px; }
+.hm-past-item span { font-size: 12px; color: var(--a1); font-weight: 800; }
+.hm-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+.hm-contact a { display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #fff; text-decoration: none; font-weight: 800; font-size: 14px; }
+.hm-contact svg { width: 18px; height: 18px; color: #9fe3ff; }
+.menu-legal { padding: 14px 0 6px; }
+.hm-combo { flex: none; width: 146px; display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; border: 2px solid #2ff3e0; background: rgba(10,2,22,.8);
+  box-shadow: 0 0 14px rgba(47,243,224,.6), inset 0 0 10px rgba(47,243,224,.22); }
+.hm-sign { display: flex; align-items: center; gap: 7px; padding: 8px 9px 7px; animation: neonFlicker 5s linear infinite; will-change: opacity; }
+.hm-sign svg { width: 24px; height: 24px; flex: none; filter: drop-shadow(0 0 5px rgba(255,210,63,.9)); }
+.hm-sign b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 13.5px; line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 0 6px #2ff3e0, 0 0 14px #2ff3e0; }
+.hm-sign small { display: block; margin-top: 3px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #ffd23f; }
+.hm-reg { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 8px 6px; background: linear-gradient(90deg, var(--a3), #ff8a3d); color: #fff; font-weight: 800; font-size: 13px; text-decoration: none; }
+.hm-reg svg { width: 13px; height: 13px; }
+.hm-combo .hm-sign:only-child { padding: 10px; }
+@keyframes neonFlicker { 0%, 100% { opacity: 1; } 2% { opacity: .35; } 3% { opacity: 1; } 5% { opacity: .5; } 6% { opacity: 1; } 55% { opacity: 1; } 56% { opacity: .4; } 57% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hm-sign { animation: none; } }
+.hm-next h3 { font-size: 23px; }
+
 </style>
 </head>
 <body>
@@ -4257,38 +4337,7 @@ function placeTapHint() {
   h.style.top = (g.offsetTop + t.offsetTop + t.offsetHeight + gap / 2).toFixed(1) + "px";
 }
 
-/* ================= Hauptmenü ================= */
-function buildMenu() {
-  const g = $("menuGrid");
-  const now = startIndex();
-  const evTile = (ev, label) => {
-    if (!ev) return `<div class="mtile tile-empty"><span>Nächster Abend<br>folgt bald</span></div>`;
-    const i = EVENTS.indexOf(ev);
-    const meta = ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
-    const extra = ev.anmeldung && !isPast(ev)
-      ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop>Anmelden ${ICON_EXT}</a>`
-      : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>` : "";
-    return `<div class="mtile tile-ev t-${ev.thema}" role="link" tabindex="0" data-ev="${i}" style="${themeStyle(ev.th)}" aria-label="${esc(label)}: ${esc(ev.titel.join(" "))}, ${esc(ev.wdLong)} ${esc(ev.dm)} – Infos öffnen">
-      <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice"></svg>`).join("")}</div>
-      <div>
-        <div class="tile-label">${esc(label)}</div>
-        ${chip(status(ev))}
-        <h2 class="tile-title">${titleHTML(ev)}</h2>
-        <p class="tile-sub">${esc(ev.untertitel)}</p>
-        ${ev.banner && !isPast(ev) ? `<div class="tile-banner" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : ""}
-      </div>
-      <div>
-        <div class="tile-row"><div class="tile-date"><b>${esc(ev.dm)}</b><span>${esc(ev.wd)} · ${meta}</span></div>${extra}</div>
-        <div class="tile-go"><span>Drinks &amp; Infos</span><i>${ICON_ARROW}</i></div>
-      </div>
-    </div>`;
-  };
-  const crown = CROWN_BIG.replace('class="crown-big"', "");
-  g.innerHTML =
-    evTile(EVENTS[now], "Diese Woche") +
-    evTile(EVENTS[now + 1], "Kommende Woche") +
-    `<a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-Ranking<br>&amp; Wünsche</b><small>Counter · Matrikel-Duell</small></span></a>
-    <div class="tile-btn tile-couch"><svg class="couch-art" viewBox="0 28 200 92" aria-hidden="true">
+const COUCH_SVG = `<svg class="couch-art" viewBox="0 28 200 92" aria-hidden="true">
           <defs>
             <radialGradient id="cc-spot" cx="50%" cy="0%" r="90%"><stop offset="0" stop-color="#fff3c4" stop-opacity=".55"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
           </defs>
@@ -4315,23 +4364,90 @@ function buildMenu() {
             <circle cx="100" cy="56" r="8.5" fill="#f2cfb3"/>
             <path d="M91 55 q0 -11 9 -11 q10 0 10 10 q-4 -4 -10 -4 q-5 0 -9 5z" fill="#f5d36b"/>
           </g>
-        </svg><span><b>Castingcouch</b><small>mit Lars · kommt bald</small></span></div>
-    <div class="tile-row4">
-      <a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beer&shy;pong</b></span></a>
-      <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Bus&shy;fahrer</b></span></a>
-      <a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapf&shy;meister</b></span></a>
-      <a class="tile-btn tile-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen">
-        <span class="pp-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg></span>
-        <span class="pp-row"><span class="pp-word"><i>Pay</i><i>Pal</i></span><i class="pp-go">${ICON_ARROW}</i></span>
-      </a>
+        </svg>`;
+const ICON_CAL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>`;
+const ICON_CAM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>`;
+/* Party-Modus: am Partytag ab 4 Stunden vor Beginn bis Partyende */
+function partyTime(ev) {
+  if (!ev) return false;
+  const now = window.__fakeNow ? new Date(window.__fakeNow) : new Date();
+  const from = new Date(ev.startDate.getTime() - 4 * 3600e3);
+  return now >= from && now <= ev.endDate;
+}
+/* ================= Hauptmenü ================= */
+function buildMenu() {
+  const g = $("menuGrid");
+  const now = startIndex();
+  const evTile = (ev, label, big) => {
+    if (!ev) return `<div class="mtile tile-empty"><span>Nächster Abend<br>folgt bald</span></div>`;
+    const i = EVENTS.indexOf(ev);
+    const meta = ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
+    const extra = ev.anmeldung && !isPast(ev)
+      ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop>Anmelden ${ICON_EXT}</a>`
+      : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>` : "";
+    return `<div class="mtile tile-ev t-${ev.thema}" role="link" tabindex="0" data-ev="${i}" style="${themeStyle(ev.th)}" aria-label="${esc(label)}: ${esc(ev.titel.join(" "))}, ${esc(ev.wdLong)} ${esc(ev.dm)} – Infos öffnen">
+      <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice"></svg>`).join("")}</div>
+      <div>
+        <div class="tile-label">${esc(label)}</div>
+        ${chip(status(ev))}
+        <h2 class="tile-title">${titleHTML(ev)}</h2>
+        <p class="tile-sub">${esc(ev.untertitel)}</p>
+        ${ev.banner && !isPast(ev) ? `<div class="tile-banner" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : ""}
+      </div>
+      <div>
+        <div class="tile-row"><div class="tile-date"><b>${esc(ev.dm)}</b><span>${esc(ev.wd)} · ${meta}</span></div>${extra}</div>
+        <div class="tile-go"><span>Drinks &amp; Infos</span>${big && !isPast(ev) ? `<button type="button" class="tile-cal" data-stop data-cal="${i}">${ICON_CAL}Kalender</button>` : ""}<i>${ICON_ARROW}</i></div>
+      </div>
     </div>`;
-  /* Blink-Rahmen: oben links, oben rechts, dann rechte Hälfte, dann linke Hälfte */
-  const flash = (el, d) => el && el.insertAdjacentHTML("beforeend", `<i class="flash" aria-hidden="true" style="--fd:${d}s"></i>`);
-  const evs = g.querySelectorAll(".tile-ev");
-  flash(evs[0], 0); flash(evs[1], 2);
-  [".tile-couch", ".tile-zapf", ".tile-pay"].forEach((q) => flash(g.querySelector(q), 4));
-  [".tile-rank", ".tile-game", ".tile-bus"].forEach((q) => flash(g.querySelector(q), 6));
-  g.querySelectorAll(".tile-ev").forEach((t) => {
+  };
+  const crown = CROWN_BIG.replace('class="crown-big"', "");
+  const evA = EVENTS[now], evB = EVENTS[now + 1];
+  const party = partyTime(evA);
+  const nextStrip = (ev) => {
+    const i = EVENTS.indexOf(ev);
+    const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
+    const open = !isPast(ev);
+    const sign = ev.banner && open ? `<div class="hm-sign"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : "";
+    const reg = ev.anmeldung && open ? `<a class="hm-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop>Anmelden ${ICON_EXT}</a>` : "";
+    return `<div class="hm-next t-${ev.thema}" role="link" tabindex="0" data-ev="${i}" style="${themeStyle(ev.th)}" aria-label="Kommende Woche: ${esc(ev.titel.join(" "))} – Infos öffnen">
+      <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice"></svg>`).join("")}</div>
+      <div class="hm-next-txt">
+        <div class="tile-label">Kommende Woche</div>
+        <h3>${esc(ev.titel.join(" "))}</h3>
+        <span>${when}</span>
+      </div>
+      ${sign || reg ? `<div class="hm-combo">${sign}${reg}</div>` : `<i class="hm-go">${ICON_ARROW}</i>`}
+    </div>`;
+  };
+  const PPM = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg>`;
+  const quick = `<div class="hm-quick${party ? " party" : ""}">
+      <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-Ranking<br>&amp; Wünsche</b><small>Counter · Matrikel-Duell</small></span></a>
+      <a class="tile-btn tile-pay hm-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen"><span class="pp-mark">${PPM}</span><span class="hm-pay-txt"><span class="pp-word"><i>Pay</i><i>Pal</i></span><small>Bargeldlos zahlen</small></span><i class="pp-go">${ICON_ARROW}</i></a>
+    </div>`;
+  const hh = party && evA.happyHour ? `<a class="hm-party" href="#${evA.id}"><span class="hm-live"></span><b>Heute live</b><span>Happy Hour ${esc(evA.happyHour.von)}–${esc(evA.happyHour.bis)} Uhr</span><i>${ICON_ARROW}</i></a>` : "";
+  const past = EVENTS.filter((e) => isPast(e)).slice(-6).reverse();
+  g.innerHTML = `
+    <div class="hm-hero">${evTile(evA, party ? "Heute!" : "Diese Woche", true)}</div>
+    ${party ? hh + quick : ""}
+    ${evB ? nextStrip(evB) : ""}
+    ${party ? "" : quick}
+    <h3 class="hm-sec">Minispiele <small>zum Wischen</small></h3>
+    <div class="hm-games">
+      <a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span></a>
+      <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span></a>
+      <a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span></a>
+    </div>
+    <h3 class="hm-sec">Demnächst</h3>
+    <div class="tile-btn tile-couch hm-couch">${COUCH_SVG}<span><b>Castingcouch mit Lars</b><small>kommt bald</small></span></div>
+    <h3 class="hm-sec">Vergangene Abende</h3>
+    ${past.length ? `<div class="hm-past">${past.map((e) => `<a href="#${e.id}" class="hm-past-item t-${e.thema}" style="${themeStyle(e.th)}"><b>${esc(e.titel.join(" "))}</b><span>${esc(e.dm)} · Fotos</span></a>`).join("")}</div>`
+      : `<div class="hm-empty">${ICON_CAM}<span>Nach der ersten Party findest du hier Fotos und Rückblicke.</span></div>`}
+    <div class="hm-contact">
+      <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
+      <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
+    </div>`;
+  g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
+  g.querySelectorAll(".tile-ev, .hm-next").forEach((t) => {
     const ev = EVENTS[+t.dataset.ev];
     const layers = (SCENES[ev.thema] || sceneIce)();
     t.querySelectorAll(".tile-scene svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `mt${t.dataset.ev}l${k}_`); if (svg.pauseAnimations) svg.pauseAnimations(); });
@@ -4343,7 +4459,6 @@ function buildMenu() {
     t.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openTile(); } });
   });
   fitMenu();
-  requestAnimationFrame(() => { placeTapHint(); syncTapAnim(); });
 }
 /* Finger, Pfeile und aufleuchtende Kacheln laufen im selben Takt */
 function syncTapAnim() {
@@ -4353,7 +4468,7 @@ function syncTapAnim() {
     el.getAnimations().forEach((a) => { if (/^(tapRound|tapDir|tapRipple|tileFlash)$/.test(a.animationName)) a.startTime = t0; }));
 }
 function fitMenu() {
-  document.querySelectorAll(".tile-title").forEach((el) => fitTitle(el, 34));
+  document.querySelectorAll(".tile-title").forEach((el) => fitTitle(el, el.closest(".hm-hero") ? 58 : 34));
 }
 function setMenu(on) {
   app.classList.toggle("is-menu", on);
