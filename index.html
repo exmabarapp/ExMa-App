@@ -3291,8 +3291,9 @@ const Game = (() => {
         <div class="bp-score"><div><small>Becher</small><b>${cleared}</b></div><div><small>Zeit</small><b>${fmt(ms)}</b></div></div>
         <label for="bpName" style="display:block;text-align:left;font-size:13px;font-weight:700;color:#7a6a8f;margin-bottom:6px">Dein Name für die Bestenliste</label>
         <input id="bpName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25">
-        <div class="row2"><button class="ghost" id="bpSkip" type="button">Überspringen</button><button class="primary" id="bpSave" type="button">Eintragen</button></div>
+        <div class="row2"><button class="ghost" id="bpRetry" type="button">Nochmal</button><button class="primary" id="bpSave" type="button">Eintragen</button></div>
         <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>
+        <button class="linkbtn" id="bpSkip" type="button">Top 10 ansehen</button>
       </div>`;
     const name = $("bpName");
     setTimeout(() => name.focus(), 200);
@@ -3306,6 +3307,7 @@ const Game = (() => {
       showTop(await Top.list().catch(() => []), id);
     });
     $("bpSkip").addEventListener("click", async () => showTop(await Top.list().catch(() => []), null));
+    $("bpRetry").addEventListener("click", reset);
     name.addEventListener("keydown", (e) => { if (e.key === "Enter") $("bpSave").click(); });
   }
 

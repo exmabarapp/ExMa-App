@@ -2,7 +2,7 @@
    - Seite selbst: erst aus dem Netz (damit neue Versionen sofort ankommen), ohne Netz aus dem Speicher
    - Bilder, Icons, Schriften: aus dem Speicher, im Hintergrund aktualisiert
    Bei jeder neuen Version VERSION hochzählen. */
-const VERSION = "exma-v30";
+const VERSION = "exma-v31";
 const CORE = [
   "./",
   "./index.html",
