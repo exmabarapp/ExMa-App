@@ -507,6 +507,7 @@ a { color: inherit; }
 .cal-row { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .cal-row .cal { margin-top: 0; width: 100%; background: none; font-family: inherit; cursor: pointer; }
 .cal-row .cal.share { background: var(--a1); border-color: var(--a1); color: var(--night); }
+.cal-row .cal.wa { background: #25d366; border-color: #25d366; color: #052e16; font-size: 14px; }
 .cal-row .cal:disabled { opacity: .6; }
 .cal-hint { margin: 8px 4px 0; font-size: 13px; line-height: 1.4; color: var(--dim); text-align: center; }
 .bring {
@@ -1419,18 +1420,25 @@ a { color: inherit; }
 .hm-contact a { display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #fff; text-decoration: none; font-weight: 800; font-size: 14px; }
 .hm-contact svg { width: 18px; height: 18px; color: #9fe3ff; }
 .menu-legal { padding: 14px 0 6px; }
-.hm-combo { flex: none; width: 146px; display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; border: 2px solid #2ff3e0; background: rgba(10,2,22,.8);
-  box-shadow: 0 0 14px rgba(47,243,224,.6), inset 0 0 10px rgba(47,243,224,.22); }
-.hm-sign { display: flex; align-items: center; gap: 7px; padding: 8px 9px 7px; animation: neonFlicker 5s linear infinite; will-change: opacity; }
-.hm-sign svg { width: 24px; height: 24px; flex: none; filter: drop-shadow(0 0 5px rgba(255,210,63,.9)); }
-.hm-sign b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 13.5px; line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 0 6px #2ff3e0, 0 0 14px #2ff3e0; }
-.hm-sign small { display: block; margin-top: 3px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #ffd23f; }
-.hm-reg { display: flex; align-items: center; justify-content: center; gap: 5px; padding: 8px 6px; background: linear-gradient(90deg, var(--a3), #ff8a3d); color: #fff; font-weight: 800; font-size: 13px; text-decoration: none; }
-.hm-reg svg { width: 13px; height: 13px; }
-.hm-combo .hm-sign:only-child { padding: 10px; }
-@keyframes neonFlicker { 0%, 100% { opacity: 1; } 2% { opacity: .35; } 3% { opacity: 1; } 5% { opacity: .5; } 6% { opacity: 1; } 55% { opacity: 1; } 56% { opacity: .4; } 57% { opacity: 1; } }
+.hm-card { position: relative; overflow: hidden; isolation: isolate; border-radius: 22px; background: var(--night);
+  border: 1px solid color-mix(in srgb, var(--a1) 45%, transparent); box-shadow: 0 0 18px color-mix(in srgb, var(--a3) 22%, transparent); }
+.hm-card .hm-next { border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.hm-next h3 { overflow: hidden; }
+.hm-sign { flex: none; display: flex; align-items: center; gap: 6px; padding: 6px 9px 6px 7px; border-radius: 12px; border: 2px solid #2ff3e0; background: rgba(10,2,22,.78);
+  box-shadow: 0 0 12px rgba(47,243,224,.65), inset 0 0 8px rgba(47,243,224,.3); transform: rotate(-4deg); animation: neonCycle 8s linear infinite; will-change: opacity; }
+.hm-sign svg { width: 20px; height: 20px; flex: none; filter: drop-shadow(0 0 4px rgba(255,210,63,.9)); }
+.hm-sign b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 11.5px; line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 0 6px #2ff3e0, 0 0 12px #2ff3e0; }
+.hm-sign small { display: block; margin-top: 2px; font-size: 8.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #ffd23f; }
+/* LED-Schild: ~5 s an (mit Flackern), ~3 s aus */
+@keyframes neonCycle {
+  0% { opacity: 0; } 1.5% { opacity: .9; } 2.5% { opacity: .15; } 3.5% { opacity: 1; } 4.5% { opacity: .35; } 6% { opacity: 1; }
+  40% { opacity: 1; } 40.8% { opacity: .45; } 41.5% { opacity: 1; }
+  61% { opacity: 1; } 62% { opacity: .25; } 63% { opacity: .9; } 64% { opacity: .1; } 65% { opacity: .7; } 66.5% { opacity: 0; }
+  100% { opacity: 0; }
+}
+.hm-reg { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 11px 12px; background: linear-gradient(90deg, var(--a3), #ff8a3d); color: #fff; font-weight: 800; font-size: 14px; text-decoration: none; border-top: 1px solid rgba(255,255,255,.18); }
+.hm-reg svg { width: 14px; height: 14px; }
 @media (prefers-reduced-motion: reduce) { .hm-sign { animation: none; } }
-.hm-next h3 { font-size: 23px; }
 
 </style>
 </head>
@@ -2430,7 +2438,7 @@ function renderDetail(ev) {
       ${timeline}
       ${past ? "" : `<div class="cal-row">
         <button class="cal" id="calBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>In Kalender</button>
-        <button class="cal share" id="shareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.4M8.3 13.2l7.4 4.4"/></svg>Teilen</button>
+        <button class="cal share wa" id="shareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.2 9.6c.2 2.2 2.1 4.6 4.6 5.2.6.1 1.3-.4 1.5-1l-1.6-.9-.8.6c-.9-.4-1.8-1.3-2.1-2.1l.6-.8-.8-1.7c-.7.1-1.3.7-1.4 1.3z" fill="currentColor" stroke="none"/></svg>Per WhatsApp teilen</button>
       </div>
       <p class="cal-hint" id="calHint" hidden></p>`}
       ${ev.mitbringen ? `<div class="bring"><b>Bitte mitbringen</b>${esc(ev.mitbringen)}</div>` : ""}
@@ -2469,8 +2477,7 @@ function renderDetail(ev) {
   $("backBtn").addEventListener("click", closeDetail);
   if ($("calBtn")) {
     $("calBtn").addEventListener("click", () => addToCalendar(ev));
-    $("shareBtn").addEventListener("click", () => shareEvent(ev));
-    prepareShare(ev);
+    $("shareBtn").addEventListener("click", () => shareWhatsApp(ev));
   }
   $("copyMail").addEventListener("click", async () => {
     const b = $("copyMail");
@@ -4408,16 +4415,16 @@ function buildMenu() {
     const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
     const open = !isPast(ev);
     const sign = ev.banner && open ? `<div class="hm-sign"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : "";
-    const reg = ev.anmeldung && open ? `<a class="hm-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop>Anmelden ${ICON_EXT}</a>` : "";
-    return `<div class="hm-next t-${ev.thema}" role="link" tabindex="0" data-ev="${i}" style="${themeStyle(ev.th)}" aria-label="Kommende Woche: ${esc(ev.titel.join(" "))} – Infos öffnen">
+    const reg = ev.anmeldung && open ? `<a class="hm-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener">${esc(ev.anmeldung.text || "Jetzt anmelden")} ${ICON_EXT}</a>` : "";
+    return `<div class="hm-card t-${ev.thema}" style="${themeStyle(ev.th)}"><div class="hm-next" role="link" tabindex="0" data-ev="${i}" aria-label="Kommende Woche: ${esc(ev.titel.join(" "))} – Infos öffnen">
       <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice"></svg>`).join("")}</div>
       <div class="hm-next-txt">
         <div class="tile-label">Kommende Woche</div>
         <h3>${esc(ev.titel.join(" "))}</h3>
         <span>${when}</span>
       </div>
-      ${sign || reg ? `<div class="hm-combo">${sign}${reg}</div>` : `<i class="hm-go">${ICON_ARROW}</i>`}
-    </div>`;
+      ${sign || `<i class="hm-go">${ICON_ARROW}</i>`}
+    </div>${reg}</div>`;
   };
   const PPM = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg>`;
   const quick = `<div class="hm-quick${party ? " party" : ""}">
@@ -4469,6 +4476,10 @@ function syncTapAnim() {
 }
 function fitMenu() {
   document.querySelectorAll(".tile-title").forEach((el) => fitTitle(el, el.closest(".hm-hero") ? 58 : 34));
+  document.querySelectorAll(".hm-next h3").forEach((el) => {
+    let fs = 24; el.style.fontSize = fs + "px";
+    while (el.scrollWidth > el.clientWidth + 1 && fs > 13) { fs -= 1; el.style.fontSize = fs + "px"; }
+  });
 }
 function setMenu(on) {
   app.classList.toggle("is-menu", on);
@@ -4599,7 +4610,7 @@ function eventText(ev) {
     `📍 ${ev.ort}, ${CLUB.anschrift.join(", ")}`
   ];
   if (ev.ablauf && ev.ablauf.length > 1) lines.push(ev.ablauf.map((a) => `${a.zeit} ${a.kurz || a.was}`).join(" · "));
-  if (ev.musik) lines.push(`🎧 ${ev.musik.zeit} Uhr: ${ev.musik.text}`);
+  if (ev.musik) lines.push(`🎧 ${ev.musik.zeit}${/uhr/i.test(ev.musik.zeit) ? "" : " Uhr"}: ${ev.musik.text}`);
   return lines.join("\n");
 }
 function icsText(ev) {
@@ -4714,6 +4725,13 @@ function prepareShare(ev) {
     (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
   });
   return shareCache[ev.id];
+}
+/* Teilen: öffnet direkt WhatsApp mit Kontaktauswahl und fertigem Text samt Link */
+function shareWhatsApp(ev) {
+  const text = eventText(ev) + "\n\nAlle Infos, Drinks & App: " + eventUrl(ev);
+  const url = "https://wa.me/?text=" + encodeURIComponent(text);
+  const w = window.open(url, "_blank", "noopener");
+  if (!w) location.href = url;
 }
 async function shareEvent(ev) {
   const btn = $("shareBtn"), hint = $("calHint");
