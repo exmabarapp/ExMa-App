@@ -504,6 +504,11 @@ a { color: inherit; }
   font-weight: 800; font-size: 15px;
 }
 .cal svg { width: 18px; height: 18px; }
+.cal-row { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cal-row .cal { margin-top: 0; width: 100%; background: none; font-family: inherit; cursor: pointer; }
+.cal-row .cal.share { background: var(--a1); border-color: var(--a1); color: var(--night); }
+.cal-row .cal:disabled { opacity: .6; }
+.cal-hint { margin: 8px 4px 0; font-size: 13px; line-height: 1.4; color: var(--dim); text-align: center; }
 .bring {
   margin-top: 12px; padding: 14px 16px; border-radius: 18px;
   background: color-mix(in srgb, var(--a3) 16%, var(--night-2));
@@ -1006,11 +1011,18 @@ a { color: inherit; }
   padding: 5px 10px 5px 7px; border-radius: 12px; border: 2px solid #2ff3e0; background: rgba(10,2,22,.72);
   transform: rotate(-5deg); white-space: nowrap; pointer-events: none;
   box-shadow: 0 0 12px rgba(47,243,224,.75), inset 0 0 10px rgba(47,243,224,.35), 0 6px 18px rgba(0,0,0,.5);
-  animation: neonSign 7.5s linear infinite; }
+  animation: neonSign 7.5s linear infinite; will-change: opacity; }
 .tile-banner svg { width: 24px; height: 24px; flex: none; filter: drop-shadow(0 0 5px rgba(255,210,63,.9)); }
 .tile-banner b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 14px; line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 0 6px #2ff3e0, 0 0 14px #2ff3e0; }
 .tile-banner small { display: block; margin-top: 2px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #ffd23f; }
 /* LED-Schild: flackert an, ~5 s sichtbar, flackert aus, ~2 s weg (dann sieht man die Becher) */
+@media (max-height: 720px) {
+  .menu-grid { grid-template-rows: minmax(0, 1.75fr) minmax(0, .45fr) minmax(0, .56fr); }
+  .tile-banner { margin-top: 5px; padding: 3px 8px 3px 6px; gap: 5px; }
+  .tile-banner svg { width: 18px; height: 18px; }
+  .tile-banner b { font-size: 12px; }
+  .tile-banner small { display: none; }
+}
 @keyframes neonSign {
   0% { opacity: 0; }
   1.5% { opacity: .9; } 2.5% { opacity: .15; } 3.5% { opacity: 1; } 4.5% { opacity: .35; } 6% { opacity: 1; }
@@ -1019,23 +1031,87 @@ a { color: inherit; }
   100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .tile-banner { animation: none; } }
-.app.game-solo > *:not(.view-game):not(.view-bus) { visibility: hidden !important; }
-.app.game-solo > *:not(.view-game):not(.view-bus) * { animation-play-state: paused !important; }
-/* PayPal-Kachel im Hauptmenü */
-.mtile.tile-pay { padding: 0; display: flex; flex-direction: column; background: linear-gradient(160deg, #ffdb70 0%, #ffc439 45%, #f2a900 100%); border-color: #ffe7a0; box-shadow: 0 0 22px rgba(255,196,57,.35); color: #0b2a6b; }
-.tile-pay .pay-main { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; padding: 14px 12px 10px; color: inherit; text-decoration: none; }
-.pp-head { display: flex; align-items: center; gap: 6px; }
-.pp-mark svg { display: block; width: 40px; height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.18)); }
-.pp-word { font: italic 900 27px/1 Verdana, "DejaVu Sans", Arial, sans-serif; letter-spacing: -.03em; }
+.app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf) { visibility: hidden !important; }
+.app.hero-off .view-hero { visibility: hidden !important; }
+.app.hero-off .view-hero * { animation-play-state: paused !important; }
+.app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf) * { animation-play-state: paused !important; }
+/* PayPal-Kachel im Hauptmenü (so hoch wie die Minispiel-Kacheln) */
+.tile-btn.tile-pay { background: linear-gradient(160deg, #ffdb70 0%, #ffc439 45%, #f2a900 100%); border: 1.5px solid #ffe7a0; box-shadow: 0 0 20px rgba(255,196,57,.32); color: #0b2a6b; }
+.tile-pay .pp-mark svg { display: block; width: 30px; height: 30px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.18)); }
+.tile-btn.tile-pay .pp-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.pp-word { font: italic 900 17px/1 Verdana, "DejaVu Sans", Arial, sans-serif; letter-spacing: -.03em; }
 .pp-word i { font-style: inherit; }
 .pp-word i:first-child { color: #003087; }
 .pp-word i:last-child { color: #0079c1; }
-.tile-pay b { font-family: var(--f-display); font-weight: 400; font-size: 21px; line-height: 1.02; text-transform: uppercase; color: #0b2a6b; }
-.tile-pay small { display: block; max-width: calc(100% - 40px); font-size: 11.5px; font-weight: 700; line-height: 1.3; color: rgba(11,42,107,.8); }
-.tile-pay .pp-go { position: absolute; right: 10px; bottom: 10px; width: 32px; height: 32px; border-radius: 50%; background: #003087; color: #fff; display: grid; place-items: center; }
-.tile-pay .pp-go svg { width: 16px; height: 16px; }
-.tile-pay .legal-links { display: flex; gap: 12px; padding: 8px 12px 10px; border-top: 1px solid rgba(0,48,135,.2); }
-.tile-pay .legal-links a { font-size: 11.5px; font-weight: 700; color: rgba(11,42,107,.78); text-decoration: none; min-height: 22px; display: flex; align-items: center; }
+.tile-pay .pp-go { flex: none; width: 26px; height: 26px; border-radius: 50%; background: #003087; color: #fff; display: grid; place-items: center; }
+.tile-pay .pp-go svg { width: 13px; height: 13px; }
+.tile-btn.tile-pay .pp-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+.tile-btn.tile-pay .pp-go { position: absolute; top: 9px; right: 9px; }
+/* Zapfmeister-Kachel */
+.tile-btn.tile-zapf { background: linear-gradient(180deg, #2a1608 0%, #4a2a12 62%, #7a4a22 62%, #5a3415 100%); border: 1.5px solid #e0a64a; box-shadow: 0 0 14px rgba(224,166,74,.3); }
+.tile-zapf::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 50%, rgba(20,10,4,.82)); }
+.zd { position: absolute; inset: 0; z-index: -2; }
+.zd-tap { position: absolute; left: 50%; top: 18%; width: 10px; height: 16px; margin-left: -5px; border-radius: 3px 3px 2px 2px; background: linear-gradient(90deg, #8d939b, #e9edf2, #8d939b); }
+.zd-stream { position: absolute; left: 50%; top: calc(18% + 16px); width: 3px; height: 26%; margin-left: -1.5px; background: #f3b130; transform-origin: top; animation: zdStream 3.2s linear infinite; }
+.zd-glass { position: absolute; left: 50%; bottom: 30%; width: 26px; height: 36px; margin-left: -13px; border: 2px solid rgba(255,255,255,.75); border-top: none; border-radius: 0 0 5px 5px; overflow: hidden; background: rgba(255,255,255,.08); }
+.zd-beer { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; background: linear-gradient(180deg, #ffc84a, #e08a12); transform-origin: bottom; animation: zdBeer 3.2s ease-in-out infinite; }
+.zd-foam { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; background: #fffaf0; transform-origin: bottom; animation: zdFoam 3.2s ease-in-out infinite; mix-blend-mode: normal; }
+@keyframes zdBeer { 0% { transform: scaleY(0); } 45%, 92% { transform: scaleY(.72); } 100% { transform: scaleY(0); } }
+@keyframes zdFoam { 0% { transform: scaleY(0); opacity: 0; } 10% { opacity: 1; } 45% { transform: scaleY(.84); } 60%, 92% { transform: scaleY(.95); opacity: 1; } 100% { transform: scaleY(0); opacity: 0; } }
+@keyframes zdStream { 0%, 44% { transform: scaleY(1); opacity: 1; } 46%, 100% { transform: scaleY(0); opacity: 0; } }
+.zd-foam { clip-path: inset(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) { .zd-beer, .zd-foam, .zd-stream { animation: none; } .zd-beer { transform: scaleY(.72); } }
+/* Castingcouch-Kachel */
+.tile-btn.tile-couch { background: radial-gradient(120% 90% at 50% 0%, #3a1450 0%, #1a0b2e 60%, #0d0618 100%); border: 1.5px solid rgba(255,46,136,.45); box-shadow: 0 0 16px rgba(255,46,136,.18); }
+.tile-btn.tile-couch { justify-content: flex-start; }
+.tile-couch .couch-art { position: absolute; left: 50%; bottom: 6px; height: 60%; width: auto; max-width: 104%; transform: translateX(-50%); z-index: -2; }
+.tile-couch small { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; color: #ff8fc4; }
+.tile-couch b { font-size: 14px; white-space: nowrap; text-shadow: 0 2px 8px rgba(0,0,0,.8); }
+.tile-btn.tile-couch > span:last-child { position: relative; margin-top: 0; order: -1; }
+.tile-couch .soon-tag { position: absolute; top: 10px; right: 10px; z-index: 1; font-size: 9px !important; padding: 2px 7px !important; }
+/* Platzhalter-Kachel */
+.tile-btn.tile-soon { border: 1.5px dashed rgba(255,255,255,.28); background: rgba(255,255,255,.04); color: rgba(255,255,255,.75); }
+.tile-couch .soon-tag, .tile-soon .soon-tag { align-self: flex-start; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.tile-soon small { display: block; margin-top: 4px; font-size: 12px; color: rgba(255,255,255,.55); }
+/* Impressum/Datenschutz unter den Kacheln */
+.menu-legal { flex: none; display: flex; justify-content: center; gap: 8px; padding: 6px 0 0; font-size: 11.5px; color: rgba(255,255,255,.45); }
+.menu-legal a { color: rgba(255,255,255,.65); font-weight: 600; text-decoration: none; }
+/* ---------- Zapfmeister ---------- */
+.view-zapf {
+  z-index: 30; opacity: 0; pointer-events: none; transform: none; transition: opacity .4s ease;
+  overflow: hidden; background: #1a0e06; color: #fff; font-family: var(--f-body);
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none;
+}
+.app.is-zapf .view-zapf { opacity: 1; pointer-events: auto; }
+.app.is-zapf .topbar, .app.is-zapf .pager, .app.is-zapf .arrow { opacity: 0; pointer-events: none; }
+.zf-cam { position: absolute; inset: 0; transform-origin: 50% 50%; transition: transform .7s cubic-bezier(.2,.8,.2,1); will-change: transform; }
+.zf-cam svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.zf-hud { position: absolute; left: 0; right: 0; top: 0; z-index: 3; display: grid; grid-template-columns: 44px 1fr 1fr 1fr; gap: 8px; align-items: center;
+  padding: calc(12px + var(--safe-t)) 14px 26px; background: linear-gradient(180deg, rgba(14,7,2,.92), rgba(14,7,2,.6) 70%, transparent); }
+.view-zapf .bp-stat small { color: #ffc84a; }
+.zf-pct { position: absolute; left: 0; right: 0; top: calc(86px + var(--safe-t)); z-index: 3; text-align: center; pointer-events: none;
+  font-family: var(--f-display); font-size: 46px; line-height: 1; font-variant-numeric: tabular-nums; color: #fff;
+  text-shadow: 0 0 18px rgba(255,200,74,.8), 0 3px 10px rgba(0,0,0,.7); opacity: 0; transform: translateY(-8px); transition: opacity .25s, transform .25s; }
+.zf-pct.show { opacity: 1; transform: none; }
+.zf-pct.ok { color: #9dffb0; text-shadow: 0 0 18px rgba(43,255,136,.8), 0 3px 10px rgba(0,0,0,.7); }
+.zf-pct.bad { color: #ff7aa8; text-shadow: 0 0 18px rgba(255,46,136,.9), 0 3px 10px rgba(0,0,0,.7); }
+.zf-pct small { display: block; margin-top: 6px; font-family: var(--f-body); font-size: 15px; font-weight: 800; letter-spacing: .04em; color: #ffe2a0; text-shadow: 0 2px 6px rgba(0,0,0,.8); }
+.zf-info { position: absolute; left: 50%; bottom: calc(18px + var(--safe-b)); z-index: 3; transform: translateX(-50%); width: calc(100% - 32px); max-width: 420px;
+  padding: 10px 14px; border-radius: 16px; background: rgba(14,7,2,.78); border: 1px solid rgba(255,200,74,.35); text-align: center; pointer-events: none; transition: opacity .3s; }
+.zf-info b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 18px; text-transform: uppercase; color: #ffc84a; }
+.zf-info span { display: block; margin-top: 2px; font-size: 13px; line-height: 1.35; color: rgba(255,255,255,.85); }
+.zf-info.hide { opacity: 0; }
+.view-zapf .bp-toast { top: 40%; text-shadow: 0 0 16px #ffc84a, 0 0 30px #ffc84a; z-index: 4; }
+.view-zapf .bp-toast.bad { text-shadow: 0 0 16px #ff2e88, 0 0 30px #ff2e88; }
+.view-zapf .bp-over { z-index: 6; }
+.view-zapf .bp-card h3 { color: #c77a10; }
+.view-zapf .bp-card h3.bad { color: #ff2e88; }
+.view-zapf .bp-card .primary { background: linear-gradient(90deg, #12a35c, #2bd47a); }
+.view-zapf .bp-list li.me { background: #fff1d6; }
+.view-zapf .bp-list li .r { color: #c77a10; }
+.zf-rules { margin: 10px 0 4px; padding: 0; list-style: none; text-align: left; display: grid; gap: 8px; color: #4a3d5c; font-size: 14px; line-height: 1.4; }
+.zf-rules li { display: flex; gap: 10px; }
+.zf-rules li i { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #ffc84a; color: #3a2405; font-style: normal; font-weight: 900; font-size: 12px; display: grid; place-items: center; }
 /* ---------- Busfahrer (Höher oder Tiefer) ---------- */
 .view-bus {
   z-index: 30; opacity: 0; pointer-events: none; transform: none; transition: opacity .4s ease;
@@ -1108,10 +1184,10 @@ a { color: inherit; }
 .bus-res { margin: 6px 0 0; font-size: 14px; color: #5d5070; }
 .bp-card .linkbtn { margin-top: 10px; height: auto; background: none; color: #5d5070; text-decoration: underline; font-weight: 700; font-size: 13px; }
 /* Menü: zwei Minispiel-Kacheln nebeneinander */
-.tile-games { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; min-height: 0; }
-.tile-games .tile-btn { padding: 9px; border-radius: 18px; }
-.tile-games .tile-btn b { font-size: 13px; }
-.tile-games .mini-tag { font-size: 8.5px; padding: 2px 6px; letter-spacing: .08em; }
+.tile-row4 { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; min-height: 0; }
+.tile-row4 .tile-btn { padding: 9px; border-radius: 18px; }
+.tile-row4 .tile-btn b { font-size: 12.5px; }
+.tile-row4 .mini-tag { font-size: 8px; padding: 2px 5px; letter-spacing: .06em; }
 .tile-bus { background: radial-gradient(120% 90% at 50% 15%, #17885a, #07402a 60%, #04261a); border: 1.5px solid #ffd23f; box-shadow: 0 0 16px rgba(255,210,63,.3); }
 .tile-bus::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 45%, rgba(3,26,17,.85)); }
 .bd { position: absolute; inset: 0; z-index: -2; }
@@ -1141,7 +1217,7 @@ a { color: inherit; }
 .app.is-menu .view-menu { opacity: 1; visibility: visible; transform: none; transition: opacity .4s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
 .app.is-menu .view-hero { pointer-events: none; }
 .menu-head { display: flex; align-items: center; gap: 12px; padding: 2px 4px 12px; }
-.menu-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1.5fr 1fr; gap: 10px; }
+.menu-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1.5fr) minmax(0, .5fr) minmax(0, .58fr); gap: 10px; }
 .mtile {
   position: relative; overflow: hidden; isolation: isolate;
   border-radius: 24px; text-decoration: none; color: var(--frost);
@@ -1168,7 +1244,7 @@ a { color: inherit; }
 .tile-go i { width: 30px; height: 30px; border-radius: 50%; background: var(--frost); color: var(--night); display: grid; place-items: center; font-style: normal; }
 .tile-go i svg { width: 16px; height: 16px; }
 .tile-empty { display: grid; place-items: center; text-align: center; padding: 16px; color: rgba(255,255,255,.6); font-weight: 700; border-style: dashed; }
-.tile-split { display: grid; grid-template-rows: 1fr 1fr; gap: 10px; background: none; border: none; overflow: visible; }
+.tile-split { display: grid; grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; min-height: 0; background: none; border: none; overflow: visible; }
 .tile-btn { position: relative; overflow: hidden; isolation: isolate; border-radius: 22px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: #fff; }
 .tile-btn > span:last-child { margin-top: auto; display: block; }
 .tile-btn b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 17px; line-height: 1.05; text-transform: uppercase; }
@@ -1194,8 +1270,7 @@ a { color: inherit; }
 /* Hinweis: Kacheln antippen */
 .tap-hint {
   position: absolute; z-index: 5; width: 38px; height: 38px; margin: -19px 0 0 -19px;
-  border-radius: 50%; background: rgba(40,40,52,.62); border: 1px solid rgba(255,255,255,.22);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border-radius: 50%; background: rgba(36,34,48,.86); border: 1px solid rgba(255,255,255,.22);
   display: grid; place-items: center; pointer-events: none;
   box-shadow: 0 4px 14px rgba(0,0,0,.45);
   transition: opacity .4s;
@@ -1234,19 +1309,11 @@ a { color: inherit; }
 }
 @keyframes tapRipple { 0%, 20% { opacity: 0; transform: scale(.8); } 25% { opacity: .9; } 60%, 100% { opacity: 0; transform: scale(1.7); } }
 /* passende Kachel blinkt kurz weiß auf: oben links, oben rechts, unten rechts, unten links */
-.menu-grid > .tile-ev, .menu-grid > .tile-pay, .menu-grid > .tile-split .tile-btn {
-  outline: 2px solid rgba(255,255,255,0); outline-offset: 2px;
-  animation: tileFlash 8s linear infinite;
-}
-.menu-grid > .mtile:nth-child(2) { animation-delay: 2s; }
-.menu-grid > .tile-pay { animation-delay: 4s; }
-.menu-grid > .tile-split .tile-btn { animation-delay: 6s; }
-@keyframes tileFlash {
-  0%, 26%, 100% { outline-color: rgba(255,255,255,0); }
-  5%, 16% { outline-color: rgba(255,255,255,.4); }
-}
+.menu-grid .flash { position: absolute; inset: 0; z-index: 6; border-radius: inherit; border: 2px solid rgba(255,255,255,.5); opacity: 0; pointer-events: none;
+  animation: tileFlash 8s linear infinite; animation-delay: var(--fd, 0s); will-change: opacity; }
+@keyframes tileFlash { 0%, 26%, 100% { opacity: 0; } 5%, 16% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .tap-finger, .tap-hint .ripple, .tap-hint .tap-dir, .menu-grid > .mtile, .menu-grid .tile-btn { animation: none !important; }
+  .tap-finger, .tap-hint .ripple, .tap-hint .tap-dir, .menu-grid .flash { animation: none !important; }
   .tap-hint .tap-dir { opacity: .9; }
 }
 /* Minispiel-Kachel */
@@ -1299,6 +1366,7 @@ a { color: inherit; }
         <button class="app-pill" id="appPill" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>App holen</button>
       </header>
       <div class="menu-grid" id="menuGrid"></div>
+      <nav class="menu-legal" aria-label="Rechtliches"><a href="#impressum">Impressum</a><span aria-hidden="true">·</span><a href="#datenschutz">Datenschutz</a></nav>
       <div class="tap-hint" id="tapHint" aria-hidden="true"><span class="ripple"></span><span class="tap-dir d1"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tap-dir d2"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tap-dir d3"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tap-dir d4"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><svg class="tap-finger" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10l4.6.9a2 2 0 0 1 1.6 2.2l-.6 4.6a3 3 0 0 1-3 2.6h-3.3a3 3 0 0 1-2.4-1.2l-3.2-4.3a1.4 1.4 0 0 1 2-1.9L9 14z" fill="#c9c9d4" stroke="#2a2a35" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
     </section>
 
@@ -1381,9 +1449,24 @@ a { color: inherit; }
         <button class="bus-btn up" id="busUp" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>Höher</span></button>
         <button class="bus-btn down" id="busDown" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg><span>Tiefer</span></button>
       </div>
-      <div class="bus-foot"><span>Ass = niedrigste, König = höchste Karte.<br>Gleicher Wert = einfach weiter.</span><button type="button" id="busShuffle">Neu mischen</button></div>
+      <div class="bus-foot"><span>2 = niedrigste, Ass = höchste Karte.<br>Gleicher Wert = einfach weiter.</span><button type="button" id="busShuffle">Neu mischen</button></div>
       <div class="bp-toast" id="busToast"></div>
       <div class="bp-over" id="busOver" hidden></div>
+    </section>
+
+    <!-- Zapfmeister-Spiel -->
+    <section class="view view-zapf" id="zapf" aria-label="Zapfmeister-Spiel" aria-hidden="true">
+      <div class="zf-cam" id="zfCam"><svg id="zfSvg" viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg></div>
+      <div class="zf-hud">
+        <button class="bp-x" id="zfClose" type="button" aria-label="Spiel beenden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <div class="bp-stat"><small>Glas</small><b id="zfN">1</b></div>
+        <div class="bp-stat"><small>Punkte</small><b id="zfScore">0,00</b></div>
+        <div class="bp-stat"><small>Rekord</small><b id="zfBest">0,00</b></div>
+      </div>
+      <div class="zf-pct" id="zfPct" aria-live="polite"></div>
+      <div class="zf-info" id="zfInfo"></div>
+      <div class="bp-toast" id="zfToast"></div>
+      <div class="bp-over" id="zfOver" hidden></div>
     </section>
 
     <!-- Detailansicht -->
@@ -2177,17 +2260,6 @@ function hhStatus(ev, now = new Date()) {
   return status(ev, now);
 }
 
-function calendarLink(ev) {
-  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const p = new URLSearchParams({
-    action: "TEMPLATE",
-    text: `${ev.titel.join(" ")} – ${ev.untertitel} | ${CLUB.name}`,
-    dates: `${fmt(ev.startDate)}/${fmt(new Date(Math.min(ev.endDate, ev.startDate.getTime() + 8 * 3600e3)))}`,
-    location: ev.ort,
-    details: `${ev.art ? ev.art + " – " : ""}${CLUB.name}. Infos: ${location.href.split("#")[0]}`
-  });
-  return "https://calendar.google.com/calendar/render?" + p.toString();
-}
 
 function renderDetail(ev) {
   current = ev;
@@ -2276,7 +2348,11 @@ function renderDetail(ev) {
       ${ev.spiel === "beerpong" ? `<a class="game-card" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span class="gc-text"><b>Beerpong</b><small>Schon mal fürs Turnier üben</small></span><i>${ICON_ARROW}</i></a>` : ""}
       <dl class="facts">${facts}</dl>
       ${timeline}
-      ${past ? "" : `<a class="cal" href="${calendarLink(ev)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Im Kalender speichern</a>`}
+      ${past ? "" : `<div class="cal-row">
+        <button class="cal" id="calBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>In Kalender</button>
+        <button class="cal share" id="shareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.4M8.3 13.2l7.4 4.4"/></svg>Teilen</button>
+      </div>
+      <p class="cal-hint" id="calHint" hidden></p>`}
       ${ev.mitbringen ? `<div class="bring"><b>Bitte mitbringen</b>${esc(ev.mitbringen)}</div>` : ""}
     </div>
     <nav class="jump" id="jump" aria-label="Zu Abschnitt springen">
@@ -2311,6 +2387,11 @@ function renderDetail(ev) {
     </div>`;
 
   $("backBtn").addEventListener("click", closeDetail);
+  if ($("calBtn")) {
+    $("calBtn").addEventListener("click", () => addToCalendar(ev));
+    $("shareBtn").addEventListener("click", () => shareEvent(ev));
+    prepareShare(ev);
+  }
   $("copyMail").addEventListener("click", async () => {
     const b = $("copyMail");
     try { await navigator.clipboard.writeText(CLUB.email); b.textContent = "Kopiert"; } catch { b.textContent = "Bitte markieren"; }
@@ -2897,6 +2978,7 @@ function renderTeam() {
         <button type="button" class="danger" id="tResetM">Matrikel-Duell auf 0</button>
         <button type="button" class="danger" id="tResetBP">Beerpong-Top 10 leeren</button>
         <button type="button" class="danger" id="tResetBus">Busfahrer-Top 10 leeren</button>
+        <button type="button" class="danger" id="tResetZapf">Zapfmeister-Top 10 leeren</button>
         <button type="button" id="tLogout">Abmelden</button>
       </div>
     </section>
@@ -2918,6 +3000,7 @@ function renderTeam() {
   armed("tResetM", "Matrikel-Duell auf 0", () => Live.resetMatrikel().catch(() => alertTeam("Zurücksetzen hat nicht geklappt.")));
   armed("tResetBP", "Beerpong-Top 10 leeren", () => Top.clear().catch(() => alertTeam("Löschen hat nicht geklappt.")));
   armed("tResetBus", "Busfahrer-Top 10 leeren", () => BusTop.clear().catch(() => alertTeam("Löschen hat nicht geklappt.")));
+  armed("tResetZapf", "Zapfmeister-Top 10 leeren", () => ZapfTop.clear().catch(() => alertTeam("Löschen hat nicht geklappt.")));
   $("tLogout").addEventListener("click", async () => {
     teamAuthed = false; try { sessionStorage.removeItem("exmaTeam"); } catch {}
     if (Live.remote) { try { await FB.auth.signOut(); } catch {} }
@@ -3061,6 +3144,25 @@ const Game = (() => {
   function launch(xl, zl) {
     ball = { xl, zl, t: 0, dur: 600 + Math.min(zl, 1.2) * 240, apex: 1.25 * (.55 + Math.min(zl, 1.2) * .5), phase: "fly", checked: false, x: 0, z: 0, h: .55, k: 0 };
   }
+  function rimHop(b, at, cup, prev, cur) {
+    /* Geschwindigkeit beim Aufprall aus der Flugbahn bestimmen */
+    const durS = b.dur / 1000, tc = Math.min(1, b.t);
+    const vxIn = b.xl / durS, vzIn = b.zl / durS;
+    const vhIn = (-.55 + b.apex * 4 * (1 - 2 * tc)) / durS;
+    const g = 8 * b.apex / (durS * durS);
+    /* vom Becher weg abprallen (Richtung Becherrand nach außen) */
+    let nx = (at.x - cup.x) / R, nz = (at.z - cup.z) / RZ;
+    const nl = Math.hypot(nx, nz) || 1; nx /= nl; nz /= nl;
+    const kick = .9 + Math.random() * .5;
+    Object.assign(b, at, {
+      phase: "hop", k: 0, g,
+      vx: vxIn * .35 + nx * R * 1.6 * kick,
+      vz: vzIn * .35 + nz * RZ * 2.2 * kick,
+      vh: Math.abs(vhIn) * (.45 + Math.random() * .12)
+    });
+    toast("Bounce!");
+    buzz(20);
+  }
   /* Prüfen, sobald der Ball beim Herunterfallen die Höhe des Becherrands erreicht */
   function checkRim(pos) {
     const hc = cupH();
@@ -3075,12 +3177,12 @@ const Game = (() => {
     }
     return null;
   }
-  function registerHit(hit) {
+  function registerHit(hit, bounced) {
     hit.hits++;
     misses = 0;
     const sh = cupShape(hit);
     for (let i = 0; i < 18; i++) particles.push({ x: sh.ex, y: sh.ey, vx: (Math.random() - .5) * 4, vy: -Math.random() * 5 - 1, life: 1, c: i % 2 ? "#ffd27a" : "#fff" });
-    toast(hit.hits === 2 ? "Doppelt! +2" : "Treffer!");
+    toast(hit.hits === 2 ? "Doppelt! +2" : bounced ? "Bounce-Treffer!" : "Treffer!");
     buzz(hit.hits === 2 ? [30, 40, 60] : 40);
     throwsInRound++; hud();
   }
@@ -3108,13 +3210,29 @@ const Game = (() => {
           Object.assign(b, at, { phase: "cup", cup: res.cup, k: 0 });
           registerHit(res.cup); return;
         }
-        if (res && res.type === "rim") {
-          Object.assign(b, at, { phase: "bounce", k: 0, vx: res.side * (.35 + Math.random() * .3), vz: res.front ? -.25 : .35, vh: 1.4 });
+        if (res && res.type === "rim") { rimHop(b, at, res.cup, prev, cur); return; }
+      }
+      Object.assign(b, cur);
+      /* Ball landet auf dem Tisch: kein Abprallen, er bleibt liegen */
+      if (b.t >= 1) { Object.assign(b, { phase: "drop", k: 0, vx: b.xl * .15, vz: .25, vh: 0, h: 0 }); registerMiss(false); }
+      return;
+    }
+    /* Einmaliger Hüpfer nach Kontakt mit dem Becherrand – kann danach noch in einen Becher fallen */
+    if (b.phase === "hop") {
+      const s = dt / 1000, hc = cupH();
+      const prev = { x: b.x, z: b.z, h: b.h };
+      b.x += b.vx * s; b.z += b.vz * s; b.vh -= b.g * s; b.h += b.vh * s;
+      if (b.vh < 0 && prev.h > hc && b.h <= hc) {
+        const f = (prev.h - hc) / (prev.h - b.h);
+        const at = { x: prev.x + (b.x - prev.x) * f, z: prev.z + (b.z - prev.z) * f, h: hc };
+        const res = checkRim(at);
+        if (res && res.type === "hit") { Object.assign(b, at, { phase: "cup", cup: res.cup, k: 0 }); registerHit(res.cup, true); return; }
+        if (res && res.type === "rim") {   /* zweiter Randkontakt: kein weiterer Bounce, Ball ist weg */
+          Object.assign(b, at, { phase: "bounce", k: 0, vx: res.side * (.3 + Math.random() * .2), vz: res.front ? -.2 : .3, vh: .9 });
           registerMiss(true); return;
         }
       }
-      Object.assign(b, cur);
-      if (b.t >= 1) { Object.assign(b, { phase: "bounce", k: 0, vx: (b.xl - 0) * .2, vz: .5, vh: 1.1 }); registerMiss(false); }
+      if (b.h <= 0) { Object.assign(b, { phase: "drop", k: 0, h: 0, vh: 0, vx: b.vx * .3, vz: b.vz * .3 }); registerMiss(false); }
       return;
     }
     const s = dt / 1000;
@@ -3124,10 +3242,14 @@ const Game = (() => {
       if (b.k > .35) b.phase = "gone";
       return;
     }
-    if (b.phase === "bounce") {
+    if (b.phase === "bounce") {   /* fällt vom Rand herunter, auf dem Tisch kein weiteres Abprallen */
       b.x += b.vx * s; b.z += b.vz * s; b.h += b.vh * s; b.vh -= 6 * s;
-      if (b.h < 0) { b.h = 0; b.vh = Math.abs(b.vh) * .45; }
+      if (b.h < 0) { b.h = 0; b.vh = 0; b.vx *= .5; b.vz *= .5; }
       if (b.k > .8) b.phase = "gone";
+    }
+    if (b.phase === "drop") {
+      b.x += b.vx * s; b.z += b.vz * s; b.vx *= .9; b.vz *= .9;
+      if (b.k > .45) b.phase = "gone";
     }
   }
 
@@ -3219,6 +3341,7 @@ const Game = (() => {
     let alpha = 1;
     if (b.phase === "cup") alpha = Math.max(0, 1 - b.k / .35);
     if (b.phase === "bounce") alpha = Math.max(0, 1 - Math.max(0, b.k - .4) / .4);
+    if (b.phase === "drop") alpha = Math.max(0, 1 - b.k / .45);
     const sh = proj(b.x, zc), p = proj(b.x, zc, Math.max(b.h, 0));
     ctx.save(); ctx.globalAlpha = alpha;
     if (zc <= 1 && b.phase !== "cup") { ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.beginPath(); ctx.ellipse(sh.x, sh.y, r, r * .35, 0, 0, Math.PI * 2); ctx.fill(); }
@@ -3469,7 +3592,8 @@ const Bus = (() => {
   function call(dir) {
     if (!running || busy || over) return;
     const cur = deck[i], nxt = deck[i + 1];
-    const res = nxt.r === cur.r ? "tie" : ((nxt.r > cur.r) === (dir > 0) ? "good" : "wrong");
+    const v = (c) => (c.r === 1 ? 14 : c.r);   /* Ass ist die höchste Karte */
+    const res = nxt.r === cur.r ? "tie" : ((v(nxt) > v(cur)) === (dir > 0) ? "good" : "wrong");
     i++; busy = true;
     lay(nxt, "deal " + res);
     if (res === "wrong") {
@@ -3566,6 +3690,522 @@ const Bus = (() => {
   };
 })();
 
+/* ================= Zapfmeister ================= */
+const zapfAt = (e) => (e.at && e.at.toMillis ? e.at.toMillis() : (typeof e.at === "number" ? e.at : Date.now()));
+const ZapfTop = {
+  KEY: "exmaZapfTop", COL: "zapfmeister",
+  sort: (l) => l.sort((a, b) => b.score - a.score || zapfAt(a) - zapfAt(b)).slice(0, 10),
+  local() { try { return JSON.parse(localStorage.getItem(this.KEY) || "[]"); } catch { return []; } },
+  async list() {
+    if (!Live.remote) return this.sort(this.local());
+    const qs = await FB.db.collection(this.COL).orderBy("score", "desc").limit(30).get();
+    return this.sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })));
+  },
+  async add(entry) {
+    if (!Live.remote) {
+      const id = String(Date.now());
+      const l = this.sort([...this.local(), { ...entry, id, at: Date.now() }]);
+      try { localStorage.setItem(this.KEY, JSON.stringify(l)); } catch {}
+      return id;
+    }
+    const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, glasses: entry.glasses, at: FB.fv.serverTimestamp(), uid: FB.user.uid });
+    return ref.id;
+  },
+  async clear() {
+    if (!Live.remote) { try { localStorage.removeItem(this.KEY); } catch {} return; }
+    const qs = await FB.db.collection(this.COL).limit(400).get();
+    const batch = FB.db.batch(); qs.docs.forEach((d) => batch.delete(d.ref)); await batch.commit();
+  }
+};
+
+const Zapf = (() => {
+  const CX = 200, TABLE = 600, NOZZLE = 270;
+  /* Getränke: Farbe, Schaumkrone beim Zapfen, wie stark der Schaum nachsteigt */
+  const DRINKS = {
+    bier:     { name: "Pils",     liq: ["#ffd25e", "#e08a0e"], foam: "#fffaf0", head: .16, rise: .055, riseMs: 1100, stream: "#f3b130" },
+    weizen:   { name: "Weizen",   liq: ["#fbc75c", "#d58a1e"], foam: "#fffdf5", head: .22, rise: .095, riseMs: 1400, stream: "#f0b445", haze: .32 },
+    guinness: { name: "Guinness", liq: ["#2c140a", "#0f0603"], foam: "#efdfbf", head: .09, rise: .042, riseMs: 1900, stream: "#3a1b0d", surge: true },
+    sekt:     { name: "Sekt",     liq: ["#fbf0bd", "#ecd27e"], foam: "#fffbe6", head: .10, rise: .088, riseMs: 600, stream: "#f6e39a", fall: .046, bubbles: true }
+  };
+  const r = (a, b) => a + Math.random() * (b - a);
+  /* Glasformen (normales Bier) – zufällig schmal/breit, hoch/klein */
+  const NORMAL = [
+    () => ({ name: "Becher", drink: "bier", h: r(195, 240), wb: r(72, 86), wt: r(98, 114) }),
+    () => ({ name: "Stange", art: "in der", drink: "bier", h: r(250, 285), wb: r(56, 62), wt: r(62, 70) }),
+    () => ({ name: "Krug", drink: "bier", h: r(180, 212), wb: r(116, 132), wt: 0, mug: true, base: 14 }),
+    () => ({ name: "Pint", drink: "bier", h: r(228, 258), wb: r(80, 88), wt: r(104, 112), bulge: 10, bulgeAt: .86 }),
+    () => ({ name: "Tulpe", art: "in der", drink: "bier", h: r(205, 232), wb: r(56, 64), wt: r(82, 90), bulge: 22, bulgeAt: .55, stem: 26 }),
+    () => ({ name: "Humpen", drink: "bier", h: r(140, 168), wb: r(112, 128), wt: r(122, 138) })
+  ];
+  const SPECIAL = [
+    () => ({ name: "Sektflöte", art: "in der", drink: "sekt", h: r(190, 215), wb: 26, wt: r(56, 62), stem: 70, curve: .65 }),
+    () => ({ name: "Weizenglas", drink: "weizen", h: r(280, 305), wb: 62, wt: r(94, 100), waist: 14 }),
+    () => ({ name: "Guinness-Glas", drink: "guinness", h: r(238, 258), wb: 76, wt: r(100, 106), bulge: 14, bulgeAt: .82 })
+  ];
+  const CLASSIC = () => ({ name: "Willibecher", drink: "bier", h: 225, wb: 84, wt: 108, classic: true });
+  const HINTS = {
+    bier: "Klassisch: Der Schaum steigt nach dem Loslassen noch ein Stück.",
+    weizen: "Weizen schäumt kräftig nach – lieber früher loslassen!",
+    guinness: "Guinness braucht Geduld: Die Krone baut sich langsam auf.",
+    sekt: "Sekt schäumt erst hoch und fällt dann zusammen – nicht überlaufen lassen!"
+  };
+
+  let state = "off", running = false, n = 0, totalH = 0, glass = null, P = 0, delta = 0, peak = 0, finalL = 0, tSettle = 0, tPour = 0, last = 0, raf = 0, bubbles = [];
+  let best = parseInt(store.get("exmaZapfBest") || "0", 10) || 0;
+  const svg = () => $("zfSvg");
+  /* Mindest-Füllstand: Glas 1 = 90 %, danach +0,5 % pro Glas, höchstens 99 % */
+  const minPct = () => Math.min(99, 90 + Math.max(0, n - 1) * .5);
+  const fmtPts = (h) => (h / 100).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtPct = (x) => (x * 100).toLocaleString("de-DE", { minimumFractionDigits: 3, maximumFractionDigits: 3 }) + " %";
+  const buzz = (ms) => { try { navigator.vibrate && navigator.vibrate(ms); } catch {} };
+
+  /* ---------- Hintergrund: Holz, Schnapsregal, Zapfanlage ---------- */
+  function background() {
+    let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const cols = ["#3fae4a", "#b8611c", "#e8c56a", "#9fd4e8", "#d81b3c", "#3d63c9", "#f0d98a", "#8a3fb0", "#eae4d4", "#2a8a55", "#ff7a3d"];
+    /* Bokeh-Lichter im Hintergrund */
+    let bokeh = "";
+    for (let k = 0; k < 16; k++) {
+      const c = ["#ffb347", "#ff5fa2", "#2ff3e0", "#ffd23f"][k % 4];
+      bokeh += `<circle cx="${(rnd() * 400).toFixed(0)}" cy="${(30 + rnd() * 200).toFixed(0)}" r="${(10 + rnd() * 26).toFixed(0)}" fill="url(#zfBok)" style="color:${c}" opacity="${(.25 + rnd() * .35).toFixed(2)}"/>`;
+    }
+    /* Regal mit hinterleuchteten Flaschen */
+    let shelves = "";
+    [262, 372, 482].forEach((y, si) => {
+      shelves += `<rect x="0" y="${y - 104}" width="400" height="104" fill="url(#zfBack${si % 2})"/>`;
+      let x = 4;
+      while (x < 394) {
+        const w = 15 + rnd() * 14, h = 50 + rnd() * 40, c = cols[Math.floor(rnd() * cols.length)];
+        if (x + w > 398) break;
+        const nw = w * (.28 + rnd() * .1), nh = h * (.26 + rnd() * .12), bh = h - nh, rx = w * .24;
+        shelves += `<g>
+          <rect x="${x}" y="${y - bh}" width="${w}" height="${bh}" rx="${rx}" fill="${c}" opacity=".9"/>
+          <rect x="${x + (w - nw) / 2}" y="${y - h}" width="${nw}" height="${nh + 4}" rx="2" fill="${c}" opacity=".9"/>
+          <rect x="${x}" y="${y - bh}" width="${w}" height="${bh}" rx="${rx}" fill="url(#zfBot)"/>
+          <rect x="${x + (w - nw) / 2 - .5}" y="${y - h - 4}" width="${nw + 1}" height="6" rx="1.5" fill="${rnd() > .5 ? "url(#zfBrass)" : "#1a1a1e"}"/>
+          <rect x="${x + 2.5}" y="${y - bh * .62}" width="${w - 5}" height="${bh * .3}" rx="2" fill="#f6ead0" opacity=".88"/>
+          <rect x="${x + 4}" y="${y - bh * .52}" width="${w - 8}" height="2" fill="${c}" opacity=".7"/>
+          <rect x="${x + w * .2}" y="${y - bh + 5}" width="${w * .12}" height="${bh - 12}" rx="2" fill="#fff" opacity=".35"/>
+        </g>`;
+        x += w + 3 + rnd() * 5;
+      }
+      /* Glasboden mit Neonkante */
+      shelves += `<rect x="0" y="${y}" width="400" height="5" fill="rgba(190,240,255,.35)"/>
+        <rect x="0" y="${y + 5}" width="400" height="2" fill="${si % 2 ? "#ff5fa2" : "#2ff3e0"}"/>
+        <rect x="0" y="${y + 7}" width="400" height="16" fill="url(#zfLed${si % 2})"/>`;
+    });
+    return `<defs>
+      <linearGradient id="zfWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0612"/><stop offset=".45" stop-color="#1b0b16"/><stop offset="1" stop-color="#2a130b"/></linearGradient>
+      <radialGradient id="zfBok"><stop offset="0" stop-color="currentColor" stop-opacity=".9"/><stop offset=".55" stop-color="currentColor" stop-opacity=".35"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+      <linearGradient id="zfBack0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120708"/><stop offset=".7" stop-color="#3a1a08"/><stop offset="1" stop-color="#8a4a12"/></linearGradient>
+      <linearGradient id="zfBack1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120710"/><stop offset=".7" stop-color="#341027"/><stop offset="1" stop-color="#7a1f4e"/></linearGradient>
+      <linearGradient id="zfLed0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2ff3e0" stop-opacity=".45"/><stop offset="1" stop-color="#2ff3e0" stop-opacity="0"/></linearGradient>
+      <linearGradient id="zfLed1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5fa2" stop-opacity=".45"/><stop offset="1" stop-color="#ff5fa2" stop-opacity="0"/></linearGradient>
+      <linearGradient id="zfBot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".35" stop-color="#000" stop-opacity="0"/><stop offset=".7" stop-color="#000" stop-opacity=".1"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></linearGradient>
+      <linearGradient id="zfTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4520"/><stop offset=".25" stop-color="#4e2a12"/><stop offset="1" stop-color="#241108"/></linearGradient>
+      <linearGradient id="zfFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b150a"/><stop offset="1" stop-color="#0b0503"/></linearGradient>
+      <linearGradient id="zfEdge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5fa2" stop-opacity=".6"/><stop offset="1" stop-color="#ff5fa2" stop-opacity="0"/></linearGradient>
+      <linearGradient id="zfChrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4b5058"/><stop offset=".22" stop-color="#d9dee4"/><stop offset=".34" stop-color="#ffffff"/><stop offset=".55" stop-color="#8d949c"/><stop offset=".8" stop-color="#c5cbd2"/><stop offset="1" stop-color="#3e434a"/></linearGradient>
+      <linearGradient id="zfChromeH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#b8bfc7"/><stop offset="1" stop-color="#5a6068"/></linearGradient>
+      <linearGradient id="zfBrass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b0"/><stop offset=".45" stop-color="#e2b54a"/><stop offset="1" stop-color="#8a6116"/></linearGradient>
+      <radialGradient id="zfSpot" cx="50%" cy="0%" r="100%"><stop offset="0" stop-color="#fff2cf" stop-opacity=".42"/><stop offset=".6" stop-color="#ffcf7a" stop-opacity=".1"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient>
+      <radialGradient id="zfPool" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffd890" stop-opacity=".55"/><stop offset="1" stop-color="#ffd890" stop-opacity="0"/></radialGradient>
+      <radialGradient id="zfVig" cx="50%" cy="48%" r="75%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></radialGradient>
+      <linearGradient id="zfLiqG" x1="0" y1="0" x2="0" y2="1"><stop id="zfLq0" offset="0" stop-color="#ffd25e"/><stop id="zfLq1" offset="1" stop-color="#e08a0e"/></linearGradient>
+      <linearGradient id="zfLiqShade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".38"/><stop offset=".3" stop-color="#000" stop-opacity="0"/><stop offset=".42" stop-color="#fff" stop-opacity=".16"/><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".42"/></linearGradient>
+      <linearGradient id="zfGlassFill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".2" stop-color="#fff" stop-opacity=".05"/><stop offset=".75" stop-color="#fff" stop-opacity=".03"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/></linearGradient>
+      <linearGradient id="zfFoamG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#d9c9a8" stop-opacity=".45"/></linearGradient>
+      <pattern id="zfFoamPat" width="9" height="7" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.8" fill="none" stroke="#c9b48c" stroke-opacity=".35" stroke-width=".7"/><circle cx="7" cy="5.5" r="1.2" fill="none" stroke="#c9b48c" stroke-opacity=".3" stroke-width=".6"/></pattern>
+      <clipPath id="zfMedal"><circle cx="302" cy="300" r="15"/></clipPath>
+    </defs>
+    <rect x="0" y="0" width="400" height="${TABLE}" fill="url(#zfWall)"/>
+    ${bokeh}
+    <g font-family="Yellowtail, 'Brush Script MT', cursive" font-size="54" text-anchor="middle">
+      <text x="200" y="132" fill="none" stroke="#ff2e88" stroke-opacity=".22" stroke-width="16" stroke-linejoin="round">Zapfmeister</text>
+      <text x="200" y="132" fill="none" stroke="#ff2e88" stroke-opacity=".45" stroke-width="7" stroke-linejoin="round">Zapfmeister</text>
+      <text x="200" y="132" fill="#ffe3f0" stroke="#ff7ab8" stroke-width="1.6">Zapfmeister</text>
+    </g>
+    <rect x="118" y="142" width="164" height="3" rx="1.5" fill="#2ff3e0"/>
+    <rect x="110" y="139" width="180" height="9" rx="4.5" fill="#2ff3e0" opacity=".18"/>
+    ${shelves}
+    <rect x="0" y="500" width="400" height="${TABLE - 500}" fill="#120805"/>
+    <rect x="0" y="500" width="400" height="2" fill="#2ff3e0" opacity=".8"/>
+    <rect x="0" y="502" width="400" height="14" fill="url(#zfLed0)" opacity=".7"/>
+    ${[0, 1, 2, 3].map((k) => `<rect x="${12 + k * 98}" y="516" width="88" height="72" rx="5" fill="#1b0d07" stroke="#000" stroke-opacity=".5" stroke-width="2"/><rect x="${18 + k * 98}" y="522" width="76" height="2" fill="#fff" opacity=".05"/>`).join("")}
+    <path d="M150 0 L250 0 L330 ${TABLE} L70 ${TABLE} Z" fill="url(#zfSpot)"/>
+    <rect x="0" y="${TABLE - 4}" width="400" height="44" fill="url(#zfTop)"/>
+    <rect x="0" y="${TABLE - 4}" width="400" height="1.5" fill="#ffd8a8" opacity=".55"/>
+    <ellipse cx="200" cy="${TABLE + 10}" rx="150" ry="18" fill="url(#zfPool)"/>
+    ${[0, 1, 2, 3, 4, 5].map((k) => `<path d="M${k * 80 - 30} ${TABLE + 6} q 60 ${8 + k % 3 * 3} 120 0" stroke="#000" stroke-opacity=".18" stroke-width="1.2" fill="none"/>`).join("")}
+    <rect x="0" y="${TABLE + 40}" width="400" height="${760 - TABLE - 40}" fill="url(#zfFront)"/>
+    <rect x="0" y="${TABLE + 38}" width="400" height="3" fill="#ff5fa2"/>
+    <rect x="0" y="${TABLE + 41}" width="400" height="22" fill="url(#zfEdge)"/>
+    ${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((k) => `<rect x="${k * 50 - 1}" y="${TABLE + 60}" width="2" height="100" fill="#000" opacity=".35"/>`).join("")}
+    <rect x="0" y="${TABLE + 96}" width="400" height="7" rx="3.5" fill="url(#zfBrass)"/>
+    <rect x="128" y="${TABLE - 9}" width="144" height="10" rx="3" fill="#18181c" stroke="url(#zfChromeH)" stroke-width="1.2"/>
+    ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((k) => `<rect x="${134 + k * 11.5}" y="${TABLE - 7}" width="6" height="6" rx="1" fill="#050506"/>`).join("")}
+    <g id="zfGlass"></g>
+    <rect id="zfStream" x="197.5" y="${NOZZLE}" width="5" height="0" rx="2.5" fill="#f3b130" opacity=".95"/>
+    <rect x="289" y="232" width="26" height="${TABLE - 232 - 8}" rx="7" fill="url(#zfChrome)"/>
+    <circle cx="302" cy="300" r="20" fill="#120812" stroke="#ff5fa2" stroke-width="2.5"/>
+    <circle cx="302" cy="300" r="23" fill="none" stroke="#ff5fa2" stroke-opacity=".3" stroke-width="4"/>
+    <image href="logo.png" x="287" y="285" width="30" height="30" clip-path="url(#zfMedal)"/>
+    <rect x="280" y="${TABLE - 15}" width="44" height="11" rx="4" fill="url(#zfChromeH)"/>
+    <rect x="186" y="230" width="134" height="22" rx="11" fill="url(#zfChromeH)"/>
+    <rect x="192" y="236" width="120" height="3" rx="1.5" fill="#fff" opacity=".7"/>
+    <rect x="192" y="250" width="16" height="${NOZZLE - 250}" rx="3.5" fill="url(#zfChrome)"/>
+    <g id="zfHandle" style="transform-box: view-box; transform-origin: 202px 232px; transition: transform .18s ease;">
+      <rect x="195" y="140" width="14" height="94" rx="7" fill="#141418"/>
+      <rect x="197" y="144" width="3" height="86" rx="1.5" fill="#fff" opacity=".18"/>
+      <rect x="193" y="168" width="18" height="34" rx="4" fill="url(#zfBrass)"/>
+      <text x="202" y="185" text-anchor="middle" dominant-baseline="middle" font-size="7.5" font-weight="800" fill="#3a2404" transform="rotate(-90 202 185)" font-family="sans-serif">EXMA</text>
+    </g>
+    <rect x="0" y="0" width="400" height="760" fill="url(#zfVig)" pointer-events="none"/>`;
+  }
+
+  /* ---------- Glas berechnen und zeichnen ---------- */
+  function geom(t) {
+    const stem = t.stem || 0, base = t.base || 10;
+    const yBot = TABLE - 2 - stem, yIn = yBot - base, yRim = yBot - t.h;
+    const wt = t.mug ? t.wb : t.wt;
+    const width = (f) => {
+      let w = t.wb + (wt - t.wb) * (t.curve ? Math.pow(f, t.curve) : f);
+      if (t.bulge) w += t.bulge * Math.exp(-(((f - t.bulgeAt) / .2) ** 2));
+      if (t.waist) w -= t.waist * Math.exp(-(((f - .32) / .18) ** 2));
+      return w;
+    };
+    const N = 28, L = [], Rt = [], iL = [], iR = [];
+    for (let k = 0; k <= N; k++) {
+      const f = k / N, y = yBot - f * t.h, w = width(f);
+      L.push([CX - w / 2, y]); Rt.push([CX + w / 2, y]);
+      const fi = (yBot - y) >= base ? 1 : 0;
+      if (fi) { iL.push([CX - w / 2 + 3, y]); iR.push([CX + w / 2 - 3, y]); }
+    }
+    const rad = Math.min(8, t.wb * .12);
+    const outer = `M${CX - t.wb / 2 + rad} ${yBot} Q${CX - t.wb / 2} ${yBot} ${CX - t.wb / 2} ${yBot - rad} ` + L.slice(1).map((p) => `L${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ")
+      + " " + Rt.slice().reverse().slice(0, -1).map((p) => `L${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ") + ` L${CX + t.wb / 2} ${yBot - rad} Q${CX + t.wb / 2} ${yBot} ${CX + t.wb / 2 - rad} ${yBot} Z`;
+    const innerPts = [[CX - width(base / t.h) / 2 + 3, yIn], ...iL, ...iR.slice().reverse(), [CX + width(base / t.h) / 2 - 3, yIn]];
+    const inner = "M" + innerPts.map((p) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" L") + " Z";
+    let avg = 0; for (let k = 0; k <= 10; k++) avg += width(k / 10); avg /= 11;
+    return { ...t, stem, base, yBot, yIn, yRim, width, outer, inner, avgW: avg, wTop: width(1), levelY: (l) => yIn - l * (yIn - yRim) };
+  }
+  function drawGlass(g) {
+    const d = DRINKS[g.drink];
+    $("zfLq0").setAttribute("stop-color", d.liq[0]); $("zfLq1").setAttribute("stop-color", d.liq[1]);
+    $("zfStream").setAttribute("fill", d.stream);
+    const minL = minPct() / 100, yM = g.levelY(minL), wM = g.width((g.yBot - yM) / g.h);
+    const stemSVG = g.stem ? `<rect x="${CX - 3}" y="${g.yBot - 2}" width="6" height="${g.stem}" fill="url(#zfGlassFill)" stroke="rgba(255,255,255,.7)" stroke-width="1.2"/>
+      <ellipse cx="${CX}" cy="${TABLE - 3}" rx="${g.stem > 40 ? 31 : 27}" ry="4.5" fill="rgba(255,255,255,.22)" stroke="rgba(255,255,255,.8)" stroke-width="1.4"/>` : "";
+    const hp = `M${CX + g.wb / 2 - 2} ${g.yRim + 32} C${CX + g.wb / 2 + 42} ${g.yRim + 30} ${CX + g.wb / 2 + 42} ${g.yBot - 28} ${CX + g.wb / 2 - 2} ${g.yBot - 30}`;
+    const handle = g.mug ? `<path d="${hp}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="13" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#2a150a" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" transform="translate(-2 -2)"/>` : "";
+    /* aufsteigende Kohlensäure (Sekt kräftig, Bier dezent, Guinness keine) */
+    const nb = d.bubbles ? 12 : g.drink === "guinness" ? 0 : 7;
+    bubbles = Array.from({ length: nb }, () => ({ x: CX + r(-.34, .34) * g.wb, p: Math.random(), v: r(.25, .6), s: d.bubbles ? 1.7 : r(.8, 1.3) }));
+    /* Kondenswasser-Tropfen auf dem Glas */
+    let drops = "";
+    for (let k = 0; k < 22; k++) {
+      const f = r(.05, .8), y = g.yBot - f * g.h, w = g.width(f);
+      drops += `<circle cx="${(CX + r(-.42, .42) * w).toFixed(1)}" cy="${y.toFixed(1)}" r="${r(.7, 1.8).toFixed(1)}" fill="#fff" opacity="${r(.18, .45).toFixed(2)}"/>`;
+    }
+    $("zfGlass").innerHTML = `
+      <clipPath id="zfClip"><path d="${g.inner}"/></clipPath>
+      <ellipse cx="${CX}" cy="${TABLE + 2}" rx="${g.wb / 2 + 14}" ry="5" fill="#000" opacity=".45"/>
+      ${handle}${stemSVG}
+      <path d="${g.outer}" fill="url(#zfGlassFill)"/>
+      <g clip-path="url(#zfClip)">
+        <rect id="zfLiq" x="0" width="400" y="${g.yIn}" height="0" fill="url(#zfLiqG)"/>
+        <rect id="zfHaze" x="0" width="400" y="${g.yIn}" height="0" fill="#fff6e0" opacity="${d.haze || 0}"/>
+        <g id="zfBub">${bubbles.map((b) => `<circle r="${b.s}" fill="#fffbe6" opacity="${d.bubbles ? .85 : .45}"/>`).join("")}</g>
+        <rect id="zfLiqSh" x="${CX - g.wTop / 2 - 6}" width="${g.wTop + 12}" y="${g.yIn}" height="0" fill="url(#zfLiqShade)"/>
+        <rect id="zfFoam" x="0" width="400" y="${g.yIn}" height="0" fill="${d.foam}"/>
+        <rect id="zfFoamTex" x="0" width="400" y="${g.yIn}" height="0" fill="url(#zfFoamPat)"/>
+        <rect id="zfFoamSh" x="0" width="400" y="${g.yIn}" height="0" fill="url(#zfFoamG)"/>
+        <ellipse id="zfFoamTop" cx="${CX}" cy="${g.yIn}" rx="0" ry="4.5" fill="${d.foam}"/>
+      </g>
+      <ellipse cx="${CX}" cy="${g.yIn + 3}" rx="${g.wb / 2 - 4}" ry="3" fill="#fff" opacity=".22"/>
+      <path d="${g.outer}" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M${(CX - g.wb / 2 + 8).toFixed(1)} ${g.yBot - 16} L${(CX - g.wTop / 2 + 8).toFixed(1)} ${g.yRim + 14}" stroke="#fff" stroke-opacity=".42" stroke-width="5" stroke-linecap="round"/>
+      <path d="M${(CX - g.wb / 2 + 16).toFixed(1)} ${g.yBot - 24} L${(CX - g.wTop / 2 + 16).toFixed(1)} ${g.yRim + 40}" stroke="#fff" stroke-opacity=".16" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M${(CX + g.wb / 2 - 7).toFixed(1)} ${g.yBot - 30} L${(CX + g.wTop / 2 - 7).toFixed(1)} ${g.yRim + 30}" stroke="#fff" stroke-opacity=".2" stroke-width="2" stroke-linecap="round"/>
+      ${drops}
+      ${g.classic ? `<path d="M${CX - g.wTop / 2 + 1} ${g.yRim + 26} L${CX + g.wTop / 2 - 1} ${g.yRim + 26}" stroke="rgba(255,255,255,.4)" stroke-width="3"/>` : ""}
+      <ellipse cx="${CX}" cy="${g.yRim}" rx="${g.wTop / 2}" ry="3.5" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="2"/>
+      <path d="M${CX - wM / 2 + 2} ${yM} L${CX - wM / 2 + 15} ${yM}" stroke="#ffd23f" stroke-width="2.2"/>
+      <text x="${CX - wM / 2 - 4}" y="${yM + 3.5}" text-anchor="end" font-size="10" font-weight="800" fill="#ffd23f" font-family="sans-serif" stroke="#1a0b05" stroke-width="2.5" paint-order="stroke">${minPct().toLocaleString("de-DE")} %</text>
+      <g id="zfSpill" opacity="0">
+        <ellipse cx="${CX}" cy="${g.yRim - 4}" rx="${g.wTop / 2 + 6}" ry="9" fill="${d.foam}"/>
+        ${[-.42, -.1, .3].map((k, i) => `<rect class="zf-drip" x="${(CX + k * g.wTop - 4).toFixed(1)}" y="${g.yRim - 2}" width="${8 - i}" height="${60 + i * 25}" rx="4" fill="${d.foam}" style="transform-box: fill-box; transform-origin: top; transform: scaleY(0)"/>`).join("")}
+      </g>
+      <circle id="zfRim" cx="${CX}" cy="${g.yRim}" r="1" opacity="0"/>`;
+  }
+  /* Füllstand zeichnen: total = Oberkante Schaum, liq = Oberkante Flüssigkeit (als Anteil der Glashöhe) */
+  function paint(total, liq, haze) {
+    const g = glass, yI = g.yIn, yT = g.levelY(Math.min(total, 1.02)), yL = g.levelY(Math.min(liq, 1.02));
+    const set = (id, a) => { const el = $(id); for (const k in a) el.setAttribute(k, a[k]); };
+    const lh = Math.max(0, yI - yL), fh = Math.max(0, yL - yT);
+    set("zfLiq", { y: yL, height: lh });
+    set("zfHaze", { y: yL, height: lh });
+    set("zfLiqSh", { y: yT, height: lh + fh });
+    if (haze != null) $("zfHaze").setAttribute("opacity", haze);
+    set("zfFoam", { y: yT, height: fh });
+    set("zfFoamTex", { y: yT, height: fh });
+    set("zfFoamSh", { y: yT, height: fh });
+    const fw = g.width(Math.min(1, (g.yBot - yT) / g.h));
+    set("zfFoamTop", { cy: yT, rx: total > .002 ? fw / 2 - 3 : 0 });
+    if (bubbles.length) {
+      const kids = $("zfBub").children, t = performance.now() / 1000;
+      bubbles.forEach((b, k) => { const p = (b.p + t * b.v) % 1; kids[k].setAttribute("cx", b.x); kids[k].setAttribute("cy", yI - p * lh); });
+    }
+  }
+
+  /* ---------- Ablauf ---------- */
+  function hud() {
+    $("zfN").textContent = n;
+    $("zfScore").textContent = fmtPts(totalH);
+    $("zfBest").textContent = fmtPts(best);
+  }
+  function info(title, text) {
+    const el = $("zfInfo");
+    if (!title) { el.classList.add("hide"); return; }
+    el.innerHTML = `<b>${esc(title)}</b><span>${esc(text)}</span>`; el.classList.remove("hide");
+  }
+  function toast(t, bad) {
+    const el = $("zfToast"); el.textContent = t; el.classList.toggle("bad", !!bad);
+    el.classList.remove("show"); void el.offsetWidth; el.classList.add("show");
+  }
+  function pctBox(text, cls, sub) {
+    const el = $("zfPct");
+    el.className = "zf-pct" + (text ? " show" : "") + (cls ? " " + cls : "");
+    el.innerHTML = text ? `${text}${sub ? `<small>${sub}</small>` : ""}` : "";
+  }
+  function zoom(on) {
+    const cam = $("zfCam");
+    if (on) {
+      const cr = cam.getBoundingClientRect(), m = $("zfRim").getBoundingClientRect();
+      cam.style.transformOrigin = `${m.left + m.width / 2 - cr.left}px ${m.top + m.height / 2 - cr.top}px`;
+      cam.style.transform = "scale(2.3)";
+    } else cam.style.transform = "";
+  }
+  function nextGlass() {
+    n++;
+    const spec = n === 1 ? CLASSIC() : (Math.random() < .25 ? SPECIAL[Math.floor(Math.random() * SPECIAL.length)]() : NORMAL[Math.floor(Math.random() * NORMAL.length)]());
+    glass = geom(spec);
+    drawGlass(glass);
+    P = 0; paint(0, 0);
+    hud(); pctBox("");
+    const d = DRINKS[glass.drink];
+    info(`${d.name} ${glass.art || "im"} ${glass.name} · mind. ${minPct().toLocaleString("de-DE")} %`, n === 1 ? "Finger gedrückt halten zum Zapfen – loslassen stoppt den Hahn." : HINTS[glass.drink]);
+    state = "busy";
+    const a = $("zfGlass").animate([{ transform: "translateX(300px)" }, { transform: "translateX(0)" }], { duration: 480, easing: "cubic-bezier(.2,.8,.2,1)" });
+    a.onfinish = () => { if (running) state = "ready"; };
+  }
+  function pourRate() {
+    const g = glass;
+    const base = .48 * Math.pow(100 / g.avgW, .6) * Math.pow(230 / g.h, .5);
+    return Math.min(.82, Math.max(.3, base)) * Math.min(1.6, 1 + (n - 1) * .035);
+  }
+  function startPour() {
+    if (state !== "ready") return;
+    state = "pour"; tPour = 0; last = 0;
+    info(null);
+    $("zfHandle").style.transform = "rotate(-28deg)";
+    buzz(10);
+    loop();
+  }
+  function stopPour() {
+    if (state !== "pour") return;
+    $("zfHandle").style.transform = "";
+    $("zfStream").setAttribute("height", 0);
+    const d = DRINKS[glass.drink];
+    const wf = Math.min(1.6, Math.max(.7, Math.sqrt(100 / glass.avgW)));
+    const amount = d.rise * wf * r(.85, 1.15) * (.75 + .25 * Math.min(1, P / .8));
+    if (d.fall) { peak = P + amount; finalL = peak - d.fall * r(.9, 1.1); }
+    else { peak = P + amount; finalL = peak; }
+    state = "settle"; tSettle = 0;
+    zoom(true);
+  }
+  function loop() {
+    cancelAnimationFrame(raf);
+    const step = (now) => {
+      if (!running) return;
+      const dt = last ? Math.min(60, now - last) : 16; last = now;
+      const d = glass ? DRINKS[glass.drink] : null;
+      if (state === "pour") {
+        tPour += dt;
+        const ramp = Math.min(1, .45 + tPour / 450);
+        P += pourRate() * ramp * dt / 1000;
+        const head = d.head * P;
+        paint(P, P - head);
+        $("zfStream").setAttribute("height", Math.max(0, glass.levelY(P) - NOZZLE));
+        if (P > 1) { P = 1; $("zfHandle").style.transform = ""; $("zfStream").setAttribute("height", 0); result(1.02, true); return; }
+      } else if (state === "settle") {
+        tSettle += dt;
+        const k = Math.min(1, tSettle / d.riseMs), e = 1 - Math.pow(1 - k, 3);
+        let lvl;
+        if (d.fall) {
+          const up = Math.min(1, k / .45), down = Math.max(0, (k - .45) / .55);
+          lvl = P + (peak - P) * (1 - Math.pow(1 - up, 3)) - (peak - finalL) * (down * down * (3 - 2 * down));
+        } else lvl = P + (peak - P) * e;
+        const head = d.head * P;
+        paint(lvl, P - head, d.surge ? .55 * (1 - e) : null);
+        if (d.surge) $("zfHaze").setAttribute("fill", "#c99a6a");
+        pctBox(fmtPct(Math.min(lvl, 1.02)));
+        if (lvl > 1) { result(lvl, true); return; }
+        if (k >= 1) { result(finalL, false); return; }
+      } else if (bubbles.length && glass) {
+        paint(P > 0 ? Math.max(P, finalL) : 0, P - d.head * P);
+      }
+      if (state === "pour" || state === "settle" || (bubbles.length && state !== "off")) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+  function result(level, overflow) {
+    state = "result";
+    if (overflow) {
+      pctBox("Übergelaufen!", "bad", fmtPct(Math.min(level, 1.02)).replace(/^1[0-9]{2},[0-9]+/, "über 100,000"));
+      $("zfSpill").setAttribute("opacity", 1);
+      document.querySelectorAll("#zfSpill .zf-drip").forEach((el, i) => el.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { duration: 700 + i * 200, easing: "ease-in", fill: "forwards" }));
+      buzz([60, 40, 140]);
+      return setTimeout(() => gameOver("Übergelaufen!", "Der Schaum ist über den Rand gelaufen."), 1500);
+    }
+    const pct = Math.round(level * 100 * 1000) / 1000, need = minPct();
+    if (pct < need) {
+      const needTxt = need.toLocaleString("de-DE") + " %";
+      pctBox(fmtPct(level), "bad", `Zu wenig – mindestens ${needTxt}`);
+      buzz([60, 40, 140]);
+      return setTimeout(() => gameOver("Zu wenig gezapft!", `Nur ${fmtPct(level)} – für dieses Glas brauchtest du mindestens ${needTxt}.`), 1500);
+    }
+    const pts = Math.round(level * 100 * 100);   /* auf 2 Nachkommastellen gerundet */
+    totalH += pts;
+    if (totalH > best) { best = totalH; store.set("exmaZapfBest", String(best)); }
+    pctBox(fmtPct(level), "ok", `+${fmtPts(pts)} Punkte`);
+    toast(level >= .995 ? "Perfekt gezapft!" : level >= .97 ? "Sauber!" : "Passt!");
+    buzz(level >= .995 ? [30, 40, 80] : 25);
+    hud();
+    setTimeout(() => {
+      if (!running) return;
+      zoom(false); pctBox("");
+      setTimeout(() => {
+        if (!running) return;
+        const a = $("zfGlass").animate([{ transform: "translateX(0)" }, { transform: "translateX(-320px)" }], { duration: 420, easing: "cubic-bezier(.5,0,.75,0)", fill: "forwards" });
+        a.onfinish = () => { a.cancel(); if (running) nextGlass(); };
+      }, 450);
+    }, 1500);
+  }
+
+  /* ---------- Start, Ende, Bestenliste ---------- */
+  function intro() {
+    const box = $("zfOver"); box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Zapfmeister – Spielregeln">
+        <h3>Zapfmeister</h3>
+        <ul class="zf-rules">
+          <li><i>1</i><span><b>Gedrückt halten</b> zapft, loslassen stoppt den Hahn.</span></li>
+          <li><i>2</i><span>Danach <b>steigt der Schaum nach</b> – gezählt wird der Füllstand in Prozent.</span></li>
+          <li><i>3</i><span>Das erste Glas braucht <b>mindestens 90&nbsp;%</b>, jedes weitere <b>0,5&nbsp;% mehr</b> (bis 99&nbsp;%). Zu wenig oder <b>übergelaufen</b>? Dann ist Schluss. Jedes Glas bringt seine Prozente als Punkte.</span></li>
+        </ul>
+        <p class="note">Weizen schäumt stärker, Guinness braucht Geduld, Sekt schäumt hoch und fällt zusammen.</p>
+        <div class="row2"><button class="ghost" id="zfTopBtn" type="button">Top 10</button><button class="primary" id="zfGo" type="button">Los geht's</button></div>
+      </div>`;
+    $("zfGo").addEventListener("click", newGame);
+    $("zfTopBtn").addEventListener("click", async () => showTop(await ZapfTop.list().catch(() => []), null));
+  }
+  function newGame() {
+    $("zfOver").hidden = true; $("zfOver").innerHTML = "";
+    n = 0; totalH = 0; finalL = 0; zoom(false); pctBox("");
+    nextGlass();
+    loop();
+  }
+  function gameOver(title, text) {
+    state = "over";
+    zoom(false);
+    const glasses = n - 1, box = $("zfOver");
+    box.hidden = false;
+    const canSave = glasses > 0;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Game over">
+        <h3 class="bad">${esc(title)}</h3>
+        <p class="bus-res">${esc(text)}</p>
+        <div class="bp-score"><div><small>Gläser</small><b>${glasses}</b></div><div><small>Punkte</small><b>${fmtPts(totalH)}</b></div></div>
+        ${canSave ? `
+        <label for="zfName" style="display:block;text-align:left;font-size:13px;font-weight:700;color:#7a6a8f;margin-bottom:6px">Dein Name für die Bestenliste</label>
+        <input id="zfName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(store.get("exmaZapfName") || store.get("exmaBusName") || "")}">
+        <div class="row2"><button class="ghost" id="zfAgain" type="button">Nochmal</button><button class="primary" id="zfSave" type="button">Eintragen</button></div>
+        <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>
+        <button class="linkbtn" id="zfTopBtn" type="button">Top 10 ansehen</button>`
+        : `<div class="row2"><button class="ghost" id="zfAgain" type="button">Nochmal</button><button class="primary" id="zfTopBtn" type="button">Top 10</button></div>`}
+      </div>`;
+    $("zfAgain").addEventListener("click", newGame);
+    $("zfTopBtn").addEventListener("click", async () => showTop(await ZapfTop.list().catch(() => []), null));
+    if (canSave) {
+      const inp = $("zfName"); let saved = false;
+      $("zfSave").addEventListener("click", async () => {
+        if (saved) return;
+        const nm = inp.value.trim().replace(/\s+/g, " ").slice(0, 16);
+        if (!nm) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
+        const btn = $("zfSave"); btn.disabled = true; btn.textContent = "Speichert …";
+        let id = null;
+        try { id = await ZapfTop.add({ name: nm, score: Math.round(totalH) / 100, glasses }); saved = true; store.set("exmaZapfName", nm); }
+        catch (e) { console.warn("Zapfmeister speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
+        showTop(await ZapfTop.list().catch(() => []), id);
+      });
+      inp.addEventListener("keydown", (e) => { if (e.key === "Enter") $("zfSave").click(); });
+    }
+  }
+  function showTop(list, mineId) {
+    const box = $("zfOver"); box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Bestenliste Zapfmeister">
+        <h3>Top 10</h3>
+        <ol class="bp-list">${list.length ? list.map((e, k) => `<li class="${mineId && e.id === mineId ? "me" : ""}"><span class="r">${k + 1}</span><span class="n">${esc(e.name)}</span><span class="c">${fmtPts(Math.round(e.score * 100))}</span><span class="t">${e.glasses} Gl.</span></li>`).join("") : `<li><span></span><span class="n">Noch keine Einträge</span></li>`}</ol>
+        <div class="row2"><button class="ghost" id="zfDone" type="button">Schließen</button><button class="primary" id="zfAgain2" type="button">Nochmal</button></div>
+      </div>`;
+    $("zfDone").addEventListener("click", () => goBack(""));
+    $("zfAgain2").addEventListener("click", newGame);
+  }
+
+  /* ---------- Eingabe: Finger halten oder Leertaste ---------- */
+  const isUi = (t) => t.closest && t.closest(".bp-over, .bp-x, button, input");
+  $("zapf").addEventListener("pointerdown", (e) => {
+    if (!running || isUi(e.target)) return;
+    if (state === "ready") { e.preventDefault(); try { $("zapf").setPointerCapture(e.pointerId); } catch {} startPour(); }
+  });
+  ["pointerup", "pointercancel", "lostpointercapture"].forEach((ev) => $("zapf").addEventListener(ev, () => stopPour()));
+  $("zapf").addEventListener("contextmenu", (e) => e.preventDefault());
+  document.addEventListener("keydown", (e) => { if (running && e.key === " " && !e.repeat && !isUi(e.target)) { e.preventDefault(); startPour(); } });
+  document.addEventListener("keyup", (e) => { if (running && e.key === " ") { e.preventDefault(); stopPour(); } });
+  $("zfClose").addEventListener("click", () => goBack(""));
+
+  return {
+    _dbg: { state: () => ({ state, n, totalH, P, peak, finalL, glass: glass && { name: glass.name, drink: glass.drink, h: Math.round(glass.h), avgW: Math.round(glass.avgW) } }), start: () => startPour(), stop: () => stopPour(), setP: (p) => { P = p; }, show: (i, lv = .8) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL]; glass = geom(list[i]()); drawGlass(glass); const d = DRINKS[glass.drink]; paint(lv, lv - d.head * lv - .05, d.haze != null ? d.haze : null); return glass.name; } },
+    open() {
+      if (running) return;
+      running = true;
+      app.classList.add("is-zapf");
+      $("zapf").setAttribute("aria-hidden", "false");
+      if (!svg().firstElementChild) svg().innerHTML = background();
+      soloView(true);
+      state = "intro"; n = 0; totalH = 0; hud(); info(null); pctBox("");
+      $("zfGlass").innerHTML = "";
+      intro();
+    },
+    close() {
+      if (!running) return;
+      running = false; state = "off";
+      cancelAnimationFrame(raf);
+      zoom(false);
+      app.classList.remove("is-zapf");
+      $("zapf").setAttribute("aria-hidden", "true");
+      soloView(false);
+    }
+  };
+})();
+
+/* Kleine Demo für die Zapfmeister-Kachel: Glas füllt sich, Schaum steigt nach */
+function zapfDemo() {
+  return `<span class="zd" aria-hidden="true"><span class="zd-tap"></span><span class="zd-stream"></span><span class="zd-glass"><span class="zd-foam"></span><span class="zd-beer"></span></span></span>`;
+}
+
 /* Kleine Demo für die Busfahrer-Kachel */
 function busDemo() {
   return `<span class="bd" aria-hidden="true">
@@ -3647,22 +4287,50 @@ function buildMenu() {
   g.innerHTML =
     evTile(EVENTS[now], "Diese Woche") +
     evTile(EVENTS[now + 1], "Kommende Woche") +
-    `<div class="mtile tile-split">
-      <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-Ranking<br>&amp; Wünsche</b><small>Counter · Matrikel-Duell</small></span></a>
-      <div class="tile-games">
-        <a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beer&shy;pong</b></span></a>
-        <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Bus&shy;fahrer</b></span></a>
-      </div>
-    </div>
-    <div class="mtile tile-pay">
-      <a class="pay-main" href="#paypal" aria-label="Mit PayPal bezahlen">
-        <span class="pp-head"><span class="pp-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg></span><span class="pp-word"><i>Pay</i><i>Pal</i></span></span>
-        <b>Bargeldlos<br>bezahlen</b>
-        <small>QR-Code scannen oder direkt antippen</small>
-        <i class="pp-go">${ICON_ARROW}</i>
+    `<a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-Ranking<br>&amp; Wünsche</b><small>Counter · Matrikel-Duell</small></span></a>
+    <div class="tile-btn tile-couch"><svg class="couch-art" viewBox="0 28 200 92" aria-hidden="true">
+          <defs>
+            <radialGradient id="cc-spot" cx="50%" cy="0%" r="90%"><stop offset="0" stop-color="#fff3c4" stop-opacity=".55"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient>
+          </defs>
+          <path d="M70 0h60l40 120H30z" fill="url(#cc-spot)"/>
+          <ellipse cx="100" cy="116" rx="92" ry="5" fill="rgba(0,0,0,.35)"/>
+          ${[[18, "#8d5524", "#ff2e88", 1], [42, "#c68642", "#2ff3e0", 0], [158, "#5c3a1e", "#ffd23f", 0], [182, "#a0662f", "#8f6bff", 1], [128, "#3b2414", "#2bff88", 0]].map(([x, skin, shirt, wave]) => `
+          <g class="cc-p">
+            <rect x="${x - 4}" y="88" width="3.5" height="26" rx="1.7" fill="#2a2440"/><rect x="${x + 0.5}" y="88" width="3.5" height="26" rx="1.7" fill="#2a2440"/>
+            <rect x="${x - 7}" y="60" width="14" height="32" rx="6" fill="${shirt}"/>
+            ${wave ? `<path d="M${x + 6} 64 q8 -6 9 -18" stroke="${skin}" stroke-width="3.5" fill="none" stroke-linecap="round"/>` : `<path d="M${x + 6} 64 q3 10 2 20" stroke="${skin}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`}
+            <path d="M${x - 6} 64 q-3 10 -2 20" stroke="${skin}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <circle cx="${x}" cy="50" r="8" fill="${skin}"/>
+          </g>`).join("")}
+          <g class="cc-couch">
+            <rect x="52" y="74" width="96" height="26" rx="10" fill="#b3122e"/>
+            <rect x="46" y="86" width="108" height="22" rx="8" fill="#d81b3c"/>
+            <rect x="42" y="80" width="16" height="30" rx="7" fill="#c0162f"/><rect x="142" y="80" width="16" height="30" rx="7" fill="#c0162f"/>
+            <rect x="52" y="108" width="5" height="7" rx="1" fill="#3a1020"/><rect x="143" y="108" width="5" height="7" rx="1" fill="#3a1020"/>
+          </g>
+          <g class="cc-lars">
+            <rect x="90" y="96" width="9" height="16" rx="3" fill="#2a2440"/><rect x="101" y="96" width="9" height="16" rx="3" fill="#2a2440"/>
+            <rect x="91" y="66" width="18" height="30" rx="7" fill="#f4f1ea"/>
+            <path d="M92 72 q-6 8 -2 18M108 72 q6 8 2 18" stroke="#f2cfb3" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <circle cx="100" cy="56" r="8.5" fill="#f2cfb3"/>
+            <path d="M91 55 q0 -11 9 -11 q10 0 10 10 q-4 -4 -10 -4 q-5 0 -9 5z" fill="#f5d36b"/>
+          </g>
+        </svg><span><b>Castingcouch</b><small>mit Lars · kommt bald</small></span></div>
+    <div class="tile-row4">
+      <a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beer&shy;pong</b></span></a>
+      <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Bus&shy;fahrer</b></span></a>
+      <a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapf&shy;meister</b></span></a>
+      <a class="tile-btn tile-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen">
+        <span class="pp-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg></span>
+        <span class="pp-row"><span class="pp-word"><i>Pay</i><i>Pal</i></span><i class="pp-go">${ICON_ARROW}</i></span>
       </a>
-      <div class="legal-links"><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a></div>
     </div>`;
+  /* Blink-Rahmen: oben links, oben rechts, dann rechte Hälfte, dann linke Hälfte */
+  const flash = (el, d) => el && el.insertAdjacentHTML("beforeend", `<i class="flash" aria-hidden="true" style="--fd:${d}s"></i>`);
+  const evs = g.querySelectorAll(".tile-ev");
+  flash(evs[0], 0); flash(evs[1], 2);
+  [".tile-couch", ".tile-zapf", ".tile-pay"].forEach((q) => flash(g.querySelector(q), 4));
+  [".tile-rank", ".tile-game", ".tile-bus"].forEach((q) => flash(g.querySelector(q), 6));
   g.querySelectorAll(".tile-ev").forEach((t) => {
     const ev = EVENTS[+t.dataset.ev];
     const layers = (SCENES[ev.thema] || sceneIce)();
@@ -3681,7 +4349,7 @@ function buildMenu() {
 function syncTapAnim() {
   if (!document.getAnimations || !document.timeline) return;
   const t0 = document.timeline.currentTime;
-  document.querySelectorAll("#tapHint, #tapHint *, #menuGrid > .mtile, #menuGrid .tile-btn").forEach((el) =>
+  document.querySelectorAll("#tapHint, #tapHint *, #menuGrid .flash").forEach((el) =>
     el.getAnimations().forEach((a) => { if (/^(tapRound|tapDir|tapRipple|tileFlash)$/.test(a.animationName)) a.startTime = t0; }));
 }
 function fitMenu() {
@@ -3721,9 +4389,10 @@ function route() { routeInner(); afterRoute(); }
 function routeInner() {
   const id = location.hash.slice(1);
   trackNav(id);
-  if (id === "beerpong") { Bus.close(); Game.open(); return; }
-  if (id === "busfahrer") { Game.close(); Bus.open(); return; }
-  Game.close(); Bus.close();
+  if (id === "beerpong") { Bus.close(); Zapf.close(); Game.open(); return; }
+  if (id === "busfahrer") { Game.close(); Zapf.close(); Bus.open(); return; }
+  if (id === "zapfmeister") { Game.close(); Bus.close(); Zapf.open(); return; }
+  Game.close(); Bus.close(); Zapf.close();
   if (id === "ranking") { renderClub(); showClub(true); return; }
   showClub(false);
   if (id === "impressum" || id === "datenschutz") { renderLegal(id); show(true); return; }
@@ -3779,12 +4448,12 @@ function renderLegal(which) {
       <h3>3. Schriftarten</h3>
       <p>Für die Darstellung werden Schriftarten von Google Fonts (Google Ireland Limited) geladen. Dabei wird Ihre IP-Adresse an Google übermittelt. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.</p>
       <h3>4. Speicherung auf Ihrem Gerät</h3>
-      <p>Damit die App schnell lädt und auch offline funktioniert, legt Ihr Browser die Dateien der App (Texte, Bilder, Schriften) in einem lokalen Zwischenspeicher ab. Außerdem merkt sich die App auf Ihrem Gerät einige Einstellungen, etwa Ihre Matrikel, Ihren Busfahrer-Rekord und den zuletzt eingegebenen Namen für die Bestenliste. Diese Angaben bleiben auf Ihrem Gerät und werden nicht an uns übertragen. Diese Speicherung ist für den von Ihnen gewünschten Dienst unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit über die Browser-Einstellungen löschen.</p>
+      <p>Damit die App schnell lädt und auch offline funktioniert, legt Ihr Browser die Dateien der App (Texte, Bilder, Schriften) in einem lokalen Zwischenspeicher ab. Außerdem merkt sich die App auf Ihrem Gerät einige Einstellungen, etwa Ihre Matrikel, Ihre Rekorde in den Minispielen und den zuletzt eingegebenen Namen für die Bestenliste. Diese Angaben bleiben auf Ihrem Gerät und werden nicht an uns übertragen. Diese Speicherung ist für den von Ihnen gewünschten Dienst unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit über die Browser-Einstellungen löschen.</p>
       <h3>5. Externe Dienste und Links</h3>
-      <p>Die App verlinkt auf Instagram, Google Formulare (Anmeldung zum Turnier), Google Kalender und PayPal. Daten werden an diese Anbieter erst übertragen, wenn Sie den jeweiligen Link antippen. Ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Für die Anmeldung über Google Formulare finden Sie die Hinweise direkt im Formular.</p>
+      <p>Die App verlinkt auf Instagram, Google Formulare (Anmeldung zum Turnier) und PayPal. Kalender-Einträge und Bilder zum Teilen erstellt die App direkt auf Ihrem Gerät, dabei werden keine Daten an uns übertragen. Daten werden an diese Anbieter erst übertragen, wenn Sie den jeweiligen Link antippen. Ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Für die Anmeldung über Google Formulare finden Sie die Hinweise direkt im Formular.</p>
       <h3>6. Sauf-Ranking, Bestenlisten und Wünsche (Google Firebase)</h3>
-      <p>Für die gemeinsamen Zahlen, die Bestenlisten der Minispiele (Beerpong, Busfahrer) und die Wünsche nutzen wir Google Firebase (Google Ireland Limited). Die Daten werden in einem Rechenzentrum in Frankfurt am Main (Deutschland) gespeichert. Beim Öffnen der App lädt Ihr Browser die Firebase-Programmbibliothek von Google-Servern, dabei wird Ihre IP-Adresse übermittelt. Damit Einträge nicht beliebig oft gemacht werden können, erhält Ihr Gerät eine zufällige, anonyme Kennung (keine Anmeldung, kein Name). Gespeichert werden:</p>
-      <p>· beim Eintragen eines Drinks: nur der Zeitpunkt Ihres letzten Eintrags zu dieser anonymen Kennung sowie die Erhöhung der Gesamtzähler (keine Angaben zu Ihrer Person);<br>· bei den Bestenlisten: der von Ihnen gewählte Name, Ihr Ergebnis (Beerpong: Becherzahl und Spielzeit; Busfahrer: Zahl der geschafften Karten) und der Zeitpunkt;<br>· bei Wünschen: Ihr Wunsch und, falls angegeben, Name und Studiengang.</p>
+      <p>Für die gemeinsamen Zahlen, die Bestenlisten der Minispiele (Beerpong, Busfahrer, Zapfmeister) und die Wünsche nutzen wir Google Firebase (Google Ireland Limited). Die Daten werden in einem Rechenzentrum in Frankfurt am Main (Deutschland) gespeichert. Beim Öffnen der App lädt Ihr Browser die Firebase-Programmbibliothek von Google-Servern, dabei wird Ihre IP-Adresse übermittelt. Damit Einträge nicht beliebig oft gemacht werden können, erhält Ihr Gerät eine zufällige, anonyme Kennung (keine Anmeldung, kein Name). Gespeichert werden:</p>
+      <p>· beim Eintragen eines Drinks: nur der Zeitpunkt Ihres letzten Eintrags zu dieser anonymen Kennung sowie die Erhöhung der Gesamtzähler (keine Angaben zu Ihrer Person);<br>· bei den Bestenlisten: der von Ihnen gewählte Name, Ihr Ergebnis (Beerpong: Becherzahl und Spielzeit; Busfahrer: Zahl der geschafften Karten; Zapfmeister: Punkte und Zahl der Gläser) und der Zeitpunkt;<br>· bei Wünschen: Ihr Wunsch und, falls angegeben, Name und Studiengang.</p>
       <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Betrieb der Funktionen) bzw. bei freiwilligen Angaben Art. 6 Abs. 1 lit. a DSGVO. Bestenliste und Wünsche löschen wir, sobald wir sie nicht mehr brauchen, spätestens zum Ende des Semesters. Google ist unter dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Datenschutz bei Firebase</a>.</p>
       <h3>7. Kontakt per E-Mail</h3>
       <p>Wenn Sie uns schreiben, verwenden wir Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. f DSGVO), und löschen sie, wenn sie nicht mehr gebraucht werden.</p>
@@ -3804,6 +4473,159 @@ function openDetail(ev) { if (location.hash !== "#" + ev.id) location.hash = ev.
 function closeDetail() { goBack(app.classList.contains("is-menu") ? "" : "abende"); }
 window.addEventListener("hashchange", route);
 
+
+
+/* ================= Kalender (Apple, Samsung, Google … über das Handy) und Teilen ================= */
+const eventUrl = (ev) => location.origin + location.pathname + "#" + ev.id;
+function eventText(ev) {
+  const lines = [
+    `${ev.titel.join(" ")} – ${ev.untertitel}`,
+    `📅 ${ev.wdLong}, ${ev.dm} · ${ev.time} Uhr`,
+    `📍 ${ev.ort}, ${CLUB.anschrift.join(", ")}`
+  ];
+  if (ev.ablauf && ev.ablauf.length > 1) lines.push(ev.ablauf.map((a) => `${a.zeit} ${a.kurz || a.was}`).join(" · "));
+  if (ev.musik) lines.push(`🎧 ${ev.musik.zeit} Uhr: ${ev.musik.text}`);
+  return lines.join("\n");
+}
+function icsText(ev) {
+  const f = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const e = (t) => String(t).replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/([,;])/g, "\\$1");
+  const end = new Date(Math.min(ev.endDate, ev.startDate.getTime() + 8 * 3600e3));
+  const title = `${ev.titel.join(" ")} – ${ev.untertitel} | ${CLUB.name}`;
+  const raw = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//ExMa Bar//App//DE", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${ev.id}-${f(ev.startDate)}@exma-bar`,
+    `DTSTAMP:${f(new Date())}`,
+    `DTSTART:${f(ev.startDate)}`,
+    `DTEND:${f(end)}`,
+    `SUMMARY:${e(title)}`,
+    `LOCATION:${e([ev.ort, ...CLUB.anschrift].join(", "))}`,
+    `DESCRIPTION:${e(eventText(ev).replace(/^[^\n]*\n/, "") + "\n\nAlle Infos & App: " + eventUrl(ev))}`,
+    `URL:${eventUrl(ev)}`,
+    "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:-PT3H", `DESCRIPTION:${e(title)}`, "END:VALARM",
+    "END:VEVENT", "END:VCALENDAR"
+  ];
+  /* Zeilen nach 73 Byte umbrechen (Kalender-Standard) */
+  const enc = new TextEncoder();
+  const fold = (line) => {
+    const out = []; let cur = "", n = 0;
+    for (const ch of line) {
+      const b = enc.encode(ch).length;
+      if (n + b > 73) { out.push(cur); cur = " "; n = 1; }
+      cur += ch; n += b;
+    }
+    out.push(cur);
+    return out.join("\r\n");
+  };
+  return raw.map(fold).join("\r\n") + "\r\n";
+}
+function addToCalendar(ev) {
+  const ics = icsText(ev);
+  const hint = $("calHint");
+  if (isIOS) {
+    /* iPhone/iPad: Safari öffnet den Termin direkt im Apple-Kalender („Hinzufügen“) */
+    location.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+    return;
+  }
+  /* Android & PC: Termin-Datei laden – sie öffnet sich im Kalender des Geräts (Samsung, Google, Outlook …) */
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+  a.download = `${ev.id}.ics`;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 5000);
+  if (hint) { hint.hidden = false; hint.textContent = "Termin-Datei geladen – antippen und mit deinem Kalender öffnen."; }
+}
+
+/* Bild zum Teilen: Motto-Szene + Titel + Datum + Link (wird im Hintergrund vorbereitet) */
+const shareCache = {};
+const loadImg = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+async function shareImage(ev) {
+  const W = 1080, H = 1350, th = ev.th || {};
+  const c = document.createElement("canvas"); c.width = W; c.height = H;
+  const g = c.getContext("2d");
+  g.fillStyle = th.night || "#0b0718"; g.fillRect(0, 0, W, H);
+  const layers = (SCENES[ev.thema] || sceneIce)();
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice">${layers.map((l, k) => `<g>${prefixIds(l, "x" + k + "_")}</g>`).join("")}</svg>`;
+  const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+  try { g.drawImage(await loadImg(url), 0, 0, W, H); } finally { URL.revokeObjectURL(url); }
+  /* dunkler Verlauf oben und unten für die Schrift */
+  let gr = g.createLinearGradient(0, 0, 0, 560);
+  gr.addColorStop(0, "rgba(5,3,12,.92)"); gr.addColorStop(1, "rgba(5,3,12,0)");
+  g.fillStyle = gr; g.fillRect(0, 0, W, 560);
+  gr = g.createLinearGradient(0, H - 330, 0, H);
+  gr.addColorStop(0, "rgba(5,3,12,0)"); gr.addColorStop(1, "rgba(5,3,12,.95)");
+  g.fillStyle = gr; g.fillRect(0, H - 330, W, 330);
+  const css = getComputedStyle(document.documentElement);
+  const fD = css.getPropertyValue("--f-display").trim() || "sans-serif";
+  const fS = css.getPropertyValue("--f-script").trim() || "cursive";
+  const fB = css.getPropertyValue("--f-body").trim() || "sans-serif";
+  try { await Promise.all([document.fonts.load(`100px ${fD}`), document.fonts.load(`60px ${fS}`), document.fonts.load(`700 36px ${fB}`)]); } catch {}
+  const fit = (txt, font, size, max) => { let s = size; do { g.font = font.replace("#", s); s -= 4; } while (g.measureText(txt).width > max && s > 20); };
+  /* Datum-Plakette */
+  const date = `${ev.wd} · ${ev.dm} · ${ev.time} Uhr`.toUpperCase();
+  g.font = `800 34px ${fB}`;
+  const dw = g.measureText(date).width + 56;
+  g.fillStyle = "rgba(255,255,255,.12)"; g.strokeStyle = th.a1 || "#2ff3e0"; g.lineWidth = 3;
+  g.beginPath(); g.roundRect ? g.roundRect(70, 80, dw, 66, 33) : g.rect(70, 80, dw, 66); g.fill(); g.stroke();
+  g.fillStyle = "#fff"; g.textBaseline = "middle"; g.fillText(date, 98, 114);
+  /* Titel */
+  g.textBaseline = "alphabetic";
+  const t = ev.titel;
+  t.forEach((line, k) => {
+    fit(line.toUpperCase(), `400 #px ${fD}`, 150, W - 140);
+    g.shadowColor = th.a1 || "#2ff3e0"; g.shadowBlur = 34;
+    g.fillStyle = k === 0 ? "#ffffff" : (th.a1 || "#2ff3e0");
+    g.fillText(line.toUpperCase(), 70, 300 + k * 140);
+  });
+  g.shadowBlur = 0;
+  fit(ev.untertitel, `400 #px ${fS}`, 76, W - 140);
+  g.shadowColor = "rgba(0,0,0,.85)"; g.shadowBlur = 18;
+  g.fillStyle = th.script || "#fff"; g.fillText(ev.untertitel, 76, 300 + t.length * 140 - 30);
+  const extra = ev.banner && ev.ablauf && ev.ablauf[0] ? `${ev.banner} ab ${ev.ablauf[0].zeit} Uhr` : ev.musik ? `${ev.musik.zeit} Uhr · ${ev.musik.text}` : "";
+  if (extra) { fit(extra.toUpperCase(), `800 #px ${fB}`, 40, W - 140); g.fillStyle = "#ffd23f"; g.fillText(extra.toUpperCase(), 76, 300 + t.length * 140 + 40); }
+  g.shadowBlur = 0;
+  /* Fuß: Logo, Name, Link */
+  try { const logo = await loadImg("logo.png"); g.save(); g.beginPath(); g.arc(130, H - 120, 60, 0, Math.PI * 2); g.clip(); g.drawImage(logo, 70, H - 180, 120, 120); g.restore(); } catch {}
+  g.fillStyle = "#fff"; g.font = `800 40px ${fB}`; g.fillText(CLUB.name, 220, H - 132);
+  g.fillStyle = "rgba(255,255,255,.75)"; g.font = `600 30px ${fB}`;
+  g.fillText((location.host + location.pathname).replace(/\/$/, ""), 220, H - 86);
+  return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("toBlob"))), "image/png"));
+}
+function prepareShare(ev) {
+  if (shareCache[ev.id]) return shareCache[ev.id];
+  shareCache[ev.id] = new Promise((res) => {
+    const run = () => shareImage(ev).then((b) => res(new File([b], `${ev.id}.png`, { type: "image/png" }))).catch(() => res(null));
+    (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
+  });
+  return shareCache[ev.id];
+}
+async function shareEvent(ev) {
+  const btn = $("shareBtn"), hint = $("calHint");
+  const text = eventText(ev) + "\n\nAlle Infos, Drinks & App: " + eventUrl(ev);
+  const title = `${ev.titel.join(" ")} – ${CLUB.name}`;
+  btn.disabled = true;
+  try {
+    const files = [];
+    const img = await prepareShare(ev);
+    if (img) files.push(img);
+    try {
+      const ics = new File([icsText(ev)], `${ev.id}.ics`, { type: "text/calendar" });
+      if (files.length && navigator.canShare && navigator.canShare({ files: [...files, ics] })) files.push(ics);
+    } catch {}
+    if (files.length && navigator.canShare && navigator.canShare({ files })) await navigator.share({ files, title, text });
+    else if (navigator.share) await navigator.share({ title, text });
+    else {
+      await navigator.clipboard.writeText(text);
+      if (img) { const a = document.createElement("a"); a.href = URL.createObjectURL(img); a.download = img.name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); }
+      if (hint) { hint.hidden = false; hint.textContent = "Text mit Link kopiert" + (img ? " und Bild geladen" : "") + " – einfach in WhatsApp & Co. einfügen."; }
+    }
+  } catch (e) {
+    if (e && e.name !== "AbortError") {
+      try { await navigator.share({ title, text }); } catch {}
+    }
+  } finally { btn.disabled = false; }
+}
 
 /* ================= PayPal-Seite ================= */
 function renderPay() {
@@ -3858,7 +4680,26 @@ function swipeGo(dir, from = 0) {
     location.replace("#" + next);
   };
 }
+/* Die Startansicht (Karussell) liegt unter Menü und Unterseiten. Solange sie verdeckt ist,
+   wird sie ausgeblendet und ihre Animationen pausieren – das spart viel Rechenzeit. */
+let heroTimer = 0;
+function heroSleep() {
+  clearTimeout(heroTimer);
+  const covered = ["is-menu", "is-detail", "is-club"].some((c) => app.classList.contains(c));
+  const svgs = () => heroEl.querySelectorAll("svg");
+  if (covered) {
+    heroTimer = setTimeout(() => {
+      if (!["is-menu", "is-detail", "is-club"].some((c) => app.classList.contains(c))) return;
+      app.classList.add("hero-off");
+      svgs().forEach((v) => v.pauseAnimations && v.pauseAnimations());
+    }, 650);
+  } else if (app.classList.contains("hero-off")) {
+    app.classList.remove("hero-off");
+    if (!reduceMotion) svgs().forEach((v) => v.unpauseAnimations && v.unpauseAnimations());
+  }
+}
 function afterRoute() {
+  heroSleep();
   updateSwipeHint();
   if (!pendingSwipe) return;
   const { dir, out, anim } = pendingSwipe; pendingSwipe = null;
