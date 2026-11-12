@@ -1001,11 +1001,18 @@ a { color: inherit; }
   padding: 5px 10px 5px 7px; border-radius: 12px; border: 2px solid #2ff3e0; background: rgba(10,2,22,.72);
   transform: rotate(-5deg); white-space: nowrap; pointer-events: none;
   box-shadow: 0 0 12px rgba(47,243,224,.75), inset 0 0 10px rgba(47,243,224,.35), 0 6px 18px rgba(0,0,0,.5);
-  animation: neonSign 5s linear infinite; }
+  animation: neonSign 7.5s linear infinite; }
 .tile-banner svg { width: 24px; height: 24px; flex: none; filter: drop-shadow(0 0 5px rgba(255,210,63,.9)); }
 .tile-banner b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 14px; line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 0 6px #2ff3e0, 0 0 14px #2ff3e0; }
 .tile-banner small { display: block; margin-top: 2px; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #ffd23f; }
-@keyframes neonSign { 0%, 6%, 9%, 100% { opacity: 1; } 7%, 8% { opacity: .55; } }
+/* LED-Schild: flackert an, ~5 s sichtbar, flackert aus, ~2 s weg (dann sieht man die Becher) */
+@keyframes neonSign {
+  0% { opacity: 0; }
+  1.5% { opacity: .9; } 2.5% { opacity: .15; } 3.5% { opacity: 1; } 4.5% { opacity: .35; } 6% { opacity: 1; }
+  69% { opacity: 1; }
+  70% { opacity: .25; } 71% { opacity: .95; } 72% { opacity: .1; } 73% { opacity: .7; } 74.5% { opacity: 0; }
+  100% { opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) { .tile-banner { animation: none; } }
 /* ---------- Busfahrer (Höher oder Tiefer) ---------- */
 .view-bus {
