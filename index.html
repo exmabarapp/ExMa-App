@@ -1405,13 +1405,15 @@ a { color: inherit; }
 .hm-sec small { margin-left: 6px; font-family: var(--f-body); font-size: 12px; font-weight: 700; text-transform: none; color: rgba(255,255,255,.55); letter-spacing: 0; }
 .hm-games { display: grid; grid-auto-flow: column; grid-auto-columns: 44%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; }
 .hm-games::-webkit-scrollbar { display: none; }
-.hm-games .tile-btn { height: 168px; border-radius: 20px; }
+.hm-games .tile-btn { height: 178px; border-radius: 20px; }
 .hm-game { min-width: 0; scroll-snap-align: start; }
-.hm-best { display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 18px; margin: 7px 2px 0; font-size: 11.5px; line-height: 1.2; color: rgba(255,255,255,.5); opacity: 0; transition: opacity .5s; }
+.hm-games .tile-btn > span:nth-last-child(2) { margin-top: auto; display: block; }
+.hm-best { position: relative; display: flex; align-items: center; gap: 5px; margin: 8px 0 0; padding: 7px 0 0; font-size: 11px; line-height: 1.2; color: rgba(255,255,255,.8); opacity: 0; transition: opacity .5s; }
+.hm-best::before { content: ""; position: absolute; top: 0; left: 6%; right: 6%; height: 1px; background: rgba(255,255,255,.6); }
 .hm-best.on { opacity: 1; }
-.hm-best svg { flex: none; width: 12px; height: 12px; color: #ffcf4a; opacity: .8; }
+.hm-best svg { flex: none; width: 11px; height: 11px; color: #ffcf4a; }
 .hm-best span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.hm-best b { font-weight: 800; color: rgba(255,255,255,.72); }
+.hm-best b { font-weight: 800; color: #fff; }
 .hm-games .tile-btn b { font-size: 16px; }
 .hm-games .tile-btn small { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.75); }
 .hm-couch { height: 112px; border-radius: 20px; }
@@ -2704,7 +2706,7 @@ async function initFirebase() {
       if (!u) { FB.auth.signInAnonymously().catch(() => {}); return; }
       const team = !!u.email && u.email.toLowerCase() === TEAM_EMAIL;
       if (team !== teamAuthed) { teamAuthed = team; renderTeam(); }
-      if (!FB.ready) { FB.ready = true; Live.goRemote(); }
+      if (!FB.ready) { FB.ready = true; Live.goRemote(); fillBest(document, true); }
     });
   } catch (e) { console.warn("Firebase nicht erreichbar, lokaler Modus", e); }
 }
@@ -4581,9 +4583,9 @@ function buildMenu() {
     ${party ? "" : quick}
     <h3 class="hm-sec">Minispiele <small>zum Wischen</small></h3>
     <div class="hm-games">
-      <div class="hm-game"><a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span></a><p class="hm-best" data-best="beerpong" aria-label="Platz 1 Beerpong"></p></div>
-      <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span></a><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></div>
-      <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span></a><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></div>
+           <div class="hm-game"><a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span><p class="hm-best" data-best="beerpong" aria-label="Platz 1 Beerpong"></p></a></div>
+      <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></a></div>
+      <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
     </div>
     <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
     <h3 class="hm-sec">Demnächst</h3>
@@ -4949,14 +4951,11 @@ const BEST_SRC = {
 };
 async function loadBest(key, fresh = false) {
   const src = BEST_SRC[key], ck = "exmaBest_" + key;
-  if (!fresh) { try { const c = JSON.parse(sessionStorage.getItem(ck) || "null"); if (c && Date.now() - c.t < 5 * 60 * 1000) return c.e; } catch {} }
-  let e = null;
-  if (!Live.remote) e = (await src.api().list())[0] || null;
-  else {   /* nur die Spitze lesen: spart Datenbank-Zugriffe */
-    const qs = await FB.db.collection(src.col).orderBy(src.field, "desc").limit(5).get();
-    e = src.api().sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })))[0] || null;
-  }
-  try { sessionStorage.setItem(ck, JSON.stringify({ t: Date.now(), e })); } catch {}
+  if (!fresh) { try { const c = JSON.parse(sessionStorage.getItem(ck) || "null"); if (c && c.e && Date.now() - c.t < 5 * 60 * 1000) return c.e; } catch {} }
+  if (!Live.remote) return (await src.api().list())[0] || null;
+  const qs = await FB.db.collection(src.col).orderBy(src.field, "desc").limit(50).get();
+  const e = src.api().sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })))[0] || null;
+  if (e) { try { sessionStorage.setItem(ck, JSON.stringify({ t: Date.now(), e })); } catch {} }
   return e;
 }
 function fillBest(root, fresh) {
@@ -4964,7 +4963,7 @@ function fillBest(root, fresh) {
     const key = el.dataset.best;
     try {
       const e = await loadBest(key, fresh); if (!el.isConnected) return;
-      el.innerHTML = e ? `${CROWN_MINI}<span><b>${esc(e.name)}</b> · ${esc(BEST_SRC[key].fmt(e))}</span>` : `${CROWN_MINI}<span>Platz 1 ist noch frei</span>`;
+      el.innerHTML = e ? `${CROWN_MINI}<span><b>${esc(e.name)}</b> · ${esc(BEST_SRC[key].fmt(e))}</span>` : `${CROWN_MINI}<span>1. Platz noch frei</span>`;
       el.classList.add("on");
     } catch { el.textContent = ""; }
   });
