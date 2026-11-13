@@ -1369,7 +1369,8 @@ a { color: inherit; }
 .hm-hero .tile-go { margin-top: 12px; font-size: 16px; gap: 10px; }
 .hm-hero .tile-go > span { margin-right: auto; }
 .hm-hero .tile-go i { width: 38px; height: 38px; }
-.hm-hero .tile-scene svg { top: -6%; }
+.hm-hero .tile-scene svg { top: 2%; }
+.hm-hero .tile-scene svg:first-child { top: -6%; }
 .tile-cal { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--a1); background: rgba(5,8,22,.45); color: var(--a1); font: 800 13px var(--f-body); }
 .tile-cal svg { width: 15px; height: 15px; }
 .hm-next { position: relative; overflow: hidden; isolation: isolate; display: flex; align-items: center; gap: 10px; min-height: 96px; padding: 12px 14px; border-radius: 22px; background: var(--night); border: 1px solid color-mix(in srgb, var(--a1) 45%, transparent); box-shadow: 0 0 18px color-mix(in srgb, var(--a3) 22%, transparent); cursor: pointer; }
@@ -1420,6 +1421,41 @@ a { color: inherit; }
 .hm-contact a { display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #fff; text-decoration: none; font-weight: 800; font-size: 14px; }
 .hm-contact svg { width: 18px; height: 18px; color: #9fe3ff; }
 .menu-legal { padding: 14px 0 6px; }
+/* Seiten im Ranking-Stil (Wünsche, Team) */
+.view-detail.clubby { --c-bg: #0b0608; --c-card: #1a0d11; --c-line: rgba(255,120,120,.18); --c-red: #ff3b3b; --c-gold: #ffcf4a; --c-text: #fff6f3; --c-dim: #c7a9ab;
+  color: var(--c-text); background: radial-gradient(120% 50% at 50% 0%, rgba(255,59,59,.18), transparent 60%), #0b0608; }
+.page-h { margin: 4px 0 0; text-align: center; font-family: var(--f-display); font-weight: 400; font-size: 34px; text-transform: uppercase; color: #fff; text-shadow: 0 0 14px rgba(255,59,59,.8), 0 0 30px rgba(255,59,59,.45); }
+.team-area { display: grid; gap: 18px; }
+.team-now { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--c-dim); }
+.team-now b { color: #fff; }
+.team-row button.wide { grid-column: 1 / -1; }
+.tl-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 4px; margin: 10px 0 8px; border-radius: 999px; background: rgba(255,255,255,.06); }
+.tl-tabs button { height: 38px; border: none; border-radius: 999px; background: transparent; color: var(--c-dim); font: 800 13px var(--f-body); }
+.tl-tabs button[aria-pressed="true"] { background: #fff; color: #12070a; }
+.tl-list { display: grid; gap: 6px; }
+.tl-item { display: grid; grid-template-columns: 26px 1fr auto auto; align-items: center; gap: 8px; padding: 8px 8px 8px 12px; border-radius: 14px; background: rgba(255,255,255,.05); }
+.tl-r { font-family: var(--f-display); color: var(--c-gold); }
+.tl-n { font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tl-s { font-size: 12.5px; color: var(--c-dim); white-space: nowrap; }
+.tl-item button { min-width: 36px; height: 34px; padding: 0 10px; border-radius: 999px; border: 1px solid rgba(255,90,90,.6); background: transparent; color: #ff9a9a; font: 800 15px var(--f-body); }
+.tl-item button.armed { background: #ff3b3b; border-color: #ff3b3b; color: #fff; font-size: 12px; }
+.team-logout { justify-self: center; height: 44px; padding: 0 22px; border-radius: 999px; border: 1px solid var(--c-line); background: transparent; color: var(--c-dim); font: 800 14px var(--f-body); }
+/* Theke zu */
+.prost-lock { display: grid; justify-items: center; gap: 6px; padding: 10px 4px 4px; text-align: center; }
+.prost-lock .lock-ico { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,207,74,.12); color: var(--c-gold); }
+.prost-lock .lock-ico svg { width: 24px; height: 24px; }
+.prost-lock b { font-size: 17px; }
+.prost-lock > span { font-size: 13.5px; line-height: 1.45; color: var(--c-dim); }
+.prost-lock .lock-next { margin-top: 4px; padding: 8px 12px; border-radius: 14px; background: rgba(255,255,255,.06); color: var(--c-text); }
+/* Wünsche-Kachel */
+.tile-btn.hm-wish { flex-direction: row; align-items: center; gap: 14px; height: 92px; border-radius: 20px; background: linear-gradient(120deg, #3a1006, #6a1d0d 55%, #8f2a12); border: 1.5px solid rgba(255,207,74,.55); box-shadow: 0 0 16px rgba(255,170,60,.22); }
+.hm-wish-ico { flex: none; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: rgba(255,207,74,.15); color: #ffcf4a; box-shadow: inset 0 0 0 1px rgba(255,207,74,.35); }
+.hm-wish-ico svg { width: 28px; height: 28px; filter: drop-shadow(0 0 6px rgba(255,207,74,.7)); }
+.tile-btn.hm-wish > span:nth-child(2) { flex: 1; margin-top: 0 !important; }
+.hm-wish b { font-size: 18px; }
+.hm-wish small { display: block; margin-top: 3px; font-size: 12px; font-weight: 700; color: #ffd9a8; }
+.hm-wish .hm-go { flex: none; }
+
 /* Musikwünsche-Kachel */
 .tile-btn.hm-music { height: 112px; border-radius: 20px; justify-content: flex-end; background: radial-gradient(120% 140% at 85% 50%, #5a1a8a 0%, #2a0b45 45%, #12051f 100%); border: 1.5px solid rgba(186,104,255,.6); box-shadow: 0 0 18px rgba(186,104,255,.28); }
 .hm-music > span:last-of-type { position: relative; max-width: 58%; }
@@ -1476,7 +1512,7 @@ a { color: inherit; }
         <button class="app-pill" id="appPill" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>App holen</button>
       </header>
       <div class="menu-grid" id="menuGrid"></div>
-      <nav class="menu-legal" aria-label="Rechtliches"><a href="#impressum">Impressum</a><span aria-hidden="true">·</span><a href="#datenschutz">Datenschutz</a></nav>
+      <nav class="menu-legal" aria-label="Rechtliches"><a href="#impressum">Impressum</a><span aria-hidden="true">·</span><a href="#datenschutz">Datenschutz</a><span aria-hidden="true">·</span><a href="#team">Team-Login</a></nav>
       <div class="tap-hint" id="tapHint" aria-hidden="true"><span class="ripple"></span><span class="tap-dir d1"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tap-dir d2"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tap-dir d3"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="tap-dir d4"><svg viewBox="0 0 14 14"><path d="M2 10l5-5 5 5" fill="none" stroke="#c9c9d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><svg class="tap-finger" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10l4.6.9a2 2 0 0 1 1.6 2.2l-.6 4.6a3 3 0 0 1-3 2.6h-3.3a3 3 0 0 1-2.4-1.2l-3.2-4.3a1.4 1.4 0 0 1 2-1.9L9 14z" fill="#c9c9d4" stroke="#2a2a35" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
     </section>
 
@@ -1690,6 +1726,7 @@ const KARTE = {
 /* Farbthemen der Abende */
 const THEMEN = {
   eis:   { night: "#050816", night2: "#0b1236", a1: "#9fe3ff", a2: "#2d6bff", a3: "#ff3fc8", frost: "#f2f8ff", dim: "#9aa6cf", script: "#ffd6f3" },
+  club:  { night: "#0b0608", night2: "#1a0d11", a1: "#ffcf4a", a2: "#ff3b3b", a3: "#ff3b3b", frost: "#fff6f3", dim: "#c7a9ab", script: "#ffcf4a" },
   pay:   { night: "#03122e", night2: "#082152", a1: "#4fc3ff", a2: "#0070e0", a3: "#ffc439", frost: "#f2f8ff", dim: "#9db3d6", script: "#cfe8ff" },
   miami: { night: "#12041f", night2: "#26093f", a1: "#2ff3e0", a2: "#7b2cff", a3: "#ff2e88", frost: "#fff5ee", dim: "#c9a9d6", script: "#ffe2c4" }
 };
@@ -2658,7 +2695,7 @@ async function initFirebase() {
       FB.user = u;
       if (!u) { FB.auth.signInAnonymously().catch(() => {}); return; }
       const team = !!u.email && u.email.toLowerCase() === TEAM_EMAIL;
-      if (team !== teamAuthed) { teamAuthed = team; if (clubBuilt) renderTeam(); }
+      if (team !== teamAuthed) { teamAuthed = team; renderTeam(); }
       if (!FB.ready) { FB.ready = true; Live.goRemote(); }
     });
   } catch (e) { console.warn("Firebase nicht erreichbar, lokaler Modus", e); }
@@ -2749,6 +2786,11 @@ const Live = (() => {
       if (!remote) { Object.assign(flat, z); emit(null); return; }
       await statsRef().update(z);
     },
+    async resetSemester() {
+      const z = { s_bier: 0, s_mische: 0, s_shot: 0 };
+      if (!remote) { Object.assign(flat, z); emit(null); return; }
+      await statsRef().update(z);
+    },
     async resetMatrikel() {
       const z = Object.fromEntries(MATRIKEL_KEYS().map((k) => [k, 0]));
       if (!remote) { Object.assign(flat, z); emit(null); return; }
@@ -2776,6 +2818,10 @@ const Top = {
     }
     const ref = await FB.db.collection("beerpong").add({ name: entry.name, cups: entry.cups, ms: Math.round(entry.ms), at: FB.fv.serverTimestamp(), uid: FB.user.uid });
     return ref.id;
+  },
+  async remove(id) {
+    if (!Live.remote) { try { localStorage.setItem(this.KEY, JSON.stringify(this.local().filter((e) => e.id !== id))); } catch {} return; }
+    await FB.db.doc("beerpong/" + id).delete();
   },
   async clear() {
     if (!Live.remote) { try { localStorage.removeItem(this.KEY); } catch {} return; }
@@ -2831,7 +2877,7 @@ function renderClub() {
       <img class="logo" src="logo.png" alt="">
     </header>
     <div class="club-wrap">
-      <div class="club-title">${CROWN_BIG}<h2 id="clubH"><span>Sauf-Ranking</span><span>&amp; Wünsche</span></h2>${CROWN_BIG}</div>
+      <div class="club-title">${CROWN_BIG}<h2 id="clubH"><span>Sauf-</span><span>Ranking</span></h2>${CROWN_BIG}</div>
       <p class="demo-note" id="liveNote"${Live.remote ? " hidden" : ""}>Hinweis: Keine Verbindung zur Datenbank. Die Zahlen werden gerade nur auf deinem Handy gezählt.</p>
 
       <section class="cbox" aria-labelledby="h-count">
@@ -2852,38 +2898,12 @@ function renderClub() {
           <div class="duel-row" id="d-${m}"><span class="who"><span>Matrikel<br>${m}</span><span class="crown-slot"></span></span><span class="bar"><i></i></span><span class="pts">0</span></div>`).join("")}</div>
       </section>
 
-      <section class="cbox wish" aria-labelledby="h-wish" id="wishBox">
-        <h3 id="h-wish">Wünsche</h3>
-        <p class="wish-intro">Was fehlt euch? Wünscht euch einen Specialdrink oder ein Motto für einen Clubabend.</p>
-        <div id="wishForm">
-          <div class="wish-toggle" role="group" aria-label="Art des Wunsches">
-            <button type="button" data-type="Drink" aria-pressed="true">Specialdrink</button>
-            <button type="button" data-type="Motto" aria-pressed="false">Motto</button>
-          </div>
-          <label for="wText" id="wLabel">Welchen Specialdrink sollen wir mixen?</label>
-          <textarea id="wText" maxlength="400" placeholder="z. B. Blue Lagoon mit extra Eis"></textarea>
-          <div class="two">
-            <div><label for="wName">Name <small>(optional)</small></label><input id="wName" maxlength="60" autocomplete="name"></div>
-            <div><label for="wStudy">Studiengang <small>(optional)</small></label><input id="wStudy" maxlength="60"></div>
-          </div>
-          <p class="hint">Name und Studiengang nur, falls wir Rückfragen haben.</p>
-          <button class="send" id="wSend" type="button">Wunsch abschicken</button>
-          <p class="err" id="wErr" hidden></p>
-        </div>
-      </section>
-
-      <div id="teamArea"></div>
-      <button class="team-link" id="teamLink" type="button">Team-Login</button>
     </div>`;
 
   $("clubClose").addEventListener("click", closeClub);
   renderProst();
   fitClubTitle();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitClubTitle);
-  c.querySelectorAll(".wish-toggle button").forEach((b) => b.addEventListener("click", () => setWishType(b.dataset.type)));
-  $("wSend").addEventListener("click", sendWish);
-  setWishType(wishType);
-  $("teamLink").addEventListener("click", () => { teamOpen = !teamOpen; renderTeam(); });
 
   Live.subscribe((st, ch) => {
     const today = st.heute.bier + st.heute.mische + st.heute.shot;
@@ -2917,10 +2937,36 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, v); } catch {} }
 };
 let prostTimer = null, changingMatrikel = false;
+const CLOSE_H = 1, CLOSE_M = 30;   /* Bar schließt um 1:30 Uhr */
+function barWindow(ev) {
+  const from = new Date(ev.startDate), to = new Date(ev.startDate);
+  if (from.getHours() >= 6) to.setDate(to.getDate() + 1);
+  to.setHours(CLOSE_H, CLOSE_M, 0, 0);
+  return [from, to];
+}
+function barState() {
+  const now = new Date();
+  for (const e of EVENTS) { const [a, b] = barWindow(e); if (now >= a && now <= b) return { open: true, ev: e, until: b }; }
+  const next = EVENTS.filter((e) => e.startDate > now).sort((x, y) => x.startDate - y.startDate)[0];
+  return { open: false, next };
+}
 function renderProst() {
   const box = $("prost"); if (!box) return;
   const mine = store.get("exmaMatrikel");
   clearInterval(prostTimer);
+  const bar = barState();
+  if (!bar.open) {
+    const n = bar.next;
+    box.innerHTML = `
+      <div class="prost-lock">
+        <span class="lock-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>
+        <b>Die Theke hat gerade zu</b>
+        <span>Eintragen geht nur während eines Clubabends – ab Beginn bis 1:30 Uhr.</span>
+        ${n ? `<span class="lock-next">Nächster Abend: <b>${esc(n.titel.join(" "))}</b> · ${esc(n.wd)} ${esc(n.dm)} ab ${esc(n.time)} Uhr</span>` : ""}
+      </div>`;
+    prostTimer = setInterval(() => { if (!$("prost")) { clearInterval(prostTimer); return; } if (barState().open) renderProst(); }, 15000);
+    return;
+  }
   if (!mine || changingMatrikel) {
     box.innerHTML = `
       <p class="prost-q">Zu welcher Matrikel gehörst du?</p>
@@ -2929,6 +2975,7 @@ function renderProst() {
       ${mine ? `<button type="button" class="prost-cancel" id="pickCancel">Abbrechen</button>` : ""}`;
     box.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => { store.set("exmaMatrikel", b.dataset.pick); changingMatrikel = false; renderProst(); }));
     if (mine) $("pickCancel").addEventListener("click", () => { changingMatrikel = false; renderProst(); });
+    prostTimer = setInterval(() => { if (!$("prost")) { clearInterval(prostTimer); return; } if (!barState().open) { changingMatrikel = false; renderProst(); } }, 15000);
     return;
   }
   box.innerHTML = `
@@ -2949,6 +2996,7 @@ function prostLeft() {
 }
 function tickProst() {
   const ring = $("prostRing"); if (!ring) { clearInterval(prostTimer); return; }
+  if (!barState().open) { renderProst(); return; }
   const left = prostLeft(), total = PROST_PAUSE_MS;
   document.querySelectorAll(".self-btn").forEach((b) => { b.disabled = left > 0; });
   const C = 2 * Math.PI * 28;
@@ -2959,6 +3007,7 @@ function tickProst() {
 }
 async function selfDrink(btn) {
   if (prostLeft() > 0) return;
+  if (!barState().open) { renderProst(); return; }
   const mine = store.get("exmaMatrikel");
   document.querySelectorAll(".self-btn").forEach((b) => { b.disabled = true; });
   try {
@@ -3067,33 +3116,71 @@ async function loadWishList() {
     }));
   } catch { box.innerHTML = `<p class="prost-small">Wünsche konnten nicht geladen werden.</p>`; }
 }
+const TEAM_LISTS = {
+  beerpong: { name: "Beerpong", api: () => Top, fmt: (e) => `${e.cups} Becher · ${Math.floor(e.ms / 60000)}:${String(Math.floor(e.ms / 1000) % 60).padStart(2, "0")}` },
+  busfahrer: { name: "Busfahrer", api: () => BusTop, fmt: (e) => `${e.score} / 51` },
+  zapfmeister: { name: "Zapfmeister", api: () => ZapfTop, fmt: (e) => `${(e.score || 0).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} · ${e.glasses} Gl.` }
+};
+let teamList = "beerpong", teamSub = null;
+async function loadTeamList() {
+  const box = $("tlList"); if (!box) return;
+  const L = TEAM_LISTS[teamList];
+  document.querySelectorAll(".tl-tabs button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.tl === teamList ? "true" : "false"));
+  box.innerHTML = `<p class="prost-small">Lädt …</p>`;
+  let list = [];
+  try { list = await L.api().list(); } catch { box.innerHTML = `<p class="prost-small">Liste konnte nicht geladen werden.</p>`; return; }
+  box.innerHTML = list.length ? list.map((e, k) => `
+    <div class="tl-item"><span class="tl-r">${k + 1}</span><span class="tl-n">${esc(e.name)}</span><span class="tl-s">${esc(L.fmt(e))}</span>
+    <button type="button" data-del="${esc(e.id)}" aria-label="Eintrag von ${esc(e.name)} löschen">×</button></div>`).join("")
+    : `<p class="prost-small">Noch keine Einträge.</p>`;
+  box.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
+    if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "Löschen?"; b.classList.add("armed"); setTimeout(() => { if (b.isConnected) { delete b.dataset.armed; b.textContent = "×"; b.classList.remove("armed"); } }, 3000); return; }
+    b.disabled = true;
+    try { await L.api().remove(b.dataset.del); loadTeamList(); } catch { b.disabled = false; alertTeam("Löschen hat nicht geklappt."); }
+  }));
+}
 function renderTeam() {
-  const a = $("teamArea");
-  $("teamLink").textContent = teamOpen ? "Team-Bereich schließen" : "Team-Login";
-  if (!teamOpen) { a.innerHTML = ""; return; }
+  const a = $("teamArea"); if (!a) return;
   if (!teamAuthed) { renderTeamLogin(a); return; }
   a.innerHTML = `
-    <section class="cbox team" aria-label="Team-Bereich">
-      <h3>Team-Bereich</h3>
+    <section class="cbox team" aria-label="Zähler">
+      <h3>Zähler</h3>
+      <p class="team-now" id="tNow"></p>
       <div class="team-grid">${COUNTER.map((k) => `<button type="button" data-c="${k.id}"><small>+1</small>${k.name}</button>`).join("")}</div>
       <div class="team-grid mat">${MATRIKEL.map((m) => `<button type="button" data-m="${m}"><small>+1</small>Matrikel ${m}</button>`).join("")}</div>
+      <div class="team-row"><button type="button" id="tUndo">Letzten Tipp rückgängig</button></div>
+    </section>
+    <section class="cbox team" aria-label="Zurücksetzen">
+      <h3>Zurücksetzen</h3>
       <div class="team-row">
-        <button type="button" id="tUndo">Letzten Tipp rückgängig</button>
         <button type="button" class="danger" id="tReset">Abend auf 0</button>
-        <button type="button" class="danger" id="tResetM">Matrikel-Duell auf 0</button>
-        <button type="button" class="danger" id="tResetBP">Beerpong-Top 10 leeren</button>
-        <button type="button" class="danger" id="tResetBus">Busfahrer-Top 10 leeren</button>
-        <button type="button" class="danger" id="tResetZapf">Zapfmeister-Top 10 leeren</button>
-        <button type="button" id="tLogout">Abmelden</button>
+        <button type="button" class="danger" id="tResetS">Semester auf 0</button>
+        <button type="button" class="danger wide" id="tResetM">Matrikel-Duell auf 0</button>
       </div>
+      <p class="prost-small">Zum Bestätigen zweimal tippen.</p>
+    </section>
+    <section class="cbox team" aria-label="Bestenlisten">
+      <h3>Bestenlisten</h3>
+      <div class="tl-tabs" role="group" aria-label="Spiel wählen">${Object.entries(TEAM_LISTS).map(([k, v]) => `<button type="button" data-tl="${k}" aria-pressed="${k === teamList}">${v.name}</button>`).join("")}</div>
+      <div id="tlList" class="tl-list"></div>
+      <div class="team-row"><button type="button" class="danger wide" id="tClearList">Ganze Liste leeren</button></div>
     </section>
     <section class="cbox team" aria-label="Eingegangene Wünsche">
       <h3>Wünsche</h3>
       <div id="wishList" class="wish-list"><p class="prost-small">${Live.remote ? "Lädt …" : "Wünsche sind erst mit Datenbank-Verbindung sichtbar."}</p></div>
-    </section>`;
+    </section>
+    <button type="button" class="team-logout" id="tLogout">Abmelden</button>`;
   loadWishList();
+  loadTeamList();
+  if (teamSub) teamSub();
+  teamSub = Live.subscribe((st) => {
+    const el = $("tNow"); if (!el) return;
+    const t = st.heute.bier + st.heute.mische + st.heute.shot, se = st.semester.bier + st.semester.mische + st.semester.shot;
+    el.innerHTML = `Heute <b>${t}</b> · Semester <b>${se}</b> · Matrikel ${MATRIKEL.map((m) => `${m}: <b>${st.matrikel[m]}</b>`).join(" · ")}`;
+  });
   a.querySelectorAll("[data-c]").forEach((b) => b.addEventListener("click", () => Live.add("counter", b.dataset.c).catch(() => alertTeam("Speichern hat nicht geklappt."))));
   a.querySelectorAll("[data-m]").forEach((b) => b.addEventListener("click", () => Live.add("matrikel", b.dataset.m).catch(() => alertTeam("Speichern hat nicht geklappt."))));
+  a.querySelectorAll("[data-tl]").forEach((b) => b.addEventListener("click", () => { teamList = b.dataset.tl; loadTeamList(); }));
   $("tUndo").addEventListener("click", () => Live.undo().catch(() => alertTeam("Rückgängig hat nicht geklappt.")));
   const armed = (id, label, action) => $(id).addEventListener("click", (e) => {
     const b = e.currentTarget;
@@ -3102,16 +3189,14 @@ function renderTeam() {
     setTimeout(() => { if (b.isConnected) { b.textContent = label; delete b.dataset.armed; } }, 3000);
   });
   armed("tReset", "Abend auf 0", () => Live.resetToday().catch(() => alertTeam("Zurücksetzen hat nicht geklappt.")));
+  armed("tResetS", "Semester auf 0", () => Live.resetSemester().catch(() => alertTeam("Zurücksetzen hat nicht geklappt.")));
   armed("tResetM", "Matrikel-Duell auf 0", () => Live.resetMatrikel().catch(() => alertTeam("Zurücksetzen hat nicht geklappt.")));
-  armed("tResetBP", "Beerpong-Top 10 leeren", () => Top.clear().catch(() => alertTeam("Löschen hat nicht geklappt.")));
-  armed("tResetBus", "Busfahrer-Top 10 leeren", () => BusTop.clear().catch(() => alertTeam("Löschen hat nicht geklappt.")));
-  armed("tResetZapf", "Zapfmeister-Top 10 leeren", () => ZapfTop.clear().catch(() => alertTeam("Löschen hat nicht geklappt.")));
+  armed("tClearList", "Ganze Liste leeren", () => TEAM_LISTS[teamList].api().clear().then(loadTeamList).catch(() => alertTeam("Löschen hat nicht geklappt.")));
   $("tLogout").addEventListener("click", async () => {
     teamAuthed = false; try { sessionStorage.removeItem("exmaTeam"); } catch {}
     if (Live.remote) { try { await FB.auth.signOut(); } catch {} }
     renderTeam();
   });
-  a.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
 }
 
 const WISH_TEXT = {
@@ -3652,6 +3737,10 @@ const BusTop = {
     const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, at: FB.fv.serverTimestamp(), uid: FB.user.uid });
     return ref.id;
   },
+  async remove(id) {
+    if (!Live.remote) { try { localStorage.setItem(this.KEY, JSON.stringify(this.local().filter((e) => e.id !== id))); } catch {} return; }
+    await FB.db.doc(this.COL + "/" + id).delete();
+  },
   async clear() {
     if (!Live.remote) { try { localStorage.removeItem(this.KEY); } catch {} return; }
     const qs = await FB.db.collection(this.COL).limit(400).get();
@@ -3827,6 +3916,10 @@ const ZapfTop = {
     const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, glasses: entry.glasses, at: FB.fv.serverTimestamp(), uid: FB.user.uid });
     return ref.id;
   },
+  async remove(id) {
+    if (!Live.remote) { try { localStorage.setItem(this.KEY, JSON.stringify(this.local().filter((e) => e.id !== id))); } catch {} return; }
+    await FB.db.doc(this.COL + "/" + id).delete();
+  },
   async clear() {
     if (!Live.remote) { try { localStorage.removeItem(this.KEY); } catch {} return; }
     const qs = await FB.db.collection(this.COL).limit(400).get();
@@ -3841,6 +3934,7 @@ const Zapf = (() => {
     bier:     { name: "Pils",     liq: ["#ffd25e", "#e08a0e"], foam: "#fffaf0", head: .16, rise: .055, riseMs: 1100, stream: "#f3b130" },
     weizen:   { name: "Weizen",   liq: ["#fbc75c", "#d58a1e"], foam: "#fffdf5", head: .22, rise: .095, riseMs: 1400, stream: "#f0b445", haze: .32 },
     guinness: { name: "Guinness", liq: ["#2c140a", "#0f0603"], foam: "#efdfbf", head: .09, rise: .042, riseMs: 1900, stream: "#3a1b0d", surge: true },
+    pfeffi:   { name: "Pfeffi",   liq: ["#8ef5a8", "#1f9e48"], foam: "#c4ffd3", head: 0, rise: .022, riseMs: 450, stream: "#5fe082", still: true },
     sekt:     { name: "Sekt",     liq: ["#fbf0bd", "#ecd27e"], foam: "#fffbe6", head: .10, rise: .088, riseMs: 600, stream: "#f6e39a", fall: .046, bubbles: true }
   };
   const r = (a, b) => a + Math.random() * (b - a);
@@ -3851,19 +3945,25 @@ const Zapf = (() => {
     () => ({ name: "Krug", drink: "bier", h: r(180, 212), wb: r(116, 132), wt: 0, mug: true, base: 14 }),
     () => ({ name: "Pint", drink: "bier", h: r(228, 258), wb: r(80, 88), wt: r(104, 112), bulge: 10, bulgeAt: .86 }),
     () => ({ name: "Tulpe", art: "in der", drink: "bier", h: r(205, 232), wb: r(56, 64), wt: r(82, 90), bulge: 22, bulgeAt: .55, stem: 26 }),
-    () => ({ name: "Humpen", drink: "bier", h: r(140, 168), wb: r(112, 128), wt: r(122, 138) })
+    () => ({ name: "Humpen", drink: "bier", h: r(140, 168), wb: r(112, 128), wt: r(122, 138) }),
+    /* Profil-Gläser: Breite folgt den Stützpunkten von unten nach oben – die Flüssigkeit steigt mal schnell, mal langsam */
+    () => ({ name: "Wellenglas", drink: "bier", h: r(250, 272), prof: [62, r(92, 100), r(54, 60), r(94, 102), r(58, 64)] }),
+    () => ({ name: "Bauchglas", drink: "bier", h: r(205, 228), prof: [66, r(104, 114), r(108, 118), r(80, 88)] }),
+    () => ({ name: "Sanduhrglas", drink: "bier", h: r(230, 255), prof: [r(88, 96), r(52, 58), r(92, 100)] })
   ];
   const SPECIAL = [
     () => ({ name: "Sektflöte", art: "in der", drink: "sekt", h: r(190, 215), wb: 26, wt: r(56, 62), stem: 70, curve: .65 }),
     () => ({ name: "Weizenglas", drink: "weizen", h: r(280, 305), wb: 62, wt: r(94, 100), waist: 14 }),
     () => ({ name: "Guinness-Glas", drink: "guinness", h: r(238, 258), wb: 76, wt: r(100, 106), bulge: 14, bulgeAt: .82 })
   ];
+  const SHOT = () => ({ name: "Schnapsglas", drink: "pfeffi", h: r(74, 84), wb: 34, wt: r(44, 48), base: 17, rate: .4 });
   const CLASSIC = () => ({ name: "Willibecher", drink: "bier", h: 225, wb: 84, wt: 108, classic: true });
   const HINTS = {
     bier: "Klassisch: Der Schaum steigt nach dem Loslassen noch ein Stück.",
     weizen: "Weizen schäumt kräftig nach – lieber früher loslassen!",
     guinness: "Guinness braucht Geduld: Die Krone baut sich langsam auf.",
-    sekt: "Sekt schäumt erst hoch und fällt dann zusammen – nicht überlaufen lassen!"
+    sekt: "Sekt schäumt erst hoch und fällt dann zusammen – nicht überlaufen lassen!",
+    pfeffi: "Kleines Glas, kaum Nachlauf – aber du hast nur einen Wimpernschlag."
   };
 
   let state = "off", running = false, n = 0, totalH = 0, glass = null, P = 0, delta = 0, peak = 0, finalL = 0, tSettle = 0, tPour = 0, last = 0, raf = 0, bubbles = [];
@@ -3983,14 +4083,19 @@ const Zapf = (() => {
   function geom(t) {
     const stem = t.stem || 0, base = t.base || 10;
     const yBot = TABLE - 2 - stem, yIn = yBot - base, yRim = yBot - t.h;
+    if (t.prof) { t.wb = t.prof[0]; t.wt = t.prof[t.prof.length - 1]; }
     const wt = t.mug ? t.wb : t.wt;
     const width = (f) => {
+      if (t.prof) {   /* weich zwischen den Stützpunkten (Kosinus) */
+        const q = Math.max(0, Math.min(1, f)) * (t.prof.length - 1), i = Math.min(t.prof.length - 2, Math.floor(q)), u = q - i, m = (1 - Math.cos(u * Math.PI)) / 2;
+        return t.prof[i] + (t.prof[i + 1] - t.prof[i]) * m;
+      }
       let w = t.wb + (wt - t.wb) * (t.curve ? Math.pow(f, t.curve) : f);
       if (t.bulge) w += t.bulge * Math.exp(-(((f - t.bulgeAt) / .2) ** 2));
       if (t.waist) w -= t.waist * Math.exp(-(((f - .32) / .18) ** 2));
       return w;
     };
-    const N = 28, L = [], Rt = [], iL = [], iR = [];
+    const N = t.prof ? 48 : 28, L = [], Rt = [], iL = [], iR = [];
     for (let k = 0; k <= N; k++) {
       const f = k / N, y = yBot - f * t.h, w = width(f);
       L.push([CX - w / 2, y]); Rt.push([CX + w / 2, y]);
@@ -4003,7 +4108,17 @@ const Zapf = (() => {
     const innerPts = [[CX - width(base / t.h) / 2 + 3, yIn], ...iL, ...iR.slice().reverse(), [CX + width(base / t.h) / 2 - 3, yIn]];
     const inner = "M" + innerPts.map((p) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" L") + " Z";
     let avg = 0; for (let k = 0; k <= 10; k++) avg += width(k / 10); avg /= 11;
-    return { ...t, stem, base, yBot, yIn, yRim, width, outer, inner, avgW: avg, wTop: width(1), levelY: (l) => yIn - l * (yIn - yRim) };
+    const levelY = (l) => yIn - l * (yIn - yRim);
+    const wAt = (l) => width(Math.max(0, Math.min(1, (yBot - levelY(Math.max(0, Math.min(1, l)))) / t.h)));
+    /* Bezugsbreite kurz unter dem Rand: dort entscheidet sich jede Runde – gleiche Geschwindigkeit wie bisher */
+    const wRef = wAt(.93);
+    return { ...t, stem, base, yBot, yIn, yRim, width, outer, inner, avgW: avg, wTop: width(1), levelY, wAt, wRef };
+  }
+  /* Glanzlinie entlang der Glaswand (side -1 = links, 1 = rechts) */
+  function hl(g, side, off, fromBot, fromRim, op, sw) {
+    const f0 = fromBot / g.h, f1 = 1 - fromRim / g.h; if (f1 <= f0 + .05) return "";
+    const pts = []; for (let k = 0; k <= 16; k++) { const f = f0 + (f1 - f0) * k / 16; pts.push(`${(CX + side * (g.width(f) / 2 - off)).toFixed(1)} ${(g.yBot - f * g.h).toFixed(1)}`); }
+    return `<path d="M${pts.join(" L")}" fill="none" stroke="#fff" stroke-opacity="${op}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`;
   }
   function drawGlass(g) {
     const d = DRINKS[g.drink];
@@ -4015,7 +4130,7 @@ const Zapf = (() => {
     const hp = `M${CX + g.wb / 2 - 2} ${g.yRim + 32} C${CX + g.wb / 2 + 42} ${g.yRim + 30} ${CX + g.wb / 2 + 42} ${g.yBot - 28} ${CX + g.wb / 2 - 2} ${g.yBot - 30}`;
     const handle = g.mug ? `<path d="${hp}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="13" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#2a150a" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" transform="translate(-2 -2)"/>` : "";
     /* aufsteigende Kohlensäure (Sekt kräftig, Bier dezent, Guinness keine) */
-    const nb = d.bubbles ? 12 : g.drink === "guinness" ? 0 : 7;
+    const nb = d.bubbles ? 12 : g.drink === "guinness" || d.still ? 0 : 7;
     bubbles = Array.from({ length: nb }, () => ({ x: CX + r(-.34, .34) * g.wb, p: Math.random(), v: r(.25, .6), s: d.bubbles ? 1.7 : r(.8, 1.3) }));
     /* Kondenswasser-Tropfen auf dem Glas */
     let drops = "";
@@ -4040,11 +4155,11 @@ const Zapf = (() => {
       </g>
       <ellipse cx="${CX}" cy="${g.yIn + 3}" rx="${g.wb / 2 - 4}" ry="3" fill="#fff" opacity=".22"/>
       <path d="${g.outer}" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M${(CX - g.wb / 2 + 8).toFixed(1)} ${g.yBot - 16} L${(CX - g.wTop / 2 + 8).toFixed(1)} ${g.yRim + 14}" stroke="#fff" stroke-opacity=".42" stroke-width="5" stroke-linecap="round"/>
-      <path d="M${(CX - g.wb / 2 + 16).toFixed(1)} ${g.yBot - 24} L${(CX - g.wTop / 2 + 16).toFixed(1)} ${g.yRim + 40}" stroke="#fff" stroke-opacity=".16" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M${(CX + g.wb / 2 - 7).toFixed(1)} ${g.yBot - 30} L${(CX + g.wTop / 2 - 7).toFixed(1)} ${g.yRim + 30}" stroke="#fff" stroke-opacity=".2" stroke-width="2" stroke-linecap="round"/>
+      ${hl(g, -1, 8, 16, 14, ".42", 5)}${hl(g, -1, 16, 24, 40, ".16", 2.5)}${hl(g, 1, 7, 30, 30, ".2", 2)}
+      ${g.drink === "guinness" ? (() => { const y = g.yBot - g.h * .46, w = g.width(.46); return `<text x="${CX}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="${Math.min(16, w * .15).toFixed(1)}" letter-spacing="1.5" fill="#f4e6c4" opacity=".92">GUINNESS</text>`; })() : ""}
       ${drops}
       ${g.classic ? `<path d="M${CX - g.wTop / 2 + 1} ${g.yRim + 26} L${CX + g.wTop / 2 - 1} ${g.yRim + 26}" stroke="rgba(255,255,255,.4)" stroke-width="3"/>` : ""}
+      <path id="zfDome" d="" fill="${d.foam}"/>
       <ellipse cx="${CX}" cy="${g.yRim}" rx="${g.wTop / 2}" ry="3.5" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="2"/>
       <path d="M${CX - wM / 2 + 2} ${yM} L${CX - wM / 2 + 15} ${yM}" stroke="#ffd23f" stroke-width="2.2"/>
       <text x="${CX - wM / 2 - 4}" y="${yM + 3.5}" text-anchor="end" font-size="10" font-weight="800" fill="#ffd23f" font-family="sans-serif" stroke="#1a0b05" stroke-width="2.5" paint-order="stroke">${minPct().toLocaleString("de-DE")} %</text>
@@ -4067,7 +4182,13 @@ const Zapf = (() => {
     set("zfFoamTex", { y: yT, height: fh });
     set("zfFoamSh", { y: yT, height: fh });
     const fw = g.width(Math.min(1, (g.yBot - yT) / g.h));
-    set("zfFoamTop", { cy: yT, rx: total > .002 ? fw / 2 - 3 : 0 });
+    set("zfFoamTop", { cy: Math.max(yT, g.yRim), rx: total > .002 ? fw / 2 - 3 : 0 });
+    const dome = $("zfDome");
+    if (dome) {
+      if (total > 1) { const hgt = g.yRim - yT, hw = g.wTop / 2 + 1;
+        dome.setAttribute("d", `M${CX - hw} ${g.yRim + 2} C${CX - hw} ${g.yRim - hgt * 1.3} ${CX + hw} ${g.yRim - hgt * 1.3} ${CX + hw} ${g.yRim + 2} Z`);
+      } else dome.setAttribute("d", "");
+    }
     if (bubbles.length) {
       const kids = $("zfBub").children, t = performance.now() / 1000;
       bubbles.forEach((b, k) => { const p = (b.p + t * b.v) % 1; kids[k].setAttribute("cx", b.x); kids[k].setAttribute("cy", yI - p * lh); });
@@ -4104,7 +4225,8 @@ const Zapf = (() => {
   }
   function nextGlass() {
     n++;
-    const spec = n === 1 ? CLASSIC() : (Math.random() < .25 ? SPECIAL[Math.floor(Math.random() * SPECIAL.length)]() : NORMAL[Math.floor(Math.random() * NORMAL.length)]());
+    const roll = Math.random();
+    const spec = n === 1 ? CLASSIC() : roll < .09 ? SHOT() : roll < .32 ? SPECIAL[Math.floor(Math.random() * SPECIAL.length)]() : NORMAL[Math.floor(Math.random() * NORMAL.length)]();
     glass = geom(spec);
     drawGlass(glass);
     P = 0; paint(0, 0);
@@ -4117,8 +4239,8 @@ const Zapf = (() => {
   }
   function pourRate() {
     const g = glass;
-    const base = .48 * Math.pow(100 / g.avgW, .6) * Math.pow(230 / g.h, .5);
-    return Math.min(.82, Math.max(.3, base)) * Math.min(1.6, 1 + (n - 1) * .035);
+    const base = g.rate || Math.min(.82, Math.max(.3, .48 * Math.pow(100 / g.avgW, .6) * Math.pow(230 / g.h, .5)));
+    return base * Math.min(1.6, 1 + (n - 1) * .035);
   }
   function startPour() {
     if (state !== "ready") return;
@@ -4134,7 +4256,8 @@ const Zapf = (() => {
     $("zfStream").setAttribute("height", 0);
     const d = DRINKS[glass.drink];
     const wf = Math.min(1.6, Math.max(.7, Math.sqrt(100 / glass.avgW)));
-    const amount = d.rise * wf * r(.85, 1.15) * (.75 + .25 * Math.min(1, P / .8));
+    const lf = Math.min(1.8, Math.max(.6, (glass.wRef / glass.wAt(P)) ** 1.5));
+    const amount = d.rise * wf * lf * r(.85, 1.15) * (.75 + .25 * Math.min(1, P / .8));
     if (d.fall) { peak = P + amount; finalL = peak - d.fall * r(.9, 1.1); }
     else { peak = P + amount; finalL = peak; }
     state = "settle"; tSettle = 0;
@@ -4149,7 +4272,9 @@ const Zapf = (() => {
       if (state === "pour") {
         tPour += dt;
         const ramp = Math.min(1, .45 + tPour / 450);
-        P += pourRate() * ramp * dt / 1000;
+        /* gleiche Menge pro Zeit: schmale Stellen steigen schneller, breite langsamer */
+        const wf = Math.min(2.6, Math.max(.35, (glass.wRef / glass.wAt(P)) ** 2));
+        P += pourRate() * ramp * wf * dt / 1000;
         const head = d.head * P;
         paint(P, P - head);
         $("zfStream").setAttribute("height", Math.max(0, glass.levelY(P) - NOZZLE));
@@ -4165,8 +4290,9 @@ const Zapf = (() => {
         const head = d.head * P;
         paint(lvl, P - head, d.surge ? .55 * (1 - e) : null);
         if (d.surge) $("zfHaze").setAttribute("fill", "#c99a6a");
-        pctBox(fmtPct(Math.min(lvl, 1.02)));
-        if (lvl > 1) { result(lvl, true); return; }
+        const cap = d.fall ? 1.02 : 1;   /* Sekt-Schaum darf kurz über den Rand (Anzeige bleibt bei 100 %) */
+        pctBox(fmtPct(Math.min(lvl, d.fall ? 1 : 1.02)));
+        if (lvl > cap) { result(lvl, true); return; }
         if (k >= 1) { result(finalL, false); return; }
       } else if (bubbles.length && glass) {
         paint(P > 0 ? Math.max(P, finalL) : 0, P - d.head * P);
@@ -4220,7 +4346,7 @@ const Zapf = (() => {
           <li><i>2</i><span>Danach <b>steigt der Schaum nach</b> – gezählt wird der Füllstand in Prozent.</span></li>
           <li><i>3</i><span>Das erste Glas braucht <b>mindestens 90&nbsp;%</b>, jedes weitere <b>0,5&nbsp;% mehr</b> (bis 99&nbsp;%). Zu wenig oder <b>übergelaufen</b>? Dann ist Schluss. Jedes Glas bringt seine Prozente als Punkte.</span></li>
         </ul>
-        <p class="note">Weizen schäumt stärker, Guinness braucht Geduld, Sekt schäumt hoch und fällt zusammen.</p>
+        <p class="note">Weizen schäumt stärker, Guinness braucht Geduld, Sekt schäumt hoch und fällt zusammen. Bei bauchigen Gläsern steigt alles mal schneller, mal langsamer – und der Pfeffi kommt flott.</p>
         <div class="row2"><button class="ghost" id="zfTopBtn" type="button">Top 10</button><button class="primary" id="zfGo" type="button">Los geht's</button></div>
       </div>`;
     $("zfGo").addEventListener("click", newGame);
@@ -4293,7 +4419,7 @@ const Zapf = (() => {
   $("zfClose").addEventListener("click", () => goBack(""));
 
   return {
-    _dbg: { state: () => ({ state, n, totalH, P, peak, finalL, glass: glass && { name: glass.name, drink: glass.drink, h: Math.round(glass.h), avgW: Math.round(glass.avgW) } }), start: () => startPour(), stop: () => stopPour(), setP: (p) => { P = p; }, show: (i, lv = .8) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL]; glass = geom(list[i]()); drawGlass(glass); const d = DRINKS[glass.drink]; paint(lv, lv - d.head * lv - .05, d.haze != null ? d.haze : null); return glass.name; } },
+    _dbg: { state: () => ({ state, n, totalH, P, peak, finalL, glass: glass && { name: glass.name, drink: glass.drink, h: Math.round(glass.h), avgW: Math.round(glass.avgW) } }), start: () => startPour(), stop: () => stopPour(), setP: (p) => { P = p; }, show: (i, lv = .8) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT]; glass = geom(list[i]()); drawGlass(glass); const d = DRINKS[glass.drink]; paint(lv, lv - d.head * lv - .05, d.haze != null ? d.haze : null); return glass.name; }, force: (i) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT]; glass = geom(list[i]()); drawGlass(glass); P = 0; finalL = 0; paint(0, 0); state = "ready"; return glass.name; }, pct: () => $("zfPct").textContent },
     open() {
       if (running) return;
       running = true;
@@ -4435,7 +4561,7 @@ function buildMenu() {
   };
   const PPM = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg>`;
   const quick = `<div class="hm-quick${party ? " party" : ""}">
-      <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-Ranking<br>&amp; Wünsche</b><small>Counter · Matrikel-Duell</small></span></a>
+      <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-<br>Ranking</b><small>Counter · Matrikel-Duell</small></span></a>
       <a class="tile-btn tile-pay hm-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen"><span class="pp-mark">${PPM}</span><span class="hm-pay-txt"><span class="pp-word"><i>Pay</i><i>Pal</i></span><small>Bargeldlos zahlen</small></span><i class="pp-go">${ICON_ARROW}</i></a>
     </div>`;
   const hh = party && evA.happyHour ? `<a class="hm-party" href="#${evA.id}"><span class="hm-live"></span><b>Heute live</b><span>Happy Hour ${esc(evA.happyHour.von)}–${esc(evA.happyHour.bis)} Uhr</span><i>${ICON_ARROW}</i></a>` : "";
@@ -4451,6 +4577,7 @@ function buildMenu() {
       <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span></a>
       <a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span></a>
     </div>
+    <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
     <h3 class="hm-sec">Demnächst</h3>
     <div class="tile-btn hm-music" aria-label="Musikwünsche – kommt bald">${MUSIC_ART}<span class="soon-tag">Bald</span><span><b>Musikwünsche</b><small>kommt bald</small></span></div>
     <h3 class="hm-sec">Vergangene Abende</h3>
@@ -4530,6 +4657,8 @@ function routeInner() {
   showClub(false);
   if (id === "impressum" || id === "datenschutz") { renderLegal(id); show(true); return; }
   if (id === "paypal") { renderPay(); show(true); return; }
+  if (id === "wuensche") { renderWishPage(); show(true); return; }
+  if (id === "team") { renderTeamPage(); show(true); return; }
   const i = EVENTS.findIndex((ev) => ev.id === id);
   if (i >= 0) {
     setMenu(false);
@@ -4767,6 +4896,54 @@ async function shareEvent(ev) {
   } finally { btn.disabled = false; }
 }
 
+
+/* ================= Eigene Seiten: Wünsche und Team ================= */
+function pageShell(cls, title, inner) {
+  current = null;
+  const d = $("detail");
+  d.className = "view view-detail clubby " + cls;
+  d.style.cssText = themeStyle(THEMEN.club);
+  d.innerHTML = `
+    <header class="d-head">
+      <button class="back" id="backBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
+      <img class="logo" src="logo.png" alt="">
+    </header>
+    <div class="club-wrap">
+      <h2 class="page-h">${title}</h2>
+      ${inner}
+    </div>`;
+  $("backBtn").addEventListener("click", closeDetail);
+  d.onscroll = null; d.scrollTop = 0;
+}
+function renderWishPage() {
+  pageShell("wish-page", "Wünsche", `
+      <section class="cbox wish" id="wishBox" aria-label="Wunsch abschicken">
+        <p class="wish-intro">Was fehlt euch? Wünscht euch einen Specialdrink oder ein Motto für einen Clubabend.</p>
+        <div id="wishForm">
+          <div class="wish-toggle" role="group" aria-label="Art des Wunsches">
+            <button type="button" data-type="Drink" aria-pressed="true">Specialdrink</button>
+            <button type="button" data-type="Motto" aria-pressed="false">Motto</button>
+          </div>
+          <label for="wText" id="wLabel">Welchen Specialdrink sollen wir mixen?</label>
+          <textarea id="wText" maxlength="400" placeholder="z. B. Blue Lagoon mit extra Eis"></textarea>
+          <div class="two">
+            <div><label for="wName">Name <small>(optional)</small></label><input id="wName" maxlength="60" autocomplete="name"></div>
+            <div><label for="wStudy">Studiengang <small>(optional)</small></label><input id="wStudy" maxlength="60"></div>
+          </div>
+          <p class="hint">Name und Studiengang nur, falls wir Rückfragen haben.</p>
+          <button class="send" id="wSend" type="button">Wunsch abschicken</button>
+          <p class="err" id="wErr" hidden></p>
+        </div>
+      </section>`);
+  document.querySelectorAll(".wish-toggle button").forEach((b) => b.addEventListener("click", () => setWishType(b.dataset.type)));
+  $("wSend").addEventListener("click", sendWish);
+  setWishType(wishType);
+}
+function renderTeamPage() {
+  pageShell("team-page", "Team-Bereich", `<div id="teamArea" class="team-area"></div>`);
+  renderTeam();
+}
+
 /* ================= PayPal-Seite ================= */
 function renderPay() {
   current = null;
@@ -4797,7 +4974,7 @@ function renderPay() {
 /* ================= Wischen: diese Woche → kommende Woche → Ranking → PayPal → … ================= */
 function swipeRing() {
   const now = startIndex();
-  return [EVENTS[now], EVENTS[now + 1]].filter(Boolean).map((e) => e.id).concat(["ranking", "paypal"]);
+  return [EVENTS[now], EVENTS[now + 1]].filter(Boolean).map((e) => e.id).concat(["ranking", "wuensche", "paypal"]);
 }
 const activeView = () => (app.classList.contains("is-club") ? $("club") : $("detail"));
 let pendingSwipe = null, swiping = false;
