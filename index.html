@@ -917,8 +917,9 @@ a { color: inherit; }
 .team-row button { min-height: 44px; padding: 8px 12px; line-height: 1.2; border-radius: 999px; border: 1px solid var(--c-line); background: transparent; color: var(--c-text); font-weight: 800; }
 .team-row button.danger { border-color: rgba(255,90,90,.6); color: #ff9a9a; }
 .pin-label { display: block; margin: 10px 0 6px; font-size: 13px; font-weight: 700; color: var(--c-dim); }
-.pin-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
-.pin { height: 50px; border-radius: 14px; border: 1px solid var(--c-line); background: rgba(0,0,0,.35); color: var(--c-text); font: inherit; font-size: 22px; letter-spacing: .4em; text-align: center; padding: 0 12px; }
+.pin-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.pin-row > * { min-width: 0; }
+.pin { box-sizing: border-box; width: 100%; height: 50px; border-radius: 14px; border: 1px solid var(--c-line); background: rgba(0,0,0,.35); color: var(--c-text); font: inherit; font-size: 22px; letter-spacing: .4em; text-align: center; padding: 0 12px; }
 .pin-go { height: 50px; padding: 0 18px; border-radius: 999px; border: none; background: var(--c-gold); color: #1a0d11; font-weight: 800; }
 .pin-err { margin: 8px 0 0; color: #ff9a9a; font-size: 13.5px; }
 .shake { animation: shake .35s; }
@@ -980,10 +981,10 @@ a { color: inherit; }
 .bp-help b { display: block; font-size: 18px; color: #fff; margin-bottom: 4px; }
 .bp-help.hide { opacity: 0; }
 .bp-over[hidden] { display: none; }
-.bp-over { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(10, 2, 18, .78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.bp-card { width: min(360px, 100%); padding: 22px 20px; border-radius: 26px; background: #fff; color: #1a0b2e; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,.5); animation: pop .4s cubic-bezier(.2,.9,.25,1.2); }
+.bp-over { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 20px; background: rgba(10, 2, 18, .78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.bp-card { box-sizing: border-box; min-width: 0; max-width: 100%; width: min(360px, 100%); padding: 22px 20px; border-radius: 26px; background: #fff; color: #1a0b2e; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,.5); animation: pop .4s cubic-bezier(.2,.9,.25,1.2); }
 @keyframes pop { from { transform: scale(.85); opacity: 0; } }
-.bp-card h3 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 34px; text-transform: uppercase; color: #ff2e88; }
+.bp-card h3 { white-space: nowrap; overflow: hidden; margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 34px; text-transform: uppercase; color: #ff2e88; }
 .bp-score { margin: 10px 0 16px; display: flex; justify-content: center; gap: 26px; }
 .bp-score div small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .12em; color: #7a6a8f; text-transform: uppercase; }
 .bp-score div b { font-family: var(--f-display); font-weight: 400; font-size: 34px; font-variant-numeric: tabular-nums; }
@@ -1404,7 +1405,13 @@ a { color: inherit; }
 .hm-sec small { margin-left: 6px; font-family: var(--f-body); font-size: 12px; font-weight: 700; text-transform: none; color: rgba(255,255,255,.55); letter-spacing: 0; }
 .hm-games { display: grid; grid-auto-flow: column; grid-auto-columns: 44%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; }
 .hm-games::-webkit-scrollbar { display: none; }
-.hm-games .tile-btn { height: 168px; border-radius: 20px; scroll-snap-align: start; }
+.hm-games .tile-btn { height: 168px; border-radius: 20px; }
+.hm-game { min-width: 0; scroll-snap-align: start; }
+.hm-best { display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 18px; margin: 7px 2px 0; font-size: 11.5px; line-height: 1.2; color: rgba(255,255,255,.5); opacity: 0; transition: opacity .5s; }
+.hm-best.on { opacity: 1; }
+.hm-best svg { flex: none; width: 12px; height: 12px; color: #ffcf4a; opacity: .8; }
+.hm-best span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hm-best b { font-weight: 800; color: rgba(255,255,255,.72); }
 .hm-games .tile-btn b { font-size: 16px; }
 .hm-games .tile-btn small { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.75); }
 .hm-couch { height: 112px; border-radius: 20px; }
@@ -1424,8 +1431,9 @@ a { color: inherit; }
 /* Seiten im Ranking-Stil (Wünsche, Team) */
 .view-detail.clubby { --c-bg: #0b0608; --c-card: #1a0d11; --c-line: rgba(255,120,120,.18); --c-red: #ff3b3b; --c-gold: #ffcf4a; --c-text: #fff6f3; --c-dim: #c7a9ab;
   color: var(--c-text); background: radial-gradient(120% 50% at 50% 0%, rgba(255,59,59,.18), transparent 60%), #0b0608; }
-.page-h { margin: 4px 0 0; text-align: center; font-family: var(--f-display); font-weight: 400; font-size: 34px; text-transform: uppercase; color: #fff; text-shadow: 0 0 14px rgba(255,59,59,.8), 0 0 30px rgba(255,59,59,.45); }
-.team-area { display: grid; gap: 18px; }
+.page-h { white-space: nowrap; overflow: hidden; margin: 4px 0 0; text-align: center; font-family: var(--f-display); font-weight: 400; font-size: 34px; text-transform: uppercase; color: #fff; text-shadow: 0 0 14px rgba(255,59,59,.8), 0 0 30px rgba(255,59,59,.45); }
+.team-area { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.team-area > *, .clubby .club-wrap > * { min-width: 0; max-width: 100%; box-sizing: border-box; }
 .team-now { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--c-dim); }
 .team-now b { color: #fff; }
 .team-row button.wide { grid-column: 1 / -1; }
@@ -3136,7 +3144,7 @@ async function loadTeamList() {
   box.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
     if (!b.dataset.armed) { b.dataset.armed = "1"; b.textContent = "Löschen?"; b.classList.add("armed"); setTimeout(() => { if (b.isConnected) { delete b.dataset.armed; b.textContent = "×"; b.classList.remove("armed"); } }, 3000); return; }
     b.disabled = true;
-    try { await L.api().remove(b.dataset.del); loadTeamList(); } catch { b.disabled = false; alertTeam("Löschen hat nicht geklappt."); }
+    try { await L.api().remove(b.dataset.del); clearBestCache(); loadTeamList(); } catch { b.disabled = false; alertTeam("Löschen hat nicht geklappt."); }
   }));
 }
 function renderTeam() {
@@ -3614,19 +3622,19 @@ const Game = (() => {
         <h3>Game over</h3>
         <div class="bp-score"><div><small>Becher</small><b>${cleared}</b></div><div><small>Zeit</small><b>${fmt(ms)}</b></div></div>
         <label for="bpName" style="display:block;text-align:left;font-size:13px;font-weight:700;color:#7a6a8f;margin-bottom:6px">Dein Name für die Bestenliste</label>
-        <input id="bpName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25">
+        <input id="bpName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(playerName())}">
         <div class="row2"><button class="ghost" id="bpRetry" type="button">Nochmal</button><button class="primary" id="bpSave" type="button">Eintragen</button></div>
         <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>
         <button class="linkbtn" id="bpSkip" type="button">Top 10 ansehen</button>
       </div>`;
     const name = $("bpName");
-    setTimeout(() => name.focus(), 200);
+    if (!name.value) setTimeout(() => name.focus(), 200);
     $("bpSave").addEventListener("click", async () => {
       const n = name.value.trim().replace(/\s+/g, " ").slice(0, 16);
       if (!n) { name.focus(); name.style.borderColor = "#ff2e88"; return; }
       const btn = $("bpSave"); btn.disabled = true; btn.textContent = "Speichert …";
       let id = null;
-      try { id = await Top.add({ name: n, cups: cleared, ms: Math.max(1000, Math.round(ms)) }); }
+      try { id = await Top.add({ name: n, cups: cleared, ms: Math.max(1000, Math.round(ms)) }); setPlayerName(n); clearBestCache(); }
       catch { btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
       showTop(await Top.list().catch(() => []), id);
     });
@@ -3828,7 +3836,7 @@ const Bus = (() => {
         <div class="bp-score"><div><small>Geschafft</small><b>${made}</b></div><div><small>Rekord</small><b>${best}</b></div></div>
         ${canSave ? `
         <label for="busName" style="display:block;text-align:left;font-size:13px;font-weight:700;color:#7a6a8f;margin-bottom:6px">Dein Name für die Bestenliste</label>
-        <input id="busName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(store.get("exmaBusName") || "")}">
+        <input id="busName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(playerName())}">
         <div class="row2"><button class="ghost" id="busAgain" type="button">Neu mischen</button><button class="primary" id="busSave" type="button">Eintragen</button></div>
         <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>`
         : `<div class="row2"><button class="ghost" id="busAgain" type="button">Neu mischen</button><button class="primary" id="busTop" type="button">Top 10</button></div>`}
@@ -3844,7 +3852,7 @@ const Bus = (() => {
         if (!n) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
         const btn = $("busSave"); btn.disabled = true; btn.textContent = "Speichert …";
         let id = null;
-        try { id = await BusTop.add({ name: n, score: made }); saved = true; store.set("exmaBusName", n); }
+        try { id = await BusTop.add({ name: n, score: made }); saved = true; store.set("exmaBusName", n); setPlayerName(n); clearBestCache(); }
         catch (e) { console.warn("Busfahrer speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
         showTop(await BusTop.list().catch(() => []), id);
       });
@@ -4371,7 +4379,7 @@ const Zapf = (() => {
         <div class="bp-score"><div><small>Gläser</small><b>${glasses}</b></div><div><small>Punkte</small><b>${fmtPts(totalH)}</b></div></div>
         ${canSave ? `
         <label for="zfName" style="display:block;text-align:left;font-size:13px;font-weight:700;color:#7a6a8f;margin-bottom:6px">Dein Name für die Bestenliste</label>
-        <input id="zfName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(store.get("exmaZapfName") || store.get("exmaBusName") || "")}">
+        <input id="zfName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(playerName())}">
         <div class="row2"><button class="ghost" id="zfAgain" type="button">Nochmal</button><button class="primary" id="zfSave" type="button">Eintragen</button></div>
         <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>
         <button class="linkbtn" id="zfTopBtn" type="button">Top 10 ansehen</button>`
@@ -4387,7 +4395,7 @@ const Zapf = (() => {
         if (!nm) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
         const btn = $("zfSave"); btn.disabled = true; btn.textContent = "Speichert …";
         let id = null;
-        try { id = await ZapfTop.add({ name: nm, score: Math.round(totalH) / 100, glasses }); saved = true; store.set("exmaZapfName", nm); }
+        try { id = await ZapfTop.add({ name: nm, score: Math.round(totalH) / 100, glasses }); saved = true; store.set("exmaZapfName", nm); setPlayerName(nm); clearBestCache(); }
         catch (e) { console.warn("Zapfmeister speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
         showTop(await ZapfTop.list().catch(() => []), id);
       });
@@ -4573,9 +4581,9 @@ function buildMenu() {
     ${party ? "" : quick}
     <h3 class="hm-sec">Minispiele <small>zum Wischen</small></h3>
     <div class="hm-games">
-      <a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span></a>
-      <a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span></a>
-      <a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span></a>
+      <div class="hm-game"><a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span></a><p class="hm-best" data-best="beerpong" aria-label="Platz 1 Beerpong"></p></div>
+      <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span></a><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></div>
+      <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span></a><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></div>
     </div>
     <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
     <h3 class="hm-sec">Demnächst</h3>
@@ -4587,11 +4595,13 @@ function buildMenu() {
       <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
     </div>`;
+  fillBest(g);
   g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
   g.querySelectorAll(".tile-ev, .hm-next").forEach((t) => {
     const ev = EVENTS[+t.dataset.ev];
     const layers = (SCENES[ev.thema] || sceneIce)();
     t.querySelectorAll(".tile-scene svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `mt${t.dataset.ev}l${k}_`); if (svg.pauseAnimations) svg.pauseAnimations(); });
+    if (t.closest(".hm-hero")) fitHeroScene(t, ev);
     const openTile = () => {
       try { localStorage.setItem("exmaTileTapped", "1"); } catch {}
       location.hash = ev.id;
@@ -4897,6 +4907,71 @@ async function shareEvent(ev) {
 }
 
 
+/* ================= Große Kachel: Hauptmotiv an die Kachelhöhe anpassen =================
+   top = oberste Kante des Motivs, lip = Vorderkante des Pults (Koordinaten der Szene 400 × 760).
+   Das Pult sitzt direkt über den Datums-Feldern, die Flasche möglichst unter dem Untertitel. */
+const HERO_FIT = { eis: { layer: 2, top: 380, lip: 614 } };
+function fitHeroScene(t, ev) {
+  const f = HERO_FIT[ev.thema]; if (!f) return;
+  const svg = t.querySelectorAll(".tile-scene svg")[f.layer]; if (!svg) return;
+  const W = t.clientWidth, H = t.clientHeight; if (!W || !H) return;
+  const span = f.lip - f.top;
+  const s = Math.max(.5, Math.min(W / 400, (H - 300) / span));
+  let lipY = H - 116;                                   /* knapp über den Datums-Feldern */
+  if (lipY - span * s < 165) lipY = 165 + span * s;     /* Flasche nie in den Titel schieben */
+  Object.assign(svg.style, { width: 400 * s + "px", height: 760 * s + "px", left: (W - 400 * s) / 2 + "px", right: "auto", top: lipY - f.lip * s + "px" });
+  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+}
+let heroFitTimer = null;
+addEventListener("resize", () => { clearTimeout(heroFitTimer); heroFitTimer = setTimeout(() => document.querySelectorAll(".hm-hero .tile-ev").forEach((t) => fitHeroScene(t, EVENTS[+t.dataset.ev])), 150); });
+
+/* ================= Überschriften einzeilig einpassen (breite Club-Schrift) ================= */
+function fitLine(el, min = 16) {
+  if (!el || !el.isConnected) return;
+  el.style.fontSize = "";
+  let fs = parseFloat(getComputedStyle(el).fontSize), guard = 40;
+  while (el.scrollWidth > el.clientWidth + 1 && fs > min && guard--) { fs -= 1; el.style.fontSize = fs + "px"; }
+}
+const fitTitles = (root) => root.querySelectorAll(".bp-card h3, .page-h").forEach((h) => fitLine(h, 16));
+const watchOverlays = () => document.querySelectorAll(".bp-over").forEach((o) => new MutationObserver(() => { if (!o.hidden) requestAnimationFrame(() => fitTitles(o)); }).observe(o, { attributes: true, attributeFilter: ["hidden"], childList: true }));
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", watchOverlays); else watchOverlays();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitTitles(document));
+
+/* ================= Spielername für alle Bestenlisten ================= */
+const playerName = () => store.get("exmaPlayerName") || store.get("exmaZapfName") || store.get("exmaBusName") || "";
+const setPlayerName = (n) => { store.set("exmaPlayerName", n); };
+
+/* ================= Platz 1 unter den Minispiel-Kacheln ================= */
+const BEST_SRC = {
+  beerpong: { api: () => Top, col: "beerpong", field: "cups", fmt: (e) => `${e.cups} Becher` },
+  busfahrer: { api: () => BusTop, col: "busfahrer", field: "score", fmt: (e) => `${e.score} / 51` },
+  zapfmeister: { api: () => ZapfTop, col: "zapfmeister", field: "score", fmt: (e) => `${(e.score || 0).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Pkt.` }
+};
+async function loadBest(key, fresh = false) {
+  const src = BEST_SRC[key], ck = "exmaBest_" + key;
+  if (!fresh) { try { const c = JSON.parse(sessionStorage.getItem(ck) || "null"); if (c && Date.now() - c.t < 5 * 60 * 1000) return c.e; } catch {} }
+  let e = null;
+  if (!Live.remote) e = (await src.api().list())[0] || null;
+  else {   /* nur die Spitze lesen: spart Datenbank-Zugriffe */
+    const qs = await FB.db.collection(src.col).orderBy(src.field, "desc").limit(5).get();
+    e = src.api().sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })))[0] || null;
+  }
+  try { sessionStorage.setItem(ck, JSON.stringify({ t: Date.now(), e })); } catch {}
+  return e;
+}
+function fillBest(root, fresh) {
+  root.querySelectorAll("[data-best]").forEach(async (el) => {
+    const key = el.dataset.best;
+    try {
+      const e = await loadBest(key, fresh); if (!el.isConnected) return;
+      el.innerHTML = e ? `${CROWN_MINI}<span><b>${esc(e.name)}</b> · ${esc(BEST_SRC[key].fmt(e))}</span>` : `${CROWN_MINI}<span>Platz 1 ist noch frei</span>`;
+      el.classList.add("on");
+    } catch { el.textContent = ""; }
+  });
+}
+const CROWN_MINI = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z" fill="currentColor"/></svg>`;
+const clearBestCache = () => { ["beerpong", "busfahrer", "zapfmeister"].forEach((k) => { try { sessionStorage.removeItem("exmaBest_" + k); } catch {} }); };
+
 /* ================= Eigene Seiten: Wünsche und Team ================= */
 function pageShell(cls, title, inner) {
   current = null;
@@ -4914,6 +4989,7 @@ function pageShell(cls, title, inner) {
     </div>`;
   $("backBtn").addEventListener("click", closeDetail);
   d.onscroll = null; d.scrollTop = 0;
+  requestAnimationFrame(() => fitLine(d.querySelector(".page-h"), 20));
 }
 function renderWishPage() {
   pageShell("wish-page", "Wünsche", `
