@@ -2690,14 +2690,16 @@ const FB = { ready: false, db: null, auth: null, user: null, fv: null };
 function loadScript(src) {
   return new Promise((res, rej) => { const el = document.createElement("script"); el.src = src; el.onload = res; el.onerror = rej; document.head.appendChild(el); });
 }
-async function initFirebase() {
-  if (inFrame && !window.firebase) return;            /* Vorschau bei Claude: keine Verbindung möglich */
-  try {
-    if (!window.firebase) {
-      const base = `https://www.gstatic.com/firebasejs/${FB_VERSION}/`;
-      await loadScript(base + "firebase-app-compat.js");
-      await Promise.all([loadScript(base + "firebase-auth-compat.js"), loadScript(base + "firebase-firestore-compat.js")]);
-    }
+async function loadBest(key, fresh = false) {
+  const src = BEST_SRC[key], ck = "exmaBest_" + key;
+  if (!fresh) { try { const c = JSON.parse(sessionStorage.getItem(ck) || "null"); if (c && c.e && Date.now() - c.t < 5 * 60 * 1000) return c.e; } catch {} }
+  let e = null;
+  if (!Live.remote) return (await src.api().list())[0] || null;   /* lokal: nie zwischenspeichern */
+  const qs = await FB.db.collection(src.col).orderBy(src.field, "desc").limit(50).get();
+  e = src.api().sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })))[0] || null;
+  if (e) { try { sessionStorage.setItem(ck, JSON.stringify({ t: Date.now(), e })); } catch {} }
+  return e;
+}
     const appFb = firebase.apps && firebase.apps.length ? firebase.app() : firebase.initializeApp(FIREBASE_CONFIG);
     FB.auth = firebase.auth(appFb);
     FB.db = firebase.firestore(appFb);
@@ -2707,7 +2709,7 @@ async function initFirebase() {
       if (!u) { FB.auth.signInAnonymously().catch(() => {}); return; }
       const team = !!u.email && u.email.toLowerCase() === TEAM_EMAIL;
       if (team !== teamAuthed) { teamAuthed = team; renderTeam(); }
-      if (!FB.ready) { FB.ready = true; Live.goRemote(); }
+      if (!FB.ready) { FB.ready = true; Live.goRemote(); fillBest(document, true); }
     });
   } catch (e) { console.warn("Firebase nicht erreichbar, lokaler Modus", e); }
 }
