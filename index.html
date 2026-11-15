@@ -1291,7 +1291,6 @@ a { color: inherit; }
 .hm-go svg { width: 16px; height: 16px; }
 .hm-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .hm-quick .tile-btn { height: 118px; border-radius: 22px; }
-.hm-quick.party .tile-btn { height: 132px; }
 .hm-quick .tile-rank b { font-size: 16px; }
 .hm-pay { justify-content: space-between; }
 .tile-btn.hm-pay .pp-mark svg { display: block; width: 34px; height: 34px; }
@@ -1299,17 +1298,83 @@ a { color: inherit; }
 .hm-pay .pp-word { font-size: 24px; display: block; }
 .hm-pay small { display: block; margin-top: 3px; font-size: 12px; font-weight: 800; color: rgba(11,42,107,.8); }
 .tile-btn.hm-pay .pp-go { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; }
-.hm-party { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 18px; text-decoration: none; color: #fff; background: linear-gradient(90deg, rgba(255,46,136,.28), rgba(255,138,61,.2)); border: 1.5px solid #ff2e88; box-shadow: 0 0 18px rgba(255,46,136,.35); }
-.hm-party b { font-family: var(--f-display); font-weight: 400; text-transform: uppercase; font-size: 16px; }
-.hm-party > span:not(.hm-live) { flex: 1; font-size: 13px; font-weight: 800; color: #ffd0e4; }
-.hm-party i { width: 28px; height: 28px; border-radius: 50%; background: #fff; color: #12041f; display: grid; place-items: center; }
-.hm-party i svg { width: 14px; height: 14px; }
-.hm-live { width: 10px; height: 10px; border-radius: 50%; background: #ff2e88; animation: livePulse 1.6s infinite; }
 @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255,46,136,.7); } 70% { box-shadow: 0 0 0 10px rgba(255,46,136,0); } 100% { box-shadow: 0 0 0 0 rgba(255,46,136,0); } }
 .hm-sec { margin: 14px 2px -2px; font-family: var(--f-display); font-weight: 400; font-size: 18px; text-transform: uppercase; color: #fff; letter-spacing: .02em; }
 .hm-sec small { margin-left: 6px; font-family: var(--f-body); font-size: 12px; font-weight: 700; text-transform: none; color: rgba(255,255,255,.55); letter-spacing: 0; }
 .hm-games { display: grid; grid-auto-flow: column; grid-auto-columns: 44%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; }
 .hm-games::-webkit-scrollbar { display: none; }
+
+/* ===== Clubabend: Abend-Kacheln im Menü (Clubtag, Live, Rückblick) ===== */
+.ph-block { display: grid; gap: 12px; }
+.ph-h { margin: 2px 2px -4px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--tgM) 45%, #fff); }
+.ph-specs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.ph-specs.n1 { grid-template-columns: 1fr; }
+.ph-specs.n3 { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 47%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.ph-specs.n3::-webkit-scrollbar { display: none; }
+.ph-spec { scroll-snap-align: start; display: flex; align-items: center; gap: 6px; min-height: 86px; padding: 6px 12px 6px 2px; border-radius: 18px; text-decoration: none; color: #fff;
+  background: radial-gradient(80% 90% at 22% 55%, color-mix(in srgb, var(--c) 38%, transparent), transparent 70%), rgba(255,255,255,.04);
+  border: 1.5px solid color-mix(in srgb, var(--c) 55%, transparent); box-shadow: 0 0 16px color-mix(in srgb, var(--c) 18%, transparent); }
+.ph-art { flex: none; width: 58px; height: 74px; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--c) 60%, transparent)); }
+.ph-art svg { width: 100%; height: 100%; display: block; }
+.ph-sn { display: grid; gap: 6px; min-width: 0; }
+.ph-sn b { font-family: var(--f-display); font-weight: 400; font-size: 14px; line-height: 1.08; text-transform: uppercase; overflow-wrap: anywhere; }
+.ph-sn em { justify-self: start; padding: 2px 11px; border-radius: 999px; background: #fff; color: #12091a; font-style: normal; font-weight: 800; font-size: 15px; }
+.ph-hh { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 12px; padding: 12px 14px; border-radius: 18px; text-decoration: none; color: #fff;
+  background: rgba(255,255,255,.04); border: 1.5px dashed color-mix(in srgb, var(--tgM) 60%, transparent); }
+.ph-hh small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--tgM) 45%, #fff); }
+.ph-hh-l b { display: block; margin: 2px 0 1px; font-size: 16px; font-weight: 800; line-height: 1.15; }
+.ph-hh-l span { font-size: 13px; font-weight: 700; color: var(--dim); }
+.ph-hh-l s { opacity: .8; }
+.ph-hh-r { text-align: right; }
+.ph-hh-r b { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.ph-hh.on { border: 0; background: var(--tg); box-shadow: 0 0 26px color-mix(in srgb, var(--tgM) 55%, transparent); animation: phGlow 2.4s ease-in-out infinite; }
+.ph-hh.on small, .ph-hh.on .ph-hh-l span { color: #fff; }
+.ph-hh.on b, .ph-hh.on span { text-shadow: 0 2px 10px rgba(30,0,50,.35); }
+@keyframes phGlow { 50% { box-shadow: 0 0 44px var(--tgM); } }
+.ph-bar { grid-column: 1 / -1; display: block; height: 8px; margin-top: 4px; border-radius: 9px; background: rgba(0,0,0,.25); overflow: hidden; }
+.ph-bar i { display: block; height: 100%; border-radius: 9px; background: #fff; transition: width 1s linear; }
+.ph-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ph-btn { height: 46px; padding: 0 12px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 8px; font: 800 14px var(--f-body); text-decoration: none; color: #fff;
+  border: 1.5px solid rgba(255,255,255,.25); background: rgba(255,255,255,.04); }
+.ph-btn svg { width: 18px; height: 18px; flex: none; }
+.ph-btn.wa { background: #25d366; color: #05310f; border: 0; }
+.ph-btn.pp { background: #ffc439; color: #003087; border: 0; }
+.ph-live-head { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 16px; text-decoration: none; color: #fff;
+  background: color-mix(in srgb, var(--tgM) 16%, transparent); border: 1px solid color-mix(in srgb, var(--tgM) 45%, transparent); }
+.ph-live-head b { font-family: var(--f-display); font-weight: 400; font-size: 15px; text-transform: uppercase; white-space: nowrap; }
+.ph-live-head span:last-child { margin-left: auto; font-size: 12px; font-weight: 800; text-align: right; color: color-mix(in srgb, var(--tgM) 35%, #fff); }
+.ph-live-head.last { background: linear-gradient(90deg, #ff8a3d, #ff3b3b); border: 0; }
+.ph-live-head.last span:last-child { color: #fff; }
+.ph-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--tgM); box-shadow: 0 0 10px var(--tgM); animation: phBlink 1.2s ease-in-out infinite; }
+.ph-live-head.last .ph-dot { background: #fff; box-shadow: 0 0 10px #fff; }
+@keyframes phBlink { 50% { opacity: .3; } }
+.ph-count { display: grid; gap: 4px; padding: 14px 16px; border-radius: 22px; text-decoration: none; color: #fff;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tgZ) 30%, #0b0612), #0b0612); border: 1.5px solid color-mix(in srgb, var(--tgM) 50%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--tgM) 20%, transparent); }
+.ph-count small, .ph-rueck small { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--tgM) 45%, #fff); }
+.ph-count > b, .ph-rn b { justify-self: start; font-size: 52px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums;
+  background: var(--tg); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ph-count #phThree { font-size: 13px; font-weight: 700; color: var(--dim); }
+.ph-duel { display: grid; gap: 5px; margin-top: 4px; }
+.ph-duel span { display: grid; grid-template-columns: 38px 1fr 34px; align-items: center; gap: 8px; font-size: 13px; }
+.ph-duel span > i { height: 8px; border-radius: 8px; background: rgba(255,255,255,.1); overflow: hidden; }
+.ph-duel span > i > i { display: block; height: 100%; border-radius: 8px; background: color-mix(in srgb, var(--tgZ) 70%, #888); transition: width 1s; }
+.ph-duel span.lead > i > i { background: var(--tg); }
+.ph-duel em { font-style: normal; text-align: right; font-weight: 800; }
+.ph-count > em { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 7px 14px; border-radius: 999px; background: #fff; color: #12091a; font-style: normal; font-weight: 800; font-size: 14px; }
+.ph-count > em svg { width: 14px; height: 14px; }
+.ph-rueck { display: grid; gap: 8px; padding: 16px; border-radius: 22px; background: linear-gradient(160deg, color-mix(in srgb, var(--tgZ) 26%, #0b0612), #0b0612);
+  border: 1.5px solid color-mix(in srgb, var(--tgM) 50%, transparent); }
+.ph-rueck h3 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: 26px; line-height: 1.05; text-transform: uppercase; color: #fff; }
+.ph-rn { display: flex; align-items: baseline; gap: 10px; }
+.ph-rn span { font-size: 13px; font-weight: 700; color: var(--dim); }
+.ph-lead { margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; color: #fff; }
+.ph-lead:empty { display: none; }
+.ph-lead svg { width: 16px; height: 16px; color: #ffcf4a; flex: none; }
+.ph-note { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dim); }
+.ph-note svg, .ph-rueck .ph-btn svg { width: 18px; height: 18px; }
+.tile-cd b { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .ph-hh.on, .ph-dot { animation: none; } }
 .hm-games .tile-btn { height: 200px; border-radius: 20px; }
 .hm-game { min-width: 0; scroll-snap-align: start; }
 .hm-games .tile-btn > span:nth-last-child(2) { margin-top: auto; display: block; }
@@ -2890,12 +2955,14 @@ const toState = (d) => ({
    Kosten: 1 Lesezugriff pro Abfrage, unabhängig davon, wie viel an der Bar los ist. */
 const LIVE_POLL = { ranking: 30000, team: 15000 };
 const Live = (() => {
-  let remote = false, flat = zeroStats(), prevFlat = null, statsExists = null, timer = null, lastFetch = 0, inflight = false, tresen = false;
+  let remote = false, flat = zeroStats(), prevFlat = null, statsExists = null, timer = null, lastFetch = 0, inflight = false, tresen = false, menuMs = 0;
   const subs = new Set(), history = [];
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const interval = () => (tresen ? 60000 : LIVE_POLL[page()]);
+  const OTHER = ["ranking", "team", "beerpong", "busfahrer", "zapfmeister", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
+  const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !EVENTS.some((e) => e.id === id)); };
+  const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
   const keysFor = (kind, key, mat) => {
     const k = [];
@@ -2947,7 +3014,8 @@ const Live = (() => {
       schedule();
     },
     refresh: () => fetchNow().then(schedule),
-    setTresen(on) { tresen = on; schedule(); },
+    setTresen(on) { tresen = on; if (on) lastFetch = 0; schedule(); },   /* beim Start sofort aktuelle Zahlen */
+    setMenu(ms) { menuMs = ms; schedule(); },   /* Menü am Clubabend: 60 s, im Rückblick selten */
     async ensureStats() {
       if (!remote) return;
       const snap = await statsRef().get();
@@ -4701,19 +4769,72 @@ const MUSIC_ART = `<span class="mu-art" aria-hidden="true">
   <svg class="mu-note n2" viewBox="0 0 24 24"><path d="M10 18V4l7 3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.5" cy="18" r="2.8" fill="currentColor"/></svg>
 </span>`;
 const ICON_CAL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>`;
+const ICON_WA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.2 9.6c.2 2.2 2.1 4.6 4.6 5.2.6.1 1.3-.4 1.5-1l-1.6-.9-.8.6c-.9-.4-1.8-1.3-2.1-2.1l.6-.8-.8-1.7c-.7.1-1.3.7-1.4 1.3z" fill="currentColor" stroke="none"/></svg>`;
 const ICON_CAM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>`;
-/* Party-Modus: am Partytag ab 4 Stunden vor Beginn bis Partyende */
-function partyTime(ev) {
-  if (!ev) return false;
-  const now = window.__fakeNow ? new Date(window.__fakeNow) : new Date();
-  const from = new Date(ev.startDate.getTime() - 4 * 3600e3);
-  return now >= from && now <= ev.endDate;
+/* Clubabend-Phasen: „tag“ ab 15 Uhr bis Beginn, „live“ von Beginn bis 1:30, „rueck“ danach bis 12 Uhr am Folgetag */
+function clubPhase(now = new Date()) {
+  for (const ev of EVENTS) {
+    const [open, close] = barWindow(ev);
+    const from = new Date(open); from.setHours(15, 0, 0, 0);
+    if (from > open - 3600e3) from.setTime(open - 3600e3);
+    const noon = new Date(close); noon.setHours(12, 0, 0, 0);
+    if (now >= from && now < open) return { phase: "tag", ev, open, close };
+    if (now >= open && now <= close) return { phase: "live", ev, open, close, last: now >= close - 15 * 6e4 };
+    if (now > close && now < noon) return { phase: "rueck", ev, open, close };
+  }
+  return null;
 }
+const phaseKey = (ph, now = new Date()) => {
+  if (!ph) return "none";
+  const hh = trHH(ph.ev), h = !hh ? "-" : now < hh.from ? "soon" : now < hh.to ? "on" : "off";
+  return [ph.phase, ph.ev.id, h, ph.last ? "last" : ""].join("|");
+};
+/* Farben des Abends für die Abend-Kacheln (wie in der Tresen-Ansicht) */
+const phaseStyle = (th) => {
+  const v = th.verlauf || [th.a1, th.a3, th.a2];
+  return themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgA:${v[0]};--tgM:${v[Math.floor(v.length / 2)]};--tgZ:${v[v.length - 1]}`;
+};
+function phSpecials(ev) {
+  const list = ev.specials || []; if (!list.length) return "";
+  return `<h3 class="ph-h">Heute im Angebot</h3><div class="ph-specs n${Math.min(list.length, 3)}">${list.map((sp) => {
+    const d = DRINKS[sp.bild] || DRINKS.lemon;
+    return `<a class="ph-spec" href="#${ev.id}" style="--c:${d.glow}"><span class="ph-art">${drinkArt(sp.bild)}</span><span class="ph-sn"><b>${esc(sp.name)}</b><em>${trEuro(sp.preis)}</em></span></a>`;
+  }).join("")}</div>`;
+}
+function phHappy(ev, now) {
+  const hh = trHH(ev); if (!hh || now >= hh.to) return "";
+  const o = trOffer(ev), on = now >= hh.from, statt = trNormalPrice(o);
+  const deal = o ? `${o.preis != null ? trEuro(o.preis) : ""}${o.zusatz ? " " + esc(o.zusatz) : ""}${statt != null ? ` <s>statt ${trEuro(statt)}</s>` : ""}` : "";
+  return `<a class="ph-hh${on ? " on" : ""}" href="#${ev.id}">
+      <span class="ph-hh-l"><small>${on ? "Happy Hour läuft" : `Happy Hour ${esc(ev.happyHour.von)}–${esc(ev.happyHour.bis)} Uhr`}</small><b>${o ? esc(o.name) : "Happy Hour"}</b><span>${deal}</span></span>
+      <span class="ph-hh-r"><small>${on ? "noch" : "in"}</small><b data-cd="${(on ? hh.to : hh.from).getTime()}"></b></span>
+      ${on ? `<i class="ph-bar"><i data-from="${hh.from.getTime()}" data-to="${hh.to.getTime()}"></i></i>` : ""}</a>`;
+}
+let phSub = null, phBuiltKey = null;
+function phLive(st) {
+  const total = st.heute.bier + st.heute.mische + st.heute.shot;
+  const c = $("phCount"); if (c) c.textContent = total.toLocaleString("de-DE");
+  const t = $("phThree"); if (t) t.textContent = `${st.heute.bier} Bier · ${st.heute.mische} Mische · ${st.heute.shot} Shots`;
+  const order = [...MATRIKEL].sort((a, b) => st.matrikel[b] - st.matrikel[a]), max = Math.max(1, ...MATRIKEL.map((m) => st.matrikel[m]));
+  const d = $("phDuel");
+  if (d) d.innerHTML = order.map((m, i) => `<span class="${i === 0 && st.matrikel[m] > 0 ? "lead" : ""}"><b>M${esc(m)}</b><i><i style="width:${(100 * st.matrikel[m] / max).toFixed(1)}%"></i></i><em>${st.matrikel[m]}</em></span>`).join("");
+  const l = $("phLead");
+  if (l) l.innerHTML = st.matrikel[order[0]] > 0 ? `${CROWN_MINI}<span>Vorne im Matrikel-Duell: <b>Matrikel ${esc(order[0])}</b> mit ${st.matrikel[order[0]]}</span>` : "";
+}
+/* Countdowns und Balken im Menü jede Sekunde; bei Phasenwechsel das Menü neu bauen */
+function phaseTick() {
+  if (document.hidden) return;
+  const now = new Date();
+  if (phaseKey(clubPhase(now), now) !== phBuiltKey) { buildMenu(); return; }
+  document.querySelectorAll("#menuGrid [data-cd]").forEach((el) => { el.textContent = trCountdown(+el.dataset.cd - now); });
+  document.querySelectorAll("#menuGrid [data-to]").forEach((el) => { el.style.width = (100 * (+el.dataset.to - now) / (+el.dataset.to - +el.dataset.from)).toFixed(1) + "%"; });
+}
+setInterval(phaseTick, 1000);
 /* ================= Hauptmenü ================= */
 function buildMenu() {
   const g = $("menuGrid");
   const now = startIndex();
-  const evTile = (ev, label, big) => {
+  const evTile = (ev, label, big, cdTo) => {
     if (!ev) return `<div class="mtile tile-empty"><span>Nächster Abend<br>folgt bald</span></div>`;
     const i = EVENTS.indexOf(ev);
     const meta = ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
@@ -4730,14 +4851,17 @@ function buildMenu() {
         ${ev.banner && !isPast(ev) ? `<div class="tile-banner" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : ""}
       </div>
       <div>
-        <div class="tile-row"><div class="tile-date"><b>${esc(ev.dm)}</b><span>${esc(ev.wd)} · ${meta}</span></div>${extra}</div>
+        <div class="tile-row">${cdTo ? `<div class="tile-date tile-cd"><b data-cd="${cdTo}"></b><span>bis Einlass · ${esc(ev.time)} Uhr</span></div>` : `<div class="tile-date"><b>${esc(ev.dm)}</b><span>${esc(ev.wd)} · ${meta}</span></div>`}${extra}</div>
         <div class="tile-go"><span>Drinks &amp; Infos</span>${big && !isPast(ev) ? `<button type="button" class="tile-cal" data-stop data-cal="${i}">${ICON_CAL}Kalender</button>` : ""}<i>${ICON_ARROW}</i></div>
       </div>
     </div>`;
   };
   const crown = CROWN_BIG.replace('class="crown-big"', "");
-  const evA = EVENTS[now], evB = EVENTS[now + 1];
-  const party = partyTime(evA);
+  const tNow = new Date(), ph = clubPhase(tNow);
+  phBuiltKey = phaseKey(ph, tNow);
+  /* im Rückblick zeigt die große Kachel schon den nächsten Abend */
+  const evA = ph && ph.phase === "rueck" ? (EVENTS.find((e) => e.startDate > tNow) || EVENTS[now]) : EVENTS[now];
+  const evB = EVENTS[EVENTS.indexOf(evA) + 1];
   const nextStrip = (ev) => {
     const i = EVENTS.indexOf(ev);
     const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
@@ -4755,17 +4879,12 @@ function buildMenu() {
     </div>${reg}</div>`;
   };
   const PPM = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg>`;
-  const quick = `<div class="hm-quick${party ? " party" : ""}">
+  const quick = `<div class="hm-quick">
       <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-<br>Ranking</b><small>Counter · Matrikel-Duell</small></span></a>
       <a class="tile-btn tile-pay hm-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen"><span class="pp-mark">${PPM}</span><span class="hm-pay-txt"><span class="pp-word"><i>Pay</i><i>Pal</i></span><small>Bargeldlos zahlen</small></span><i class="pp-go">${ICON_ARROW}</i></a>
     </div>`;
-  const hh = party && evA.happyHour ? `<a class="hm-party" href="#${evA.id}"><span class="hm-live"></span><b>Heute live</b><span>Happy Hour ${esc(evA.happyHour.von)}–${esc(evA.happyHour.bis)} Uhr</span><i>${ICON_ARROW}</i></a>` : "";
   const past = EVENTS.filter((e) => isPast(e)).slice(-6).reverse();
-  g.innerHTML = `
-    <div class="hm-hero">${evTile(evA, party ? "Heute!" : "Diese Woche", true)}</div>
-    ${party ? hh + quick : ""}
-    ${evB ? nextStrip(evB) : ""}
-    ${party ? "" : quick}
+  const games = `
     <h3 class="hm-sec">Minispiele <small>zum Wischen</small></h3>
     <div class="hm-games">
            <div class="hm-game"><a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span><p class="hm-best" data-best="beerpong" aria-label="Platz 1 Beerpong"></p></a></div>
@@ -4773,6 +4892,8 @@ function buildMenu() {
       <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
     </div>
     <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
+`;
+  const rest = `
     <h3 class="hm-sec">Demnächst</h3>
     <div class="tile-btn hm-music" aria-label="Musikwünsche – kommt bald">${MUSIC_ART}<span class="soon-tag">Bald</span><span><b>Musikwünsche</b><small>kommt bald</small></span></div>
     <h3 class="hm-sec">Vergangene Abende</h3>
@@ -4782,6 +4903,44 @@ function buildMenu() {
       <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
     </div>`;
+  /* ---- je nach Phase zusammensetzen ---- */
+  const hero = (label, cdTo) => `<div class="hm-hero">${evTile(evA, label, true, cdTo)}</div>`;
+  const next = evB ? nextStrip(evB) : "";
+  let html;
+  if (ph && ph.phase === "tag") {
+    const ev = ph.ev, i = EVENTS.indexOf(ev);
+    html = `${hero("Heute Abend!", ph.open.getTime())}
+      <div class="ph-block" style="${phaseStyle(ev.th)}">
+        ${phSpecials(ev)}${phHappy(ev, tNow)}
+        <div class="ph-row"><button type="button" class="ph-btn wa" data-share="${i}">${ICON_WA}Freunde einladen</button><a class="ph-btn" href="#${ev.id}">Drinks &amp; Preise</a></div>
+      </div>
+      ${quick}${games}${next}${rest}`;
+  } else if (ph && ph.phase === "live") {
+    const ev = ph.ev;
+    html = `<div class="ph-block" style="${phaseStyle(ev.th)}">
+        <a class="ph-live-head${ph.last ? " last" : ""}" href="#${ev.id}"><span class="ph-dot"></span><b>${esc(ev.titel.join(" "))}</b><span>${ph.last ? "Letzte Runde! Schluss um" : "Live · Theke offen bis"} ${trClockFmt(ph.close)}</span></a>
+        <a class="ph-count" href="#ranking"><small>Heute über den Tresen</small><b id="phCount">–</b><span id="phThree"></span><span class="ph-duel" id="phDuel"></span><em>Drink eintragen ${ICON_ARROW}</em></a>
+        ${phHappy(ev, tNow)}${phSpecials(ev)}
+        <div class="ph-row"><a class="ph-btn pp" href="#paypal">PayPal</a><a class="ph-btn" href="#${ev.id}">Getränkekarte</a></div>
+      </div>
+      ${games}${hero("Heute", null)}${next}${rest}`;
+  } else if (ph && ph.phase === "rueck") {
+    const ev = ph.ev;
+    html = `<div class="ph-block" style="${phaseStyle(ev.th)}">
+        <div class="ph-rueck"><small>${esc(ev.titel.join(" "))} · Endstand</small><h3>Danke fürs Kommen!</h3>
+          <div class="ph-rn"><b id="phCount">–</b><span>Getränke über den Tresen</span></div>
+          <p class="ph-lead" id="phLead"></p>
+          ${ev.fotos ? `<a class="ph-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">${ICON_CAM}Fotos vom Abend</a>` : `<p class="ph-note">${ICON_CAM}Fotos vom Abend folgen hier.</p>`}
+        </div>
+      </div>
+      ${hero("Als Nächstes", null)}${next}${quick}${games}${rest}`;
+  } else html = `${hero("Diese Woche", null)}${next}${quick}${games}${rest}`;
+  g.innerHTML = html;
+  if (phSub) { phSub(); phSub = null; }
+  if (ph && ph.phase !== "tag") phSub = Live.subscribe(phLive);
+  Live.setMenu(ph && ph.phase === "live" ? 60000 : ph && ph.phase === "rueck" ? 30 * 60000 : 0);
+  g.querySelectorAll("[data-share]").forEach((bt) => bt.addEventListener("click", () => shareWhatsApp(EVENTS[+bt.dataset.share])));
+  phaseTick();
   fillBest(g);
   g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
   g.querySelectorAll(".tile-ev, .hm-next").forEach((t) => {
