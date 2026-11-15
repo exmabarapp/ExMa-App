@@ -1449,7 +1449,7 @@ a { color: inherit; }
   filter:drop-shadow(0 0 40px color-mix(in srgb,var(--c) 90%,transparent)) drop-shadow(0 20px 30px rgba(0,0,0,.5))}
 .tr-glass svg{width:100%;height:100%}
 .tr-spec.l .tr-glass{transform:rotate(-4deg)}.tr-spec.r .tr-glass{transform:rotate(4deg)}
-.tr-nm{position:absolute;left:24px;right:24px;bottom:122px;z-index:3;text-align:center;white-space:nowrap;overflow:hidden;
+.tr-nm{position:absolute;left:24px;right:24px;bottom:122px;z-index:3;text-align:center;white-space:nowrap;
   font-family:var(--f-display);font-weight:400;font-size:62px;line-height:1.15;text-transform:uppercase;color:#fff;
   text-shadow:0 0 18px color-mix(in srgb,var(--c) 90%,transparent),0 0 44px color-mix(in srgb,var(--c) 60%,transparent),0 4px 14px rgba(0,0,0,.6)}
 .tr-pr{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:3;padding:4px 40px;border-radius:999px;background:#fff;color:var(--night);
@@ -1478,11 +1478,13 @@ a { color: inherit; }
 .tr-hh>*:not(.tr-stripes){position:relative}
 .tr-live{width:14px;height:14px;border-radius:50%;background:var(--a3);box-shadow:0 0 0 5px color-mix(in srgb,var(--a3) 25%,transparent);animation:trBlink 1.2s ease-in-out infinite}
 @keyframes trBlink{50%{opacity:.3}}
-.tr-big{margin-top:14px;font-family:var(--f-display);font-weight:400;font-size:92px;line-height:.95;text-transform:uppercase;color:#fff;text-shadow:0 6px 30px rgba(40,0,60,.5)}
+.tr-big{max-width:100%;white-space:nowrap;margin-top:14px;font-family:var(--f-display);font-weight:400;font-size:92px;line-height:.95;text-transform:uppercase;color:#fff;text-shadow:0 6px 30px rgba(40,0,60,.5)}
 .tr-deal{margin-top:14px;display:grid;justify-items:center}
 .tr-deal span{font-size:42px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.06em}
 .tr-deal b{font-size:160px;line-height:.95;font-weight:800;color:#fff;text-shadow:0 0 40px rgba(255,255,255,.75)}
 .tr-deal s{font-size:34px;color:rgba(255,255,255,.85);font-weight:800}
+.tr-deal small{font-size:34px;color:#fff;font-weight:800}
+.tr-deal span{max-width:100%;line-height:1.1}
 .tr-bar{flex:none;width:100%;height:26px;margin-top:18px;border-radius:99px;background:rgba(0,0,0,.28);overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
 .tr-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#fff,#ffe1f6);box-shadow:0 0 20px #fff;transition:width 1s linear}
 .tr-left{width:100%;display:flex;justify-content:space-between;margin-top:10px;font-size:26px;color:#fff}.tr-left b{font-weight:800}
@@ -1514,6 +1516,40 @@ a { color: inherit; }
 .tr-duel span i{display:block;height:100%;background:#8a6f72;transition:width 1s}
 .tr-duel div.lead span i{background:#ffcf4a}
 .tr-duel em{font-style:normal;text-align:right;font-weight:800}
+
+/* ===== Farben des Abends (Verlauf aus dem Thema) ===== */
+.tr-shade{background:radial-gradient(70% 45% at 50% 108%,color-mix(in srgb,var(--tgM) 35%,transparent),transparent 70%),radial-gradient(60% 70% at 50% 45%,rgba(5,8,22,.3),rgba(5,8,22,.86))}
+.tr-tt h2{background:var(--tgv);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--tgM) 60%,transparent))}
+.tr-tt span{color:color-mix(in srgb,var(--tgA) 70%,#fff)}
+.tr-frame{position:relative}
+.tr-frame::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:3px;background:var(--tg);pointer-events:none;z-index:5;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.tr-clock{border:0;background:rgba(5,8,22,.7);border-radius:18px}
+.tr-clock.tr-frame::after{padding:2px}
+.tr-spec{box-shadow:0 0 50px color-mix(in srgb,var(--c) 40%,transparent),0 0 70px color-mix(in srgb,var(--tgM) 22%,transparent)}
+.tr-stag{background:var(--tg);color:#1a0612;border:0;box-shadow:0 0 22px color-mix(in srgb,var(--tgM) 60%,transparent)}
+.tr-hh.soon,.tr-hh.clock{border:0;box-shadow:0 0 44px color-mix(in srgb,var(--tgM) 35%,transparent),inset 0 0 50px color-mix(in srgb,var(--tgM) 12%,transparent)}
+.tr-hh.soon .tr-cd,.tr-hh.clock .tr-cd{background:var(--tgv);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;
+  filter:drop-shadow(0 0 22px color-mix(in srgb,var(--tgM) 70%,transparent))}
+.tr-small{color:color-mix(in srgb,var(--tgA) 60%,#fff)}
+.tr-tag.dim{background:color-mix(in srgb,var(--tgM) 18%,transparent);color:color-mix(in srgb,var(--tgM) 40%,#fff)}
+.tr-next{background:color-mix(in srgb,var(--tgM) 10%,transparent);border-color:color-mix(in srgb,var(--tgM) 60%,transparent)}
+.tr-next span{color:color-mix(in srgb,var(--tgA) 55%,#fff)}
+.tr-hh.on{background:var(--tgbg);box-shadow:0 0 90px color-mix(in srgb,var(--tgM) 70%,transparent),0 0 0 4px rgba(255,255,255,.85)}
+@keyframes trGlow{50%{box-shadow:0 0 130px var(--tgM),0 0 0 4px #fff}}
+.tr-tag{color:color-mix(in srgb,var(--tgM) 70%,#000)}
+.tr-hh.on .tr-big,.tr-hh.on .tr-deal,.tr-hh.on .tr-left{text-shadow:0 3px 18px rgba(25,0,55,.45)}
+.tr-live{background:var(--tgM)}
+.tr-karte{border:0}
+.tr-kh,.tr-ct{background:var(--tg);-webkit-background-clip:text;background-clip:text;color:transparent;justify-self:start;width:max-content}
+.tr-kr i{border-bottom-color:color-mix(in srgb,var(--tgM) 40%,transparent)}
+.tr-kr.hl{background:color-mix(in srgb,var(--tgM) 22%,transparent);box-shadow:inset 0 0 0 2px var(--tgM)}
+.tr-kr b.hot{color:color-mix(in srgb,var(--tgA) 50%,#fff)}
+.tr-cnt{background:linear-gradient(160deg,color-mix(in srgb,var(--tgZ) 30%,#0b0612),#0b0612);border:0;box-shadow:0 0 30px color-mix(in srgb,var(--tgM) 22%,transparent)}
+.tr-cn{background:var(--tgv);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;width:max-content;filter:drop-shadow(0 0 16px color-mix(in srgb,var(--tgM) 60%,transparent))}
+.tr-duel span i{background:color-mix(in srgb,var(--tgZ) 70%,#888)}
+.tr-duel div.lead span i{background:var(--tg)}
+.tr-qr.tr-appqr{border:0}
 @media (prefers-reduced-motion: reduce){.tr-rays,.tr-stripes,.tr-hh.on,.tr-hh.last,.tr-live{animation:none}}
 /* Abmelden */
 #trOut{position:absolute;right:16px;bottom:calc(4px + env(safe-area-inset-bottom,0px));z-index:3;font-size:12px;color:#fff;opacity:.2;text-decoration:none;padding:6px}
@@ -1649,17 +1685,17 @@ a { color: inherit; }
   <div id="tresen" hidden>
     <div class="tr-scene" id="trScene" aria-hidden="true"></div><div class="tr-shade"></div>
     <div class="tr-stage" id="trStage">
-      <header class="tr-top"><img src="logo.png" alt=""><div class="tr-tt"><h2 id="trTitle"></h2><span id="trScript"></span></div><div class="tr-clock" id="trClock">--:--</div></header>
+      <header class="tr-top"><img src="logo.png" alt=""><div class="tr-tt"><h2 id="trTitle"></h2><span id="trScript"></span></div><div class="tr-clock tr-frame" id="trClock">--:--</div></header>
       <main class="tr-main" id="trMain">
-        <div class="tr-spec l" id="trSpecL"></div>
-        <section class="tr-hh" id="trHH"></section>
-        <div class="tr-spec r" id="trSpecR"></div>
+        <div class="tr-spec tr-frame l" id="trSpecL"></div>
+        <section class="tr-hh tr-frame" id="trHH"></section>
+        <div class="tr-spec tr-frame r" id="trSpecR"></div>
       </main>
       <section class="tr-bottom">
-        <div class="tr-karte"><div class="tr-kh">Getränkekarte</div><div id="trMenu"></div><div class="tr-pf" id="trPfand"></div></div>
+        <div class="tr-karte tr-frame"><div class="tr-kh">Getränkekarte</div><div id="trMenu"></div><div class="tr-pf" id="trPfand"></div></div>
         <div class="tr-qr pp"><img src="paypal-qr.png" alt="PayPal-QR-Code"><span>Bargeldlos bezahlen</span></div>
-        <div class="tr-cnt"><div class="tr-ct">Heute über den Tresen</div><div class="tr-cn" id="trCount">0</div><div class="tr-duel" id="trDuel"></div></div>
-        <div class="tr-qr tr-appqr"><svg class="tr-qrsvg" viewBox="0 0 41 41" aria-label="QR-Code zur ExMa-App"><rect width="41" height="41" rx="2" fill="#fff"/><path d="M11 2h1.04v1.04h-1.04zM18 2h1.04v1.04h-1.04zM21 2h1.04v1.04h-1.04zM23 2h1.04v1.04h-1.04zM25 2h1.04v1.04h-1.04zM27 2h1.04v1.04h-1.04zM11 3h1.04v1.04h-1.04zM13 3h1.04v1.04h-1.04zM15 3h1.04v1.04h-1.04zM18 3h1.04v1.04h-1.04zM26 3h1.04v1.04h-1.04zM27 3h1.04v1.04h-1.04zM11 4h1.04v1.04h-1.04zM14 4h1.04v1.04h-1.04zM16 4h1.04v1.04h-1.04zM19 4h1.04v1.04h-1.04zM21 4h1.04v1.04h-1.04zM23 4h1.04v1.04h-1.04zM27 4h1.04v1.04h-1.04zM28 4h1.04v1.04h-1.04zM30 4h1.04v1.04h-1.04zM11 5h1.04v1.04h-1.04zM13 5h1.04v1.04h-1.04zM14 5h1.04v1.04h-1.04zM15 5h1.04v1.04h-1.04zM17 5h1.04v1.04h-1.04zM19 5h1.04v1.04h-1.04zM22 5h1.04v1.04h-1.04zM23 5h1.04v1.04h-1.04zM25 5h1.04v1.04h-1.04zM28 5h1.04v1.04h-1.04zM29 5h1.04v1.04h-1.04zM10 6h1.04v1.04h-1.04zM12 6h1.04v1.04h-1.04zM13 6h1.04v1.04h-1.04zM16 6h1.04v1.04h-1.04zM21 6h1.04v1.04h-1.04zM22 6h1.04v1.04h-1.04zM24 6h1.04v1.04h-1.04zM27 6h1.04v1.04h-1.04zM28 6h1.04v1.04h-1.04zM29 6h1.04v1.04h-1.04zM11 7h1.04v1.04h-1.04zM12 7h1.04v1.04h-1.04zM13 7h1.04v1.04h-1.04zM15 7h1.04v1.04h-1.04zM19 7h1.04v1.04h-1.04zM21 7h1.04v1.04h-1.04zM22 7h1.04v1.04h-1.04zM23 7h1.04v1.04h-1.04zM28 7h1.04v1.04h-1.04zM10 8h1.04v1.04h-1.04zM12 8h1.04v1.04h-1.04zM14 8h1.04v1.04h-1.04zM16 8h1.04v1.04h-1.04zM18 8h1.04v1.04h-1.04zM20 8h1.04v1.04h-1.04zM22 8h1.04v1.04h-1.04zM24 8h1.04v1.04h-1.04zM26 8h1.04v1.04h-1.04zM28 8h1.04v1.04h-1.04zM30 8h1.04v1.04h-1.04zM10 9h1.04v1.04h-1.04zM11 9h1.04v1.04h-1.04zM19 9h1.04v1.04h-1.04zM22 9h1.04v1.04h-1.04zM25 9h1.04v1.04h-1.04zM26 9h1.04v1.04h-1.04zM27 9h1.04v1.04h-1.04zM28 9h1.04v1.04h-1.04zM29 9h1.04v1.04h-1.04zM30 9h1.04v1.04h-1.04zM4 10h1.04v1.04h-1.04zM5 10h1.04v1.04h-1.04zM8 10h1.04v1.04h-1.04zM9 10h1.04v1.04h-1.04zM10 10h1.04v1.04h-1.04zM11 10h1.04v1.04h-1.04zM14 10h1.04v1.04h-1.04zM15 10h1.04v1.04h-1.04zM17 10h1.04v1.04h-1.04zM18 10h1.04v1.04h-1.04zM20 10h1.04v1.04h-1.04zM21 10h1.04v1.04h-1.04zM23 10h1.04v1.04h-1.04zM25 10h1.04v1.04h-1.04zM27 10h1.04v1.04h-1.04zM28 10h1.04v1.04h-1.04zM29 10h1.04v1.04h-1.04zM31 10h1.04v1.04h-1.04zM32 10h1.04v1.04h-1.04zM34 10h1.04v1.04h-1.04zM3 11h1.04v1.04h-1.04zM7 11h1.04v1.04h-1.04zM10 11h1.04v1.04h-1.04zM11 11h1.04v1.04h-1.04zM14 11h1.04v1.04h-1.04zM15 11h1.04v1.04h-1.04zM17 11h1.04v1.04h-1.04zM19 11h1.04v1.04h-1.04zM20 11h1.04v1.04h-1.04zM23 11h1.04v1.04h-1.04zM27 11h1.04v1.04h-1.04zM29 11h1.04v1.04h-1.04zM36 11h1.04v1.04h-1.04zM6 12h1.04v1.04h-1.04zM7 12h1.04v1.04h-1.04zM8 12h1.04v1.04h-1.04zM9 12h1.04v1.04h-1.04zM11 12h1.04v1.04h-1.04zM13 12h1.04v1.04h-1.04zM16 12h1.04v1.04h-1.04zM17 12h1.04v1.04h-1.04zM20 12h1.04v1.04h-1.04zM21 12h1.04v1.04h-1.04zM22 12h1.04v1.04h-1.04zM25 12h1.04v1.04h-1.04zM26 12h1.04v1.04h-1.04zM27 12h1.04v1.04h-1.04zM30 12h1.04v1.04h-1.04zM31 12h1.04v1.04h-1.04zM34 12h1.04v1.04h-1.04zM35 12h1.04v1.04h-1.04zM2 13h1.04v1.04h-1.04zM4 13h1.04v1.04h-1.04zM7 13h1.04v1.04h-1.04zM13 13h1.04v1.04h-1.04zM15 13h1.04v1.04h-1.04zM20 13h1.04v1.04h-1.04zM22 13h1.04v1.04h-1.04zM23 13h1.04v1.04h-1.04zM24 13h1.04v1.04h-1.04zM26 13h1.04v1.04h-1.04zM27 13h1.04v1.04h-1.04zM28 13h1.04v1.04h-1.04zM30 13h1.04v1.04h-1.04zM33 13h1.04v1.04h-1.04zM35 13h1.04v1.04h-1.04zM36 13h1.04v1.04h-1.04zM2 14h1.04v1.04h-1.04zM3 14h1.04v1.04h-1.04zM4 14h1.04v1.04h-1.04zM5 14h1.04v1.04h-1.04zM6 14h1.04v1.04h-1.04zM8 14h1.04v1.04h-1.04zM9 14h1.04v1.04h-1.04zM10 14h1.04v1.04h-1.04zM14 14h1.04v1.04h-1.04zM15 14h1.04v1.04h-1.04zM16 14h1.04v1.04h-1.04zM20 14h1.04v1.04h-1.04zM22 14h1.04v1.04h-1.04zM23 14h1.04v1.04h-1.04zM24 14h1.04v1.04h-1.04zM27 14h1.04v1.04h-1.04zM28 14h1.04v1.04h-1.04zM29 14h1.04v1.04h-1.04zM31 14h1.04v1.04h-1.04zM32 14h1.04v1.04h-1.04zM34 14h1.04v1.04h-1.04zM35 14h1.04v1.04h-1.04zM37 14h1.04v1.04h-1.04zM38 14h1.04v1.04h-1.04zM2 15h1.04v1.04h-1.04zM3 15h1.04v1.04h-1.04zM4 15h1.04v1.04h-1.04zM5 15h1.04v1.04h-1.04zM9 15h1.04v1.04h-1.04zM10 15h1.04v1.04h-1.04zM11 15h1.04v1.04h-1.04zM12 15h1.04v1.04h-1.04zM14 15h1.04v1.04h-1.04zM27 15h1.04v1.04h-1.04zM28 15h1.04v1.04h-1.04zM29 15h1.04v1.04h-1.04zM32 15h1.04v1.04h-1.04zM34 15h1.04v1.04h-1.04zM36 15h1.04v1.04h-1.04zM37 15h1.04v1.04h-1.04zM38 15h1.04v1.04h-1.04zM3 16h1.04v1.04h-1.04zM4 16h1.04v1.04h-1.04zM8 16h1.04v1.04h-1.04zM10 16h1.04v1.04h-1.04zM11 16h1.04v1.04h-1.04zM14 16h1.04v1.04h-1.04zM28 16h1.04v1.04h-1.04zM33 16h1.04v1.04h-1.04zM34 16h1.04v1.04h-1.04zM36 16h1.04v1.04h-1.04zM37 16h1.04v1.04h-1.04zM4 17h1.04v1.04h-1.04zM5 17h1.04v1.04h-1.04zM6 17h1.04v1.04h-1.04zM9 17h1.04v1.04h-1.04zM11 17h1.04v1.04h-1.04zM13 17h1.04v1.04h-1.04zM14 17h1.04v1.04h-1.04zM26 17h1.04v1.04h-1.04zM30 17h1.04v1.04h-1.04zM37 17h1.04v1.04h-1.04zM38 17h1.04v1.04h-1.04zM2 18h1.04v1.04h-1.04zM7 18h1.04v1.04h-1.04zM8 18h1.04v1.04h-1.04zM10 18h1.04v1.04h-1.04zM11 18h1.04v1.04h-1.04zM13 18h1.04v1.04h-1.04zM14 18h1.04v1.04h-1.04zM26 18h1.04v1.04h-1.04zM27 18h1.04v1.04h-1.04zM29 18h1.04v1.04h-1.04zM30 18h1.04v1.04h-1.04zM33 18h1.04v1.04h-1.04zM35 18h1.04v1.04h-1.04zM36 18h1.04v1.04h-1.04zM38 18h1.04v1.04h-1.04zM2 19h1.04v1.04h-1.04zM3 19h1.04v1.04h-1.04zM9 19h1.04v1.04h-1.04zM11 19h1.04v1.04h-1.04zM12 19h1.04v1.04h-1.04zM13 19h1.04v1.04h-1.04zM27 19h1.04v1.04h-1.04zM29 19h1.04v1.04h-1.04zM32 19h1.04v1.04h-1.04zM36 19h1.04v1.04h-1.04zM38 19h1.04v1.04h-1.04zM2 20h1.04v1.04h-1.04zM3 20h1.04v1.04h-1.04zM4 20h1.04v1.04h-1.04zM6 20h1.04v1.04h-1.04zM7 20h1.04v1.04h-1.04zM8 20h1.04v1.04h-1.04zM9 20h1.04v1.04h-1.04zM10 20h1.04v1.04h-1.04zM11 20h1.04v1.04h-1.04zM12 20h1.04v1.04h-1.04zM26 20h1.04v1.04h-1.04zM28 20h1.04v1.04h-1.04zM29 20h1.04v1.04h-1.04zM31 20h1.04v1.04h-1.04zM33 20h1.04v1.04h-1.04zM37 20h1.04v1.04h-1.04zM38 20h1.04v1.04h-1.04zM2 21h1.04v1.04h-1.04zM3 21h1.04v1.04h-1.04zM6 21h1.04v1.04h-1.04zM9 21h1.04v1.04h-1.04zM10 21h1.04v1.04h-1.04zM12 21h1.04v1.04h-1.04zM14 21h1.04v1.04h-1.04zM31 21h1.04v1.04h-1.04zM32 21h1.04v1.04h-1.04zM34 21h1.04v1.04h-1.04zM35 21h1.04v1.04h-1.04zM37 21h1.04v1.04h-1.04zM38 21h1.04v1.04h-1.04zM2 22h1.04v1.04h-1.04zM4 22h1.04v1.04h-1.04zM5 22h1.04v1.04h-1.04zM7 22h1.04v1.04h-1.04zM8 22h1.04v1.04h-1.04zM9 22h1.04v1.04h-1.04zM12 22h1.04v1.04h-1.04zM14 22h1.04v1.04h-1.04zM28 22h1.04v1.04h-1.04zM30 22h1.04v1.04h-1.04zM31 22h1.04v1.04h-1.04zM34 22h1.04v1.04h-1.04zM37 22h1.04v1.04h-1.04zM2 23h1.04v1.04h-1.04zM3 23h1.04v1.04h-1.04zM4 23h1.04v1.04h-1.04zM5 23h1.04v1.04h-1.04zM10 23h1.04v1.04h-1.04zM11 23h1.04v1.04h-1.04zM12 23h1.04v1.04h-1.04zM28 23h1.04v1.04h-1.04zM33 23h1.04v1.04h-1.04zM35 23h1.04v1.04h-1.04zM36 23h1.04v1.04h-1.04zM3 24h1.04v1.04h-1.04zM7 24h1.04v1.04h-1.04zM8 24h1.04v1.04h-1.04zM9 24h1.04v1.04h-1.04zM10 24h1.04v1.04h-1.04zM11 24h1.04v1.04h-1.04zM13 24h1.04v1.04h-1.04zM14 24h1.04v1.04h-1.04zM26 24h1.04v1.04h-1.04zM28 24h1.04v1.04h-1.04zM32 24h1.04v1.04h-1.04zM34 24h1.04v1.04h-1.04zM37 24h1.04v1.04h-1.04zM2 25h1.04v1.04h-1.04zM3 25h1.04v1.04h-1.04zM4 25h1.04v1.04h-1.04zM7 25h1.04v1.04h-1.04zM10 25h1.04v1.04h-1.04zM11 25h1.04v1.04h-1.04zM13 25h1.04v1.04h-1.04zM27 25h1.04v1.04h-1.04zM28 25h1.04v1.04h-1.04zM29 25h1.04v1.04h-1.04zM30 25h1.04v1.04h-1.04zM31 25h1.04v1.04h-1.04zM32 25h1.04v1.04h-1.04zM35 25h1.04v1.04h-1.04zM36 25h1.04v1.04h-1.04zM37 25h1.04v1.04h-1.04zM3 26h1.04v1.04h-1.04zM5 26h1.04v1.04h-1.04zM8 26h1.04v1.04h-1.04zM12 26h1.04v1.04h-1.04zM13 26h1.04v1.04h-1.04zM15 26h1.04v1.04h-1.04zM21 26h1.04v1.04h-1.04zM22 26h1.04v1.04h-1.04zM23 26h1.04v1.04h-1.04zM24 26h1.04v1.04h-1.04zM25 26h1.04v1.04h-1.04zM32 26h1.04v1.04h-1.04zM33 26h1.04v1.04h-1.04zM34 26h1.04v1.04h-1.04zM36 26h1.04v1.04h-1.04zM38 26h1.04v1.04h-1.04zM7 27h1.04v1.04h-1.04zM9 27h1.04v1.04h-1.04zM10 27h1.04v1.04h-1.04zM11 27h1.04v1.04h-1.04zM12 27h1.04v1.04h-1.04zM15 27h1.04v1.04h-1.04zM17 27h1.04v1.04h-1.04zM18 27h1.04v1.04h-1.04zM20 27h1.04v1.04h-1.04zM21 27h1.04v1.04h-1.04zM22 27h1.04v1.04h-1.04zM23 27h1.04v1.04h-1.04zM25 27h1.04v1.04h-1.04zM30 27h1.04v1.04h-1.04zM31 27h1.04v1.04h-1.04zM33 27h1.04v1.04h-1.04zM34 27h1.04v1.04h-1.04zM38 27h1.04v1.04h-1.04zM3 28h1.04v1.04h-1.04zM4 28h1.04v1.04h-1.04zM5 28h1.04v1.04h-1.04zM6 28h1.04v1.04h-1.04zM8 28h1.04v1.04h-1.04zM9 28h1.04v1.04h-1.04zM10 28h1.04v1.04h-1.04zM11 28h1.04v1.04h-1.04zM16 28h1.04v1.04h-1.04zM18 28h1.04v1.04h-1.04zM19 28h1.04v1.04h-1.04zM20 28h1.04v1.04h-1.04zM21 28h1.04v1.04h-1.04zM22 28h1.04v1.04h-1.04zM23 28h1.04v1.04h-1.04zM24 28h1.04v1.04h-1.04zM26 28h1.04v1.04h-1.04zM27 28h1.04v1.04h-1.04zM28 28h1.04v1.04h-1.04zM29 28h1.04v1.04h-1.04zM30 28h1.04v1.04h-1.04zM33 28h1.04v1.04h-1.04zM35 28h1.04v1.04h-1.04zM36 28h1.04v1.04h-1.04zM37 28h1.04v1.04h-1.04zM2 29h1.04v1.04h-1.04zM7 29h1.04v1.04h-1.04zM9 29h1.04v1.04h-1.04zM10 29h1.04v1.04h-1.04zM12 29h1.04v1.04h-1.04zM13 29h1.04v1.04h-1.04zM15 29h1.04v1.04h-1.04zM20 29h1.04v1.04h-1.04zM21 29h1.04v1.04h-1.04zM22 29h1.04v1.04h-1.04zM23 29h1.04v1.04h-1.04zM26 29h1.04v1.04h-1.04zM28 29h1.04v1.04h-1.04zM30 29h1.04v1.04h-1.04zM31 29h1.04v1.04h-1.04zM37 29h1.04v1.04h-1.04zM38 29h1.04v1.04h-1.04zM2 30h1.04v1.04h-1.04zM3 30h1.04v1.04h-1.04zM4 30h1.04v1.04h-1.04zM5 30h1.04v1.04h-1.04zM6 30h1.04v1.04h-1.04zM8 30h1.04v1.04h-1.04zM9 30h1.04v1.04h-1.04zM11 30h1.04v1.04h-1.04zM12 30h1.04v1.04h-1.04zM13 30h1.04v1.04h-1.04zM18 30h1.04v1.04h-1.04zM20 30h1.04v1.04h-1.04zM24 30h1.04v1.04h-1.04zM25 30h1.04v1.04h-1.04zM27 30h1.04v1.04h-1.04zM29 30h1.04v1.04h-1.04zM30 30h1.04v1.04h-1.04zM31 30h1.04v1.04h-1.04zM32 30h1.04v1.04h-1.04zM33 30h1.04v1.04h-1.04zM34 30h1.04v1.04h-1.04zM35 30h1.04v1.04h-1.04zM36 30h1.04v1.04h-1.04zM37 30h1.04v1.04h-1.04zM38 30h1.04v1.04h-1.04zM10 31h1.04v1.04h-1.04zM12 31h1.04v1.04h-1.04zM13 31h1.04v1.04h-1.04zM15 31h1.04v1.04h-1.04zM16 31h1.04v1.04h-1.04zM19 31h1.04v1.04h-1.04zM21 31h1.04v1.04h-1.04zM22 31h1.04v1.04h-1.04zM23 31h1.04v1.04h-1.04zM25 31h1.04v1.04h-1.04zM26 31h1.04v1.04h-1.04zM27 31h1.04v1.04h-1.04zM28 31h1.04v1.04h-1.04zM30 31h1.04v1.04h-1.04zM34 31h1.04v1.04h-1.04zM35 31h1.04v1.04h-1.04zM36 31h1.04v1.04h-1.04zM38 31h1.04v1.04h-1.04zM10 32h1.04v1.04h-1.04zM11 32h1.04v1.04h-1.04zM12 32h1.04v1.04h-1.04zM15 32h1.04v1.04h-1.04zM17 32h1.04v1.04h-1.04zM21 32h1.04v1.04h-1.04zM22 32h1.04v1.04h-1.04zM27 32h1.04v1.04h-1.04zM28 32h1.04v1.04h-1.04zM30 32h1.04v1.04h-1.04zM32 32h1.04v1.04h-1.04zM34 32h1.04v1.04h-1.04zM35 32h1.04v1.04h-1.04zM37 32h1.04v1.04h-1.04zM38 32h1.04v1.04h-1.04zM12 33h1.04v1.04h-1.04zM15 33h1.04v1.04h-1.04zM16 33h1.04v1.04h-1.04zM17 33h1.04v1.04h-1.04zM18 33h1.04v1.04h-1.04zM20 33h1.04v1.04h-1.04zM22 33h1.04v1.04h-1.04zM25 33h1.04v1.04h-1.04zM26 33h1.04v1.04h-1.04zM29 33h1.04v1.04h-1.04zM30 33h1.04v1.04h-1.04zM34 33h1.04v1.04h-1.04zM35 33h1.04v1.04h-1.04zM37 33h1.04v1.04h-1.04zM21 34h1.04v1.04h-1.04zM22 34h1.04v1.04h-1.04zM24 34h1.04v1.04h-1.04zM25 34h1.04v1.04h-1.04zM28 34h1.04v1.04h-1.04zM30 34h1.04v1.04h-1.04zM31 34h1.04v1.04h-1.04zM32 34h1.04v1.04h-1.04zM33 34h1.04v1.04h-1.04zM34 34h1.04v1.04h-1.04zM35 34h1.04v1.04h-1.04zM38 34h1.04v1.04h-1.04zM10 35h1.04v1.04h-1.04zM13 35h1.04v1.04h-1.04zM14 35h1.04v1.04h-1.04zM15 35h1.04v1.04h-1.04zM18 35h1.04v1.04h-1.04zM23 35h1.04v1.04h-1.04zM27 35h1.04v1.04h-1.04zM32 35h1.04v1.04h-1.04zM34 35h1.04v1.04h-1.04zM35 35h1.04v1.04h-1.04zM10 36h1.04v1.04h-1.04zM12 36h1.04v1.04h-1.04zM13 36h1.04v1.04h-1.04zM14 36h1.04v1.04h-1.04zM15 36h1.04v1.04h-1.04zM17 36h1.04v1.04h-1.04zM18 36h1.04v1.04h-1.04zM28 36h1.04v1.04h-1.04zM30 36h1.04v1.04h-1.04zM32 36h1.04v1.04h-1.04zM33 36h1.04v1.04h-1.04zM34 36h1.04v1.04h-1.04zM36 36h1.04v1.04h-1.04zM37 36h1.04v1.04h-1.04zM11 37h1.04v1.04h-1.04zM13 37h1.04v1.04h-1.04zM14 37h1.04v1.04h-1.04zM16 37h1.04v1.04h-1.04zM17 37h1.04v1.04h-1.04zM18 37h1.04v1.04h-1.04zM22 37h1.04v1.04h-1.04zM25 37h1.04v1.04h-1.04zM26 37h1.04v1.04h-1.04zM27 37h1.04v1.04h-1.04zM29 37h1.04v1.04h-1.04zM35 37h1.04v1.04h-1.04zM36 37h1.04v1.04h-1.04zM11 38h1.04v1.04h-1.04zM13 38h1.04v1.04h-1.04zM14 38h1.04v1.04h-1.04zM16 38h1.04v1.04h-1.04zM17 38h1.04v1.04h-1.04zM19 38h1.04v1.04h-1.04zM20 38h1.04v1.04h-1.04zM23 38h1.04v1.04h-1.04zM24 38h1.04v1.04h-1.04zM25 38h1.04v1.04h-1.04zM26 38h1.04v1.04h-1.04zM28 38h1.04v1.04h-1.04zM31 38h1.04v1.04h-1.04zM32 38h1.04v1.04h-1.04zM33 38h1.04v1.04h-1.04zM35 38h1.04v1.04h-1.04zM36 38h1.04v1.04h-1.04zM37 38h1.04v1.04h-1.04zM38 38h1.04v1.04h-1.04z" fill="#050816" shape-rendering="crispEdges"/><rect x="2.5" y="2.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="4" y="4" width="3" height="3" fill="#050816"/><rect x="32.5" y="2.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="34" y="4" width="3" height="3" fill="#050816"/><rect x="2.5" y="32.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="4" y="34" width="3" height="3" fill="#050816"/><rect x="14.98" y="14.98" width="11.04" height="11.04" rx="1.6" fill="#fff"/><image href="icon-192.png" x="15.58" y="15.58" width="9.84" height="9.84"/></svg><span>App holen &amp; mitzählen</span></div>
+        <div class="tr-cnt tr-frame"><div class="tr-ct">Heute über den Tresen</div><div class="tr-cn" id="trCount">0</div><div class="tr-duel" id="trDuel"></div></div>
+        <div class="tr-qr tr-appqr tr-frame"><svg class="tr-qrsvg" viewBox="0 0 41 41" aria-label="QR-Code zur ExMa-App"><rect width="41" height="41" rx="2" fill="#fff"/><path d="M11 2h1.04v1.04h-1.04zM18 2h1.04v1.04h-1.04zM21 2h1.04v1.04h-1.04zM23 2h1.04v1.04h-1.04zM25 2h1.04v1.04h-1.04zM27 2h1.04v1.04h-1.04zM11 3h1.04v1.04h-1.04zM13 3h1.04v1.04h-1.04zM15 3h1.04v1.04h-1.04zM18 3h1.04v1.04h-1.04zM26 3h1.04v1.04h-1.04zM27 3h1.04v1.04h-1.04zM11 4h1.04v1.04h-1.04zM14 4h1.04v1.04h-1.04zM16 4h1.04v1.04h-1.04zM19 4h1.04v1.04h-1.04zM21 4h1.04v1.04h-1.04zM23 4h1.04v1.04h-1.04zM27 4h1.04v1.04h-1.04zM28 4h1.04v1.04h-1.04zM30 4h1.04v1.04h-1.04zM11 5h1.04v1.04h-1.04zM13 5h1.04v1.04h-1.04zM14 5h1.04v1.04h-1.04zM15 5h1.04v1.04h-1.04zM17 5h1.04v1.04h-1.04zM19 5h1.04v1.04h-1.04zM22 5h1.04v1.04h-1.04zM23 5h1.04v1.04h-1.04zM25 5h1.04v1.04h-1.04zM28 5h1.04v1.04h-1.04zM29 5h1.04v1.04h-1.04zM10 6h1.04v1.04h-1.04zM12 6h1.04v1.04h-1.04zM13 6h1.04v1.04h-1.04zM16 6h1.04v1.04h-1.04zM21 6h1.04v1.04h-1.04zM22 6h1.04v1.04h-1.04zM24 6h1.04v1.04h-1.04zM27 6h1.04v1.04h-1.04zM28 6h1.04v1.04h-1.04zM29 6h1.04v1.04h-1.04zM11 7h1.04v1.04h-1.04zM12 7h1.04v1.04h-1.04zM13 7h1.04v1.04h-1.04zM15 7h1.04v1.04h-1.04zM19 7h1.04v1.04h-1.04zM21 7h1.04v1.04h-1.04zM22 7h1.04v1.04h-1.04zM23 7h1.04v1.04h-1.04zM28 7h1.04v1.04h-1.04zM10 8h1.04v1.04h-1.04zM12 8h1.04v1.04h-1.04zM14 8h1.04v1.04h-1.04zM16 8h1.04v1.04h-1.04zM18 8h1.04v1.04h-1.04zM20 8h1.04v1.04h-1.04zM22 8h1.04v1.04h-1.04zM24 8h1.04v1.04h-1.04zM26 8h1.04v1.04h-1.04zM28 8h1.04v1.04h-1.04zM30 8h1.04v1.04h-1.04zM10 9h1.04v1.04h-1.04zM11 9h1.04v1.04h-1.04zM19 9h1.04v1.04h-1.04zM22 9h1.04v1.04h-1.04zM25 9h1.04v1.04h-1.04zM26 9h1.04v1.04h-1.04zM27 9h1.04v1.04h-1.04zM28 9h1.04v1.04h-1.04zM29 9h1.04v1.04h-1.04zM30 9h1.04v1.04h-1.04zM4 10h1.04v1.04h-1.04zM5 10h1.04v1.04h-1.04zM8 10h1.04v1.04h-1.04zM9 10h1.04v1.04h-1.04zM10 10h1.04v1.04h-1.04zM11 10h1.04v1.04h-1.04zM14 10h1.04v1.04h-1.04zM15 10h1.04v1.04h-1.04zM17 10h1.04v1.04h-1.04zM18 10h1.04v1.04h-1.04zM20 10h1.04v1.04h-1.04zM21 10h1.04v1.04h-1.04zM23 10h1.04v1.04h-1.04zM25 10h1.04v1.04h-1.04zM27 10h1.04v1.04h-1.04zM28 10h1.04v1.04h-1.04zM29 10h1.04v1.04h-1.04zM31 10h1.04v1.04h-1.04zM32 10h1.04v1.04h-1.04zM34 10h1.04v1.04h-1.04zM3 11h1.04v1.04h-1.04zM7 11h1.04v1.04h-1.04zM10 11h1.04v1.04h-1.04zM11 11h1.04v1.04h-1.04zM14 11h1.04v1.04h-1.04zM15 11h1.04v1.04h-1.04zM17 11h1.04v1.04h-1.04zM19 11h1.04v1.04h-1.04zM20 11h1.04v1.04h-1.04zM23 11h1.04v1.04h-1.04zM27 11h1.04v1.04h-1.04zM29 11h1.04v1.04h-1.04zM36 11h1.04v1.04h-1.04zM6 12h1.04v1.04h-1.04zM7 12h1.04v1.04h-1.04zM8 12h1.04v1.04h-1.04zM9 12h1.04v1.04h-1.04zM11 12h1.04v1.04h-1.04zM13 12h1.04v1.04h-1.04zM16 12h1.04v1.04h-1.04zM17 12h1.04v1.04h-1.04zM20 12h1.04v1.04h-1.04zM21 12h1.04v1.04h-1.04zM22 12h1.04v1.04h-1.04zM25 12h1.04v1.04h-1.04zM26 12h1.04v1.04h-1.04zM27 12h1.04v1.04h-1.04zM30 12h1.04v1.04h-1.04zM31 12h1.04v1.04h-1.04zM34 12h1.04v1.04h-1.04zM35 12h1.04v1.04h-1.04zM2 13h1.04v1.04h-1.04zM4 13h1.04v1.04h-1.04zM7 13h1.04v1.04h-1.04zM13 13h1.04v1.04h-1.04zM15 13h1.04v1.04h-1.04zM20 13h1.04v1.04h-1.04zM22 13h1.04v1.04h-1.04zM23 13h1.04v1.04h-1.04zM24 13h1.04v1.04h-1.04zM26 13h1.04v1.04h-1.04zM27 13h1.04v1.04h-1.04zM28 13h1.04v1.04h-1.04zM30 13h1.04v1.04h-1.04zM33 13h1.04v1.04h-1.04zM35 13h1.04v1.04h-1.04zM36 13h1.04v1.04h-1.04zM2 14h1.04v1.04h-1.04zM3 14h1.04v1.04h-1.04zM4 14h1.04v1.04h-1.04zM5 14h1.04v1.04h-1.04zM6 14h1.04v1.04h-1.04zM8 14h1.04v1.04h-1.04zM9 14h1.04v1.04h-1.04zM10 14h1.04v1.04h-1.04zM14 14h1.04v1.04h-1.04zM15 14h1.04v1.04h-1.04zM16 14h1.04v1.04h-1.04zM20 14h1.04v1.04h-1.04zM22 14h1.04v1.04h-1.04zM23 14h1.04v1.04h-1.04zM24 14h1.04v1.04h-1.04zM27 14h1.04v1.04h-1.04zM28 14h1.04v1.04h-1.04zM29 14h1.04v1.04h-1.04zM31 14h1.04v1.04h-1.04zM32 14h1.04v1.04h-1.04zM34 14h1.04v1.04h-1.04zM35 14h1.04v1.04h-1.04zM37 14h1.04v1.04h-1.04zM38 14h1.04v1.04h-1.04zM2 15h1.04v1.04h-1.04zM3 15h1.04v1.04h-1.04zM4 15h1.04v1.04h-1.04zM5 15h1.04v1.04h-1.04zM9 15h1.04v1.04h-1.04zM10 15h1.04v1.04h-1.04zM11 15h1.04v1.04h-1.04zM12 15h1.04v1.04h-1.04zM14 15h1.04v1.04h-1.04zM27 15h1.04v1.04h-1.04zM28 15h1.04v1.04h-1.04zM29 15h1.04v1.04h-1.04zM32 15h1.04v1.04h-1.04zM34 15h1.04v1.04h-1.04zM36 15h1.04v1.04h-1.04zM37 15h1.04v1.04h-1.04zM38 15h1.04v1.04h-1.04zM3 16h1.04v1.04h-1.04zM4 16h1.04v1.04h-1.04zM8 16h1.04v1.04h-1.04zM10 16h1.04v1.04h-1.04zM11 16h1.04v1.04h-1.04zM14 16h1.04v1.04h-1.04zM28 16h1.04v1.04h-1.04zM33 16h1.04v1.04h-1.04zM34 16h1.04v1.04h-1.04zM36 16h1.04v1.04h-1.04zM37 16h1.04v1.04h-1.04zM4 17h1.04v1.04h-1.04zM5 17h1.04v1.04h-1.04zM6 17h1.04v1.04h-1.04zM9 17h1.04v1.04h-1.04zM11 17h1.04v1.04h-1.04zM13 17h1.04v1.04h-1.04zM14 17h1.04v1.04h-1.04zM26 17h1.04v1.04h-1.04zM30 17h1.04v1.04h-1.04zM37 17h1.04v1.04h-1.04zM38 17h1.04v1.04h-1.04zM2 18h1.04v1.04h-1.04zM7 18h1.04v1.04h-1.04zM8 18h1.04v1.04h-1.04zM10 18h1.04v1.04h-1.04zM11 18h1.04v1.04h-1.04zM13 18h1.04v1.04h-1.04zM14 18h1.04v1.04h-1.04zM26 18h1.04v1.04h-1.04zM27 18h1.04v1.04h-1.04zM29 18h1.04v1.04h-1.04zM30 18h1.04v1.04h-1.04zM33 18h1.04v1.04h-1.04zM35 18h1.04v1.04h-1.04zM36 18h1.04v1.04h-1.04zM38 18h1.04v1.04h-1.04zM2 19h1.04v1.04h-1.04zM3 19h1.04v1.04h-1.04zM9 19h1.04v1.04h-1.04zM11 19h1.04v1.04h-1.04zM12 19h1.04v1.04h-1.04zM13 19h1.04v1.04h-1.04zM27 19h1.04v1.04h-1.04zM29 19h1.04v1.04h-1.04zM32 19h1.04v1.04h-1.04zM36 19h1.04v1.04h-1.04zM38 19h1.04v1.04h-1.04zM2 20h1.04v1.04h-1.04zM3 20h1.04v1.04h-1.04zM4 20h1.04v1.04h-1.04zM6 20h1.04v1.04h-1.04zM7 20h1.04v1.04h-1.04zM8 20h1.04v1.04h-1.04zM9 20h1.04v1.04h-1.04zM10 20h1.04v1.04h-1.04zM11 20h1.04v1.04h-1.04zM12 20h1.04v1.04h-1.04zM26 20h1.04v1.04h-1.04zM28 20h1.04v1.04h-1.04zM29 20h1.04v1.04h-1.04zM31 20h1.04v1.04h-1.04zM33 20h1.04v1.04h-1.04zM37 20h1.04v1.04h-1.04zM38 20h1.04v1.04h-1.04zM2 21h1.04v1.04h-1.04zM3 21h1.04v1.04h-1.04zM6 21h1.04v1.04h-1.04zM9 21h1.04v1.04h-1.04zM10 21h1.04v1.04h-1.04zM12 21h1.04v1.04h-1.04zM14 21h1.04v1.04h-1.04zM31 21h1.04v1.04h-1.04zM32 21h1.04v1.04h-1.04zM34 21h1.04v1.04h-1.04zM35 21h1.04v1.04h-1.04zM37 21h1.04v1.04h-1.04zM38 21h1.04v1.04h-1.04zM2 22h1.04v1.04h-1.04zM4 22h1.04v1.04h-1.04zM5 22h1.04v1.04h-1.04zM7 22h1.04v1.04h-1.04zM8 22h1.04v1.04h-1.04zM9 22h1.04v1.04h-1.04zM12 22h1.04v1.04h-1.04zM14 22h1.04v1.04h-1.04zM28 22h1.04v1.04h-1.04zM30 22h1.04v1.04h-1.04zM31 22h1.04v1.04h-1.04zM34 22h1.04v1.04h-1.04zM37 22h1.04v1.04h-1.04zM2 23h1.04v1.04h-1.04zM3 23h1.04v1.04h-1.04zM4 23h1.04v1.04h-1.04zM5 23h1.04v1.04h-1.04zM10 23h1.04v1.04h-1.04zM11 23h1.04v1.04h-1.04zM12 23h1.04v1.04h-1.04zM28 23h1.04v1.04h-1.04zM33 23h1.04v1.04h-1.04zM35 23h1.04v1.04h-1.04zM36 23h1.04v1.04h-1.04zM3 24h1.04v1.04h-1.04zM7 24h1.04v1.04h-1.04zM8 24h1.04v1.04h-1.04zM9 24h1.04v1.04h-1.04zM10 24h1.04v1.04h-1.04zM11 24h1.04v1.04h-1.04zM13 24h1.04v1.04h-1.04zM14 24h1.04v1.04h-1.04zM26 24h1.04v1.04h-1.04zM28 24h1.04v1.04h-1.04zM32 24h1.04v1.04h-1.04zM34 24h1.04v1.04h-1.04zM37 24h1.04v1.04h-1.04zM2 25h1.04v1.04h-1.04zM3 25h1.04v1.04h-1.04zM4 25h1.04v1.04h-1.04zM7 25h1.04v1.04h-1.04zM10 25h1.04v1.04h-1.04zM11 25h1.04v1.04h-1.04zM13 25h1.04v1.04h-1.04zM27 25h1.04v1.04h-1.04zM28 25h1.04v1.04h-1.04zM29 25h1.04v1.04h-1.04zM30 25h1.04v1.04h-1.04zM31 25h1.04v1.04h-1.04zM32 25h1.04v1.04h-1.04zM35 25h1.04v1.04h-1.04zM36 25h1.04v1.04h-1.04zM37 25h1.04v1.04h-1.04zM3 26h1.04v1.04h-1.04zM5 26h1.04v1.04h-1.04zM8 26h1.04v1.04h-1.04zM12 26h1.04v1.04h-1.04zM13 26h1.04v1.04h-1.04zM15 26h1.04v1.04h-1.04zM21 26h1.04v1.04h-1.04zM22 26h1.04v1.04h-1.04zM23 26h1.04v1.04h-1.04zM24 26h1.04v1.04h-1.04zM25 26h1.04v1.04h-1.04zM32 26h1.04v1.04h-1.04zM33 26h1.04v1.04h-1.04zM34 26h1.04v1.04h-1.04zM36 26h1.04v1.04h-1.04zM38 26h1.04v1.04h-1.04zM7 27h1.04v1.04h-1.04zM9 27h1.04v1.04h-1.04zM10 27h1.04v1.04h-1.04zM11 27h1.04v1.04h-1.04zM12 27h1.04v1.04h-1.04zM15 27h1.04v1.04h-1.04zM17 27h1.04v1.04h-1.04zM18 27h1.04v1.04h-1.04zM20 27h1.04v1.04h-1.04zM21 27h1.04v1.04h-1.04zM22 27h1.04v1.04h-1.04zM23 27h1.04v1.04h-1.04zM25 27h1.04v1.04h-1.04zM30 27h1.04v1.04h-1.04zM31 27h1.04v1.04h-1.04zM33 27h1.04v1.04h-1.04zM34 27h1.04v1.04h-1.04zM38 27h1.04v1.04h-1.04zM3 28h1.04v1.04h-1.04zM4 28h1.04v1.04h-1.04zM5 28h1.04v1.04h-1.04zM6 28h1.04v1.04h-1.04zM8 28h1.04v1.04h-1.04zM9 28h1.04v1.04h-1.04zM10 28h1.04v1.04h-1.04zM11 28h1.04v1.04h-1.04zM16 28h1.04v1.04h-1.04zM18 28h1.04v1.04h-1.04zM19 28h1.04v1.04h-1.04zM20 28h1.04v1.04h-1.04zM21 28h1.04v1.04h-1.04zM22 28h1.04v1.04h-1.04zM23 28h1.04v1.04h-1.04zM24 28h1.04v1.04h-1.04zM26 28h1.04v1.04h-1.04zM27 28h1.04v1.04h-1.04zM28 28h1.04v1.04h-1.04zM29 28h1.04v1.04h-1.04zM30 28h1.04v1.04h-1.04zM33 28h1.04v1.04h-1.04zM35 28h1.04v1.04h-1.04zM36 28h1.04v1.04h-1.04zM37 28h1.04v1.04h-1.04zM2 29h1.04v1.04h-1.04zM7 29h1.04v1.04h-1.04zM9 29h1.04v1.04h-1.04zM10 29h1.04v1.04h-1.04zM12 29h1.04v1.04h-1.04zM13 29h1.04v1.04h-1.04zM15 29h1.04v1.04h-1.04zM20 29h1.04v1.04h-1.04zM21 29h1.04v1.04h-1.04zM22 29h1.04v1.04h-1.04zM23 29h1.04v1.04h-1.04zM26 29h1.04v1.04h-1.04zM28 29h1.04v1.04h-1.04zM30 29h1.04v1.04h-1.04zM31 29h1.04v1.04h-1.04zM37 29h1.04v1.04h-1.04zM38 29h1.04v1.04h-1.04zM2 30h1.04v1.04h-1.04zM3 30h1.04v1.04h-1.04zM4 30h1.04v1.04h-1.04zM5 30h1.04v1.04h-1.04zM6 30h1.04v1.04h-1.04zM8 30h1.04v1.04h-1.04zM9 30h1.04v1.04h-1.04zM11 30h1.04v1.04h-1.04zM12 30h1.04v1.04h-1.04zM13 30h1.04v1.04h-1.04zM18 30h1.04v1.04h-1.04zM20 30h1.04v1.04h-1.04zM24 30h1.04v1.04h-1.04zM25 30h1.04v1.04h-1.04zM27 30h1.04v1.04h-1.04zM29 30h1.04v1.04h-1.04zM30 30h1.04v1.04h-1.04zM31 30h1.04v1.04h-1.04zM32 30h1.04v1.04h-1.04zM33 30h1.04v1.04h-1.04zM34 30h1.04v1.04h-1.04zM35 30h1.04v1.04h-1.04zM36 30h1.04v1.04h-1.04zM37 30h1.04v1.04h-1.04zM38 30h1.04v1.04h-1.04zM10 31h1.04v1.04h-1.04zM12 31h1.04v1.04h-1.04zM13 31h1.04v1.04h-1.04zM15 31h1.04v1.04h-1.04zM16 31h1.04v1.04h-1.04zM19 31h1.04v1.04h-1.04zM21 31h1.04v1.04h-1.04zM22 31h1.04v1.04h-1.04zM23 31h1.04v1.04h-1.04zM25 31h1.04v1.04h-1.04zM26 31h1.04v1.04h-1.04zM27 31h1.04v1.04h-1.04zM28 31h1.04v1.04h-1.04zM30 31h1.04v1.04h-1.04zM34 31h1.04v1.04h-1.04zM35 31h1.04v1.04h-1.04zM36 31h1.04v1.04h-1.04zM38 31h1.04v1.04h-1.04zM10 32h1.04v1.04h-1.04zM11 32h1.04v1.04h-1.04zM12 32h1.04v1.04h-1.04zM15 32h1.04v1.04h-1.04zM17 32h1.04v1.04h-1.04zM21 32h1.04v1.04h-1.04zM22 32h1.04v1.04h-1.04zM27 32h1.04v1.04h-1.04zM28 32h1.04v1.04h-1.04zM30 32h1.04v1.04h-1.04zM32 32h1.04v1.04h-1.04zM34 32h1.04v1.04h-1.04zM35 32h1.04v1.04h-1.04zM37 32h1.04v1.04h-1.04zM38 32h1.04v1.04h-1.04zM12 33h1.04v1.04h-1.04zM15 33h1.04v1.04h-1.04zM16 33h1.04v1.04h-1.04zM17 33h1.04v1.04h-1.04zM18 33h1.04v1.04h-1.04zM20 33h1.04v1.04h-1.04zM22 33h1.04v1.04h-1.04zM25 33h1.04v1.04h-1.04zM26 33h1.04v1.04h-1.04zM29 33h1.04v1.04h-1.04zM30 33h1.04v1.04h-1.04zM34 33h1.04v1.04h-1.04zM35 33h1.04v1.04h-1.04zM37 33h1.04v1.04h-1.04zM21 34h1.04v1.04h-1.04zM22 34h1.04v1.04h-1.04zM24 34h1.04v1.04h-1.04zM25 34h1.04v1.04h-1.04zM28 34h1.04v1.04h-1.04zM30 34h1.04v1.04h-1.04zM31 34h1.04v1.04h-1.04zM32 34h1.04v1.04h-1.04zM33 34h1.04v1.04h-1.04zM34 34h1.04v1.04h-1.04zM35 34h1.04v1.04h-1.04zM38 34h1.04v1.04h-1.04zM10 35h1.04v1.04h-1.04zM13 35h1.04v1.04h-1.04zM14 35h1.04v1.04h-1.04zM15 35h1.04v1.04h-1.04zM18 35h1.04v1.04h-1.04zM23 35h1.04v1.04h-1.04zM27 35h1.04v1.04h-1.04zM32 35h1.04v1.04h-1.04zM34 35h1.04v1.04h-1.04zM35 35h1.04v1.04h-1.04zM10 36h1.04v1.04h-1.04zM12 36h1.04v1.04h-1.04zM13 36h1.04v1.04h-1.04zM14 36h1.04v1.04h-1.04zM15 36h1.04v1.04h-1.04zM17 36h1.04v1.04h-1.04zM18 36h1.04v1.04h-1.04zM28 36h1.04v1.04h-1.04zM30 36h1.04v1.04h-1.04zM32 36h1.04v1.04h-1.04zM33 36h1.04v1.04h-1.04zM34 36h1.04v1.04h-1.04zM36 36h1.04v1.04h-1.04zM37 36h1.04v1.04h-1.04zM11 37h1.04v1.04h-1.04zM13 37h1.04v1.04h-1.04zM14 37h1.04v1.04h-1.04zM16 37h1.04v1.04h-1.04zM17 37h1.04v1.04h-1.04zM18 37h1.04v1.04h-1.04zM22 37h1.04v1.04h-1.04zM25 37h1.04v1.04h-1.04zM26 37h1.04v1.04h-1.04zM27 37h1.04v1.04h-1.04zM29 37h1.04v1.04h-1.04zM35 37h1.04v1.04h-1.04zM36 37h1.04v1.04h-1.04zM11 38h1.04v1.04h-1.04zM13 38h1.04v1.04h-1.04zM14 38h1.04v1.04h-1.04zM16 38h1.04v1.04h-1.04zM17 38h1.04v1.04h-1.04zM19 38h1.04v1.04h-1.04zM20 38h1.04v1.04h-1.04zM23 38h1.04v1.04h-1.04zM24 38h1.04v1.04h-1.04zM25 38h1.04v1.04h-1.04zM26 38h1.04v1.04h-1.04zM28 38h1.04v1.04h-1.04zM31 38h1.04v1.04h-1.04zM32 38h1.04v1.04h-1.04zM33 38h1.04v1.04h-1.04zM35 38h1.04v1.04h-1.04zM36 38h1.04v1.04h-1.04zM37 38h1.04v1.04h-1.04zM38 38h1.04v1.04h-1.04z" fill="#050816" shape-rendering="crispEdges"/><rect x="2.5" y="2.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="4" y="4" width="3" height="3" fill="#050816"/><rect x="32.5" y="2.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="34" y="4" width="3" height="3" fill="#050816"/><rect x="2.5" y="32.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="4" y="34" width="3" height="3" fill="#050816"/><rect x="14.98" y="14.98" width="11.04" height="11.04" rx="1.6" fill="#fff"/><image href="icon-192.png" x="15.58" y="15.58" width="9.84" height="9.84"/></svg><span>App holen &amp; mitzählen</span></div>
       </section>
     </div>
 
@@ -1734,7 +1770,8 @@ const EVENTS = [
     mitbringen: null,
     fotos: null,
     specials: [
-      { name: "Sex on the Beach", info: "Fruchtiger Klassiker mit Vodka", preis: 3.0, bild: "beach" }
+      { name: "Sex on the Beach", info: "Fruchtiger Klassiker mit Vodka", preis: 3.0, bild: "beach" },
+      { name: "Sangria", info: "Rotwein mit frischem Obst", preis: 1.0, bild: "sangria" }
     ],
     happyHour: {
       von: "22:00", bis: "23:00", platzhalter: false,
@@ -1779,10 +1816,12 @@ const KARTE = {
 
 /* Farbthemen der Abende */
 const THEMEN = {
-  eis:   { night: "#050816", night2: "#0b1236", a1: "#9fe3ff", a2: "#2d6bff", a3: "#ff3fc8", frost: "#f2f8ff", dim: "#9aa6cf", script: "#ffd6f3" },
+  eis:   { night: "#050816", night2: "#0b1236", a1: "#9fe3ff", a2: "#2d6bff", a3: "#ff3fc8", frost: "#f2f8ff", dim: "#9aa6cf", script: "#ffd6f3",
+           verlauf: ["#e6fbff", "#9fe3ff", "#4f86ff", "#ff3fc8"] },   /* Farbverlauf der Tresen-Ansicht */
   club:  { night: "#0b0608", night2: "#1a0d11", a1: "#ffcf4a", a2: "#ff3b3b", a3: "#ff3b3b", frost: "#fff6f3", dim: "#c7a9ab", script: "#ffcf4a" },
   pay:   { night: "#03122e", night2: "#082152", a1: "#4fc3ff", a2: "#0070e0", a3: "#ffc439", frost: "#f2f8ff", dim: "#9db3d6", script: "#cfe8ff" },
-  miami: { night: "#12041f", night2: "#26093f", a1: "#2ff3e0", a2: "#7b2cff", a3: "#ff2e88", frost: "#fff5ee", dim: "#c9a9d6", script: "#ffe2c4" }
+  miami: { night: "#12041f", night2: "#26093f", a1: "#2ff3e0", a2: "#7b2cff", a3: "#ff2e88", frost: "#fff5ee", dim: "#c9a9d6", script: "#ffe2c4",
+           verlauf: ["#ffd36e", "#ff8a4c", "#ff3f8e", "#c23fc8", "#6a35c9"] }   /* Sonnenuntergang wie im GTA-VI-Logo */
 };
 
 /* =====================================================================
@@ -2113,9 +2152,90 @@ let drinkUid = 0;
 const DRINKS = {
   lemon:  { stops: [["0", "#fbf8d2", .78], [".6", "#f1ea9f", .82], ["1", "#e2d66e", .9]], top: 64, bubbles: 14, glow: "#f3e98a", garnish: "lemon", straw: "#1b1b1b" },
   energy: { stops: [["0", "#ffe46b", .85], [".55", "#ffc21f", .88], ["1", "#e89400", .92]], top: 66, bubbles: 18, glow: "#ffc21f", garnish: "foam", straw: "#1b1b1b" },
-  beach:  { stops: [["0", "#ffd166", .9], [".35", "#ff9f2e", .92], [".7", "#ff5a36", .94], ["1", "#c3102f", .96]], top: 60, bubbles: 0, glow: "#ff7a3d", garnish: "beach", straw: "#ff2e88" }
+  beach:  { stops: [["0", "#ffd166", .9], [".35", "#ff9f2e", .92], [".7", "#ff5a36", .94], ["1", "#c3102f", .96]], top: 60, bubbles: 0, glow: "#ff7a3d", garnish: "beach", straw: "#ff2e88" },
+  sangria: { glow: "#e8344f", custom: true }   /* eigenes Motiv: kleines Glas mit Obst vor einem Tetrapak */
 };
+/* Sangria: kleines bauchiges Glas mit Obststücken, dahinter ein klassisches Tetrapak (ohne echte Marke) */
+function sangriaArt() {
+  const p = "dk" + (++drinkUid) + "_";
+  /* Glas: oben 62–134, unten 68–128, Flüssigkeit ab y 110 */
+  const gT = 98, gB = 174, liq = 110;
+  const xl = (y) => 62 + (y - gT) / (gB - gT) * 6, xr = (y) => 134 - (y - gT) / (gB - gT) * 6;
+  const inner = `M${xl(gT)} ${gT} L${xr(gT)} ${gT} L${xr(gB)} ${gB} L${xl(gB)} ${gB} Z`;
+  const orange = (x, y, r, rot, half) => {
+    let seg = ""; const n = half ? 5 : 9, a0 = half ? Math.PI : 0, span = half ? Math.PI : Math.PI * 2;
+    for (let i = 0; i < n; i++) {
+      const a1 = a0 + (i / n) * span + .08, a2 = a0 + ((i + 1) / n) * span - .08, ri = r * .82;
+      seg += `<path d="M0 0 L${(Math.cos(a1) * ri).toFixed(1)} ${(Math.sin(a1) * ri).toFixed(1)} A${ri} ${ri} 0 0 1 ${(Math.cos(a2) * ri).toFixed(1)} ${(Math.sin(a2) * ri).toFixed(1)} Z" fill="url(#${p}org)"/>`;
+    }
+    const shape = half ? `M${-r} 0 A${r} ${r} 0 0 1 ${r} 0 Z` : null;
+    return `<g transform="translate(${x} ${y}) rotate(${rot})">${half ? `<path d="${shape}" fill="#e8700a"/><path d="M${-r * .9} 0 A${r * .9} ${r * .9} 0 0 1 ${r * .9} 0 Z" fill="#fff1d6"/>` : `<circle r="${r}" fill="#e8700a"/><circle r="${r * .9}" fill="#fff1d6"/>`}${seg}</g>`;
+  };
+  const cube = (x, y, sz, rot, c) => `<g transform="translate(${x} ${y}) rotate(${rot})"><rect x="${-sz / 2}" y="${-sz / 2}" width="${sz}" height="${sz}" rx="1.6" fill="${c}"/><rect x="${-sz / 2}" y="${-sz / 2}" width="${sz}" height="${sz * .35}" rx="1.4" fill="#fff" fill-opacity=".35"/></g>`;
+  return `<svg viewBox="0 0 160 200" aria-hidden="true">
+    <defs>
+      <linearGradient id="${p}box" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a50f2b"/><stop offset=".6" stop-color="#d0203f"/><stop offset="1" stop-color="#b3142f"/></linearGradient>
+      <linearGradient id="${p}boxS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a0a1f"/><stop offset="1" stop-color="#5a0616"/></linearGradient>
+      <linearGradient id="${p}liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8213f" stop-opacity=".88"/><stop offset=".55" stop-color="#9e0c2a" stop-opacity=".92"/><stop offset="1" stop-color="#5e0518" stop-opacity=".95"/></linearGradient>
+      <linearGradient id="${p}shade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></linearGradient>
+      <radialGradient id="${p}org"><stop offset="0" stop-color="#ffd59a"/><stop offset="1" stop-color="#ff8a1f"/></radialGradient>
+      <radialGradient id="${p}sun"><stop offset="0" stop-color="#fff3c4" stop-opacity=".9"/><stop offset=".7" stop-color="#ffc35c" stop-opacity=".2"/><stop offset="1" stop-color="#ff9a3d" stop-opacity=".6"/></radialGradient>
+      <filter id="${p}blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="3.5"/></filter>
+      <clipPath id="${p}in"><path d="${inner}"/></clipPath>
+      <clipPath id="${p}liqc"><rect x="0" y="${liq}" width="160" height="${gB - liq}"/></clipPath>
+    </defs>
+    <ellipse cx="80" cy="190" rx="58" ry="6" fill="#000" opacity=".55" filter="url(#${p}blur)"/>
+    <ellipse cx="98" cy="190" rx="36" ry="5" fill="#e8344f" opacity=".5" filter="url(#${p}blur)"/>
+    <!-- Tetrapak hinten links -->
+    <g transform="rotate(-4 50 110)">
+      <path d="M14 34 L76 34 L76 178 L14 178 Z" fill="url(#${p}box)"/>
+      <path d="M76 34 L92 26 L92 170 L76 178 Z" fill="url(#${p}boxS)"/>
+      <path d="M14 34 L30 26 L92 26 L76 34 Z" fill="#c21a37"/>
+      <path d="M14 34 L30 26 L92 26 L76 34 Z" fill="#fff" opacity=".12"/>
+      <path d="M22 30 L84 30" stroke="#8c0c22" stroke-width="2.4" stroke-linecap="round"/>
+      <ellipse cx="34" cy="29" rx="7" ry="3" fill="#f2f2f2"/><rect x="27" y="22" width="14" height="7" fill="#f2f2f2"/><ellipse cx="34" cy="22" rx="7" ry="3" fill="#ffffff"/>
+      <rect x="14" y="50" width="62" height="34" fill="#fff6e8"/>
+      <rect x="14" y="50" width="62" height="3" fill="#f2b630"/><rect x="14" y="81" width="62" height="3" fill="#f2b630"/>
+      <text x="45" y="72" text-anchor="middle" textLength="54" lengthAdjust="spacingAndGlyphs" font-family="'Dela Gothic One','Arial Black',Impact,sans-serif" font-size="12.5" fill="#a50f2b">SANGRIA</text>
+      <circle cx="40" cy="130" r="25" fill="#ffd27a"/><circle cx="40" cy="130" r="25" fill="url(#${p}sun)"/>
+      <g class="dancer">
+        <path d="M37 116 C33 108 28 101 25 92" stroke="#1d0a0c" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <path d="M42 116 C46 108 50 100 50 91" stroke="#1d0a0c" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <circle cx="24.6" cy="91" r="1.8" fill="#1d0a0c"/><circle cx="50" cy="90" r="1.8" fill="#1d0a0c"/>
+        <circle cx="39.5" cy="106.5" r="5" fill="#1d0a0c"/><circle cx="35.6" cy="103.8" r="2.6" fill="#1d0a0c"/>
+        <circle cx="43.4" cy="103.5" r="1.9" fill="#ff2a3d"/><circle cx="44.6" cy="104.8" r="1.3" fill="#ff5a68"/>
+        <path d="M36 113 Q39.5 111 43 113 L41.8 127 Q39.5 128.5 37.6 127 Z" fill="#c4001f"/>
+        <path d="M37.4 126 Q30 140 18 160 Q22 166 30 163 Q38 168 46 163 Q54 168 63 160 Q52 146 42 126 Z" fill="#e3122d"/>
+        <path d="M22 156 Q28 162 34 158 Q40 164 46 159 Q53 164 60 157" stroke="#7a0016" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M27 147 Q32 152 38 149 Q44 154 50 150 Q55 153 58 151" stroke="#7a0016" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M30 163 Q38 168 46 163 Q54 168 63 160 L64 163 Q55 172 46 167 Q38 172 30 167 Q22 170 17 162 L18 160 Q22 166 30 163 Z" fill="#ffffff" opacity=".85"/>
+        <path d="M36 166 L35 174 M43 167 L45 174" stroke="#1d0a0c" stroke-width="1.8" stroke-linecap="round"/>
+      </g>
+      <path d="M16 44 L16 170" stroke="#fff" stroke-opacity=".22" stroke-width="3" stroke-linecap="round"/>
+      <rect x="14" y="34" width="62" height="144" fill="#000" opacity=".18"/>
+    </g>
+    <!-- Glas vorne rechts -->
+    <path d="${inner}" fill="#fff" fill-opacity=".07"/>
+    <g clip-path="url(#${p}in)">
+      <g clip-path="url(#${p}liqc)">
+        <rect x="56" y="${liq}" width="84" height="${gB - liq}" fill="url(#${p}liq)"/>
+        ${orange(80, 132, 11, 20, false)}${orange(112, 150, 10, -30, false)}
+        ${cube(98, 126, 9, 18, "#f6e7a1")}${cube(74, 156, 8, -12, "#f3dc86")}${cube(118, 122, 7, 30, "#f6e7a1")}${cube(92, 162, 7, 8, "#ffdf6e")}
+        <rect x="56" y="${liq}" width="84" height="${gB - liq}" fill="url(#${p}shade)"/>
+      </g>
+      ${cube(86, 107, 12, -10, "rgba(255,255,255,.35)")}${cube(108, 105, 11, 14, "rgba(255,255,255,.32)")}
+      <ellipse cx="98" cy="${liq}" rx="${(xr(liq) - xl(liq)) / 2}" ry="2.6" fill="#ff5a73" opacity=".75"/>
+    </g>
+    <path d="${inner}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M${xl(gB) - 1} ${gB} L${xr(gB) + 1} ${gB} L${xr(gB) + 1} ${gB + 5} Q98 ${gB + 8} ${xl(gB) - 1} ${gB + 5} Z" fill="#fff" fill-opacity=".35"/>
+    <ellipse cx="98" cy="${gT}" rx="36" ry="3.2" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.4"/>
+    <path d="M${xl(gT) + 5} ${gT + 8} L${xl(gB) + 4} ${gB - 6}" stroke="#fff" stroke-opacity=".55" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M${xr(gT) - 7} ${gT + 10} L${xr(gB) - 6} ${gB - 14}" stroke="#fff" stroke-opacity=".22" stroke-width="1.6" stroke-linecap="round"/>
+    ${orange(128, 98, 14, -24, true)}
+  </svg>`;
+}
 function drinkArt(kind) {
+  if (kind === "sangria") return sangriaArt();
   const d = DRINKS[kind] || DRINKS.lemon;
   const p = "dk" + (++drinkUid) + "_";
   const T = d.top, L = 50, R = 110, BOT = 172;
@@ -5247,8 +5367,9 @@ function trSpecials(ev) {
   trSpec($("trSpecL"), list[k * 2]); trSpec($("trSpecR"), list[k * 2 + 1] || (list.length > 2 ? list[0] : null));
 }
 function trRender(ev) {
-  const t = $("tresen");
-  t.style.cssText = themeStyle(ev ? ev.th : THEMEN.eis);
+  const t = $("tresen"), th = ev ? ev.th : THEMEN.eis;
+  const v = th.verlauf || [th.a1, th.a3, th.a2], mid = v[Math.floor(v.length / 2)];
+  t.style.cssText = themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgv:linear-gradient(180deg,${v.join(",")});--tgA:${v[0]};--tgM:${mid};--tgZ:${v[v.length - 1]};--tgbg:linear-gradient(120deg,${(v.length > 3 ? v.slice(1) : v).join(",")})`;
   const layers = (ev && SCENES[ev.thema] ? SCENES[ev.thema] : sceneIce)();
   $("trScene").innerHTML = layers.map((l, k) => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "tr" + k + "_")}</svg>`).join("");
   $("trTitle").textContent = ev ? ev.titel.join(" ") : CLUB.name;
@@ -5272,14 +5393,19 @@ function trCenter(ev, now) {
   const box = $("trHH");
   if (state !== TR.state) {
     TR.state = state;
-    box.className = "tr-hh " + state;
-    const offerTxt = o ? `${esc(o.name)}${o.preis != null ? " " + trEuro(o.preis) : ""}` : "";
+    box.className = "tr-hh tr-frame " + state;
+    /* mit Zusatz (z. B. „für 2 Bier“) steht der Preis in der kleinen Zeile, sonst direkt hinter dem Namen */
+    const price = o && o.preis != null ? trEuro(o.preis) : "";
+    const longName = !!o && o.name.length > 18;
+    const offerTxt = o ? `${esc(o.name)}${price && !longName ? " " + price : ""}` : "";
+    const offerSmall = [longName && price ? `${price}${o.zusatz ? " " + esc(o.zusatz) : ""}` : o && o.zusatz ? esc(o.zusatz) : "",
+      statt != null ? `statt ${trEuro(statt)}` : ""].filter(Boolean).map((x) => x + " · ").join("");
     if (state === "soon") box.innerHTML = `<div class="tr-tag dim">${now < open ? "Heute Abend" : "Gleich geht's los"}</div>
         <div class="tr-small">Happy Hour in</div><div class="tr-cd" id="trCd"></div>
-        <div class="tr-next"><span>ab ${esc(ev.happyHour.von)} Uhr</span>${offerTxt ? `<b>${offerTxt}</b>` : ""}<small>${statt != null ? `statt ${trEuro(statt)} · ` : ""}bis ${esc(ev.happyHour.bis)} Uhr</small></div>`;
+        <div class="tr-next"><span>ab ${esc(ev.happyHour.von)} Uhr</span>${offerTxt ? `<b>${offerTxt}</b>` : ""}<small>${offerSmall}bis ${esc(ev.happyHour.bis)} Uhr</small></div>`;
     else if (state === "on") box.innerHTML = `<div class="tr-stripes"></div><div class="tr-tag"><span class="tr-live"></span>Jetzt läuft</div>
         <div class="tr-big">Happy Hour</div>
-        ${o ? `<div class="tr-deal"><span>${esc(o.name)}</span>${o.preis != null ? `<b>${trEuro(o.preis)}</b>` : ""}${statt != null ? `<s>statt ${trEuro(statt)}</s>` : ""}</div>` : ""}
+        ${o ? `<div class="tr-deal"><span>${esc(o.name)}</span>${price ? `<b>${price}</b>` : ""}${o.zusatz || statt != null ? `<small>${o.zusatz ? esc(o.zusatz) : ""}${o.zusatz && statt != null ? " · " : ""}${statt != null ? `<s>statt ${trEuro(statt)}</s>` : ""}</small>` : ""}</div>` : ""}
         <div class="tr-bar"><i id="trBar"></i></div><div class="tr-left"><b id="trLeft"></b><span>bis ${esc(ev.happyHour.bis)} Uhr</span></div>`;
     else if (state === "last") box.innerHTML = `<div class="tr-stripes"></div><div class="tr-tag">Gleich ist Schluss</div>
         <div class="tr-big">Letzte Runde!</div><div class="tr-cd" id="trCd" style="font-size:150px;text-shadow:0 0 30px rgba(255,255,255,.6)"></div>
@@ -5288,6 +5414,7 @@ function trCenter(ev, now) {
         <div class="tr-cd" id="trCd"></div>
         <div class="tr-sub">${ev && now < open ? `Theke öffnet um ${trClockFmt(open)} Uhr` : close && now <= close ? `Theke offen bis ${trClockFmt(close)} Uhr` : "Bis zum nächsten Clubabend!"}</div>`;
     trMenu(ev, state === "on");
+    box.querySelectorAll(".tr-big").forEach((h) => fitLine(h, 40));
   }
   if (state === "soon") $("trCd").textContent = trCountdown(hh.from - now);
   else if (state === "on") {
