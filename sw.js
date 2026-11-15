@@ -2,7 +2,7 @@
    - Eigene Dateien: erst aus dem Netz, ohne Netz aus dem Speicher
    - Schriften: aus dem Speicher, im Hintergrund aktualisiert
    Bei jeder neuen Version VERSION hochzählen. */
-const VERSION = "exma-v53";
+const VERSION = "exma-v54";
 const CORE = [
   "./",
   "./index.html",
