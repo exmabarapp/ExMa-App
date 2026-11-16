@@ -53,6 +53,11 @@ ABZEICHEN
 - Neuer Themenabend mit eigenem Abzeichen: im EVENTS-Eintrag abzeichen: "<id>" setzen und in BADGE_LIST
   einen Eintrag mit cat: "Gold" anlegen. Dafür braucht es ein neues Bild in abzeichen.svg (<symbol id="b-<id>">).
 - Liste aller Abzeichen und Bedingungen: im Code nach „const BADGE_LIST“ suchen.
+- Seit v84: 81 Abzeichen, in jeder Kategorie thematisch sortiert. Weitere Stapel (Grün → Lila):
+  Gesamt-Becher, -Karten, -Gläser (200/500/1000/2000), Polnischen gesamt (2/5/10/21 km, geheim),
+  Clubabende (1/3/10/25: Neu hier, Stammgast, Inventar, Legende) und Sammler (15/25/35/45 Abzeichen).
+  Sammler Gold = alle Abzeichen außer den goldenen. Alte Abzeichen „Neu hier/Stammgast/Inventar“ werden automatisch übernommen.
+  Schwellen ändern: im Code „const BADGE_STUFEN“.
 
 FOTOGALERIE (Google Drive)
 - Menü-Kachel „Fotowand“ (…/#fotowand): ein Polaroid pro vergangenem Clubabend, dahinter die Fotos (…/#fotos-<id>).
