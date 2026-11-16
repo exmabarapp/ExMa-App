@@ -1072,6 +1072,95 @@ a { color: inherit; }
 .view-zapf .bp-card .primary { background: linear-gradient(90deg, #12a35c, #2bd47a); }
 .view-zapf .bp-list li.me { background: #fff1d6; }
 .view-zapf .bp-list li .r { color: #c77a10; }
+/* ---------- Abzeichen ---------- */
+.tile-btn.hm-badges { flex-direction: row; align-items: center; gap: 12px; height: 96px; margin-top: 14px; padding: 12px 12px 12px 8px; border-radius: 20px; overflow: visible;
+  background: radial-gradient(60% 120% at 16% 55%, rgba(246,195,68,.30), transparent 70%), linear-gradient(115deg, #2b0d36 0%, #4b1650 55%, #6e2156 100%);
+  border: 1.5px solid rgba(246,195,68,.62); box-shadow: 0 0 18px rgba(246,195,68,.18), inset 0 1px 0 rgba(255,255,255,.12); }
+.hm-bdg-fx { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; z-index: -1;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 16px), repeating-linear-gradient(-45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 16px); }
+.hm-shine { position: absolute; top: -20%; bottom: -20%; left: -40%; width: 30%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,240,200,.20), transparent); animation: hmShine 7s ease-in-out 1.5s infinite; }
+@keyframes hmShine { 0%, 72% { left: -40%; } 100% { left: 130%; } }
+.hm-badges .hm-bdg-ico { position: relative; flex: none; width: 118px; height: 80px; margin: -16px 0 0 -2px; }
+.hb-c { position: absolute; top: 0; width: 62px; height: 65px; filter: drop-shadow(0 5px 7px rgba(0,0,0,.5)); }
+.hb-c svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.hb-0 { left: -2px; top: 16px; transform: rotate(-18deg) scale(.74); filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)) brightness(.78); }
+.hb-1 { left: 58px; top: 16px; transform: rotate(18deg) scale(.74); filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)) brightness(.78); }
+.hb-2 { left: 26px; top: 2px; width: 68px; height: 71px; }
+.hb-c.lk svg { filter: saturate(.3) brightness(.62); }
+.hm-bdg-txt { flex: 1; min-width: 0; margin-top: 0 !important; }
+.hm-badges b { font-size: 18px; text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+.hm-badges small { display: block; margin-top: 3px; font-size: 12px; font-weight: 800; color: #ffe6a6; opacity: 1; }
+.hm-bdg-rail { display: block; height: 5px; margin-top: 7px; max-width: 120px; border-radius: 5px; background: rgba(0,0,0,.35); box-shadow: inset 0 0 0 1px rgba(246,195,68,.25); overflow: hidden; }
+.hm-bdg-rail i { display: block; height: 100%; border-radius: 5px; background: linear-gradient(90deg, #f6c344, #ffe39a); }
+.hm-badges .hm-go { flex: none; }
+.hm-badges.new::after { content: "Neu"; position: absolute; top: -9px; right: 16px; padding: 2px 8px; border-radius: 999px; background: #ff3fc8; color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 0 12px #ff3fc8; }
+
+/* Abzeichen-Seite: Samt, Rautenmuster, Spotlight */
+.view-detail.clubby.badge-page { --c-dim: #c9b3d6;
+  background:
+    radial-gradient(100% 420px at 50% 0, rgba(246,195,68,.22), transparent 75%) local,
+    radial-gradient(90% 600px at 0 700px, rgba(138,108,240,.14), transparent 70%) local,
+    radial-gradient(90% 600px at 100% 1500px, rgba(255,93,158,.10), transparent 70%) local,
+    repeating-linear-gradient(45deg, rgba(255,255,255,.028) 0 1px, transparent 1px 22px) local,
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.028) 0 1px, transparent 1px 22px) local,
+    linear-gradient(180deg, #1d0b25 0, #150819 700px, #0f0613 100%) local; }
+.badge-page .page-h { color: #fff3d6; text-shadow: 0 0 14px rgba(246,195,68,.75), 0 0 32px rgba(246,195,68,.35); }
+.bdg-hero { padding: 14px 16px 14px; border-radius: 22px; background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border: 1px solid rgba(246,195,68,.28); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+.bdg-hero .bdg-top { margin: 0 0 10px; }
+.bdg-hero .bdg-note { margin: 0 0 10px; }
+.bdg-tiers { display: flex; justify-content: space-between; gap: 4px; margin-top: 10px; }
+.bdg-tiers span { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 800; color: #eadff2; font-variant-numeric: tabular-nums; }
+.bdg-tiers i { width: 13px; height: 13px; border-radius: 50%; background: var(--tc); border: 2px dashed rgba(255,255,255,.75); box-shadow: 0 0 0 1.5px #1f2a44, 0 0 8px var(--tc); }
+.bdg-shelf { padding: 4px 8px 10px; border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015)); border: 1px solid rgba(255,255,255,.08); box-shadow: inset 0 -10px 18px rgba(0,0,0,.25); }
+.bdg-shelf.gold { background: radial-gradient(120% 90% at 50% 0, rgba(246,195,68,.16), transparent 70%), linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); border-color: rgba(246,195,68,.40); }
+.bdg-shelf .bdg-h { margin: 12px 8px 4px; display: flex; align-items: baseline; gap: 8px; }
+.bdg-shelf .bdg-h::after { content: ""; flex: 1; height: 1px; align-self: center; background: linear-gradient(90deg, rgba(246,195,68,.45), transparent); }
+.bdg { position: relative; isolation: isolate; }
+.bdg:not(.locked)::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 8px; width: 78%; max-width: 92px; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--tc) 55%, transparent) 0, transparent 68%); }
+.bdg.locked .bdg-svg { opacity: .8; }
+.bdg-lv { display: flex; gap: 4px; margin-top: 3px; }
+.bdg-lv i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.14); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+.bdg-lv i.on { background: var(--tc); box-shadow: 0 0 6px var(--tc); }
+.bdg-card .bdg-next { margin: 2px 0 0; font-size: 12.5px; font-weight: 700; color: #6b7593; }
+.bdg.locked b { color: #a893b4; }
+.bdg-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 8px; }
+.bdg-count b { font-family: var(--f-display); font-size: 40px; line-height: 1; background: linear-gradient(90deg, #f6c344, #ff5d9e, #8a6cf0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bdg-count span { display: block; font-size: 13px; font-weight: 800; color: var(--c-dim); }
+.bdg-info { width: 34px; height: 34px; flex: none; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.35); background: rgba(255,255,255,.06); color: #fff; font-family: Georgia, serif; font-style: italic; font-weight: 700; font-size: 18px; }
+.bdg-info[aria-expanded="true"] { background: #fff; color: #12091a; }
+.bdg-note { margin: 0 0 12px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); font-size: 13.5px; line-height: 1.45; color: #e9e2f5; }
+.bdg-bar { height: 8px; border-radius: 8px; background: rgba(255,255,255,.1); overflow: hidden; margin-bottom: 6px; }
+.bdg-bar i { display: block; height: 100%; border-radius: 8px; background: linear-gradient(90deg, #7bc86c, #4f7fe0, #ef6b5b, #8a6cf0, #f6c344); }
+.bdg-h { margin: 22px 0 10px; font-family: var(--f-display); font-weight: 400; font-size: 16px; text-transform: uppercase; letter-spacing: .04em; }
+.bdg-h small { font-family: var(--f-body); font-size: 12px; font-weight: 800; color: var(--c-dim); letter-spacing: 0; }
+.bdg-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 4px; }
+.bdg { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px 8px; border: 0; border-radius: 16px; background: transparent; color: #fff; }
+.bdg:active { background: rgba(255,255,255,.06); }
+.bdg .bdg-svg { width: 100%; max-width: 104px; aspect-ratio: 160 / 168; overflow: visible; }
+.bdg b { font-size: 12px; line-height: 1.2; text-align: center; }
+.bdg.locked b { color: var(--c-dim); }
+.bdg-over { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 20px; background: rgba(8,4,16,.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; transition: opacity .22s; overflow: hidden; }
+.bdg-over.show { opacity: 1; }
+.bdg-over[hidden] { display: none; }
+.bdg-over:not(.show) { pointer-events: none; }
+.bdg-card { position: relative; z-index: 2; width: min(340px, 100%); padding: 18px 20px 20px; border-radius: 26px; background: #fff; color: #1f2a44; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+.bdg-card .bdg-kick { display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #8a6cf0; }
+.bdg-big { width: 200px; margin: 0 auto -6px; }
+.bdg-big svg { width: 100%; overflow: visible; }
+.bdg-card.fresh .bdg-big { animation: bdgPop .9s cubic-bezier(.2,.9,.25,1.25) both; }
+@keyframes bdgPop { 0% { transform: scale(.2) rotate(-200deg); opacity: 0; } 60% { opacity: 1; } 100% { transform: none; } }
+.bdg-card h3 { margin: 6px 0 4px; font-family: var(--f-display); font-weight: 400; font-size: 24px; text-transform: uppercase; }
+.bdg-card p { margin: 0 0 6px; font-size: 14.5px; line-height: 1.4; color: #4a5578; }
+.bdg-card .bdg-when { font-size: 12.5px; font-weight: 800; color: #8a6cf0; }
+.bdg-card .row2 { display: flex; gap: 10px; margin-top: 12px; }
+.bdg-card .row2 button { flex: 1; height: 46px; border-radius: 999px; border: 0; font-weight: 800; font-size: 15px; }
+.bdg-card .ghost { background: #efeaf8; color: #1f2a44; }
+.bdg-card .primary { background: linear-gradient(90deg, #8a6cf0, #ff5d9e); color: #fff; }
+.bdg-confetti { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.bdg-confetti i { position: absolute; top: -20px; left: var(--x); width: 8px; height: 14px; border-radius: 2px; background: var(--c); transform: rotate(var(--r)); animation: bdgFall 2.4s var(--d) ease-in forwards; }
+@keyframes bdgFall { to { transform: translateY(110vh) rotate(calc(var(--r) + 540deg)); } }
+@media (prefers-reduced-motion: reduce) { .bdg-card.fresh .bdg-big, .bdg-confetti i, .hm-shine { animation: none; } .bdg-confetti, .hm-shine { display: none; } }
 /* ---------- Polnischen (geheimes Minispiel) ---------- */
 .view-pol {
   z-index: 30; opacity: 0; pointer-events: none; transform: none; transition: opacity .4s ease;
@@ -2049,6 +2138,7 @@ const CLUB = {
 const EVENTS = [
   {
     id: "vodka-night",
+    abzeichen: "eiskalt",   /* Abzeichen für diesen Themenabend (Bild in abzeichen.svg) */
     thema: "eis",
     titel: ["Vodka", "Night"],
     untertitel: "Welcome back Party",
@@ -2069,6 +2159,7 @@ const EVENTS = [
   },
   {
     id: "miami-vibes",
+    abzeichen: "miami",
     thema: "miami",
     titel: ["Miami", "Vibes"],
     untertitel: "GTA VI Edition",
@@ -3214,7 +3305,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
+  const OTHER = ["ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -3551,6 +3642,7 @@ async function selfDrink(btn, infoId = "prostInfo") {
     return;
   }
   store.set("exmaProstAt", String(Date.now()));
+  Badges.drink(btn.dataset.self || btn.dataset.phself);
   for (let i = 0; i < 12; i++) {
     const f = document.createElement("span");
     f.className = "fizz";
@@ -3782,6 +3874,7 @@ async function sendWish() {
   let res;
   try { res = await Wishes.send(w); }
   catch { $("wSend").disabled = false; $("wSend").textContent = "Wunsch abschicken"; err.textContent = "Das hat nicht geklappt. Bitte versuch es gleich nochmal."; err.hidden = false; return; }
+  Badges.unlock("wunsch");
   $("wishForm").innerHTML = `<div class="ok" role="status"><b>Danke für deinen Wunsch!</b>Wir schauen ihn uns an.${res === "preview" ? "<br><small>(Vorschau: In der echten App wird er wirklich verschickt.)</small>" : ""}</div>`;
 }
 
@@ -4022,6 +4115,7 @@ const Game = (() => {
     });
     remove.forEach((c) => { c.dying = 1; });
     cleared += remove.size;
+    Badges.bp(cleared, performance.now() - tStart, [...remove].some((c) => c.moving));
     setTimeout(() => {
       cups = cups.filter((c) => !remove.has(c));
       cups.forEach((c) => { c.hits = 0; });
@@ -4162,6 +4256,7 @@ const Game = (() => {
   
   function gameOver() {
     over = true; tEnd = performance.now();
+    Badges.played("beerpong");
     const ms = tEnd - tStart;
     buzz([80, 60, 120]);
     const box = $("bpOver");
@@ -4185,7 +4280,7 @@ const Game = (() => {
       let id = null;
       try { id = await Top.add({ name: n, cups: cleared, ms: Math.max(1000, Math.round(ms)) }); setPlayerName(n); clearBestCache(); }
       catch { btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
-      showTop(await Top.list().catch(() => []), id);
+      { const l = await Top.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
     });
     $("bpSkip").addEventListener("click", async () => showTop(await Top.list().catch(() => []), null));
     $("bpRetry").addEventListener("click", reset);
@@ -4356,6 +4451,8 @@ const Bus = (() => {
     const cur = deck[i], nxt = deck[i + 1];
     const v = (c) => (c.r === 1 ? 14 : c.r);   /* Ass ist die höchste Karte */
     const res = nxt.r === cur.r ? "tie" : ((v(nxt) > v(cur)) === (dir > 0) ? "good" : "wrong");
+    if (res === "good" && cur.r === 13 && dir > 0) Badges.unlock("gross");
+    if (res === "good" && cur.r === 3 && dir < 0) Badges.unlock("tief");
     i++; busy = true;
     lay(nxt, "deal " + res);
     if (res === "wrong") {
@@ -4366,6 +4463,7 @@ const Bus = (() => {
       return;
     }
     made++;
+    Badges.bus(made);
     if (made > best) { best = made; store.set("exmaBusBest", String(best)); }
     if (res === "tie") { toast("Gleich – weiter!"); buzz(30); } else buzz(15);
     hud();
@@ -4374,6 +4472,7 @@ const Bus = (() => {
   }
 
   function showOver(win) {
+    Badges.played("busfahrer");
     const box = $("busOver");
     box.hidden = false;
     const canSave = made > 0;
@@ -4403,7 +4502,7 @@ const Bus = (() => {
         let id = null;
         try { id = await BusTop.add({ name: n, score: made }); saved = true; store.set("exmaBusName", n); setPlayerName(n); clearBestCache(); }
         catch (e) { console.warn("Busfahrer speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
-        showTop(await BusTop.list().catch(() => []), id);
+        { const l = await BusTop.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
       });
       inp.addEventListener("keydown", (e) => { if (e.key === "Enter") $("busSave").click(); });
     }
@@ -4876,6 +4975,9 @@ const Zapf = (() => {
     }
     const pts = Math.round(level * 100 * 100);   /* auf 2 Nachkommastellen gerundet */
     totalH += pts;
+    /* Split the G: Grenze zwischen Bier und Schaum genau auf Höhe des Querstrichs vom G (Schriftzug bei 46 % der Glashöhe) */
+    const splitG = glass.drink === "guinness" && Math.abs(glass.levelY(P - DRINKS.guinness.head * P) - (glass.yBot - glass.h * .46)) <= 2.2;
+    Badges.zapf(n, level, splitG);
     if (totalH > best) { best = totalH; store.set("exmaZapfBest", String(best)); }
     pctBox(fmtPct(level), "ok", `+${fmtPts(pts)} Punkte`);
     toast(level >= .995 ? "Perfekt gezapft!" : level >= .97 ? "Sauber!" : "Passt!");
@@ -4916,6 +5018,7 @@ const Zapf = (() => {
     loop();
   }
   function gameOver(title, text) {
+    Badges.played("zapfmeister");
     state = "over";
     zoom(false);
     const glasses = n - 1, box = $("zfOver");
@@ -4946,7 +5049,7 @@ const Zapf = (() => {
         let id = null;
         try { id = await ZapfTop.add({ name: nm, score: Math.round(totalH) / 100, glasses }); saved = true; store.set("exmaZapfName", nm); setPlayerName(nm); clearBestCache(); }
         catch (e) { console.warn("Zapfmeister speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
-        showTop(await ZapfTop.list().catch(() => []), id);
+        { const l = await ZapfTop.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
       });
       inp.addEventListener("keydown", (e) => { if (e.key === "Enter") $("zfSave").click(); });
     }
@@ -5448,6 +5551,8 @@ const Pol = (() => {
     store.set("exmaPolPlayed", "1");
     const dm = Math.floor(d * 10), ms = Math.round(tms);
     if (d > best) { best = d; store.set("exmaPolBest", String(best)); }
+    if (d >= 500) Badges.unlock("heim");
+    if (d >= 600) Badges.unlock("vorbei");
     const box = $("plOver"); box.hidden = false;
     const canSave = dm >= 100;
     const title = CAUSE[cause] || pick(LINES);
@@ -5476,7 +5581,7 @@ const Pol = (() => {
         let id = null;
         try { id = await PolTop.add({ name: nm, dm, ms }); saved = true; setPlayerName(nm); }
         catch (e) { console.warn("Polnischen speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
-        showTop(await PolTop.list().catch(() => []), id);
+        { const l = await PolTop.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
       });
       inp.addEventListener("keydown", (e) => { if (e.key === "Enter") $("plSave").click(); });
     }
@@ -5523,6 +5628,7 @@ const Pol = (() => {
       running = true;
       cv = $("plCanvas"); ctx = cv.getContext("2d");
       app.classList.add("is-pol");
+      Badges.unlock("abgang");
       $("pol").setAttribute("aria-hidden", "false");
       soloView(true);
       best = parseFloat(store.get("exmaPolBest") || "0") || 0;
@@ -5555,6 +5661,320 @@ const Pol = (() => {
     if (n >= 5) { n = 0; location.hash = "polnischen"; }
   });
 })();
+
+/* ================= Abzeichen =================
+   Alles bleibt auf dem Handy (localStorage): exmaBadges = { id: Zeitpunkt }, exmaBadgeLog = Besuche, Abende, Matrikel.
+   Die Bilder stehen in abzeichen.svg (je ein <symbol id="b-…">) und werden erst bei Bedarf geladen. */
+const BADGE_TIER = { 0: "#f6c344", 1: "#7bc86c", 2: "#4f7fe0", 3: "#ef6b5b", 4: "#8a6cf0" };
+const BADGE_LIST = [
+  {"id": "eiskalt", "name": "Eiskalt", "desc": "Bei der Vodka Night dabei.", "tier": 0, "cat": "Gold"},
+  {"id": "miami", "name": "Miami Vice", "desc": "Bei Miami Vibes dabei.", "tier": 0, "cat": "Gold"},
+  {"id": "champion", "name": "Champion", "desc": "Das Beerpong-Turnier gewonnen.", "tier": 0, "cat": "Gold"},
+  {"id": "bpgold", "name": "Beerpong Gold", "desc": "50 Becher in einem Spiel getroffen.", "tier": 0, "cat": "Gold"},
+  {"id": "endstation", "name": "Busfahrer Gold", "desc": "Alle 51 Karten richtig – Endstation!", "tier": 0, "cat": "Gold"},
+  {"id": "zapfgold", "name": "Zapfmeister Gold", "desc": "Das Glas geschafft, bei dem 99 % gefordert sind.", "tier": 0, "cat": "Gold"},
+  {"id": "erste", "name": "Erste Runde", "desc": "Deinen ersten Drink eingetragen.", "tier": 1, "cat": "Am Abend"},
+  {"id": "happy", "name": "Happy-Hour-Jäger", "desc": "In der Happy Hour eingetragen.", "tier": 1, "cat": "Am Abend"},
+  {"id": "wunsch", "name": "Wunschkonzert", "desc": "Einen Musikwunsch abgeschickt.", "tier": 1, "cat": "Am Abend"},
+  {"id": "vorglueh", "name": "Vorglüher", "desc": "Vor 22 Uhr eingetragen.", "tier": 2, "cat": "Am Abend"},
+  {"id": "lastcall", "name": "Letzte Runde", "desc": "Nach 1:15 noch eingetragen.", "tier": 2, "cat": "Am Abend"},
+  {"id": "allround", "name": "Allrounder", "desc": "Bier, Mische und Shot an einem Abend.", "tier": 2, "cat": "Am Abend"},
+  {"id": "mstolz", "name": "Matrikel-Stolz", "desc": "Deine Matrikel gewinnt das Duell.", "tier": 2, "cat": "Am Abend"},
+  {"id": "zocker", "name": "Zocker am Tresen", "desc": "Am Clubabend ein Minispiel gespielt.", "tier": 2, "cat": "Am Abend"},
+  {"id": "spielkind", "name": "Spielkind", "desc": "Alle 3 Minispiele an einem Clubabend.", "tier": 3, "cat": "Am Abend"},
+  {"id": "top10", "name": "Top 10", "desc": "Am Clubabend in eine Bestenliste.", "tier": 3, "cat": "Am Abend"},
+  {"id": "comeback", "name": "Comeback", "desc": "Deine Matrikel lag hinten – und gewinnt.", "tier": 3, "cat": "Am Abend"},
+  {"id": "koenig", "name": "Abendkönig", "desc": "Am Clubabend Platz 1 einer Bestenliste.", "tier": 4, "cat": "Am Abend"},
+  {"id": "dynastie", "name": "Matrikel-Dynastie", "desc": "Deine Matrikel gewinnt 3 deiner Abende.", "tier": 4, "cat": "Am Abend"},
+  {"id": "neu", "name": "Neu hier", "desc": "Dein erster Clubabend mit der App.", "tier": 1, "cat": "Treue"},
+  {"id": "hatapp", "name": "Hat die App", "desc": "App auf dem Startbildschirm.", "tier": 1, "cat": "Treue"},
+  {"id": "einlader", "name": "Einlader", "desc": "Freunde per WhatsApp eingeladen.", "tier": 1, "cat": "Treue"},
+  {"id": "stamm", "name": "Stammgast", "desc": "An 3 Clubabenden dabei.", "tier": 2, "cat": "Treue"},
+  {"id": "serie", "name": "Seriensieger", "desc": "3 Clubabende in Folge.", "tier": 3, "cat": "Treue"},
+  {"id": "inventar", "name": "Inventar", "desc": "An 10 Clubabenden dabei.", "tier": 4, "cat": "Treue"},
+  {"id": "teilnehmer", "name": "Turnier-Teilnehmer", "desc": "Beim Beerpong-Turnier dabei.", "tier": 1, "cat": "Minispiele"},
+  {"id": "moving", "name": "Bewegliches Ziel", "desc": "Den beweglichen Becher getroffen.", "tier": 2, "cat": "Minispiele"},
+  {"id": "gross", "name": "Größenwahn", "desc": "Bei König „Höher“ – und richtig.", "tier": 3, "cat": "Minispiele"},
+  {"id": "tief", "name": "Tiefstapler", "desc": "Bei 3 „Tiefer“ – und richtig.", "tier": 3, "cat": "Minispiele"},
+  {"id": "blitz", "name": "Blitzwerfer", "desc": "10 Becher in unter 10 Sekunden.", "tier": 4, "cat": "Minispiele"},
+    {"id": "milli", "name": "Millimeterarbeit", "desc": "Füllmenge über 99,900 %.", "tier": 4, "cat": "Minispiele"},
+  {"id": "abgang", "name": "Polnischer Abgang", "desc": "Das geheime Spiel gefunden.", "tier": 2, "cat": "Geheim"},
+  {"id": "nacht", "name": "Nachtschwärmer", "desc": "Die App zwischen 3 und 5 Uhr geöffnet.", "tier": 2, "cat": "Geheim"},
+  {"id": "heim", "name": "Heimgekommen", "desc": "Im Polnischen die Haustür erreicht.", "tier": 3, "cat": "Geheim"},
+  {"id": "vorbei", "name": "Dran vorbei", "desc": "Im Polnischen über 600 m.", "tier": 4, "cat": "Geheim"},
+  {"id": "splitg", "name": "Split the G", "desc": "Das Guinness genau am G geteilt.", "tier": 4, "cat": "Geheim"}
+];
+/* Gestufte Minispiel-Abzeichen: pro Spiel ein Chip-Stapel, jede Stufe zählt einzeln */
+const BADGE_STUFEN = {
+  bp: { name: "Beerpong", unit: "Becher", need: [5, 10, 20, 30], txt: (n) => `${n} Becher in einem Spiel getroffen.` },
+  bus: { name: "Busfahrer", unit: "Karten", need: [5, 10, 20, 35], txt: (n) => `${n} Karten in einem Spiel richtig.` },
+  z: { name: "Zapfmeister", unit: "Gläser", need: [3, 5, 10, 15], txt: (n) => `${n} Gläser in einem Spiel gezapft.` }
+};
+const STUFE_FARBE = ["", "Grün", "Blau", "Rot", "Lila"];
+(() => {
+  const i = BADGE_LIST.findIndex((b) => b.cat === "Minispiele");
+  const add = [];
+  for (const [g, d] of Object.entries(BADGE_STUFEN)) d.need.forEach((n, k) => add.push({ id: `${g}-${k + 1}`, name: `${d.name} ${STUFE_FARBE[k + 1]}`, desc: d.txt(n), tier: k + 1, cat: "Minispiele", grp: g, lv: k + 1 }));
+  BADGE_LIST.splice(i, 0, ...add);
+})();
+const BADGE_CATS = ["Gold", "Am Abend", "Treue", "Minispiele", "Geheim"];
+const Badges = (() => {
+  const BMAP = Object.fromEntries(BADGE_LIST.map((b) => [b.id, b]));
+  const read = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } };
+  let have = read("exmaBadges", {}), log = read("exmaBadgeLog", { visits: [], eve: {} });
+  log.visits = log.visits || []; log.eve = log.eve || {};
+  { const MIG = { bp1: "bp-1", bp2: "bp-2", treff: "bp-3", bus1: "bus-1", bus2: "bus-2", busfahrer: "bus-3", z1: "z-1", z2: "z-2", zapf: "z-3" }; let ch = false;
+    for (const [o, nw] of Object.entries(MIG)) if (have[o]) { if (!have[nw]) have[nw] = have[o]; delete have[o]; ch = true; }
+    for (const g of ["bp", "bus", "z"]) for (let k = 4; k > 1; k--) if (have[`${g}-${k}`]) for (let j = 1; j < k; j++) if (!have[`${g}-${j}`]) { have[`${g}-${j}`] = have[`${g}-${k}`] - (k - j); ch = true; }
+    if (ch) try { localStorage.setItem("exmaBadges", JSON.stringify(have)); } catch {} }
+  const save = () => { try { localStorage.setItem("exmaBadges", JSON.stringify(have)); localStorage.setItem("exmaBadgeLog", JSON.stringify(log)); } catch {} };
+  const eve = (id) => log.eve[id] || (log.eve[id] = {});
+  const queue = []; let showing = false, artP = null;
+
+  /* Bilder einmal laden und unsichtbar ins Dokument hängen, damit <use href="#b-…"> funktioniert */
+  function art() {
+    if (artP) return artP;
+    artP = fetch("abzeichen.svg").then((r) => (r.ok ? r.text() : Promise.reject(r.status))).then((t) => {
+      const box = document.createElement("div"); box.id = "badgeArt"; box.setAttribute("aria-hidden", "true");
+      box.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+      box.innerHTML = t + `<svg width="0" height="0"><filter id="bdgGrey"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer></filter></svg>`;
+      document.body.appendChild(box);
+    }).catch((e) => { console.warn("Abzeichen-Bilder", e); artP = null; });
+    return artP;
+  }
+  const stars = (t, grey) => t === 0 ? "" : Array.from({ length: t }, (_, i) => {
+    const cx = (i - (t - 1) / 2) * 16, cy = 74, r = 6.5, ri = 2.9;
+    const pts = Array.from({ length: 10 }, (_, k) => { const a = k * Math.PI / 5, rr = k % 2 ? ri : r; return `${(cx + rr * Math.sin(a)).toFixed(1)} ${(cy - rr * Math.cos(a)).toFixed(1)}`; }).join(" ");
+    return `<polygon points="${pts}" fill="${grey ? "#c9cdd8" : BADGE_TIER[t]}" stroke="#1f2a44" stroke-width="1.8" stroke-linejoin="round"/>`;
+  }).join("");
+  const LOCK = `<g transform="translate(0 6)"><rect x="-13" y="-4" width="26" height="22" rx="5" fill="#8d93a8" stroke="#1f2a44" stroke-width="2.2"/><path d="M-7.5 -4v-6a7.5 7.5 0 0 1 15 0v6" fill="none" stroke="#1f2a44" stroke-width="5"/><path d="M-7.5 -4v-6a7.5 7.5 0 0 1 15 0v6" fill="none" stroke="#8d93a8" stroke-width="2.4"/><circle cy="6" r="2.6" fill="#1f2a44"/></g>`;
+  function chip(id, opts = {}) {
+    const b = BMAP[id], got = opts.force || !!have[id], secret = b.cat === "Geheim" && !got;
+    const use = `<use href="#b-${secret ? "geheim" : id}" x="-80" y="-82" width="160" height="168"/>`;
+    return `<svg class="bdg-svg" viewBox="-80 -82 160 168" aria-hidden="true">${got ? use : `<g filter="url(#bdgGrey)">${use}</g>${secret ? "" : LOCK}`}${stars(b.tier, !got)}</svg>`;
+  }
+
+  /* ---------- Freischalten ---------- */
+  function unlock(id) {
+    if (have[id] || !BMAP[id]) return;
+    have[id] = Date.now(); save();
+    store.set("exmaBadgeNew", "1");
+    queue.push(id); updateTile();
+    if (!showing) setTimeout(next, 400);
+  }
+  function stufe(g, n) {
+    const reach = BADGE_STUFEN[g].need.filter((x) => n >= x).length;
+    for (let k = 1; k < reach; k++) { const id = `${g}-${k}`; if (!have[id]) { have[id] = Date.now() - (reach - k); save(); } }
+    if (reach) unlock(`${g}-${reach}`);
+  }
+  /* Höchste geholte Stufe einer Gruppe (oder null) */
+  const topLv = (g) => { for (let k = 4; k >= 1; k--) if (have[`${g}-${k}`]) return k; return 0; };
+  const inGame = () => ["is-game", "is-bus", "is-zapf", "is-pol"].some((c) => app.classList.contains(c));
+  function next() {
+    if (!queue.length) { showing = false; return; }
+    if (inGame() || document.hidden) { showing = true; setTimeout(next, 1500); return; }
+    showing = true;
+    art().then(() => card(queue.shift(), true));
+  }
+
+  /* ---------- Karte: Freischalt-Moment oder Detail ---------- */
+  function card(id, fresh) {
+    const b = BMAP[id], got = !!have[id], secret = b.cat === "Geheim" && !got;
+    let over = $("bdgOver");
+    if (!over) { over = document.createElement("div"); over.id = "bdgOver"; over.className = "bdg-over"; document.body.appendChild(over); }
+    const when = got ? new Date(have[id]).toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
+    const prog = !got && !secret ? progress(id) : "";
+    over.innerHTML = `<div class="bdg-card${fresh ? " fresh" : ""}" role="dialog" aria-label="${secret ? "Geheimes Abzeichen" : esc(b.name)}">
+        ${fresh ? `<small class="bdg-kick">Abzeichen freigeschaltet!</small>` : ""}
+        <div class="bdg-big">${chip(id)}</div>
+        <h3>${secret ? "???" : esc(b.name)}</h3>
+        <p>${secret ? "Ein geheimes Abzeichen. Finde selbst heraus, wie du es bekommst." : esc(b.desc)}</p>
+        ${got ? `<p class="bdg-when">Geholt am ${when}</p>` : prog ? `<p class="bdg-when">${prog}</p>` : ""}
+        ${got && b.grp && b.lv < 4 ? `<p class="bdg-next">Nächste Stufe (${STUFE_FARBE[b.lv + 1]}): ${BADGE_STUFEN[b.grp].need[b.lv]} ${BADGE_STUFEN[b.grp].unit}</p>` : ""}
+        <div class="row2">${got ? `<button class="ghost" type="button" data-share>Teilen</button>` : ""}<button class="primary" type="button" data-close>${fresh ? "Weiter" : "Schließen"}</button></div>
+      </div>${fresh ? `<div class="bdg-confetti" aria-hidden="true">${Array.from({ length: 36 }, (_, i) => `<i style="--x:${(Math.random() * 100).toFixed(1)}%;--d:${(Math.random() * .6).toFixed(2)}s;--r:${Math.round(Math.random() * 360)}deg;--c:${["#f6c344", "#ff5d9e", "#4f7fe0", "#7bc86c", "#8a6cf0", "#ef6b5b"][i % 6]}"></i>`).join("")}</div>` : ""}`;
+    over.hidden = false; requestAnimationFrame(() => over.classList.add("show"));
+    const close = () => { over.classList.remove("show"); setTimeout(() => { over.hidden = true; over.innerHTML = ""; if (fresh) next(); }, 220); };
+    over.querySelector("[data-close]").addEventListener("click", close);
+    over.onclick = (e) => { if (e.target === over) close(); };
+    const sh = over.querySelector("[data-share]"); if (sh) sh.addEventListener("click", () => share(id, sh));
+    if (fresh) { buzzOnce(); if ($("abzeichenPage")) renderBadgePage(); }
+  }
+  const buzzOnce = () => { try { navigator.vibrate && navigator.vibrate([30, 40, 90]); } catch {} };
+  function progress(id) {
+    const v = log.visits.length, wins = Object.values(log.eve).filter((e) => e.win && e.win === e.mat).length;
+    if (id === "stamm") return `${Math.min(v, 3)} von 3 Clubabenden`;
+    if (id === "inventar") return `${Math.min(v, 10)} von 10 Clubabenden`;
+    if (id === "dynastie") return `${Math.min(wins, 3)} von 3 Siegen deiner Matrikel`;
+    const b = BMAP[id]; if (b && b.grp) { const d = BADGE_STUFEN[b.grp]; return `Ziel: ${d.need[b.lv - 1]} ${d.unit} in einem Spiel`; }
+    return "Noch nicht geschafft.";
+  }
+
+  /* ---------- Teilen: fertige Story-Grafik (1080 × 1920) ---------- */
+  async function share(id, btn) {
+    const b = BMAP[id]; btn.disabled = true; const old = btn.textContent; btn.textContent = "Erstellt Bild …";
+    try {
+      await art(); if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const sym = document.getElementById("b-" + id);
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -82 160 168" width="800" height="840">${sym.innerHTML}${stars(b.tier, false)}</svg>`;
+      const img = new Image(); img.src = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+      await img.decode();
+      const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1920; const x = cv.getContext("2d");
+      const c = BADGE_TIER[b.tier], g = x.createLinearGradient(0, 0, 0, 1920);
+      g.addColorStop(0, "#12091a"); g.addColorStop(.55, "#1d1336"); g.addColorStop(1, c); x.fillStyle = g; x.fillRect(0, 0, 1080, 1920);
+      const rg = x.createRadialGradient(540, 860, 40, 540, 860, 560); rg.addColorStop(0, c + "88"); rg.addColorStop(1, c + "00"); x.fillStyle = rg; x.fillRect(0, 0, 1080, 1920);
+      x.drawImage(img, 140, 400, 800, 840);
+      x.textAlign = "center"; x.fillStyle = "#fff";
+      x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillText("ABZEICHEN FREIGESCHALTET", 540, 300);
+      x.font = '84px "Dela Gothic One", sans-serif'; x.fillText(b.name.toUpperCase(), 540, 1370, 980);
+      x.font = '600 44px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.85)"; x.fillText(b.desc, 540, 1450, 980);
+      x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillStyle = "#fff"; x.fillText("ExMa Bar · DHSN Glauchau", 540, 1760);
+      x.font = '600 34px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.8)"; x.fillText("exmabarapp.github.io/ExMa-App", 540, 1815);
+      const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
+      const file = new File([blob], `exma-abzeichen-${id}.png`, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file], title: "ExMa-Abzeichen: " + b.name });
+      else { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name; document.body.appendChild(a); a.click(); a.remove(); }
+    } catch (e) { if (!e || e.name !== "AbortError") console.warn("Abzeichen teilen", e); }
+    btn.disabled = false; btn.textContent = old;
+  }
+
+  /* ---------- Prüfstellen ---------- */
+  /* Clubabend fürs Abzeichen: Live-Phase eines Abends und 21:00–1:30 Uhr */
+  function clubNow(now = new Date()) {
+    const ph = clubPhase(now); if (!ph || ph.phase !== "live") return null;
+    const h = now.getHours() + now.getMinutes() / 60;
+    return h >= 21 || h < 1.5 ? ph.ev : null;
+  }
+  function tick() {
+    const now = new Date(), h = now.getHours();
+    if (h >= 3 && h < 5) unlock("nacht");
+    try { if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) unlock("hatapp"); } catch {}
+    const ev = clubNow(now);
+    if (ev) {
+      if (!log.visits.includes(ev.id)) { log.visits.push(ev.id); save(); }
+      if (ev.abzeichen) unlock(ev.abzeichen);
+    }
+    const v = log.visits;
+    if (v.length >= 1) unlock("neu");
+    if (v.length >= 3) unlock("stamm");
+    if (v.length >= 10) unlock("inventar");
+    const idx = v.map((id) => EVENTS.findIndex((e) => e.id === id)).filter((i) => i >= 0).sort((a, b) => a - b);
+    for (let i = 2; i < idx.length; i++) if (idx[i] - idx[i - 2] === 2) { unlock("serie"); break; }
+    /* Abende ohne Rückblick-Zahlen mit dem letzten Stand nach 1:15 abschließen */
+    const ph = clubPhase(now);
+    v.forEach((id) => { const e = log.eve[id]; if (e && e.win === undefined && e.last && !(ph && ph.ev && ph.ev.id === id)) finalize(id, e.last); });
+  }
+  function onStats(st) {
+    if (!st || !st.matrikel) return;
+    const now = new Date(), mine = store.get("exmaMatrikel"), m = st.matrikel;
+    const ev = clubNow(now);
+    if (ev && mine && log.visits.includes(ev.id)) {
+      const e = eve(ev.id); e.mat = mine;
+      const lead = Math.max(...MATRIKEL.filter((x) => x !== mine).map((x) => m[x] || 0));
+      if (lead - (m[mine] || 0) >= 10) e.behind = true;
+      const h = now.getHours() + now.getMinutes() / 60;
+      if (h >= 1.25 && h < 1.5) e.last = { ...m };
+      save();
+    }
+    const ph = clubPhase(now);
+    if (ph && ph.phase === "rueck" && ph.ev) finalize(ph.ev.id, m);
+  }
+  function finalize(id, m) {
+    const e = log.eve[id]; if (!e || e.win !== undefined || !log.visits.includes(id)) return;
+    const tot = MATRIKEL.map((x) => m[x] || 0), mx = Math.max(...tot);
+    e.win = mx > 0 && tot.filter((t) => t === mx).length === 1 ? MATRIKEL[tot.indexOf(mx)] : null;
+    save();
+    if (e.win && e.win === e.mat) { unlock("mstolz"); if (e.behind) unlock("comeback"); }
+    if (Object.values(log.eve).filter((x) => x.win && x.win === x.mat).length >= 3) unlock("dynastie");
+  }
+  function drink(kind) {
+    unlock("erste");
+    const now = new Date(), ev = clubNow(now); if (!ev) return;
+    const hh = trHH(ev); if (hh && now >= hh.from && now < hh.to) unlock("happy");
+    const h = now.getHours() + now.getMinutes() / 60;
+    if (h >= 21 && h < 22) unlock("vorglueh");
+    if (h >= 1.25 && h < 1.5) unlock("lastcall");
+    const e = eve(ev.id); e.k = [...new Set([...(e.k || []), kind])]; save();
+    if (e.k.length >= 3) unlock("allround");
+  }
+  function played(game) {
+    const ev = clubNow(); if (!ev) return;
+    const e = eve(ev.id); e.g = [...new Set([...(e.g || []), game])]; save();
+    unlock("zocker"); if (e.g.length >= 3) unlock("spielkind");
+  }
+  function board(list, id) {
+    if (!id || !clubNow()) return;
+    const i = list.findIndex((e) => e.id === id);
+    if (i >= 0 && i < 10) unlock("top10");
+    if (i === 0) unlock("koenig");
+  }
+  return {
+    BMAP, chip, art, unlock, drink, played, board, card, tick,
+    bp(n, ms, movingHit) { stufe("bp", n); if (n >= 50) unlock("bpgold"); if (n >= 10 && ms < 10000) unlock("blitz"); if (movingHit) unlock("moving"); },
+    bus(n) { stufe("bus", n); if (n >= 51) unlock("endstation"); },
+    zapf(n, level, split) { stufe("z", n); if (n >= 19) unlock("zapfgold"); if (level >= .999) unlock("milli"); if (split) unlock("splitg"); },
+    turnier(st, mine) {
+      if (!mine || !st.groups.length) return;
+      if (st.groups.some((g) => st.d.gruppen[g].includes(mine))) unlock("teilnehmer");
+      if (st.champ && st.champ === mine) unlock("champion");
+    },
+    count: () => BADGE_LIST.filter((b) => have[b.id]).length,
+    has: (id) => !!have[id],
+    latest: () => Object.entries(have).sort((a, b) => b[1] - a[1]).map(([k]) => k).find((k) => BMAP[k]) || null,
+    recent: (n) => [...new Set(Object.entries(have).sort((a, b) => b[1] - a[1]).map(([k]) => k).filter((k) => BMAP[k]).map((k) => BMAP[k].grp ? `${BMAP[k].grp}-${topLv(BMAP[k].grp)}` : k))].slice(0, n),
+    topLv,
+    init() {
+      tick(); setInterval(tick, 60000);
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) tick(); });
+      Live.subscribe(onStats);
+      if (Object.keys(have).length || store.get("exmaBadgeNew")) art();
+    },
+    _dbg: { have: () => have, log: () => log, reset: () => { have = {}; log = { visits: [], eve: {} }; save(); }, clubNow, onStats, finalize }
+  };
+})();
+function updateTile() {
+  const got = Badges.count(), N = BADGE_LIST.length;
+  const n = $("hmBadgeN"); if (n) n.textContent = `${got} von ${N}`;
+  const bar = $("hmBadgeBar"); if (bar) bar.style.width = `${(100 * got / N).toFixed(1)}%`;
+  const d = document.querySelector(".hm-badges"); if (d) d.classList.toggle("new", !!store.get("exmaBadgeNew"));
+  const ic = $("hmBadgeIco"); if (!ic) return;
+  /* Fächer aus drei Chips: die zuletzt geholten vorn, aufgefüllt mit noch gesperrten */
+  const ids = Badges.recent(3);
+  for (const b of ["erste", "zocker", "neu", "bp-1", "bus-1"]) { if (ids.length >= 3) break; if (!ids.includes(b)) ids.push(b); }
+  ic.innerHTML = ids.slice(0, 3).reverse().map((id, i) => { const lk = !Badges.has(id);
+    return `<span class="hb-c hb-${i}${lk ? " lk" : ""}">${Badges.chip(id, { force: lk })}</span>`; }).join("");
+}
+function badgeTile() {
+  return `<a class="tile-btn hm-badges" href="#abzeichen"><span class="hm-bdg-fx" aria-hidden="true"><i class="hm-shine"></i></span><span class="hm-bdg-ico" id="hmBadgeIco" aria-hidden="true"></span><span class="hm-bdg-txt"><b>Abzeichen</b><small id="hmBadgeN">${Badges.count()} von ${BADGE_LIST.length}</small><span class="hm-bdg-rail"><i id="hmBadgeBar"></i></span></span><i class="hm-go">${ICON_ARROW}</i></a>`;
+}
+function renderBadgePage() {
+  store.set("exmaBadgeNew", "");
+  const got = Badges.count();
+  const cats = BADGE_CATS.map((c) => {
+    const list = BADGE_LIST.filter((b) => b.cat === c), n = list.filter((b) => Badges.has(b.id)).length;
+    const shown = [], seen = new Set();
+    for (const b of list) {
+      if (!b.grp) { shown.push(b); continue; }
+      if (seen.has(b.grp)) continue; seen.add(b.grp);
+      const lv = Badges.topLv(b.grp); shown.push(BADGE_LIST.find((x) => x.id === `${b.grp}-${Math.max(1, lv)}`));
+    }
+    return `<section class="bdg-shelf${c === "Gold" ? " gold" : ""}"><h3 class="bdg-h">${c} <small>${n} / ${list.length}</small></h3>
+      <div class="bdg-grid">${shown.map((b) => { const secret = b.cat === "Geheim" && !Badges.has(b.id);
+        return `<button type="button" class="bdg${Badges.has(b.id) ? "" : " locked"}" style="--tc:${BADGE_TIER[b.tier]}" data-b="${b.id}" aria-label="${secret ? "Geheimes Abzeichen" : esc(b.name)}${Badges.has(b.id) ? "" : " (noch gesperrt)"}">${Badges.chip(b.id)}<b>${secret ? "???" : esc(b.grp ? BADGE_STUFEN[b.grp].name : b.name)}</b>${b.grp ? `<span class="bdg-lv" aria-hidden="true">${[1, 2, 3, 4].map((k) => `<i class="${Badges.has(`${b.grp}-${k}`) ? "on" : ""}" style="--tc:${BADGE_TIER[k]}"></i>`).join("")}</span>` : ""}</button>`; }).join("")}</div></section>`;
+  }).join("");
+  pageShell("badge-page", "Abzeichen", `
+    <div id="abzeichenPage">
+      <div class="bdg-hero"><div class="bdg-top"><div class="bdg-count"><b>${got}</b><span>von ${BADGE_LIST.length} Abzeichen</span></div>
+        <button type="button" class="bdg-info" id="bdgInfo" aria-expanded="false" aria-controls="bdgNote" aria-label="Wo werden meine Abzeichen gespeichert?">i</button></div>
+      <p class="bdg-note" id="bdgNote" hidden>Deine Abzeichen werden nur auf diesem Handy gespeichert – nicht online. Wenn du dein Handy wechselst, den Browserverlauf bzw. die Websitedaten löschst oder die App neu installierst, sind sie weg. Abzeichen rund um den Clubabend zählen von 21:00 bis 1:30 Uhr.</p>
+      <div class="bdg-bar"><i style="width:${(100 * got / BADGE_LIST.length).toFixed(1)}%"></i></div>
+      <div class="bdg-tiers">${[0, 1, 2, 3, 4].map((t) => { const l = BADGE_LIST.filter((b) => b.tier === t); return `<span style="--tc:${BADGE_TIER[t]}"><i></i>${l.filter((b) => Badges.has(b.id)).length}/${l.length}</span>`; }).join("")}</div></div>
+      ${cats}
+    </div>`);
+  $("bdgInfo").addEventListener("click", (e) => { const n = $("bdgNote"); n.hidden = !n.hidden; e.currentTarget.setAttribute("aria-expanded", String(!n.hidden)); });
+  document.querySelectorAll("#abzeichenPage [data-b]").forEach((b) => b.addEventListener("click", () => Badges.card(b.dataset.b, false)));
+  Badges.art();
+}
 
 /* Kleine Demo für die Zapfmeister-Kachel: Glas füllt sich, Schaum steigt nach */
 function zapfDemo() {
@@ -5737,6 +6157,7 @@ function buildMenu() {
       <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></a></div>
       <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
     </div>
+    ${badgeTile()}
     <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
 `;
   const rest = `
@@ -5799,6 +6220,7 @@ function buildMenu() {
     if (Live.remote || FB.off) fill(); else setTimeout(fill, 2500);
   }
   phSelfPick = false; renderPhSelf();
+  Badges.art().then(updateTile);
   phaseTick();
   fillBest(g);
   g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
@@ -5868,6 +6290,7 @@ function routeInner() {
   if (id === "impressum" || id === "datenschutz") { renderLegal(id); show(true); return; }
   if (id === "paypal") { renderPay(); show(true); return; }
   if (id === "wuensche") { renderWishPage(); show(true); return; }
+  if (id === "abzeichen") { renderBadgePage(); show(true); return; }
   if (id === "team") { renderTeamPage(); show(true); return; }
   if (id === "turnier") { renderTurnier(); show(true); return; }
   if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
@@ -5926,9 +6349,10 @@ function renderLegal(which) {
       <h3>5. Externe Dienste und Links</h3>
       <p>Die App verlinkt auf Instagram, Google Formulare (Anmeldung zum Turnier) und PayPal. Kalender-Einträge und Bilder zum Teilen erstellt die App direkt auf Ihrem Gerät, dabei werden keine Daten an uns übertragen. Daten werden an diese Anbieter erst übertragen, wenn Sie den jeweiligen Link antippen. Ab dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters. Für die Anmeldung über Google Formulare finden Sie die Hinweise direkt im Formular.</p>
       <h3>6. Sauf-Ranking, Bestenlisten und Wünsche (Google Firebase)</h3>
-      <p>Für die gemeinsamen Zahlen, die Bestenlisten der Minispiele (Beerpong, Busfahrer, Zapfmeister) und die Wünsche nutzen wir Google Firebase (Google Ireland Limited). Die Daten werden in einem Rechenzentrum in Frankfurt am Main (Deutschland) gespeichert. Beim Öffnen der App lädt Ihr Browser die Firebase-Programmbibliothek von Google-Servern, dabei wird Ihre IP-Adresse übermittelt. Damit Einträge nicht beliebig oft gemacht werden können, erhält Ihr Gerät eine zufällige, anonyme Kennung (keine Anmeldung, kein Name). Gespeichert werden:</p>
-      <p>· beim Eintragen eines Drinks: nur der Zeitpunkt Ihres letzten Eintrags zu dieser anonymen Kennung sowie die Erhöhung der Gesamtzähler (keine Angaben zu Ihrer Person);<br>· bei den Bestenlisten: der von Ihnen gewählte Name, Ihr Ergebnis (Beerpong: Becherzahl und Spielzeit; Busfahrer: Zahl der geschafften Karten; Zapfmeister: Punkte und Zahl der Gläser) und der Zeitpunkt;<br>· bei Wünschen: Ihr Wunsch und, falls angegeben, Name und Studiengang.</p>
+      <p>Für die gemeinsamen Zahlen, die Bestenlisten der Minispiele (Beerpong, Busfahrer, Zapfmeister und ein verstecktes Spiel) und die Wünsche nutzen wir Google Firebase (Google Ireland Limited). Die Daten werden in einem Rechenzentrum in Frankfurt am Main (Deutschland) gespeichert. Beim Öffnen der App lädt Ihr Browser die Firebase-Programmbibliothek von Google-Servern, dabei wird Ihre IP-Adresse übermittelt. Damit Einträge nicht beliebig oft gemacht werden können, erhält Ihr Gerät eine zufällige, anonyme Kennung (keine Anmeldung, kein Name). Gespeichert werden:</p>
+      <p>· beim Eintragen eines Drinks: nur der Zeitpunkt Ihres letzten Eintrags zu dieser anonymen Kennung sowie die Erhöhung der Gesamtzähler (keine Angaben zu Ihrer Person);<br>· bei den Bestenlisten: der von Ihnen gewählte Name, Ihr Ergebnis (Beerpong: Becherzahl und Spielzeit; Busfahrer: Zahl der geschafften Karten; Zapfmeister: Punkte und Zahl der Gläser; verstecktes Spiel: Strecke und Zeit) und der Zeitpunkt;<br>· bei Wünschen: Ihr Wunsch und, falls angegeben, Name und Studiengang.</p>
       <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Betrieb der Funktionen) bzw. bei freiwilligen Angaben Art. 6 Abs. 1 lit. a DSGVO. Bestenliste und Wünsche löschen wir, sobald wir sie nicht mehr brauchen, spätestens zum Ende des Semesters. Google ist unter dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Datenschutz bei Firebase</a>.</p>
+      <p><b>Abzeichen:</b> Welche Abzeichen Sie freigeschaltet haben und die dafür nötigen Angaben (z. B. an welchen Clubabenden die App geöffnet war oder welche Matrikel an einem Abend vorne lag) werden ausschließlich lokal auf Ihrem Gerät gespeichert (Browser-Speicher) und nicht an uns oder Dritte übertragen. Sie können sie jederzeit löschen, indem Sie die Websitedaten im Browser löschen.</p>
       <h3>7. Kontakt per E-Mail</h3>
       <p>Wenn Sie uns schreiben, verwenden wir Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. f DSGVO), und löschen sie, wenn sie nicht mehr gebraucht werden.</p>
       <h3>8. Ihre Rechte</h3>
@@ -6013,6 +6437,7 @@ function addToCalendar(ev) {
 
 /* Teilen: öffnet direkt WhatsApp mit Kontaktauswahl und fertigem Text samt Link */
 function shareWhatsApp(ev) {
+  Badges.unlock("einlader");
   const text = eventText(ev) + "\n\nAlle Infos, Drinks & App: " + eventUrl(ev);
   const url = "https://wa.me/?text=" + encodeURIComponent(text);
   const w = window.open(url, "_blank", "noopener");
@@ -6422,6 +6847,7 @@ function renderTurnierBody(st) {
   const body = $("tnBody"); if (!body) return;
   const ev = tnEvent(), mine = tnMyTeam(), nx = mine && st.groups.length ? tnMatchFor(st, mine) : null;
   if (st.champ) tnMarkEnded(st.champ);
+  Badges.turnier(st, mine);
   body.innerHTML = `${tnPill(st)}
     ${st.champ ? `<div class="tn-card tn-champ"><div>🏆</div><small>Turniersieger</small><b>${esc(st.champ)}</b><span>Finale ${Math.max(...st.M.F.r.s)}:${Math.min(...st.M.F.r.s)} gegen ${esc(st.M.F.lose)} · Platz 3: ${esc(st.M.P3.win || "–")}</span></div>` : ""}
     ${tnMine(st)}
@@ -7046,6 +7472,7 @@ goTo(index, false);
 buildMenu();
 initFirebase();
 route();
+Badges.init();
 fitAll();
 setInterval(refreshLive, 30000);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fitAll(); fitMenu(); });
