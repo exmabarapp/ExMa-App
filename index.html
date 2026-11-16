@@ -1008,10 +1008,10 @@ a { color: inherit; }
   100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .tile-banner { animation: none; } }
-.app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf) { visibility: hidden !important; }
+.app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf):not(.view-pol) { visibility: hidden !important; }
 .app.hero-off .view-hero { visibility: hidden !important; }
 .app.hero-off .view-hero * { animation-play-state: paused !important; }
-.app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf) * { animation-play-state: paused !important; }
+.app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf):not(.view-pol) * { animation-play-state: paused !important; }
 /* PayPal-Kachel im Hauptmenü (so hoch wie die Minispiel-Kacheln) */
 .tile-btn.tile-pay { background: linear-gradient(160deg, #ffdb70 0%, #ffc439 45%, #f2a900 100%); border: 1.5px solid #ffe7a0; box-shadow: 0 0 20px rgba(255,196,57,.32); color: #0b2a6b; }
 .tile-pay .pp-mark svg { display: block; width: 30px; height: 30px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.18)); }
@@ -1072,6 +1072,38 @@ a { color: inherit; }
 .view-zapf .bp-card .primary { background: linear-gradient(90deg, #12a35c, #2bd47a); }
 .view-zapf .bp-list li.me { background: #fff1d6; }
 .view-zapf .bp-list li .r { color: #c77a10; }
+/* ---------- Polnischen (geheimes Minispiel) ---------- */
+.view-pol {
+  z-index: 30; opacity: 0; pointer-events: none; transform: none; transition: opacity .4s ease;
+  overflow: hidden; background: #070b24; color: #fff; font-family: var(--f-body);
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none;
+}
+.app.is-pol .view-pol { opacity: 1; pointer-events: auto; }
+.app.is-pol .topbar, .app.is-pol .pager, .app.is-pol .arrow { opacity: 0; pointer-events: none; }
+.view-pol canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.pl-blur { position: absolute; inset: 0; pointer-events: none; --b: 0px; --r: 62%;
+  backdrop-filter: blur(var(--b)); -webkit-backdrop-filter: blur(var(--b));
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 34% 58%, transparent var(--r), #000 calc(var(--r) + 30%));
+  mask-image: radial-gradient(ellipse 70% 60% at 34% 58%, transparent var(--r), #000 calc(var(--r) + 30%)); }
+.pl-black { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity .08s; z-index: 2; }
+.pl-black.on { opacity: 1; }
+.pl-hud { background: linear-gradient(180deg, rgba(7,11,36,.92), rgba(7,11,36,.55) 70%, transparent); }
+.view-pol .bp-stat small { color: #ff7ad9; }
+.view-pol .bp-stat b { font-size: 17px; }
+.pl-say { position: absolute; left: 0; right: 0; top: calc(96px + var(--safe-t)); z-index: 3; text-align: center; pointer-events: none;
+  font-family: var(--f-display); font-size: 24px; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(-6px) scale(.96);
+  transition: opacity .2s, transform .2s; text-shadow: 0 0 14px #ff3fc8, 0 2px 8px rgba(0,0,0,.7); }
+.pl-say.show { opacity: 1; transform: none; }
+.pl-say.big { font-size: 30px; color: #ffe08a; text-shadow: 0 0 16px #ffb347, 0 2px 8px rgba(0,0,0,.7); }
+.pl-pads { position: absolute; left: 12px; right: 12px; bottom: calc(14px + var(--safe-b)); z-index: 3; display: flex; justify-content: space-between; pointer-events: none; }
+.pl-pads span { padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.18); font-size: 13px; font-weight: 800; letter-spacing: .06em; color: rgba(255,255,255,.75); text-transform: uppercase; }
+.view-pol .bp-over { z-index: 6; }
+.view-pol .bp-card h3 { color: #6a2cf0; }
+.view-pol .bp-card h3.bad { color: #ff2e88; }
+.view-pol .bp-card .primary { background: linear-gradient(90deg, #6a2cf0, #ff3fc8); }
+.view-pol .bp-list li.me { background: #f1e6ff; }
+.view-pol .bp-list li .r { color: #6a2cf0; }
+.pl-sub { margin: -4px 0 6px; font-size: 13px; font-weight: 700; color: #8a7aa0; }
 .zf-rules { margin: 10px 0 4px; padding: 0; list-style: none; text-align: left; display: grid; gap: 8px; color: #4a3d5c; font-size: 14px; line-height: 1.4; }
 .zf-rules li { display: flex; gap: 10px; }
 .zf-rules li i { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #ffc84a; color: #3a2405; font-style: normal; font-weight: 900; font-size: 12px; display: grid; place-items: center; }
@@ -1906,6 +1938,22 @@ a { color: inherit; }
       <div class="zf-info" id="zfInfo"></div>
       <div class="bp-toast" id="zfToast"></div>
       <div class="bp-over" id="zfOver" hidden></div>
+    </section>
+
+    <!-- Geheimes Minispiel: Polnischen -->
+    <section class="view view-pol" id="pol" aria-label="Geheimes Minispiel Polnischen" aria-hidden="true">
+      <canvas id="plCanvas" aria-hidden="true"></canvas>
+      <div class="pl-blur" id="plBlur" aria-hidden="true"></div>
+      <div class="pl-black" id="plBlack" aria-hidden="true"></div>
+      <div class="zf-hud pl-hud">
+        <button class="bp-x" id="plClose" type="button" aria-label="Spiel beenden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <div class="bp-stat"><small>Strecke</small><b id="plM">0,0 m</b></div>
+        <div class="bp-stat"><small>Zeit</small><b id="plT">0:00</b></div>
+        <div class="bp-stat"><small>Rekord</small><b id="plBest">0,0 m</b></div>
+      </div>
+      <div class="pl-say" id="plSay" aria-live="polite"></div>
+      <div class="pl-pads" aria-hidden="true"><span>‹ zurück</span><span>vor ›</span></div>
+      <div class="bp-over" id="plOver" hidden></div>
     </section>
 
     <!-- Detailansicht -->
@@ -3151,7 +3199,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["ranking", "team", "beerpong", "busfahrer", "zapfmeister", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
+  const OTHER = ["ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -3580,7 +3628,8 @@ async function loadWishList() {
 const TEAM_LISTS = {
   beerpong: { name: "Beerpong", api: () => Top, fmt: (e) => `${e.cups} Becher · ${Math.floor(e.ms / 60000)}:${String(Math.floor(e.ms / 1000) % 60).padStart(2, "0")}` },
   busfahrer: { name: "Busfahrer", api: () => BusTop, fmt: (e) => `${e.score} / 51` },
-  zapfmeister: { name: "Zapfmeister", api: () => ZapfTop, fmt: (e) => `${(e.score || 0).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} · ${e.glasses} Gl.` }
+  zapfmeister: { name: "Zapfmeister", api: () => ZapfTop, fmt: (e) => `${(e.score || 0).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} · ${e.glasses} Gl.` },
+  polnischen: { name: "Polnischen", api: () => PolTop, fmt: (e) => `${fmtMeter(e.dm)} · ${fmtZeit(e.ms)}` }
 };
 let teamList = "beerpong", teamSub = null;
 async function loadTeamList() {
@@ -4909,6 +4958,562 @@ const Zapf = (() => {
   };
 })();
 
+/* ================= Geheimes Minispiel: Polnischen =================
+   Ein Betrunkener will von der ExMa nach Hause (nach rechts). Er schwankt vor und zurück –
+   links/rechts tippen lehnt ihn nach hinten/vorne. Nach vorne lehnen = schneller, aber riskanter.
+   Je weiter er kommt, desto stärker das Schwanken, desto verschwommener der Rand und desto träger die Eingabe.
+   Zu finden über 5× Tippen aufs Logo. Bestenliste: Meter (mehr ist besser), bei Gleichstand die Zeit. */
+const polAt = (e) => (e.at && e.at.toMillis ? e.at.toMillis() : (typeof e.at === "number" ? e.at : Date.now()));
+const PolTop = {
+  KEY: "exmaPolTop", COL: "polnischen",
+  sort: (l) => l.sort((a, b) => b.dm - a.dm || a.ms - b.ms || polAt(a) - polAt(b)).slice(0, 10),
+  local() { try { return JSON.parse(localStorage.getItem(this.KEY) || "[]"); } catch { return []; } },
+  async list() {
+    if (!Live.remote) return this.sort(this.local());
+    const qs = await FB.db.collection(this.COL).orderBy("dm", "desc").limit(14).get();
+    return this.sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })));
+  },
+  async add(entry) {
+    if (!Live.remote) {
+      const id = String(Date.now());
+      const l = this.sort([...this.local(), { ...entry, id, at: Date.now() }]);
+      try { localStorage.setItem(this.KEY, JSON.stringify(l)); } catch {}
+      return id;
+    }
+    const ref = await FB.db.collection(this.COL).add({ name: entry.name, dm: entry.dm, ms: entry.ms, at: FB.fv.serverTimestamp(), uid: FB.user.uid });
+    return ref.id;
+  },
+  async remove(id) {
+    if (!Live.remote) { try { localStorage.setItem(this.KEY, JSON.stringify(this.local().filter((e) => e.id !== id))); } catch {} return; }
+    await FB.db.doc(this.COL + "/" + id).delete();
+  },
+  async clear() {
+    if (!Live.remote) { try { localStorage.removeItem(this.KEY); } catch {} return; }
+    const qs = await FB.db.collection(this.COL).limit(400).get();
+    const batch = FB.db.batch(); qs.docs.forEach((d) => batch.delete(d.ref)); await batch.commit();
+  }
+};
+const fmtMeter = (dm) => (dm / 10).toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " m";
+const fmtZeit = (ms) => `${Math.floor(ms / 60000)}:${String(Math.floor(ms / 1000) % 60).padStart(2, "0")}`;
+
+if (typeof CanvasRenderingContext2D !== "undefined" && !CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) { r = Math.min(r || 0, w / 2, h / 2); this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath(); return this; };
+}
+const Pol = (() => {
+  /* ---------- Figuren (alle spielen gleich, nur das Aussehen ist anders) ---------- */
+  const SKIN = ["#f6d3b8", "#eebd95", "#d79b6c", "#a8693f", "#7a4a2a", "#f1c9a5"];
+  const HAIR = ["#2b1a10", "#5a3418", "#c98b3c", "#1b1b1f", "#8a2d1c", "#e6c178"];
+  const FIG = [
+    { id: "hoodie",  top: "#3d5bd9", pants: "#27324f", shoe: "#f2f2f2", hair: "short", hood: true },
+    { id: "zopf",    top: "#6f9fd8", pants: "#1f2a44", shoe: "#ffffff", hair: "ponytail", jacket: true, female: true },
+    { id: "hawaii",  top: "#ff8a3d", pants: "#e8d9b0", shoe: "#5b3a1e", hair: "short", hawaii: true, shades: true },
+    { id: "glitzer", top: "#d83aa8", pants: "#20142e", shoe: "#d83aa8", hair: "long", glitter: true, heels: true, female: true },
+    { id: "trikot",  top: "#e3344a", pants: "#ffffff", shoe: "#222", hair: "buzz", belly: true, jersey: true },
+    { id: "ersti",   top: "#f6b928", pants: "#3a3f58", shoe: "#ff5d73", hair: "bob", backpack: true, band: true, female: true },
+    { id: "team",    top: "#141418", pants: "#2c2c34", shoe: "#ffffff", hair: "curly", team: true },
+    { id: "gips",    top: "#2e9a6a", pants: "#3b3b52", shoe: "#222", hair: "short", cast: true }
+  ];
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+
+  /* ---------- Zustand ---------- */
+  let running = false, raf = 0, last = 0, acc = 0, state = "off";
+  let cv, ctx, W = 0, H = 0, DPR = 1, U = 1;
+  let fig, th, om, d, tms, walk, noiseV, noiseT, speed, best = 0;
+  let inputs = [], events = [], nextEv, active = [], fx = [], ghosts = 0, blackUntil = 0, slope = 0, slopeT = 0, cobble = 0;
+  let fallT = 0, fallDir = 0, cause = "", causeAt = -1e9, milestonesShown = {}, greenT = 0, reach = 0, reachBack = 0, holdBottle = false, hickT = 0, padFlash = { l: 0, r: 0 };
+  const DT = 1 / 120;
+  const T_FALL = 0.95;
+  /* Stellschrauben: Tipp-Stoß, Kippen, Schwanken, Dämpfung – und wie stark sie mit der Strecke wachsen */
+  const TUNE = { imp: 0.38, g0: 0.8, gMax: 2.0, gPer: 150, a0: 0.4, aMax: 1.8, aPer: 120, damp: 2.6, lagPer: 1500, lagMax: 0.3, evMul: 0.4 };
+  const MILES = [
+    { m: 50, name: "Parkplatz" }, { m: 150, name: "Bushaltestelle" }, { m: 300, name: "Dönerladen" }, { m: 500, name: "Haustür" }
+  ];
+  const LINES = ["Der Boden war schneller.", "Hier wohnst du jetzt.", "Kurze Pause auf dem Gehweg.", "Die Schwerkraft gewinnt immer.", "Mal kurz den Asphalt testen.", "Der Gehweg sagt Hallo.", "Wird schon keiner gesehen haben."];
+  const CAUSE = {
+    pfuetze: "Pfütze erwischt.", gully: "Gullydeckel. Natürlich.", kopf: "Kopfsteinpflaster ist kein Freund.", banane: "Bananenschale. Ein Klassiker.",
+    flasche: "Die Flasche war's nicht wert.", bier: "Wer kann zu Freibier schon Nein sagen?", hick: "Hicks … und weg.", kotzen: "Danach ging gar nichts mehr.",
+    blackout: "Filmriss.", doppelt: "Zu viele von dir.", bergab: "Bergab ging's dann schnell.", bergauf: "Bergauf war zu steil."
+  };
+
+  /* ---------- Ereignisse ---------- */
+  const EV = [
+    { k: "pfuetze", from: 8, ground: true, w: 3 },
+    { k: "gully", from: 14, ground: true, w: 3 },
+    { k: "flasche", from: 24, ground: true, w: 2.5 },
+    { k: "kopf", from: 30, ground: true, w: 2.5, len: 9 },
+    { k: "banane", from: 40, ground: true, w: 2 },
+    { k: "hick", from: 45, w: 2 },
+    { k: "slope", from: 60, w: 2, len: 16 },
+    { k: "bier", from: 75, w: 2 },
+    { k: "kotzen", from: 100, w: 1.6 },
+    { k: "doppelt", from: 120, w: 1.6 },
+    { k: "blackout", from: 160, w: 1.3 }
+  ];
+  function schedule(from) {
+    const pool = EV.filter((e) => from >= e.from);
+    const gap = Math.max(5, 13 - from / 45) + Math.random() * 4;
+    if (!pool.length) { nextEv = { k: null, at: from + gap }; return; }
+    let r = Math.random() * pool.reduce((s, e) => s + e.w, 0), e = pool[0];
+    for (const x of pool) { r -= x.w; if (r <= 0) { e = x; break; } }
+    const ev = { k: e.k, at: from + gap, ground: !!e.ground, len: e.len || 0, dir: Math.random() < .5 ? -1 : 1, done: false };
+    if (e.k === "slope") ev.dir = Math.random() < .5 ? -1 : 1;  /* -1 bergauf, +1 bergab */
+    nextEv = ev; events.push(ev);
+  }
+  const power = () => TUNE.evMul * (1 + Math.min(1.2, d / 400));
+
+  function trigger(ev) {
+    const p = power();
+    switch (ev.k) {
+      case "pfuetze": om += (ev.dir) * 1.35 * p; splash("#9fd3ff"); say("Platsch!"); break;
+      case "gully": om += 1.25 * p; say("Stolper!"); break;
+      case "banane": om -= 1.9 * p; say("Huiii!"); break;
+      case "flasche": reach = 0.9; holdBottle = true; say("Ooh, eine Flasche!"); break;
+      case "kopf": cobble = d + ev.len; say("Kopfsteinpflaster"); break;
+      case "hick": hickT = 4; break;
+      case "slope": slope = ev.dir; slopeT = d + ev.len; say(ev.dir > 0 ? "Bergab!" : "Bergauf!"); break;
+      case "bier": active.push({ k: "bierhand", t: 0 }); break;
+      case "kotzen": greenT = 0.75; active.push({ k: "kotzen", t: 0 }); break;
+      case "doppelt": ghosts = 4.5; say("Doppelt sehen …"); break;
+      case "blackout": blackUntil = tms + (550 + Math.min(450, d * 1.2)); break;
+    }
+    ev.done = true;
+    if (["pfuetze", "gully", "banane"].includes(ev.k)) setCause(ev.k);
+  }
+  function setCause(k) { cause = k; causeAt = tms; }
+
+  /* ---------- Physik (feste Schritte, damit es auf jedem Handy gleich läuft) ---------- */
+  function step() {
+    const p = power();
+    const G = TUNE.g0 + Math.min(TUNE.gMax, d / TUNE.gPer);
+    const A = TUNE.a0 + Math.min(TUNE.aMax, d / TUNE.aPer) + (d < cobble ? 1.6 : 0);
+    const lag = Math.min(TUNE.lagMax, d / TUNE.lagPer);
+    /* Eingaben mit wachsender Verzögerung */
+    while (inputs.length && inputs[0].t + lag * 1000 <= tms) { const i = inputs.shift(); om += i.dir * TUNE.imp; }
+    /* weiches Zufalls-Schwanken */
+    noiseT -= DT; if (noiseT <= 0) { noiseT = 0.35 + Math.random() * 0.5; noiseV = (Math.random() * 2 - 1) * A; }
+    let tq = G * Math.sin(th) + noiseV;
+    if (d < cobble && Math.random() < DT * 3) om += (Math.random() * 2 - 1) * 0.7;
+    if (slope && d < slopeT) tq += slope * 0.95 * p; else slope = 0;
+    if (reach > 0) { tq += 2.6 * p; reach -= DT; }
+    if (reachBack > 0) { tq -= 2.8 * p; reachBack -= DT; }
+    if (hickT > 0) { const before = hickT; hickT -= DT; if (Math.floor(before / 0.55) !== Math.floor(hickT / 0.55)) { om += (Math.random() < .5 ? -1 : 1) * 0.75 * p; say("Hick!"); } }
+    om += tq * DT;
+    om *= 1 - TUNE.damp * DT;
+    th += om * DT;
+    speed = Math.max(1.1, Math.min(7.2, 3 + 5.2 * th + (slope > 0 ? 1.2 : slope < 0 ? -0.9 : 0)));
+    d += speed * DT;
+    walk += speed * DT * 2.3;
+    tms += DT * 1000;
+    if (ghosts > 0) ghosts -= DT;
+    if (greenT > 0) { greenT -= DT; if (greenT <= 0) { om -= 2.5 * p; vomit(); say("Bwäärgh!"); } }
+    active.forEach((a) => { a.t += DT; if (a.k === "bierhand" && a.t > 0.65 && !a.fired) { a.fired = true; reachBack = 0.8; say("Oh, ein Bier!"); } });
+    active = active.filter((a) => a.t < 1.8);
+    if (d < cobble) setCause("kopf");
+    if (slope) setCause(slope > 0 ? "bergab" : "bergauf");
+    if (reach > 0) setCause("flasche");
+    if (reachBack > 0) setCause("bier");
+    if (hickT > 0) setCause("hick");
+    if (ghosts > 0) setCause("doppelt");
+    if (tms < blackUntil) setCause("blackout");
+    if (greenT > 0 || active.some((a) => a.k === "kotzen" && a.t < 1.2)) setCause("kotzen");
+    /* Ereignis erreicht? */
+    for (const ev of events) if (!ev.done && d >= ev.at) trigger(ev);
+    if (nextEv && d >= nextEv.at - (nextEv.ground ? 0 : 0)) schedule(nextEv.at);
+    events = events.filter((e) => !e.done || e.at > d - 20);
+    /* Meilensteine */
+    for (const m of MILES) if (!milestonesShown[m.m] && d >= m.m) { milestonesShown[m.m] = true; say(m.m === 500 ? "Haustür erreicht!" : m.name, true); }
+    if (!milestonesShown.weiter && d >= 515) { milestonesShown.weiter = true; say("… und dran vorbei.", true); }
+    if (Math.abs(th) > T_FALL) { fall(); }
+  }
+
+  /* ---------- Effekte ---------- */
+  let sayEl = null;
+  function say(text, big) {
+    if (!sayEl) return;
+    sayEl.textContent = text; sayEl.className = "pl-say show" + (big ? " big" : "");
+    clearTimeout(say._t); say._t = setTimeout(() => { if (sayEl) sayEl.className = "pl-say"; }, big ? 1500 : 900);
+  }
+  function splash(c) { for (let i = 0; i < 14; i++) fx.push({ x: 0, y: 0, vx: (Math.random() * 2 - 1) * 2.2, vy: -2 - Math.random() * 2.4, c, t: 0, life: .6, g: 9 }); }
+  function vomit() { for (let i = 0; i < 26; i++) fx.push({ head: true, x: 0, y: 0, vx: 3.2 + Math.random() * 2.2, vy: -0.6 + Math.random() * 1.4, c: i % 3 ? "#9ad94a" : "#c7e86b", t: i * -0.02, life: .8, g: 6 }); }
+
+  /* ---------- Zeichnen ---------- */
+  const PX = () => 46 * U;  /* Pixel pro Meter */
+  function resize() {
+    const r = cv.getBoundingClientRect();
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    U = Math.max(0.6, Math.min(1.5, Math.min(H / 760, W / 390)));
+  }
+  let stars = null, houses = null;
+  function seed() {
+    stars = Array.from({ length: 50 }, () => ({ x: Math.random(), y: Math.random() * .45, r: Math.random() * 1.3 + .3, tw: Math.random() * 6 }));
+    houses = Array.from({ length: 14 }, (_, i) => ({ w: 70 + Math.random() * 70, h: 90 + Math.random() * 120, roof: Math.random() < .5, win: Array.from({ length: 8 }, () => Math.random() < .35), c: ["#1a2152", "#1e2660", "#171c47", "#222a68"][i % 4] }));
+  }
+  function scene(ground) {
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#070b24"); g.addColorStop(.55, "#18205a"); g.addColorStop(1, "#2b2f6e");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#fff";
+    stars.forEach((s) => { ctx.globalAlpha = .4 + .5 * Math.abs(Math.sin(tms / 900 + s.tw)); ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, 7); ctx.fill(); });
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = "#fff6d8"; ctx.beginPath(); ctx.arc(W * .8, H * .14, 26 * U, 0, 7); ctx.fill();
+    ctx.fillStyle = "#18205a"; ctx.beginPath(); ctx.arc(W * .8 + 11 * U, H * .14 - 6 * U, 24 * U, 0, 7); ctx.fill();
+    /* Häuser (langsam, Parallaxe) */
+    const off = (d * PX() * .25) % (houses.reduce((s, h) => s + h.w * U + 14 * U, 0));
+    let x = -off;
+    for (let rep = 0; rep < 3 && x < W; rep++) for (const h of houses) {
+      const w = h.w * U, hh = h.h * U, top = ground - 26 * U - hh;
+      if (x + w > 0 && x < W) {
+        ctx.fillStyle = h.c; ctx.fillRect(x, top, w, hh + 30 * U);
+        if (h.roof) { ctx.beginPath(); ctx.moveTo(x - 4 * U, top); ctx.lineTo(x + w / 2, top - 28 * U); ctx.lineTo(x + w + 4 * U, top); ctx.fill(); }
+        h.win.forEach((on, i) => { const cx = x + 12 * U + (i % 2) * (w / 2), cy = top + 16 * U + Math.floor(i / 2) * 28 * U; if (cy < ground - 40 * U) { ctx.fillStyle = on ? "#ffd56b" : "#0f143a"; ctx.fillRect(cx, cy, 14 * U, 16 * U); } });
+      }
+      x += w + 14 * U;
+    }
+  }
+  function worldX(m) { return W * .34 + (m - d) * PX(); }
+  function lamp(x, ground) {
+    ctx.strokeStyle = "#3a4176"; ctx.lineWidth = 5 * U; ctx.beginPath(); ctx.moveTo(x, ground); ctx.lineTo(x, ground - 170 * U); ctx.lineTo(x + 22 * U, ground - 176 * U); ctx.stroke();
+    const gl = ctx.createRadialGradient(x + 24 * U, ground - 170 * U, 2, x + 24 * U, ground - 120 * U, 120 * U);
+    gl.addColorStop(0, "rgba(255,214,120,.55)"); gl.addColorStop(1, "rgba(255,214,120,0)");
+    ctx.fillStyle = gl; ctx.beginPath(); ctx.moveTo(x + 24 * U, ground - 170 * U); ctx.lineTo(x - 50 * U, ground); ctx.lineTo(x + 100 * U, ground); ctx.fill();
+    ctx.fillStyle = "#ffe08a"; ctx.beginPath(); ctx.ellipse(x + 24 * U, ground - 172 * U, 9 * U, 5 * U, 0, 0, 7); ctx.fill();
+  }
+  function sign(x, ground, kind) {
+    const u = U;
+    ctx.save(); ctx.translate(x, ground);
+    if (kind === 0) { /* Start: ExMa */
+      ctx.fillStyle = "#2a1640"; ctx.fillRect(-150 * u, -190 * u, 190 * u, 190 * u);
+      ctx.fillStyle = "#3b1f5a"; ctx.fillRect(-60 * u, -110 * u, 50 * u, 110 * u);
+      ctx.font = `${26 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillStyle = "#ff3fc8"; ctx.shadowColor = "#ff3fc8"; ctx.shadowBlur = 16 * u; ctx.fillText("EXMA", -55 * u, -140 * u); ctx.shadowBlur = 0;
+    } else if (kind === 50) { ctx.fillStyle = "#cfd6ff"; ctx.fillRect(-3 * u, -120 * u, 6 * u, 120 * u); ctx.fillStyle = "#2d6bff"; ctx.fillRect(-22 * u, -160 * u, 44 * u, 44 * u); ctx.fillStyle = "#fff"; ctx.font = `${30 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("P", 0, -126 * u); }
+    else if (kind === 150) { ctx.fillStyle = "#cfd6ff"; ctx.fillRect(-3 * u, -150 * u, 6 * u, 150 * u); ctx.fillStyle = "#f6c518"; ctx.beginPath(); ctx.arc(0, -160 * u, 22 * u, 0, 7); ctx.fill(); ctx.fillStyle = "#1b7a3a"; ctx.font = `${24 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("H", 0, -151 * u); ctx.strokeStyle = "rgba(200,220,255,.5)"; ctx.lineWidth = 3 * u; ctx.strokeRect(20 * u, -110 * u, 90 * u, 110 * u); }
+    else if (kind === 300) { ctx.fillStyle = "#3a1a14"; ctx.fillRect(-20 * u, -170 * u, 170 * u, 170 * u); ctx.fillStyle = "#ffb347"; ctx.fillRect(0, -100 * u, 130 * u, 60 * u); ctx.fillStyle = "#e3344a"; ctx.fillRect(-20 * u, -170 * u, 170 * u, 40 * u); ctx.fillStyle = "#fff"; ctx.font = `${22 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("DÖNER", 65 * u, -142 * u); }
+    else if (kind === 500) { ctx.fillStyle = "#2e3a7a"; ctx.fillRect(-60 * u, -200 * u, 160 * u, 200 * u); ctx.fillStyle = "#8a4b22"; ctx.fillRect(-10 * u, -120 * u, 56 * u, 120 * u); ctx.fillStyle = "#ffd56b"; ctx.beginPath(); ctx.arc(36 * u, -60 * u, 4 * u, 0, 7); ctx.fill(); ctx.fillStyle = "#ffd56b"; ctx.font = `${14 * u}px "Bricolage Grotesque", sans-serif`; ctx.textAlign = "center"; ctx.fillText("Nr. 5", 18 * u, -130 * u); ctx.fillStyle = "#c0392b"; ctx.fillRect(-16 * u, -6 * u, 68 * u, 6 * u); }
+    ctx.restore();
+  }
+  function groundThings(ground) {
+    /* Laternen alle 11 m */
+    const first = Math.floor((d - 20) / 11) * 11;
+    for (let m = first; m < d + 30; m += 11) { const x = worldX(m + 5); if (x > -150 && x < W + 150) lamp(x, ground); }
+    [0, 50, 150, 300, 500].forEach((m) => { const x = worldX(m + (m ? 2 : -3)); if (x > -260 && x < W + 260) sign(x, ground, m); });
+    /* Gehweg */
+    ctx.fillStyle = "#3b3f6b"; ctx.fillRect(0, ground, W, H - ground);
+    ctx.fillStyle = "#4a4f82"; ctx.fillRect(0, ground, W, 8 * U);
+    ctx.strokeStyle = "rgba(255,255,255,.07)"; ctx.lineWidth = 2;
+    const t0 = Math.floor((d - 15) / 2) * 2;
+    for (let m = t0; m < d + 20; m += 2) { const x = worldX(m); ctx.beginPath(); ctx.moveTo(x, ground + 8 * U); ctx.lineTo(x - 18 * U, H); ctx.stroke(); }
+    ctx.fillStyle = "#23264a"; ctx.fillRect(0, ground + 70 * U, W, H);
+    /* Hindernisse am Boden */
+    for (const ev of events) {
+      if (!ev.ground) continue;
+      const x = worldX(ev.at); if (x < -200 || x > W + 300) continue;
+      ctx.save(); ctx.translate(x, ground + 3 * U);
+      if (ev.k === "pfuetze") { ctx.fillStyle = "#4f86ff"; ctx.beginPath(); ctx.ellipse(0, 0, 38 * U, 7 * U, 0, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.beginPath(); ctx.ellipse(-10 * U, -1 * U, 12 * U, 2 * U, 0, 0, 7); ctx.fill(); }
+      if (ev.k === "gully") { ctx.fillStyle = "#1a1c30"; ctx.beginPath(); ctx.ellipse(0, 0, 26 * U, 6 * U, 0, 0, 7); ctx.fill(); ctx.strokeStyle = "#5a5f8f"; ctx.lineWidth = 2 * U; for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.moveTo(i * 8 * U, -4 * U); ctx.lineTo(i * 8 * U, 4 * U); ctx.stroke(); } }
+      if (ev.k === "banane" && !ev.done) { ctx.fillStyle = "#ffd23f"; ctx.beginPath(); ctx.moveTo(-16 * U, -2 * U); ctx.quadraticCurveTo(0, -16 * U, 16 * U, -2 * U); ctx.quadraticCurveTo(0, -8 * U, -16 * U, -2 * U); ctx.fill(); ctx.fillStyle = "#6b4a10"; ctx.fillRect(14 * U, -4 * U, 4 * U, 3 * U); }
+      if (ev.k === "flasche" && !ev.done) { ctx.rotate(-1.35); ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-5 * U, -30 * U, 10 * U, 30 * U); ctx.fillRect(-2.5 * U, -42 * U, 5 * U, 12 * U); ctx.fillStyle = "#f6c518"; ctx.fillRect(-5 * U, -20 * U, 10 * U, 9 * U); }
+      if (ev.k === "kopf") { const len = ev.len * PX(); ctx.fillStyle = "#5a5e8c"; for (let i = 0; i < len; i += 14 * U) for (let j = 0; j < 2; j++) { ctx.beginPath(); ctx.ellipse(i + (j ? 7 * U : 0), j * 7 * U, 6 * U, 3 * U, 0, 0, 7); ctx.fill(); } }
+      ctx.restore();
+    }
+  }
+
+  /* Figur zeichnen: Drehpunkt sind die Füße, th > 0 = nach vorne (rechts) geneigt */
+  function person(x, ground, ang, opts = {}) {
+    const f = fig, u = U * 1.32, a = opts.alpha == null ? 1 : opts.alpha;
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, ground); ctx.rotate(ang);
+    const ph = opts.still ? 0 : walk, sw = Math.sin(ph), sw2 = Math.sin(ph + Math.PI);
+    const legL = 60 * u, hipY = -64 * u, shY = -112 * u;
+    const shade = (c, k) => { const n = parseInt(c.slice(1), 16); const r = Math.round(((n >> 16) & 255) * k), g = Math.round(((n >> 8) & 255) * k), b = Math.round((n & 255) * k); return `rgb(${r},${g},${b})`; };
+    const leg = (s, front) => {
+      const ang2 = s * 0.55;
+      ctx.save(); ctx.translate(front ? 4 * u : -4 * u, hipY); ctx.rotate(-ang2);
+      ctx.strokeStyle = f.cast && front ? "#f4f4f4" : (front ? f.pants : shade(f.pants, .72)); ctx.lineCap = "round"; ctx.lineWidth = (f.cast && front ? 17 : 14) * u;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, legL - 6 * u); ctx.stroke();
+      ctx.fillStyle = f.cast && front ? "#f4f4f4" : f.shoe; ctx.beginPath(); ctx.ellipse(6 * u, legL - 2 * u, 12 * u, 6 * u, 0, 0, 7); ctx.fill();
+      ctx.restore();
+    };
+    const castSw = f.cast ? 0.25 : 1;
+    leg(sw2 * castSw, false);
+    /* Krücken */
+    if (f.cast) { ctx.strokeStyle = "#b9c0d6"; ctx.lineWidth = 5 * u; [[-26, 1], [28, -1]].forEach(([dx, s]) => { ctx.beginPath(); ctx.moveTo(dx * u + sw * 10 * u * s, 0); ctx.lineTo(dx * .5 * u, shY + 30 * u); ctx.stroke(); }); }
+    /* Rucksack */
+    if (f.backpack) { ctx.fillStyle = "#e3344a"; ctx.beginPath(); ctx.roundRect(-34 * u, shY + 6 * u, 18 * u, 46 * u, 8 * u); ctx.fill(); }
+    /* Oberkörper */
+    ctx.fillStyle = f.top;
+    if (f.belly) { ctx.beginPath(); ctx.ellipse(4 * u, (hipY + shY) / 2 + 6 * u, 26 * u, 30 * u, 0, 0, 7); ctx.fill(); }
+    ctx.beginPath(); ctx.roundRect(-18 * u, shY, 36 * u, hipY - shY + 8 * u, 12 * u); ctx.fill();
+    if (f.jacket) { ctx.fillStyle = "#4b74a8"; ctx.fillRect(-18 * u, shY + 4 * u, 8 * u, hipY - shY); ctx.fillRect(10 * u, shY + 4 * u, 8 * u, hipY - shY); }
+    if (f.hawaii) { ctx.fillStyle = "#ffe066"; for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.arc((-10 + (i % 3) * 10) * u, shY + (10 + i * 9) * u, 3.5 * u, 0, 7); ctx.fill(); } }
+    if (f.glitter) { ctx.fillStyle = "rgba(255,255,255,.8)"; for (let i = 0; i < 8; i++) { ctx.fillRect((-14 + (i * 7) % 28) * u, shY + (6 + i * 5) * u, 2 * u, 2 * u); } }
+    if (f.jersey) { ctx.fillStyle = "#fff"; ctx.font = `${16 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("10", 2 * u, shY + 30 * u); }
+    if (f.team) { ctx.fillStyle = "#ff3fc8"; ctx.font = `${10 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("EXMA", 0, shY + 24 * u); }
+    if (f.hood) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.ellipse(-10 * u, shY - 2 * u, 16 * u, 9 * u, 0, 0, 7); ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2 * u; ctx.beginPath(); ctx.moveTo(4 * u, shY + 4 * u); ctx.lineTo(6 * u, shY + 22 * u); ctx.stroke(); }
+    leg(sw * castSw, true);
+    /* Arme */
+    const arm = (base, front) => {
+      ctx.save(); ctx.translate(0, shY + 6 * u); ctx.rotate(base);
+      const sc = f.jacket ? "#4b74a8" : f.top;
+      ctx.strokeStyle = front ? sc : shade(sc, .75); ctx.lineCap = "round"; ctx.lineWidth = 12 * u;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 44 * u); ctx.stroke();
+      ctx.fillStyle = f.skin; ctx.beginPath(); ctx.arc(0, 48 * u, 6 * u, 0, 7); ctx.fill();
+      if (front && f.band) { ctx.fillStyle = "#ff3fc8"; ctx.fillRect(-6 * u, 38 * u, 12 * u, 4 * u); }
+      if (front && f.heels) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.moveTo(-4 * u, 50 * u); ctx.lineTo(12 * u, 58 * u); ctx.lineTo(10 * u, 64 * u); ctx.lineTo(-6 * u, 60 * u); ctx.fill(); }
+      if (front && holdBottle) { ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-4 * u, 48 * u, 8 * u, 22 * u); }
+      ctx.restore();
+    };
+    const sway = Math.sin(tms / 400) * 0.25;
+    let back = sw * 0.45 + 0.15 + sway, front = sw2 * 0.45 - 0.1 + sway;
+    if (f.cast) { back = -0.25; front = 0.35; }
+    if (opts.reach > 0) front = -1.5;           /* greift nach vorne unten */
+    if (opts.reachBack > 0) back = 1.9;         /* greift nach hinten */
+    if (opts.fall) { back = -2.2; front = -2.5; }
+    arm(back, false);
+    /* Kopf */
+    const hx = 2 * u, hy = shY - 26 * u, hr = 25 * u;
+    ctx.fillStyle = f.skin; ctx.fillRect(-5 * u, shY - 8 * u, 10 * u, 10 * u);
+    const sick = greenT > 0 && !opts.ghost;
+    ctx.fillStyle = sick ? "#b6d98a" : f.skin; ctx.beginPath(); ctx.arc(hx, hy, hr, 0, 7); ctx.fill();
+    /* Haare */
+    ctx.fillStyle = f.hairC;
+    if (f.hair === "short") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 6 * u, hr * .95, Math.PI * 1.05, Math.PI * 2.05); ctx.fill(); }
+    if (f.hair === "buzz") { ctx.beginPath(); ctx.arc(hx, hy - 4 * u, hr * .98, Math.PI * 1.1, Math.PI * 1.95); ctx.fill(); }
+    if (f.hair === "curly") { for (let i = 0; i < 7; i++) { ctx.beginPath(); ctx.arc(hx - 20 * u + i * 6.5 * u, hy - 18 * u - Math.sin(i) * 3 * u, 8 * u, 0, 7); ctx.fill(); } }
+    if (f.hair === "bob") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 4 * u, hr * 1.08, Math.PI * .95, Math.PI * 2.05); ctx.fill(); ctx.fillRect(hx - hr - 2 * u, hy - 6 * u, 12 * u, 26 * u); }
+    if (f.hair === "long") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 4 * u, hr * 1.06, Math.PI * .9, Math.PI * 2.05); ctx.fill(); ctx.beginPath(); ctx.roundRect(hx - hr - 6 * u, hy - 8 * u, 20 * u, 50 * u, 10 * u); ctx.fill(); }
+    if (f.hair === "ponytail") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 5 * u, hr * 1.02, Math.PI * 1.0, Math.PI * 2.05); ctx.fill(); ctx.beginPath(); ctx.ellipse(hx - hr - 6 * u, hy - 12 * u + Math.sin(walk) * 3 * u, 8 * u, 18 * u, -0.6 + Math.sin(walk) * .2, 0, 7); ctx.fill(); }
+    if (f.hood) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.arc(hx - 6 * u, hy + 2 * u, hr * .9, Math.PI * .55, Math.PI * 1.25); ctx.lineTo(hx - 6 * u, hy + 2 * u); ctx.fill(); }
+    /* Gesicht: verschlafene Augen, rote Wangen */
+    ctx.strokeStyle = "#2a1a22"; ctx.lineWidth = 2.6 * u; ctx.lineCap = "round";
+    if (f.shades) { ctx.fillStyle = "#14141c"; ctx.beginPath(); ctx.roundRect(hx + 2 * u, hy - 8 * u, 24 * u, 10 * u, 4 * u); ctx.fill(); }
+    else {
+      const blink = opts.fall ? 1 : 0;
+      [[hx + 8 * u, hy - 4 * u], [hx + 19 * u, hy - 4 * u]].forEach(([ex, ey]) => { ctx.beginPath(); if (blink) { ctx.moveTo(ex - 3 * u, ey - 3 * u); ctx.lineTo(ex + 3 * u, ey + 3 * u); ctx.moveTo(ex + 3 * u, ey - 3 * u); ctx.lineTo(ex - 3 * u, ey + 3 * u); } else ctx.arc(ex, ey, 3.2 * u, 0.1, Math.PI - 0.1); ctx.stroke(); });
+    }
+    ctx.fillStyle = "rgba(255,90,110,.45)"; ctx.beginPath(); ctx.arc(hx + 20 * u, hy + 7 * u, 5 * u, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(hx + 9 * u, hy + 11 * u); ctx.quadraticCurveTo(hx + 14 * u, hy + (sick ? 9 : 15) * u, hx + 19 * u, hy + 11 * u); ctx.stroke();
+    arm(front, true);
+    ctx.restore();
+  }
+  function bierhand(t, ground) {
+    const x = Math.min(W * .17, -40 + t * 300 * U), y = ground - 150 * U * 1.32;
+    ctx.save(); ctx.globalAlpha = Math.max(0, Math.min(1, 1.6 - t));
+    ctx.fillStyle = "#e6b48f"; ctx.fillRect(-20, y, x + 20, 16 * U);
+    ctx.beginPath(); ctx.arc(x, y + 8 * U, 12 * U, 0, 7); ctx.fill();
+    ctx.fillStyle = "#c46d1a"; ctx.fillRect(x - 4 * U, y - 26 * U, 16 * U, 34 * U); ctx.fillRect(x, y - 38 * U, 8 * U, 12 * U);
+    ctx.fillStyle = "#fff"; ctx.fillRect(x - 4 * U, y - 16 * U, 16 * U, 8 * U);
+    ctx.restore();
+  }
+
+  function draw() {
+    if (!ctx) return;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const ground = H * .77;
+    scene(ground);
+    /* Hang: ganze Welt leicht kippen */
+    const tilt = slope ? -slope * 0.07 : 0;
+    ctx.save(); ctx.translate(W * .34, ground); ctx.rotate(tilt); ctx.translate(-W * .34, -ground);
+    groundThings(ground);
+    const px = W * .34;
+    let ang = th;
+    if (state === "fall" || state === "over") ang = th + (fallDir * (Math.PI / 2 - Math.abs(th))) * Math.min(1, fallT / 0.45);
+    if (ghosts > 0 && (state === "play" || state === "pause")) {
+      const k = Math.min(1, ghosts, (4.5 - ghosts) * 2);
+      [[-1, .7], [1, -.5], [-.5, -.9], [.6, .8]].forEach(([dx, da], i) => {
+        const o = Math.sin(tms / (380 + i * 90) + i * 2) * 70 * U * k * dx;
+        person(px + o, ground, th + da * 0.28 * k * Math.sin(tms / 300 + i), { alpha: .45, ghost: true, reach, reachBack });
+      });
+    }
+    person(px, ground, ang, { alpha: ghosts > 0 ? .62 : 1, reach, reachBack, fall: state === "fall" || state === "over" });
+    /* Partikel */
+    const headX = px + Math.sin(ang) * 176 * U, headY = ground - Math.cos(ang) * 176 * U;
+    fx.forEach((p) => {
+      if (p.t < 0) return;
+      const sx = (p.head ? headX + 16 * U : px) + p.vx * p.t * 60 * U, sy = (p.head ? headY + 6 * U : ground) + (p.vy * p.t + .5 * p.g * p.t * p.t) * 60 * U;
+      ctx.globalAlpha = Math.max(0, 1 - p.t / p.life); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(sx, sy, (p.head ? 6 : 4) * U, 0, 7); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    ctx.restore();
+    active.forEach((a) => { if (a.k === "bierhand") bierhand(a.t, ground); });
+    /* Rand-Hinweise zum Tippen */
+    ["l", "r"].forEach((s) => { const k = padFlash[s]; if (k <= 0) return; const g = ctx.createLinearGradient(s === "l" ? 0 : W, 0, s === "l" ? 70 : W - 70, 0); g.addColorStop(0, `rgba(255,63,200,${.45 * k})`); g.addColorStop(1, "rgba(255,63,200,0)"); ctx.fillStyle = g; ctx.fillRect(s === "l" ? 0 : W - 70, 0, 70, H); });
+  }
+
+  /* ---------- Spielschleife ---------- */
+  function hud() {
+    $("plM").textContent = fmtMeter(Math.floor(d * 10));
+    $("plT").textContent = fmtZeit(tms);
+    $("plBest").textContent = fmtMeter(Math.floor(best * 10));
+    const b = Math.min(7, Math.max(0, (d - 25) / 45)), r = Math.max(30, 62 - d / 12);
+    const bl = $("plBlur"); bl.style.setProperty("--b", b.toFixed(2) + "px"); bl.style.setProperty("--r", r.toFixed(1) + "%");
+    $("plBlack").classList.toggle("on", tms < blackUntil);
+  }
+  function loop(now) {
+    if (!running) return;
+    raf = requestAnimationFrame(loop);
+    if (!last) last = now;
+    let dt = Math.min(0.1, (now - last) / 1000); last = now;
+    padFlash.l = Math.max(0, padFlash.l - dt * 3); padFlash.r = Math.max(0, padFlash.r - dt * 3);
+    fx.forEach((p) => { p.t += dt; }); fx = fx.filter((p) => p.t < p.life);
+    if (state === "play") { acc += dt; while (acc >= DT && state === "play") { step(); acc -= DT; } hud(); }
+    else if (state === "fall") { fallT += dt; if (fallT > 1.1) over(); }
+    draw();
+  }
+  function fall() {
+    state = "fall"; fallT = 0; fallDir = th > 0 ? 1 : -1; blackUntil = 0; ghosts = 0; hud();
+    if (tms - causeAt > 1800) cause = "";
+  }
+
+  /* ---------- Eingabe: links/rechts tippen (oder Pfeiltasten) ---------- */
+  function tap(dir) {
+    if (state !== "play") return;
+    inputs.push({ t: tms, dir }); padFlash[dir < 0 ? "l" : "r"] = 1;
+  }
+
+  /* ---------- Start, Ende, Bestenliste ---------- */
+  const played = () => !!store.get("exmaPolPlayed");
+  function intro() {
+    const box = $("plOver"); box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Polnischen – Spielregeln">
+        <h3>Polnischen</h3>
+        <p class="pl-sub">Pssst. Ab nach Hause, ohne Tschüss zu sagen.</p>
+        <ul class="zf-rules">
+          <li><i>1</i><span>Er will <b>nach rechts</b> nach Hause, schwankt aber gewaltig.</span></li>
+          <li><i>2</i><span><b>Links tippen</b> lehnt ihn nach hinten, <b>rechts tippen</b> nach vorne. Kippt er zu weit, liegt er.</span></li>
+          <li><i>3</i><span><b>Nach vorne lehnen</b> macht ihn schneller – aber auch wackliger.</span></li>
+        </ul>
+        <p class="note">Je weiter er kommt, desto verschwommener wird alles und desto träger reagiert er. Und unterwegs lauert so einiges.</p>
+        <div class="row2"><button class="ghost" id="plBack" type="button">Zurück</button><button class="primary" id="plGo" type="button">Los geht's</button></div>
+        ${played() ? `<button class="linkbtn" id="plTopBtn" type="button">Top 10 ansehen</button>` : ""}
+      </div>`;
+    $("plGo").addEventListener("click", newGame);
+    $("plBack").addEventListener("click", () => goBack(""));
+    if (played()) $("plTopBtn").addEventListener("click", async () => showTop(await PolTop.list().catch(() => []), null));
+  }
+  function newGame() {
+    $("plOver").hidden = true; $("plOver").innerHTML = "";
+    const base = pick(FIG);
+    fig = { ...base, skin: pick(SKIN), hairC: pick(HAIR) };
+    th = (Math.random() < .5 ? -1 : 1) * 0.04; om = 0; d = 0; tms = 0; walk = 0; noiseV = 0; noiseT = 0; speed = 3;
+    inputs = []; events = []; active = []; fx = []; ghosts = 0; blackUntil = 0; slope = 0; slopeT = 0; cobble = 0;
+    fallT = 0; cause = ""; causeAt = -1e9; milestonesShown = {}; greenT = 0; reach = 0; reachBack = 0; holdBottle = false; hickT = 0; acc = 0; last = 0;
+    schedule(0);
+    state = "play"; hud();
+  }
+  function over() {
+    state = "over";
+    store.set("exmaPolPlayed", "1");
+    const dm = Math.floor(d * 10), ms = Math.round(tms);
+    if (d > best) { best = d; store.set("exmaPolBest", String(best)); }
+    const box = $("plOver"); box.hidden = false;
+    const canSave = dm >= 100;
+    const title = CAUSE[cause] || pick(LINES);
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Umgefallen">
+        <h3 class="bad">Hingelegt!</h3>
+        <p class="bus-res">${esc(title)}</p>
+        <div class="bp-score"><div><small>Strecke</small><b>${fmtMeter(dm)}</b></div><div><small>Zeit</small><b>${fmtZeit(ms)}</b></div></div>
+        ${canSave ? `
+        <label for="plName" style="display:block;text-align:left;font-size:13px;font-weight:700;color:#7a6a8f;margin-bottom:6px">Dein Name für die Bestenliste</label>
+        <input id="plName" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(playerName())}">
+        <div class="row2"><button class="ghost" id="plAgain" type="button">Nochmal</button><button class="primary" id="plSave" type="button">Eintragen</button></div>
+        <p class="note">${Live.remote ? "Bitte keine beleidigenden Namen. Das Team löscht solche Einträge." : "Keine Verbindung: Die Bestenliste wird gerade nur auf deinem Handy gespeichert."}</p>
+        <button class="linkbtn" id="plTopBtn" type="button">Top 10 ansehen</button>`
+        : `<p class="note">Ab 10 m kannst du dich eintragen.</p><div class="row2"><button class="ghost" id="plAgain" type="button">Nochmal</button><button class="primary" id="plTopBtn" type="button">Top 10</button></div>`}
+      </div>`;
+    $("plAgain").addEventListener("click", newGame);
+    $("plTopBtn").addEventListener("click", async () => showTop(await PolTop.list().catch(() => []), null));
+    if (canSave) {
+      const inp = $("plName"); let saved = false;
+      $("plSave").addEventListener("click", async () => {
+        if (saved) return;
+        const nm = inp.value.trim().replace(/\s+/g, " ").slice(0, 16);
+        if (!nm) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
+        const btn = $("plSave"); btn.disabled = true; btn.textContent = "Speichert …";
+        let id = null;
+        try { id = await PolTop.add({ name: nm, dm, ms }); saved = true; setPlayerName(nm); }
+        catch (e) { console.warn("Polnischen speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
+        showTop(await PolTop.list().catch(() => []), id);
+      });
+      inp.addEventListener("keydown", (e) => { if (e.key === "Enter") $("plSave").click(); });
+    }
+  }
+  function showTop(list, mineId) {
+    const box = $("plOver"); box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Bestenliste Polnischen">
+        <h3>Top 10</h3>
+        <ol class="bp-list">${list.length ? list.map((e, k) => `<li class="${mineId && e.id === mineId ? "me" : ""}"><span class="r">${k + 1}</span><span class="n">${esc(e.name)}</span><span class="c">${fmtMeter(e.dm)}</span><span class="t">${fmtZeit(e.ms)}</span></li>`).join("") : `<li><span></span><span class="n">Noch keine Einträge</span></li>`}</ol>
+        <div class="row2"><button class="ghost" id="plDone" type="button">Schließen</button><button class="primary" id="plAgain2" type="button">Nochmal</button></div>
+      </div>`;
+    $("plDone").addEventListener("click", () => goBack(""));
+    $("plAgain2").addEventListener("click", newGame);
+  }
+
+  const isUi = (t) => t.closest && t.closest(".bp-over, .bp-x, button, input");
+  function bind() {
+    const v = $("pol");
+    v.addEventListener("pointerdown", (e) => {
+      if (!running || isUi(e.target)) return;
+      e.preventDefault();
+      const r = v.getBoundingClientRect();
+      tap(e.clientX - r.left < r.width / 2 ? -1 : 1);
+    });
+    v.addEventListener("contextmenu", (e) => e.preventDefault());
+    document.addEventListener("keydown", (e) => {
+      if (!running || isUi(e.target)) return;
+      if (e.key === "ArrowLeft" || e.key === "a") { e.preventDefault(); tap(-1); }
+      if (e.key === "ArrowRight" || e.key === "d") { e.preventDefault(); tap(1); }
+    });
+    $("plClose").addEventListener("click", () => goBack(""));
+    document.addEventListener("visibilitychange", () => { if (document.hidden && running) last = 0; });
+    window.addEventListener("resize", () => { if (running) resize(); });
+    sayEl = $("plSay");
+  }
+  let bound = false;
+
+  return {
+    _dbg: { tune: (o) => Object.assign(TUNE, o), st: () => ({ state, th, om, d, tms, speed, fig: fig && fig.id, cause, ghosts, slope, events: events.map((e) => e.k + "@" + Math.round(e.at)) }), tap, set: (o) => { if ("th" in o) th = o.th; if ("d" in o) d = o.d; if ("om" in o) om = o.om; }, trigger: (k) => trigger({ k, dir: 1, len: k === "kopf" ? 9 : 16 }), fig: (id) => { const b = FIG.find((f) => f.id === id); if (b) fig = { ...b, skin: SKIN[2], hairC: HAIR[0] }; }, step: (n) => { const was = state; state = "play"; for (let i = 0; i < n && state === "play"; i++) { step(); fx.forEach((p) => { p.t += DT; }); } fx = fx.filter((p) => p.t < p.life); if (state === "play") state = was; hud(); draw(); }, newGame, pause: (p) => { state = p ? "pause" : "play"; } },
+    open() {
+      if (running) return;
+      if (!bound) { bind(); bound = true; }
+      running = true;
+      cv = $("plCanvas"); ctx = cv.getContext("2d");
+      app.classList.add("is-pol");
+      $("pol").setAttribute("aria-hidden", "false");
+      soloView(true);
+      best = parseFloat(store.get("exmaPolBest") || "0") || 0;
+      seed(); resize();
+      fig = { ...pick(FIG), skin: pick(SKIN), hairC: pick(HAIR) };
+      th = 0; om = 0; d = 0; tms = 0; walk = 0; events = []; active = []; fx = []; ghosts = 0; blackUntil = 0; slope = 0; greenT = 0; reach = 0; reachBack = 0; holdBottle = false;
+      state = "intro"; hud();
+      intro();
+      last = 0; raf = requestAnimationFrame(loop);
+    },
+    close() {
+      if (!running) return;
+      running = false; state = "off";
+      cancelAnimationFrame(raf);
+      app.classList.remove("is-pol");
+      $("pol").setAttribute("aria-hidden", "true");
+      soloView(false);
+    }
+  };
+})();
+
+/* Geheimer Zugang: 5× schnell aufs Logo tippen */
+(() => {
+  let n = 0, t = 0;
+  document.addEventListener("click", (e) => {
+    const l = e.target.closest && e.target.closest(".menu-head .logo, .topbar .logo");
+    if (!l) return;
+    const now = Date.now();
+    n = now - t < 900 ? n + 1 : 1; t = now;
+    if (n >= 5) { n = 0; location.hash = "polnischen"; }
+  });
+})();
+
 /* Kleine Demo für die Zapfmeister-Kachel: Glas füllt sich, Schaum steigt nach */
 function zapfDemo() {
   return `<span class="zd" aria-hidden="true"><span class="zd-tap"></span><span class="zd-stream"></span><span class="zd-glass"><span class="zd-foam"></span><span class="zd-beer"></span></span></span>`;
@@ -5207,10 +5812,11 @@ function routeInner() {
   const id = location.hash.slice(1);
   if (id !== "turnier" && id !== "turnier-team") tnStop();
   trackNav(id);
-  if (id === "beerpong") { Bus.close(); Zapf.close(); Game.open(); return; }
-  if (id === "busfahrer") { Game.close(); Zapf.close(); Bus.open(); return; }
-  if (id === "zapfmeister") { Game.close(); Bus.close(); Zapf.open(); return; }
-  Game.close(); Bus.close(); Zapf.close();
+  if (id === "beerpong") { Bus.close(); Zapf.close(); Pol.close(); Game.open(); return; }
+  if (id === "busfahrer") { Game.close(); Zapf.close(); Pol.close(); Bus.open(); return; }
+  if (id === "zapfmeister") { Game.close(); Bus.close(); Pol.close(); Zapf.open(); return; }
+  if (id === "polnischen") { Game.close(); Bus.close(); Zapf.close(); Pol.open(); return; }
+  Game.close(); Bus.close(); Zapf.close(); Pol.close();
   if (id === "ranking") { renderClub(); showClub(true); return; }
   showClub(false);
   if (id === "impressum" || id === "datenschutz") { renderLegal(id); show(true); return; }
@@ -5403,7 +6009,7 @@ const playerName = () => store.get("exmaPlayerName") || store.get("exmaZapfName"
 const setPlayerName = (n) => { store.set("exmaPlayerName", n); };
 
 /* Top-10-Listen: 60 Sekunden auf dem Handy merken (mehrmals „Top 10“ tippen kostet nur einmal) */
-[Top, BusTop, ZapfTop].forEach((o) => {
+[Top, BusTop, ZapfTop, PolTop].forEach((o) => {
   const list = o.list.bind(o), drop = () => { o._c = null; };
   o.list = async () => {
     if (!Live.remote) return list();
