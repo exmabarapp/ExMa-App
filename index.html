@@ -1155,6 +1155,7 @@ a { color: inherit; }
 .bdg-card .bdg-when { font-size: 12.5px; font-weight: 800; color: #8a6cf0; }
 .bdg-card .row2 { display: flex; gap: 10px; margin-top: 12px; }
 .bdg-card .row2 button { flex: 1; height: 46px; border-radius: 999px; border: 0; font-weight: 800; font-size: 15px; }
+.bdg-card .row2 button:disabled { opacity: .55; }
 .bdg-card .ghost { background: #efeaf8; color: #1f2a44; }
 .bdg-card .primary { background: linear-gradient(90deg, #8a6cf0, #ff5d9e); color: #fff; }
 .bdg-confetti { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
@@ -5791,13 +5792,13 @@ const Badges = (() => {
         <p>${secret ? "Ein geheimes Abzeichen. Finde selbst heraus, wie du es bekommst." : esc(b.desc)}</p>
         ${got ? `<p class="bdg-when">Geholt am ${when}</p>` : prog ? `<p class="bdg-when">${prog}</p>` : ""}
         ${got && b.grp && b.lv < 4 ? `<p class="bdg-next">Nächste Stufe (${STUFE_FARBE[b.lv + 1]}): ${BADGE_STUFEN[b.grp].need[b.lv]} ${BADGE_STUFEN[b.grp].unit}</p>` : ""}
-        <div class="row2">${got ? `<button class="ghost" type="button" data-share>Teilen</button>` : ""}<button class="primary" type="button" data-close>${fresh ? "Weiter" : "Schließen"}</button></div>
+        <div class="row2">${got ? `<button class="ghost" type="button" data-share disabled>Lädt …</button>` : ""}<button class="primary" type="button" data-close>${fresh ? "Weiter" : "Schließen"}</button></div>
       </div>${fresh ? `<div class="bdg-confetti" aria-hidden="true">${Array.from({ length: 36 }, (_, i) => `<i style="--x:${(Math.random() * 100).toFixed(1)}%;--d:${(Math.random() * .6).toFixed(2)}s;--r:${Math.round(Math.random() * 360)}deg;--c:${["#f6c344", "#ff5d9e", "#4f7fe0", "#7bc86c", "#8a6cf0", "#ef6b5b"][i % 6]}"></i>`).join("")}</div>` : ""}`;
     over.hidden = false; requestAnimationFrame(() => over.classList.add("show"));
     const close = () => { over.classList.remove("show"); setTimeout(() => { over.hidden = true; over.innerHTML = ""; if (fresh) next(); }, 220); };
     over.querySelector("[data-close]").addEventListener("click", close);
     over.onclick = (e) => { if (e.target === over) close(); };
-    const sh = over.querySelector("[data-share]"); if (sh) sh.addEventListener("click", () => share(id, sh));
+    const sh = over.querySelector("[data-share]"); if (sh) { sh.addEventListener("click", () => share(id, sh)); prepShare(id, sh); }
     if (fresh) { buzzOnce(); if ($("abzeichenPage")) renderBadgePage(); }
   }
   const buzzOnce = () => { try { navigator.vibrate && navigator.vibrate([30, 40, 90]); } catch {} };
@@ -5811,31 +5812,52 @@ const Badges = (() => {
   }
 
   /* ---------- Teilen: fertige Story-Grafik (1080 × 1920) ---------- */
-  async function share(id, btn) {
-    const b = BMAP[id]; btn.disabled = true; const old = btn.textContent; btn.textContent = "Erstellt Bild …";
-    try {
-      await art(); if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  /* Story-Bild schon beim Öffnen der Karte vorbereiten: Beim Tippen auf „Teilen“ muss
+     navigator.share sofort aufgerufen werden, sonst blockiert das Handy das Teilen-Menü. */
+  const shots = new Map();
+  function shot(id) {
+    if (shots.has(id)) return shots.get(id);
+    const b = BMAP[id];
+    const p = (async () => {
+      await art();
+      if (document.fonts && document.fonts.ready) await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 600))]);
       const sym = document.getElementById("b-" + id);
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -82 160 168" width="800" height="840">${sym.innerHTML}${stars(b.tier, false)}</svg>`;
-      const img = new Image(); img.src = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
-      await img.decode();
+      const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+      const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
       const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1920; const x = cv.getContext("2d");
       const c = BADGE_TIER[b.tier], g = x.createLinearGradient(0, 0, 0, 1920);
       g.addColorStop(0, "#12091a"); g.addColorStop(.55, "#1d1336"); g.addColorStop(1, c); x.fillStyle = g; x.fillRect(0, 0, 1080, 1920);
       const rg = x.createRadialGradient(540, 860, 40, 540, 860, 560); rg.addColorStop(0, c + "88"); rg.addColorStop(1, c + "00"); x.fillStyle = rg; x.fillRect(0, 0, 1080, 1920);
-      x.drawImage(img, 140, 400, 800, 840);
+      x.drawImage(img, 140, 400, 800, 840); URL.revokeObjectURL(url);
       x.textAlign = "center"; x.fillStyle = "#fff";
       x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillText("ABZEICHEN FREIGESCHALTET", 540, 300);
       x.font = '84px "Dela Gothic One", sans-serif'; x.fillText(b.name.toUpperCase(), 540, 1370, 980);
       x.font = '600 44px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.85)"; x.fillText(b.desc, 540, 1450, 980);
       x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillStyle = "#fff"; x.fillText("ExMa Bar · DHSN Glauchau", 540, 1760);
       x.font = '600 34px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.8)"; x.fillText("exmabarapp.github.io/ExMa-App", 540, 1815);
-      const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
-      const file = new File([blob], `exma-abzeichen-${id}.png`, { type: "image/png" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file], title: "ExMa-Abzeichen: " + b.name });
-      else { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name; document.body.appendChild(a); a.click(); a.remove(); }
-    } catch (e) { if (!e || e.name !== "AbortError") console.warn("Abzeichen teilen", e); }
-    btn.disabled = false; btn.textContent = old;
+      const blob = await new Promise((ok, no) => cv.toBlob((bl) => (bl ? ok(bl) : no(new Error("toBlob"))), "image/jpeg", .9));
+      return new File([blob], `exma-abzeichen-${id}.jpg`, { type: "image/jpeg" });
+    })();
+    p.catch(() => shots.delete(id));
+    shots.set(id, p); return p;
+  }
+  function prepShare(id, btn) {
+    btn.disabled = true; btn.textContent = "Lädt …";
+    shot(id).then((file) => { btn.file = file; btn.disabled = false; btn.textContent = "Teilen"; })
+      .catch((e) => { console.warn("Abzeichen-Bild", e); btn.disabled = false; btn.textContent = "Teilen"; });
+  }
+  function download(file) {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = file.name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+  /* Wird direkt im Klick ausgeführt – kein await davor */
+  function share(id, btn) {
+    const file = btn.file;
+    if (!file) { prepShare(id, btn); return; }
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file] }).catch((e) => { if (e && e.name !== "AbortError") download(file); });
+    } else download(file);
   }
 
   /* ---------- Prüfstellen ---------- */
@@ -5909,7 +5931,7 @@ const Badges = (() => {
     if (i === 0) unlock("koenig");
   }
   return {
-    BMAP, chip, art, unlock, drink, played, board, card, tick,
+    BMAP, chip, art, unlock, drink, played, board, card, tick, _shot: shot,
     bp(n, ms, movingHit) { stufe("bp", n); if (n >= 50) unlock("bpgold"); if (n >= 10 && ms < 10000) unlock("blitz"); if (movingHit) unlock("moving"); },
     bus(n) { stufe("bus", n); if (n >= 51) unlock("endstation"); },
     zapf(n, level, split) { stufe("z", n); if (n >= 19) unlock("zapfgold"); if (level >= .999) unlock("milli"); if (split) unlock("splitg"); },
