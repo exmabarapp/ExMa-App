@@ -1095,6 +1095,29 @@ a { color: inherit; }
 .hm-badges .hm-go { flex: none; }
 .hm-badges.new::after { content: "Neu"; position: absolute; top: -9px; right: 16px; padding: 2px 8px; border-radius: 999px; background: #ff3fc8; color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 0 12px #ff3fc8; }
 
+/* ---------- „Mehr“: 2×2-Raster (Musik · Fotowand / Wünsche · Abzeichen) ---------- */
+.hm-grid4 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.hm-grid4 > .tile-btn { margin: 0 !important; height: 176px !important; flex-direction: column !important; align-items: flex-start !important; justify-content: flex-end !important; padding: 14px !important; gap: 0 !important; overflow: visible; }
+.hm-grid4 b { font-size: 17px !important; }
+.hm-grid4 small { font-size: 11.5px !important; }
+.hm-grid4 .hm-go { display: none; }
+.hm-grid4 .hm-bdg-txt, .hm-grid4 .hm-wish > span:nth-child(2) { flex: none !important; width: 100%; margin-top: 0 !important; }
+.hm-grid4 .hm-badges .hm-bdg-ico { position: absolute; left: 50%; top: 22px; margin: 0 0 0 -59px !important; transform: scale(1.12); }
+.hm-grid4 .hm-badges .hm-bdg-rail { max-width: none; }
+.hm-grid4 .hm-fotowand .fw-txt { max-width: none; }
+.hm-grid4 .fw-p0 { right: auto; left: 0; top: 12px; }
+.hm-grid4 .fw-p1 { right: -2px; top: 10px; }
+.hm-grid4 .fw-p2 { right: auto; left: 50%; margin-left: -39px; top: -22px; }
+.hm-grid4 .hm-fotowand .fw-new { top: auto; bottom: 66px; left: auto; right: 10px; z-index: 3; }
+.hm-grid4 .hm-fotowand small svg { display: none; }
+.hm-grid4 .hm-music b { font-size: 15.5px !important; white-space: nowrap; }
+.hm-grid4 .fw-flash { right: 0; }
+.hm-grid4 .hm-wish .hm-wish-ico { position: absolute; top: 22px; left: 50%; width: 64px; height: 64px; margin-left: -32px; }
+.hm-grid4 .hm-wish .hm-wish-ico svg { width: 38px; height: 38px; }
+.hm-grid4 .hm-wish small { white-space: nowrap; }
+.hm-grid4 .hm-music > span:last-of-type { max-width: none; }
+.hm-grid4 .mu-vinyl { right: 50%; margin-right: -50px; top: 66px; width: 100px; height: 100px; }
+.hm-grid4 .mu-eq { right: 12px; bottom: auto; top: 14px; }
 /* ---------- Fotowand ---------- */
 .tile-btn.hm-fotowand { height: 112px; margin-top: 14px; border-radius: 20px; justify-content: flex-end; overflow: visible; isolation: isolate;
   background: radial-gradient(120% 140% at 82% 40%, #a01f5c 0%, #4a0c33 46%, #170512 100%); border: 1.5px solid rgba(255,110,170,.65); box-shadow: 0 0 18px rgba(255,80,150,.3); }
@@ -6555,13 +6578,15 @@ function buildMenu() {
       <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></a></div>
       <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
     </div>
-    ${badgeTile()}
-    ${fotowandTile()}
-    <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
+    <h3 class="hm-sec">Mehr</h3>
+    <div class="hm-grid4">
+      <div class="tile-btn hm-music" aria-label="Musikwünsche – kommt bald">${MUSIC_ART}<span class="soon-tag">Bald</span><span><b>Musikwünsche</b><small>kommt bald</small></span></div>
+      ${fotowandTile()}
+      <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Drink oder Motto</small></span><i class="hm-go">${ICON_ARROW}</i></a>
+      ${badgeTile()}
+    </div>
 `;
   const rest = `
-    <h3 class="hm-sec">Demnächst</h3>
-    <div class="tile-btn hm-music" aria-label="Musikwünsche – kommt bald">${MUSIC_ART}<span class="soon-tag">Bald</span><span><b>Musikwünsche</b><small>kommt bald</small></span></div>
     <div class="hm-contact">
       <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
