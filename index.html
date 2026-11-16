@@ -1095,6 +1095,97 @@ a { color: inherit; }
 .hm-badges .hm-go { flex: none; }
 .hm-badges.new::after { content: "Neu"; position: absolute; top: -9px; right: 16px; padding: 2px 8px; border-radius: 999px; background: #ff3fc8; color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 0 12px #ff3fc8; }
 
+/* ---------- Musikwünsche & DJ-Pult ---------- */
+.mu-livetag { display: inline-flex; align-items: center; gap: 5px; background: #ff3fa0 !important; color: #fff !important; box-shadow: 0 0 12px #ff3fa0; }
+.mu-livetag i, .mu-live i { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: muPulse 1.4s ease-in-out infinite; }
+@keyframes muPulse { 50% { opacity: .25; } }
+.view-detail.clubby.musik-page, .view-detail.clubby.dj-page { background: radial-gradient(110% 380px at 50% 0, rgba(186,104,255,.22), transparent 75%) local, linear-gradient(180deg, #1a0b2c, #10071c 60%, #0b0514) local; }
+.musik-page .page-h, .dj-page .page-h { color: #f3e8ff; text-shadow: 0 0 14px rgba(186,104,255,.8), 0 0 30px rgba(186,104,255,.35); }
+.mu-head { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-top: -6px; text-align: center; }
+.mu-head b { font-family: var(--f-display); font-weight: 400; font-size: 22px; text-transform: uppercase; color: var(--a1, #fff); text-shadow: 0 0 12px var(--a1, #ff5d9e); }
+.mu-head small { color: #cdb8e6; font-weight: 700; font-size: 13px; }
+.mu-live { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; background: #ff3fa0; color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 0 12px #ff3fa0; }
+.mu-live.off { background: rgba(255,255,255,.14); box-shadow: none; }
+.mu-card { padding: 14px; border-radius: 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+.mu-card h3 { margin: 0 0 10px; display: flex; align-items: baseline; gap: 8px; font-size: 17px; color: #fff; }
+.mu-card h3 small { font-size: 12px; font-weight: 700; color: #b79fd2; }
+.mu-hint { margin: -4px 0 10px; font-size: 12.5px; color: #b79fd2; }
+.mu-lbl { display: block; margin-bottom: 8px; font-weight: 800; font-size: 17px; color: #fff; }
+.mu-search { position: relative; }
+.mu-form input { width: 100%; box-sizing: border-box; height: 48px; padding: 0 14px; border-radius: 14px; border: 1.5px solid rgba(186,104,255,.5); background: rgba(10,4,20,.6); color: #fff; font: inherit; font-size: 16px; }
+.mu-form input:focus { outline: none; border-color: #c98bff; box-shadow: 0 0 0 3px rgba(186,104,255,.25); }
+.mu-sug { display: grid; gap: 4px; margin-top: 6px; }
+.mu-sug:empty { display: none; }
+.mu-srow { display: flex; align-items: center; gap: 10px; width: 100%; padding: 6px; border: 0; border-radius: 12px; background: rgba(255,255,255,.07); color: #fff; text-align: left; font: inherit; cursor: pointer; }
+.mu-srow:active { background: rgba(186,104,255,.3); }
+.mu-sload { margin: 4px 2px; font-size: 13px; color: #b79fd2; }
+.mu-pick { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 8px; border-radius: 14px; background: rgba(186,104,255,.18); border: 1.5px solid rgba(201,139,255,.7); }
+.mu-x { margin-left: auto; width: 34px; height: 34px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 20px; line-height: 1; }
+.mu-freebox { display: grid; gap: 8px; margin-top: 10px; }
+.mu-freebtn { display: block; margin: 8px 0 0; padding: 4px 0; border: 0; background: none; color: #c9a6ff; font: inherit; font-size: 13px; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.mu-send { width: 100%; height: 50px; margin-top: 12px; border: 0; border-radius: 999px; background: linear-gradient(90deg, #ff3fa0, #b45cff); color: #fff; font: inherit; font-size: 16px; font-weight: 800; box-shadow: 0 0 16px rgba(255,63,160,.45); cursor: pointer; }
+.mu-send:disabled { opacity: .4; box-shadow: none; cursor: default; }
+.mu-msg { margin: 10px 0 0; font-size: 14px; font-weight: 700; color: #9ff0c9; }
+.mu-msg:empty { display: none; }
+.mu-msg.bad { color: #ffb4c8; }
+.mu-cov { flex: none; width: 46px; height: 46px; border-radius: 10px; overflow: hidden; display: grid; place-items: center; background: linear-gradient(135deg, #3a1d66, #1a0b2c); color: #c9a6ff; }
+.mu-cov img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mu-cov svg { width: 22px; height: 22px; }
+.mu-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mu-tx b { font-size: 15px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mu-tx small { font-size: 12.5px; color: #c4b0dc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mu-tx em { font-style: normal; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: rgba(255,63,160,.25); color: #ffc2e0; font-size: 11px; font-weight: 800; }
+.mu-list, .dj-list { display: grid; gap: 8px; }
+.mu-row { display: flex; align-items: center; gap: 10px; padding: 7px; border-radius: 14px; background: rgba(255,255,255,.05); }
+.mu-row.mine { box-shadow: inset 0 0 0 1.5px rgba(255,63,160,.6); }
+.mu-row.played { opacity: .55; }
+.mu-rank { flex: none; width: 22px; text-align: center; font-weight: 800; color: #f6c344; }
+.mu-n { flex: none; font-weight: 800; color: #ffd0a8; }
+.mu-vote { flex: none; display: inline-flex; align-items: center; gap: 4px; min-width: 64px; height: 40px; justify-content: center; border-radius: 999px; border: 1.5px solid rgba(255,140,80,.55); background: rgba(255,120,60,.1); color: #fff; font: inherit; font-size: 16px; cursor: pointer; }
+.mu-vote i { font-style: normal; font-weight: 800; font-size: 15px; }
+.mu-vote.on { background: linear-gradient(90deg, #ff6a2b, #ff3fa0); border-color: transparent; box-shadow: 0 0 12px rgba(255,90,60,.55); }
+.mu-done { flex: none; font-size: 12px; font-weight: 800; color: #9ff0c9; }
+.mu-sub { margin: 8px 2px 0; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #9b86b5; }
+.mu-empty { margin: 4px 2px; font-size: 14px; color: #b79fd2; }
+.mu-moods { display: grid; gap: 8px; }
+.mu-mood { position: relative; display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0 14px; overflow: hidden; border-radius: 12px; border: 1.5px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: #fff; font: inherit; text-align: left; }
+button.mu-mood { cursor: pointer; }
+.mu-mood.on { border-color: #c98bff; box-shadow: 0 0 0 3px rgba(186,104,255,.22); }
+.mu-mbar { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, rgba(186,104,255,.45), rgba(255,63,160,.35)); transition: width .4s; }
+.mu-mood b, .mu-mood i { position: relative; font-style: normal; }
+.mu-mood i { font-weight: 800; color: #f3e8ff; }
+.mu-mtot { margin: 2px 2px 0; font-size: 12px; color: #9b86b5; }
+.mu-played { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 20px; background: linear-gradient(120deg, #ff3fa0, #b45cff); box-shadow: 0 0 22px rgba(255,63,160,.5); color: #fff; }
+.mu-played > span:first-child { font-size: 30px; }
+.mu-played b { display: block; font-size: 18px; }
+.mu-played small { font-weight: 700; opacity: .95; }
+.mu-closed { display: grid; justify-items: center; gap: 6px; text-align: center; }
+.mu-closed-ico { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px; background: rgba(186,104,255,.18); color: #d6b6ff; }
+.mu-closed-ico svg { width: 28px; height: 28px; }
+.mu-closed b { font-size: 18px; color: #fff; }
+.mu-closed span { font-weight: 700; color: #e4d4f7; }
+.mu-closed small { color: #b79fd2; font-size: 13px; }
+.mu-toast { position: fixed; left: 12px; right: 12px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 350; padding: 14px 16px; border-radius: 16px; background: linear-gradient(120deg, #ff3fa0, #b45cff); color: #fff; font-weight: 800; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); transform: translateY(140%); transition: transform .35s; }
+.mu-toast.show { transform: none; }
+.dj-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 10px; padding: 8px; border-radius: 14px; background: rgba(255,255,255,.06); }
+.dj-row.small { grid-template-columns: auto minmax(0, 1fr) auto; }
+.dj-n { font-size: 18px; font-weight: 800; color: #ffd0a8; }
+.dj-acts, .dj-ask { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.dj-acts button, .dj-ask button, .dj-row > button { flex: 1; min-height: 42px; padding: 0 10px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.dj-acts .ok { background: rgba(60,200,130,.22); border-color: rgba(90,230,160,.6); }
+.dj-acts .bad, .dj-ask button[data-blk="song"], .dj-ask button[data-blk="artist"] { background: rgba(230,50,70,.22); border-color: rgba(255,90,110,.65); }
+.dj-ask b { flex-basis: 100%; font-size: 13px; color: #ffb4c8; }
+.dj-ask .ghost, .dj-row > .ghost { background: transparent; }
+.dj-row > button { flex: none; }
+.dj-typ { padding: 3px 8px; border-radius: 999px; background: rgba(230,50,70,.25); color: #ffc2cc; font-size: 11px; font-weight: 800; }
+.mu-played[hidden], .mu-pick[hidden], .mu-freebox[hidden], .mu-freebtn[hidden] { display: none !important; }
+.mu-sug { grid-template-columns: minmax(0, 1fr); }
+.mu-srow, .mu-pick { min-width: 0; }
+.dj-acts button { font-size: 13px; white-space: nowrap; padding: 0 6px; }
+.dj-ask button { flex: 1 1 40%; }
+.dj-ask .ghost { flex-basis: 100%; min-height: 36px; }
+.dj-page .mu-head small { display: block; }
+@media (prefers-reduced-motion: reduce) { .mu-livetag i, .mu-live i { animation: none; } .mu-toast, .mu-mbar { transition: none; } }
 /* ---------- „Mehr“: 2×2-Raster (Musik · Fotowand / Wünsche · Abzeichen) ---------- */
 .hm-grid4 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
 .hm-grid4 > .tile-btn { margin: 0 !important; height: 176px !important; flex-direction: column !important; align-items: flex-start !important; justify-content: flex-end !important; padding: 14px !important; gap: 0 !important; overflow: visible; }
@@ -1872,7 +1963,7 @@ body.fg-open { overflow: hidden; }
 .hm-music b { font-size: 18px; text-shadow: 0 0 12px rgba(186,104,255,.9); }
 .hm-music small { display: block; margin-top: 3px; font-size: 12px; font-weight: 700; color: #e3c9ff; }
 .hm-music .soon-tag { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.14); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-.tile-btn.hm-music { cursor: default; }
+.tile-btn.hm-music { cursor: pointer; text-decoration: none; }
 .mu-art { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .mu-vinyl { position: absolute; right: -18px; top: 50%; width: 112px; height: 112px; margin-top: -56px; border-radius: 50%;
   background: repeating-radial-gradient(circle, #111 0 2px, #1c1c22 2px 4px); box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 6px 20px rgba(0,0,0,.6); animation: muSpin 3.2s linear infinite; }
@@ -3451,7 +3542,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["fotowand", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
+  const OTHER = ["fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !id.startsWith("fotos-") && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -3958,6 +4049,11 @@ function renderTeam() {
     <section class="cbox team" aria-label="Eingegangene Wünsche">
       <h3>Wünsche</h3>
       <div id="wishList" class="wish-list"><p class="prost-small">${Live.remote ? "Lädt …" : "Wünsche sind erst mit Datenbank-Verbindung sichtbar."}</p></div>
+    </section>
+        <section class="cbox team" aria-label="DJ-Pult">
+      <h3>DJ-Pult</h3>
+      <p class="prost-small">Für das Handy des DJs: Musikwünsche nach Votes, Stimmung im Raum, „Gespielt“, „Passt nicht“ und dauerhaft sperren (Song oder ganzer Interpret).</p>
+      <div class="team-row"><a class="wide tn-teamlink" href="#dj">DJ-Pult öffnen</a></div>
     </section>
         <section class="cbox team" aria-label="Beerpong-Turnier">
       <h3>Beerpong-Turnier</h3>
@@ -5821,10 +5917,11 @@ const BADGE_LIST = [
   {"id": "zapfgold", "name": "Zapfmeister Gold", "desc": "Das Glas geschafft, bei dem 99 % gefordert sind.", "tier": 0, "cat": "Gold"},
   {"id": "erste", "name": "Erste Runde", "desc": "Deinen ersten Drink eingetragen.", "tier": 1, "cat": "Am Abend"},
   {"id": "happy", "name": "Happy-Hour-Jäger", "desc": "In der Happy Hour eingetragen.", "tier": 1, "cat": "Am Abend"},
-  {"id": "wunsch", "name": "Wunschkonzert", "desc": "Einen Musikwunsch abgeschickt.", "tier": 1, "cat": "Am Abend"},
+  {"id": "wunsch", "name": "Wunschkonzert", "desc": "Einen Wunsch abgeschickt – Song, Drink oder Motto.", "tier": 1, "cat": "Am Abend"},
   {"id": "vorglueh", "name": "Vorglüher", "desc": "Vor 22 Uhr eingetragen.", "tier": 2, "cat": "Am Abend"},
   {"id": "lastcall", "name": "Letzte Runde", "desc": "Nach 1:15 noch eingetragen.", "tier": 2, "cat": "Am Abend"},
   {"id": "allround", "name": "Allrounder", "desc": "Bier, Mische und Shot an einem Abend.", "tier": 2, "cat": "Am Abend"},
+  {"id": "songlaeuft", "name": "Dein Song läuft!", "desc": "Der DJ hat deinen Musikwunsch gespielt.", "tier": 2, "cat": "Am Abend"},
   {"id": "mstolz", "name": "Matrikel-Stolz", "desc": "Deine Matrikel gewinnt das Duell.", "tier": 2, "cat": "Am Abend"},
   {"id": "zocker", "name": "Zocker am Tresen", "desc": "Am Clubabend ein Minispiel gespielt.", "tier": 2, "cat": "Am Abend"},
   {"id": "spielkind", "name": "Spielkind", "desc": "Alle 3 Minispiele an einem Clubabend.", "tier": 3, "cat": "Am Abend"},
@@ -6178,6 +6275,304 @@ function updateTile() {
 function badgeTile() {
   return `<a class="tile-btn hm-badges" href="#abzeichen"><span class="hm-bdg-fx" aria-hidden="true"><i class="hm-shine"></i></span><span class="hm-bdg-ico" id="hmBadgeIco" aria-hidden="true"></span><span class="hm-bdg-txt"><b>Abzeichen</b><small id="hmBadgeN">${Badges.count()} von ${BADGE_LIST.length}</small><span class="hm-bdg-rail"><i id="hmBadgeBar"></i></span></span><i class="hm-go">${ICON_ARROW}</i></a>`;
 }
+/* ================= Musikwünsche =================
+   Ein Firestore-Dokument pro Clubabend: musik/<Abend-ID> = { w: { <Song-Schlüssel>: Wunsch }, m: { <Gerät>: Stimmung } }.
+   Gäste lesen 1 Dokument (alle 20 s, nur solange die Seite offen ist), der DJ alle 6 s.
+   Sperren: musikSperre/<Schlüssel> (öffentlich, ohne Namen) + musikSperreInfo/<Schlüssel> (nur Team, mit Namen).
+   Die Regeln lehnen Wünsche mit gesperrtem Song oder Interpret ab. Songsuche: iTunes-Suche von Apple (ohne Schlüssel). */
+const MOODS = [["techno", "Techno"], ["charts", "Charts"], ["hiphop", "Hip-Hop"], ["party", "Party-Klassiker"]];
+const MUSIK_PAUSE = 10 * 60000;
+const NOTE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>`;
+const hm = (d) => d.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+const Musik = (() => {
+  const night = (now = new Date()) => { const ph = clubPhase(now); return ph && ph.phase === "live" ? ph.ev : null; };
+  const lastNight = () => { const ph = clubPhase(); if (ph && ph.phase === "rueck") return ph.ev; const p = EVENTS.filter((e) => isPast(e)); return p[p.length - 1] || null; };
+  const nextNight = () => EVENTS.find((e) => !isPast(e)) || null;
+  /* Schlüssel: gleiche Songs landen unabhängig von Schreibweise, „feat.“ oder (Remix) beim selben Eintrag */
+  const norm = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/ß/g, "ss")
+    .replace(/\(.*?\)|\[.*?\]/g, " ").replace(/\s(feat|ft|featuring|with)\b\.?.*$/, " ").replace(/[^a-z0-9]+/g, " ").trim();
+  const mainArtist = (a) => norm(String(a || "").split(/,|&|\sx\s|\sund\s|\sfeat\.?\s|\sft\.?\s/i)[0]);
+  async function sha(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].slice(0, 12).map((x) => x.toString(16).padStart(2, "0")).join(""); }
+  async function keys(t, a) { return { k: "s" + await sha(norm(a) + "|" + norm(t)), ak: "a" + await sha(mainArtist(a) || "-") }; }
+  /* Verbindung: Firebase, sonst lokaler Modus (Vorschau/offline) */
+  async function conn() { for (let i = 0; i < 60 && !FB.ready && !FB.off; i++) await new Promise((r) => setTimeout(r, 100)); return FB.ready && FB.db && FB.user ? FB.db : null; }
+  const FP = (...p) => new firebase.firestore.FieldPath(...p);
+  const localId = () => { let id = store.get("exmaMusikId"); if (!id) { id = "l" + Math.random().toString(36).slice(2, 12); store.set("exmaMusikId", id); } return id; };
+  const me = () => (FB.user && FB.user.uid) || localId();
+  const jget = (k, d) => { try { return JSON.parse(store.get(k)) ?? d; } catch { return d; } };
+  const jset = (k, v) => store.set(k, JSON.stringify(v));
+  const empty = () => ({ w: {}, m: {} });
+  async function load(id) {
+    const db = await conn();
+    if (!db) return { ...empty(), ...jget("exmaMusik:" + id, {}) };
+    const s = await db.doc("musik/" + id).get();
+    return s.exists ? { ...empty(), ...s.data() } : empty();
+  }
+  async function ensure(db, id) { const r = db.doc("musik/" + id); const s = await r.get(); if (!s.exists) { try { await r.set(empty()); } catch {} } return r; }
+  const localLoad = (id) => ({ ...empty(), ...jget("exmaMusik:" + id, {}) });
+  async function isBlocked(k, ak) {
+    const db = await conn();
+    if (!db) { const b = jget("exmaMusikSperre", {}); return !!(b[k] || b[ak]); }
+    const [x, y] = await Promise.all([db.doc("musikSperre/" + k).get(), db.doc("musikSperre/" + ak).get()]);
+    return x.exists || y.exists;
+  }
+  const mine = (id) => jget("exmaMusikMine", {})[id] || [];
+  function addMine(id, k) { const m = jget("exmaMusikMine", {}); m[id] = [...new Set([...(m[id] || []), k])]; jset("exmaMusikMine", m); }
+  const pauseLeft = () => MUSIK_PAUSE - (Date.now() - (+store.get("exmaMusikPause") || 0));
+  async function wish(ev, s) {
+    const t = String(s.t || "").trim().slice(0, 100), a = String(s.a || "").trim().slice(0, 100), c = /^https:\/\//.test(s.c || "") ? s.c.slice(0, 300) : "";
+    if (!t) return { r: "leer" };
+    const { k, ak } = await keys(t, a);
+    if (await isBlocked(k, ak)) return { r: "blocked" };
+    const d = await load(ev.id), u = me();
+    if (d.w[k] && d.w[k].st !== "weg") {
+      if ((d.w[k].v || []).includes(u)) return { r: "schon", k };
+      await vote(ev, k); return { r: "vote", k };
+    }
+    if (d.w[k] && d.w[k].st === "weg") return { r: "weg" };
+    const wait = pauseLeft(); if (wait > 0) return { r: "pause", wait };
+    const entry = { t, a, c, by: u, v: [u], st: "neu", ak };
+    const db = await conn();
+    if (db) {
+      const r = await ensure(db, ev.id);
+      try { await r.update(FP("w", k), { ...entry, at: FB.fv.serverTimestamp() }, "last", k); }
+      catch (e) { return { r: e && e.code === "permission-denied" ? "blocked" : "err" }; }
+    } else { const L = localLoad(ev.id); L.w[k] = { ...entry, at: Date.now() }; jset("exmaMusik:" + ev.id, L); }
+    store.set("exmaMusikPause", String(Date.now())); addMine(ev.id, k);
+    try { Badges.unlock("wunsch"); } catch {}
+    return { r: "ok", k };
+  }
+  async function vote(ev, k) {
+    const u = me(), db = await conn();
+    if (db) { const r = await ensure(db, ev.id); await r.update(FP("w", k, "v"), FB.fv.arrayUnion(u), "last", k); }
+    else { const L = localLoad(ev.id); const w = L.w[k]; if (w && !w.v.includes(u)) { w.v.push(u); jset("exmaMusik:" + ev.id, L); } }
+  }
+  async function mood(ev, m) {
+    const u = me(), db = await conn();
+    if (db) { const r = await ensure(db, ev.id); await r.update(FP("m", u), m); }
+    else { const L = localLoad(ev.id); L.m[u] = m; jset("exmaMusik:" + ev.id, L); }
+  }
+  /* ---------- DJ / Team ---------- */
+  async function setSt(ev, ks, st) {
+    const db = await conn();
+    if (db) { const pairs = ks.flatMap((k) => [FP("w", k, "st"), st]); await db.doc("musik/" + ev.id).update(...pairs); }
+    else { const L = localLoad(ev.id); ks.forEach((k) => { if (L.w[k]) L.w[k].st = st; }); jset("exmaMusik:" + ev.id, L); }
+  }
+  async function block(ev, d, k, typ) {
+    const w = d.w[k], h = typ === "artist" ? w.ak : k;
+    const label = typ === "artist" ? (w.a || "Unbekannt") : `${w.t}${w.a ? " – " + w.a : ""}`;
+    const db = await conn();
+    if (db) {
+      const b = db.batch();
+      b.set(db.doc("musikSperre/" + h), { typ });
+      b.set(db.doc("musikSperreInfo/" + h), { label, typ, at: FB.fv.serverTimestamp() });
+      await b.commit();
+    } else { const B = jget("exmaMusikSperre", {}); B[h] = { label, typ, at: Date.now() }; jset("exmaMusikSperre", B); }
+    const hit = Object.keys(d.w).filter((x) => x === k || (typ === "artist" && d.w[x].ak === w.ak));
+    await setSt(ev, hit, "weg");
+  }
+  async function blocks() {
+    const db = await conn();
+    if (!db) return Object.entries(jget("exmaMusikSperre", {})).map(([h, v]) => ({ h, ...v })).sort((a, b) => (b.at || 0) - (a.at || 0));
+    const q = await db.collection("musikSperreInfo").get();
+    return q.docs.map((x) => { const v = x.data(); return { h: x.id, label: v.label, typ: v.typ, at: v.at && v.at.toMillis ? v.at.toMillis() : +v.at || 0 }; }).sort((a, b) => b.at - a.at);
+  }
+  async function unblock(h) {
+    const db = await conn();
+    if (db) { const b = db.batch(); b.delete(db.doc("musikSperre/" + h)); b.delete(db.doc("musikSperreInfo/" + h)); await b.commit(); }
+    else { const B = jget("exmaMusikSperre", {}); delete B[h]; jset("exmaMusikSperre", B); }
+  }
+  /* ---------- „Dein Song läuft!“ ---------- */
+  function playedNew(ev, d) {
+    const seen = jget("exmaMusikSeen", []), hits = mine(ev.id).filter((k) => d.w[k] && d.w[k].st === "gespielt" && !seen.includes(k));
+    if (hits.length) { jset("exmaMusikSeen", [...seen, ...hits]); try { Badges.unlock("songlaeuft"); } catch {} }
+    return hits.map((k) => d.w[k]);
+  }
+  const pending = (ev) => { const seen = jget("exmaMusikSeen", []); return mine(ev.id).some((k) => !seen.includes(k)); };
+  /* ---------- Songsuche (iTunes, JSONP – ohne Schlüssel, ohne Konto) ---------- */
+  let cbN = 0;
+  function search(term) {
+    return new Promise((res) => {
+      const cb = "__exmaIt" + (++cbN), s = document.createElement("script"); let done = false;
+      const fin = (v) => { if (done) return; done = true; window[cb] = () => {}; s.remove(); res(v); };
+      window[cb] = (j) => fin(((j && j.results) || []).filter((r) => r.trackName).map((r) => ({ t: r.trackName, a: r.artistName || "", c: (r.artworkUrl100 || "").replace("100x100bb", "120x120bb") })));
+      s.src = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=song&limit=6&country=DE&callback=${cb}`;
+      s.onerror = () => fin(null); setTimeout(() => fin(null), 5000);
+      document.head.appendChild(s);
+    });
+  }
+  return { night, lastNight, nextNight, load, wish, vote, mood, setSt, block, blocks, unblock, playedNew, pending, search, me, mine, pauseLeft, keys, norm };
+})();
+
+/* Sortierung: offene Wünsche nach Votes, dann zuerst gewünscht; Gespielte darunter */
+function muSorted(d) {
+  const all = Object.entries(d.w || {}).map(([k, w]) => ({ k, ...w, n: (w.v || []).length, t0: w.at && w.at.toMillis ? w.at.toMillis() : +w.at || 0 }));
+  const open = all.filter((w) => w.st === "neu").sort((a, b) => b.n - a.n || a.t0 - b.t0);
+  const done = all.filter((w) => w.st === "gespielt").sort((a, b) => b.t0 - a.t0);
+  const weg = all.filter((w) => w.st === "weg");
+  return { open, done, weg };
+}
+const muCover = (w) => `<span class="mu-cov">${w.c ? `<img src="${esc(w.c)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : NOTE_SVG}</span>`;
+function muMoodsHTML(d, mineM, btn) {
+  const vals = Object.values(d.m || {}), tot = vals.length;
+  return MOODS.map(([id, l]) => { const n = vals.filter((x) => x === id).length, p = tot ? Math.round(100 * n / tot) : 0;
+    return `<${btn ? `button type="button" data-mood="${id}" aria-pressed="${mineM === id}"` : "div"} class="mu-mood${mineM === id ? " on" : ""}"><span class="mu-mbar" style="width:${p}%"></span><b>${l}</b><i>${tot ? p + " %" : ""}</i></${btn ? "button" : "div"}>`; }).join("")
+    + `<p class="mu-mtot">${tot ? `${tot} Stimme${tot === 1 ? "" : "n"}` : "Noch keine Stimmen"}</p>`;
+}
+
+/* ---------- Gäste-Seite ---------- */
+let muTimer = null;
+function renderMusikPage() {
+  clearInterval(muTimer);
+  const ev = Musik.night();
+  if (!ev) {
+    const nx = Musik.nextNight(), ln = Musik.lastNight();
+    pageShell("musik-page", "Musikwünsche", `
+      <div class="mu-card mu-closed"><span class="mu-closed-ico">${NOTE_SVG}</span><b>Wünschen geht am Clubabend</b>
+        <span>${nx ? `${esc(nx.titel.join(" "))} · ${esc(nx.wd)} ${esc(nx.dm)} · ab ${hm(barWindow(nx)[0])} Uhr` : "Der nächste Abend wird bald angekündigt."}</span>
+        <small>Dann kannst du hier Songs suchen, wünschen und mit 🔥 die Wünsche der anderen nach oben voten.</small></div>
+      ${ln ? `<section class="mu-card"><h3>Top-Wünsche vom letzten Abend</h3><div class="mu-list" id="muTop"><p class="mu-empty">Lädt …</p></div></section>` : ""}`);
+    if (ln) Musik.load(ln.id).then((d) => { const el = $("muTop"); if (!el) return; const { open, done } = muSorted(d); const top = [...open, ...done].sort((a, b) => b.n - a.n).slice(0, 5);
+      el.innerHTML = top.length ? top.map((w, i) => `<div class="mu-row"><span class="mu-rank">${i + 1}</span>${muCover(w)}<span class="mu-tx"><b>${esc(w.t)}</b><small>${esc(w.a)}</small></span><span class="mu-n">🔥 ${w.n}</span></div>`).join("") : `<p class="mu-empty">Beim letzten Abend gab es keine Wünsche.</p>`; }).catch(() => {});
+    return;
+  }
+  pageShell("musik-page", "Musikwünsche", `
+    <div class="mu-head" style="${themeStyle(ev.th)}"><span class="mu-live"><i></i>Live</span><b>${esc(ev.titel.join(" "))}</b><small>Wünschen bis ${hm(barWindow(ev)[1])} Uhr</small></div>
+    <div class="mu-played" id="muPlayed" hidden></div>
+    <section class="mu-card mu-form">
+      <label for="muQ" class="mu-lbl">Song wünschen</label>
+      <div class="mu-search"><input id="muQ" type="search" placeholder="Titel oder Interpret suchen" autocomplete="off" maxlength="80" enterkeyhint="search"><div class="mu-sug" id="muSug" role="listbox" aria-label="Vorschläge"></div></div>
+      <div class="mu-pick" id="muPick" hidden></div>
+      <div class="mu-freebox" id="muFree" hidden><input id="muT" placeholder="Titel" maxlength="100"><input id="muA" placeholder="Interpret" maxlength="100"></div>
+      <button class="mu-freebtn" id="muFreeBtn" type="button">Nicht gefunden? Selbst eintragen</button>
+      <button class="mu-send" id="muSend" type="button" disabled>Wünschen</button>
+      <p class="mu-msg" id="muMsg" role="status" aria-live="polite"></p>
+    </section>
+    <section class="mu-card"><h3>Was soll mehr laufen?</h3><div class="mu-moods" id="muMoods"></div></section>
+    <section class="mu-card"><h3>Wunschliste <small id="muCount"></small></h3><p class="mu-hint">Mit 🔥 unterstützt du einen Wunsch – der DJ sieht, was am meisten gewünscht wird.</p><div class="mu-list" id="muList"><p class="mu-empty">Lädt …</p></div></section>`);
+  let data = { w: {}, m: {} }, pick = null, free = false;
+  const msg = (t, bad) => { const m = $("muMsg"); if (m) { m.textContent = t; m.classList.toggle("bad", !!bad); } };
+  const u = () => Musik.me();
+  function paint() {
+    const list = $("muList"); if (!list) return;
+    const { open, done } = muSorted(data), mineKs = Musik.mine(ev.id);
+    $("muCount").textContent = open.length ? `${open.length} offen` : "";
+    const row = (w, played) => `<div class="mu-row${mineKs.includes(w.k) ? " mine" : ""}${played ? " played" : ""}">${muCover(w)}<span class="mu-tx"><b>${esc(w.t)}</b><small>${esc(w.a)}${mineKs.includes(w.k) ? `<em>Dein Wunsch</em>` : ""}</small></span>${played ? `<span class="mu-done">Gespielt ✓</span>` : `<button type="button" class="mu-vote${(w.v || []).includes(u()) ? " on" : ""}" data-k="${w.k}" aria-pressed="${(w.v || []).includes(u())}" aria-label="${esc(w.t)} unterstützen, ${w.n} Stimmen">🔥<i>${w.n}</i></button>`}</div>`;
+    list.innerHTML = open.length || done.length ? open.map((w) => row(w, false)).join("") + (done.length ? `<p class="mu-sub">Schon gespielt</p>` + done.map((w) => row(w, true)).join("") : "") : `<p class="mu-empty">Noch keine Wünsche – mach den Anfang!</p>`;
+    list.querySelectorAll(".mu-vote").forEach((b) => b.addEventListener("click", async () => {
+      if (b.classList.contains("on")) return;
+      const w = data.w[b.dataset.k]; if (!w) return; w.v = [...(w.v || []), u()]; paint();
+      try { await Musik.vote(ev, b.dataset.k); } catch { msg("Hat nicht geklappt – versuch es gleich nochmal.", true); }
+    }));
+    const mm = data.m && data.m[u()];
+    $("muMoods").innerHTML = muMoodsHTML(data, mm, true);
+    $("muMoods").querySelectorAll("[data-mood]").forEach((b) => b.addEventListener("click", async () => { data.m = { ...(data.m || {}), [u()]: b.dataset.mood }; paint(); try { await Musik.mood(ev, b.dataset.mood); } catch {} }));
+    const pl = Musik.playedNew(ev, data), box = $("muPlayed");
+    if (pl.length && box) { box.hidden = false; box.innerHTML = `<span>🎶</span><span><b>Dein Song läuft!</b><small>${pl.map((w) => esc(w.t)).join(", ")}</small></span>`; }
+  }
+  async function refresh() { try { data = await Musik.load(ev.id); paint(); } catch {} }
+  refresh();
+  muTimer = setInterval(() => { if (location.hash !== "#musik") { clearInterval(muTimer); return; } if (!document.hidden) refresh(); }, 20000);
+  /* Suche */
+  const q = $("muQ"), sug = $("muSug"), send = $("muSend"); let tq = null, lastQ = "";
+  const showPick = () => { const p = $("muPick"); p.hidden = !pick; if (pick) p.innerHTML = `${muCover(pick)}<span class="mu-tx"><b>${esc(pick.t)}</b><small>${esc(pick.a)}</small></span><button type="button" class="mu-x" aria-label="Auswahl entfernen">×</button>`;
+    if (pick) p.querySelector(".mu-x").addEventListener("click", () => { pick = null; showPick(); upd(); q.focus(); }); };
+  const upd = () => { send.disabled = !(pick || (free && $("muT").value.trim())); };
+  q.addEventListener("input", () => {
+    clearTimeout(tq); const v = q.value.trim(); if (v.length < 2) { sug.innerHTML = ""; return; }
+    tq = setTimeout(async () => {
+      lastQ = v; sug.innerHTML = `<p class="mu-sload">Suche …</p>`;
+      const r = await Musik.search(v); if (lastQ !== v || !$("muSug")) return;
+      if (r === null) { sug.innerHTML = `<p class="mu-sload">Suche gerade nicht erreichbar – trag den Song unten selbst ein.</p>`; return; }
+      sug.innerHTML = r.length ? r.map((x, i) => `<button type="button" class="mu-srow" role="option" data-i="${i}">${muCover(x)}<span class="mu-tx"><b>${esc(x.t)}</b><small>${esc(x.a)}</small></span></button>`).join("") : `<p class="mu-sload">Nichts gefunden – trag den Song unten selbst ein.</p>`;
+      sug.querySelectorAll(".mu-srow").forEach((b) => b.addEventListener("click", () => { pick = r[+b.dataset.i]; sug.innerHTML = ""; q.value = ""; free = false; $("muFree").hidden = true; showPick(); upd(); send.focus(); }));
+    }, 350);
+  });
+  $("muFreeBtn").addEventListener("click", () => { free = true; pick = null; showPick(); $("muFree").hidden = false; $("muFreeBtn").hidden = true; sug.innerHTML = ""; if (q.value.trim()) $("muT").value = q.value.trim(); $("muT").focus(); upd(); });
+  ["muT", "muA"].forEach((id) => $(id).addEventListener("input", upd));
+  send.addEventListener("click", async () => {
+    const s = pick || { t: $("muT").value, a: $("muA").value, c: "" };
+    send.disabled = true; msg("");
+    let r; try { r = await Musik.wish(ev, s); } catch { r = { r: "err" }; }
+    const T = {
+      ok: ["Dein Wunsch ist beim DJ! 🎶 Teil ihn mit deinen Leuten, damit er hochgevotet wird."],
+      vote: ["Den Song hat schon jemand gewünscht – deine Stimme zählt jetzt mit 🔥"],
+      schon: ["Den Song hast du schon unterstützt."],
+      pause: [`Nächster eigener Wunsch in ${Math.ceil((r.wait || 0) / 60000)} Min. Bis dahin kannst du andere Songs mit 🔥 nach oben voten.`, true],
+      blocked: ["Dieser Song kann hier nicht gewünscht werden.", true],
+      weg: ["Der Song passt heute leider nicht – such dir einen anderen aus.", true],
+      leer: ["Trag zuerst einen Titel ein.", true],
+      err: ["Hat nicht geklappt – versuch es gleich nochmal.", true]
+    }[r.r] || ["Hat nicht geklappt.", true];
+    msg(...T);
+    if (r.r === "ok" || r.r === "vote" || r.r === "schon") { pick = null; showPick(); $("muT").value = ""; $("muA").value = ""; $("muFree").hidden = true; $("muFreeBtn").hidden = false; free = false; refresh(); }
+    upd();
+  });
+}
+
+/* „Dein Song läuft!“ auch außerhalb der Seite melden (nur wenn man selbst etwas gewünscht hat) */
+setInterval(async () => {
+  const ev = Musik.night(); if (!ev || document.hidden || location.hash === "#musik" || !Musik.pending(ev)) return;
+  try { const pl = Musik.playedNew(ev, await Musik.load(ev.id)); if (pl.length) muToast(`🎶 Dein Song läuft: ${pl.map((w) => w.t).join(", ")}`); } catch {}
+}, 60000);
+function muToast(t) {
+  let el = $("muToast"); if (!el) { el = document.createElement("a"); el.id = "muToast"; el.className = "mu-toast"; el.href = "#musik"; el.setAttribute("role", "status"); document.body.appendChild(el); }
+  el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 9000);
+}
+
+/* ---------- DJ-Pult (nur Team) ---------- */
+let djTimer = null;
+function renderDjPage() {
+  clearInterval(djTimer);
+  const ph = clubPhase(), ev = Musik.night() || (ph && ph.ev) || Musik.nextNight();
+  pageShell("dj-page", "DJ-Pult", `<div id="djBody"></div>`);
+  const body = $("djBody");
+  if (!teamAuthed) { body.innerHTML = `<div class="tn-card tn-empty"><b>Nur für das Team.</b><span>Bitte zuerst im Team-Bereich mit der PIN anmelden, dann hierher zurück.</span><a class="tn-btn" href="#team">Zum Team-Login</a></div>`; return; }
+  if (!ev) { body.innerHTML = `<div class="mu-card mu-closed"><b>Kein Clubabend eingetragen.</b></div>`; return; }
+  const live = Musik.night() === ev;
+  body.innerHTML = `
+    <div class="mu-head" style="${themeStyle(ev.th)}">${live ? `<span class="mu-live"><i></i>Live</span>` : `<span class="mu-live off">Noch zu</span>`}<b>${esc(ev.titel.join(" "))}</b><small>${live ? `Gäste können bis ${hm(barWindow(ev)[1])} Uhr wünschen` : `Wünsche öffnen ${esc(ev.wd)} ${esc(ev.dm)} um ${hm(barWindow(ev)[0])} Uhr`}</small><small id="djAge">–</small></div>
+    <section class="mu-card"><h3>Stimmung im Raum</h3><div class="mu-moods" id="djMoods"></div></section>
+    <section class="mu-card"><h3>Wünsche <small>nach Votes</small></h3><div class="dj-list" id="djList"><p class="mu-empty">Lädt …</p></div></section>
+    <section class="mu-card"><h3>Gespielt &amp; aussortiert</h3><div class="dj-list" id="djDone"></div></section>
+    <section class="mu-card"><h3>Dauerhaft gesperrt</h3><p class="mu-hint">Gesperrte Songs oder Interpreten können nie wieder gewünscht werden – an keinem Abend.</p><div class="dj-list" id="djBlocks"><p class="mu-empty">Lädt …</p></div></section>`;
+  let data = { w: {}, m: {} }, at = 0, asking = null;
+  const ago = () => { const a = $("djAge"); if (a) a.textContent = at ? `aktualisiert vor ${Math.round((Date.now() - at) / 1000)} s` : "–"; };
+  function paint() {
+    if (!$("djList")) return;
+    const { open, done, weg } = muSorted(data);
+    $("djMoods").innerHTML = muMoodsHTML(data, null, false);
+    $("djList").innerHTML = open.length ? open.map((w) => `<div class="dj-row" data-k="${w.k}">${muCover(w)}<span class="mu-tx"><b>${esc(w.t)}</b><small>${esc(w.a) || "–"}</small></span><span class="dj-n">🔥 ${w.n}</span>
+        ${asking === w.k ? `<div class="dj-ask"><b>Dauerhaft sperren:</b><button type="button" data-blk="song">Nur diesen Song</button>${w.a ? `<button type="button" data-blk="artist">Alles von ${esc(w.a)}</button>` : ""}<button type="button" data-blk="no" class="ghost">Abbrechen</button></div>`
+        : `<div class="dj-acts"><button type="button" data-st="gespielt" class="ok">✓ Gespielt</button><button type="button" data-st="weg">✕ Passt nicht</button><button type="button" data-ask class="bad">⛔ Sperren</button></div>`}</div>`).join("")
+      : `<p class="mu-empty">${live ? "Noch keine offenen Wünsche." : "Die Wunschliste öffnet mit dem Clubabend."}</p>`;
+    const back = [...done, ...weg];
+    $("djDone").innerHTML = back.length ? back.map((w) => `<div class="dj-row small" data-k="${w.k}">${muCover(w)}<span class="mu-tx"><b>${esc(w.t)}</b><small>${w.st === "gespielt" ? "Gespielt" : "Aussortiert"} · 🔥 ${w.n}</small></span><button type="button" data-st="neu" class="ghost">Zurückholen</button></div>`).join("") : `<p class="mu-empty">Noch nichts.</p>`;
+    body.querySelectorAll(".dj-row [data-st]").forEach((b) => b.addEventListener("click", async () => {
+      const k = b.closest(".dj-row").dataset.k; data.w[k].st = b.dataset.st; asking = null; paint();
+      try { await Musik.setSt(ev, [k], b.dataset.st); } catch { alertBad(); } refresh();
+    }));
+    body.querySelectorAll(".dj-row [data-ask]").forEach((b) => b.addEventListener("click", () => { asking = b.closest(".dj-row").dataset.k; paint(); }));
+    body.querySelectorAll(".dj-row [data-blk]").forEach((b) => b.addEventListener("click", async () => {
+      const k = b.closest(".dj-row").dataset.k, typ = b.dataset.blk; asking = null;
+      if (typ === "no") { paint(); return; }
+      b.disabled = true;
+      try { await Musik.block(ev, data, k, typ); } catch { alertBad(); }
+      refresh(); paintBlocks();
+    }));
+  }
+  const alertBad = () => { const h = $("djAge"); if (h) h.textContent = "Speichern fehlgeschlagen – Verbindung prüfen"; };
+  async function paintBlocks() {
+    const el = $("djBlocks"); if (!el) return;
+    let bl = []; try { bl = await Musik.blocks(); } catch { el.innerHTML = `<p class="mu-empty">Konnte die Sperrliste nicht laden.</p>`; return; }
+    el.innerHTML = bl.length ? bl.map((b) => `<div class="dj-row small"><span class="dj-typ">${b.typ === "artist" ? "Interpret" : "Song"}</span><span class="mu-tx"><b>${esc(b.label)}</b></span><button type="button" class="ghost" data-unb="${b.h}">Entsperren</button></div>`).join("") : `<p class="mu-empty">Nichts gesperrt.</p>`;
+    el.querySelectorAll("[data-unb]").forEach((b) => b.addEventListener("click", async () => { b.disabled = true; try { await Musik.unblock(b.dataset.unb); } catch {} paintBlocks(); }));
+  }
+  async function refresh() { try { data = await Musik.load(ev.id); at = Date.now(); if (!asking) paint(); ago(); } catch { alertBad(); } }
+  refresh(); paintBlocks();
+  djTimer = setInterval(() => { if (location.hash !== "#dj") { clearInterval(djTimer); return; } ago(); if (!document.hidden && Date.now() - at > 6000) refresh(); }, 1000);
+}
+
 /* ================= Fotowand: alle vergangenen Clubabende als Polaroids ================= */
 /* Titel im Stil der Abend-Kacheln (Neon, Verlauf, Kontur, Schreibschrift), verkleinert fürs Polaroid */
 /* Hintergrund wie auf den Abend-Kacheln: die gezeichnete Szene des Mottos */
@@ -6580,7 +6975,7 @@ function buildMenu() {
     </div>
     <h3 class="hm-sec">Mehr</h3>
     <div class="hm-grid4">
-      <div class="tile-btn hm-music" aria-label="Musikwünsche – kommt bald">${MUSIC_ART}<span class="soon-tag">Bald</span><span><b>Musikwünsche</b><small>kommt bald</small></span></div>
+      <a class="tile-btn hm-music" href="#musik" aria-label="Musikwünsche">${MUSIC_ART}${Musik.night() ? `<span class="soon-tag mu-livetag"><i></i>Live</span>` : `<span class="soon-tag">${Musik.nextNight() ? `Ab ${hm(barWindow(Musik.nextNight())[0])} Uhr` : "Bald"}</span>`}<span><b>Musikwünsche</b><small>${Musik.night() ? "Jetzt Song wünschen" : "Wünschen &amp; voten"}</small></span></a>
       ${fotowandTile()}
       <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Drink oder Motto</small></span><i class="hm-go">${ICON_ARROW}</i></a>
       ${badgeTile()}
@@ -6717,6 +7112,8 @@ function routeInner() {
   if (id === "turnier") { renderTurnier(); show(true); return; }
   if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
   if (id === "fotowand") { setMenu(false); renderFotowand(); show(true); return; }
+  if (id === "musik") { setMenu(false); renderMusikPage(); show(true); return; }
+  if (id === "dj") { setMenu(false); renderDjPage(); show(true); return; }
   const i = EVENTS.findIndex((ev) => ev.id === id);
   /* Vorbei: Infos zum Abend braucht keiner mehr – direkt zu den Fotos */
   if (i >= 0 && isPast(EVENTS[i])) { navReplace = true; location.replace("#fotos-" + id); return; }
@@ -6779,6 +7176,7 @@ function renderLegal(which) {
       <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Betrieb der Funktionen) bzw. bei freiwilligen Angaben Art. 6 Abs. 1 lit. a DSGVO. Bestenliste und Wünsche löschen wir, sobald wir sie nicht mehr brauchen, spätestens zum Ende des Semesters. Google ist unter dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Datenschutz bei Firebase</a>.</p>
       <p><b>Abzeichen:</b> Welche Abzeichen Sie freigeschaltet haben und die dafür nötigen Angaben (z. B. an welchen Clubabenden die App geöffnet war oder welche Matrikel an einem Abend vorne lag) werden ausschließlich lokal auf Ihrem Gerät gespeichert (Browser-Speicher) und nicht an uns oder Dritte übertragen. Sie können sie jederzeit löschen, indem Sie die Websitedaten im Browser löschen.</p>
       <p><b>Fotos der Clubabende:</b> Die Fotos eines Abends liegen in einem Ordner bei Google Drive (Google Ireland Limited). Wenn Sie die Fotos in der App ansehen, lädt Ihr Gerät die Bilder und die Liste der Fotos direkt von Servern von Google. Dabei wird Ihre IP-Adresse an Google übertragen. Wir erfahren nicht, wer welche Fotos ansieht. Wenn Sie auf einem Foto zu sehen sind und es entfernt haben möchten, tippen Sie im Vollbild auf „Entfernen lassen“ oder schreiben Sie an ${mail}. Wir löschen es umgehend (Art. 17 und Art. 21 DSGVO).</p>
+      <p><b>Musikwünsche:</b> Wenn Sie am Clubabend einen Song wünschen, für einen Wunsch stimmen oder bei der Stimmung abstimmen, speichern wir Titel, Interpret, Albumbild-Adresse und die zufällige Kennung Ihres Geräts (kein Name, keine E-Mail) in unserer Datenbank (Google Firebase, Frankfurt). Die Wunschliste ist für alle Gäste sichtbar, ohne Angabe, wer gewünscht hat. Für die Songsuche wird Ihr Suchbegriff direkt an die iTunes-Suche von Apple (Apple Inc.) geschickt, dabei wird Ihre IP-Adresse an Apple übertragen; Albumbilder werden von Apple-Servern geladen.</p>
       <h3>7. Kontakt per E-Mail</h3>
       <p>Wenn Sie uns schreiben, verwenden wir Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. f DSGVO), und löschen sie, wenn sie nicht mehr gebraucht werden.</p>
       <h3>8. Ihre Rechte</h3>
