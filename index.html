@@ -1559,6 +1559,21 @@ a { color: inherit; }
 .ph-duel span > i > i { display: block; height: 100%; border-radius: 8px; background: color-mix(in srgb, var(--tgZ) 70%, #888); transition: width 1s; }
 .ph-duel span.lead > i > i { background: var(--tg); }
 .ph-duel em { font-style: normal; text-align: right; font-weight: 800; }
+.ph-self { margin-top: 8px; }
+.ph-plus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ph-plus .self-btn { height: 74px; border-radius: 16px; gap: 3px; font-size: 13.5px;
+  background: var(--tgbg, linear-gradient(160deg, var(--tgA), var(--tgZ))); box-shadow: 0 0 16px color-mix(in srgb, var(--tgM) 30%, transparent); }
+.ph-plus .self-btn svg { width: 28px; height: 28px; }
+.ph-plus .self-btn span { text-shadow: 0 1px 3px rgba(0,0,0,.45); }
+.ph-self-st { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.ph-count .ph-self-st small { flex: 1; font-size: 12.5px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--dim); font-variant-numeric: tabular-nums; }
+.ph-self-st button { flex: none; height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: transparent; color: #fff; font-weight: 800; font-size: 12px; }
+.ph-self-q { margin: 2px 0 8px; font-size: 13.5px; font-weight: 700; }
+.ph-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ph-pick button { height: 48px; border-radius: 14px; border: 1.5px solid color-mix(in srgb, var(--tgM) 60%, transparent); background: rgba(255,255,255,.06); color: #fff; font-family: var(--f-display); font-size: 20px; }
+.ph-pick button[aria-pressed="true"] { background: color-mix(in srgb, var(--tgM) 30%, transparent); }
+.ph-more { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 13px; font-weight: 800; color: color-mix(in srgb, var(--tgM) 40%, #fff); text-decoration: none; }
+.ph-more svg { width: 13px; height: 13px; }
 .ph-count > em { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 7px 14px; border-radius: 999px; background: #fff; color: #12091a; font-style: normal; font-weight: 800; font-size: 14px; }
 .ph-count > em svg { width: 14px; height: 14px; }
 .ph-rueck { display: grid; gap: 8px; padding: 16px; border-radius: 22px; background: linear-gradient(160deg, color-mix(in srgb, var(--tgZ) 26%, #0b0612), #0b0612);
@@ -3514,24 +3529,25 @@ function tickProst() {
   const secs = Math.ceil(left / 1000);
   $("prostInfo").textContent = left > 0 ? `Nächster Eintrag in ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}` : "Tippe, was du dir gerade geholt hast";
 }
-async function selfDrink(btn) {
+async function selfDrink(btn, infoId = "prostInfo") {
+  const info = (t) => { const el = $(infoId); if (el) el.textContent = t; if (infoId === "phSelfInfo") phSelfMsgUntil = Date.now() + 5000; };
   if (prostLeft() > 0) return;
-  if (!barState().open) { renderProst(); return; }
+  if (!barState().open) { if ($("prost")) renderProst(); return; }
   const mine = store.get("exmaMatrikel");
   document.querySelectorAll(".self-btn").forEach((b) => { b.disabled = true; });
   try {
-    await Live.add("drink", btn.dataset.self, 1, mine);
+    await Live.add("drink", btn.dataset.self || btn.dataset.phself, 1, mine);
   } catch (e) {
     console.warn("Drink eintragen", e);
     const c = (e && e.code) || "";
     if (c === "not-found" || Live.statsMissing) {
-      $("prostInfo").textContent = "Der Zähler ist noch nicht gestartet – das Team muss sich einmal anmelden.";
+      info("Der Zähler ist noch nicht gestartet – das Team muss sich einmal anmelden.");
       document.querySelectorAll(".self-btn").forEach((b) => { b.disabled = false; });
       return;
     }
-    $("prostInfo").textContent = c === "permission-denied" ? "Kurz warten – du hast gerade erst eingetragen." : `Gerade nicht möglich (${c || "Fehler"}) – bitte etwas später nochmal.`;
+    info(c === "permission-denied" ? "Kurz warten – du hast gerade erst eingetragen." : `Gerade nicht möglich (${c || "Fehler"}) – bitte etwas später nochmal.`);
     store.set("exmaProstAt", String(Date.now()));
-    setTimeout(tickProst, 2500);
+    setTimeout(() => { tickProst(); phSelfTick(); }, 2500);
     return;
   }
   store.set("exmaProstAt", String(Date.now()));
@@ -3543,7 +3559,33 @@ async function selfDrink(btn) {
     f.style.setProperty("--dx", ((Math.random() - .5) * 50).toFixed(0) + "px");
     btn.appendChild(f); setTimeout(() => f.remove(), 1300);
   }
-  tickProst();
+  tickProst(); phSelfTick();
+}
+
+/* +1-Knöpfe direkt in der Live-Kachel im Menü (gleiche Sperrzeit wie auf der Ranking-Seite) */
+let phSelfPick = false, phSelfMsgUntil = 0;
+const drinkLabel = (k) => (k.name === "Mischen" ? "Mische" : k.name === "Shots" ? "Shot" : k.name);
+function renderPhSelf() {
+  const box = $("phSelf"); if (!box) return;
+  const mine = store.get("exmaMatrikel");
+  if (!mine || phSelfPick) {
+    box.innerHTML = `<p class="ph-self-q">${mine ? "Für welche Matrikel zählst du?" : "Zu welcher Matrikel gehörst du? Dann kannst du mitzählen."}</p>
+      <div class="ph-pick">${MATRIKEL.map((m) => `<button type="button" data-phpick="${m}" aria-pressed="${m === mine}">M${m}</button>`).join("")}</div>`;
+    box.querySelectorAll("[data-phpick]").forEach((b) => b.addEventListener("click", () => { store.set("exmaMatrikel", b.dataset.phpick); phSelfPick = false; renderPhSelf(); }));
+    return;
+  }
+  box.innerHTML = `<div class="ph-plus">${COUNTER.map((k) => `<button type="button" class="self-btn" data-phself="${k.id}" aria-label="Plus 1 ${drinkLabel(k)} für Matrikel ${mine}">${k.icon}<span>+1 ${drinkLabel(k)}</span></button>`).join("")}</div>
+    <div class="ph-self-st"><small id="phSelfInfo"></small><button type="button" id="phSelfChange">M${esc(mine)} · ändern</button></div>`;
+  box.querySelectorAll("[data-phself]").forEach((b) => b.addEventListener("click", () => selfDrink(b, "phSelfInfo")));
+  $("phSelfChange").addEventListener("click", () => { phSelfPick = true; renderPhSelf(); });
+  phSelfTick();
+}
+function phSelfTick() {
+  const info = $("phSelfInfo"); if (!info) return;
+  const left = prostLeft(), secs = Math.ceil(left / 1000);
+  document.querySelectorAll("[data-phself]").forEach((b) => { b.disabled = left > 0; });
+  if (Date.now() < phSelfMsgUntil) return;
+  info.textContent = left > 0 ? `Nächster Eintrag in ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}` : "Tipp an, was du dir gerade geholt hast";
 }
 
 function fitClubTitle() {
@@ -5630,6 +5672,7 @@ function phaseTick() {
   const now = new Date();
   if (phaseKey(clubPhase(now), now) !== phBuiltKey) { buildMenu(); return; }
   document.querySelectorAll("#menuGrid [data-cd]").forEach((el) => { el.textContent = trCountdown(+el.dataset.cd - now); });
+  phSelfTick();
   document.querySelectorAll("#menuGrid [data-to]").forEach((el) => { el.style.width = (100 * (+el.dataset.to - now) / (+el.dataset.to - +el.dataset.from)).toFixed(1) + "%"; });
 }
 setInterval(phaseTick, 1000);
@@ -5725,7 +5768,9 @@ function buildMenu() {
     html = `<div class="ph-block" style="${phaseStyle(ev.th)}">
         ${tnTile(ev)}
         <a class="ph-live-head${ph.last ? " last" : ""}" href="#${ev.id}"><span class="ph-dot"></span><b>${esc(ev.titel.join(" "))}</b><span>${ph.last ? "Letzte Runde! Schluss um" : "Live · Theke offen bis"} ${trClockFmt(ph.close)}</span></a>
-        <a class="ph-count" href="#ranking"><small>Heute über den Tresen</small><b id="phCount">–</b><span id="phThree"></span><span class="ph-duel" id="phDuel"></span><em>Drink eintragen ${ICON_ARROW}</em></a>
+        <div class="ph-count"><small>Heute über den Tresen</small><b id="phCount">–</b><span id="phThree"></span>
+          <div class="ph-self" id="phSelf"></div>
+          <a class="ph-more" href="#ranking">Zum Matrikel-Ranking ${ICON_ARROW}</a></div>
         ${phHappy(ev, tNow)}${phSpecials(ev)}
         <div class="ph-row"><a class="ph-btn pp" href="#paypal">PayPal</a><a class="ph-btn" href="#${ev.id}">Getränkekarte</a></div>
       </div>
@@ -5753,6 +5798,7 @@ function buildMenu() {
       el.innerHTML = `<a class="ph-champ" href="#turnier"><span>🏆</span><span><small>Beerpong-Turniersieger</small><b>${esc(st.champ)}</b><em>Finale ${Math.max(...st.M.F.r.s)}:${Math.min(...st.M.F.r.s)} gegen ${esc(st.M.F.lose)}${st.M.P3.win ? ` · Platz 3: ${esc(st.M.P3.win)}` : ""}</em></span></a>`; }).catch(() => {});
     if (Live.remote || FB.off) fill(); else setTimeout(fill, 2500);
   }
+  phSelfPick = false; renderPhSelf();
   phaseTick();
   fillBest(g);
   g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
