@@ -1011,6 +1011,9 @@ a { color: inherit; }
 .app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf):not(.view-pol) { visibility: hidden !important; }
 .app.hero-off .view-hero { visibility: hidden !important; }
 .app.hero-off .view-hero * { animation-play-state: paused !important; }
+/* Menü: Kacheln außerhalb des Bildschirms und das Menü unter einer Unterseite pausieren */
+.anim-off, .anim-off * { animation-play-state: paused !important; }
+.app:not(.is-menu) .view-menu *, .app.is-detail .view-menu *, .app.is-club .view-menu * { animation-play-state: paused !important; }
 .app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf):not(.view-pol) * { animation-play-state: paused !important; }
 /* PayPal-Kachel im Hauptmenü (so hoch wie die Minispiel-Kacheln) */
 .tile-btn.tile-pay { background: linear-gradient(160deg, #ffdb70 0%, #ffc439 45%, #f2a900 100%); border: 1.5px solid #ffe7a0; box-shadow: 0 0 20px rgba(255,196,57,.32); color: #0b2a6b; }
@@ -1078,8 +1081,8 @@ a { color: inherit; }
   border: 1.5px solid rgba(246,195,68,.62); box-shadow: 0 0 18px rgba(246,195,68,.18), inset 0 1px 0 rgba(255,255,255,.12); }
 .hm-bdg-fx { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; z-index: -1;
   background: repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 16px), repeating-linear-gradient(-45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 16px); }
-.hm-shine { position: absolute; top: -20%; bottom: -20%; left: -40%; width: 30%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,240,200,.20), transparent); animation: hmShine 7s ease-in-out 1.5s infinite; }
-@keyframes hmShine { 0%, 72% { left: -40%; } 100% { left: 130%; } }
+.hm-shine { position: absolute; top: -20%; bottom: -20%; left: 0; width: 30%; transform: translateX(-140%) skewX(-20deg); will-change: transform; background: linear-gradient(90deg, transparent, rgba(255,240,200,.20), transparent); animation: hmShine 7s ease-in-out 1.5s infinite; }
+@keyframes hmShine { 0%, 72% { transform: translateX(-140%) skewX(-20deg); } 100% { transform: translateX(440%) skewX(-20deg); } }
 .hm-badges .hm-bdg-ico { position: relative; flex: none; width: 118px; height: 80px; margin: -16px 0 0 -2px; }
 .hb-c { position: absolute; top: 0; width: 62px; height: 65px; filter: drop-shadow(0 5px 7px rgba(0,0,0,.5)); }
 .hb-c svg { width: 100%; height: 100%; overflow: visible; display: block; }
@@ -1245,6 +1248,7 @@ button.mu-mood { cursor: pointer; }
 .fw-pol[style] .fw-pic, .fw-card .fw-pic { position: relative; background: radial-gradient(120% 90% at 50% 25%, color-mix(in srgb, var(--a1) 20%, var(--night)) 0%, var(--night) 72%); }
 .fw-pol.has-pic .fw-mini { display: none; }
 .fw-scene { position: absolute; inset: 0; overflow: hidden; }
+.fw-scene * { animation: none !important; }
 .fw-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .fw-scene::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 30% at 50% 31%, rgba(0,0,0,.42), transparent 100%), linear-gradient(180deg, rgba(0,0,0,.25), transparent 45%, transparent 80%, rgba(0,0,0,.2)); }
 .fw-mini { z-index: 1; }
@@ -2376,6 +2380,9 @@ const CLUB = {
   vertreten: "",               // Name der verantwortlichen Person (Clubleitung) – sollte für ein vollständiges Impressum ergänzt werden
   paypal: "https://www.paypal.com/qrcodes/p2pqrc/6AADCB72F4HJ8"
 };
+
+/* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
+const APP_V = "85";
 
 const EVENTS = [
   {
@@ -6146,16 +6153,26 @@ const Badges = (() => {
   const queue = []; let showing = false, artP = null;
 
   /* Bilder einmal laden und unsichtbar ins Dokument hängen, damit <use href="#b-…"> funktioniert */
+  /* Die Datei wird nur als Text geladen; ins Dokument kommen nur die Bilder, die gerade gezeigt werden
+     (alle 80+ auf einmal einzubauen bremst den Start auf älteren Handys spürbar). */
+  let syms = null, artBox = null; const want = new Set(); let flushQ = false;
   function art() {
     if (artP) return artP;
-    artP = fetch("abzeichen.svg").then((r) => (r.ok ? r.text() : Promise.reject(r.status))).then((t) => {
+    artP = fetch("abzeichen.svg?v=" + APP_V).then((r) => (r.ok ? r.text() : Promise.reject(r.status))).then((t) => {
+      syms = {}; for (const m of t.matchAll(/<symbol id="b-([^"]+)"[\s\S]*?<\/symbol>/g)) syms[m[1]] = m[0];
       const box = document.createElement("div"); box.id = "badgeArt"; box.setAttribute("aria-hidden", "true");
       box.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
-      box.innerHTML = t + `<svg width="0" height="0"><filter id="bdgGrey"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer></filter></svg>`;
-      document.body.appendChild(box);
+      box.innerHTML = `<svg width="0" height="0"><filter id="bdgGrey"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer></filter></svg><svg width="0" height="0" id="badgeSyms"></svg>`;
+      document.body.appendChild(box); artBox = box.querySelector("#badgeSyms"); flush();
     }).catch((e) => { console.warn("Abzeichen-Bilder", e); artP = null; });
     return artP;
   }
+  function flush() {
+    flushQ = false; if (!syms) return;
+    let add = ""; want.forEach((k) => { if (syms[k]) { add += syms[k]; delete syms[k]; } }); want.clear();
+    if (add) artBox.insertAdjacentHTML("beforeend", add);
+  }
+  function need(k) { if (!syms || syms[k]) { want.add(k); if (syms && !flushQ) { flushQ = true; queueMicrotask(flush); } } }
   const stars = (t, grey) => t === 0 ? "" : Array.from({ length: t }, (_, i) => {
     const cx = (i - (t - 1) / 2) * 16, cy = 74, r = 6.5, ri = 2.9;
     const pts = Array.from({ length: 10 }, (_, k) => { const a = k * Math.PI / 5, rr = k % 2 ? ri : r; return `${(cx + rr * Math.sin(a)).toFixed(1)} ${(cy - rr * Math.cos(a)).toFixed(1)}`; }).join(" ");
@@ -6164,6 +6181,7 @@ const Badges = (() => {
   const LOCK = `<g transform="translate(0 6)"><rect x="-13" y="-4" width="26" height="22" rx="5" fill="#8d93a8" stroke="#1f2a44" stroke-width="2.2"/><path d="M-7.5 -4v-6a7.5 7.5 0 0 1 15 0v6" fill="none" stroke="#1f2a44" stroke-width="5"/><path d="M-7.5 -4v-6a7.5 7.5 0 0 1 15 0v6" fill="none" stroke="#8d93a8" stroke-width="2.4"/><circle cy="6" r="2.6" fill="#1f2a44"/></g>`;
   function chip(id, opts = {}) {
     const b = BMAP[id], got = opts.force || !!have[id], secret = b.cat === "Geheim" && !got;
+    need(secret ? "geheim" : id);
     const use = `<use href="#b-${secret ? "geheim" : id}" x="-80" y="-82" width="160" height="168"/>`;
     return `<svg class="bdg-svg" viewBox="-80 -82 160 168" aria-hidden="true">${got ? use : `<g filter="url(#bdgGrey)">${use}</g>${secret ? "" : LOCK}`}${stars(b.tier, !got)}</svg>`;
   }
@@ -6333,7 +6351,7 @@ const Badges = (() => {
     if (shots.has(id)) return shots.get(id);
     const b = BMAP[id];
     const p = (async () => {
-      await art();
+      await art(); need(id); flush();
       if (document.fonts && document.fonts.load) await Promise.race([Promise.all(['84px "Dela Gothic One"', '800 40px "Bricolage Grotesque"', '600 40px "Bricolage Grotesque"'].map((f) => document.fonts.load(f).catch(() => {}))), new Promise((r) => setTimeout(r, 1500))]);
       const sym = document.getElementById("b-" + id);
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -82 160 168" width="800" height="840">${sym.innerHTML}${stars(b.tier, false)}</svg>`;
@@ -6789,7 +6807,10 @@ function renderDjPage() {
 /* Hintergrund wie auf den Abend-Kacheln: die gezeichnete Szene des Mottos */
 const fwScene = (e) => `<span class="fw-scene" data-scene="${e.id}">${'<svg viewBox="0 120 400 440" preserveAspectRatio="xMidYMid slice"></svg>'.repeat(DEPTHS.length)}</span>`;
 let fwSceneUid = 0;
-function fwScenes(root = document) {
+/* Polaroid-Hintergründe erst einbauen, wenn das Handy nach dem Start Luft hat (nicht im Startmoment) */
+const idle = (f) => ("requestIdleCallback" in window ? requestIdleCallback(f, { timeout: 1200 }) : setTimeout(f, 300));
+function fwScenes(root = document) { idle(() => fwScenesNow(root)); }
+function fwScenesNow(root) {
   root.querySelectorAll(".fw-scene:not([data-done])").forEach((el) => {
     el.dataset.done = "1"; const ev = EVENTS.find((e) => e.id === el.dataset.scene); if (!ev) return;
     const layers = (SCENES[ev.thema] || sceneIce)(), u = fwSceneUid++;
@@ -7125,6 +7146,11 @@ function phaseTick() {
 let prunedAt = minIndex();
 setInterval(phaseTick, 1000);
 /* ================= Hauptmenü ================= */
+/* Nur Kacheln animieren, die gerade auf dem Bildschirm sind (spart auf älteren Handys viel Rechenzeit) */
+const animIO = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => {
+  e.target.classList.toggle("anim-off", !e.isIntersecting);
+}), { rootMargin: "60px 0px" }) : null;
+function watchAnim(root) { if (animIO) root.querySelectorAll(".mtile, .hm-card, .tile-btn, .hm-sign").forEach((el) => animIO.observe(el)); }
 function buildMenu() {
   const g = $("menuGrid");
   const now = startIndex();
@@ -7264,6 +7290,7 @@ function buildMenu() {
     t.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openTile(); } });
   });
   fitMenu();
+  watchAnim(g);
 }
 function fitMenu() {
   document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? 58 : 34); });
@@ -8519,7 +8546,13 @@ setInterval(refreshLive, 30000);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fitAll(); fitMenu(); });
 window.addEventListener("resize", () => { fitAll(); fitClubTitle(); fitMenu(); });
 if ("serviceWorker" in navigator && location.protocol.startsWith("http") && !inFrame) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  /* Neue Version: sobald der neue Service Worker übernimmt, einmal neu laden – aber nie mitten im Spiel oder beim Tippen */
+  const hadCtrl = !!navigator.serviceWorker.controller, t0 = Date.now(); let pend = false;
+  const busy = () => ["is-game", "is-bus", "is-zapf", "is-pol"].some((c) => app.classList.contains(c)) || /INPUT|TEXTAREA/.test((document.activeElement || {}).tagName || "");
+  const go = () => { if (pend && !busy()) { pend = false; location.reload(); } };
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (!hadCtrl) return; pend = true; if (Date.now() - t0 < 15000) go(); });
+  document.addEventListener("visibilitychange", () => { if (document.hidden) return; if (pend) go(); else if (navigator.serviceWorker.controller) navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {}); });
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(() => {}));
 }
 </script>
 </body>
