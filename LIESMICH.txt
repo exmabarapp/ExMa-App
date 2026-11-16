@@ -53,3 +53,24 @@ ABZEICHEN
 - Neuer Themenabend mit eigenem Abzeichen: im EVENTS-Eintrag abzeichen: "<id>" setzen und in BADGE_LIST
   einen Eintrag mit cat: "Gold" anlegen. Dafür braucht es ein neues Bild in abzeichen.svg (<symbol id="b-<id>">).
 - Liste aller Abzeichen und Bedingungen: im Code nach „const BADGE_LIST“ suchen.
+
+FOTOGALERIE (Google Drive)
+- Menü-Kachel „Fotowand“ (…/#fotowand): ein Polaroid pro vergangenem Clubabend, dahinter die Fotos (…/#fotos-<id>).
+- Ist ein Abend vorbei (eingetragenes „ende“), verschwindet er automatisch aus Startseiten-Karussell und Menü – auch
+  bei offener App. Übrig bleibt nur sein Polaroid auf der Fotowand (erscheint automatisch, „Neue Fotos“ eine Woche lang).
+- Ist ein Abend vorbei, führt sein alter Link (…/#vodka-night) automatisch zu den Fotos. Die Infoseite des Abends
+  (Drinks, Ablauf) ist danach nicht mehr erreichbar.
+- Pro Abend im EVENTS-Eintrag bei fotos: den Link zum Drive-Ordner eintragen (Vodka Night ist schon eingetragen).
+- Der Ordner muss freigegeben sein: In Drive Rechtsklick auf den Ordner → Freigeben → Allgemeiner Zugriff:
+  „Jeder, der über den Link verfügt“ → Betrachter. Unterordner (z. B. Fotobox) werden mit angezeigt.
+- Ohne API-Schlüssel (DRIVE_KEY leer) öffnet „Fotos ansehen“ einfach den Ordner in Google Drive.
+- Mit Schlüssel zeigt die App die Fotos selbst (Vorschau auf der Abend-Seite, Galerie, Vollbild mit Wischen).
+  Schlüssel einmalig anlegen (kostenlos, keine Kreditkarte):
+  1. console.cloud.google.com öffnen, oben das Projekt „exma-bar-app“ wählen.
+  2. Menü → APIs & Dienste → Bibliothek → „Google Drive API“ → Aktivieren.
+  3. APIs & Dienste → Anmeldedaten → Anmeldedaten erstellen → API-Schlüssel.
+  4. Schlüssel bearbeiten: Anwendungseinschränkung „Websites“ → https://exmabarapp.github.io/*
+     API-Einschränkung: „Schlüssel einschränken“ → nur „Google Drive API“. Speichern.
+  5. Schlüssel in index.html bei const DRIVE_KEY = "…" eintragen.
+- Foto löschen: einfach in Google Drive löschen. Die App zeigt nach spätestens 5 Minuten den neuen Stand.
+- „Entfernen lassen“ im Vollbild schickt eine E-Mail mit Dateiname und Link an die Club-Adresse.
