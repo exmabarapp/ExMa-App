@@ -5812,6 +5812,78 @@ const Badges = (() => {
   }
 
   /* ---------- Teilen: fertige Story-Grafik (1080 × 1920) ---------- */
+  /* ---------- Story-Bild 1080×1920 (Instagram-sicher: Wichtiges zwischen 250 und 1670 px) ---------- */
+  const STORY_QR = "1fc812a87f,104a901841,17494a8d5d,174ba9a65d,1756434e5d,104e8b8441,1fd555557f,18093f00,679b6aed0,899ac8a04,1ea673998,148285dd2c,1f71c5cedb,1e3d7dce57,c59526436,72b775103,10db967b2d,182e13ca45,1dfc8756a3,19355040db,16e51da592,1e1c04842c,8fbd11452,1c9a034fce,a4683e075,bcb7a1b1,f785fdf2e,10b6879583,1f6e146bff,16cbbd1d,1fdca30d5b,1044f5331a,17400365f9,1753908858,1757b00576,104b713a0c,1fcb6cf4ef".split(",").map((h) => parseInt(h, 16));
+  const DARK_T = { 0: "#b8890f", 1: "#3f8a35", 2: "#2c4fa8", 3: "#b8392c", 4: "#5a3cc0" };
+  const NAVY = "#1f2a44";
+  function rr(x, X, Y, W, H, R) { x.beginPath(); x.moveTo(X + R, Y); x.arcTo(X + W, Y, X + W, Y + H, R); x.arcTo(X + W, Y + H, X, Y + H, R); x.arcTo(X, Y + H, X, Y, R); x.arcTo(X, Y, X + W, Y, R); x.closePath(); }
+  function rnd(seed) { let t = 0; for (const ch of seed) t = (t * 31 + ch.charCodeAt(0)) | 0; return () => { t = (t + 0x6D2B79F5) | 0; let r = Math.imul(t ^ (t >>> 15), 1 | t); r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r; return ((r ^ (r >>> 14)) >>> 0) / 4294967296; }; }
+  function fitFont(x, txt, max, size, fam) { do { x.font = `${size}px ${fam}`; size -= 2; } while (x.measureText(txt).width > max && size > 30); }
+  function wrap(x, txt, max) { const out = []; let line = ""; for (const w of txt.split(" ")) { const t = line ? line + " " + w : w; if (x.measureText(t).width > max && line) { out.push(line); line = w; } else line = t; } if (line) out.push(line); return out; }
+  function drawStory(x, b, img, logo) {
+    const c = BADGE_TIER[b.tier], dk = DARK_T[b.tier], R = rnd(b.id), CX = 540, CY = 720;
+    /* Samt + Rautenmuster */
+    let g = x.createLinearGradient(0, 0, 0, 1920); g.addColorStop(0, "#1c0824"); g.addColorStop(.5, "#2b0e38"); g.addColorStop(1, "#12061a");
+    x.fillStyle = g; x.fillRect(0, 0, 1080, 1920);
+    x.save(); x.strokeStyle = "rgba(255,255,255,.04)"; x.lineWidth = 2;
+    for (let k = -1920; k < 1080 + 1920; k += 64) { x.beginPath(); x.moveTo(k, 0); x.lineTo(k + 1920, 1920); x.moveTo(k, 1920); x.lineTo(k + 1920, 0); x.stroke(); }
+    x.restore();
+    /* Strahlen + Leuchten in Stufenfarbe */
+    x.save(); x.translate(CX, CY); x.fillStyle = c; x.globalAlpha = .13;
+    for (let k = 0; k < 24; k += 2) { const a1 = k * Math.PI / 12, a2 = (k + 1) * Math.PI / 12; x.beginPath(); x.moveTo(0, 0); x.lineTo(Math.cos(a1) * 1400, Math.sin(a1) * 1400); x.lineTo(Math.cos(a2) * 1400, Math.sin(a2) * 1400); x.closePath(); x.fill(); }
+    x.restore();
+    g = x.createRadialGradient(CX, CY, 60, CX, CY, 620); g.addColorStop(0, c + "aa"); g.addColorStop(.55, c + "33"); g.addColorStop(1, c + "00");
+    x.fillStyle = g; x.fillRect(0, 0, 1080, 1920);
+    g = x.createRadialGradient(CX, 1920, 100, CX, 1920, 900); g.addColorStop(0, "rgba(0,0,0,.55)"); g.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = g; x.fillRect(0, 1000, 1080, 920);
+    /* Konfetti außerhalb der Mitte */
+    const cols = [c, "#f6c344", "#ff5d9e", "#ffffff", "#5ad7c8"];
+    for (let n = 0, tries = 0; n < 46 && tries < 400; tries++) {
+      const px = R() * 1080, py = R() * 1500 + 40;
+      if (Math.hypot(px - CX, py - CY) < 430 || (py > 1080 && py < 1500 && px > 70 && px < 1010)) continue;
+      n++; x.save(); x.translate(px, py); x.rotate(R() * Math.PI); x.fillStyle = cols[Math.floor(R() * cols.length)]; x.globalAlpha = .55 + R() * .45;
+      const t = R();
+      if (t < .5) x.fillRect(-14, -6, 28, 12); else if (t < .8) { x.beginPath(); x.arc(0, 0, 8 + R() * 5, 0, 7); x.fill(); }
+      else { x.beginPath(); for (let k = 0; k < 8; k++) { const r = k % 2 ? 6 : 17, a = k * Math.PI / 4; x.lineTo(Math.cos(a) * r, Math.sin(a) * r); } x.closePath(); x.fill(); }
+      x.restore();
+    }
+    /* Kopf: Pille „Neues Abzeichen“ */
+    x.font = '800 38px "Bricolage Grotesque", sans-serif'; const head = "NEUES ABZEICHEN"; try { x.letterSpacing = "4px"; } catch {}
+    const hw = x.measureText(head).width + 80;
+    rr(x, CX - hw / 2, 262, hw, 76, 38); x.fillStyle = NAVY; x.fill(); x.lineWidth = 4; x.strokeStyle = c; x.stroke();
+    x.fillStyle = "#fff"; x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(head, CX, 302);
+    try { x.letterSpacing = "0px"; } catch {}
+    /* Chip */
+    x.save(); x.shadowColor = "rgba(0,0,0,.45)"; x.shadowBlur = 50; x.shadowOffsetY = 24;
+    x.drawImage(img, CX - 360, CY - 360, 720, 756); x.restore();
+    /* Band mit Namen */
+    const name = b.name.toUpperCase(), BY = 1150, BH = 128;
+    fitFont(x, name, 760, 80, '"Dela Gothic One", sans-serif');
+    const bw = Math.max(560, Math.min(880, x.measureText(name).width + 140)), L = CX - bw / 2, Rr = CX + bw / 2;
+    x.lineJoin = "round"; x.lineWidth = 7; x.strokeStyle = NAVY;
+    for (const s of [-1, 1]) { const ex = s < 0 ? L : Rr; x.beginPath(); x.moveTo(ex - s * 30, BY + 26); x.lineTo(ex + s * 70, BY + 26); x.lineTo(ex + s * 46, BY + 26 + BH / 2); x.lineTo(ex + s * 70, BY + 26 + BH); x.lineTo(ex - s * 30, BY + 26 + BH); x.closePath(); x.fillStyle = dk; x.fill(); x.stroke(); }
+    x.beginPath(); x.moveTo(L, BY); x.lineTo(Rr, BY); x.lineTo(Rr, BY + BH); x.lineTo(L, BY + BH); x.closePath(); x.fillStyle = c; x.fill(); x.stroke();
+    x.fillStyle = "rgba(255,255,255,.22)"; x.fillRect(L + 4, BY + 4, bw - 8, 16);
+    x.textBaseline = "middle"; x.lineWidth = 12; x.strokeStyle = NAVY; x.strokeText(name, CX, BY + BH / 2 + 4); x.fillStyle = "#fff"; x.fillText(name, CX, BY + BH / 2 + 4);
+    /* Beschreibung */
+    x.font = '600 44px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.92)"; x.textBaseline = "alphabetic";
+    wrap(x, b.desc, 860).slice(0, 2).forEach((l, i) => x.fillText(l, CX, 1356 + i * 56));
+    /* Pillen: Stufe + Sammlung */
+    const lv = b.tier === 0 ? "★ Gold" : "★".repeat(b.tier) + " " + STUFE_FARBE[b.tier];
+    const pills = [lv, `${BADGE_LIST.filter((q) => have[q.id]).length} von ${BADGE_LIST.length} Abzeichen`];
+    x.font = '800 34px "Bricolage Grotesque", sans-serif';
+    const pw = pills.map((t) => x.measureText(t).width + 56), tot = pw[0] + pw[1] + 20; let px = CX - tot / 2;
+    pills.forEach((t, i) => { rr(x, px, 1440, pw[i], 64, 32); x.fillStyle = i ? "rgba(255,255,255,.12)" : c; x.fill(); x.lineWidth = 3; x.strokeStyle = i ? "rgba(255,255,255,.35)" : NAVY; x.stroke();
+      x.fillStyle = i ? "#fff" : NAVY; x.textBaseline = "middle"; x.fillText(t, px + pw[i] / 2, 1473); px += pw[i] + 20; });
+    /* Fuß: Logo · Text · QR */
+    rr(x, 70, 1515, 940, 180, 34); x.fillStyle = "rgba(255,255,255,.08)"; x.fill(); x.lineWidth = 2; x.strokeStyle = "rgba(246,195,68,.45)"; x.stroke();
+    if (logo) { x.save(); x.beginPath(); x.arc(160, 1605, 54, 0, 7); x.clip(); x.drawImage(logo, 106, 1551, 108, 108); x.restore(); x.beginPath(); x.arc(160, 1605, 54, 0, 7); x.lineWidth = 3; x.strokeStyle = "rgba(255,255,255,.5)"; x.stroke(); }
+    x.textAlign = "left"; x.textBaseline = "alphabetic"; x.fillStyle = "#fff"; x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillText("Hol dir die ExMa-App", 240, 1596);
+    x.font = '600 28px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.75)"; x.fillText("ExMa Bar · DHSN Glauchau", 240, 1640);
+    const Q = STORY_QR.length, cell = 3.8, qs = Q * cell + 32, qx = 1000 - qs - 2, qy = 1605 - qs / 2;
+    rr(x, qx, qy, qs, qs, 12); x.fillStyle = "#fff"; x.fill(); x.fillStyle = NAVY;
+    STORY_QR.forEach((row, r) => { for (let k = 0; k < Q; k++) if (Math.floor(row / 2 ** (Q - 1 - k)) % 2) x.fillRect(qx + 16 + k * cell, qy + 16 + r * cell, cell + .3, cell + .3); });
+    x.textAlign = "center";
+  }
   /* Story-Bild schon beim Öffnen der Karte vorbereiten: Beim Tippen auf „Teilen“ muss
      navigator.share sofort aufgerufen werden, sonst blockiert das Handy das Teilen-Menü. */
   const shots = new Map();
@@ -5820,22 +5892,14 @@ const Badges = (() => {
     const b = BMAP[id];
     const p = (async () => {
       await art();
-      if (document.fonts && document.fonts.ready) await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 600))]);
+      if (document.fonts && document.fonts.load) await Promise.race([Promise.all(['84px "Dela Gothic One"', '800 40px "Bricolage Grotesque"', '600 40px "Bricolage Grotesque"'].map((f) => document.fonts.load(f).catch(() => {}))), new Promise((r) => setTimeout(r, 1500))]);
       const sym = document.getElementById("b-" + id);
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-80 -82 160 168" width="800" height="840">${sym.innerHTML}${stars(b.tier, false)}</svg>`;
       const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
       const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
-      const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1920; const x = cv.getContext("2d");
-      const c = BADGE_TIER[b.tier], g = x.createLinearGradient(0, 0, 0, 1920);
-      g.addColorStop(0, "#12091a"); g.addColorStop(.55, "#1d1336"); g.addColorStop(1, c); x.fillStyle = g; x.fillRect(0, 0, 1080, 1920);
-      const rg = x.createRadialGradient(540, 860, 40, 540, 860, 560); rg.addColorStop(0, c + "88"); rg.addColorStop(1, c + "00"); x.fillStyle = rg; x.fillRect(0, 0, 1080, 1920);
-      x.drawImage(img, 140, 400, 800, 840); URL.revokeObjectURL(url);
-      x.textAlign = "center"; x.fillStyle = "#fff";
-      x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillText("ABZEICHEN FREIGESCHALTET", 540, 300);
-      x.font = '84px "Dela Gothic One", sans-serif'; x.fillText(b.name.toUpperCase(), 540, 1370, 980);
-      x.font = '600 44px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.85)"; x.fillText(b.desc, 540, 1450, 980);
-      x.font = '800 40px "Bricolage Grotesque", sans-serif'; x.fillStyle = "#fff"; x.fillText("ExMa Bar · DHSN Glauchau", 540, 1760);
-      x.font = '600 34px "Bricolage Grotesque", sans-serif'; x.fillStyle = "rgba(255,255,255,.8)"; x.fillText("exmabarapp.github.io/ExMa-App", 540, 1815);
+      const logo = await new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = "logo.png"; });
+      const cv = document.createElement("canvas"); cv.width = 1080; cv.height = 1920;
+      drawStory(cv.getContext("2d"), b, img, logo); URL.revokeObjectURL(url);
       const blob = await new Promise((ok, no) => cv.toBlob((bl) => (bl ? ok(bl) : no(new Error("toBlob"))), "image/jpeg", .9));
       return new File([blob], `exma-abzeichen-${id}.jpg`, { type: "image/jpeg" });
     })();
