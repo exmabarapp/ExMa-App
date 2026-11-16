@@ -1337,7 +1337,7 @@ a { color: inherit; }
 .tn-card { display: grid; gap: 10px; padding: 14px; border-radius: 20px; background: rgba(255,255,255,.04); border: 1px solid color-mix(in srgb, var(--tgM) 35%, transparent); }
 .tn-card.tight { gap: 5px; }
 .tn-empty { text-align: center; justify-items: center; } .tn-empty span { font-size: 13px; color: var(--dim); }
-.tn-pick { display: grid; justify-items: center; gap: 2px; padding: 18px; border-radius: 20px; border: 0; color: #fff; background: var(--tg); box-shadow: 0 0 22px color-mix(in srgb, var(--tgM) 45%, transparent); font: inherit; }
+.tn-pick { display: grid; justify-items: center; gap: 2px; padding: 18px; border-radius: 20px; border: 0; color: #fff; background: var(--tgbg); box-shadow: 0 0 22px color-mix(in srgb, var(--tgM) 45%, transparent); font: inherit; }
 .tn-pick span { font-size: 26px; } .tn-pick b { font-size: 20px; font-weight: 800; } .tn-pick small { font-size: 12.5px; font-weight: 700; }
 .tn-mine { background: linear-gradient(160deg, color-mix(in srgb, var(--tgZ) 35%, transparent), rgba(18,4,31,.9)); border: 1.5px solid color-mix(in srgb, var(--tgM) 55%, transparent); }
 .tn-mh { display: flex; align-items: baseline; gap: 8px; }
@@ -1348,7 +1348,7 @@ a { color: inherit; }
 .tn-ms div { padding: 6px 2px; border-radius: 12px; background: rgba(255,255,255,.06); text-align: center; }
 .tn-ms small { display: block; font-size: 10px; color: var(--dim); font-weight: 800; text-transform: uppercase; letter-spacing: .05em; } .tn-ms b { font-size: 18px; font-weight: 800; }
 .tn-next { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; padding: 12px; border-radius: 16px; background: rgba(255,255,255,.07); }
-.tn-next.hot { background: var(--tg); text-shadow: 0 2px 8px rgba(40,0,60,.35); }
+.tn-next.hot { background: var(--tgbg); text-shadow: 0 2px 8px rgba(40,0,60,.35); }
 .tn-next.out { background: rgba(255,255,255,.05); }
 .tn-next small { grid-column: 1 / -1; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .tn-nv { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-width: 0; } .tn-nv b { font-size: 19px; font-weight: 800; } .tn-nv span { font-size: 13px; opacity: .85; }
@@ -1413,18 +1413,18 @@ a { color: inherit; }
 .tn-sh input[type=search] { height: 46px; padding: 0 14px; border-radius: 14px; border: 0; background: rgba(255,255,255,.09); color: #fff; font: 600 16px var(--f-body); }
 .tn-list { display: grid; gap: 4px; }
 .tn-list button { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 12px; border: 0; background: rgba(255,255,255,.05); color: #fff; font: 700 16px var(--f-body); text-align: left; }
-.tn-list button small { font-size: 12px; color: var(--dim); } .tn-list button.sel { background: var(--tg); } .tn-list button.sel small { color: #fff; }
+.tn-list button small { font-size: 12px; color: var(--dim); } .tn-list button.sel { background: var(--tgbg); } .tn-list button.sel small { color: #fff; }
 .tn-x { height: 44px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.25); background: none; color: #fff; font: 800 14px var(--f-body); }
 .tn-toast { position: fixed; left: 50%; bottom: calc(22px + var(--safe-b)); transform: translateX(-50%); z-index: 70; width: min(440px, calc(100% - 32px)); padding: 12px 14px; border-radius: 14px; background: #0f3b26; border: 1px solid #3ee08a; color: #c9ffe0; font-weight: 800; font-size: 13.5px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
 .tn-toast[hidden] { display: none; }
 /* Turnierleitung */
 .tn-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
 .tn-steps span { padding: 7px 2px; border-radius: 9px; text-align: center; font-size: 11px; font-weight: 800; background: rgba(255,255,255,.06); color: var(--dim); }
-.tn-steps span.on { background: var(--tg); color: #fff; } .tn-steps span.done { background: rgba(143,240,180,.14); color: #8ff0b4; }
+.tn-steps span.on { background: var(--tgbg); color: #fff; } .tn-steps span.done { background: rgba(143,240,180,.14); color: #8ff0b4; }
 .tn-ah { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; } .tn-ah b { font-size: 16px; font-weight: 800; } .tn-ah small { font-size: 12px; color: var(--dim); }
 .tn-card textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.25); color: #fff; font: 600 15px/1.5 var(--f-body); resize: vertical; }
 .tn-r2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
-.tn-btn { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 14px; border-radius: 999px; border: 0; background: var(--tg); color: #fff; font: 800 14px var(--f-body); text-decoration: none; text-shadow: 0 1px 6px rgba(40,0,60,.35); }
+.tn-btn { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 14px; border-radius: 999px; border: 0; background: var(--tgbg); color: #fff; font: 800 14px var(--f-body); text-decoration: none; text-shadow: 0 1px 6px rgba(40,0,60,.35); }
 .tn-btn.ghost { background: transparent; border: 1.5px solid rgba(255,255,255,.3); text-shadow: none; } .tn-btn.red { background: #8a1020; } .tn-btn.big { min-height: 54px; font-size: 16px; }
 .tn-btn[disabled] { opacity: .35; } .tn-btn[data-armed] { background: #ff3b3b; }
 .tn-gp { display: grid; grid-template-columns: 22px 1fr; gap: 1px 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
@@ -1461,10 +1461,10 @@ a { color: inherit; }
 .tn-quick small { font-size: 11px; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
 .tn-quick div { display: grid; grid-template-columns: repeat(11, 1fr); gap: 3px; margin-top: 4px; }
 .tn-quick button { height: 34px; padding: 0; border-radius: 8px; border: 0; background: rgba(255,255,255,.08); color: #fff; font: 800 14px var(--f-body); }
-.tn-quick button.on { background: var(--tg); }
+.tn-quick button.on { background: var(--tgbg); }
 .tn-gg { display: grid; gap: 6px; padding: 10px; border-radius: 14px; background: rgba(255,211,110,.1); border: 1px dashed rgba(255,211,110,.6); }
 .tn-gg small { font-size: 12px; color: #ffd36e; font-weight: 700; } .tn-gg div { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.tn-gg button { height: 44px; border-radius: 999px; border: 0; background: #fff; color: #12041f; font: 800 14px var(--f-body); } .tn-gg button.on { background: var(--tg); color: #fff; }
+.tn-gg button { height: 44px; border-radius: 999px; border: 0; background: #fff; color: #12041f; font: 800 14px var(--f-body); } .tn-gg button.on { background: var(--tgbg); color: #fff; }
 .tn-res { padding: 10px 12px; border-radius: 14px; background: rgba(143,240,180,.1); border: 1px solid rgba(143,240,180,.4); font-size: 14px; font-weight: 700; text-align: center; }
 .tn-err { padding: 10px 12px; border-radius: 14px; background: rgba(255,59,59,.12); border: 1px solid rgba(255,59,59,.5); font-size: 13px; font-weight: 700; color: #ffb3b3; }
 /* ===== Clubabend: Abend-Kacheln im Menü (Clubtag, Live, Rückblick) ===== */
@@ -1493,9 +1493,9 @@ a { color: inherit; }
 .ph-hh-l s { opacity: .8; }
 .ph-hh-r { text-align: right; }
 .ph-hh-r b { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
-.ph-hh.on { border: 0; background: var(--tg); box-shadow: 0 0 26px color-mix(in srgb, var(--tgM) 55%, transparent); animation: phGlow 2.4s ease-in-out infinite; }
+.ph-hh.on { border: 0; background: var(--tgbg); box-shadow: 0 0 26px color-mix(in srgb, var(--tgM) 55%, transparent); animation: phGlow 2.4s ease-in-out infinite; }
 .ph-hh.on small, .ph-hh.on .ph-hh-l span { color: #fff; }
-.ph-hh.on b, .ph-hh.on span { text-shadow: 0 2px 10px rgba(30,0,50,.35); }
+.ph-hh.on b, .ph-hh.on span, .ph-hh.on small { text-shadow: 0 1px 3px rgba(20,0,40,.45), 0 2px 12px rgba(20,0,40,.35); }
 @keyframes phGlow { 50% { box-shadow: 0 0 44px var(--tgM); } }
 .ph-bar { grid-column: 1 / -1; display: block; height: 8px; margin-top: 4px; border-radius: 9px; background: rgba(0,0,0,.25); overflow: hidden; }
 .ph-bar i { display: block; height: 100%; border-radius: 9px; background: #fff; transition: width 1s linear; }
@@ -4988,7 +4988,9 @@ const phaseKey = (ph, now = new Date()) => {
 /* Farben des Abends für die Abend-Kacheln (wie in der Tresen-Ansicht) */
 const phaseStyle = (th) => {
   const v = th.verlauf || [th.a1, th.a3, th.a2];
-  return themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgA:${v[0]};--tgM:${v[Math.floor(v.length / 2)]};--tgZ:${v[v.length - 1]}`;
+  /* --tgbg: für Flächen mit weißer Schrift – ohne den hellsten Ton und leicht abgedunkelt, damit alles gut lesbar bleibt */
+  const bg = v.length > 3 ? v.slice(1) : v;
+  return themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgbg:linear-gradient(rgba(14,4,32,.28),rgba(14,4,32,.28)),linear-gradient(120deg,${bg.join(",")});--tgA:${v[0]};--tgM:${v[Math.floor(v.length / 2)]};--tgZ:${v[v.length - 1]}`;
 };
 function phSpecials(ev) {
   const list = ev.specials || []; if (!list.length) return "";
