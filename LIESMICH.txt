@@ -20,3 +20,36 @@ Firebase (gemeinsame Zahlen, Bestenliste, Wünsche, Team-Login):
 - Sicherheitsregeln: Inhalt von firestore.rules unter Firestore Database -> Regeln einfügen
 - Team-Konto: club@ba-glauchau.de, Passwort = "exma-team-" + PIN (aktuell PIN 9876)
   PIN ändern = in Firebase unter Authentication -> Nutzer das Passwort ändern.
+
+Beerpong-Turnier (Miami Vibes):
+- Spieler: Kachel "Beerpong-Turnier" im Menü und auf der Miami-Seite (Link-Ende #turnier).
+  Die Kachel verschwindet von selbst, sobald ein Turniersieger feststeht.
+- Team: Team-Login -> "Turnierleitung öffnen". Teams einfügen, auslosen, starten, Ergebnisse eintragen.
+- Vor dem echten Turnier: Testläufe mit "Turnier komplett zurücksetzen" löschen.
+- Einstellungen im Code unter TURNIER (z. B. csv = Link zur veröffentlichten Teamliste).
+
+Testen mit anderer Uhrzeit: an den Link ?zeit=2026-11-25T18:30 anhängen (gilt nur für dieses Gerät).
+
+
+GEHEIMES MINISPIEL „POLNISCHEN“
+- Zu finden: 5× schnell auf das Logo oben links tippen (Hauptmenü oder Startseite). Direkt-Link: …/#polnischen
+- Links tippen = nach hinten lehnen, rechts tippen = nach vorne. Nach vorne lehnen macht schneller, aber wackliger.
+- Bestenliste: Meter, bei Gleichstand die Zeit. Sie ist nur im Spiel zu sehen – und „Top 10“ erst, wenn man selbst einmal gespielt hat.
+- Team-Bereich: Unter „Bestenlisten“ gibt es den Reiter „Polnischen“ zum Löschen einzelner Namen.
+- WICHTIG: Für die öffentliche Bestenliste muss die neue firestore.rules einmal in Firebase veröffentlicht werden
+  (Abschnitt „match /polnischen/{id}“). Ohne das wird nur auf dem eigenen Handy gespeichert.
+- Schwierigkeit einstellen: im Code nach „const TUNE“ suchen (imp = Stoß pro Tipp, g0/a0 = Kippen/Schwanken am Anfang).
+
+ABZEICHEN
+- Neue Datei abzeichen.svg: enthält alle Abzeichen-Bilder. Muss mit hochgeladen werden (neben index.html und sw.js).
+- Kachel „Abzeichen“ im Menü, Seite …/#abzeichen. Gespeichert wird nur auf dem jeweiligen Handy (kein Konto, nichts in Firebase).
+  Handywechsel oder Browserdaten löschen = Abzeichen weg. Das steht auch hinter dem „i“ oben auf der Seite.
+- Clubabend zählt von 21:00 bis 1:30. Matrikel-Abzeichen: Sieger wird am Ende des Abends aus den Live-Zahlen genommen
+  (darum die Matrikel-Zahlen weiter jeden Abend zurücksetzen). „Comeback“ gibt es erst ab 10 Getränken Rückstand.
+- Minispiele: Beerpong, Busfahrer und Zapfmeister haben gestufte Abzeichen (Grün → Blau → Rot → Lila als Chip-Stapel),
+  jede Stufe zählt einzeln. Schwellen im Code unter „const BADGE_STUFEN“:
+  Beerpong 5/10/20/30 Becher, Busfahrer 5/10/20/35 Karten, Zapfmeister 3/5/10/15 Gläser.
+  Gold (oben in „Gold“): Beerpong 50 Becher, Busfahrer alle 51 Karten, Zapfmeister Glas 19 (99 % gefordert).
+- Neuer Themenabend mit eigenem Abzeichen: im EVENTS-Eintrag abzeichen: "<id>" setzen und in BADGE_LIST
+  einen Eintrag mit cat: "Gold" anlegen. Dafür braucht es ein neues Bild in abzeichen.svg (<symbol id="b-<id>">).
+- Liste aller Abzeichen und Bedingungen: im Code nach „const BADGE_LIST“ suchen.
