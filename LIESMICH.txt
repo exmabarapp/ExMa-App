@@ -74,3 +74,15 @@ FOTOGALERIE (Google Drive)
   5. Schlüssel in index.html bei const DRIVE_KEY = "…" eintragen.
 - Foto löschen: einfach in Google Drive löschen. Die App zeigt nach spätestens 5 Minuten den neuen Stand.
 - „Entfernen lassen“ im Vollbild schickt eine E-Mail mit Dateiname und Link an die Club-Adresse.
+
+MUSIKWÜNSCHE & DJ-PULT
+- Gäste: Kachel „Musikwünsche“ (…/#musik). Wünschen geht nur während des Clubabends (Bar offen).
+  Songsuche mit Cover über die iTunes-Suche von Apple; wird nichts gefunden: „Selbst eintragen“.
+  Pro Handy 1 eigener Wunsch alle 10 Minuten. Gleiche Songs (auch Remix/andere Schreibweise) werden zusammengelegt,
+  ein zweiter Wunsch zählt dann als 🔥-Stimme. Dazu „Was soll mehr laufen?“ (Techno, Charts, Hip-Hop, Party-Klassiker).
+- Wird ein Wunsch gespielt, sieht der Gast „Dein Song läuft!“ und bekommt das Abzeichen „Dein Song läuft!“.
+- DJ: im Team-Bereich mit PIN anmelden → „DJ-Pult öffnen“ (…/#dj). Liste nach Votes, Knöpfe
+  „Gespielt“, „Passt nicht“ (nur heute weg) und „Sperren“ (dauerhaft: nur dieser Song oder ganzer Interpret).
+  Unten „Dauerhaft gesperrt“ mit „Entsperren“. Gesperrtes lehnt auch die Datenbank ab (Regeln).
+- Daten: Firestore musik/<Abend-ID> (ein Dokument pro Abend), musikSperre/… und musikSperreInfo/….
+- WICHTIG: Für die Musikwünsche müssen die neuen firestore.rules in Firebase eingefügt werden.
