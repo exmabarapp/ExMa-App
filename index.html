@@ -1095,6 +1095,25 @@ a { color: inherit; }
 .hm-badges .hm-go { flex: none; }
 .hm-badges.new::after { content: "Neu"; position: absolute; top: -9px; right: 16px; padding: 2px 8px; border-radius: 999px; background: #ff3fc8; color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 0 12px #ff3fc8; }
 
+/* ---------- Team-Bereich: Starten + aufklappbare Zeilen ---------- */
+.tm-launch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tm-go { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 6px 12px; border-radius: 18px; border: 1.5px solid rgba(246,195,68,.55); background: linear-gradient(160deg, rgba(246,195,68,.2), rgba(246,195,68,.06)); color: #fff; font: inherit; text-decoration: none; text-align: center; cursor: pointer; box-shadow: 0 0 14px rgba(246,195,68,.15); }
+.tm-go span { font-size: 26px; line-height: 1.1; }
+.tm-go b { font-size: 15px; }
+.tm-go small { font-size: 11px; font-weight: 700; color: #e6d6a8; }
+.tm-go:active { transform: scale(.97); }
+.tm-acc { padding: 0 !important; }
+.tm-acc > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px; list-style: none; cursor: pointer; font-weight: 800; font-size: 16px; color: #fff; }
+.tm-acc > summary::-webkit-details-marker { display: none; }
+.tm-acc > summary span small { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--c-dim, #b9a6c8); }
+.tm-acc > summary::after { content: ""; flex: none; width: 10px; height: 10px; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(45deg); margin: -4px 4px 0 auto; transition: transform .2s; opacity: .7; }
+.tm-acc[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
+.tm-acc > summary em { font-style: normal; min-width: 24px; padding: 2px 8px; border-radius: 999px; background: #ff3fa0; color: #fff; font-size: 13px; text-align: center; box-shadow: 0 0 10px rgba(255,63,160,.5); }
+.tm-acc > summary em:empty { display: none; }
+.tm-acc > :not(summary) { margin-left: 18px; margin-right: 18px; }
+.tm-acc[open] { padding-bottom: 16px !important; }
+.tm-danger > summary { color: #ffb4bd; }
+@media (prefers-reduced-motion: reduce) { .tm-acc > summary::after { transition: none; } }
 /* ---------- Musikwünsche & DJ-Pult ---------- */
 .mu-livetag { display: inline-flex; align-items: center; gap: 5px; background: #ff3fa0 !important; color: #fff !important; box-shadow: 0 0 12px #ff3fa0; }
 .mu-livetag i, .mu-live i { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: muPulse 1.4s ease-in-out infinite; }
@@ -3987,12 +4006,13 @@ async function loadWishList() {
   const box = $("wishList"); if (!box || !Live.remote) return;
   try {
     const list = await Wishes.list();
+    const n = $("tWishN"); if (n) n.textContent = list.length ? String(list.length) : "";
     box.innerHTML = list.length ? list.map((w) => `
       <div class="wish-item"><div><b>${esc(w.art)}:</b> ${esc(w.wunsch)}${w.name || w.studiengang ? `<small>${esc([w.name, w.studiengang].filter(Boolean).join(" · "))}</small>` : ""}</div>
       <button type="button" data-del="${esc(w.id)}" aria-label="Wunsch löschen">×</button></div>`).join("") : `<p class="prost-small">Noch keine Wünsche.</p>`;
     box.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
       b.disabled = true;
-      try { await Wishes.remove(b.dataset.del); b.closest(".wish-item").remove(); if (!box.querySelector(".wish-item")) box.innerHTML = `<p class="prost-small">Noch keine Wünsche.</p>`; } catch { b.disabled = false; alertTeam("Löschen hat nicht geklappt."); }
+      try { await Wishes.remove(b.dataset.del); b.closest(".wish-item").remove(); const n = $("tWishN"); if (n) n.textContent = box.querySelectorAll(".wish-item").length || ""; if (!box.querySelector(".wish-item")) box.innerHTML = `<p class="prost-small">Noch keine Wünsche.</p>`; } catch { b.disabled = false; alertTeam("Löschen hat nicht geklappt."); }
     }));
   } catch { box.innerHTML = `<p class="prost-small">Wünsche konnten nicht geladen werden.</p>`; }
 }
@@ -4024,6 +4044,11 @@ function renderTeam() {
   const a = $("teamArea"); if (!a) return;
   if (!teamAuthed) { renderTeamLogin(a); return; }
   a.innerHTML = `
+    <div class="tm-launch" role="group" aria-label="Starten">
+      <button type="button" class="tm-go" id="tTresen"><span aria-hidden="true">🖥️</span><b>Tresen</b><small>Vollbild am Laptop</small></button>
+      <a class="tm-go" href="#dj"><span aria-hidden="true">🎧</span><b>DJ-Pult</b><small>Musikwünsche</small></a>
+      <a class="tm-go" href="#turnier-team"><span aria-hidden="true">🏆</span><b>Turnier</b><small>Turnierleitung</small></a>
+    </div>
     <section class="cbox team" aria-label="Zähler">
       <h3>Zähler</h3>
       <p class="team-now" id="tNow"></p>
@@ -4031,40 +4056,25 @@ function renderTeam() {
       <div class="team-grid mat">${MATRIKEL.map((m) => `<button type="button" data-m="${m}"><small>+1</small>Matrikel ${m}</button>`).join("")}</div>
       <div class="team-row"><button type="button" id="tUndo">Letzten Tipp rückgängig</button></div>
     </section>
-    <section class="cbox team" aria-label="Zurücksetzen">
-      <h3>Zurücksetzen</h3>
+    <details class="cbox team tm-acc">
+      <summary><span>Wünsche <small>Drinks &amp; Mottos</small></span><em id="tWishN"></em></summary>
+      <div id="wishList" class="wish-list"><p class="prost-small">${Live.remote ? "Lädt …" : "Wünsche sind erst mit Datenbank-Verbindung sichtbar."}</p></div>
+    </details>
+    <details class="cbox team tm-acc">
+      <summary><span>Bestenlisten <small>Einträge löschen</small></span></summary>
+      <div class="tl-tabs" role="group" aria-label="Spiel wählen">${Object.entries(TEAM_LISTS).map(([k, v]) => `<button type="button" data-tl="${k}" aria-pressed="${k === teamList}">${v.name}</button>`).join("")}</div>
+      <div id="tlList" class="tl-list"></div>
+      <div class="team-row"><button type="button" class="danger wide" id="tClearList">Ganze Liste leeren</button></div>
+    </details>
+    <details class="cbox team tm-acc tm-danger">
+      <summary><span>Zurücksetzen <small>Abend · Semester · Matrikel</small></span></summary>
       <div class="team-row">
         <button type="button" class="danger" id="tReset">Abend auf 0</button>
         <button type="button" class="danger" id="tResetS">Semester auf 0</button>
         <button type="button" class="danger wide" id="tResetM">Matrikel-Duell auf 0</button>
       </div>
       <p class="prost-small">Zum Bestätigen zweimal tippen.</p>
-    </section>
-    <section class="cbox team" aria-label="Bestenlisten">
-      <h3>Bestenlisten</h3>
-      <div class="tl-tabs" role="group" aria-label="Spiel wählen">${Object.entries(TEAM_LISTS).map(([k, v]) => `<button type="button" data-tl="${k}" aria-pressed="${k === teamList}">${v.name}</button>`).join("")}</div>
-      <div id="tlList" class="tl-list"></div>
-      <div class="team-row"><button type="button" class="danger wide" id="tClearList">Ganze Liste leeren</button></div>
-    </section>
-    <section class="cbox team" aria-label="Eingegangene Wünsche">
-      <h3>Wünsche</h3>
-      <div id="wishList" class="wish-list"><p class="prost-small">${Live.remote ? "Lädt …" : "Wünsche sind erst mit Datenbank-Verbindung sichtbar."}</p></div>
-    </section>
-        <section class="cbox team" aria-label="DJ-Pult">
-      <h3>DJ-Pult</h3>
-      <p class="prost-small">Für das Handy des DJs: Musikwünsche nach Votes, Stimmung im Raum, „Gespielt“, „Passt nicht“ und dauerhaft sperren (Song oder ganzer Interpret).</p>
-      <div class="team-row"><a class="wide tn-teamlink" href="#dj">DJ-Pult öffnen</a></div>
-    </section>
-        <section class="cbox team" aria-label="Beerpong-Turnier">
-      <h3>Beerpong-Turnier</h3>
-      <p class="prost-small">Teams laden, Gruppen auslosen, Ergebnisse eintragen – alles erscheint live bei den Spielern.</p>
-      <div class="team-row"><a class="wide tn-teamlink" href="#turnier-team">Turnierleitung öffnen</a></div>
-    </section>
-        <section class="cbox team" aria-label="Tresen-Ansicht">
-      <h3>Tresen-Ansicht</h3>
-      <p class="prost-small">Vollbild für den Laptop am Tresen: Specials, Happy Hour mit Countdown, Karte, PayPal- und App-QR, Live-Zähler. Beenden geht nur mit PIN.</p>
-      <div class="team-row"><button type="button" class="wide" id="tTresen">Tresen-Ansicht starten</button></div>
-    </section>
+    </details>
     <button type="button" class="team-logout" id="tLogout">Abmelden</button>`;
   loadWishList();
      $("tTresen").addEventListener("click", openTresen);
