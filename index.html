@@ -5418,6 +5418,8 @@ const Pol = (() => {
   let fig, th, om, d, tms, walk, noiseV, noiseT, speed, best = 0;
   let inputs = [], events = [], nextEv, active = [], fx = [], ghosts = 0, blackUntil = 0, slope = 0, slopeT = 0, cobble = 0;
   let fallT = 0, fallDir = 0, cause = "", causeAt = -1e9, milestonesShown = {}, greenT = 0, reach = 0, reachBack = 0, holdBottle = false, hickT = 0, padFlash = { l: 0, r: 0 };
+  /* Animationen: pose = Ausrutschen/Stolpern/Banane, hopT = Schluckauf-Hüpfer, kotz = Würgen + Schwall, reachA = Flasche aufheben + trinken */
+  let pose = null, hopT = 0, hickPuff = false, kotz = null, decals = [], reachA = -1, reachEv = null, tiltCur = 0, frameDt = 0, emitAcc = 0;
   const DT = 1 / 120;
   const T_FALL = 0.95;
   /* Stellschrauben: Tipp-Stoß, Kippen, Schwanken, Dämpfung – und wie stark sie mit der Strecke wachsen */
@@ -5438,7 +5440,7 @@ const Pol = (() => {
     { k: "gully", from: 14, ground: true, w: 3 },
     { k: "flasche", from: 24, ground: true, w: 2.5 },
     { k: "kopf", from: 30, ground: true, w: 2.5, len: 9 },
-    { k: "banane", from: 40, ground: true, w: 2 },
+    { k: "banane", from: 34, ground: true, w: 2.6 },
     { k: "hick", from: 45, w: 2 },
     { k: "slope", from: 60, w: 2, len: 16 },
     { k: "bier", from: 75, w: 2 },
@@ -5461,15 +5463,15 @@ const Pol = (() => {
   function trigger(ev) {
     const p = power();
     switch (ev.k) {
-      case "pfuetze": om += (ev.dir) * 1.35 * p; splash("#9fd3ff"); say("Platsch!"); break;
-      case "gully": om += 1.25 * p; say("Stolper!"); break;
-      case "banane": om -= 1.9 * p; say("Huiii!"); break;
-      case "flasche": reach = 0.9; holdBottle = true; say("Ooh, eine Flasche!"); break;
+      case "pfuetze": om -= 1.45 * p; pose = { k: "slip", t: 0, dur: 0.75 }; splash("#9fd3ff", 18); say("Rutsch!"); break;
+      case "gully": om += 1.35 * p; pose = { k: "stumble", t: 0, dur: 0.6 }; ev.hit = tms; sparks(); say("Klonk – Stolper!"); break;
+      case "banane": om -= 2.0 * p; pose = { k: "banana", t: 0, dur: 1.0 }; peel(); say("Huiii!"); break;
+      case "flasche": reach = 0.9; reachA = 0; reachEv = ev; say("Ooh, eine Flasche!"); break;
       case "kopf": cobble = d + ev.len; say("Kopfsteinpflaster"); break;
-      case "hick": hickT = 4; break;
+      case "hick": hickT = 4.4; say("Schluckauf!"); break;
       case "slope": slope = ev.dir; slopeT = d + ev.len; say(ev.dir > 0 ? "Bergab!" : "Bergauf!"); break;
       case "bier": active.push({ k: "bierhand", t: 0 }); break;
-      case "kotzen": greenT = 0.75; active.push({ k: "kotzen", t: 0 }); break;
+      case "kotzen": kotz = { t: 0 }; say("Mir wird schlecht …"); break;
       case "doppelt": ghosts = 4.5; say("Doppelt sehen …"); break;
       case "blackout": blackUntil = tms + (550 + Math.min(450, d * 1.2)); break;
     }
@@ -5493,16 +5495,29 @@ const Pol = (() => {
     if (slope && d < slopeT) tq += slope * 0.95 * p; else slope = 0;
     if (reach > 0) { tq += 2.6 * p; reach -= DT; }
     if (reachBack > 0) { tq -= 2.8 * p; reachBack -= DT; }
-    if (hickT > 0) { const before = hickT; hickT -= DT; if (Math.floor(before / 0.55) !== Math.floor(hickT / 0.55)) { om += (Math.random() < .5 ? -1 : 1) * 0.75 * p; say("Hick!"); } }
+    if (hickT > 0) { const before = hickT; hickT -= DT; if (Math.floor(before / 0.55) !== Math.floor(hickT / 0.55)) { om += (Math.random() < .5 ? -1 : 1) * 0.8 * p; hopT = 0.24; hickPuff = true; } }
+    if (hopT > 0) hopT -= DT;
+    if (pose) { pose.t += DT; if (pose.t >= pose.dur) pose = null; }
+    if (reachA >= 0) { reachA += DT; if (reachA >= 0.45 && reachEv && !reachEv.taken) { reachEv.taken = true; holdBottle = true; } if (reachA > 1.7) reachA = -1; }
+    if (kotz) {
+      const kt = kotz.t; kotz.t += DT;
+      if (kotz.t < 1.2) tq += 0.8 * p;
+      else if (kotz.t < 3.1) { if (kt < 1.2) say("Bwäääärgh!"); tq += (1.1 + 0.6 * Math.sin(kotz.t * 9)) * p; }
+      else if (!kotz.back) { kotz.back = true; om -= 1.5 * p; }
+      if (kotz.t > 3.6) kotz = null;
+    }
+    tiltCur += ((slope && d < slopeT ? slope * 0.1 : 0) - tiltCur) * Math.min(1, DT * 2.5);
     om += tq * DT;
     om *= 1 - TUNE.damp * DT;
     th += om * DT;
     speed = Math.max(1.1, Math.min(7.2, 3 + 5.2 * th + (slope > 0 ? 1.2 : slope < 0 ? -0.9 : 0)));
+    if (kotz && kotz.t > 1.2 && kotz.t < 3.1) speed *= 0.35;
+    if (reachA >= 0 && reachA < 0.8) speed *= 0.2;   /* zum Aufheben fast stehen bleiben */
     d += speed * DT;
     walk += speed * DT * 2.3;
     tms += DT * 1000;
     if (ghosts > 0) ghosts -= DT;
-    if (greenT > 0) { greenT -= DT; if (greenT <= 0) { om -= 2.5 * p; vomit(); say("Bwäärgh!"); } }
+
     active.forEach((a) => { a.t += DT; if (a.k === "bierhand" && a.t > 0.65 && !a.fired) { a.fired = true; reachBack = 0.8; say("Oh, ein Bier!"); } });
     active = active.filter((a) => a.t < 1.8);
     if (d < cobble) setCause("kopf");
@@ -5512,7 +5527,7 @@ const Pol = (() => {
     if (hickT > 0) setCause("hick");
     if (ghosts > 0) setCause("doppelt");
     if (tms < blackUntil) setCause("blackout");
-    if (greenT > 0 || active.some((a) => a.k === "kotzen" && a.t < 1.2)) setCause("kotzen");
+    if (kotz) setCause("kotzen");
     /* Ereignis erreicht? */
     for (const ev of events) if (!ev.done && d >= ev.at) trigger(ev);
     if (nextEv && d >= nextEv.at - (nextEv.ground ? 0 : 0)) schedule(nextEv.at);
@@ -5530,8 +5545,11 @@ const Pol = (() => {
     sayEl.textContent = text; sayEl.className = "pl-say show" + (big ? " big" : "");
     clearTimeout(say._t); say._t = setTimeout(() => { if (sayEl) sayEl.className = "pl-say"; }, big ? 1500 : 900);
   }
-  function splash(c) { for (let i = 0; i < 14; i++) fx.push({ x: 0, y: 0, vx: (Math.random() * 2 - 1) * 2.2, vy: -2 - Math.random() * 2.4, c, t: 0, life: .6, g: 9 }); }
-  function vomit() { for (let i = 0; i < 26; i++) fx.push({ head: true, x: 0, y: 0, vx: 3.2 + Math.random() * 2.2, vy: -0.6 + Math.random() * 1.4, c: i % 3 ? "#9ad94a" : "#c7e86b", t: i * -0.02, life: .8, g: 6 }); }
+  /* Partikel hängen an der Welt (sx/sy = Bildschirm beim Entstehen, d0 = Strecke dabei) */
+  const feet = () => ({ x: W * .34, y: H * .77 });
+  function splash(c, n) { const f = feet(); for (let i = 0; i < n; i++) fx.push({ sx: f.x + (Math.random() * 40 - 10) * U, sy: f.y, d0: d, vx: (Math.random() * 2 - 1) * 2.6, vy: -2.2 - Math.random() * 2.8, c, t: 0, life: .75, g: 9, r: 3 + Math.random() * 3 }); }
+  function sparks() { const f = feet(); for (let i = 0; i < 10; i++) fx.push({ sx: f.x + 14 * U, sy: f.y, d0: d, vx: (Math.random() * 2 - 0.4) * 2.2, vy: -1.5 - Math.random() * 2, c: i % 2 ? "#ffe08a" : "#c9cede", t: 0, life: .45, g: 9, r: 2 }); }
+  function peel() { const f = feet(); fx.push({ kind: "peel", sx: f.x + 8 * U, sy: f.y - 6 * U, d0: d, vx: 3.4, vy: -5.2, c: "#ffd23f", t: 0, life: 1.3, g: 9, r: 1 }); }
 
   /* ---------- Zeichnen ---------- */
   const PX = () => 46 * U;  /* Pixel pro Meter */
@@ -5601,42 +5619,77 @@ const Pol = (() => {
     const t0 = Math.floor((d - 15) / 2) * 2;
     for (let m = t0; m < d + 20; m += 2) { const x = worldX(m); ctx.beginPath(); ctx.moveTo(x, ground + 8 * U); ctx.lineTo(x - 18 * U, H); ctx.stroke(); }
     ctx.fillStyle = "#23264a"; ctx.fillRect(0, ground + 70 * U, W, H);
+    /* Kotzlachen bleiben liegen */
+    decals.forEach((k) => { const x = worldX(k.m); if (x < -120 || x > W + 120) return; const w = (16 + 34 * k.w) * U;
+      ctx.fillStyle = "rgba(170,205,70,.9)"; ctx.beginPath(); ctx.ellipse(x, ground + 4 * U, w, 6 * U + 2 * U * k.w, 0, 0, 7); ctx.fill();
+      ctx.fillStyle = "#d8ea7a"; for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.arc(x + (i - 2.5) * w / 3.2, ground + 2 * U + (i % 2) * 3 * U, 2.6 * U, 0, 7); ctx.fill(); } });
     /* Hindernisse am Boden */
     for (const ev of events) {
       if (!ev.ground) continue;
       const x = worldX(ev.at); if (x < -200 || x > W + 300) continue;
       ctx.save(); ctx.translate(x, ground + 3 * U);
       if (ev.k === "pfuetze") { ctx.fillStyle = "#4f86ff"; ctx.beginPath(); ctx.ellipse(0, 0, 38 * U, 7 * U, 0, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.beginPath(); ctx.ellipse(-10 * U, -1 * U, 12 * U, 2 * U, 0, 0, 7); ctx.fill(); }
-      if (ev.k === "gully") { ctx.fillStyle = "#1a1c30"; ctx.beginPath(); ctx.ellipse(0, 0, 26 * U, 6 * U, 0, 0, 7); ctx.fill(); ctx.strokeStyle = "#5a5f8f"; ctx.lineWidth = 2 * U; for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.moveTo(i * 8 * U, -4 * U); ctx.lineTo(i * 8 * U, 4 * U); ctx.stroke(); } }
-      if (ev.k === "banane" && !ev.done) { ctx.fillStyle = "#ffd23f"; ctx.beginPath(); ctx.moveTo(-16 * U, -2 * U); ctx.quadraticCurveTo(0, -16 * U, 16 * U, -2 * U); ctx.quadraticCurveTo(0, -8 * U, -16 * U, -2 * U); ctx.fill(); ctx.fillStyle = "#6b4a10"; ctx.fillRect(14 * U, -4 * U, 4 * U, 3 * U); }
-      if (ev.k === "flasche" && !ev.done) { ctx.rotate(-1.35); ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-5 * U, -30 * U, 10 * U, 30 * U); ctx.fillRect(-2.5 * U, -42 * U, 5 * U, 12 * U); ctx.fillStyle = "#f6c518"; ctx.fillRect(-5 * U, -20 * U, 10 * U, 9 * U); }
+      if (ev.k === "gully") {
+        const k = ev.hit != null ? Math.max(0, 1 - (tms - ev.hit) / 450) : 0, j = k * Math.abs(Math.sin((tms - (ev.hit || 0)) / 40));
+        ctx.fillStyle = "#0c0d1c"; ctx.beginPath(); ctx.ellipse(0, 0, 27 * U, 6.5 * U, 0, 0, 7); ctx.fill();
+        ctx.save(); ctx.translate(0, -7 * U * j); ctx.rotate(-0.12 * j);
+        ctx.fillStyle = "#2a2d48"; ctx.beginPath(); ctx.ellipse(0, -1 * U, 26 * U, 6 * U, 0, 0, 7); ctx.fill();
+        ctx.strokeStyle = "#6a70a6"; ctx.lineWidth = 2 * U; for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.moveTo(i * 8 * U, -5 * U); ctx.lineTo(i * 8 * U, 3 * U); ctx.stroke(); }
+        ctx.restore();
+      }
+      if (ev.k === "banane" && !ev.done) bananaShape(1.35);
+      if (ev.k === "flasche" && !ev.taken) { ctx.translate(0.55 * PX(), 0); ctx.rotate(-1.35); ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-5 * U, -30 * U, 10 * U, 30 * U); ctx.fillRect(-2.5 * U, -42 * U, 5 * U, 12 * U); ctx.fillStyle = "#f6c518"; ctx.fillRect(-5 * U, -20 * U, 10 * U, 9 * U); }
       if (ev.k === "kopf") { const len = ev.len * PX(); ctx.fillStyle = "#5a5e8c"; for (let i = 0; i < len; i += 14 * U) for (let j = 0; j < 2; j++) { ctx.beginPath(); ctx.ellipse(i + (j ? 7 * U : 0), j * 7 * U, 6 * U, 3 * U, 0, 0, 7); ctx.fill(); } }
       ctx.restore();
     }
   }
 
-  /* Figur zeichnen: Drehpunkt sind die Füße, th > 0 = nach vorne (rechts) geneigt */
+  function bananaShape(sc) {
+    ctx.save(); ctx.scale(sc * U, sc * U);
+    ctx.lineJoin = "round"; ctx.lineWidth = 2.4; ctx.strokeStyle = "#5a3d08";
+    ctx.fillStyle = "#ffd23f"; ctx.beginPath(); ctx.moveTo(-18, -3); ctx.quadraticCurveTo(-4, -20, 16, -6); ctx.lineTo(19, -9); ctx.lineTo(18, -4); ctx.quadraticCurveTo(-2, -9, -18, -3); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#f2b81d"; ctx.beginPath(); ctx.moveTo(-6, -6); ctx.quadraticCurveTo(-16, 4, -22, 2); ctx.quadraticCurveTo(-14, -2, -10, -6); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(4, -6); ctx.quadraticCurveTo(14, 4, 22, 3); ctx.quadraticCurveTo(14, -1, 10, -7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.ellipse(-2, -12, 7, 1.8, -0.3, 0, 7); ctx.fill();
+    ctx.restore();
+  }
+  /* Figur zeichnen: Drehpunkt sind die Füße, th > 0 = nach vorne (rechts) geneigt.
+     opts: hop (Hüpfer), bend (Oberkörper vor), front (Arm-Winkel vorne), sick/puff/mouthOpen/wide (Gesicht), drink, headTilt */
+  const mix = (a, b, k) => a + (b - a) * k;
+  /* Pose setzt schnell ein (0,15 s), hält und klingt in den letzten 0,3 s aus */
+  const poseK = () => pose ? Math.min(1, pose.t / 0.15) * Math.min(1, (pose.dur - pose.t) / 0.3) : 0;
   function person(x, ground, ang, opts = {}) {
     const f = fig, u = U * 1.32, a = opts.alpha == null ? 1 : opts.alpha;
-    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, ground); ctx.rotate(ang);
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, ground - (opts.hop || 0)); ctx.rotate(ang);
     const ph = opts.still ? 0 : walk, sw = Math.sin(ph), sw2 = Math.sin(ph + Math.PI);
     const legL = 60 * u, hipY = -64 * u, shY = -112 * u;
     const shade = (c, k) => { const n = parseInt(c.slice(1), 16); const r = Math.round(((n >> 16) & 255) * k), g = Math.round(((n >> 8) & 255) * k), b = Math.round((n & 255) * k); return `rgb(${r},${g},${b})`; };
+    const P = opts.ghost || opts.fall ? null : pose, pe = poseK();
+    const drunk = Math.min(1, 0.5 + d / 300);
+    const castSw = f.cast ? 0.25 : 1;
+    /* Beine mit Knie, das beim Gehen einknickt */
     const leg = (s, front) => {
-      const ang2 = s * 0.55;
+      let ang2 = s * 0.55 * castSw;
+      if (P) { const tgt = P.k === "slip" ? (front ? 1.2 : -0.5) : P.k === "banana" ? (front ? 1.55 : 1.15) : (front ? -0.8 : 0.35); ang2 = mix(ang2, tgt, pe); }
+      const cast = f.cast && front;
+      let knee = cast ? 0 : Math.max(0, Math.sin(ph + (front ? 0 : Math.PI) + 0.9)) * 0.6 * castSw;
+      if (P && P.k === "stumble" && !cast) knee = mix(knee, 0.9, pe);
+      if (P && P.k !== "stumble" && !cast) knee = mix(knee, 0.15, pe);
       ctx.save(); ctx.translate(front ? 4 * u : -4 * u, hipY); ctx.rotate(-ang2);
-      ctx.strokeStyle = f.cast && front ? "#f4f4f4" : (front ? f.pants : shade(f.pants, .72)); ctx.lineCap = "round"; ctx.lineWidth = (f.cast && front ? 17 : 14) * u;
-      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, legL - 6 * u); ctx.stroke();
-      ctx.fillStyle = f.cast && front ? "#f4f4f4" : f.shoe; ctx.beginPath(); ctx.ellipse(6 * u, legL - 2 * u, 12 * u, 6 * u, 0, 0, 7); ctx.fill();
+      ctx.strokeStyle = cast ? "#f4f4f4" : (front ? f.pants : shade(f.pants, .72)); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.lineWidth = (cast ? 17 : 14) * u;
+      const t1 = legL * 0.5, sl = legL * 0.5 - 6 * u, fx2 = -Math.sin(knee) * sl, fy2 = t1 + Math.cos(knee) * sl;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, t1); ctx.lineTo(fx2, fy2); ctx.stroke();
+      ctx.fillStyle = cast ? "#f4f4f4" : f.shoe; ctx.beginPath(); ctx.ellipse(fx2 + 6 * u, fy2 + 4 * u, 12 * u, 6 * u, -knee * 0.4, 0, 7); ctx.fill();
       ctx.restore();
     };
-    const castSw = f.cast ? 0.25 : 1;
-    leg(sw2 * castSw, false);
+    leg(sw2, false);
+    leg(sw, true);
     /* Krücken */
     if (f.cast) { ctx.strokeStyle = "#b9c0d6"; ctx.lineWidth = 5 * u; [[-26, 1], [28, -1]].forEach(([dx, s]) => { ctx.beginPath(); ctx.moveTo(dx * u + sw * 10 * u * s, 0); ctx.lineTo(dx * .5 * u, shY + 30 * u); ctx.stroke(); }); }
-    /* Rucksack */
+    /* Oberkörper schwankt um die Hüfte */
+    const bend = (opts.bend || 0) + (opts.ghost ? 0 : Math.sin(tms / 330) * 0.08 * drunk);
+    ctx.save(); ctx.translate(0, hipY); ctx.rotate(bend); ctx.translate(0, -hipY);
     if (f.backpack) { ctx.fillStyle = "#e3344a"; ctx.beginPath(); ctx.roundRect(-34 * u, shY + 6 * u, 18 * u, 46 * u, 8 * u); ctx.fill(); }
-    /* Oberkörper */
     ctx.fillStyle = f.top;
     if (f.belly) { ctx.beginPath(); ctx.ellipse(4 * u, (hipY + shY) / 2 + 6 * u, 26 * u, 30 * u, 0, 0, 7); ctx.fill(); }
     ctx.beginPath(); ctx.roundRect(-18 * u, shY, 36 * u, hipY - shY + 8 * u, 12 * u); ctx.fill();
@@ -5646,32 +5699,38 @@ const Pol = (() => {
     if (f.jersey) { ctx.fillStyle = "#fff"; ctx.font = `${16 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("10", 2 * u, shY + 30 * u); }
     if (f.team) { ctx.fillStyle = "#ff3fc8"; ctx.font = `${10 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("EXMA", 0, shY + 24 * u); }
     if (f.hood) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.ellipse(-10 * u, shY - 2 * u, 16 * u, 9 * u, 0, 0, 7); ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2 * u; ctx.beginPath(); ctx.moveTo(4 * u, shY + 4 * u); ctx.lineTo(6 * u, shY + 22 * u); ctx.stroke(); }
-    leg(sw * castSw, true);
-    /* Arme */
+    /* Arme: schlenkern, rudern beim Kippen, Posen */
     const arm = (base, front) => {
       ctx.save(); ctx.translate(0, shY + 6 * u); ctx.rotate(base);
       const sc = f.jacket ? "#4b74a8" : f.top;
       ctx.strokeStyle = front ? sc : shade(sc, .75); ctx.lineCap = "round"; ctx.lineWidth = 12 * u;
       ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 44 * u); ctx.stroke();
+      if (front && holdBottle && !opts.ghost) {
+        ctx.save(); ctx.translate(0, 50 * u); ctx.rotate(opts.drink ? 2.3 : 0);
+        ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-5 * u, -4 * u, 10 * u, 22 * u); ctx.fillRect(-2.5 * u, 18 * u, 5 * u, 9 * u);
+        ctx.fillStyle = "#f6c518"; ctx.fillRect(-5 * u, 3 * u, 10 * u, 7 * u); ctx.restore();
+      }
       ctx.fillStyle = f.skin; ctx.beginPath(); ctx.arc(0, 48 * u, 6 * u, 0, 7); ctx.fill();
       if (front && f.band) { ctx.fillStyle = "#ff3fc8"; ctx.fillRect(-6 * u, 38 * u, 12 * u, 4 * u); }
       if (front && f.heels) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.moveTo(-4 * u, 50 * u); ctx.lineTo(12 * u, 58 * u); ctx.lineTo(10 * u, 64 * u); ctx.lineTo(-6 * u, 60 * u); ctx.fill(); }
-      if (front && holdBottle) { ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-4 * u, 48 * u, 8 * u, 22 * u); }
       ctx.restore();
     };
     const sway = Math.sin(tms / 400) * 0.25;
     let back = sw * 0.45 + 0.15 + sway, front = sw2 * 0.45 - 0.1 + sway;
     if (f.cast) { back = -0.25; front = 0.35; }
-    if (opts.reach > 0) front = -1.5;           /* greift nach vorne unten */
-    if (opts.reachBack > 0) back = 1.9;         /* greift nach hinten */
+    const fl = opts.ghost ? 0 : Math.min(1, Math.max(0, (Math.abs(th) - 0.36) / 0.32));
+    if (fl > 0) { back = mix(back, 2.0 + Math.sin(tms / 95) * 0.45, fl); front = mix(front, -2.0 + Math.sin(tms / 85 + 1) * 0.5, fl); }
+    if (P) { if (P.k === "stumble") { back = mix(back, -1.1, pe); front = mix(front, -1.7, pe); } else { back = mix(back, 2.6, pe); front = mix(front, -2.7, pe); } }
+    if (opts.reachBack > 0) back = 1.9;
+    if (opts.front != null) front = opts.front;
     if (opts.fall) { back = -2.2; front = -2.5; }
     arm(back, false);
-    /* Kopf */
+    /* Kopf wackelt am Hals */
     const hx = 2 * u, hy = shY - 26 * u, hr = 25 * u;
     ctx.fillStyle = f.skin; ctx.fillRect(-5 * u, shY - 8 * u, 10 * u, 10 * u);
-    const sick = greenT > 0 && !opts.ghost;
-    ctx.fillStyle = sick ? "#b6d98a" : f.skin; ctx.beginPath(); ctx.arc(hx, hy, hr, 0, 7); ctx.fill();
-    /* Haare */
+    ctx.save(); ctx.translate(0, shY - 4 * u); ctx.rotate((opts.ghost ? 0 : Math.sin(tms / 290) * 0.12 * drunk) + (opts.headTilt || 0)); ctx.translate(0, -(shY - 4 * u));
+    const sick = !!opts.sick;
+    ctx.fillStyle = sick ? "#a9d77e" : f.skin; ctx.beginPath(); ctx.arc(hx, hy, hr, 0, 7); ctx.fill();
     ctx.fillStyle = f.hairC;
     if (f.hair === "short") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 6 * u, hr * .95, Math.PI * 1.05, Math.PI * 2.05); ctx.fill(); }
     if (f.hair === "buzz") { ctx.beginPath(); ctx.arc(hx, hy - 4 * u, hr * .98, Math.PI * 1.1, Math.PI * 1.95); ctx.fill(); }
@@ -5680,17 +5739,43 @@ const Pol = (() => {
     if (f.hair === "long") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 4 * u, hr * 1.06, Math.PI * .9, Math.PI * 2.05); ctx.fill(); ctx.beginPath(); ctx.roundRect(hx - hr - 6 * u, hy - 8 * u, 20 * u, 50 * u, 10 * u); ctx.fill(); }
     if (f.hair === "ponytail") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 5 * u, hr * 1.02, Math.PI * 1.0, Math.PI * 2.05); ctx.fill(); ctx.beginPath(); ctx.ellipse(hx - hr - 6 * u, hy - 12 * u + Math.sin(walk) * 3 * u, 8 * u, 18 * u, -0.6 + Math.sin(walk) * .2, 0, 7); ctx.fill(); }
     if (f.hood) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.arc(hx - 6 * u, hy + 2 * u, hr * .9, Math.PI * .55, Math.PI * 1.25); ctx.lineTo(hx - 6 * u, hy + 2 * u); ctx.fill(); }
-    /* Gesicht: verschlafene Augen, rote Wangen */
+    /* Gesicht: halb zu, rote Nase – oder weit auf beim Hicksen */
     ctx.strokeStyle = "#2a1a22"; ctx.lineWidth = 2.6 * u; ctx.lineCap = "round";
     if (f.shades) { ctx.fillStyle = "#14141c"; ctx.beginPath(); ctx.roundRect(hx + 2 * u, hy - 8 * u, 24 * u, 10 * u, 4 * u); ctx.fill(); }
-    else {
-      const blink = opts.fall ? 1 : 0;
-      [[hx + 8 * u, hy - 4 * u], [hx + 19 * u, hy - 4 * u]].forEach(([ex, ey]) => { ctx.beginPath(); if (blink) { ctx.moveTo(ex - 3 * u, ey - 3 * u); ctx.lineTo(ex + 3 * u, ey + 3 * u); ctx.moveTo(ex + 3 * u, ey - 3 * u); ctx.lineTo(ex - 3 * u, ey + 3 * u); } else ctx.arc(ex, ey, 3.2 * u, 0.1, Math.PI - 0.1); ctx.stroke(); });
+    else [[hx + 8 * u, hy - 4 * u], [hx + 19 * u, hy - 4 * u]].forEach(([ex, ey]) => {
+      ctx.beginPath();
+      if (opts.fall) { ctx.moveTo(ex - 3 * u, ey - 3 * u); ctx.lineTo(ex + 3 * u, ey + 3 * u); ctx.moveTo(ex + 3 * u, ey - 3 * u); ctx.lineTo(ex - 3 * u, ey + 3 * u); ctx.stroke(); }
+      else if (opts.wide) { ctx.fillStyle = "#fff"; ctx.arc(ex, ey, 4.6 * u, 0, 7); ctx.fill(); ctx.stroke(); ctx.fillStyle = "#2a1a22"; ctx.beginPath(); ctx.arc(ex + 1 * u, ey, 1.9 * u, 0, 7); ctx.fill(); }
+      else if (sick) { ctx.moveTo(ex - 3.5 * u, ey - 1 * u); ctx.lineTo(ex + 3.5 * u, ey + 1 * u); ctx.stroke(); }
+      else { /* halb zugefallene Lider */
+        ctx.fillStyle = "#fff"; ctx.ellipse(ex, ey + 0.6 * u, 4.2 * u, 3.4 * u, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = "#2a1a22"; ctx.beginPath(); ctx.arc(ex + 0.8 * u, ey + 1.6 * u, 1.8 * u, 0, 7); ctx.fill();
+        ctx.fillStyle = shade(f.skin, .9); ctx.beginPath(); ctx.ellipse(ex, ey + 0.6 * u, 4.6 * u, 3.8 * u, 0, Math.PI, Math.PI * 2); ctx.lineTo(ex - 4.6 * u, ey + 0.9 * u); ctx.fill();
+        ctx.lineWidth = 1.8 * u; ctx.beginPath(); ctx.moveTo(ex - 4.6 * u, ey + 0.9 * u); ctx.lineTo(ex + 4.6 * u, ey + 0.5 * u); ctx.stroke(); ctx.lineWidth = 2.6 * u; }
+    });
+    ctx.fillStyle = sick ? "rgba(120,170,60,.6)" : "rgba(255,90,110,.5)"; ctx.beginPath(); ctx.arc(hx + 18 * u, hy + 8 * u, (opts.puff ? 9 : 5.5) * u, 0, 7); ctx.fill();
+    ctx.fillStyle = sick ? "#8fbf5a" : "#e8505b"; ctx.beginPath(); ctx.arc(hx + 25 * u, hy + 3 * u, 5 * u, 0, 7); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.arc(hx + 26.5 * u, hy + 1.5 * u, 1.5 * u, 0, 7); ctx.fill();
+    if (opts.mouthOpen) { ctx.fillStyle = "#3a1420"; ctx.beginPath(); ctx.ellipse(hx + 15 * u, hy + 13 * u, 5 * u, 6 * u, 0, 0, 7); ctx.fill(); }
+    else if (opts.puff) { ctx.beginPath(); ctx.moveTo(hx + 10 * u, hy + 13 * u); ctx.lineTo(hx + 19 * u, hy + 13 * u); ctx.stroke(); }
+    else { ctx.beginPath(); ctx.moveTo(hx + 8 * u, hy + 11 * u); ctx.quadraticCurveTo(hx + 13 * u, hy + 17 * u, hx + 19 * u, hy + 10 * u); ctx.stroke(); }
+    /* Sternchen kreisen um den Kopf */
+    if (!opts.ghost && !opts.fall) {
+      ctx.fillStyle = "#ffe066";
+      for (let i = 0; i < 3; i++) { const an = tms / 420 + i * 2.09, sx = hx + Math.cos(an) * 24 * u, sy = hy - 34 * u + Math.sin(an) * 6 * u, r = (3.5 + Math.sin(an) * 1.2) * u;
+        ctx.globalAlpha = a * (0.55 + 0.35 * drunk) * (0.6 + 0.4 * Math.sin(an)); ctx.beginPath(); for (let k = 0; k < 8; k++) { const rr = k % 2 ? r * .4 : r, aa = k * Math.PI / 4; ctx.lineTo(sx + Math.cos(aa) * rr, sy + Math.sin(aa) * rr); } ctx.fill(); }
+      ctx.globalAlpha = a;
     }
-    ctx.fillStyle = "rgba(255,90,110,.45)"; ctx.beginPath(); ctx.arc(hx + 20 * u, hy + 7 * u, 5 * u, 0, 7); ctx.fill();
-    ctx.beginPath(); ctx.moveTo(hx + 9 * u, hy + 11 * u); ctx.quadraticCurveTo(hx + 14 * u, hy + (sick ? 9 : 15) * u, hx + 19 * u, hy + 11 * u); ctx.stroke();
+    ctx.restore();
     arm(front, true);
     ctx.restore();
+    ctx.restore();
+  }
+  /* Mundposition in Weltkoordinaten (für Schwall und „hick!“-Blasen) */
+  function mouthAt(x, ground, ang, bend, hop) {
+    const u = U * 1.32, hipY = -64 * u, mx = 18 * u, my = -112 * u - 26 * u + 13 * u;
+    const rx = mx * Math.cos(bend) - (my - hipY) * Math.sin(bend), ry = mx * Math.sin(bend) + (my - hipY) * Math.cos(bend) + hipY;
+    return { x: x + rx * Math.cos(ang) - ry * Math.sin(ang), y: ground - hop + rx * Math.sin(ang) + ry * Math.cos(ang) };
   }
   function bierhand(t, ground) {
     const x = Math.min(W * .17, -40 + t * 300 * U), y = ground - 150 * U * 1.32;
@@ -5705,31 +5790,72 @@ const Pol = (() => {
   function draw() {
     if (!ctx) return;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    const ground = H * .77;
+    const ground = H * .77, playing = state === "play" || state === "pause";
+    /* Kamera schwankt mit – je weiter, desto mehr */
+    const roll = playing ? Math.sin(tms / 1900) * (0.012 + Math.min(0.026, d / 9000)) + Math.sin(tms / 730) * 0.004 : 0;
+    ctx.save(); ctx.translate(W / 2, H * .55); ctx.rotate(roll); ctx.scale(1.07, 1.07); ctx.translate(-W / 2, -H * .55);
     scene(ground);
-    /* Hang: ganze Welt leicht kippen */
-    const tilt = slope ? -slope * 0.07 : 0;
-    ctx.save(); ctx.translate(W * .34, ground); ctx.rotate(tilt); ctx.translate(-W * .34, -ground);
+    /* Hang: bergab fällt der Boden nach rechts ab, bergauf steigt er */
+    ctx.save(); ctx.translate(W * .34, ground); ctx.rotate(tiltCur); ctx.translate(-W * .34, -ground);
     groundThings(ground);
     const px = W * .34;
-    let ang = th;
+    let ang = th - tiltCur * 0.8;
+    if (pose) ang += ({ slip: -0.22, banana: -0.42, stumble: 0.26 }[pose.k] || 0) * poseK();
     if (state === "fall" || state === "over") ang = th + (fallDir * (Math.PI / 2 - Math.abs(th))) * Math.min(1, fallT / 0.45);
-    if (ghosts > 0 && (state === "play" || state === "pause")) {
+    /* Posen aus den Ereignissen */
+    const o = { alpha: ghosts > 0 ? .62 : 1, reachBack, fall: state === "fall" || state === "over" };
+    o.hop = hopT > 0 ? Math.sin(Math.PI * (1 - hopT / 0.24)) * 16 * U : 0;
+    if (hopT > 0) o.wide = true;
+    let bend = 0;
+    if (reachA >= 0) {
+      const t = reachA, sm = (k) => k * k * (3 - 2 * k);
+      if (t < 0.45) { const k = sm(t / 0.45); bend = 0.85 * k; o.front = mix(0.2, -0.45, k); }
+      else if (t < 0.8) { const k = sm((t - 0.45) / 0.35); bend = 0.85 * (1 - k); o.front = mix(-0.45, -2.4, k); }
+      else if (t < 1.45) { o.front = -2.75 + Math.sin(t * 9) * 0.06; o.drink = true; o.headTilt = -0.22; }
+      else { const k = sm((t - 1.45) / 0.25); o.front = mix(-2.75, 0.1, k); }
+    }
+    if (kotz && !o.fall) {
+      const t = kotz.t;
+      o.sick = true;
+      if (t < 1.2) { const k = Math.min(1, t / 0.35); bend = 0.32 * k + Math.sin(t * 14) * 0.04; o.puff = true; o.front = mix(0.1, -2.8, k); }
+      else if (t < 3.1) { bend = 0.6 + Math.sin(t * 9) * 0.07; o.mouthOpen = true; o.front = 0.45; o.headTilt = 0.12; }
+      else { const k = Math.min(1, (t - 3.1) / 0.5); bend = 0.6 * (1 - k); o.front = mix(-2.6, 0.1, k); o.sick = k < 0.5; }
+    }
+    o.bend = bend;
+    if (ghosts > 0 && playing) {
       const k = Math.min(1, ghosts, (4.5 - ghosts) * 2);
       [[-1, .7], [1, -.5], [-.5, -.9], [.6, .8]].forEach(([dx, da], i) => {
-        const o = Math.sin(tms / (380 + i * 90) + i * 2) * 70 * U * k * dx;
-        person(px + o, ground, th + da * 0.28 * k * Math.sin(tms / 300 + i), { alpha: .45, ghost: true, reach, reachBack });
+        const off = Math.sin(tms / (380 + i * 90) + i * 2) * 70 * U * k * dx;
+        person(px + off, ground, ang + da * 0.28 * k * Math.sin(tms / 300 + i), { alpha: .45, ghost: true, reachBack });
       });
     }
-    person(px, ground, ang, { alpha: ghosts > 0 ? .62 : 1, reach, reachBack, fall: state === "fall" || state === "over" });
+    person(px, ground, ang, o);
+    /* Schwall und Blasen kommen aus dem Mund */
+    const m = mouthAt(px, ground, ang, bend + Math.sin(tms / 330) * 0.08 * Math.min(1, 0.5 + d / 300), o.hop);
+    if (kotz && kotz.t > 1.2 && kotz.t < 3.1 && playing) {
+      if (!kotz.decal) { kotz.decal = { m: d + (m.x + 60 * U - px) / PX(), w: 0 }; decals.push(kotz.decal); }
+      kotz.decal.w = Math.min(1, (kotz.t - 1.2) / 1.6);
+      emitAcc += frameDt * 55;
+      while (emitAcc >= 1) { emitAcc -= 1; const big = Math.random() < .3;
+        fx.push({ kind: "puke", sx: m.x + 4 * U, sy: m.y, d0: d, vx: 1.6 + Math.random() * 1.6, vy: -0.4 + Math.random() * 1.2, c: ["#9ad94a", "#c7e86b", "#b5c44a", "#e3d36a"][Math.floor(Math.random() * 4)], t: 0, life: 1.1, g: 9, r: big ? 5.5 : 3 + Math.random() * 2 }); }
+    }
+    if (hickPuff) { hickPuff = false; fx.push({ kind: "txt", txt: "hick!", sx: m.x + 10 * U, sy: m.y - 8 * U, d0: d, vx: 0.5, vy: -1.4, g: 0, t: 0, life: 0.9, c: "#fff" }); }
     /* Partikel */
-    const headX = px + Math.sin(ang) * 176 * U, headY = ground - Math.cos(ang) * 176 * U;
     fx.forEach((p) => {
       if (p.t < 0) return;
-      const sx = (p.head ? headX + 16 * U : px) + p.vx * p.t * 60 * U, sy = (p.head ? headY + 6 * U : ground) + (p.vy * p.t + .5 * p.g * p.t * p.t) * 60 * U;
-      ctx.globalAlpha = Math.max(0, 1 - p.t / p.life); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(sx, sy, (p.head ? 6 : 4) * U, 0, 7); ctx.fill();
+      const sx = p.sx + p.vx * p.t * 60 * U - (d - p.d0) * PX(), sy = p.sy + (p.vy * p.t + .5 * p.g * p.t * p.t) * 60 * U;
+      if (p.kind !== "txt" && p.kind !== "peel" && sy > ground + 4 * U) return;
+      const al = Math.max(0, 1 - p.t / p.life);
+      if (p.kind === "txt") {
+        ctx.globalAlpha = al; ctx.font = `800 ${15 * U}px "Bricolage Grotesque", sans-serif`; ctx.textAlign = "center";
+        const w = ctx.measureText(p.txt).width + 14 * U; ctx.fillStyle = "rgba(255,255,255,.92)"; ctx.beginPath(); ctx.roundRect(sx - w / 2, sy - 13 * U, w, 22 * U, 11 * U); ctx.fill();
+        ctx.fillStyle = "#2a1a22"; ctx.fillText(p.txt, sx, sy + 3 * U);
+      } else if (p.kind === "peel") {
+        ctx.globalAlpha = al; ctx.save(); ctx.translate(sx, sy); ctx.rotate(p.t * 11); bananaShape(1.2); ctx.restore();
+      } else { ctx.globalAlpha = p.kind === "puke" ? Math.min(1, al * 1.6) : al; ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(sx, sy, (p.r || 4) * U, 0, 7); ctx.fill(); }
     });
     ctx.globalAlpha = 1;
+    ctx.restore();
     ctx.restore();
     active.forEach((a) => { if (a.k === "bierhand") bierhand(a.t, ground); });
     /* Rand-Hinweise zum Tippen */
@@ -5749,7 +5875,7 @@ const Pol = (() => {
     if (!running) return;
     raf = requestAnimationFrame(loop);
     if (!last) last = now;
-    let dt = Math.min(0.1, (now - last) / 1000); last = now;
+    let dt = Math.min(0.1, (now - last) / 1000); last = now; frameDt = state === "play" ? dt : 0;
     padFlash.l = Math.max(0, padFlash.l - dt * 3); padFlash.r = Math.max(0, padFlash.r - dt * 3);
     fx.forEach((p) => { p.t += dt; }); fx = fx.filter((p) => p.t < p.life);
     if (state === "play") { acc += dt; while (acc >= DT && state === "play") { step(); acc -= DT; } hud(); }
@@ -5795,6 +5921,7 @@ const Pol = (() => {
     th = (Math.random() < .5 ? -1 : 1) * 0.04; om = 0; d = 0; tms = 0; walk = 0; noiseV = 0; noiseT = 0; speed = 3;
     inputs = []; events = []; active = []; fx = []; ghosts = 0; blackUntil = 0; slope = 0; slopeT = 0; cobble = 0;
     fallT = 0; cause = ""; causeAt = -1e9; milestonesShown = {}; greenT = 0; reach = 0; reachBack = 0; holdBottle = false; hickT = 0; acc = 0; last = 0;
+    pose = null; hopT = 0; hickPuff = false; kotz = null; decals = []; reachA = -1; reachEv = null; tiltCur = 0; emitAcc = 0;
     schedule(0);
     state = "play"; hud();
   }
@@ -5873,7 +6000,7 @@ const Pol = (() => {
   let bound = false;
 
   return {
-    _dbg: { tune: (o) => Object.assign(TUNE, o), st: () => ({ state, th, om, d, tms, speed, fig: fig && fig.id, cause, ghosts, slope, events: events.map((e) => e.k + "@" + Math.round(e.at)) }), tap, set: (o) => { if ("th" in o) th = o.th; if ("d" in o) d = o.d; if ("om" in o) om = o.om; }, trigger: (k) => trigger({ k, dir: 1, len: k === "kopf" ? 9 : 16 }), fig: (id) => { const b = FIG.find((f) => f.id === id); if (b) fig = { ...b, skin: SKIN[2], hairC: HAIR[0] }; }, step: (n) => { const was = state; state = "play"; for (let i = 0; i < n && state === "play"; i++) { step(); fx.forEach((p) => { p.t += DT; }); } fx = fx.filter((p) => p.t < p.life); if (state === "play") state = was; hud(); draw(); }, newGame, pause: (p) => { state = p ? "pause" : "play"; } },
+    _dbg: { tune: (o) => Object.assign(TUNE, o), st: () => ({ state, th, om, d, tms, speed, fig: fig && fig.id, cause, ghosts, slope, events: events.map((e) => e.k + "@" + Math.round(e.at)) }), tap, set: (o) => { if ("th" in o) th = o.th; if ("d" in o) d = o.d; if ("om" in o) om = o.om; }, trigger: (k, dir = 1) => trigger({ k, dir, len: k === "kopf" ? 9 : 16 }), calm: () => { events = []; nextEv = { k: null, at: d + 9999 }; }, place: (k, ahead = 1.2) => { const ev = { k, at: d + ahead, ground: true, len: k === "kopf" ? 9 : 0, dir: 1, done: false }; events.push(ev); return ev; }, frame: (dt) => { frameDt = dt || 1 / 60; draw(); frameDt = 0; }, fig: (id) => { const b = FIG.find((f) => f.id === id); if (b) fig = { ...b, skin: SKIN[2], hairC: HAIR[0] }; }, step: (n) => { const was = state; state = "play"; for (let i = 0; i < n && state === "play"; i++) { step(); fx.forEach((p) => { p.t += DT; }); } fx = fx.filter((p) => p.t < p.life); if (state === "play") state = was; hud(); draw(); }, newGame, pause: (p) => { state = p ? "pause" : "play"; } },
     open() {
       if (running) return;
       if (!bound) { bind(); bound = true; }
