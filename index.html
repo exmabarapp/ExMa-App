@@ -1304,8 +1304,174 @@ a { color: inherit; }
 .hm-games { display: grid; grid-auto-flow: column; grid-auto-columns: 44%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -14px; padding: 2px 14px 6px; scrollbar-width: none; }
 .hm-games::-webkit-scrollbar { display: none; }
 
+
+/* Zeit-Vorschau (nur mit ?zeit=… im Link) */
+.zeit-vorschau { position: fixed; left: 50%; top: calc(6px + var(--safe-t)); transform: translateX(-50%); z-index: 10000; display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+  border-radius: 999px; background: #ffd23f; color: #241500; font: 700 12px var(--f-body); text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,.5); white-space: nowrap; }
+.zeit-vorschau b { font-weight: 800; text-transform: uppercase; letter-spacing: .08em; } .zeit-vorschau i { font-style: normal; opacity: .75; }
+/* ===== Beerpong-Turnier ===== */
+.tn-link { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 18px; text-decoration: none; color: #fff; margin-top: 10px;
+  background: linear-gradient(120deg, rgba(255,211,110,.18), rgba(255,63,142,.18)); border: 1.5px solid rgba(255,211,110,.55); box-shadow: 0 0 18px rgba(255,140,80,.2); }
+.tn-link > span:first-child { font-size: 26px; }
+.tn-link b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 16px; text-transform: uppercase; }
+.tn-link small { display: block; font-size: 12px; font-weight: 700; color: #ffd9b8; }
+.tn-link i { margin-left: auto; width: 30px; height: 30px; border-radius: 50%; background: #fff; color: #12041f; display: grid; place-items: center; flex: none; }
+.tn-link i svg { width: 14px; height: 14px; }
+.ph-block .tn-link { margin-top: 0; }
+.tn-teamlink { display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 14px; text-decoration: none; font-weight: 800; color: #12070a; background: var(--c-gold); }
+.ph-champ { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 16px; text-decoration: none; color: #fff; background: rgba(255,211,110,.1); border: 1.5px solid #ffd36e; }
+.ph-champ > span:first-child { font-size: 34px; }
+.ph-champ small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #ffd36e; }
+.ph-champ b { display: block; font-size: 22px; font-weight: 800; }
+.ph-champ em { font-style: normal; font-size: 12px; color: var(--dim); }
+.tn-page { color: #fff; background: radial-gradient(90% 35% at 50% 0%, color-mix(in srgb, var(--tgM) 30%, transparent), transparent 70%), radial-gradient(80% 40% at 50% 100%, color-mix(in srgb, var(--tgZ) 35%, transparent), transparent 70%), var(--night); }
+.tn-wrap { padding: 4px 16px 60px; display: grid; gap: 12px; }
+.tn-ttl small { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--tgA); }
+.tn-ttl h2 { margin: 2px 0 0; font-family: var(--f-display); font-weight: 400; font-size: 30px; line-height: 1.05; text-transform: uppercase; background: var(--tg); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#tnBody { display: grid; gap: 12px; }
+.tn-muted { margin: 0; font-size: 12.5px; color: var(--dim); }
+.tn-pill { justify-self: start; display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, var(--tgM) 16%, transparent); border: 1px solid color-mix(in srgb, var(--tgM) 50%, transparent); font-size: 12.5px; font-weight: 800; }
+.tn-pill.gold { background: rgba(255,211,110,.14); border-color: rgba(255,211,110,.6); }
+.tn-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--tgM); box-shadow: 0 0 8px var(--tgM); flex: none; animation: phBlink 1.2s ease-in-out infinite; }
+.tn-dot.g { background: #3ee08a; box-shadow: 0 0 8px #3ee08a; }
+.tn-card { display: grid; gap: 10px; padding: 14px; border-radius: 20px; background: rgba(255,255,255,.04); border: 1px solid color-mix(in srgb, var(--tgM) 35%, transparent); }
+.tn-card.tight { gap: 5px; }
+.tn-empty { text-align: center; justify-items: center; } .tn-empty span { font-size: 13px; color: var(--dim); }
+.tn-pick { display: grid; justify-items: center; gap: 2px; padding: 18px; border-radius: 20px; border: 0; color: #fff; background: var(--tg); box-shadow: 0 0 22px color-mix(in srgb, var(--tgM) 45%, transparent); font: inherit; }
+.tn-pick span { font-size: 26px; } .tn-pick b { font-size: 20px; font-weight: 800; } .tn-pick small { font-size: 12.5px; font-weight: 700; }
+.tn-mine { background: linear-gradient(160deg, color-mix(in srgb, var(--tgZ) 35%, transparent), rgba(18,4,31,.9)); border: 1.5px solid color-mix(in srgb, var(--tgM) 55%, transparent); }
+.tn-mh { display: flex; align-items: baseline; gap: 8px; }
+.tn-mh span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--tgA); }
+.tn-mh b { font-size: 22px; font-weight: 800; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tn-mh button { margin-left: auto; background: none; border: 0; color: var(--dim); font: 700 12px var(--f-body); text-decoration: underline; padding: 4px; }
+.tn-ms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.tn-ms div { padding: 6px 2px; border-radius: 12px; background: rgba(255,255,255,.06); text-align: center; }
+.tn-ms small { display: block; font-size: 10px; color: var(--dim); font-weight: 800; text-transform: uppercase; letter-spacing: .05em; } .tn-ms b { font-size: 18px; font-weight: 800; }
+.tn-next { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; padding: 12px; border-radius: 16px; background: rgba(255,255,255,.07); }
+.tn-next.hot { background: var(--tg); text-shadow: 0 2px 8px rgba(40,0,60,.35); }
+.tn-next.out { background: rgba(255,255,255,.05); }
+.tn-next small { grid-column: 1 / -1; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.tn-nv { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-width: 0; } .tn-nv b { font-size: 19px; font-weight: 800; } .tn-nv span { font-size: 13px; opacity: .85; }
+.tn-tisch { grid-row: 2 / 4; grid-column: 2; display: grid; place-items: center; padding: 6px 12px; border-radius: 14px; background: rgba(18,4,31,.4); }
+.tn-tisch span { font-size: 11px; font-weight: 800; } .tn-tisch b { font-size: 32px; font-weight: 800; line-height: 1; }
+.tn-wait { grid-column: 1; font-size: 12px; font-weight: 700; opacity: .9; }
+.tn-plan-go { justify-self: start; background: none; border: 0; padding: 0; color: #fff; font: 800 13px var(--f-body); text-decoration: underline; }
+.tn-status { grid-column: 1 / -1; font-size: 15px; font-weight: 800; }
+.tn-plan small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: 2px; }
+.tn-pr { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto 40px; gap: 8px; align-items: center; padding: 7px 4px; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 13.5px; }
+.tn-pr > span:first-child { font-weight: 800; color: var(--dim); } .tn-pr > span:nth-child(3) { font-size: 12px; color: var(--dim); } .tn-pr > span:last-child { text-align: right; font-weight: 800; }
+.tn-pr.w > span:last-child { color: #8ff0b4; } .tn-pr.l > span:last-child { color: #ff9aa8; } .tn-pr.now { background: color-mix(in srgb, var(--tgM) 18%, transparent); border-radius: 10px; } .tn-pr.now > span:last-child { color: var(--tgA); } .tn-pr.pause { opacity: .55; }
+.tn-reg { display: flex; justify-content: center; align-items: center; gap: 8px; height: 48px; border-radius: 999px; text-decoration: none; color: #fff; font-weight: 800; background: linear-gradient(90deg, var(--a3), #ff8a3d); }
+.tn-reg svg { width: 14px; height: 14px; }
+.tn-h { margin: 10px 2px 0; font-family: var(--f-display); font-weight: 400; font-size: 20px; text-transform: uppercase; }
+.tn-h small { font-family: var(--f-body); font-size: 11px; font-weight: 800; letter-spacing: .1em; color: var(--tgA); margin-left: 6px; }
+.tn-legend { display: grid; gap: 3px; font-size: 12px; color: var(--dim); }
+.tn-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.tn-legend i.q1 { background: var(--tgM); } .tn-legend i.q3 { background: var(--tgA); }
+.tn-grp { padding: 10px 12px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid color-mix(in srgb, var(--tgM) 30%, transparent); }
+.tn-gh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; } .tn-gh b { font-size: 16px; font-weight: 800; } .tn-gh span { font-size: 11px; color: var(--dim); }
+.tn-grp table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.tn-grp td { padding: 4px 3px; text-align: right; } .tn-grp td.tm { text-align: left; font-weight: 700; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .tn-grp td.pl { width: 18px; text-align: left; color: var(--dim); }
+.tn-grp tr.th td { font-size: 10px; color: var(--dim); font-weight: 800; text-transform: uppercase; }
+.tn-grp tr.q1 td.pl { box-shadow: inset 3px 0 var(--tgM); } .tn-grp tr.q3 td.pl { box-shadow: inset 3px 0 var(--tgA); } .tn-grp tr.q3x td.pl { box-shadow: inset 3px 0 color-mix(in srgb, var(--tgA) 35%, transparent); }
+.tn-grp tr.me { background: color-mix(in srgb, var(--tgM) 22%, transparent); } .tn-grp td.pk { font-weight: 800; }
+.tn-live { display: grid; gap: 2px; margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(255,255,255,.12); font-size: 11.5px; color: var(--dim); }
+.tn-live span.done { opacity: .6; } .tn-live b { color: #fff; }
+.tn-best { gap: 4px; } .tn-best > small { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tgA); }
+.tn-best > div { display: grid; grid-template-columns: 22px minmax(0, 1fr) 42px auto; gap: 6px; font-size: 13px; }
+.tn-best i, .tn-best em { font-style: normal; color: var(--dim); font-size: 12px; } .tn-best .out { opacity: .45; }
+.tn-best.in-card { display: grid; }
+.tn-bracket { display: grid; grid-template-columns: repeat(4, 150px); gap: 10px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
+.tn-col { display: grid; grid-template-rows: auto 1fr; gap: 8px; scroll-snap-align: start; }
+.tn-cb { display: flex; flex-direction: column; justify-content: space-around; gap: 6px; }
+.tn-cb.last { justify-content: center; gap: 28px; }
+.tn-col h4 { margin: 0; font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tgA); }
+.tn-m { position: relative; border-radius: 10px; background: rgba(255,255,255,.06); border: 1px solid color-mix(in srgb, var(--tgM) 35%, transparent); overflow: hidden; }
+.tn-m small { display: block; padding: 3px 7px 0; font-size: 9.5px; font-weight: 800; color: var(--dim); }
+.tn-m div { display: flex; justify-content: space-between; gap: 4px; padding: 3px 7px; font-size: 12px; color: var(--dim); }
+.tn-m div span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tn-m div.w { color: #fff; font-weight: 800; } .tn-m div.me { background: color-mix(in srgb, var(--tgM) 28%, transparent); color: #fff; } .tn-m div.ph span { font-style: italic; font-size: 11px; }
+.tn-m em { position: absolute; right: 24px; top: 4px; font-style: normal; font-size: 9px; font-weight: 800; color: #12041f; background: var(--tgA); padding: 0 4px; border-radius: 4px; }
+.tn-m.fin { border-color: #ffd36e; box-shadow: 0 0 14px rgba(255,211,110,.35); }
+.tn-room { position: relative; padding: 70px 18px 46px; border-radius: 20px; background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 20px, transparent 20px 40px), #1a0830; border: 2px solid rgba(255,255,255,.18); }
+.tn-bar { position: absolute; left: 18px; right: 18px; top: 14px; height: 40px; border-radius: 12px; background: rgba(255,211,110,.16); border: 1.5px solid rgba(255,211,110,.6); display: grid; place-items: center; font-weight: 800; color: #ffd36e; }
+.tn-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; } .tn-cols > div { display: grid; gap: 12px; }
+.tn-t { position: relative; height: 44px; border-radius: 10px; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; gap: 6px; }
+.tn-t b { font-size: 18px; font-weight: 800; } .tn-t small { font-size: 10px; color: var(--dim); }
+.tn-t.me { background: #ff2a3d; border-color: #fff; box-shadow: 0 0 22px rgba(255,42,61,.8); } .tn-t.me small { color: #fff; }
+.tn-t i { position: absolute; top: -12px; right: -6px; padding: 1px 8px; border-radius: 999px; background: #fff; color: #c00018; font-style: normal; font-size: 10.5px; font-weight: 800; }
+.tn-door { position: absolute; left: 18px; bottom: -2px; padding: 2px 12px; background: var(--night); border: 2px solid rgba(255,255,255,.18); border-bottom: 0; border-radius: 8px 8px 0 0; font-size: 11px; color: var(--dim); }
+.tn-champ { justify-items: center; text-align: center; gap: 2px; border: 2px solid #ffd36e; background: radial-gradient(70% 70% at 50% 25%, rgba(255,211,110,.3), transparent 70%), rgba(255,255,255,.04); box-shadow: 0 0 26px rgba(255,211,110,.3); }
+.tn-champ > div { font-size: 46px; } .tn-champ small { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #ffd36e; }
+.tn-champ b { font-size: 30px; font-weight: 800; background: var(--tg); -webkit-background-clip: text; background-clip: text; color: transparent; } .tn-champ span { font-size: 13px; color: var(--dim); }
+.tn-sheet { position: fixed; inset: 0; z-index: 60; background: rgba(5,0,12,.6); display: flex; align-items: flex-end; justify-content: center; }
+.tn-sheet[hidden] { display: none; }
+.tn-sh { width: 100%; max-width: 480px; max-height: 88dvh; overflow-y: auto; border-radius: 26px 26px 0 0; background: #1d0a32; padding: 12px 16px calc(18px + var(--safe-b)); display: grid; gap: 12px; box-shadow: 0 -20px 40px rgba(0,0,0,.5); color: #fff; }
+.tn-grab { justify-self: center; width: 44px; height: 5px; border-radius: 9px; background: rgba(255,255,255,.3); }
+.tn-sh h3 { margin: 0; font-size: 21px; font-weight: 800; } .tn-sh > p { margin: -6px 0 0; font-size: 13px; color: var(--dim); }
+.tn-k { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tgA); margin-bottom: -8px; }
+.tn-sh input[type=search] { height: 46px; padding: 0 14px; border-radius: 14px; border: 0; background: rgba(255,255,255,.09); color: #fff; font: 600 16px var(--f-body); }
+.tn-list { display: grid; gap: 4px; }
+.tn-list button { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 12px; border: 0; background: rgba(255,255,255,.05); color: #fff; font: 700 16px var(--f-body); text-align: left; }
+.tn-list button small { font-size: 12px; color: var(--dim); } .tn-list button.sel { background: var(--tg); } .tn-list button.sel small { color: #fff; }
+.tn-x { height: 44px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.25); background: none; color: #fff; font: 800 14px var(--f-body); }
+.tn-toast { position: fixed; left: 50%; bottom: calc(22px + var(--safe-b)); transform: translateX(-50%); z-index: 70; width: min(440px, calc(100% - 32px)); padding: 12px 14px; border-radius: 14px; background: #0f3b26; border: 1px solid #3ee08a; color: #c9ffe0; font-weight: 800; font-size: 13.5px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.tn-toast[hidden] { display: none; }
+/* Turnierleitung */
+.tn-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.tn-steps span { padding: 7px 2px; border-radius: 9px; text-align: center; font-size: 11px; font-weight: 800; background: rgba(255,255,255,.06); color: var(--dim); }
+.tn-steps span.on { background: var(--tg); color: #fff; } .tn-steps span.done { background: rgba(143,240,180,.14); color: #8ff0b4; }
+.tn-ah { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; } .tn-ah b { font-size: 16px; font-weight: 800; } .tn-ah small { font-size: 12px; color: var(--dim); }
+.tn-card textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.25); color: #fff; font: 600 15px/1.5 var(--f-body); resize: vertical; }
+.tn-r2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.tn-btn { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 14px; border-radius: 999px; border: 0; background: var(--tg); color: #fff; font: 800 14px var(--f-body); text-decoration: none; text-shadow: 0 1px 6px rgba(40,0,60,.35); }
+.tn-btn.ghost { background: transparent; border: 1.5px solid rgba(255,255,255,.3); text-shadow: none; } .tn-btn.red { background: #8a1020; } .tn-btn.big { min-height: 54px; font-size: 16px; }
+.tn-btn[disabled] { opacity: .35; } .tn-btn[data-armed] { background: #ff3b3b; }
+.tn-gp { display: grid; grid-template-columns: 22px 1fr; gap: 1px 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+.tn-gp b { grid-row: 1 / 3; font-size: 18px; font-weight: 800; color: var(--tgA); } .tn-gp span { font-size: 13px; font-weight: 700; } .tn-gp small { font-size: 11px; color: var(--dim); }
+.tn-livebar { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 14px; background: rgba(143,240,180,.1); border: 1px solid rgba(143,240,180,.45); font-size: 13px; font-weight: 800; color: #bff7d4; }
+.tn-tr { display: grid; grid-template-columns: 30px minmax(0, 1fr) 70px; align-items: center; gap: 8px; padding: 8px 6px; border-radius: 12px; border: 0; background: rgba(255,255,255,.05); color: #fff; font: inherit; text-align: left; }
+.tn-tn { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: rgba(255,255,255,.12); font-weight: 800; font-size: 14px; }
+.tn-tm { display: grid; grid-template-columns: 1fr 38px 1fr; gap: 4px; font-size: 13px; min-width: 0; }
+.tn-tm b { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .tn-tm b:last-child { text-align: right; }
+.tn-tm i { font-style: normal; text-align: center; color: var(--dim); font-weight: 800; }
+.tn-st { text-align: right; font-size: 11px; font-weight: 800; color: var(--dim); }
+.tn-tr.done { opacity: .65; } .tn-tr.done .tn-st { color: #8ff0b4; } .tn-tr.done .tn-tm i { color: #fff; }
+.tn-tr.off { opacity: .4; } .tn-tr.off .tn-tm { display: block; font-size: 12px; }
+.tn-all summary { display: flex; justify-content: space-between; align-items: baseline; cursor: pointer; list-style: none; } .tn-all summary::-webkit-details-marker { display: none; }
+.tn-all summary b { font-size: 15px; font-weight: 800; } .tn-all summary small { font-size: 12px; color: var(--dim); }
+.tn-all h4 { margin: 8px 0 0; font-size: 12px; color: var(--tgA); text-transform: uppercase; letter-spacing: .1em; }
+.tn-row { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 8px 4px; border: 0; border-bottom: 1px solid rgba(255,255,255,.07); background: none; color: #fff; font: 600 13px var(--f-body); text-align: left; }
+.tn-row.locked { opacity: .4; } .tn-row.locked b { font-weight: 600; font-size: 11.5px; }
+.tn-round { display: flex; align-items: baseline; gap: 6px; } .tn-round b { font-size: 20px; font-weight: 800; } .tn-round span { font-size: 13px; color: var(--dim); }
+.tn-round em { margin-left: auto; font-style: normal; font-size: 13px; font-weight: 800; color: #8ff0b4; }
+.tn-rbar { height: 8px; border-radius: 9px; background: rgba(255,255,255,.1); overflow: hidden; margin: 2px 0 4px; } .tn-rbar i { display: block; height: 100%; border-radius: 9px; background: #3ee08a; transition: width .4s; }
+.tn-row span:first-child { color: var(--dim); font-size: 11.5px; } .tn-row span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .tn-row.open b { color: var(--dim); font-weight: 600; }
+.tn-afprev { display: grid; gap: 3px; font-size: 12.5px; } .tn-afprev i { font-style: normal; color: var(--tgA); font-weight: 800; margin-right: 6px; } .tn-afprev small { color: var(--dim); }
+.tn-card.danger { border-color: rgba(255,59,59,.4); }
+.tn-sc { display: grid; grid-template-columns: 1fr 14px 1fr; align-items: center; gap: 6px; }
+.tn-side { display: grid; justify-items: center; gap: 6px; padding: 8px 4px; border-radius: 16px; border: 1.5px solid transparent; }
+.tn-side.f { border-color: color-mix(in srgb, var(--tgM) 70%, transparent); background: rgba(255,255,255,.04); }
+.tn-side > b { font-size: 15px; font-weight: 800; text-align: center; overflow-wrap: anywhere; }
+.tn-side small { font-size: 11px; font-weight: 800; color: #8ff0b4; }
+.tn-stp { display: flex; align-items: center; gap: 6px; }
+.tn-stp button { width: 40px; height: 40px; border-radius: 12px; border: 0; background: rgba(255,255,255,.12); color: #fff; font: 800 22px var(--f-body); }
+.tn-stp span { width: 54px; height: 58px; border-radius: 14px; background: #fff; color: #12041f; display: grid; place-items: center; font-size: 32px; font-weight: 800; }
+.tn-vs { font-size: 26px; font-weight: 800; text-align: center; }
+.tn-quick small { font-size: 11px; font-weight: 800; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+.tn-quick div { display: grid; grid-template-columns: repeat(11, 1fr); gap: 3px; margin-top: 4px; }
+.tn-quick button { height: 34px; padding: 0; border-radius: 8px; border: 0; background: rgba(255,255,255,.08); color: #fff; font: 800 14px var(--f-body); }
+.tn-quick button.on { background: var(--tg); }
+.tn-gg { display: grid; gap: 6px; padding: 10px; border-radius: 14px; background: rgba(255,211,110,.1); border: 1px dashed rgba(255,211,110,.6); }
+.tn-gg small { font-size: 12px; color: #ffd36e; font-weight: 700; } .tn-gg div { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tn-gg button { height: 44px; border-radius: 999px; border: 0; background: #fff; color: #12041f; font: 800 14px var(--f-body); } .tn-gg button.on { background: var(--tg); color: #fff; }
+.tn-res { padding: 10px 12px; border-radius: 14px; background: rgba(143,240,180,.1); border: 1px solid rgba(143,240,180,.4); font-size: 14px; font-weight: 700; text-align: center; }
+.tn-err { padding: 10px 12px; border-radius: 14px; background: rgba(255,59,59,.12); border: 1px solid rgba(255,59,59,.5); font-size: 13px; font-weight: 700; color: #ffb3b3; }
 /* ===== Clubabend: Abend-Kacheln im Menü (Clubtag, Live, Rückblick) ===== */
 .ph-block { display: grid; gap: 12px; }
+.tile-btn.hm-nextsoon { display: grid; gap: 4px; padding: 16px; border-radius: 20px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.15); color: #fff; }
+.hm-nextsoon small { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--a1); }
+.hm-nextsoon b { font-size: 20px; font-weight: 800; } .hm-nextsoon span { font-size: 13px; color: var(--dim); }
 .ph-h { margin: 2px 2px -4px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--tgM) 45%, #fff); }
 .ph-specs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .ph-specs.n1 { grid-template-columns: 1fr; }
@@ -1778,6 +1944,28 @@ a { color: inherit; }
 </div>
 
 <script>
+/* ===== Zeit-Vorschau zum Testen: Link mit ?zeit=2026-11-25T18:30 tut auf DIESEM Gerät so, als wäre es diese Uhrzeit.
+   Die Uhr läuft ab dort normal weiter. Ohne ?zeit ändert sich nichts. ===== */
+(() => {
+  const q = new URLSearchParams(location.search).get("zeit"); if (!q) return;
+  const target = new Date(q.length <= 10 ? q + "T20:00" : q); if (isNaN(target)) return;
+  const RealDate = Date, off = target.getTime() - RealDate.now();
+  class VorschauDate extends RealDate {
+    constructor(...a) { if (a.length) super(...a); else super(RealDate.now() + off); }
+    static now() { return RealDate.now() + off; }
+  }
+  window.Date = VorschauDate;
+  window.__zeitVorschau = true;
+  const banner = () => {
+    const b = document.createElement("a");
+    b.className = "zeit-vorschau"; b.href = location.pathname;
+    const fmt = () => new Intl.DateTimeFormat("de-DE", { weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date());
+    b.innerHTML = `<b>Vorschau</b><span>${fmt()}</span><i>beenden ✕</i>`;
+    setInterval(() => { b.querySelector("span").textContent = fmt(); }, 15000);
+    document.body.appendChild(b);
+  };
+  if (document.body) banner(); else addEventListener("DOMContentLoaded", banner);
+})();
 /* =====================================================================
    INHALTE – hier wird alles gepflegt
    Neue Abende einfach in EVENTS ergänzen. Die Reihenfolge ergibt sich aus dem Datum.
@@ -1832,6 +2020,7 @@ const EVENTS = [
     ],
     anmeldung: { link: "https://forms.gle/RQFaHxjdZyxCBgDw8", text: "Zum Turnier anmelden" },
     spiel: "beerpong",           // zeigt den Button „Beerpong spielen“ unter dem Datum
+    turnier: "miami",            // Beerpong-Turnier mit Gruppen, Spielplan und Turnierbaum (siehe TURNIER)
     mitbringen: null,
     fotos: null,
     specials: [
@@ -2731,6 +2920,7 @@ function renderDetail(ev) {
       <h2 class="title" id="dTitle">${titleHTML(ev)}</h2>
       <p class="script">${esc(ev.untertitel)}</p>
       ${reg}${pastBox}
+      ${ev.turnier ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : ""}
       ${ev.spiel === "beerpong" ? `<a class="game-card" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span class="gc-text"><b>Beerpong</b><small>Schon mal fürs Turnier üben</small></span><i>${ICON_ARROW}</i></a>` : ""}
       <dl class="facts">${facts}</dl>
       ${timeline}
@@ -2786,6 +2976,7 @@ function renderDetail(ev) {
   setupInstall();
   d.scrollTop = 0;
   fitTitle($("dTitle"), Math.min(76, Math.min(app.clientWidth, 480) * .2));
+  tnHideIfEnded($("detail"));
 }
 
 /* Sprungleiste */
@@ -3438,6 +3629,11 @@ function renderTeam() {
     <section class="cbox team" aria-label="Eingegangene Wünsche">
       <h3>Wünsche</h3>
       <div id="wishList" class="wish-list"><p class="prost-small">${Live.remote ? "Lädt …" : "Wünsche sind erst mit Datenbank-Verbindung sichtbar."}</p></div>
+    </section>
+        <section class="cbox team" aria-label="Beerpong-Turnier">
+      <h3>Beerpong-Turnier</h3>
+      <p class="prost-small">Teams laden, Gruppen auslosen, Ergebnisse eintragen – alles erscheint live bei den Spielern.</p>
+      <div class="team-row"><a class="wide tn-teamlink" href="#turnier-team">Turnierleitung öffnen</a></div>
     </section>
         <section class="cbox team" aria-label="Tresen-Ansicht">
       <h3>Tresen-Ansicht</h3>
@@ -4860,8 +5056,8 @@ function buildMenu() {
   const tNow = new Date(), ph = clubPhase(tNow);
   phBuiltKey = phaseKey(ph, tNow);
   /* im Rückblick zeigt die große Kachel schon den nächsten Abend */
-  const evA = ph && ph.phase === "rueck" ? (EVENTS.find((e) => e.startDate > tNow) || EVENTS[now]) : EVENTS[now];
-  const evB = EVENTS[EVENTS.indexOf(evA) + 1];
+  const evA = ph && ph.phase === "rueck" ? EVENTS.find((e) => e.startDate > tNow) || null : EVENTS[now];
+  const evB = evA ? EVENTS[EVENTS.indexOf(evA) + 1] : null;
   const nextStrip = (ev) => {
     const i = EVENTS.indexOf(ev);
     const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
@@ -4904,13 +5100,15 @@ function buildMenu() {
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
     </div>`;
   /* ---- je nach Phase zusammensetzen ---- */
-  const hero = (label, cdTo) => `<div class="hm-hero">${evTile(evA, label, true, cdTo)}</div>`;
+  const tnTile = (ev) => ev && ev.turnier ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : "";
+  const hero = (label, cdTo) => evA ? `<div class="hm-hero">${evTile(evA, label, true, cdTo)}</div>${ph && ph.phase !== "rueck" ? "" : tnTile(evA)}` : `<div class="tile-btn hm-nextsoon"><small>Nächster Abend</small><b>Folgt bald</b><span>Infos kommen hier und auf Instagram.</span></div>`;
   const next = evB ? nextStrip(evB) : "";
   let html;
   if (ph && ph.phase === "tag") {
     const ev = ph.ev, i = EVENTS.indexOf(ev);
     html = `${hero("Heute Abend!", ph.open.getTime())}
       <div class="ph-block" style="${phaseStyle(ev.th)}">
+        ${tnTile(ev)}
         ${phSpecials(ev)}${phHappy(ev, tNow)}
         <div class="ph-row"><button type="button" class="ph-btn wa" data-share="${i}">${ICON_WA}Freunde einladen</button><a class="ph-btn" href="#${ev.id}">Drinks &amp; Preise</a></div>
       </div>
@@ -4918,6 +5116,7 @@ function buildMenu() {
   } else if (ph && ph.phase === "live") {
     const ev = ph.ev;
     html = `<div class="ph-block" style="${phaseStyle(ev.th)}">
+        ${tnTile(ev)}
         <a class="ph-live-head${ph.last ? " last" : ""}" href="#${ev.id}"><span class="ph-dot"></span><b>${esc(ev.titel.join(" "))}</b><span>${ph.last ? "Letzte Runde! Schluss um" : "Live · Theke offen bis"} ${trClockFmt(ph.close)}</span></a>
         <a class="ph-count" href="#ranking"><small>Heute über den Tresen</small><b id="phCount">–</b><span id="phThree"></span><span class="ph-duel" id="phDuel"></span><em>Drink eintragen ${ICON_ARROW}</em></a>
         ${phHappy(ev, tNow)}${phSpecials(ev)}
@@ -4930,6 +5129,7 @@ function buildMenu() {
         <div class="ph-rueck"><small>${esc(ev.titel.join(" "))} · Endstand</small><h3>Danke fürs Kommen!</h3>
           <div class="ph-rn"><b id="phCount">–</b><span>Getränke über den Tresen</span></div>
           <p class="ph-lead" id="phLead"></p>
+          ${ev.turnier ? `<div id="phChamp"></div>` : ""}
           ${ev.fotos ? `<a class="ph-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">${ICON_CAM}Fotos vom Abend</a>` : `<p class="ph-note">${ICON_CAM}Fotos vom Abend folgen hier.</p>`}
         </div>
       </div>
@@ -4940,6 +5140,12 @@ function buildMenu() {
   if (ph && ph.phase !== "tag") phSub = Live.subscribe(phLive);
   Live.setMenu(ph && ph.phase === "live" ? 60000 : ph && ph.phase === "rueck" ? 30 * 60000 : 0);
   g.querySelectorAll("[data-share]").forEach((bt) => bt.addEventListener("click", () => shareWhatsApp(EVENTS[+bt.dataset.share])));
+  tnHideIfEnded(g);
+  if ($("phChamp")) {   /* ein einziger Lesezugriff */
+    const fill = () => TStore.once().then((d) => { const st = tnState(d), el = $("phChamp"); if (!el || !st.champ) return;
+      el.innerHTML = `<a class="ph-champ" href="#turnier"><span>🏆</span><span><small>Beerpong-Turniersieger</small><b>${esc(st.champ)}</b><em>Finale ${Math.max(...st.M.F.r.s)}:${Math.min(...st.M.F.r.s)} gegen ${esc(st.M.F.lose)}${st.M.P3.win ? ` · Platz 3: ${esc(st.M.P3.win)}` : ""}</em></span></a>`; }).catch(() => {});
+    if (Live.remote || FB.off) fill(); else setTimeout(fill, 2500);
+  }
   phaseTick();
   fillBest(g);
   g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
@@ -4997,6 +5203,7 @@ function show(detailOpen) {
 function route() { routeInner(); afterRoute(); }
 function routeInner() {
   const id = location.hash.slice(1);
+  if (id !== "turnier" && id !== "turnier-team") tnStop();
   trackNav(id);
   if (id === "beerpong") { Bus.close(); Zapf.close(); Game.open(); return; }
   if (id === "busfahrer") { Game.close(); Zapf.close(); Bus.open(); return; }
@@ -5008,6 +5215,8 @@ function routeInner() {
   if (id === "paypal") { renderPay(); show(true); return; }
   if (id === "wuensche") { renderWishPage(); show(true); return; }
   if (id === "team") { renderTeamPage(); show(true); return; }
+  if (id === "turnier") { renderTurnier(); show(true); return; }
+  if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
   const i = EVENTS.findIndex((ev) => ev.id === id);
   if (i >= 0) {
     setMenu(false);
@@ -5231,6 +5440,525 @@ function fillBest(root) {
 }
 const CROWN_MINI = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z" fill="currentColor"/></svg>`;
 const clearBestCache = () => { ["beerpong", "busfahrer", "zapfmeister"].forEach((k) => { try { localStorage.removeItem("exmaBest_" + k); } catch {} }); };
+
+/* ================= Beerpong-Turnier (Miami Vibes) =================
+   Alles liegt in EINEM Datenbank-Dokument turnier/<id>. Spieler hören live mit (onSnapshot),
+   nur das Team darf schreiben. Spielplan, Tabellen und K.-o.-Baum werden daraus berechnet. */
+const TURNIER = {
+  id: "miami",                 // Datenbank-Dokument turnier/miami
+  event: "miami-vibes",        // gehört zu diesem Abend (Farben, Datum)
+  csv: "",                     // optional: Link zur als CSV veröffentlichten Teamliste (nur Teamnamen, ein Name pro Zeile)
+  testTeams: ["Berlin","Paris","Rom","Madrid","Wien","Prag","Warschau","Lissabon","Athen","Dublin","Amsterdam","Brüssel","Kopenhagen","Oslo","Stockholm","Helsinki","Budapest","Bukarest","Sofia","Zagreb","Ljubljana","Bratislava","Vilnius","Riga","Tallinn","Bern","Luxemburg","Valletta","Reykjavík","Belgrad"]
+};
+const TN_GROUPS = "ABCDEF", TN_CUPS = 10;
+/* Fester Turnierbaum (wie bei der Fußball-EM): Spiel 1–8 des Achtelfinales von oben nach unten.
+   „3“ = einer der vier besten Gruppendritten. Erster und Zweiter einer Gruppe stehen immer in verschiedenen Hälften,
+   ein weitergekommener Dritter in einem anderen Viertel – geprüft für alle 15 Möglichkeiten. */
+const KO_PLAN = [["1E","2A"],["1D","3"],["2B","2C"],["1F","3"],["1C","2D"],["1B","3"],["2F","2E"],["1A","3"]];
+/* Aus welchen 4 Gruppen kommen die Dritten weiter → wer spielt in AF2, AF4, AF6, AF8 */
+const KO_DRITTE = {ABCD:"BDAC",ABCE:"BAEC",ABCF:"BAFC",ABDE:"BAED",ABDF:"BAFD",ABEF:"FAEB",ACDE:"CAED",ACDF:"CAFD",ACEF:"FAEC",ADEF:"FAED",BCDE:"BDEC",BCDF:"BDFC",BCEF:"BEFC",BDEF:"BEFD",CDEF:"CEFD"};
+const KO_THIRD_OPTS = [1, 3, 5, 7].map((_, k) => [...new Set(Object.values(KO_DRITTE).map((v) => v[k]))].sort().join("/"));
+const KO_ROUNDS = [
+  { rd: "Achtelfinale", keys: ["AF1","AF2","AF3","AF4","AF5","AF6","AF7","AF8"], timed: true },
+  { rd: "Viertelfinale", keys: ["VF1","VF2","VF3","VF4"], timed: true },
+  { rd: "Halbfinale", keys: ["HF1","HF2"], timed: false },
+  { rd: "Spiel um Platz 3", keys: ["P3"], timed: true },
+  { rd: "Finale", keys: ["F"], timed: false }
+];
+
+/* ---- Speicher: Firebase (live) oder lokal auf dem Gerät ---- */
+const TStore = (() => {
+  const LKEY = "exmaTurnier_" + TURNIER.id, DEL = { del: true }, subs = new Set();
+  let data = null, unsub = null, wanted = false, retry = null;
+  const ref = () => FB.db.doc("turnier/" + TURNIER.id);
+  const emit = () => subs.forEach((f) => f(data));
+  const local = () => { try { return JSON.parse(localStorage.getItem(LKEY) || "{}"); } catch { return {}; } };
+  function setPath(o, path, v) {
+    const ks = path.split("."); ks.slice(0, -1).forEach((k) => { if (!o[k] || typeof o[k] !== "object" || Array.isArray(o[k])) o[k] = {}; o = o[k]; });
+    if (v === DEL) delete o[ks[ks.length - 1]]; else o[ks[ks.length - 1]] = v;
+  }
+  function tryStart() {
+    clearTimeout(retry);
+    if (!wanted || unsub) return;
+    if (!Live.remote && !FB.off) { retry = setTimeout(tryStart, 400); return; }
+    if (Live.remote) unsub = ref().onSnapshot((s) => { data = s.exists ? s.data() : {}; emit(); }, (e) => console.warn("Turnier", e));
+    else { data = local(); emit(); unsub = () => {}; }
+  }
+  /* App im Hintergrund oder Handy gesperrt: nicht mithören (spart Lesezugriffe). Beim Zurückkommen wird neu verbunden. */
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { if (unsub) { unsub(); unsub = null; } }
+    else if (wanted) tryStart();
+  });
+  return {
+    DEL,
+    get data() { return data; },
+    start() { wanted = true; tryStart(); },
+    stop() { wanted = false; clearTimeout(retry); if (unsub) unsub(); unsub = null; },
+    on(fn) { subs.add(fn); if (data) fn(data); return () => subs.delete(fn); },
+    async once() {
+      if (data) return data;
+      if (!Live.remote) return local();
+      const s = await ref().get(); return s.exists ? s.data() : {};
+    },
+    /* patch: { "erg.A10": [7, 4] } – Punkte im Schlüssel = verschachtelte Felder */
+    async save(patch) {
+      if (!Live.remote) { data = data || local(); for (const [k, v] of Object.entries(patch)) setPath(data, k, v); localStorage.setItem(LKEY, JSON.stringify(data)); emit(); return; }
+      const out = {};
+      for (const [k, v] of Object.entries(patch)) out[k] = v === DEL ? FB.fv.delete() : v;
+      try { await ref().update(out); }
+      catch (e) {
+        if (e.code !== "not-found") throw e;
+        const full = {}; for (const [k, v] of Object.entries(patch)) if (v !== DEL) setPath(full, k, v);
+        await ref().set(full);
+      }
+    },
+    async replace(obj) {
+      if (!Live.remote) { data = obj; localStorage.setItem(LKEY, JSON.stringify(obj)); emit(); return; }
+      await ref().set(obj);
+    }
+  };
+})();
+
+/* ---- Rechnen ---- */
+function tnRounds(teams) {   /* jeder gegen jeden (Kreisverfahren); bei ungerader Zahl hat pro Runde ein Team Pause */
+  const t = teams.slice(); if (t.length % 2) t.push(null);
+  const n = t.length, out = [];
+  for (let r = 0; r < n - 1; r++) {
+    const games = []; let pause = null;
+    for (let i = 0; i < n / 2; i++) { const a = t[i], b = t[n - 1 - i]; if (a && b) games.push([a, b]); else pause = a || b; }
+    out.push({ games, pause });
+    t.splice(1, 0, t.pop());
+  }
+  return out;
+}
+function tnSched(d) {
+  const out = [], gr = d.gruppen || {};
+  Object.keys(gr).sort().forEach((g, gi) => tnRounds(gr[g]).forEach((rd, r) => rd.games.forEach(([a, b], k) => {
+    const key = `${g}${r + 1}${k}`;
+    out.push({ g, r: r + 1, k, key, a, b, tisch: gi * 2 + 1 + k, pause: rd.pause, s: (d.erg || {})[key] || null });
+  })));
+  return out;
+}
+const tnRoundsOf = (d, g) => tnRounds((d.gruppen || {})[g] || []);
+/* Aktuelle Runde – gilt für alle Gruppen gemeinsam: Runde 2 beginnt erst, wenn an allen Tischen Runde 1 eingetragen ist */
+function tnCurRound(sched) { const open = sched.filter((x) => !x.s).map((x) => x.r); return open.length ? Math.min(...open) : null; }
+function tnTable(d, g, sched) {
+  const rows = Object.fromEntries((d.gruppen[g] || []).map((t) => [t, { team: t, g, sp: 0, s: 0, u: 0, n: 0, bf: 0, bg: 0, pkt: 0 }]));
+  const games = sched.filter((m) => m.g === g && m.s);
+  games.forEach((m) => { const [x, y] = m.s; [[m.a, x, y], [m.b, y, x]].forEach(([t, f, ag]) => {
+    const r = rows[t]; r.sp++; r.bf += f; r.bg += ag;
+    if (f > ag) { r.s++; r.pkt += 3; } else if (f === ag) { r.u++; r.pkt += 1; } else r.n++;
+  }); });
+  const h2h = (a, b) => { const m = games.find((m) => (m.a === a && m.b === b) || (m.a === b && m.b === a)); if (!m) return 0; const diff = m.a === a ? m.s[0] - m.s[1] : m.s[1] - m.s[0]; return -Math.sign(diff); };
+  /* Punkte → Becher-Differenz → getroffene Becher → direkter Vergleich */
+  return Object.values(rows).sort((a, b) => b.pkt - a.pkt || (b.bf - b.bg) - (a.bf - a.bg) || b.bf - a.bf || h2h(a.team, b.team) || a.team.localeCompare(b.team, "de"));
+}
+function tnThirds(tables) {
+  const per = (r, v) => v / Math.max(1, r.sp);
+  return Object.values(tables).map((t) => t[2]).filter(Boolean)
+    .sort((a, b) => per(b, b.pkt) - per(a, a.pkt) || per(b, b.bf - b.bg) - per(a, a.bf - a.bg) || per(b, b.bf) - per(a, a.bf) || a.team.localeCompare(b.team, "de"));
+}
+function tnAF(tables) {   /* feste Achtelfinal-Paarungen aus den fertigen Tabellen */
+  const thirds = tnThirds(tables).slice(0, 4), order = KO_DRITTE[thirds.map((t) => t.g).sort().join("")];
+  if (!order) return null;
+  let k = 0;
+  return KO_PLAN.map((m) => m.map((s) => {
+    if (s === "3") { const g = order[k++]; return { team: tables[g][2].team, lbl: "3" + g }; }
+    return { team: tables[s[1]][+s[0] - 1].team, lbl: s };
+  }));
+}
+const tnSlotLbl = (s, i) => s === "3" ? `3. aus ${KO_THIRD_OPTS[(i - 1) / 2 | 0]}` : `${s[0]}. Gruppe ${s[1]}`;
+function tnKO(d) {
+  const ko = d.ko || {}, er = d.koErg || {}, M = {};
+  const res = (key, a, b) => { const r = er[key]; return r && r.t && r.t[0] === a && r.t[1] === b ? r : null; };
+  const win = (m) => (m && m.r ? (m.r.s[0] > m.r.s[1] || (m.r.s[0] === m.r.s[1] && m.r.gg === 0) ? m.a : m.b) : null);
+  const lose = (m) => (m && m.r ? (win(m) === m.a ? m.b : m.a) : null);
+  const mk = (key, rd, tisch, timed, a, b, la, lb) => { const m = { key, rd, tisch, timed, a, b, la, lb }; m.r = a && b ? res(key, a, b) : null; m.win = win(m); m.lose = lose(m); M[key] = m; };
+  for (let i = 1; i <= 8; i++) { const p = ko["AF" + i], pl = KO_PLAN[i - 1]; mk("AF" + i, "Achtelfinale", i, true, p ? p.a : null, p ? p.b : null, p ? p.la : tnSlotLbl(pl[0], i), p ? p.lb : tnSlotLbl(pl[1], i)); }
+  for (let k = 1; k <= 4; k++) mk("VF" + k, "Viertelfinale", k, true, M["AF" + (2 * k - 1)].win, M["AF" + 2 * k].win, "Sieger AF " + (2 * k - 1), "Sieger AF " + 2 * k);
+  for (let k = 1; k <= 2; k++) mk("HF" + k, "Halbfinale", k, false, M["VF" + (2 * k - 1)].win, M["VF" + 2 * k].win, "Sieger VF " + (2 * k - 1), "Sieger VF " + 2 * k);
+  mk("P3", "Spiel um Platz 3", 2, true, M.HF1.lose, M.HF2.lose, "Verlierer HF 1", "Verlierer HF 2");
+  mk("F", "Finale", 1, false, M.HF1.win, M.HF2.win, "Sieger HF 1", "Sieger HF 2");
+  return M;
+}
+/* Alles auf einmal berechnen */
+function tnState(d) {
+  d = d || {};
+  const sched = tnSched(d), groups = Object.keys(d.gruppen || {}).sort();
+  const tables = Object.fromEntries(groups.map((g) => [g, tnTable(d, g, sched)]));
+  const done = sched.filter((m) => m.s).length, groupsDone = sched.length > 0 && done === sched.length;
+  const M = tnKO(d), champ = M.F.win;
+  const koOpen = Object.values(M).filter((m) => m.a && m.b && !m.r);
+  return { d, phase: d.phase || "", sched, groups, tables, done, total: sched.length, groupsDone, thirds: tnThirds(tables), M, champ, koOpen };
+}
+/* Ergebnis prüfen: gibt Fehlermeldung oder null zurück */
+function tnCheck(s, ko, timed, gg) {
+  const [x, y] = s;
+  if (![x, y].every((v) => Number.isInteger(v) && v >= 0 && v <= TN_CUPS)) return `Bitte 0 bis ${TN_CUPS} Becher eintragen.`;
+  if (x === TN_CUPS && y === TN_CUPS) return "Es können nicht beide alle Becher getroffen haben.";
+  if (!timed && x !== TN_CUPS && y !== TN_CUPS) return `Ohne Zeitlimit endet das Spiel erst, wenn ein Team alle ${TN_CUPS} Becher getroffen hat.`;
+  if (ko && x === y && gg !== 0 && gg !== 1) return "Gleichstand: Bitte den Golden-Goal-Sieger antippen.";
+  return null;
+}
+
+/* ================= Turnier-Seiten ================= */
+const tnEvent = () => EVENTS.find((e) => e.id === TURNIER.event) || EVENTS[0];
+let tnSubOff = null, tnPage = null;
+function tnShell(cls, kicker, title, back) {
+  current = null;
+  const ev = tnEvent(), d = $("detail");
+  d.className = "view view-detail tn-page " + cls;
+  d.style.cssText = phaseStyle(ev.th);
+  d.innerHTML = `
+    <header class="d-head">
+      <button class="back" id="backBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
+      <img class="logo" src="logo.png" alt="">
+    </header>
+    <div class="tn-wrap">
+      <div class="tn-ttl"><small>${kicker}</small><h2>${title}</h2></div>
+      <div id="tnBody"><p class="tn-muted">Lädt …</p></div>
+    </div>
+    <div class="tn-sheet" id="tnSheet" hidden></div>
+    <div class="tn-toast" id="tnToast" hidden></div>`;
+  $("backBtn").addEventListener("click", back || closeDetail);
+  d.onscroll = null; d.scrollTop = 0;
+}
+function tnToast(t) { const el = $("tnToast"); if (!el) return; el.textContent = t; el.hidden = false; clearTimeout(tnToast.t); tnToast.t = setTimeout(() => { el.hidden = true; }, 2600); }
+function tnListen(render) {
+  if (tnSubOff) tnSubOff();
+  TStore.start();
+  tnSubOff = TStore.on((d) => {
+    const body = $("tnBody"); if (!body) return;
+    const br = body.querySelector(".tn-bracket"), sl = br ? br.scrollLeft : 0;
+    render(tnState(d));
+    const br2 = body.querySelector(".tn-bracket"); if (br2) br2.scrollLeft = sl;
+  });
+}
+function tnStop() { if (tnSubOff) { tnSubOff(); tnSubOff = null; } TStore.stop(); tnPage = null; }
+
+/* ---- Turnier-Kacheln ausblenden, sobald ein Sieger feststeht ----
+   Vor Beginn des Abends wird gar nicht nachgesehen (0 Lesezugriffe). Danach 1 Lesezugriff pro App-Start,
+   bis der Sieger einmal bekannt ist – das wird auf dem Handy gemerkt. Merker von Testläufen vor dem Abend gelten nicht. */
+const tnEndKey = () => "exmaTurnierEnde_" + TURNIER.id;
+function tnMarkEnded(champ) {
+  if (new Date() < tnEvent().startDate) return;
+  try { localStorage.setItem(tnEndKey(), JSON.stringify({ at: Date.now(), champ })); } catch {}
+  document.querySelectorAll(".tn-link").forEach((l) => l.remove());
+}
+function tnHideIfEnded(root) {
+  if (!root.querySelector(".tn-link")) return;
+  const ev = tnEvent(); if (new Date() < ev.startDate) return;
+  try { const c = JSON.parse(localStorage.getItem(tnEndKey()) || "null"); if (c && c.at >= ev.startDate.getTime()) { root.querySelectorAll(".tn-link").forEach((l) => l.remove()); return; } } catch {}
+  const run = () => TStore.once().then((d) => { const st = tnState(d); if (st.champ) tnMarkEnded(st.champ); }).catch(() => {});
+  if (Live.remote || FB.off) run(); else setTimeout(run, 2500);
+}
+
+/* ---- Bausteine ---- */
+const tnMyTeam = () => store.get("exmaTurnierTeam") || "";
+function tnPill(st) {
+  const ev = tnEvent();
+  if (!st.groups.length) return `<div class="tn-pill"><span class="tn-dot"></span>Turnier am ${esc(ev.wdLong || ev.wd)} ${esc(ev.dm)} · ab ${esc((ev.ablauf && ev.ablauf[0].zeit) || ev.time)} Uhr</div>`;
+  if (st.champ) return `<div class="tn-pill gold">🏆 Turnier beendet · Sieger: ${esc(st.champ)}</div>`;
+  if (st.phase === "setup") return `<div class="tn-pill"><span class="tn-dot"></span>Gruppen ausgelost · gleich geht's los</div>`;
+  if (st.phase === "ko") { const m = st.koOpen[0]; return `<div class="tn-pill"><span class="tn-dot"></span>K.-o.-Phase · ${esc(m ? m.rd : "")}</div>`; }
+  if (st.groupsDone) return `<div class="tn-pill"><span class="tn-dot"></span>Gruppenphase fertig · Achtelfinale gleich</div>`;
+  return `<div class="tn-pill"><span class="tn-dot"></span>Gruppenphase · ${st.done} von ${st.total} Spielen</div>`;
+}
+function tnMatchFor(st, team) {   /* nächstes offenes Spiel oder Endstatus des Teams */
+  const koKeys = KO_ROUNDS.flatMap((r) => r.keys);
+  if (st.phase === "ko") {
+    const open = koKeys.map((k) => st.M[k]).find((m) => !m.r && (m.a === team || m.b === team));
+    if (open) return { ko: true, m: open, opp: open.a === team ? open.b : open.a };
+    const played = koKeys.map((k) => st.M[k]).filter((m) => m.r && (m.a === team || m.b === team));
+    const last = played[played.length - 1];
+    if (!last) { const g = st.groups.find((x) => st.d.gruppen[x].includes(team)), pl = g ? st.tables[g].findIndex((r) => r.team === team) + 1 : 0; return { out: `In der Gruppenphase ausgeschieden${pl ? ` (Platz ${pl} in Gruppe ${g})` : ""}` }; }
+    if (last.key === "F") return { out: last.win === team ? "🏆 Turniersieger!" : "2. Platz – Glückwunsch!" };
+    if (last.key === "P3") return { out: last.win === team ? "🥉 3. Platz!" : "4. Platz" };
+    if (last.key.startsWith("HF") && last.lose === team) return { wait: "Ihr spielt um Platz 3" };
+    if (last.win === team) return { wait: "Weiter! Gegner steht noch nicht fest" };
+    return { out: "Ausgeschieden im " + last.rd };
+  }
+  const g = st.groups.find((x) => st.d.gruppen[x].includes(team));
+  const next = st.sched.find((m) => m.g === g && !m.s && (m.a === team || m.b === team));
+  if (next) {
+    const cr = tnCurRound(st.sched), live = st.phase === "gruppen";
+    const pause = live && next.r !== cr && tnRoundsOf(st.d, g)[cr - 1] && tnRoundsOf(st.d, g)[cr - 1].pause === team;
+    return { m: next, opp: next.a === team ? next.b : next.a, now: live && next.r === cr, cr: live && next.r !== cr ? cr : null, pause };
+  }
+  if (!st.groupsDone) return { wait: "Alle Gruppenspiele gespielt – warten auf die anderen Gruppen" };
+  const pl = st.tables[g].findIndex((r) => r.team === team) + 1, q = pl <= 2 || (pl === 3 && st.thirds.slice(0, 4).some((t) => t.team === team));
+  return q ? { wait: `Als ${pl}. weiter ins Achtelfinale – gleich geht's los` } : { out: `Ausgeschieden (Platz ${pl} in Gruppe ${g})` };
+}
+function tnMine(st) {
+  const team = tnMyTeam(), all = st.groups.flatMap((g) => st.d.gruppen[g]);
+  if (!all.length) return `<div class="tn-card tn-empty"><b>Die Gruppen werden kurz vor Turnierbeginn ausgelost.</b><span>Danach wählst du hier dein Team und siehst deinen Spielplan.</span></div>`;
+  if (!all.includes(team)) return `<button type="button" class="tn-pick" data-pick><span>🍺</span><b>Dein Team wählen</b><small>Dann siehst du Gruppe, Gegner und Tisch</small></button>`;
+  const g = st.groups.find((x) => st.d.gruppen[x].includes(team)), row = st.tables[g].find((r) => r.team === team), pl = st.tables[g].indexOf(row) + 1;
+  const nx = tnMatchFor(st, team);
+  let next = "";
+  if (nx.m) {
+    const lbl = nx.ko ? `${nx.m.rd}${nx.m.timed ? " · 10 min" : ""}` : nx.now ? `Jetzt dran · Runde ${nx.m.r}` : `Als Nächstes · Runde ${nx.m.r}`;
+    const note = !nx.ko && nx.cr ? `<span class="tn-wait">${nx.pause ? `Ihr habt in Runde ${nx.cr} Pause. ` : ""}Runde ${nx.m.r} startet, sobald Runde ${nx.cr} an allen Tischen fertig ist.</span>` : "";
+    next = `<div class="tn-next${nx.now || nx.ko ? " hot" : ""}"><small>${lbl}</small><div class="tn-nv"><b>${esc(team)}</b><span>vs</span><b>${esc(nx.opp)}</b></div>
+      <div class="tn-tisch"><span>Tisch</span><b>${nx.m.tisch}</b></div>${note}<button type="button" class="tn-plan-go" data-plan="${nx.m.tisch}">📍 Auf dem Lageplan zeigen</button></div>`;
+  } else next = `<div class="tn-next ${nx.out ? "out" : ""}"><b class="tn-status">${esc(nx.out || nx.wait)}</b></div>`;
+  const plan = tnRoundsOf(st.d, g).map((rd, i) => {
+    if (rd.pause === team) return `<div class="tn-pr pause"><span>R${i + 1}</span><span>Pause</span><span></span><span></span></div>`;
+    const m = st.sched.find((x) => x.g === g && x.r === i + 1 && (x.a === team || x.b === team));
+    const opp = m.a === team ? m.b : m.a, res = m.s ? (m.a === team ? m.s : [m.s[1], m.s[0]]) : null;
+    const cls = res ? (res[0] > res[1] ? "w" : res[0] < res[1] ? "l" : "d") : nx.m && nx.m.key === m.key && nx.now ? "now" : "";
+    return `<div class="tn-pr ${cls}"><span>R${i + 1}</span><span>gegen <b>${esc(opp)}</b></span><span>Tisch ${m.tisch}</span><span>${res ? res.join(":") : cls === "now" ? "läuft" : "offen"}</span></div>`;
+  }).join("");
+  return `<div class="tn-card tn-mine">
+      <div class="tn-mh"><span>Mein Team</span><b>${esc(team)}</b><button type="button" data-pick>ändern</button></div>
+      <div class="tn-ms"><div><small>Gruppe</small><b>${g}</b></div><div><small>Platz</small><b>${pl}.</b></div><div><small>Punkte</small><b>${row.pkt}</b></div><div><small>Becher</small><b>${row.bf}:${row.bg}</b></div></div>
+      ${next}
+      <div class="tn-plan"><small>Gruppenspiele</small>${plan}</div>
+    </div>`;
+}
+function tnTablesHTML(st) {
+  const team = tnMyTeam(), mg = st.groups.find((g) => st.d.gruppen[g].includes(team));
+  const order = mg ? [mg, ...st.groups.filter((g) => g !== mg)] : st.groups;
+  const best = new Set(st.thirds.slice(0, 4).map((t) => t.team));
+  return order.map((g) => {
+    const cr = tnCurRound(st.sched), gi = st.groups.indexOf(g);
+    const rows = st.tables[g].map((r, i) => `<tr class="${i < 2 ? "q1" : i === 2 ? (best.has(r.team) ? "q3" : "q3x") : ""}${r.team === team ? " me" : ""}"><td class="pl">${i + 1}</td><td class="tm">${esc(r.team)}</td><td>${r.sp}</td><td>${r.s}-${r.u}-${r.n}</td><td>${r.bf - r.bg > 0 ? "+" : ""}${r.bf - r.bg}</td><td class="pk">${r.pkt}</td></tr>`).join("");
+    const live = st.sched.filter((m) => m.g === g && m.r === cr).map((m) => `<span class="${m.s ? "done" : ""}">T${m.tisch}: ${esc(m.a)} – ${esc(m.b)}${m.s ? ` <b>${m.s.join(":")}</b>` : ""}</span>`).join("");
+    return `<div class="tn-grp"><div class="tn-gh"><b>Gruppe ${g}</b><span>${cr ? `Runde ${cr} von ${tnRoundsOf(st.d, g).length}` : "fertig"} · Tisch ${gi * 2 + 1} & ${gi * 2 + 2}</span></div>
+      <table><tr class="th"><td></td><td>Team</td><td>Sp</td><td>S-U-N</td><td>Diff</td><td>Pkt</td></tr>${rows}</table>${cr ? `<div class="tn-live">${live}</div>` : ""}</div>`;
+  }).join("");
+}
+function tnThirdsHTML(st) {
+  if (!st.groups.length) return "";
+  return `<div class="tn-card tn-best"><small>Beste Gruppendritte · die ersten 4 kommen weiter</small>${st.thirds.map((t, i) => `<div class="${i < 4 ? "in" : "out"}"><span>${i + 1}.</span><b>${esc(t.team)}</b><i>Gr. ${t.g}</i><em>${t.pkt} Pkt · ${t.bf - t.bg > 0 ? "+" : ""}${t.bf - t.bg}</em></div>`).join("")}</div>`;
+}
+function tnBracketHTML(st) {
+  const team = tnMyTeam();
+  const box = (m) => {
+    const sa = m.r ? m.r.s[0] : "", sb = m.r ? m.r.s[1] : "";
+    const row = (t, l, s, w) => `<div class="${w ? "w" : ""}${t && t === team ? " me" : ""}${t ? "" : " ph"}"><span>${esc(t || l)}</span><b>${s}</b></div>`;
+    return `<div class="tn-m${m.key === "F" ? " fin" : ""}"><small>${m.key === "F" || m.key === "P3" ? m.rd : m.key.replace(/(\D+)(\d)/, "$1 $2")} · T${m.tisch}${m.timed ? "" : " · ohne Zeit"}</small>${row(m.a, m.la, sa, m.win && m.win === m.a)}${row(m.b, m.lb, sb, m.win && m.win === m.b)}${m.r && m.r.s[0] === m.r.s[1] ? `<em>GG</em>` : ""}</div>`;
+  };
+  const col = (keys, title) => `<div class="tn-col"><h4>${title}</h4><div class="tn-cb">${keys.map((k) => box(st.M[k])).join("")}</div></div>`;
+  return `<div class="tn-bracket">${col(KO_ROUNDS[0].keys, "Achtelfinale")}${col(KO_ROUNDS[1].keys, "Viertelfinale")}${col(KO_ROUNDS[2].keys, "Halbfinale")}<div class="tn-col"><h4>Finale &amp; Platz 3</h4><div class="tn-cb last">${box(st.M.F)}${box(st.M.P3)}</div></div></div>`;
+}
+/* Lageplan: Platzhalter, bis der echte Plan vom Club da ist */
+const LAGEPLAN = { tische: 12 };
+function tnPlanHTML(hi) {
+  const n = LAGEPLAN.tische, half = Math.ceil(n / 2);
+  const t = (i) => `<div class="tn-t${i === hi ? " me" : ""}" data-t="${i}"><b>${i}</b><small>Gr. ${TN_GROUPS[(i - 1) >> 1] || ""}</small>${i === hi ? "<i>Euer Tisch</i>" : ""}</div>`;
+  return `<div class="tn-room"><div class="tn-bar">Bar</div><div class="tn-cols"><div>${Array.from({ length: half }, (_, k) => t(k + 1)).join("")}</div><div>${Array.from({ length: n - half }, (_, k) => t(half + k + 1)).join("")}</div></div><div class="tn-door">Eingang</div></div>
+    <p class="tn-muted">Platzhalter – wird durch den echten Plan vom Club ersetzt.</p>`;
+}
+function tnTeamSheet(st) {
+  const sh = $("tnSheet"); if (!sh) return;
+  const all = st.groups.flatMap((g) => st.d.gruppen[g].map((t) => [t, g])).sort((a, b) => a[0].localeCompare(b[0], "de"));
+  sh.hidden = false;
+  sh.innerHTML = `<div class="tn-sh"><div class="tn-grab"></div><h3>Welches Team seid ihr?</h3><p>Einmal auswählen – die App merkt es sich.</p>
+    <input id="tnSearch" type="search" placeholder="Team suchen …" autocomplete="off"><div class="tn-list" id="tnList"></div>
+    <button type="button" class="tn-x" id="tnClose">Schließen</button></div>`;
+  const draw = (q) => { $("tnList").innerHTML = all.filter(([t]) => t.toLowerCase().includes(q.toLowerCase())).map(([t, g]) => `<button type="button" class="${t === tnMyTeam() ? "sel" : ""}" data-team="${esc(t)}"><span>${esc(t)}</span><small>Gruppe ${g}</small></button>`).join("") || `<p class="tn-muted">Kein Team gefunden.</p>`; };
+  draw("");
+  $("tnSearch").addEventListener("input", (e) => draw(e.target.value));
+  $("tnList").addEventListener("click", (e) => { const b = e.target.closest("[data-team]"); if (!b) return; store.set("exmaTurnierTeam", b.dataset.team); sh.hidden = true; renderTurnierBody(tnState(TStore.data)); $("detail").scrollTop = 0; });
+  $("tnClose").addEventListener("click", () => { sh.hidden = true; });
+  sh.onclick = (e) => { if (e.target === sh) sh.hidden = true; };
+}
+function renderTurnierBody(st) {
+  const body = $("tnBody"); if (!body) return;
+  const ev = tnEvent(), mine = tnMyTeam(), nx = mine && st.groups.length ? tnMatchFor(st, mine) : null;
+  if (st.champ) tnMarkEnded(st.champ);
+  body.innerHTML = `${tnPill(st)}
+    ${st.champ ? `<div class="tn-card tn-champ"><div>🏆</div><small>Turniersieger</small><b>${esc(st.champ)}</b><span>Finale ${Math.max(...st.M.F.r.s)}:${Math.min(...st.M.F.r.s)} gegen ${esc(st.M.F.lose)} · Platz 3: ${esc(st.M.P3.win || "–")}</span></div>` : ""}
+    ${tnMine(st)}
+    ${!st.groups.length && ev.anmeldung ? `<a class="tn-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener">${esc(ev.anmeldung.text || "Zum Turnier anmelden")} ${ICON_EXT}</a>` : ""}
+    ${st.groups.length ? `<h3 class="tn-h">Gruppen <small>live</small></h3>
+    <div class="tn-legend"><span><i class="q1"></i>Platz 1–2: Achtelfinale</span><span><i class="q3"></i>Platz 3: die 4 besten kommen weiter</span></div>
+    ${tnTablesHTML(st)}${tnThirdsHTML(st)}` : ""}
+    <h3 class="tn-h">Turnierbaum <small>${st.phase === "ko" ? "live" : "steht fest"}</small></h3>
+    ${tnBracketHTML(st)}
+    <p class="tn-muted">Gruppenspiele, Achtel-, Viertelfinale und Spiel um Platz 3: 10 Minuten. Halbfinale und Finale ohne Zeitlimit. Gleichstand im K.-o.: Golden Goal.</p>
+    <h3 class="tn-h" id="tnPlan">Lageplan</h3>
+    ${tnPlanHTML(nx && nx.m ? nx.m.tisch : 0)}`;
+  body.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => tnTeamSheet(st)));
+  body.querySelectorAll("[data-plan]").forEach((b) => b.addEventListener("click", () => $("tnPlan").scrollIntoView({ behavior: "smooth", block: "start" })));
+}
+function renderTurnier() {
+  if (tnPage !== "spieler") { tnShell("tn-spieler", `${esc(tnEvent().titel.join(" "))} · ${esc(tnEvent().dm)}`, "Beerpong-Turnier"); tnPage = "spieler"; tnListen(renderTurnierBody); }
+}
+
+/* ================= Turnierleitung (nur Team) ================= */
+let tnDraft = null;   /* Teamliste, die gerade bearbeitet wird (überlebt Live-Updates) */
+const tnParse = (txt) => [...new Set(txt.split(/\r?\n/).map((l) => l.split(/[;,\t]/)[0].replace(/^"|"$/g, "").trim()).filter((l) => l && !/^(team|teamname|name|zeitstempel|timestamp)$/i.test(l)))];
+function tnDraw(teams) {
+  const t = teams.slice();
+  for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [t[i], t[j]] = [t[j], t[i]]; }
+  const gr = {}; [...TN_GROUPS].forEach((g) => (gr[g] = []));
+  t.forEach((x, i) => gr[TN_GROUPS[i % 6]].push(x));
+  return gr;
+}
+function tnArm(btn, label, fn) {
+  btn.addEventListener("click", () => {
+    if (btn.dataset.armed) { delete btn.dataset.armed; btn.textContent = label; fn(); return; }
+    btn.dataset.armed = "1"; btn.textContent = "Sicher? Nochmal tippen";
+    setTimeout(() => { if (btn.isConnected && btn.dataset.armed) { delete btn.dataset.armed; btn.textContent = label; } }, 3000);
+  });
+}
+const tnFail = (e) => { console.warn(e); tnToast("Speichern hat nicht geklappt – Internet da?"); };
+function tnSteps(st) {
+  const s = !st.groups.length ? 1 : st.phase === "setup" ? 2 : st.phase === "gruppen" ? 3 : 4;
+  return `<div class="tn-steps">${["Teams", "Gruppen", "Gruppenphase", "K.-o."].map((t, i) => `<span class="${i + 1 < s ? "done" : i + 1 === s ? "on" : ""}">${i + 1} ${t}</span>`).join("")}</div>`;
+}
+function renderAdminBody(st) {
+  const body = $("tnBody"); if (!body) return;
+  if (!teamAuthed) { body.innerHTML = `<div class="tn-card tn-empty"><b>Nur für das Team.</b><span>Bitte zuerst im Team-Bereich anmelden.</span><a class="tn-btn" href="#team">Zum Team-Login</a></div>`; return; }
+  if (body.contains(document.activeElement) && document.activeElement.tagName === "TEXTAREA") return;   /* nicht beim Tippen stören */
+  let html = tnSteps(st);
+  if (!st.groups.length || st.phase === "setup") {
+    if (tnDraft === null) tnDraft = (st.d.teams || []).join("\n");
+    const n = tnParse(tnDraft).length;
+    html += `<div class="tn-card"><div class="tn-ah"><b>Teams</b><small id="tnCount">${n} Teams${n && (n < 18 || n > 30) ? " · 18 bis 30 möglich" : ""}</small></div>
+      <textarea id="tnTeams" rows="8" placeholder="Ein Teamname pro Zeile – z. B. aus der Anmeldung kopieren">${esc(tnDraft)}</textarea>
+      <div class="tn-r2">${TURNIER.csv ? `<button type="button" class="tn-btn ghost" id="tnCsv">Aus Anmeldung laden</button>` : ""}<button type="button" class="tn-btn ghost" id="tnTest">Testdaten (30 Hauptstädte)</button></div>
+      <button type="button" class="tn-btn" id="tnDrawBtn">${st.groups.length ? "Neu auslosen" : "Gruppen auslosen"}</button></div>`;
+    if (st.groups.length) html += `<div class="tn-card"><div class="tn-ah"><b>Gruppen</b><small>6 Gruppen · ausgelost</small></div>
+      ${st.groups.map((g, i) => `<div class="tn-gp"><b>${g}</b><span>${st.d.gruppen[g].map(esc).join(" · ")}</span><small>Tisch ${i * 2 + 1} + ${i * 2 + 2}</small></div>`).join("")}
+      <button type="button" class="tn-btn" id="tnStart">Turnier starten</button><p class="tn-muted">Nach dem Start sind die Gruppen fest und jeder sieht seinen Spielplan.</p></div>`;
+  } else if (st.phase === "gruppen") {
+    html += `<div class="tn-livebar"><span class="tn-dot g"></span>Live bei allen · ${st.done} von ${st.total} Spielen</div>`;
+    if (st.groupsDone) {
+      const af = tnAF(st.tables);
+      html += `<div class="tn-card"><div class="tn-ah"><b>Gruppenphase fertig</b><small>${st.total} / ${st.total}</small></div>
+        <div class="tn-best in-card">${st.thirds.map((t, i) => `<div class="${i < 4 ? "in" : "out"}"><span>${i + 1}.</span><b>${esc(t.team)}</b><i>Gr. ${t.g}</i><em>${t.pkt} Pkt · ${t.bf - t.bg > 0 ? "+" : ""}${t.bf - t.bg}</em></div>`).join("")}</div>
+        <div class="tn-afprev">${af ? af.map((p, i) => `<span><i>AF ${i + 1}</i>${esc(p[0].team)} <small>${p[0].lbl}</small> – ${esc(p[1].team)} <small>${p[1].lbl}</small></span>`).join("") : "Paarungen konnten nicht berechnet werden."}</div>
+        <button type="button" class="tn-btn" id="tnKoStart">Achtelfinale starten</button><p class="tn-muted">Danach sind die Achtelfinal-Paarungen fest.</p></div>`;
+    }
+    const rows = [], cr = tnCurRound(st.sched), nRounds = Math.max(0, ...st.sched.map((m) => m.r));
+    const inRound = st.sched.filter((m) => m.r === cr), doneInRound = inRound.filter((m) => m.s).length;
+    if (!st.groupsDone) for (let t = 1; t <= 12; t++) {
+      const g = TN_GROUPS[(t - 1) >> 1]; if (!st.d.gruppen[g]) continue;
+      const m = inRound.find((x) => x.tisch === t);
+      if (!m) { rows.push(`<div class="tn-tr off"><span class="tn-tn">${t}</span><span class="tn-tm"><i>frei in dieser Runde</i></span><span class="tn-st">Gr. ${g}</span></div>`); continue; }
+      rows.push(`<button type="button" class="tn-tr${m.s ? " done" : ""}" data-edit="${m.key}"><span class="tn-tn">${t}</span><span class="tn-tm"><b>${esc(m.a)}</b><i>${m.s ? m.s.join(":") : "–"}</i><b>${esc(m.b)}</b></span><span class="tn-st">${m.s ? "✓ fertig" : `Gruppe ${g}`}</span></button>`);
+    }
+    if (rows.length) html += `<div class="tn-card tight"><div class="tn-round"><b>Runde ${cr}</b><span>von ${nRounds}</span><em>${doneInRound} / ${inRound.length} fertig</em></div>
+      <div class="tn-rbar"><i style="width:${(100 * doneInRound / Math.max(1, inRound.length)).toFixed(0)}%"></i></div>${rows.join("")}
+      <p class="tn-muted">Runde ${cr + 1 <= nRounds ? cr + 1 : ""} erscheint erst, wenn alle Spiele von Runde ${cr} eingetragen sind – so kann nichts versehentlich zu weit eingetragen werden.</p></div>`;
+    html += `<details class="tn-card tn-all"><summary><b>Alle Gruppenspiele</b><small>zum Korrigieren antippen</small></summary>
+      ${st.groups.map((g) => `<h4>Gruppe ${g}</h4>${st.sched.filter((m) => m.g === g).map((m) => m.r > cr && !m.s
+        ? `<div class="tn-row locked"><span>R${m.r} · T${m.tisch}</span><span>${esc(m.a)} – ${esc(m.b)}</span><b>noch nicht dran</b></div>`
+        : `<button type="button" class="tn-row${m.s ? "" : " open"}" data-edit="${m.key}"><span>R${m.r} · T${m.tisch}</span><span>${esc(m.a)} – ${esc(m.b)}</span><b>${m.s ? m.s.join(":") : "offen"}</b></button>`).join("")}`).join("")}</details>`;
+  } else {
+    const champ = st.champ;
+    if (champ) html += `<div class="tn-card tn-champ"><div>🏆</div><small>Turnier beendet</small><b>${esc(champ)}</b><span>Platz 2: ${esc(st.M.F.lose)} · Platz 3: ${esc(st.M.P3.win)}</span></div>`;
+    else html += `<div class="tn-livebar"><span class="tn-dot g"></span>Live bei allen · ${esc(st.koOpen[0] ? st.koOpen[0].rd : "")}</div>`;
+    if (st.koOpen.length) html += `<div class="tn-card tight"><div class="tn-ah"><b>Offene Spiele</b><small>antippen zum Eintragen</small></div>${st.koOpen.map((m) => `<button type="button" class="tn-tr" data-edit="${m.key}"><span class="tn-tn">${m.tisch}</span><span class="tn-tm"><b>${esc(m.a)}</b><i>–</i><b>${esc(m.b)}</b></span><span class="tn-st">${m.rd.replace("Spiel um ", "")}${m.timed ? " · 10′" : ""}</span></button>`).join("")}</div>`;
+    const played = KO_ROUNDS.flatMap((r) => r.keys).map((k) => st.M[k]).filter((m) => m.r);
+    if (played.length) html += `<details class="tn-card tn-all"${champ ? " open" : ""}><summary><b>Gespielte K.-o.-Spiele</b><small>zum Korrigieren antippen</small></summary>${played.map((m) => `<button type="button" class="tn-row" data-edit="${m.key}"><span>${m.key}</span><span>${esc(m.a)} – ${esc(m.b)}</span><b>${m.r.s.join(":")}${m.r.s[0] === m.r.s[1] ? " GG" : ""}</b></button>`).join("")}</details>`;
+    html += `<details class="tn-card tn-all"><summary><b>Gruppenspiele</b><small>Paarungen bleiben fest</small></summary><p class="tn-muted">Die Achtelfinal-Paarungen sind schon fest. Korrekturen in der Gruppenphase ändern nur noch die Tabellen.</p>
+      ${st.sched.map((m) => `<button type="button" class="tn-row" data-edit="${m.key}"><span>${m.g} · R${m.r}</span><span>${esc(m.a)} – ${esc(m.b)}</span><b>${m.s ? m.s.join(":") : "offen"}</b></button>`).join("")}</details>`;
+  }
+  const isTest = st.groups.length && (st.d.teams || []).every((t) => TURNIER.testTeams.includes(t));
+  if (isTest && st.phase !== "setup") html += `<div class="tn-card"><div class="tn-ah"><b>Testmodus</b><small>nur bei Testdaten</small></div>
+    <div class="tn-r2">${st.phase === "gruppen" && !st.groupsDone ? `<button type="button" class="tn-btn ghost" id="tnFillR">Aktuelle Runde zufällig</button><button type="button" class="tn-btn ghost" id="tnFillG">Ganze Gruppenphase zufällig</button>` : ""}${st.phase === "ko" && st.koOpen.length ? `<button type="button" class="tn-btn ghost" id="tnFillK">Nächste K.-o.-Runde zufällig</button>` : ""}</div>
+    <p class="tn-muted">Füllt offene Spiele mit Zufallsergebnissen – nur zum Ausprobieren.</p></div>`;
+  if (st.groups.length) html += `<div class="tn-card"><div class="tn-ah"><b>Als Spieler ansehen</b></div><a class="tn-btn ghost" href="#turnier">Spieleransicht öffnen</a></div>`;
+  if (st.groups.length) html += `<div class="tn-card danger"><div class="tn-ah"><b>Gefahrenzone</b></div><button type="button" class="tn-btn red" id="tnReset">Turnier komplett zurücksetzen</button></div>`;
+  body.innerHTML = html;
+
+  const ta = $("tnTeams");
+  if (ta) ta.addEventListener("input", () => { tnDraft = ta.value; const n = tnParse(ta.value).length; $("tnCount").textContent = `${n} Teams${n && (n < 18 || n > 30) ? " · 18 bis 30 möglich" : ""}`; });
+  const on = (id, fn) => { const b = $(id); if (b) b.addEventListener("click", fn); };
+  on("tnTest", () => { tnDraft = TURNIER.testTeams.join("\n"); renderAdminBody(tnState(TStore.data)); });
+  on("tnCsv", async () => {
+    try { const r = await fetch(TURNIER.csv, { cache: "no-store" }); if (!r.ok) throw 0; tnDraft = tnParse(await r.text()).join("\n"); renderAdminBody(tnState(TStore.data)); tnToast(`${tnParse(tnDraft).length} Teams aus der Anmeldung geladen`); }
+    catch { tnToast("Anmeldung konnte nicht geladen werden – bitte Namen einfügen"); }
+  });
+  on("tnDrawBtn", () => {
+    const teams = tnParse(tnDraft || "");
+    if (teams.length < 18 || teams.length > 30) { tnToast("Für 6 Gruppen braucht es 18 bis 30 Teams."); return; }
+    TStore.replace({ phase: "setup", teams, gruppen: tnDraw(teams), erg: {}, ko: {}, koErg: {} }).then(() => tnToast("Gruppen ausgelost")).catch(tnFail);
+  });
+  if ($("tnStart")) tnArm($("tnStart"), "Turnier starten", () => TStore.save({ phase: "gruppen" }).then(() => { tnDraft = null; tnToast("Turnier läuft – live bei allen"); }).catch(tnFail));
+  if ($("tnKoStart")) tnArm($("tnKoStart"), "Achtelfinale starten", () => {
+    const af = tnAF(st.tables); if (!af) return;
+    const ko = {}; af.forEach((p, i) => { ko["AF" + (i + 1)] = { a: p[0].team, b: p[1].team, la: p[0].lbl, lb: p[1].lbl }; });
+    TStore.save({ phase: "ko", ko }).then(() => tnToast("Achtelfinale läuft")).catch(tnFail);
+  });
+  const rnd = (n) => Math.floor(Math.random() * n);
+  on("tnFillR", () => {
+    const cr = tnCurRound(st.sched), p = {};
+    st.sched.filter((m) => !m.s && m.r === cr).forEach((m) => { let a = rnd(11), b = rnd(11); if (a === 10 && b === 10) b = rnd(10); p["erg." + m.key] = [a, b]; });
+    TStore.save(p).then(() => tnToast(`Runde ${cr} gefüllt`)).catch(tnFail);
+  });
+  on("tnFillG", () => {
+    const p = {}; st.sched.filter((m) => !m.s).forEach((m) => { let a = rnd(11), b = rnd(11); if (a === 10 && b === 10) b = rnd(10); p["erg." + m.key] = [a, b]; });
+    TStore.save(p).then(() => tnToast("Gruppenphase gefüllt")).catch(tnFail);
+  });
+  on("tnFillK", () => {
+    const rd = st.koOpen[0].rd, p = {};
+    st.koOpen.filter((m) => m.rd === rd).forEach((m) => {
+      let s = m.timed ? [rnd(11), rnd(11)] : rnd(2) ? [10, rnd(10)] : [rnd(10), 10]; if (s[0] === 10 && s[1] === 10) s[1] = 9;
+      p["koErg." + m.key] = { t: [m.a, m.b], s, gg: s[0] === s[1] ? rnd(2) : null };
+    });
+    TStore.save(p).then(() => tnToast(rd + " gefüllt")).catch(tnFail);
+  });
+  if ($("tnReset")) tnArm($("tnReset"), "Turnier komplett zurücksetzen", () => { tnDraft = null; TStore.replace({}).then(() => tnToast("Turnier zurückgesetzt")).catch(tnFail); });
+  body.querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => tnEditor(b.dataset.edit)));
+}
+/* Ergebnis-Eingabe */
+function tnEditor(key) {
+  const st = tnState(TStore.data), ko = !/^[A-F]\d\d$/.test(key);
+  const m = ko ? st.M[key] : st.sched.find((x) => x.key === key);
+  if (!m || !m.a || !m.b) return;
+  if (!ko && !m.s && m.r > tnCurRound(st.sched)) { tnToast(`Runde ${m.r} ist noch nicht dran`); return; }
+  const timed = ko ? m.timed : true, old = ko ? m.r : m.s ? { s: m.s } : null;
+  const S = { s: old ? old.s.slice() : [0, 0], gg: old && old.gg != null ? old.gg : null, f: 0 };
+  const sh = $("tnSheet"); sh.hidden = false;
+  const title = ko ? `${m.rd} · Tisch ${m.tisch}${timed ? " · 10 min" : " · ohne Zeitlimit"}` : `Gruppe ${m.g} · Runde ${m.r} · Tisch ${m.tisch}`;
+  const draw = () => {
+    const [x, y] = S.s, err = tnCheck(S.s, ko, timed, S.gg);
+    let res = "";
+    if (!err || /Golden/.test(err)) {
+      if (x === y && !ko) res = "Unentschieden · je 1 Punkt";
+      else if (x === y) res = S.gg === null ? "Gleichstand → Golden Goal" : `${S.gg === 0 ? m.a : m.b} gewinnt per Golden Goal`;
+      else res = `${x > y ? m.a : m.b} gewinnt${ko ? "" : " · 3 Punkte"}`;
+    }
+    sh.innerHTML = `<div class="tn-sh"><div class="tn-grab"></div><small class="tn-k">${title}</small><h3>Getroffene Becher</h3>
+      <div class="tn-sc">${[0, 1].map((i) => `<div class="tn-side${S.f === i ? " f" : ""}" data-f="${i}"><b>${esc(i ? m.b : m.a)}</b>
+        <div class="tn-stp"><button type="button" data-d="${i}:-1">−</button><span>${S.s[i]}</span><button type="button" data-d="${i}:1">+</button></div>
+        <small>${S.s[i] === TN_CUPS ? "alle getroffen" : "&nbsp;"}</small></div>`).join(`<div class="tn-vs">:</div>`)}</div>
+      <div class="tn-quick"><small>Schnellwahl für ${esc(S.f ? m.b : m.a)}</small><div>${Array.from({ length: TN_CUPS + 1 }, (_, k) => `<button type="button" data-q="${k}" class="${S.s[S.f] === k ? "on" : ""}">${k}</button>`).join("")}</div></div>
+      ${ko && x === y && !(err && !/Golden/.test(err)) ? `<div class="tn-gg"><small>Gleichstand → Golden Goal: Wer hat den nächsten Becher getroffen?</small><div><button type="button" data-gg="0" class="${S.gg === 0 ? "on" : ""}">${esc(m.a)}</button><button type="button" data-gg="1" class="${S.gg === 1 ? "on" : ""}">${esc(m.b)}</button></div></div>` : ""}
+      ${res ? `<div class="tn-res">${esc(res)}</div>` : ""}${err && !/Golden/.test(err) ? `<div class="tn-err">${esc(err)}</div>` : ""}
+      <button type="button" class="tn-btn big" id="tnSave"${err ? " disabled" : ""}>Speichern &amp; live stellen</button>
+      <div class="tn-r2">${old ? `<button type="button" class="tn-btn ghost" id="tnDel">Ergebnis löschen</button>` : ""}<button type="button" class="tn-btn ghost" id="tnCancel">Abbrechen</button></div></div>`;
+  };
+  draw();
+  sh.onclick = (e) => {
+    if (e.target === sh) { sh.hidden = true; return; }
+    const d = e.target.closest("[data-d]"), q = e.target.closest("[data-q]"), f = e.target.closest("[data-f]"), g = e.target.closest("[data-gg]");
+    if (d) { const [i, v] = d.dataset.d.split(":").map(Number); S.f = i; S.s[i] = Math.max(0, Math.min(TN_CUPS, S.s[i] + v)); }
+    else if (q) S.s[S.f] = +q.dataset.q;
+    else if (g) S.gg = +g.dataset.gg;
+    else if (f && !e.target.closest("button")) S.f = +f.dataset.f;
+    else if (e.target.id === "tnCancel") { sh.hidden = true; return; }
+    else if (e.target.id === "tnDel") {
+      sh.hidden = true;
+      TStore.save({ [(ko ? "koErg." : "erg.") + key]: TStore.DEL }).then(() => tnToast("Ergebnis gelöscht")).catch(tnFail); return;
+    } else if (e.target.id === "tnSave") {
+      if (tnCheck(S.s, ko, timed, S.gg)) return;
+      sh.hidden = true;
+      const val = ko ? { t: [m.a, m.b], s: S.s, gg: S.s[0] === S.s[1] ? S.gg : null } : S.s;
+      TStore.save({ [(ko ? "koErg." : "erg.") + key]: val }).then(() => tnToast("✓ Gespeichert – ist bei allen in 1–2 Sekunden da")).catch(tnFail); return;
+    } else return;
+    if (S.s[0] !== S.s[1]) S.gg = null;
+    draw();
+  };
+}
+function renderTurnierAdmin() {
+  if (tnPage !== "admin") { tnShell("tn-admin", "Team-Bereich", "Turnierleitung", () => goBack("team")); tnPage = "admin"; tnDraft = null; tnListen(renderAdminBody); }
+}
 
 /* ================= Eigene Seiten: Wünsche und Team ================= */
 function pageShell(cls, title, inner) {

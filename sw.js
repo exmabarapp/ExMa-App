@@ -1,8 +1,12 @@
 /* Service Worker der ExMa-Bar-App
-   - Eigene Dateien: erst aus dem Netz, ohne Netz aus dem Speicher
-   - Schriften: aus dem Speicher, im Hintergrund aktualisiert
-   Bei jeder neuen Version VERSION hochzählen. */
-const VERSION = "exma-v56";
+   - Seite selbst: erst aus dem Netz (damit neue Versionen sofort ankommen), ohne Netz aus dem Speicher
+   - Bilder, Icons, Schriften: aus dem Speicher, im Hintergrund aktualisiert
+   Bei jeder neuen Version VERSION hochzählen.
+   Der Speichername enthält den Pfad der App: So stören sich Original und Testversion
+   unter derselben Domain nicht gegenseitig. */
+const VERSION = "exma-v61";
+const SCOPE = self.registration.scope;
+const CACHE = VERSION + "|" + SCOPE;
 const CORE = [
   "./",
   "./index.html",
@@ -15,13 +19,16 @@ const CORE = [
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(VERSION).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
+      /* nur eigene alte Speicher löschen (gleicher Pfad) und die alten ohne Pfad im Namen */
+      .then((keys) => Promise.all(keys
+        .filter((k) => k !== CACHE && (k.endsWith("|" + SCOPE) || (k.startsWith("exma-") && !k.includes("|"))))
+        .map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -33,10 +40,10 @@ self.addEventListener("fetch", (e) => {
 
   if (req.mode === "navigate") {
     e.respondWith(
-      fetch(req, { cache: "no-cache" })
+      fetch(req)
         .then((res) => {
           const copy = res.clone();
-          caches.open(VERSION).then((c) => c.put("./index.html", copy));
+          caches.open(CACHE).then((c) => c.put("./index.html", copy));
           return res;
         })
         .catch(() => caches.match("./index.html"))
@@ -45,9 +52,9 @@ self.addEventListener("fetch", (e) => {
   }
 
   const isFont = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
-  if (isFont) {
+  if (url.origin === self.location.origin || isFont) {
     e.respondWith(
-      caches.open(VERSION).then((cache) =>
+      caches.open(CACHE).then((cache) =>
         cache.match(req).then((hit) => {
           const net = fetch(req)
             .then((res) => { if (res && (res.ok || res.type === "opaque")) cache.put(req, res.clone()); return res; })
@@ -55,18 +62,6 @@ self.addEventListener("fetch", (e) => {
           return hit || net;
         })
       )
-    );
-    return;
-  }
-
-  if (url.origin === self.location.origin) {
-    e.respondWith(
-      fetch(req, { cache: "no-cache" })
-        .then((res) => {
-          if (res && res.ok) { const copy = res.clone(); caches.open(VERSION).then((c) => c.put(req, copy)); }
-          return res;
-        })
-        .catch(() => caches.match(req))
     );
   }
 });
