@@ -1095,6 +1095,114 @@ a { color: inherit; }
 .hm-badges .hm-go { flex: none; }
 .hm-badges.new::after { content: "Neu"; position: absolute; top: -9px; right: 16px; padding: 2px 8px; border-radius: 999px; background: #ff3fc8; color: #fff; font-size: 11px; font-weight: 800; box-shadow: 0 0 12px #ff3fc8; }
 
+/* ---------- Fotowand ---------- */
+.tile-btn.hm-fotowand { height: 112px; margin-top: 14px; border-radius: 20px; justify-content: flex-end; overflow: visible; isolation: isolate;
+  background: radial-gradient(120% 140% at 82% 40%, #a01f5c 0%, #4a0c33 46%, #170512 100%); border: 1.5px solid rgba(255,110,170,.65); box-shadow: 0 0 18px rgba(255,80,150,.3); }
+.fw-art { position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit; }
+.fw-flash { position: absolute; right: 40px; top: -30px; width: 170px; height: 170px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.95) 0, rgba(255,230,245,.55) 18%, rgba(255,120,190,0) 62%); opacity: 0; animation: fwFlash 5s ease-out 1.2s infinite; }
+@keyframes fwFlash { 0%, 86% { opacity: 0; transform: scale(.6); } 88% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.15); } }
+.fw-pol { position: absolute; width: 70px; height: 84px; padding: 5px 5px 16px; background: #fffdf7; border-radius: 3px; box-shadow: 0 8px 16px rgba(0,0,0,.5); animation: fwSway 6s ease-in-out infinite alternate; }
+.fw-pol .fw-pic { display: grid; place-items: center; width: 100%; height: 100%; overflow: hidden; background: linear-gradient(150deg, var(--a1, #ff5d9e), var(--night, #2a1240) 80%); color: rgba(255,255,255,.85); }
+.fw-pol .fw-pic > svg { width: 24px; height: 24px; }
+.fw-pol .fw-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fw-mini { position: absolute; left: 50%; top: 31%; width: max-content; transform: translate(-50%, -50%) scale(var(--s, .35)); pointer-events: none; color: #fff; text-align: left; }
+.fw-mini .tile-title { margin: 0; font-size: 30px; line-height: 1.08; letter-spacing: .03em; }
+.fw-mini .tile-title span + span { margin-top: 3px; }
+.fw-mini .tile-sub { display: block; margin: 10px 0 0; font-size: 21px; letter-spacing: .02em; white-space: nowrap; }
+.fw-pol[style] .fw-pic, .fw-card .fw-pic { position: relative; background: radial-gradient(120% 90% at 50% 25%, color-mix(in srgb, var(--a1) 20%, var(--night)) 0%, var(--night) 72%); }
+.fw-pol.has-pic .fw-mini { display: none; }
+.fw-scene { position: absolute; inset: 0; overflow: hidden; }
+.fw-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fw-scene::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 30% at 50% 31%, rgba(0,0,0,.42), transparent 100%), linear-gradient(180deg, rgba(0,0,0,.25), transparent 45%, transparent 80%, rgba(0,0,0,.2)); }
+.fw-mini { z-index: 1; }
+.fw-pt { padding: 3px; font-family: var(--f-display); font-size: 11.5px; line-height: 1.05; text-align: center; text-transform: uppercase; color: #fff; text-shadow: 0 0 6px var(--a1, #ff5d9e); }
+.fw-pol.has-pic .fw-pt { display: none; }
+.fw-tape { position: absolute; top: -7px; left: 50%; width: 34px; height: 13px; margin-left: -17px; background: rgba(255,240,170,.75); transform: rotate(-4deg); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.fw-p0 { right: 118px; top: 22px; --r: -14deg; transform: rotate(-14deg); animation-delay: -2s; }
+.fw-p0 .fw-pic { background: linear-gradient(150deg, var(--a1, #2ff3e0), var(--night, #10204a) 80%); }
+.fw-p1 { right: -10px; top: 18px; --r: 12deg; transform: rotate(12deg); animation-delay: -4s; }
+.fw-p1 .fw-pic { background: linear-gradient(150deg, var(--a1, #ffd23f), var(--night, #4a2a05) 80%); }
+.fw-p1 .fw-tape { background: rgba(160,230,255,.75); transform: rotate(6deg); }
+.fw-p2 { right: 48px; top: -16px; width: 78px; height: 94px; --r: -3deg; transform: rotate(-3deg); z-index: 1; }
+.fw-p2 .fw-tape { background: rgba(255,170,210,.8); }
+.fw-p2 .fw-pt { font-size: 13px; }
+.fw-pol.fw-p0:not([style]) .fw-pic { background: linear-gradient(150deg, #2ff3e0, #133a63 80%); }
+.fw-pol.fw-p1:not([style]) .fw-pic { background: linear-gradient(150deg, #ffd23f, #b4361c 80%); }
+.fw-pol.fw-p2:not([style]) .fw-pic { background: linear-gradient(150deg, #ff5db1, #4b1a8c 80%); }
+@keyframes fwSway { from { transform: rotate(calc(var(--r) - 2deg)); } to { transform: rotate(calc(var(--r) + 2deg)); } }
+.fw-sp { position: absolute; font-style: normal; color: #fff; text-shadow: 0 0 8px #ff6ab4; animation: fwTw 2.6s ease-in-out infinite; }
+.fw-sp.sp1 { right: 132px; top: 4px; font-size: 14px; }
+.fw-sp.sp2 { right: 8px; top: -6px; font-size: 11px; animation-delay: -1s; }
+.fw-sp.sp3 { right: 102px; bottom: 6px; font-size: 10px; animation-delay: -1.8s; }
+@keyframes fwTw { 0%, 100% { opacity: .25; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.1); } }
+.hm-fotowand .fw-txt { position: relative; max-width: 48%; margin-top: 0 !important; }
+.hm-fotowand b { font-size: 20px; text-shadow: 0 0 12px rgba(255,90,170,.95); }
+.hm-fotowand small { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 12px; font-weight: 700; color: #ffd3e8; opacity: 1; }
+.hm-fotowand small svg { width: 14px; height: 14px; flex: none; }
+.hm-fotowand .fw-new { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; background: #ff3fa0; color: #fff; box-shadow: 0 0 12px #ff3fa0; }
+@media (prefers-reduced-motion: reduce) { .fw-flash, .fw-sp, .fw-pol { animation: none; } .fw-flash { display: none; } }
+.view-detail.clubby.fotowand-page { background: radial-gradient(rgba(0,0,0,.2) 1px, transparent 1.6px) 0 0 / 10px 10px local, radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.6px) 5px 6px / 13px 13px local, linear-gradient(180deg, #3b2314, #2a180d 60%, #1e1109) local; }
+.fotowand-page .page-h { color: #fff3e0; text-shadow: 0 0 14px rgba(255,180,100,.6), 0 0 30px rgba(255,140,60,.3); }
+.fw-lead { margin: -6px 0 0; text-align: center; font-weight: 700; color: #f1d9bd; }
+.fw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 16px; padding: 10px 4px 6px; }
+.fw-card { position: relative; display: block; padding: 8px 8px 0; background: #fdfaf3; border-radius: 4px; color: #2a1a10; text-decoration: none; transform: rotate(var(--rot)); box-shadow: 0 10px 20px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.3); transition: transform .2s; }
+.fw-card:active { transform: rotate(0deg) scale(.97); }
+.fw-pin { position: absolute; top: -9px; left: 50%; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff 0 14%, var(--pin) 30%); box-shadow: 0 3px 4px rgba(0,0,0,.5); z-index: 2; }
+.fw-card .fw-pic { display: block; position: relative; aspect-ratio: 1; overflow: hidden; background: radial-gradient(120% 90% at 50% 25%, color-mix(in srgb, var(--a1) 20%, var(--night)) 0%, var(--night) 72%); }
+.fw-card .fw-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fw-ph { display: block; position: relative; height: 100%; }
+.fw-ph b { font-family: var(--f-display); font-weight: 400; font-size: 20px; line-height: 1.05; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px var(--a1); }
+.fw-card.has-pic .fw-ph { display: none; }
+.fw-cap { display: block; padding: 8px 2px 10px; text-align: center; }
+.fw-cap b { display: block; font-family: var(--f-script); font-weight: 400; font-size: 22px; line-height: 1.1; color: #2a1a10; }
+.fw-cap small { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 800; color: #7a6250; }
+@media (prefers-reduced-motion: reduce) { .fw-card { transition: none; } }
+/* ---------- Fotogalerie ---------- */
+.fg-strip { display: block; text-decoration: none; color: inherit; border-radius: 18px; overflow: hidden; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
+.fg-strip-pics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.fg-strip-pics:empty { display: none; }
+.fg-strip-pics span { position: relative; aspect-ratio: 1; background: rgba(255,255,255,.06); overflow: hidden; }
+.fg-strip-pics img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fg-strip-pics b { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(10,6,20,.62); color: #fff; font-size: 20px; font-weight: 800; }
+.fg-strip-txt { display: flex; align-items: center; gap: 8px; padding: 12px 14px; font-weight: 800; color: var(--frost, #fff); }
+.fg-strip-txt svg { width: 20px; height: 20px; flex: none; }
+.fg-strip-txt svg:last-child { margin-left: auto; }
+.fg-strip.empty { pointer-events: none; opacity: .75; }
+.fg-head { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: -6px; text-align: center; }
+.fg-head b { font-family: var(--f-display); font-weight: 400; font-size: 22px; text-transform: uppercase; color: var(--a1, #fff); }
+.fg-head span { color: var(--c-dim, #c9b3d6); font-weight: 700; font-size: 14px; }
+.fg-count { margin: 0; text-align: center; font-weight: 800; color: #eadff2; }
+.fg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; border-radius: 18px; overflow: hidden; }
+.fg-t { padding: 0; border: 0; aspect-ratio: 1; background: rgba(255,255,255,.07); overflow: hidden; cursor: pointer; }
+.fg-t img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .2s; }
+.fg-t:active img { transform: scale(.96); }
+.fg-t img.bad, .fg-strip img.bad { opacity: 0; }
+.fg-sk { aspect-ratio: 1; background: linear-gradient(100deg, rgba(255,255,255,.05) 30%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.05) 70%) 0 0 / 300% 100%; animation: fgSk 1.3s linear infinite; }
+@keyframes fgSk { to { background-position: -150% 0; } }
+.fg-foot { display: grid; gap: 12px; }
+.fg-foot .ph-btn { justify-content: center; }
+.fg-foot p { margin: 0; font-size: 13px; color: var(--c-dim, #c9b3d6); text-align: center; }
+.fg-foot a:not(.ph-btn) { color: #fff; }
+body.fg-open { overflow: hidden; }
+.fg-box { position: fixed; inset: 0; z-index: 400; background: #07040c; display: none; touch-action: pan-y; }
+.fg-box.show { display: block; }
+.fg-top { position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: calc(10px + env(safe-area-inset-top)) 12px 10px 18px; background: linear-gradient(rgba(0,0,0,.55), transparent); }
+.fg-n { color: #fff; font-weight: 800; font-variant-numeric: tabular-nums; }
+.fg-x { width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 28px; line-height: 1; }
+.fg-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+.fg-stage img { grid-area: 1 / 1; max-width: 100%; max-height: 100%; width: 100%; height: 100%; object-fit: contain; }
+.fg-lo { filter: blur(6px); }
+.fg-lo { position: relative; z-index: 0; }
+.fg-hi { position: relative; z-index: 1; opacity: 0; transition: opacity .25s; }
+.fg-hi.ok { opacity: 1; }
+.fg-nav { position: absolute; top: 50%; z-index: 3; width: 46px; height: 64px; margin-top: -32px; border: 0; border-radius: 14px; background: rgba(255,255,255,.12); color: #fff; font-size: 34px; line-height: 1; }
+.fg-nav.prev { left: 8px; } .fg-nav.next { right: 8px; }
+.fg-nav:disabled { opacity: 0; pointer-events: none; }
+@media (hover: none) { .fg-nav { background: transparent; text-shadow: 0 1px 8px rgba(0,0,0,.9); } }
+.fg-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; gap: 8px; justify-content: center; padding: 14px 12px calc(14px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(0,0,0,.6)); }
+.fg-bar > * { padding: 10px 16px; border-radius: 999px; border: 0; background: rgba(255,255,255,.16); color: #fff; font: inherit; font-weight: 800; font-size: 14px; text-decoration: none; }
+.fg-bar .fg-del { background: transparent; color: rgba(255,255,255,.7); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .fg-sk { animation: none; } .fg-hi { transition: none; } }
 /* Abzeichen-Seite: Samt, Rautenmuster, Spotlight */
 .view-detail.clubby.badge-page { --c-dim: #c9b3d6;
   background:
@@ -2148,7 +2256,7 @@ const EVENTS = [
     ort: "ExMa-Bar",
     musik: { zeit: "22–0 Uhr", text: "Techno mit DJ Julian" },
     mitbringen: null,            // z. B. "Weißes T-Shirt" – bei null wird nichts angezeigt
-    fotos: null,                 // Link zum Fotoalbum, sobald der Abend vorbei ist
+    fotos: "https://drive.google.com/drive/folders/1D9g5ArT9ux9BlCaDXq4ySc8PG8ejsanm",  // Google-Drive-Ordner (Jeder mit dem Link)
     specials: [
       { name: "Vodka Lemon", info: "Vodka mit Lemon", preis: 2.0, bild: "lemon" },
       { name: "Vodka-E",     info: "Vodka mit Energy", preis: 2.0, bild: "energy" }
@@ -2833,7 +2941,7 @@ function slideHTML(ev, i) {
     : `ab ${esc(ev.time)} Uhr`;
   const reg = ev.anmeldung && !past
     ? `<a class="reg-mini" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop aria-label="${esc(ev.anmeldung.text)}">Anmelden ${ICON_EXT}</a>` : "";
-  const ctaText = past ? "Rückblick ansehen" : (ev.specials && ev.specials.length ? "Drinks & Infos" : "Infos zum Abend");
+  const ctaText = past ? "Fotos ansehen" : (ev.specials && ev.specials.length ? "Drinks & Infos" : "Infos zum Abend");
   return `
     <div class="scene" aria-hidden="true">${DEPTHS.map((d, k) => `<div class="layer" data-depth="${d}"><svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice"></svg></div>`).join("")}</div>
     <div class="chips">${[chip(status(ev)), ev.art ? `<span class="chip">${esc(ev.art)}</span>` : ""].join("")}</div>
@@ -2872,6 +2980,7 @@ function buildSlides() {
   $("dots").innerHTML = EVENTS.map((ev, i) =>
     `<button type="button" role="tab" aria-label="${esc(ev.titel.join(" "))}, ${esc(ev.dm)}"></button>`).join("");
   [...$("dots").children].forEach((b, i) => b.addEventListener("click", () => goTo(i)));
+  pruneSlides();
 }
 
 function applyTheme(ev) {
@@ -2881,25 +2990,34 @@ function applyTheme(ev) {
   document.querySelector('meta[name="theme-color"]').setAttribute("content", ev.th.night);
 }
 
+/* Vorbei = weg: Das Karussell beginnt immer beim nächsten Abend. Vergangene Abende leben nur noch als Polaroid auf der Fotowand weiter. */
+const minIndex = () => startIndex();
+function pruneSlides() {
+  const m = minIndex();
+  slides.forEach((s, k) => { s.style.display = k < m ? "none" : ""; });
+  [...$("dots").children].forEach((b, k) => { b.style.display = k < m ? "none" : ""; });
+  if (index < m) goTo(m, false);
+}
 function goTo(i, animate = true) {
-  index = Math.max(0, Math.min(EVENTS.length - 1, i));
+  index = Math.max(minIndex(), Math.min(EVENTS.length - 1, i));
   const track = $("track");
   if (!animate) track.classList.add("dragging");
   track.style.transform = `translateX(${-index * 100}%)`;
   if (!animate) requestAnimationFrame(() => track.classList.remove("dragging"));
   [...$("dots").children].forEach((b, k) => b.setAttribute("aria-current", k === index ? "true" : "false"));
   slides.forEach((s, k) => s.setAttribute("aria-hidden", k === index ? "false" : "true"));
-  $("prevBtn").hidden = index === 0;
+  $("prevBtn").hidden = index <= minIndex();
   $("nextBtn").hidden = index === EVENTS.length - 1;
   /* Pfeile tragen Farben und Datum des Abends, zu dem sie führen */
-  [["prevBtn", "prevDate", EVENTS[index - 1]], ["nextBtn", "nextDate", EVENTS[index + 1]]].forEach(([b, t, e]) => {
+  const prevEv = index - 1 >= minIndex() ? EVENTS[index - 1] : null;
+  [["prevBtn", "prevDate", prevEv], ["nextBtn", "nextDate", EVENTS[index + 1]]].forEach(([b, t, e]) => {
     if (!e) return;
     $(b).style.cssText = themeStyle(e.th);
     $(b).className = `arrow ${b === "prevBtn" ? "prev" : "next"} to-${e.thema}`;
     $(t).textContent = e.dm;
     $(b).setAttribute("aria-label", `${e.titel.join(" ")} am ${e.dm}`);
   });
-  const next = EVENTS[index + 1], prev = EVENTS[index - 1];
+  const next = EVENTS[index + 1], prev = prevEv;
   $("pagerHint").textContent = next ? `Wischen: ${next.titel.join(" ")} am ${next.dm}` : prev ? `Zurück wischen: ${prev.titel.join(" ")}` : "";
   applyTheme(EVENTS[index]);
   resetParallax();
@@ -3015,7 +3133,8 @@ function renderDetail(ev) {
   const pastBox = past ? `
     <div class="past-box">
       <p><b>Dieser Abend ist vorbei.</b> Danke, dass ihr da wart!</p>
-      ${ev.fotos ? `<a class="reg-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">Fotos ansehen ${ICON_EXT}</a>` : `<p>Die Fotos folgen bald.</p>`}
+      ${ev.fotos ? (Fotos.enabled(ev) ? `<a class="fg-strip" href="#fotos-${ev.id}" data-fgstrip="${ev.id}" aria-label="Fotos vom Abend ansehen"><span class="fg-strip-pics"></span><span class="fg-strip-txt">${ICON_CAM}Fotos vom Abend ${ICON_ARROW}</span></a>`
+        : `<a class="reg-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">Fotos ansehen ${ICON_EXT}</a>`) : `<p>Die Fotos folgen bald.</p>`}
     </div>` : "";
   const items = [...(ev.ablauf || [])];
   if (ev.musik) items.push({ zeit: ev.musik.zeit.replace(" Uhr", ""), was: ev.musik.text });
@@ -3256,6 +3375,9 @@ const FIREBASE_CONFIG = {
   appId: "1:103124884760:web:e610d220d735113f7d526d"
 };
 const FB_VERSION = "10.12.2";
+/* Fotogalerie: API-Schlüssel für Google Drive (liest nur öffentlich freigegebene Ordner).
+   Leer = die App verlinkt den Drive-Ordner nur. Einrichtung siehe LIESMICH. */
+const DRIVE_KEY = "";
 const TEAM_EMAIL = "club@ba-glauchau.de";          /* Team-Konto in Firebase */
 const TEAM_PW = (pin) => "exma-team-" + pin;         /* Passwort = exma-team- + PIN */
 const PAUSE_SEK = 20;                                 /* Sperrzeit für Gäste in Sekunden (muss zu firestore.rules passen) */
@@ -3306,8 +3428,8 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
-  const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !EVENTS.some((e) => e.id === id)); };
+  const OTHER = ["fotowand", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
+  const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !id.startsWith("fotos-") && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
   const keysFor = (kind, key, mat) => {
@@ -6033,6 +6155,194 @@ function updateTile() {
 function badgeTile() {
   return `<a class="tile-btn hm-badges" href="#abzeichen"><span class="hm-bdg-fx" aria-hidden="true"><i class="hm-shine"></i></span><span class="hm-bdg-ico" id="hmBadgeIco" aria-hidden="true"></span><span class="hm-bdg-txt"><b>Abzeichen</b><small id="hmBadgeN">${Badges.count()} von ${BADGE_LIST.length}</small><span class="hm-bdg-rail"><i id="hmBadgeBar"></i></span></span><i class="hm-go">${ICON_ARROW}</i></a>`;
 }
+/* ================= Fotowand: alle vergangenen Clubabende als Polaroids ================= */
+/* Titel im Stil der Abend-Kacheln (Neon, Verlauf, Kontur, Schreibschrift), verkleinert fürs Polaroid */
+/* Hintergrund wie auf den Abend-Kacheln: die gezeichnete Szene des Mottos */
+const fwScene = (e) => `<span class="fw-scene" data-scene="${e.id}">${'<svg viewBox="0 120 400 440" preserveAspectRatio="xMidYMid slice"></svg>'.repeat(DEPTHS.length)}</span>`;
+let fwSceneUid = 0;
+function fwScenes(root = document) {
+  root.querySelectorAll(".fw-scene:not([data-done])").forEach((el) => {
+    el.dataset.done = "1"; const ev = EVENTS.find((e) => e.id === el.dataset.scene); if (!ev) return;
+    const layers = (SCENES[ev.thema] || sceneIce)(), u = fwSceneUid++;
+    el.querySelectorAll("svg").forEach((svg, k) => { svg.innerHTML = layers[k] ? prefixIds(layers[k], `fw${u}l${k}_`) : ""; if (svg.pauseAnimations) svg.pauseAnimations(); });
+  });
+}
+const fwMini = (e) => `<span class="fw-mini t-${e.thema}"><span class="tile-title">${titleHTML(e)}</span>${e.untertitel ? `<span class="tile-sub">${esc(e.untertitel)}</span>` : ""}</span>`;
+const PIN_COLORS = ["#ff4d6d", "#ffd23f", "#4dd6ff", "#7cf29a", "#c38bff"];
+function fotowandTile() {
+  const past = EVENTS.filter((e) => isPast(e)).reverse();
+  /* vorne (fw-p2) liegt der neueste Abend */
+  /* Polaroids: erst vergangene Abende (neuester vorne), freie Plätze mit den kommenden Mottos auffüllen */
+  const shown = [...past, ...EVENTS.filter((e) => !isPast(e))].slice(0, 3);
+  const pol = [0, 1, 2].map((k) => { const e = shown[[1, 2, 0][k]];
+    return `<span class="fw-pol fw-p${k}" ${e ? `style="${themeStyle(e.th)}"${isPast(e) ? ` data-cover="${e.id}"` : ""}` : ""}><span class="fw-pic">${e ? fwScene(e) + fwMini(e) : ICON_CAM}</span><i class="fw-tape"></i></span>`; }).join("");
+  const neu = past[0] && Date.now() - past[0].endDate < 7 * 864e5;
+  return `<a class="tile-btn hm-fotowand" href="#fotowand" aria-label="Fotowand – Fotos aller Clubabende">
+    <span class="fw-art" aria-hidden="true"><span class="fw-flash"></span>${pol}<i class="fw-sp sp1">✦</i><i class="fw-sp sp2">✦</i><i class="fw-sp sp3">✦</i></span>
+    ${neu ? `<span class="soon-tag fw-new">Neue Fotos</span>` : ""}
+    <span class="fw-txt"><b>Fotowand</b><small>${past.length ? `Fotos von ${past.length} Clubabend${past.length === 1 ? "" : "en"}` : "Fotos aller Clubabende"} ${ICON_ARROW}</small></span></a>`;
+}
+/* Mini-Titel so skalieren, dass sie ganz ins Polaroid passen */
+function fitMinis(root = document) {
+  root.querySelectorAll(".fw-mini").forEach((m) => {
+    const pic = m.parentElement, W = pic.clientWidth, H = pic.clientHeight, w = m.offsetWidth, h = m.offsetHeight;
+    if (!W || !H || !w || !h) return;
+    m.style.setProperty("--s", Math.min(.86 * W / w, .5 * H / h).toFixed(3));
+  });
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitMinis());
+/* Titelbild: das erste Foto des Abends (nur mit Drive-Schlüssel) */
+function fwCovers(root = document) {
+  fwScenes(root); fitMinis(root);
+  root.querySelectorAll("[data-cover]:not([data-done])").forEach(async (el) => {
+    el.dataset.done = "1"; const ev = EVENTS.find((e) => e.id === el.dataset.cover); if (!Fotos.enabled(ev)) return;
+    try { const fs = await Fotos.list(ev); const pic = el.querySelector(".fw-pic"); if (fs.length && pic) { pic.innerHTML = Fotos.img(fs[0], 400); el.classList.add("has-pic"); }
+      const n = el.querySelector("[data-n]"); if (n) n.textContent = fs.length ? `${fs.length} Fotos` : "Fotos folgen"; } catch {}
+  });
+}
+function renderFotowand() {
+  const past = EVENTS.filter((e) => isPast(e)).reverse();
+  pageShell("fotowand-page", "Fotowand", past.length ? `
+    <p class="fw-lead">Tipp auf einen Abend und schau dir die Fotos an.</p>
+    <div class="fw-grid">${past.map((e, k) => `
+      <a class="fw-card" href="#fotos-${e.id}" data-cover="${e.id}" style="${themeStyle(e.th)};--rot:${[-2.5, 2, -1.5, 2.5, -2, 1.5][k % 6]}deg;--pin:${PIN_COLORS[k % PIN_COLORS.length]}">
+        <i class="fw-pin" aria-hidden="true"></i>
+        <span class="fw-pic"><span class="fw-ph">${fwScene(e)}${fwMini(e)}</span></span>
+        <span class="fw-cap"><b>${esc(e.titel.join(" "))}</b><small>${esc(e.wd)} ${esc(e.dm)} · <span data-n>${e.fotos ? "Fotos" : "Fotos folgen"}</span></small></span>
+      </a>`).join("")}</div>`
+    : `<div class="hm-empty">${ICON_CAM}<span>Nach der ersten Party hängen hier die Fotos.</span></div>`);
+  fwCovers($("detail"));
+}
+
+/* ================= Fotogalerie (Google-Drive-Ordner je Abend) =================
+   Der Ordner muss auf „Jeder mit dem Link – Betrachter“ stehen. Die App liest die Liste über die
+   Drive-API (DRIVE_KEY) und lädt die Bilder als Vorschaubilder direkt von Google. */
+const Fotos = (() => {
+  const fid = (url) => (String(url || "").match(/folders\/([\w-]{10,})/) || [])[1] || null;
+  const enabled = (ev) => !!(DRIVE_KEY && ev && fid(ev.fotos));
+  const mem = new Map(), TTL = 5 * 60000;
+  async function folder(id, depth) {
+    const out = []; let page = "";
+    do {
+      const q = encodeURIComponent(`'${id}' in parents and trashed=false`);
+      const r = await fetch(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=nextPageToken,files(id,name,mimeType,createdTime,imageMediaMetadata(width,height,time))&pageSize=1000&key=${encodeURIComponent(DRIVE_KEY)}${page ? "&pageToken=" + encodeURIComponent(page) : ""}`);
+      if (!r.ok) throw new Error("drive " + r.status);
+      const j = await r.json();
+      for (const f of j.files || []) {
+        if (f.mimeType === "application/vnd.google-apps.folder") { if (depth < 2) out.push(...await folder(f.id, depth + 1)); }
+        else if (/^image\//.test(f.mimeType)) out.push(f);
+      }
+      page = j.nextPageToken || "";
+    } while (page);
+    return out;
+  }
+  /* Aufnahmezeit aus den Bilddaten (EXIF), sonst Hochladezeit */
+  const when = (f) => { const t = f.imageMediaMetadata && f.imageMediaMetadata.time; return t ? t.replace(/^(\d{4}):(\d\d):(\d\d)/, "$1-$2-$3") : f.createdTime || ""; };
+  async function list(ev) {
+    const id = fid(ev.fotos), key = "exmaFotos:" + id;
+    const m = mem.get(id); if (m && Date.now() - m.at < TTL) return m.files;
+    try { const c = JSON.parse(sessionStorage.getItem(key) || "null"); if (c && Date.now() - c.at < TTL) { mem.set(id, c); return c.files; } } catch {}
+    const files = (await folder(id, 0)).map((f) => ({ id: f.id, name: f.name, w: (f.imageMediaMetadata || {}).width || 0, h: (f.imageMediaMetadata || {}).height || 0, t: when(f) }))
+      .sort((a, b) => (a.t < b.t ? -1 : a.t > b.t ? 1 : a.name.localeCompare(b.name, "de", { numeric: true })));
+    const c = { at: Date.now(), files }; mem.set(id, c);
+    try { sessionStorage.setItem(key, JSON.stringify(c)); } catch {}
+    return files;
+  }
+  const src = (id, w) => `https://drive.google.com/thumbnail?id=${id}&sz=w${w}`;
+  const alt = (id, w) => `https://lh3.googleusercontent.com/d/${id}=w${w}`;
+  /* Vorschaubild mit Ersatzadresse, falls Google die erste ablehnt */
+  const img = (f, w, cls = "") => `<img class="${cls}" src="${src(f.id, w)}" data-alt="${alt(f.id, w)}" alt="" loading="lazy" decoding="async" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else{this.classList.add('bad')}">`;
+  /* Vorschau-Streifen auf der Abend-Seite */
+  function strips() {
+    document.querySelectorAll("[data-fgstrip]:not([data-done])").forEach(async (a) => {
+      a.dataset.done = "1"; const ev = EVENTS.find((e) => e.id === a.dataset.fgstrip); if (!ev) return;
+      const box = a.querySelector(".fg-strip-pics");
+      try {
+        const fs = await list(ev);
+        if (!fs.length) { a.querySelector(".fg-strip-txt").innerHTML = `${ICON_CAM}Die Fotos folgen bald.`; a.classList.add("empty"); return; }
+        const show = fs.slice(0, 4);
+        box.innerHTML = show.map((f, k) => `<span>${img(f, 240)}${k === 3 && fs.length > 4 ? `<b>+${fs.length - 3}</b>` : ""}</span>`).join("");
+        a.querySelector(".fg-strip-txt").innerHTML = `${ICON_CAM}${fs.length} Fotos vom Abend ${ICON_ARROW}`;
+      } catch { a.classList.add("empty"); }
+    });
+  }
+  /* ---------- Vollbild ---------- */
+  let box = null, files = [], cur = 0, evNow = null;
+  function open(list, i, ev) {
+    files = list; cur = i; evNow = ev;
+    if (!box) {
+      box = document.createElement("div"); box.id = "fgBox"; box.className = "fg-box"; box.setAttribute("role", "dialog"); box.setAttribute("aria-modal", "true"); box.setAttribute("aria-label", "Foto");
+      box.innerHTML = `
+        <div class="fg-top"><span class="fg-n" id="fgN"></span><button type="button" class="fg-x" data-fgx aria-label="Schließen">×</button></div>
+        <div class="fg-stage" id="fgStage"><img class="fg-lo" id="fgLo" alt=""><img class="fg-hi" id="fgHi" alt=""></div>
+        <button type="button" class="fg-nav prev" data-fgp aria-label="Vorheriges Foto">‹</button>
+        <button type="button" class="fg-nav next" data-fgn aria-label="Nächstes Foto">›</button>
+        <div class="fg-bar"><button type="button" data-fgshare>Teilen</button><a id="fgOrig" target="_blank" rel="noopener">Original</a><a id="fgDel" class="fg-del">Entfernen lassen</a></div>`;
+      document.body.appendChild(box);
+      box.querySelector("[data-fgx]").addEventListener("click", close);
+      box.querySelector("[data-fgp]").addEventListener("click", () => go(-1));
+      box.querySelector("[data-fgn]").addEventListener("click", () => go(1));
+      box.querySelector("[data-fgshare]").addEventListener("click", shareCur);
+      const st = box.querySelector("#fgStage"); let x0 = null, y0 = 0;
+      st.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      st.addEventListener("touchend", (e) => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1); else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close(); });
+      st.addEventListener("click", (e) => { if (e.target === st) close(); });
+      document.addEventListener("keydown", (e) => { if (!box.classList.contains("show")) return; if (e.key === "Escape") close(); if (e.key === "ArrowLeft") go(-1); if (e.key === "ArrowRight") go(1); });
+      window.addEventListener("hashchange", close);
+    }
+    document.body.classList.add("fg-open"); box.classList.add("show"); paint();
+    setTimeout(() => box.querySelector("[data-fgx]").focus({ preventScroll: true }), 50);
+  }
+  function close() { if (!box || !box.classList.contains("show")) return; box.classList.remove("show"); document.body.classList.remove("fg-open"); }
+  function go(d) { const n = cur + d; if (n < 0 || n >= files.length) return; cur = n; paint(); }
+  function paint() {
+    const f = files[cur], lo = $("fgLo"), hi = $("fgHi");
+    $("fgN").textContent = `${cur + 1} / ${files.length}`;
+    box.querySelector("[data-fgp]").disabled = cur === 0; box.querySelector("[data-fgn]").disabled = cur === files.length - 1;
+    lo.src = src(f.id, 480); lo.onerror = () => { lo.onerror = null; lo.src = alt(f.id, 480); };
+    hi.classList.remove("ok"); hi.onload = () => { if (files[cur] === f) hi.classList.add("ok"); };
+    hi.onerror = () => { hi.onerror = null; hi.src = alt(f.id, 1600); };
+    const want = src(f.id, 1600);
+    if (hi.src === want && hi.complete && hi.naturalWidth) hi.classList.add("ok"); else hi.src = want;
+    $("fgOrig").href = `https://drive.google.com/file/d/${f.id}/view`;
+    $("fgDel").href = `mailto:${CLUB.email}?subject=${encodeURIComponent("Foto entfernen: " + f.name)}&body=${encodeURIComponent(`Hallo, bitte entfernt dieses Foto vom Abend „${evNow.titel.join(" ")}“:\n${f.name}\nhttps://drive.google.com/file/d/${f.id}/view\n\nDanke!`)}`;
+    for (const k of [cur - 1, cur + 1]) if (files[k]) { const im = new Image(); im.src = src(files[k].id, 1600); }
+  }
+  function shareCur() {
+    const f = files[cur], url = location.origin + location.pathname + "#fotos-" + evNow.id;
+    const t = `Fotos vom Abend „${evNow.titel.join(" ")}“ in der ExMa-App`;
+    if (navigator.share) navigator.share({ title: t, text: t, url }).catch(() => {});
+    else window.open(`https://wa.me/?text=${encodeURIComponent(t + " " + url)}`, "_blank", "noopener");
+  }
+  return { fid, enabled, list, img, strips, open, close };
+})();
+
+function renderFotoPage(ev) {
+  const folderUrl = ev.fotos;
+  pageShell("foto-page", "Fotos", `
+    <div class="fg-head" style="${themeStyle(ev.th)}"><b>${esc(ev.titel.join(" "))}</b><span>${esc(ev.wd)} ${esc(ev.dm)}</span></div>
+    <p class="fg-count" id="fgCount">Lädt …</p>
+    <div class="fg-grid" id="fgGrid">${Array.from({ length: 9 }, () => `<span class="fg-sk"></span>`).join("")}</div>
+    <div class="fg-foot">
+      <a class="ph-btn" href="${esc(folderUrl)}" target="_blank" rel="noopener">Ordner in Google Drive öffnen ${ICON_EXT}</a>
+      <p>Du bist auf einem Foto und willst es nicht online sehen? Tippe im Vollbild auf „Entfernen lassen“ oder schreib uns an <a href="mailto:${esc(CLUB.email)}">${esc(CLUB.email)}</a>. Wir löschen es sofort.</p>
+    </div>`);
+  const grid = $("fgGrid"), cnt = $("fgCount");
+  if (!Fotos.enabled(ev)) { cnt.textContent = ev.fotos ? "Die Fotos findest du in unserem Google-Drive-Ordner." : "Die Fotos folgen bald."; grid.innerHTML = ""; if (!ev.fotos) document.querySelector(".fg-foot .ph-btn").remove(); return; }
+  Fotos.list(ev).then((fs) => {
+    if (!grid.isConnected) return;
+    if (!fs.length) { cnt.textContent = "Noch keine Fotos – schau später nochmal vorbei."; grid.innerHTML = ""; return; }
+    cnt.textContent = `${fs.length} Foto${fs.length === 1 ? "" : "s"}`;
+    grid.innerHTML = fs.map((f, i) => `<button type="button" class="fg-t" data-i="${i}" aria-label="Foto ${i + 1} öffnen">${Fotos.img(f, 400)}</button>`).join("");
+    grid.querySelectorAll("[data-i]").forEach((b) => b.addEventListener("click", () => Fotos.open(fs, +b.dataset.i, ev)));
+  }).catch(() => {
+    if (!grid.isConnected) return;
+    cnt.textContent = "Die Fotos konnten gerade nicht geladen werden. Über den Knopf unten kommst du direkt zum Ordner.";
+    grid.innerHTML = "";
+  });
+}
+
 function renderBadgePage() {
   store.set("exmaBadgeNew", "");
   const got = Badges.count();
@@ -6176,11 +6486,14 @@ function phLive(st) {
 function phaseTick() {
   if (document.hidden) return;
   const now = new Date();
-  if (phaseKey(clubPhase(now), now) !== phBuiltKey) { buildMenu(); return; }
+  /* Abend vorbei (eingetragenes Ende) oder neue Phase: Karussell kürzen, Menü samt Fotowand neu aufbauen */
+  const m = minIndex();
+  if (m !== prunedAt || phaseKey(clubPhase(now), now) !== phBuiltKey) { prunedAt = m; pruneSlides(); buildMenu(); return; }
   document.querySelectorAll("#menuGrid [data-cd]").forEach((el) => { el.textContent = trCountdown(+el.dataset.cd - now); });
   phSelfTick();
   document.querySelectorAll("#menuGrid [data-to]").forEach((el) => { el.style.width = (100 * (+el.dataset.to - now) / (+el.dataset.to - +el.dataset.from)).toFixed(1) + "%"; });
 }
+let prunedAt = minIndex();
 setInterval(phaseTick, 1000);
 /* ================= Hauptmenü ================= */
 function buildMenu() {
@@ -6235,7 +6548,6 @@ function buildMenu() {
       <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-<br>Ranking</b><small>Counter · Matrikel-Duell</small></span></a>
       <a class="tile-btn tile-pay hm-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen"><span class="pp-mark">${PPM}</span><span class="hm-pay-txt"><span class="pp-word"><i>Pay</i><i>Pal</i></span><small>Bargeldlos zahlen</small></span><i class="pp-go">${ICON_ARROW}</i></a>
     </div>`;
-  const past = EVENTS.filter((e) => isPast(e)).slice(-6).reverse();
   const games = `
     <h3 class="hm-sec">Minispiele <small>zum Wischen</small></h3>
     <div class="hm-games">
@@ -6244,14 +6556,12 @@ function buildMenu() {
       <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
     </div>
     ${badgeTile()}
+    ${fotowandTile()}
     <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Specialdrink oder Motto vorschlagen</small></span><i class="hm-go">${ICON_ARROW}</i></a>
 `;
   const rest = `
     <h3 class="hm-sec">Demnächst</h3>
     <div class="tile-btn hm-music" aria-label="Musikwünsche – kommt bald">${MUSIC_ART}<span class="soon-tag">Bald</span><span><b>Musikwünsche</b><small>kommt bald</small></span></div>
-    <h3 class="hm-sec">Vergangene Abende</h3>
-    ${past.length ? `<div class="hm-past">${past.map((e) => `<a href="#${e.id}" class="hm-past-item t-${e.thema}" style="${themeStyle(e.th)}"><b>${esc(e.titel.join(" "))}</b><span>${esc(e.dm)} · Fotos</span></a>`).join("")}</div>`
-      : `<div class="hm-empty">${ICON_CAM}<span>Nach der ersten Party findest du hier Fotos und Rückblicke.</span></div>`}
     <div class="hm-contact">
       <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
@@ -6289,7 +6599,7 @@ function buildMenu() {
           <div class="ph-rn"><b id="phCount">–</b><span>Getränke über den Tresen</span></div>
           <p class="ph-lead" id="phLead"></p>
           ${ev.turnier ? `<div id="phChamp"></div>` : ""}
-          ${ev.fotos ? `<a class="ph-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">${ICON_CAM}Fotos vom Abend</a>` : `<p class="ph-note">${ICON_CAM}Fotos vom Abend folgen hier.</p>`}
+          ${ev.fotos ? `<a class="ph-btn" href="#fotos-${ev.id}">${ICON_CAM}Fotos vom Abend</a>` : `<p class="ph-note">${ICON_CAM}Fotos vom Abend folgen in der Fotowand.</p>`}
         </div>
       </div>
       ${hero("Als Nächstes", null)}${next}${quick}${games}${rest}`;
@@ -6325,7 +6635,7 @@ function buildMenu() {
   fitMenu();
 }
 function fitMenu() {
-  document.querySelectorAll(".tile-title").forEach((el) => fitTitle(el, el.closest(".hm-hero") ? 58 : 34));
+  document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? 58 : 34); });
   document.querySelectorAll(".hm-next h3").forEach((el) => {
     let fs = 24; el.style.fontSize = fs + "px";
     while (el.scrollWidth > el.clientWidth + 1 && fs > 13) { fs -= 1; el.style.fontSize = fs + "px"; }
@@ -6361,7 +6671,7 @@ function show(detailOpen) {
   $("detail").setAttribute("aria-hidden", detailOpen ? "false" : "true");
   if (detailOpen) setTimeout(() => { const b = $("backBtn"); if (b) b.focus({ preventScroll: true }); }, 560);
 }
-function route() { routeInner(); afterRoute(); }
+function route() { routeInner(); afterRoute(); Fotos.strips(); fwCovers(); }
 function routeInner() {
   const id = location.hash.slice(1);
   if (id !== "turnier" && id !== "turnier-team") tnStop();
@@ -6377,10 +6687,14 @@ function routeInner() {
   if (id === "paypal") { renderPay(); show(true); return; }
   if (id === "wuensche") { renderWishPage(); show(true); return; }
   if (id === "abzeichen") { renderBadgePage(); show(true); return; }
+  if (id.startsWith("fotos-")) { const ev = EVENTS.find((e) => "fotos-" + e.id === id); if (ev) { setMenu(false); renderFotoPage(ev); show(true); return; } }
   if (id === "team") { renderTeamPage(); show(true); return; }
   if (id === "turnier") { renderTurnier(); show(true); return; }
   if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
+  if (id === "fotowand") { setMenu(false); renderFotowand(); show(true); return; }
   const i = EVENTS.findIndex((ev) => ev.id === id);
+  /* Vorbei: Infos zum Abend braucht keiner mehr – direkt zu den Fotos */
+  if (i >= 0 && isPast(EVENTS[i])) { navReplace = true; location.replace("#fotos-" + id); return; }
   if (i >= 0) {
     setMenu(false);
     if (i !== index) goTo(i, false);
@@ -6439,6 +6753,7 @@ function renderLegal(which) {
       <p>· beim Eintragen eines Drinks: nur der Zeitpunkt Ihres letzten Eintrags zu dieser anonymen Kennung sowie die Erhöhung der Gesamtzähler (keine Angaben zu Ihrer Person);<br>· bei den Bestenlisten: der von Ihnen gewählte Name, Ihr Ergebnis (Beerpong: Becherzahl und Spielzeit; Busfahrer: Zahl der geschafften Karten; Zapfmeister: Punkte und Zahl der Gläser; verstecktes Spiel: Strecke und Zeit) und der Zeitpunkt;<br>· bei Wünschen: Ihr Wunsch und, falls angegeben, Name und Studiengang.</p>
       <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Betrieb der Funktionen) bzw. bei freiwilligen Angaben Art. 6 Abs. 1 lit. a DSGVO. Bestenliste und Wünsche löschen wir, sobald wir sie nicht mehr brauchen, spätestens zum Ende des Semesters. Google ist unter dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Datenschutz bei Firebase</a>.</p>
       <p><b>Abzeichen:</b> Welche Abzeichen Sie freigeschaltet haben und die dafür nötigen Angaben (z. B. an welchen Clubabenden die App geöffnet war oder welche Matrikel an einem Abend vorne lag) werden ausschließlich lokal auf Ihrem Gerät gespeichert (Browser-Speicher) und nicht an uns oder Dritte übertragen. Sie können sie jederzeit löschen, indem Sie die Websitedaten im Browser löschen.</p>
+      <p><b>Fotos der Clubabende:</b> Die Fotos eines Abends liegen in einem Ordner bei Google Drive (Google Ireland Limited). Wenn Sie die Fotos in der App ansehen, lädt Ihr Gerät die Bilder und die Liste der Fotos direkt von Servern von Google. Dabei wird Ihre IP-Adresse an Google übertragen. Wir erfahren nicht, wer welche Fotos ansieht. Wenn Sie auf einem Foto zu sehen sind und es entfernt haben möchten, tippen Sie im Vollbild auf „Entfernen lassen“ oder schreiben Sie an ${mail}. Wir löschen es umgehend (Art. 17 und Art. 21 DSGVO).</p>
       <h3>7. Kontakt per E-Mail</h3>
       <p>Wenn Sie uns schreiben, verwenden wir Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. f DSGVO), und löschen sie, wenn sie nicht mehr gebraucht werden.</p>
       <h3>8. Ihre Rechte</h3>
@@ -6453,7 +6768,7 @@ function renderLegal(which) {
   d.scrollTop = 0;
 }
 
-function openDetail(ev) { if (location.hash !== "#" + ev.id) location.hash = ev.id; else { renderDetail(ev); show(true); } }
+function openDetail(ev) { if (isPast(ev)) { location.hash = "fotos-" + ev.id; return; } if (location.hash !== "#" + ev.id) location.hash = ev.id; else { renderDetail(ev); show(true); } }
 function closeDetail() { goBack(app.classList.contains("is-menu") ? "" : "abende"); }
 window.addEventListener("hashchange", route);
 
