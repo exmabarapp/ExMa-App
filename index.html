@@ -4366,7 +4366,7 @@ const Game = (() => {
         .slice(0, 2).forEach((o) => remove.add(o));
     });
     remove.forEach((c) => { c.dying = 1; });
-    cleared += remove.size;
+    cleared += remove.size; Badges.tally("bp", remove.size);
     Badges.bp(cleared, performance.now() - tStart, [...remove].some((c) => c.moving));
     setTimeout(() => {
       cups = cups.filter((c) => !remove.has(c));
@@ -4714,7 +4714,7 @@ const Bus = (() => {
       setTimeout(() => showOver(false), 1250);
       return;
     }
-    made++;
+    made++; Badges.tally("bus", 1);
     Badges.bus(made);
     if (made > best) { best = made; store.set("exmaBusBest", String(best)); }
     if (res === "tie") { toast("Gleich – weiter!"); buzz(30); } else buzz(15);
@@ -4725,6 +4725,7 @@ const Bus = (() => {
 
   function showOver(win) {
     Badges.played("busfahrer");
+    if (!win && made === 0) Badges.tally("bus0", 1);
     const box = $("busOver");
     box.hidden = false;
     const canSave = made > 0;
@@ -5215,7 +5216,7 @@ const Zapf = (() => {
       pctBox("Übergelaufen!", "bad", fmtPct(Math.min(level, 1.02)).replace(/^1[0-9]{2},[0-9]+/, "über 100,000"));
       $("zfSpill").setAttribute("opacity", 1);
       document.querySelectorAll("#zfSpill .zf-drip").forEach((el, i) => el.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { duration: 700 + i * 200, easing: "ease-in", fill: "forwards" }));
-      buzz([60, 40, 140]);
+      buzz([60, 40, 140]); Badges.unlock("sauerei");
       return setTimeout(() => gameOver("Übergelaufen!", "Der Schaum ist über den Rand gelaufen."), 1500);
     }
     const pct = Math.round(level * 100 * 1000) / 1000, need = minPct();
@@ -5229,7 +5230,7 @@ const Zapf = (() => {
     totalH += pts;
     /* Split the G: Grenze zwischen Bier und Schaum genau auf Höhe des Querstrichs vom G (Schriftzug bei 46 % der Glashöhe) */
     const splitG = glass.drink === "guinness" && Math.abs(glass.levelY(P - DRINKS.guinness.head * P) - (glass.yBot - glass.h * .46)) <= 2.2;
-    Badges.zapf(n, level, splitG);
+    Badges.tally("z", 1); Badges.zapf(n, level, splitG);
     if (totalH > best) { best = totalH; store.set("exmaZapfBest", String(best)); }
     pctBox(fmtPct(level), "ok", `+${fmtPts(pts)} Punkte`);
     toast(level >= .995 ? "Perfekt gezapft!" : level >= .97 ? "Sauber!" : "Passt!");
@@ -5419,7 +5420,7 @@ const Pol = (() => {
   let inputs = [], events = [], nextEv, active = [], fx = [], ghosts = 0, blackUntil = 0, slope = 0, slopeT = 0, cobble = 0;
   let fallT = 0, fallDir = 0, cause = "", causeAt = -1e9, milestonesShown = {}, greenT = 0, reach = 0, reachBack = 0, holdBottle = false, hickT = 0, padFlash = { l: 0, r: 0 };
   /* Animationen: pose = Ausrutschen/Stolpern/Banane, hopT = Schluckauf-Hüpfer, kotz = Würgen + Schwall, reachA = Flasche aufheben + trinken */
-  let pose = null, hopT = 0, hickPuff = false, kotz = null, decals = [], reachA = -1, reachEv = null, tiltCur = 0, frameDt = 0, emitAcc = 0;
+  let pose = null, hopT = 0, hickPuff = false, kotz = null, kotzN = 0, decals = [], reachA = -1, reachEv = null, tiltCur = 0, frameDt = 0, emitAcc = 0;
   const DT = 1 / 120;
   const T_FALL = 0.95;
   /* Stellschrauben: Tipp-Stoß, Kippen, Schwanken, Dämpfung – und wie stark sie mit der Strecke wachsen */
@@ -5471,7 +5472,7 @@ const Pol = (() => {
       case "hick": hickT = 4.4; say("Schluckauf!"); break;
       case "slope": slope = ev.dir; slopeT = d + ev.len; say(ev.dir > 0 ? "Bergab!" : "Bergauf!"); break;
       case "bier": active.push({ k: "bierhand", t: 0 }); break;
-      case "kotzen": kotz = { t: 0 }; say("Mir wird schlecht …"); break;
+      case "kotzen": kotz = { t: 0 }; say("Mir wird schlecht …"); if (++kotzN >= 3) Badges.unlock("kotzbrocken"); break;
       case "doppelt": ghosts = 4.5; say("Doppelt sehen …"); break;
       case "blackout": blackUntil = tms + (550 + Math.min(450, d * 1.2)); break;
     }
@@ -5921,7 +5922,7 @@ const Pol = (() => {
     th = (Math.random() < .5 ? -1 : 1) * 0.04; om = 0; d = 0; tms = 0; walk = 0; noiseV = 0; noiseT = 0; speed = 3;
     inputs = []; events = []; active = []; fx = []; ghosts = 0; blackUntil = 0; slope = 0; slopeT = 0; cobble = 0;
     fallT = 0; cause = ""; causeAt = -1e9; milestonesShown = {}; greenT = 0; reach = 0; reachBack = 0; holdBottle = false; hickT = 0; acc = 0; last = 0;
-    pose = null; hopT = 0; hickPuff = false; kotz = null; decals = []; reachA = -1; reachEv = null; tiltCur = 0; emitAcc = 0;
+    pose = null; hopT = 0; hickPuff = false; kotz = null; kotzN = 0; decals = []; reachA = -1; reachEv = null; tiltCur = 0; emitAcc = 0;
     schedule(0);
     state = "play"; hud();
   }
@@ -5930,6 +5931,7 @@ const Pol = (() => {
     store.set("exmaPolPlayed", "1");
     const dm = Math.floor(d * 10), ms = Math.round(tms);
     if (d > best) { best = d; store.set("exmaPolBest", String(best)); }
+    Badges.tally("pol", d); Badges.tally("runs", 1);
     if (d >= 500) Badges.unlock("heim");
     if (d >= 600) Badges.unlock("vorbei");
     const box = $("plOver"); box.hidden = false;
@@ -6045,67 +6047,99 @@ const Pol = (() => {
    Alles bleibt auf dem Handy (localStorage): exmaBadges = { id: Zeitpunkt }, exmaBadgeLog = Besuche, Abende, Matrikel.
    Die Bilder stehen in abzeichen.svg (je ein <symbol id="b-…">) und werden erst bei Bedarf geladen. */
 const BADGE_TIER = { 0: "#f6c344", 1: "#7bc86c", 2: "#4f7fe0", 3: "#ef6b5b", 4: "#8a6cf0" };
+/* Gestufte Abzeichen: ein Chip-Stapel pro Gruppe, jede Stufe (Grün, Blau, Rot, Lila) zählt einzeln.
+   sum: true = zählt über alle Spiele/Abende zusammen, sonst in einem einzigen Spiel. */
+const fmtNum = (n) => Number(n).toLocaleString("de-DE");
+const BADGE_STUFEN = {
+  abende: { name: "Clubabende", unit: "Clubabende", need: [1, 3, 10, 25], sum: true, names: ["Neu hier", "Stammgast", "Inventar", "Legende"], txt: (n) => (n === 1 ? "Dein erster Clubabend mit der App." : `An ${n} Clubabenden dabei.`) },
+  samm: { name: "Sammler", unit: "Abzeichen", need: [15, 25, 35, 45], sum: true, txt: (n) => `${n} Abzeichen gesammelt.` },
+  bp: { name: "Beerpong", unit: "Becher", need: [5, 10, 20, 30], txt: (n) => `${n} Becher in einem Spiel getroffen.` },
+  bpt: { name: "Becherregen", unit: "Becher", need: [200, 500, 1000, 2000], sum: true, txt: (n) => `Insgesamt ${fmtNum(n)} Becher getroffen.` },
+  bus: { name: "Busfahrer", unit: "Karten", need: [5, 10, 20, 35], txt: (n) => `${n} Karten in einem Spiel richtig.` },
+  bust: { name: "Vielfahrer", unit: "Karten", need: [200, 500, 1000, 2000], sum: true, txt: (n) => `Insgesamt ${fmtNum(n)} Karten richtig umgedreht.` },
+  z: { name: "Zapfmeister", unit: "Gläser", need: [3, 5, 10, 15], txt: (n) => `${n} Gläser in einem Spiel gezapft.` },
+  zt: { name: "Dauerzapfer", unit: "Gläser", need: [200, 500, 1000, 2000], sum: true, txt: (n) => `Insgesamt ${fmtNum(n)} Gläser gezapft.` },
+  polt: { name: "Heimweg-Marathon", unit: "km", need: [2000, 5000, 10000, 21000], sum: true, km: true, txt: (n) => `Im Polnischen insgesamt ${n / 1000} km gelaufen.` }
+};
+const STUFE_FARBE = ["", "Grün", "Blau", "Rot", "Lila"];
+/* Wert einer Gruppe lesbar: 1.000 Becher, 2 km, 3 Clubabende */
+const stufeFmt = (g, n) => { const d = BADGE_STUFEN[g]; return d.km ? `${(Math.floor(n / 100) / 10).toLocaleString("de-DE")} km` : `${fmtNum(n)} ${n === 1 && g === "abende" ? "Clubabend" : d.unit}`; };
 const BADGE_LIST = [
+  /* Gold – thematisch sortiert */
   {"id": "eiskalt", "name": "Eiskalt", "desc": "Bei der Vodka Night dabei.", "tier": 0, "cat": "Gold"},
   {"id": "miami", "name": "Miami Vice", "desc": "Bei Miami Vibes dabei.", "tier": 0, "cat": "Gold"},
   {"id": "champion", "name": "Champion", "desc": "Das Beerpong-Turnier gewonnen.", "tier": 0, "cat": "Gold"},
   {"id": "bpgold", "name": "Beerpong Gold", "desc": "50 Becher in einem Spiel getroffen.", "tier": 0, "cat": "Gold"},
   {"id": "endstation", "name": "Busfahrer Gold", "desc": "Alle 51 Karten richtig – Endstation!", "tier": 0, "cat": "Gold"},
   {"id": "zapfgold", "name": "Zapfmeister Gold", "desc": "Das Glas geschafft, bei dem 99 % gefordert sind.", "tier": 0, "cat": "Gold"},
+  {"id": "sammgold", "name": "Sammler Gold", "desc": "Alle Abzeichen außer den goldenen gesammelt.", "tier": 0, "cat": "Gold"},
+  /* Am Abend – thematisch sortiert */
   {"id": "erste", "name": "Erste Runde", "desc": "Deinen ersten Drink eingetragen.", "tier": 1, "cat": "Am Abend"},
-  {"id": "happy", "name": "Happy-Hour-Jäger", "desc": "In der Happy Hour eingetragen.", "tier": 1, "cat": "Am Abend"},
-  {"id": "wunsch", "name": "Wunschkonzert", "desc": "Einen Wunsch abgeschickt – Song, Drink oder Motto.", "tier": 1, "cat": "Am Abend"},
   {"id": "vorglueh", "name": "Vorglüher", "desc": "Vor 22 Uhr eingetragen.", "tier": 2, "cat": "Am Abend"},
+  {"id": "happy", "name": "Happy-Hour-Jäger", "desc": "In der Happy Hour eingetragen.", "tier": 1, "cat": "Am Abend"},
   {"id": "lastcall", "name": "Letzte Runde", "desc": "Nach 1:15 noch eingetragen.", "tier": 2, "cat": "Am Abend"},
   {"id": "allround", "name": "Allrounder", "desc": "Bier, Mische und Shot an einem Abend.", "tier": 2, "cat": "Am Abend"},
-  {"id": "songlaeuft", "name": "Dein Song läuft!", "desc": "Der DJ hat deinen Musikwunsch gespielt.", "tier": 2, "cat": "Am Abend"},
   {"id": "mstolz", "name": "Matrikel-Stolz", "desc": "Deine Matrikel gewinnt das Duell.", "tier": 2, "cat": "Am Abend"},
+  {"id": "comeback", "name": "Comeback", "desc": "Deine Matrikel lag hinten – und gewinnt.", "tier": 3, "cat": "Am Abend"},
+  {"id": "dynastie", "name": "Matrikel-Dynastie", "desc": "Deine Matrikel gewinnt 3 deiner Abende.", "tier": 4, "cat": "Am Abend"},
+  {"id": "wunsch", "name": "Wunschkonzert", "desc": "Einen Wunsch abgeschickt – Song, Drink oder Motto.", "tier": 1, "cat": "Am Abend"},
+  {"id": "songlaeuft", "name": "Dein Song läuft!", "desc": "Der DJ hat deinen Musikwunsch gespielt.", "tier": 2, "cat": "Am Abend"},
+  {"id": "feuer", "name": "Feuerteufel", "desc": "An einem Abend 10 Musikwünsche mit Feuer unterstützt.", "tier": 2, "cat": "Am Abend"},
+  {"id": "trend", "name": "Trendsetter", "desc": "Dein Musikwunsch stand auf Platz 1 der Wunschliste.", "tier": 3, "cat": "Am Abend"},
+  {"id": "stimmung", "name": "Stimmungsmacher", "desc": "Deine Musikrichtung lag nach Mitternacht vorn.", "tier": 2, "cat": "Am Abend"},
   {"id": "zocker", "name": "Zocker am Tresen", "desc": "Am Clubabend ein Minispiel gespielt.", "tier": 2, "cat": "Am Abend"},
   {"id": "spielkind", "name": "Spielkind", "desc": "Alle 3 Minispiele an einem Clubabend.", "tier": 3, "cat": "Am Abend"},
   {"id": "top10", "name": "Top 10", "desc": "Am Clubabend in eine Bestenliste.", "tier": 3, "cat": "Am Abend"},
-  {"id": "comeback", "name": "Comeback", "desc": "Deine Matrikel lag hinten – und gewinnt.", "tier": 3, "cat": "Am Abend"},
   {"id": "koenig", "name": "Abendkönig", "desc": "Am Clubabend Platz 1 einer Bestenliste.", "tier": 4, "cat": "Am Abend"},
-  {"id": "dynastie", "name": "Matrikel-Dynastie", "desc": "Deine Matrikel gewinnt 3 deiner Abende.", "tier": 4, "cat": "Am Abend"},
-  {"id": "neu", "name": "Neu hier", "desc": "Dein erster Clubabend mit der App.", "tier": 1, "cat": "Treue"},
+  /* Treue – thematisch sortiert */
+  "@abende",
+  {"id": "serie", "name": "Seriensieger", "desc": "3 Clubabende in Folge.", "tier": 3, "cat": "Treue"},
+  {"id": "mottofan", "name": "Mottofan", "desc": "Bei 3 verschiedenen Mottos dabei.", "tier": 2, "cat": "Treue"},
   {"id": "hatapp", "name": "Hat die App", "desc": "App auf dem Startbildschirm.", "tier": 1, "cat": "Treue"},
   {"id": "einlader", "name": "Einlader", "desc": "Freunde per WhatsApp eingeladen.", "tier": 1, "cat": "Treue"},
-  {"id": "stamm", "name": "Stammgast", "desc": "An 3 Clubabenden dabei.", "tier": 2, "cat": "Treue"},
-  {"id": "serie", "name": "Seriensieger", "desc": "3 Clubabende in Folge.", "tier": 3, "cat": "Treue"},
-  {"id": "inventar", "name": "Inventar", "desc": "An 10 Clubabenden dabei.", "tier": 4, "cat": "Treue"},
+  {"id": "angeber", "name": "Angeber", "desc": "Ein Abzeichen geteilt.", "tier": 1, "cat": "Treue"},
+  "@samm",
+  /* Minispiele – thematisch sortiert */
   {"id": "teilnehmer", "name": "Turnier-Teilnehmer", "desc": "Beim Beerpong-Turnier dabei.", "tier": 1, "cat": "Minispiele"},
+  "@bp",
+  "@bpt",
   {"id": "moving", "name": "Bewegliches Ziel", "desc": "Den beweglichen Becher getroffen.", "tier": 2, "cat": "Minispiele"},
+  {"id": "blitz", "name": "Blitzwerfer", "desc": "10 Becher in unter 10 Sekunden.", "tier": 4, "cat": "Minispiele"},
+  "@bus",
+  "@bust",
   {"id": "gross", "name": "Größenwahn", "desc": "Bei König „Höher“ – und richtig.", "tier": 3, "cat": "Minispiele"},
   {"id": "tief", "name": "Tiefstapler", "desc": "Bei 3 „Tiefer“ – und richtig.", "tier": 3, "cat": "Minispiele"},
-  {"id": "blitz", "name": "Blitzwerfer", "desc": "10 Becher in unter 10 Sekunden.", "tier": 4, "cat": "Minispiele"},
-    {"id": "milli", "name": "Millimeterarbeit", "desc": "Füllmenge über 99,900 %.", "tier": 4, "cat": "Minispiele"},
+  {"id": "pechvogel", "name": "Pechvogel", "desc": "5-mal im Busfahrer schon an der ersten Karte gescheitert.", "tier": 2, "cat": "Minispiele"},
+  "@z",
+  "@zt",
+  {"id": "milli", "name": "Millimeterarbeit", "desc": "Füllmenge über 99,900 %.", "tier": 4, "cat": "Minispiele"},
+  {"id": "sauerei", "name": "Sauerei", "desc": "Beim Zapfmeister ist dir das Glas übergelaufen.", "tier": 1, "cat": "Minispiele"},
+  {"id": "dauerzocker", "name": "Dauerzocker", "desc": "100 Runden Minispiele gespielt.", "tier": 3, "cat": "Minispiele"},
+  /* Geheim – thematisch sortiert */
   {"id": "abgang", "name": "Polnischer Abgang", "desc": "Das geheime Spiel gefunden.", "tier": 2, "cat": "Geheim"},
-  {"id": "nacht", "name": "Nachtschwärmer", "desc": "Die App zwischen 3 und 5 Uhr geöffnet.", "tier": 2, "cat": "Geheim"},
   {"id": "heim", "name": "Heimgekommen", "desc": "Im Polnischen die Haustür erreicht.", "tier": 3, "cat": "Geheim"},
   {"id": "vorbei", "name": "Dran vorbei", "desc": "Im Polnischen über 600 m.", "tier": 4, "cat": "Geheim"},
-  {"id": "splitg", "name": "Split the G", "desc": "Das Guinness genau am G geteilt.", "tier": 4, "cat": "Geheim"}
-];
-/* Gestufte Minispiel-Abzeichen: pro Spiel ein Chip-Stapel, jede Stufe zählt einzeln */
-const BADGE_STUFEN = {
-  bp: { name: "Beerpong", unit: "Becher", need: [5, 10, 20, 30], txt: (n) => `${n} Becher in einem Spiel getroffen.` },
-  bus: { name: "Busfahrer", unit: "Karten", need: [5, 10, 20, 35], txt: (n) => `${n} Karten in einem Spiel richtig.` },
-  z: { name: "Zapfmeister", unit: "Gläser", need: [3, 5, 10, 15], txt: (n) => `${n} Gläser in einem Spiel gezapft.` }
-};
-const STUFE_FARBE = ["", "Grün", "Blau", "Rot", "Lila"];
-(() => {
-  const i = BADGE_LIST.findIndex((b) => b.cat === "Minispiele");
-  const add = [];
-  for (const [g, d] of Object.entries(BADGE_STUFEN)) d.need.forEach((n, k) => add.push({ id: `${g}-${k + 1}`, name: `${d.name} ${STUFE_FARBE[k + 1]}`, desc: d.txt(n), tier: k + 1, cat: "Minispiele", grp: g, lv: k + 1 }));
-  BADGE_LIST.splice(i, 0, ...add);
-})();
+  {"id": "kotzbrocken", "name": "Kotzbrocken", "desc": "Im Polnischen 3-mal in einem Lauf gekotzt.", "tier": 3, "cat": "Geheim"},
+  "@polt",
+  {"id": "splitg", "name": "Split the G", "desc": "Das Guinness genau am G geteilt.", "tier": 4, "cat": "Geheim"},
+  {"id": "nacht", "name": "Nachtschwärmer", "desc": "Die App zwischen 3 und 5 Uhr geöffnet.", "tier": 2, "cat": "Geheim"},
+  {"id": "kleingedr", "name": "Kleingedrucktes", "desc": "Die Datenschutzerklärung bis ganz unten gelesen.", "tier": 3, "cat": "Geheim"}
+].flatMap((b) => {
+  if (typeof b !== "string") return [b];
+  const g = b.slice(1), d = BADGE_STUFEN[g], cat = { abende: "Treue", samm: "Treue", polt: "Geheim" }[g] || "Minispiele";
+  return d.need.map((n, k) => ({ id: `${g}-${k + 1}`, name: d.names ? d.names[k] : `${d.name} ${STUFE_FARBE[k + 1]}`, desc: d.txt(n), tier: k + 1, cat, grp: g, lv: k + 1 }));
+});
 const BADGE_CATS = ["Gold", "Am Abend", "Treue", "Minispiele", "Geheim"];
 const Badges = (() => {
   const BMAP = Object.fromEntries(BADGE_LIST.map((b) => [b.id, b]));
   const read = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } };
   let have = read("exmaBadges", {}), log = read("exmaBadgeLog", { visits: [], eve: {} });
   log.visits = log.visits || []; log.eve = log.eve || {};
-  { const MIG = { bp1: "bp-1", bp2: "bp-2", treff: "bp-3", bus1: "bus-1", bus2: "bus-2", busfahrer: "bus-3", z1: "z-1", z2: "z-2", zapf: "z-3" }; let ch = false;
+  /* Zähler über alle Spiele: Becher, Karten, Gläser, Meter (Polnischen), Runden, Busfahrer-Fehlstarts */
+  log.tot = { bp: 0, bus: 0, z: 0, pol: 0, runs: 0, bus0: 0, ...(log.tot || {}) };
+  { const MIG = { bp1: "bp-1", bp2: "bp-2", treff: "bp-3", bus1: "bus-1", bus2: "bus-2", busfahrer: "bus-3", z1: "z-1", z2: "z-2", zapf: "z-3", neu: "abende-1", stamm: "abende-2", inventar: "abende-3" }; let ch = false;
     for (const [o, nw] of Object.entries(MIG)) if (have[o]) { if (!have[nw]) have[nw] = have[o]; delete have[o]; ch = true; }
-    for (const g of ["bp", "bus", "z"]) for (let k = 4; k > 1; k--) if (have[`${g}-${k}`]) for (let j = 1; j < k; j++) if (!have[`${g}-${j}`]) { have[`${g}-${j}`] = have[`${g}-${k}`] - (k - j); ch = true; }
+    for (const g of Object.keys(BADGE_STUFEN)) for (let k = 4; k > 1; k--) if (have[`${g}-${k}`]) for (let j = 1; j < k; j++) if (!have[`${g}-${j}`]) { have[`${g}-${j}`] = have[`${g}-${k}`] - (k - j); ch = true; }
     if (ch) try { localStorage.setItem("exmaBadges", JSON.stringify(have)); } catch {} }
   const save = () => { try { localStorage.setItem("exmaBadges", JSON.stringify(have)); localStorage.setItem("exmaBadgeLog", JSON.stringify(log)); } catch {} };
   const eve = (id) => log.eve[id] || (log.eve[id] = {});
@@ -6141,7 +6175,27 @@ const Badges = (() => {
     store.set("exmaBadgeNew", "1");
     queue.push(id); updateTile();
     if (!showing) setTimeout(next, 400);
+    sammCheck();
   }
+  /* Sammler: zählt alle Abzeichen außer den Sammler-Stufen; Gold = alles außer den goldenen */
+  let sammBusy = false;
+  function sammCheck() {
+    if (sammBusy) return; sammBusy = true;
+    try {
+      stufe("samm", BADGE_LIST.filter((b) => have[b.id] && b.grp !== "samm").length);
+      if (BADGE_LIST.every((b) => b.cat === "Gold" || have[b.id])) unlock("sammgold");
+    } finally { sammBusy = false; }
+  }
+  /* Zähler hochsetzen und gestufte Gesamt-Abzeichen prüfen */
+  const TOT_GRP = { bp: "bpt", bus: "bust", z: "zt", pol: "polt" };
+  function tally(k, n) {
+    if (!(n > 0)) return;
+    log.tot[k] = (log.tot[k] || 0) + n; save();
+    if (TOT_GRP[k]) stufe(TOT_GRP[k], log.tot[k]);
+    if (k === "runs" && log.tot.runs >= 100) unlock("dauerzocker");
+    if (k === "bus0" && log.tot.bus0 >= 5) unlock("pechvogel");
+  }
+  const cur = (g) => g === "abende" ? log.visits.length : g === "samm" ? BADGE_LIST.filter((b) => have[b.id] && b.grp !== "samm").length : log.tot[{ bpt: "bp", bust: "bus", zt: "z", polt: "pol" }[g]] || 0;
   function stufe(g, n) {
     const reach = BADGE_STUFEN[g].need.filter((x) => n >= x).length;
     for (let k = 1; k < reach; k++) { const id = `${g}-${k}`; if (!have[id]) { have[id] = Date.now() - (reach - k); save(); } }
@@ -6152,7 +6206,8 @@ const Badges = (() => {
   const inGame = () => ["is-game", "is-bus", "is-zapf", "is-pol"].some((c) => app.classList.contains(c));
   function next() {
     if (!queue.length) { showing = false; return; }
-    if (inGame() || document.hidden) { showing = true; setTimeout(next, 1500); return; }
+    const ov = $("bdgOver");
+    if (inGame() || document.hidden || (ov && !ov.hidden)) { showing = true; setTimeout(next, 1500); return; }
     showing = true;
     art().then(() => card(queue.shift(), true));
   }
@@ -6170,7 +6225,7 @@ const Badges = (() => {
         <h3>${secret ? "???" : esc(b.name)}</h3>
         <p>${secret ? "Ein geheimes Abzeichen. Finde selbst heraus, wie du es bekommst." : esc(b.desc)}</p>
         ${got ? `<p class="bdg-when">Geholt am ${when}</p>` : prog ? `<p class="bdg-when">${prog}</p>` : ""}
-        ${got && b.grp && b.lv < 4 ? `<p class="bdg-next">Nächste Stufe (${STUFE_FARBE[b.lv + 1]}): ${BADGE_STUFEN[b.grp].need[b.lv]} ${BADGE_STUFEN[b.grp].unit}</p>` : ""}
+        ${got && b.grp && b.lv < 4 ? `<p class="bdg-next">${nextTxt(b)}</p>` : ""}
         <div class="row2">${got ? `<button class="ghost" type="button" data-share disabled>Lädt …</button>` : ""}<button class="primary" type="button" data-close>${fresh ? "Weiter" : "Schließen"}</button></div>
       </div>${fresh ? `<div class="bdg-confetti" aria-hidden="true">${Array.from({ length: 36 }, (_, i) => `<i style="--x:${(Math.random() * 100).toFixed(1)}%;--d:${(Math.random() * .6).toFixed(2)}s;--r:${Math.round(Math.random() * 360)}deg;--c:${["#f6c344", "#ff5d9e", "#4f7fe0", "#7bc86c", "#8a6cf0", "#ef6b5b"][i % 6]}"></i>`).join("")}</div>` : ""}`;
     over.hidden = false; requestAnimationFrame(() => over.classList.add("show"));
@@ -6181,14 +6236,22 @@ const Badges = (() => {
     if (fresh) { buzzOnce(); if ($("abzeichenPage")) renderBadgePage(); }
   }
   const buzzOnce = () => { try { navigator.vibrate && navigator.vibrate([30, 40, 90]); } catch {} };
+  function nextTxt(b) {
+    const d = BADGE_STUFEN[b.grp], need = d.need[b.lv], f = stufeFmt(b.grp, need);
+    const st = d.sum ? ` · Stand: ${stufeFmt(b.grp, Math.min(cur(b.grp), need)).replace(/ [^ ]+$/, "")}` : "";
+    return d.names ? `Nächste Stufe: ${d.names[b.lv]} (${f})${st}` : `Nächste Stufe (${STUFE_FARBE[b.lv + 1]}): ${f}${d.sum ? " insgesamt" : ""}${st}`;
+  }
   function progress(id) {
-    const v = log.visits.length, wins = Object.values(log.eve).filter((e) => e.win && e.win === e.mat).length;
-    if (id === "stamm") return `${Math.min(v, 3)} von 3 Clubabenden`;
-    if (id === "inventar") return `${Math.min(v, 10)} von 10 Clubabenden`;
+    const wins = Object.values(log.eve).filter((e) => e.win && e.win === e.mat).length;
     if (id === "dynastie") return `${Math.min(wins, 3)} von 3 Siegen deiner Matrikel`;
-    const b = BMAP[id]; if (b && b.grp) { const d = BADGE_STUFEN[b.grp]; return `Ziel: ${d.need[b.lv - 1]} ${d.unit} in einem Spiel`; }
+    if (id === "mottofan") return `${Math.min(mottos().length, 3)} von 3 Mottos`;
+    if (id === "dauerzocker") return `${Math.min(log.tot.runs, 100)} von 100 Runden`;
+    if (id === "pechvogel") return `${Math.min(log.tot.bus0, 5)} von 5`;
+    const b = BMAP[id]; if (b && b.grp) { const d = BADGE_STUFEN[b.grp], need = d.need[b.lv - 1];
+      return d.sum ? `${stufeFmt(b.grp, Math.min(cur(b.grp), need)).replace(/ [^ ]+$/, "")} von ${stufeFmt(b.grp, need)}` : `Ziel: ${stufeFmt(b.grp, need)} in einem Spiel`; }
     return "Noch nicht geschafft.";
   }
+  const mottos = () => [...new Set(log.visits.map((id) => EVENTS.find((e) => e.id === id)).filter(Boolean).map((e) => (e.titel || [e.id]).join(" ").toLowerCase()))];
 
   /* ---------- Teilen: fertige Story-Grafik (1080 × 1920) ---------- */
   /* ---------- Story-Bild 1080×1920 (Instagram-sicher: Wichtiges zwischen 250 und 1670 px) ---------- */
@@ -6299,8 +6362,8 @@ const Badges = (() => {
     const file = btn.file;
     if (!file) { prepShare(id, btn); return; }
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      navigator.share({ files: [file] }).catch((e) => { if (e && e.name !== "AbortError") download(file); });
-    } else download(file);
+      navigator.share({ files: [file] }).then(() => unlock("angeber")).catch((e) => { if (e && e.name !== "AbortError") { download(file); unlock("angeber"); } });
+    } else { download(file); unlock("angeber"); }
   }
 
   /* ---------- Prüfstellen ---------- */
@@ -6320,9 +6383,8 @@ const Badges = (() => {
       if (ev.abzeichen) unlock(ev.abzeichen);
     }
     const v = log.visits;
-    if (v.length >= 1) unlock("neu");
-    if (v.length >= 3) unlock("stamm");
-    if (v.length >= 10) unlock("inventar");
+    stufe("abende", v.length);
+    if (mottos().length >= 3) unlock("mottofan");
     const idx = v.map((id) => EVENTS.findIndex((e) => e.id === id)).filter((i) => i >= 0).sort((a, b) => a - b);
     for (let i = 2; i < idx.length; i++) if (idx[i] - idx[i - 2] === 2) { unlock("serie"); break; }
     /* Abende ohne Rückblick-Zahlen mit dem letzten Stand nach 1:15 abschließen */
@@ -6363,6 +6425,7 @@ const Badges = (() => {
     if (e.k.length >= 3) unlock("allround");
   }
   function played(game) {
+    tally("runs", 1);
     const ev = clubNow(); if (!ev) return;
     const e = eve(ev.id); e.g = [...new Set([...(e.g || []), game])]; save();
     unlock("zocker"); if (e.g.length >= 3) unlock("spielkind");
@@ -6374,7 +6437,17 @@ const Badges = (() => {
     if (i === 0) unlock("koenig");
   }
   return {
-    BMAP, chip, art, unlock, drink, played, board, card, tick, _shot: shot,
+    BMAP, chip, art, unlock, drink, played, board, card, tick, tally, _shot: shot,
+    /* Musikwünsche: Feuer verteilt, eigener Wunsch auf Platz 1, eigene Richtung vorn */
+    musik(d, u, mineKs) {
+      const all = Object.values(d.w || {});
+      if (all.filter((w) => w.by !== u && (w.v || []).includes(u)).length >= 10) unlock("feuer");
+      const open = all.filter((w) => w.st === "neu").map((w) => ({ ...w, n: (w.v || []).length, t0: w.at && w.at.toMillis ? w.at.toMillis() : +w.at || 0 })).sort((a, b) => b.n - a.n || a.t0 - b.t0);
+      if (open.length >= 3 && open[0].by === u && open[0].n >= 3) unlock("trend");
+      const m = d.m || {}, mine = m[u], vals = Object.values(m), h = new Date().getHours();
+      if (mine && vals.length >= 5 && h < 6) { const c = (x) => vals.filter((y) => y === x).length, top = Math.max(...MOODS.map(([id]) => c(id)));
+        if (c(mine) === top && MOODS.filter(([id]) => c(id) === top).length === 1) unlock("stimmung"); }
+    },
     bp(n, ms, movingHit) { stufe("bp", n); if (n >= 50) unlock("bpgold"); if (n >= 10 && ms < 10000) unlock("blitz"); if (movingHit) unlock("moving"); },
     bus(n) { stufe("bus", n); if (n >= 51) unlock("endstation"); },
     zapf(n, level, split) { stufe("z", n); if (n >= 19) unlock("zapfgold"); if (level >= .999) unlock("milli"); if (split) unlock("splitg"); },
@@ -6389,7 +6462,7 @@ const Badges = (() => {
     recent: (n) => [...new Set(Object.entries(have).sort((a, b) => b[1] - a[1]).map(([k]) => k).filter((k) => BMAP[k]).map((k) => BMAP[k].grp ? `${BMAP[k].grp}-${topLv(BMAP[k].grp)}` : k))].slice(0, n),
     topLv,
     init() {
-      tick(); setInterval(tick, 60000);
+      tick(); sammCheck(); setInterval(tick, 60000);
       document.addEventListener("visibilitychange", () => { if (!document.hidden) tick(); });
       Live.subscribe(onStats);
       if (Object.keys(have).length || store.get("exmaBadgeNew")) art();
@@ -6405,7 +6478,7 @@ function updateTile() {
   const ic = $("hmBadgeIco"); if (!ic) return;
   /* Fächer aus drei Chips: die zuletzt geholten vorn, aufgefüllt mit noch gesperrten */
   const ids = Badges.recent(3);
-  for (const b of ["erste", "zocker", "neu", "bp-1", "bus-1"]) { if (ids.length >= 3) break; if (!ids.includes(b)) ids.push(b); }
+  for (const b of ["erste", "zocker", "abende-1", "bp-1", "bus-1"]) { if (ids.length >= 3) break; if (!ids.includes(b)) ids.push(b); }
   ic.innerHTML = ids.slice(0, 3).reverse().map((id, i) => { const lk = !Badges.has(id);
     return `<span class="hb-c hb-${i}${lk ? " lk" : ""}">${Badges.chip(id, { force: lk })}</span>`; }).join("");
 }
@@ -6604,6 +6677,7 @@ function renderMusikPage() {
     const mm = data.m && data.m[u()];
     $("muMoods").innerHTML = muMoodsHTML(data, mm, true);
     $("muMoods").querySelectorAll("[data-mood]").forEach((b) => b.addEventListener("click", async () => { data.m = { ...(data.m || {}), [u()]: b.dataset.mood }; paint(); try { await Musik.mood(ev, b.dataset.mood); } catch {} }));
+    try { Badges.musik(data, u(), mineKs); } catch {}
     const pl = Musik.playedNew(ev, data), box = $("muPlayed");
     if (pl.length && box) { box.hidden = false; box.innerHTML = `<span>🎶</span><span><b>Dein Song läuft!</b><small>${pl.map((w) => esc(w.t)).join(", ")}</small></span>`; }
   }
@@ -6911,7 +6985,7 @@ function renderBadgePage() {
     }
     return `<section class="bdg-shelf${c === "Gold" ? " gold" : ""}"><h3 class="bdg-h">${c} <small>${n} / ${list.length}</small></h3>
       <div class="bdg-grid">${shown.map((b) => { const secret = b.cat === "Geheim" && !Badges.has(b.id);
-        return `<button type="button" class="bdg${Badges.has(b.id) ? "" : " locked"}" style="--tc:${BADGE_TIER[b.tier]}" data-b="${b.id}" aria-label="${secret ? "Geheimes Abzeichen" : esc(b.name)}${Badges.has(b.id) ? "" : " (noch gesperrt)"}">${Badges.chip(b.id)}<b>${secret ? "???" : esc(b.grp ? BADGE_STUFEN[b.grp].name : b.name)}</b>${b.grp ? `<span class="bdg-lv" aria-hidden="true">${[1, 2, 3, 4].map((k) => `<i class="${Badges.has(`${b.grp}-${k}`) ? "on" : ""}" style="--tc:${BADGE_TIER[k]}"></i>`).join("")}</span>` : ""}</button>`; }).join("")}</div></section>`;
+        return `<button type="button" class="bdg${Badges.has(b.id) ? "" : " locked"}" style="--tc:${BADGE_TIER[b.tier]}" data-b="${b.id}" aria-label="${secret ? "Geheimes Abzeichen" : esc(b.name)}${Badges.has(b.id) ? "" : " (noch gesperrt)"}">${Badges.chip(b.id)}<b>${secret ? "???" : esc(b.grp ? (BADGE_STUFEN[b.grp].names && Badges.has(b.id) ? b.name : BADGE_STUFEN[b.grp].name) : b.name)}</b>${b.grp ? `<span class="bdg-lv" aria-hidden="true">${[1, 2, 3, 4].map((k) => `<i class="${Badges.has(`${b.grp}-${k}`) ? "on" : ""}" style="--tc:${BADGE_TIER[k]}"></i>`).join("")}</span>` : ""}</button>`; }).join("")}</div></section>`;
   }).join("");
   pageShell("badge-page", "Abzeichen", `
     <div id="abzeichenPage">
@@ -7326,6 +7400,12 @@ function renderLegal(which) {
   d.querySelectorAll("[data-legal]").forEach((b) => b.addEventListener("click", () => { navReplace = true; location.replace("#" + b.dataset.legal); }));
   d.onscroll = null;
   d.scrollTop = 0;
+  /* Geheim-Abzeichen: Datenschutz bis ganz unten gelesen (nicht beim bloßen Öffnen) */
+  const end = which === "datenschutz" && d.querySelector(".legal-date"), t0 = Date.now();
+  if (end) d.addEventListener("scroll", function f() {
+    if (!end.isConnected) { d.removeEventListener("scroll", f); return; }
+    if (Date.now() - t0 > 4000 && d.scrollTop > 300 && end.getBoundingClientRect().top < innerHeight) { Badges.unlock("kleingedr"); d.removeEventListener("scroll", f); }
+  }, { passive: true });
 }
 
 function openDetail(ev) { if (isPast(ev)) { location.hash = "fotos-" + ev.id; return; } if (location.hash !== "#" + ev.id) location.hash = ev.id; else { renderDetail(ev); show(true); } }
