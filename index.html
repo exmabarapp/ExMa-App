@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Yellowtail&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Yellowtail&family=Gloock&family=Instrument+Serif:ital@1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
 /* Plan: eine Nachtclub-Welt, bewusst nur dunkel. Jeder Abend bringt sein eigenes Farbthema mit
    (Vodka Night: Eis + Neon, Miami Vibes: Sonnenuntergang + Türkis). Die Farben kommen als Variablen pro Abend.
@@ -2174,6 +2174,33 @@ body.fg-open { overflow: hidden; }
 .tr-modal .go{background:var(--a3);color:#fff;font-weight:800}
 .tr-modal .no{background:#333;color:#fff}
 .tr-err{min-height:1.2em;color:#ff9a9a;font-size:14px;text-align:center}
+/* ================= ExMa X-Mas: Glühwein bei Nacht – Serifen, Creme, Kupfer, flach ================= */
+.t-xmas { --f-display: "Gloock", Georgia, "Times New Roman", serif; --f-script: "Instrument Serif", Georgia, serif; }
+.t-xmas .title, .t-xmas .tile-title { color: var(--frost); text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.t-xmas .title span:first-child, .t-xmas .tile-title span:first-child { font-size: .4em; letter-spacing: .34em; color: #e9c48f; margin: 0 0 .1em .08em; }
+.t-xmas .title span + span, .t-xmas .tile-title span + span { color: var(--frost); -webkit-text-stroke: 0; text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.t-xmas .tdash { font-style: normal; color: var(--a3); }
+.t-xmas .script, .t-xmas .tile-sub { font-style: italic; text-shadow: none; color: var(--script); }
+.t-xmas .script s, .t-xmas .tile-sub s { text-decoration: none; position: relative; color: var(--frost); opacity: .92; }
+.t-xmas .script s::after, .t-xmas .tile-sub s::after { content: ""; position: absolute; left: -2px; right: -2px; top: 55%; height: .08em; min-height: 2px; background: var(--a3); transform: rotate(-6deg); border-radius: 2px; }
+.t-xmas .tile-scene svg { top: 0 !important; }
+.t-xmas.tile-ev::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%; z-index: -1; background: linear-gradient(180deg, transparent, rgba(18,27,22,.92) 55%, #121b16); pointer-events: none; }
+.t-xmas .chip { border-color: rgba(243,234,216,.5); }
+.t-xmas .script { margin-top: 12px; }
+.t-xmas .when { border-color: var(--a1); box-shadow: none; background: rgba(18,27,22,.82); }
+.t-xmas .when-date { text-shadow: none; }
+.fw-mini.t-xmas .tile-title { font-size: 34px; }
+/* sparsame Bewegung: Lichterkette glimmt, Kerzen flackern, Dampf steigt, ein paar Flocken */
+.xm-glow { animation: xmGlow 3.2s ease-in-out infinite; }
+@keyframes xmGlow { 0%,100% { opacity: .45; } 50% { opacity: 1; } }
+.xm-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: xmFlame 1.6s ease-in-out infinite; }
+@keyframes xmFlame { 0%,100% { transform: scale(1, 1); } 30% { transform: scale(.88, 1.12) skewX(3deg); } 60% { transform: scale(1.06, .92) skewX(-2deg); } }
+.xm-steam { animation: xmSteam 3.4s ease-in-out infinite; }
+.xm-steam.s2 { animation-delay: -1.7s; }
+@keyframes xmSteam { 0% { opacity: 0; transform: translateY(6px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-10px); } }
+.xm-snow { animation: xmSnow 9s linear infinite; }
+@keyframes xmSnow { from { transform: translateY(-40px); } to { transform: translateY(220px); } }
+@media (prefers-reduced-motion: reduce) { .xm-glow, .xm-flame, .xm-steam, .xm-snow { animation: none; } }
 </style>
 </head>
 <body>
@@ -2382,7 +2409,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "85";
+const APP_V = "86";
 
 const EVENTS = [
   {
@@ -2436,6 +2463,30 @@ const EVENTS = [
         { name: "2 Bier zum Preis von einem", info: "nur während der Happy Hour", preis: 2.0, zusatz: "für 2 Bier", animation: "bier" }
       ]
     }
+  },
+  {
+    id: "exma-xmas",
+    abzeichen: "xmas",
+    thema: "xmas",
+    titel: ["ExMa", "X-Mas"],
+    untertitel: "Not So Silent Night",
+    streich: "Silent",           // dieses Wort im Untertitel wird (als Gag) rot durchgestrichen
+    art: "Weihnachtsmarkt",
+    start: "2026-12-02T18:00:00+01:00",
+    ende: "2026-12-03T03:00:00+01:00",
+    ort: "ExMa-Bar",
+    ablauf: [
+      { zeit: "18:00", was: "Weihnachtsmarkt", kurz: "Markt" },
+      { zeit: "21:00", was: "Clubabend", kurz: "Club" }
+    ],
+    kachelInfo: { zeit: "Weihnachtsmarkt", text: "Glühwein · Bratwurst · Waffeln" },  // Infokasten auf der großen Kachel
+    mitbringen: null,
+    fotos: null,
+    specials: [
+      { name: "Christmas Spritz", info: "Glüh-Spritz: Prosecco verfeinert mit Aperol oder Zimtsirup, frischem Rosmarin oder Granatapfelkernen", preis: null, bild: "spritz" },
+      { name: "Lebkuchen Espresso Martini", info: "Herber Espresso Martini mit einem Schuss Lebkuchen- oder Gewürzsirup", preis: null, bild: "martini" }
+    ],
+    happyHour: null              // noch offen
   }
 ];
 
@@ -2478,7 +2529,9 @@ const THEMEN = {
   club:  { night: "#0b0608", night2: "#1a0d11", a1: "#ffcf4a", a2: "#ff3b3b", a3: "#ff3b3b", frost: "#fff6f3", dim: "#c7a9ab", script: "#ffcf4a" },
   pay:   { night: "#03122e", night2: "#082152", a1: "#4fc3ff", a2: "#0070e0", a3: "#ffc439", frost: "#f2f8ff", dim: "#9db3d6", script: "#cfe8ff" },
   miami: { night: "#12041f", night2: "#26093f", a1: "#2ff3e0", a2: "#7b2cff", a3: "#ff2e88", frost: "#fff5ee", dim: "#c9a9d6", script: "#ffe2c4",
-           verlauf: ["#ffd36e", "#ff8a4c", "#ff3f8e", "#c23fc8", "#6a35c9"] }   /* Sonnenuntergang wie im GTA-VI-Logo */
+           verlauf: ["#ffd36e", "#ff8a4c", "#ff3f8e", "#c23fc8", "#6a35c9"] },  /* Sonnenuntergang wie im GTA-VI-Logo */
+  xmas:  { night: "#121b16", night2: "#1c2a21", a1: "#e9b77c", a2: "#5f7556", a3: "#c4362f", frost: "#f3ead8", dim: "#a9b5a6", script: "#f2c178",
+           verlauf: ["#f3ead8", "#e9b77c", "#b8743c", "#c4362f", "#5f7556"] }   /* Glühwein bei Nacht: Creme, Kupfer, Rot, Salbei */
 };
 
 /* =====================================================================
@@ -2487,12 +2540,13 @@ const THEMEN = {
 const $ = (id) => document.getElementById(id);
 const app = $("app");
 const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-const euro = (n) => n.toLocaleString("de-DE", { style: "currency", currency: "EUR" });
+const euro = (n) => (n == null ? "Preis folgt" : n.toLocaleString("de-DE", { style: "currency", currency: "EUR" }));
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const berlin = (opts) => new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", ...opts });
 const isoDay = (d) => berlin({ year: "numeric", month: "2-digit", day: "2-digit" }).format(d).split(".").reverse().join("-");
 const ICON_ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
 const ICON_EXT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>`;
+const ICON_MARKT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 L12 3 L21 10"/><path d="M5 9 V20 H19 V9"/><path d="M9 20 V14 H15 V20"/></svg>`;
 const ICON_HP = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/></svg>`;
 const ICON_BALL = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#fff"/><path d="M6 8a8 8 0 0 0 0 8M18 8a8 8 0 0 1 0 8" stroke="#ff2e88" stroke-width="1.6" fill="none"/><circle cx="9" cy="9" r="2.4" fill="#fff" opacity=".9"/></svg>`;
 const ICON_IG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>`;
@@ -2526,7 +2580,9 @@ function status(ev, now = new Date()) {
   return { text: "In " + days + " Tagen", hot: false };
 }
 const chip = (s) => `<span class="chip${s.hot ? " hot" : ""}${s.muted ? " muted" : ""}">${s.hot ? '<span class="dot"></span>' : ""}${esc(s.text)}</span>`;
-const titleHTML = (ev) => ev.titel.map((t) => `<span>${esc(t)}</span>`).join("");
+const titleHTML = (ev) => ev.titel.map((t) => `<span>${esc(t).replace(/-/g, '<i class="tdash">-</i>')}</span>`).join("");
+/* Untertitel; ev.streich = ein Wort, das als Gag durchgestrichen wird */
+const subHTML = (ev) => { const u = esc(ev.untertitel || ""); return ev.streich ? u.replace(esc(ev.streich), `<s>${esc(ev.streich)}</s>`) : u; };
 
 /* ================= Szenen ================= */
 const prefixIds = (svg, p) => svg.replace(/id="/g, `id="${p}`).replace(/url\(#/g, `url(#${p}`);
@@ -2801,7 +2857,171 @@ function sceneMiami() {
   return [back, mid, main, front];
 }
 
-const SCENES = { eis: sceneIce, miami: sceneMiami };
+/* ---------- Szene 3: ExMa X-Mas (Birken, Weihnachtsmarkt, Lichterkette) – flacher Stil ---------- */
+/* Holzbude: Bretter, Querbalken (X), Theke, Klappladen, Schneedach mit Eiszapfen, Mini-Lichter */
+function xmHut(x, y, w, h, o) {
+  const W2 = w / 2, rh = h * .42, R = "#3b2618", WD = "#6e4a2c", WL = "#82593a", PL = "#4f331f", SN = "#ead9b8", LI = "#ffc861";
+  let t = `<g transform="translate(${x} ${y})"><rect x="${-W2}" y="${-h}" width="${w}" height="${h}" fill="${WD}"/>`;
+  for (let yy = -h + 5; yy < 0; yy += 5) t += `<path d="M${-W2} ${yy} H${W2}" stroke="${PL}" stroke-width=".8"/>`;
+  const fx = -W2 + 5, fy = -h + 6, fw = w - 10, fh = h * .42;
+  t += `<rect x="${fx}" y="${fy}" width="${fw}" height="${fh}" fill="${LI}"/><rect x="${fx}" y="${fy + fh - 3}" width="${fw}" height="3" fill="#e8a43c"/>`;
+  t += `<path d="M${fx - 3} ${fy} L${fx + fw + 3} ${fy} L${fx + fw + 1} ${fy - 5} L${fx - 1} ${fy - 5} Z" fill="${WL}" stroke="${R}" stroke-width=".8"/>`;
+  t += `<rect x="${-W2 - 3}" y="${fy + fh}" width="${w + 6}" height="3.4" fill="${WL}" stroke="${R}" stroke-width=".8"/>`;
+  const uy = fy + fh + 3.4, uh = -uy, half = (w - 4) / 2;
+  t += `<rect x="${-W2 + 2}" y="${uy}" width="${w - 4}" height="${uh}" fill="${PL}"/>`;
+  for (const x0 of [-W2 + 2, -W2 + 2 + half]) { const x1 = x0 + half;
+    t += `<path d="M${x0 + 1} ${uy + 1} L${x1 - 1} -1 M${x1 - 1} ${uy + 1} L${x0 + 1} -1" stroke="${WL}" stroke-width="1.6"/><rect x="${x0}" y="${uy}" width="${half}" height="${uh}" fill="none" stroke="${R}" stroke-width="1"/>`; }
+  t += `<rect x="${-W2 - 1}" y="${-h}" width="3" height="${h}" fill="${R}"/><rect x="${W2 - 2}" y="${-h}" width="3" height="${h}" fill="${R}"/>`;
+  t += `<path d="M${-W2 - 8} ${-h + 1} L0 ${-h - rh} L${W2 + 8} ${-h + 1} Z" fill="${R}"/><path d="M${-W2 - 4} ${-h - 1} L0 ${-h - rh + 4} L${W2 + 4} ${-h - 1}" fill="none" stroke="${WD}"/>`;
+  t += `<path d="M${-W2 * .45} ${-h - rh * .42} H${W2 * .45}" stroke="${WL}" stroke-width="1.6"/><path d="M0 ${-h - rh + 3} V${-h - rh * .42}" stroke="${WL}" stroke-width="1.4"/>`;
+  t += `<path d="M${-W2 - 10} ${-h + 2} L0 ${-h - rh - 2} L${W2 + 10} ${-h + 2} L${W2 + 5} ${-h + 3} L0 ${-h - rh + 3} L${-W2 - 5} ${-h + 3} Z" fill="${SN}"/>`;
+  for (const zx of o.zap) t += `<path d="M${zx - 1.4} ${-h + 2.4} L${zx} ${-h + 6.5} L${zx + 1.4} ${-h + 2.4} Z" fill="#f6efe2"/>`;
+  for (let i = 0; i < o.n; i++) { const lx = -W2 - 2 + (w + 4) * (i + .5) / o.n; t += `<circle cx="${lx.toFixed(1)}" cy="${(-h + 4.2 + Math.sin(i * 1.7) * .6).toFixed(1)}" r="1.3" fill="${i % 3 === 1 ? "#e2554b" : "#ffd68a"}"/>`; }
+  if (o.sign) t += `<rect x="-9" y="${-h - rh * .3}" width="18" height="6" rx="1" fill="${SN}"/><path d="M-6 ${-h - rh * .3 + 3} h12" stroke="${R}" stroke-dasharray="2 1.5"/>`;
+  return t + `<path d="M${-W2 - 6} 1 C${-W2} -3 ${W2} -3 ${W2 + 6} 1 Z" fill="${SN}"/></g>`;
+}
+/* Birke: flacher Streifen mit dunklen Querstrichen */
+function xmBirch(x, w, top, bottom, marks) {
+  return `<rect x="${x}" y="${top}" width="${w}" height="${bottom - top}" fill="#efe6d6"/>` +
+    marks.map(([dy, mw, dx]) => `<path d="M${x + (dx || 0)} ${dy} q${mw / 2} -3 ${mw} 0 v2.6 h${-mw} z" fill="#1a1a17"/>`).join("");
+}
+const xmFlame = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s})"><circle cy="-22" r="24" fill="url(#xmHalo)"/><rect x="-6" y="-18" width="12" height="20" rx="2" fill="#ead9b8"/><path class="xm-flame" d="M0 -31 C4 -26 3 -22 0 -19 C-3 -22 -4 -26 0 -31Z" fill="#ffc861"/></g>`;
+function sceneXmas() {
+  const defs = `<defs>${COMMON_DEFS}
+    <radialGradient id="xmHalo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd68a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd68a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="xmHaloR" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#e2554b" stop-opacity=".5"/><stop offset="1" stop-color="#e2554b" stop-opacity="0"/></radialGradient>
+    <filter id="xmGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .85  0 0 0 .07 0"/></filter>
+    <linearGradient id="xmFoot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18231c" stop-opacity="0"/><stop offset=".5" stop-color="#18231c" stop-opacity=".9"/><stop offset="1" stop-color="#18231c"/></linearGradient>
+  </defs>`;
+  const spark4 = (x, y, s, op = 1) => `<path d="M${x} ${y - s} l${s * .28} ${s * .72} ${s * .72} ${s * .28} ${-s * .72} ${s * .28} ${-s * .28} ${s * .72} ${-s * .28} ${-s * .72} ${-s * .72} ${-s * .28} ${s * .72} ${-s * .28}z" fill="#ead9b8" opacity="${op}"/>`;
+  const back = defs + `
+    <rect width="400" height="760" fill="#18231c"/>
+    <circle cx="320" cy="500" r="190" fill="#1d2b22"/>
+    ${spark4(300, 120, 8)}${spark4(262, 236, 6, .7)}${spark4(70, 330, 5, .6)}
+    ${[[232, 70, 1.4], [340, 196, 1.2], [214, 160, 1], [120, 260, 1.2], [360, 330, 1.1], [180, 380, 1.3], [40, 160, 1]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#ead9b8" opacity=".75"/>`).join("")}
+    <path d="M0 520 C80 490 150 505 210 492 C280 478 340 488 400 474 V760 H0 Z" fill="#2c3b2f"/>`;
+  /* Buden hinter dem Salbei-Hügel, kleine mittlere Bude für Tiefe */
+  const mid = defs + `<g transform="translate(0 -40)">
+    <path d="M0 590 C90 572 170 584 250 572 C320 564 370 570 400 564 V760 H0 Z" fill="#5f7556"/>
+    <g opacity=".92">${xmHut(206, 586, 48, 31, { zap: [-13, 6, 15], n: 5 })}</g>
+    ${xmHut(112, 604, 66, 42, { zap: [-20, -4, 11, 24], n: 7, sign: true })}
+    ${xmHut(296, 598, 62, 40, { zap: [-18, 3, 20], n: 6, sign: true })}</g>`;
+  /* Lichterkette von Birke zu Birke */
+  const k0 = [16, 478], k1 = [104, 530], k2 = [196, 534], k3 = [254, 518], k4 = [336, 492], k5 = [372, 498];
+  const chainD = `M${k0} C${k1} ${k2} ${k3} S${k4} ${k5}`;
+  const bulbs = [[34, 492], [66, 512], [98, 525], [132, 532], [166, 535], [200, 530], [234, 522], [268, 512], [300, 500], [334, 493], [360, 495]].map(([x, y], i) => {
+    const red = i % 3 === 1, dim = i === 8;
+    return `<path d="M${x} ${y} v5" stroke="#0e140f" stroke-width="1.4"/>${dim ? "" : `<circle class="xm-glow" style="animation-delay:${(-i * .7).toFixed(1)}s" cx="${x}" cy="${y + 9}" r="11" fill="url(#${red ? "xmHaloR" : "xmHalo"})"/>`}<ellipse cx="${x}" cy="${y + 9}" rx="3.6" ry="4.6" fill="${dim ? "#6d6450" : red ? "#e2554b" : "#ffd68a"}"/>`;
+  }).join("");
+  const main = defs + `
+    <path d="M0 588 C70 576 140 582 220 572 C300 564 350 572 400 566 V760 H0 Z" fill="#ead9b8"/>
+    <path d="M130 596 C190 588 260 590 330 580" fill="none" stroke="#f6efe2" stroke-width="3.4" stroke-linecap="round"/>
+    ${xmBirch(-8, 22, 0, 760, [[60, 12], [170, 10, 6], [270, 12], [380, 10, 4], [470, 12], [560, 10, 4], [690, 12]])}
+    <g transform="translate(0 -25)"><path d="M37 800 L38.6 560 C39 530 40.6 512 42 498 C43.4 512 45 530 45.4 560 L47 760 Z" fill="#efe6d6"/>
+    <path d="M38 590 h6 v2 h-6z M41 650 h6 v2 h-6z M38 710 h6 v2.4 h-6z" fill="#1a1a17"/>
+    <g fill="none" stroke="#efe6d6" stroke-linecap="round">
+      <path d="M42 500 C41 492 43 486 41 478" stroke-width="1.3"/><path d="M42.6 514 C51 504 55 496 60 486" stroke-width="1.7"/><path d="M55 496 C60 492 64 491 68 491" stroke-width="1.1"/>
+      <path d="M41.5 524 C33 516 29 508 26 498" stroke-width="1.7"/><path d="M30 510 C25 508 21 504 19 500" stroke-width="1.1"/>
+      <path d="M43 550 C54 542 60 534 64 524" stroke-width="2"/><path d="M14 562 C26 556 32 550 37 542" stroke-width="2.2"/>
+    </g></g>
+    ${xmBirch(332, 10, 0, 760, [[40, 6], [120, 7, 2], [190, 6], [262, 7, 1], [330, 6], [420, 7, 2], [520, 6], [640, 7]])}
+    ${xmBirch(370, 30, 0, 760, [[66, 16, 8], [170, 13, 14], [270, 16, 6], [372, 16, 12], [470, 13, 8], [580, 16, 10], [700, 14, 6]])}
+    <path d="M370 250 C354 240 346 228 340 214" fill="none" stroke="#efe6d6" stroke-width="2.6" stroke-linecap="round"/>
+    <g transform="translate(0 -25)"><path d="${chainD}" fill="none" stroke="#0e140f" stroke-width="1.8"/>${bulbs}</g>
+    ${xmFlame(74, 600, .9)}${xmFlame(96, 605, .66)}
+    <g transform="translate(210 604) rotate(-6) scale(.62)">
+      <path class="xm-steam" d="M-6 -36 C-12 -46 2 -50 -4 -62" fill="none" stroke="#ead9b8" stroke-width="3" stroke-linecap="round"/>
+      <path class="xm-steam s2" d="M8 -36 C2 -46 16 -50 10 -64" fill="none" stroke="#ead9b8" stroke-width="3" stroke-linecap="round"/>
+      <path d="M-26 -30 H26 V6 C26 18 16 24 0 24 C-16 24 -26 18 -26 6 Z" fill="#c4362f"/>
+      <path d="M26 -20 C42 -20 42 6 26 6" fill="none" stroke="#c4362f" stroke-width="7"/>
+      <rect x="-26" y="-30" width="52" height="7" fill="#8e2420"/>
+      <text x="0" y="0" text-anchor="middle" font-family="Gloock, Georgia, serif" font-size="13" fill="#ead9b8">EXMA</text>
+      <path d="M-16 8 h32" stroke="#ead9b8" stroke-width="2" stroke-dasharray="3 4"/>
+    </g>
+    <rect width="400" height="760" filter="url(#xmGrain)"/>`;
+  const flakes = [[60, 140, 2], [150, 220, 1.6], [250, 120, 1.8], [330, 260, 1.5], [110, 400, 1.8], [220, 340, 1.4], [300, 420, 1.7], [180, 470, 1.3]]
+    .map(([x, y, r], i) => `<circle class="xm-snow" style="animation-delay:${(-i * 1.3).toFixed(1)}s" cx="${x}" cy="${y}" r="${r}" fill="#ead9b8" opacity=".8"/>`).join("");
+  const front = defs + `${flakes}<rect x="0" y="660" width="400" height="100" fill="url(#xmFoot)"/>`;
+  return [back, mid, main, front];
+}
+
+/* Special Drinks X-Mas: Christmas Spritz (Weinglas) und Lebkuchen Espresso Martini */
+function spritzArt() {
+  const p = "dk" + (++drinkUid) + "_";
+  const bowl = "M44 40 C42 92 56 124 80 128 C104 124 118 92 116 40 Z";
+  const seeds = [[66, 98], [92, 108], [78, 116], [100, 88], [60, 80], [86, 92]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="3" ry="3.8" fill="#b3122e"/><circle cx="${x - 1}" cy="${y - 1.4}" r="1" fill="#ff9aa8"/>`).join("");
+  let bubbles = "";
+  for (let i = 0; i < 10; i++) bubbles += `<circle class="bub" style="animation-delay:${(-(i * .45)).toFixed(2)}s;animation-duration:${(2.2 + (i % 4) * .5).toFixed(1)}s" cx="${56 + (i * 23) % 48}" cy="${112 + (i * 7) % 12}" r="${.8 + (i % 3) * .4}" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width=".7"/>`;
+  return `<svg viewBox="0 0 160 200" aria-hidden="true">
+    <defs>
+      <linearGradient id="${p}liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffab4a" stop-opacity=".9"/><stop offset=".5" stop-color="#ff6a2b" stop-opacity=".92"/><stop offset="1" stop-color="#d9361f" stop-opacity=".95"/></linearGradient>
+      <filter id="${p}blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="3.5"/></filter>
+      <clipPath id="${p}in"><path d="${bowl}"/></clipPath>
+    </defs>
+    <ellipse cx="80" cy="190" rx="44" ry="5" fill="#000" opacity=".5" filter="url(#${p}blur)"/>
+    <ellipse cx="80" cy="190" rx="30" ry="4" fill="#ff7a2e" opacity=".45" filter="url(#${p}blur)"/>
+    <path d="${bowl}" fill="#fff" fill-opacity=".07"/>
+    <g clip-path="url(#${p}in)">
+      <rect x="40" y="62" width="80" height="70" fill="url(#${p}liq)"/>
+      <ellipse cx="80" cy="62" rx="38" ry="3" fill="#ffd08a" opacity=".85"/>
+      ${seeds}${bubbles}
+      <g transform="translate(70 70) rotate(18)"><rect x="-9" y="-9" width="18" height="18" rx="4" fill="#fff" fill-opacity=".25" stroke="#fff" stroke-opacity=".7"/></g>
+      <g transform="translate(94 76) rotate(-14)"><rect x="-8" y="-8" width="16" height="16" rx="4" fill="#fff" fill-opacity=".22" stroke="#fff" stroke-opacity=".65"/></g>
+    </g>
+    <!-- Rosmarinzweig -->
+    <g transform="translate(98 22) rotate(16)">
+      <path d="M0 0 L-6 92" stroke="#3f6b3a" stroke-width="2" stroke-linecap="round"/>
+      ${Array.from({ length: 9 }, (_, i) => { const y = 6 + i * 8, x = -i * .55; return `<path d="M${x} ${y} l-9 -5" stroke="#5f8f4e" stroke-width="2.6" stroke-linecap="round"/><path d="M${x} ${y + 3} l8 -6" stroke="#6fa35a" stroke-width="2.6" stroke-linecap="round"/>`; }).join("")}
+    </g>
+    <!-- Zimtstange -->
+    <g transform="translate(52 30) rotate(-22)"><rect x="-4" y="0" width="8" height="58" rx="3" fill="#8a4b22"/><path d="M-2 4 V54" stroke="#b56b35" stroke-width="2"/><path d="M2 6 V52" stroke="#5e2f12" stroke-width="1.2"/></g>
+    <path d="${bowl}" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.6"/>
+    <ellipse cx="80" cy="40" rx="36" ry="3.4" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="1.4"/>
+    <path d="M52 50 C52 84 60 106 72 116" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M78 128 L78 176 M82 128 L82 176" stroke="#fff" stroke-opacity=".55" stroke-width="1.4"/>
+    <ellipse cx="80" cy="178" rx="26" ry="4.5" fill="#fff" fill-opacity=".18" stroke="#fff" stroke-opacity=".6" stroke-width="1.4"/>
+    <!-- Granatapfel-Hälfte am Fuß -->
+    <g transform="translate(124 172)"><path d="M-14 0 A14 14 0 0 1 14 0 Z" fill="#b3122e"/><path d="M-11 0 A11 11 0 0 1 11 0 Z" fill="#f4d3c4"/>
+      ${[[-6, -4], [0, -7], [6, -4], [-3, -2], [3, -2]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2" fill="#d0203f"/>`).join("")}</g>
+  </svg>`;
+}
+function martiniArt() {
+  const p = "dk" + (++drinkUid) + "_";
+  const cone = "M26 44 L134 44 L80 112 Z";
+  const bean = (x, y, r) => `<g transform="translate(${x} ${y}) rotate(${r})"><ellipse rx="6" ry="4.2" fill="#3b1f10"/><path d="M-5 0 C-2 -1.6 2 1.6 5 0" stroke="#1e0e06" stroke-width="1.2" fill="none"/><ellipse cx="-1.5" cy="-1.6" rx="2" ry=".9" fill="#7a4a2a" opacity=".7"/></g>`;
+  return `<svg viewBox="0 0 160 200" aria-hidden="true">
+    <defs>
+      <linearGradient id="${p}liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a2814"/><stop offset="1" stop-color="#1c0d05"/></linearGradient>
+      <linearGradient id="${p}crema" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7b77d"/><stop offset="1" stop-color="#b9783f"/></linearGradient>
+      <filter id="${p}blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="3.5"/></filter>
+      <clipPath id="${p}in"><path d="${cone}"/></clipPath>
+    </defs>
+    <ellipse cx="80" cy="190" rx="44" ry="5" fill="#000" opacity=".5" filter="url(#${p}blur)"/>
+    <ellipse cx="80" cy="190" rx="28" ry="4" fill="#c8925a" opacity=".4" filter="url(#${p}blur)"/>
+    <g clip-path="url(#${p}in)">
+      <rect x="20" y="52" width="120" height="70" fill="url(#${p}liq)"/>
+      <path d="M20 52 H140 V60 C120 63 100 58 80 61 C60 64 40 59 20 62 Z" fill="url(#${p}crema)"/>
+      <path d="M40 56 C50 54 60 57 70 55" stroke="#f6d3a2" stroke-width="1.4" fill="none" opacity=".8"/>
+    </g>
+    ${bean(70, 52, -14)}${bean(82, 50, 18)}${bean(94, 53, -4)}
+    <path d="${cone}" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M36 50 L74 100" stroke="#fff" stroke-opacity=".45" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M78 112 V174 M82 112 V174" stroke="#fff" stroke-opacity=".55" stroke-width="1.4"/>
+    <ellipse cx="80" cy="176" rx="26" ry="4.5" fill="#fff" fill-opacity=".18" stroke="#fff" stroke-opacity=".6" stroke-width="1.4"/>
+    <!-- Lebkuchenherz am Rand -->
+    <g transform="translate(124 46) rotate(18)">
+      <path d="M0 14 C-18 2 -20 -10 -12 -15 C-6 -18 -2 -14 0 -10 C2 -14 6 -18 12 -15 C20 -10 18 2 0 14 Z" fill="#a8622c" stroke="#6e3a14" stroke-width="1.4"/>
+      <path d="M0 10 C-13 1 -14 -8 -9 -11 C-5 -13 -2 -10 0 -7 C2 -10 5 -13 9 -11 C14 -8 13 1 0 10 Z" fill="none" stroke="#fff6e8" stroke-width="1.6" stroke-dasharray="2.4 2"/>
+      <circle cx="-5" cy="-4" r="1.6" fill="#d0203f"/><circle cx="5" cy="-4" r="1.6" fill="#3f8a35"/><circle cx="0" cy="2" r="1.6" fill="#f6c344"/>
+    </g>
+    <!-- Sternanis -->
+    <g transform="translate(40 172)">${Array.from({ length: 8 }, (_, i) => `<ellipse rx="3" ry="7" fill="#7a3f1c" transform="rotate(${i * 45}) translate(0 -6)"/>`).join("")}<circle r="2.4" fill="#c8925a"/></g>
+  </svg>`;
+}
+
+const SCENES = { eis: sceneIce, miami: sceneMiami, xmas: sceneXmas };
+/* Bildausschnitte je Motto: Vorschau-Karte (next) und Polaroid (fw); ohne Eintrag gilt der Standard */
+const SCENE_VB = { xmas: { next: "0 420 400 190", fw: "0 270 400 420", tr: "0 370 400 250" } };
 const DEPTHS = [6, 10, 0, -22];
 
 /* ================= Drink-Bilder ================= */
@@ -2810,7 +3030,9 @@ const DRINKS = {
   lemon:  { stops: [["0", "#fbf8d2", .78], [".6", "#f1ea9f", .82], ["1", "#e2d66e", .9]], top: 64, bubbles: 14, glow: "#f3e98a", garnish: "lemon", straw: "#1b1b1b" },
   energy: { stops: [["0", "#ffe46b", .85], [".55", "#ffc21f", .88], ["1", "#e89400", .92]], top: 66, bubbles: 18, glow: "#ffc21f", garnish: "foam", straw: "#1b1b1b" },
   beach:  { stops: [["0", "#ffd166", .9], [".35", "#ff9f2e", .92], [".7", "#ff5a36", .94], ["1", "#c3102f", .96]], top: 60, bubbles: 0, glow: "#ff7a3d", garnish: "beach", straw: "#ff2e88" },
-  sangria: { glow: "#e8344f", custom: true }   /* eigenes Motiv: kleines Glas mit Obst vor einem Tetrapak */
+  sangria: { glow: "#e8344f", custom: true },  /* eigenes Motiv: kleines Glas mit Obst vor einem Tetrapak */
+  spritz:  { glow: "#ff7a2e", custom: true },  /* Christmas Spritz: Weinglas, Rosmarin, Zimt, Granatapfel */
+  martini: { glow: "#c8925a", custom: true }   /* Lebkuchen Espresso Martini: Martiniglas, Bohnen, Lebkuchenherz */
 };
 /* Sangria: kleines bauchiges Glas mit Obststücken, dahinter ein klassisches Tetrapak (ohne echte Marke) */
 function sangriaArt() {
@@ -2893,6 +3115,8 @@ function sangriaArt() {
 }
 function drinkArt(kind) {
   if (kind === "sangria") return sangriaArt();
+  if (kind === "spritz") return spritzArt();
+  if (kind === "martini") return martiniArt();
   const d = DRINKS[kind] || DRINKS.lemon;
   const p = "dk" + (++drinkUid) + "_";
   const T = d.top, L = 50, R = 110, BOT = 172;
@@ -3086,9 +3310,10 @@ function slideHTML(ev, i) {
     <div class="scene" aria-hidden="true">${DEPTHS.map((d, k) => `<div class="layer" data-depth="${d}"><svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice"></svg></div>`).join("")}</div>
     <div class="chips">${[chip(status(ev)), ev.art ? `<span class="chip">${esc(ev.art)}</span>` : ""].join("")}</div>
     <h${i === index ? 1 : 2} class="title">${titleHTML(ev)}</h${i === index ? 1 : 2}>
-    <p class="script">${esc(ev.untertitel)}</p>
+    <p class="script">${subHTML(ev)}</p>
     <div><div class="when"><div class="when-date">${esc(ev.dm)}</div><div class="when-meta"><b>${esc(ev.wdLong)}</b><span>${meta}</span></div></div></div>
     ${ev.musik ? `<div><div class="music">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b> · ${esc(ev.musik.text)}</span></div></div>` : ""}
+    ${!ev.musik && ev.kachelInfo ? `<div><div class="music">${ICON_MARKT}<span><b>${esc(ev.kachelInfo.zeit)}</b> · ${esc(ev.kachelInfo.text)}</span></div></div>` : ""}
     ${ev.spiel === "beerpong" ? `<div><button class="play-btn" type="button" data-stop data-play>${ICON_BALL}<span><b>Beerpong spielen</b><small>Wisch den Ball in die Becher</small></span></button></div>` : ""}
     <div class="hero-spacer"></div>
     ${reg
@@ -3332,7 +3557,7 @@ function renderDetail(ev) {
     <div class="d-hero">
       <div class="chips"><span class="chip">${esc(ev.wd)} · ${esc(ev.dm)} · ${esc(ev.time)} Uhr</span><span id="dStatus">${chip(status(ev))}</span>${ev.art ? `<span class="chip">${esc(ev.art)}</span>` : ""}</div>
       <h2 class="title" id="dTitle">${titleHTML(ev)}</h2>
-      <p class="script">${esc(ev.untertitel)}</p>
+      <p class="script">${subHTML(ev)}</p>
       ${reg}${pastBox}
       ${ev.turnier ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : ""}
       ${ev.spiel === "beerpong" ? `<a class="game-card" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span class="gc-text"><b>Beerpong</b><small>Schon mal fürs Turnier üben</small></span><i>${ICON_ARROW}</i></a>` : ""}
@@ -6075,6 +6300,7 @@ const BADGE_LIST = [
   /* Gold – thematisch sortiert */
   {"id": "eiskalt", "name": "Eiskalt", "desc": "Bei der Vodka Night dabei.", "tier": 0, "cat": "Gold"},
   {"id": "miami", "name": "Miami Vice", "desc": "Bei Miami Vibes dabei.", "tier": 0, "cat": "Gold"},
+  {"id": "xmas", "name": "Glühwein-Gang", "desc": "Bei ExMa X-Mas dabei.", "tier": 0, "cat": "Gold"},
   {"id": "champion", "name": "Champion", "desc": "Das Beerpong-Turnier gewonnen.", "tier": 0, "cat": "Gold"},
   {"id": "bpgold", "name": "Beerpong Gold", "desc": "50 Becher in einem Spiel getroffen.", "tier": 0, "cat": "Gold"},
   {"id": "endstation", "name": "Busfahrer Gold", "desc": "Alle 51 Karten richtig – Endstation!", "tier": 0, "cat": "Gold"},
@@ -6814,10 +7040,11 @@ function fwScenesNow(root) {
   root.querySelectorAll(".fw-scene:not([data-done])").forEach((el) => {
     el.dataset.done = "1"; const ev = EVENTS.find((e) => e.id === el.dataset.scene); if (!ev) return;
     const layers = (SCENES[ev.thema] || sceneIce)(), u = fwSceneUid++;
-    el.querySelectorAll("svg").forEach((svg, k) => { svg.innerHTML = layers[k] ? prefixIds(layers[k], `fw${u}l${k}_`) : ""; if (svg.pauseAnimations) svg.pauseAnimations(); });
+    const vb = SCENE_VB[ev.thema] && SCENE_VB[ev.thema].fw;
+    el.querySelectorAll("svg").forEach((svg, k) => { if (vb) svg.setAttribute("viewBox", vb); svg.innerHTML = layers[k] ? prefixIds(layers[k], `fw${u}l${k}_`) : ""; if (svg.pauseAnimations) svg.pauseAnimations(); });
   });
 }
-const fwMini = (e) => `<span class="fw-mini t-${e.thema}"><span class="tile-title">${titleHTML(e)}</span>${e.untertitel ? `<span class="tile-sub">${esc(e.untertitel)}</span>` : ""}</span>`;
+const fwMini = (e) => `<span class="fw-mini t-${e.thema}"><span class="tile-title">${titleHTML(e)}</span>${e.untertitel ? `<span class="tile-sub">${subHTML(e)}</span>` : ""}</span>`;
 const PIN_COLORS = ["#ff4d6d", "#ffd23f", "#4dd6ff", "#7cf29a", "#c38bff"];
 function fotowandTile() {
   const past = EVENTS.filter((e) => isPast(e)).reverse();
@@ -7160,14 +7387,15 @@ function buildMenu() {
     const meta = ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
     const extra = ev.anmeldung && !isPast(ev)
       ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop>Anmelden ${ICON_EXT}</a>`
-      : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>` : "";
+      : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>`
+      : ev.kachelInfo ? `<div class="tile-extra tile-dj">${ICON_MARKT}<span><b>${esc(ev.kachelInfo.zeit)}</b>${esc(ev.kachelInfo.text)}</span></div>` : "";
     return `<div class="mtile tile-ev t-${ev.thema}" role="link" tabindex="0" data-ev="${i}" style="${themeStyle(ev.th)}" aria-label="${esc(label)}: ${esc(ev.titel.join(" "))}, ${esc(ev.wdLong)} ${esc(ev.dm)} – Infos öffnen">
       <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice"></svg>`).join("")}</div>
       <div>
         <div class="tile-label">${esc(label)}</div>
         ${chip(status(ev))}
         <h2 class="tile-title">${titleHTML(ev)}</h2>
-        <p class="tile-sub">${esc(ev.untertitel)}</p>
+        <p class="tile-sub">${subHTML(ev)}</p>
         ${ev.banner && !isPast(ev) ? `<div class="tile-banner" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : ""}
       </div>
       <div>
@@ -7280,7 +7508,8 @@ function buildMenu() {
   g.querySelectorAll(".tile-ev, .hm-next").forEach((t) => {
     const ev = EVENTS[+t.dataset.ev];
     const layers = (SCENES[ev.thema] || sceneIce)();
-    t.querySelectorAll(".tile-scene svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `mt${t.dataset.ev}l${k}_`); if (svg.pauseAnimations) svg.pauseAnimations(); });
+    const vb = t.classList.contains("hm-next") && SCENE_VB[ev.thema] && SCENE_VB[ev.thema].next;
+    t.querySelectorAll(".tile-scene svg").forEach((svg, k) => { if (vb) svg.setAttribute("viewBox", vb); svg.innerHTML = prefixIds(layers[k], `mt${t.dataset.ev}l${k}_`); if (svg.pauseAnimations) svg.pauseAnimations(); });
     if (t.closest(".hm-hero")) fitHeroScene(t, ev);
     const openTile = () => {
       try { localStorage.setItem("exmaTileTapped", "1"); } catch {}
@@ -7293,7 +7522,7 @@ function buildMenu() {
   watchAnim(g);
 }
 function fitMenu() {
-  document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? 58 : 34); });
+  document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? (el.closest(".t-xmas") ? 84 : 58) : 34); });
   document.querySelectorAll(".hm-next h3").forEach((el) => {
     let fs = 24; el.style.fontSize = fs + "px";
     while (el.scrollWidth > el.clientWidth + 1 && fs > 13) { fs -= 1; el.style.fontSize = fs + "px"; }
@@ -8351,7 +8580,7 @@ function trHH(ev) {
 }
 
 /* kurze Preise: 2 € statt 2,00 € */
-const trEuro = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2).replace(".", ",")) + " €";
+const trEuro = (n) => (n == null ? "Preis folgt" : (Number.isInteger(n) ? String(n) : n.toFixed(2).replace(".", ",")) + " €");
 const trKey = (n) => String(n).toLowerCase().replace(/^(jede[rs]?|alle)\s+/, "").replace(/n$/, "").trim();
 const isVol = (m) => /\d\s*(c?l)\b/i.test(m || "");
 /* Karte stark verkürzt: gleiche Preise einer Gruppe in einer Zeile */
@@ -8406,7 +8635,8 @@ function trRender(ev) {
   const v = th.verlauf || [th.a1, th.a3, th.a2], mid = v[Math.floor(v.length / 2)];
   t.style.cssText = themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgv:linear-gradient(180deg,${v.join(",")});--tgA:${v[0]};--tgM:${mid};--tgZ:${v[v.length - 1]};--tgbg:linear-gradient(120deg,${(v.length > 3 ? v.slice(1) : v).join(",")})`;
   const layers = (ev && SCENES[ev.thema] ? SCENES[ev.thema] : sceneIce)();
-  $("trScene").innerHTML = layers.map((l, k) => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "tr" + k + "_")}</svg>`).join("");
+  const trVB = (ev && SCENE_VB[ev.thema] && SCENE_VB[ev.thema].tr) || "0 0 400 760";
+  $("trScene").innerHTML = layers.map((l, k) => `<svg viewBox="${trVB}" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "tr" + k + "_")}</svg>`).join("");
   $("trTitle").textContent = ev ? ev.titel.join(" ") : CLUB.name;
   $("trScript").textContent = ev ? ev.untertitel : CLUB.sub;
   TR.pair = 0; trSpecials(ev);
