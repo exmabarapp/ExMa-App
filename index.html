@@ -2355,7 +2355,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "94";
+const APP_V = "95";
 
 const EVENTS = [
   {
@@ -5075,11 +5075,11 @@ const Zapf = (() => {
     () => ({ name: "Sanduhrglas", drink: "bier", h: r(230, 255), prof: [r(88, 96), r(52, 58), r(92, 100)] })
   ];
   const SPECIAL = [
-    () => ({ name: "Sektflöte", art: "in der", drink: "sekt", h: r(190, 215), wb: 26, wt: r(56, 62), stem: 70, curve: .65 }),
+    () => ({ name: "Sektflöte", art: "in der", drink: "sekt", h: r(190, 215), wb: 26, wt: r(56, 62), stem: 70, curve: .65, rate: .5 }),
     () => ({ name: "Weizenglas", drink: "weizen", h: r(280, 305), wb: 62, wt: r(94, 100), waist: 14 }),
     () => ({ name: "Guinness-Glas", drink: "guinness", h: r(238, 258), wb: 76, wt: r(100, 106), bulge: 14, bulgeAt: .82 }),
     /* durchsichtige Bierflasche (klassische Euroflasche): gerader Bauch, kurze Schulter, langer Hals – unten langsam, im Hals sehr schnell */
-    () => ({ name: "Bierflasche", art: "in der", drink: "bier", h: r(262, 276), prof: [70, 72, 72, 72, 72, 72, 72, 72, 72, 70, 60, 38, 28, 26, 26, 26, 26, 28], base: 14, rate: .42, bottle: true })
+    () => ({ name: "Bierflasche", art: "in der", drink: "bier", h: r(262, 276), prof: [70, 72, 72, 72, 72, 72, 72, 72, 72, 70, 60, 38, 28, 26, 26, 26, 26, 28], base: 14, rate: .5, minWf: .72, bottle: true })
   ];
   const SHOT = () => ({ name: "Schnapsglas", drink: "pfeffi", h: r(74, 84), wb: 34, wt: r(44, 48), base: 17, rate: .4 });
   const CLASSIC = () => ({ name: "Willibecher", drink: "bier", h: 225, wb: 84, wt: 108, classic: true });
@@ -5500,7 +5500,7 @@ const Zapf = (() => {
         tPour += dt;
         const ramp = Math.min(1, .45 + tPour / 450);
         /* gleiche Menge pro Zeit: schmale Stellen steigen schneller, breite langsamer */
-        const wf = Math.min(2.6, Math.max(.35, (glass.wRef / glass.wAt(P)) ** 2));
+        const wf = Math.min(2.6, Math.max(glass.minWf || .35, (glass.wRef / glass.wAt(P)) ** 2));   /* minWf: Flasche soll im Bauch nicht ewig brauchen */
         P += pourRate() * ramp * wf * dt / 1000;
         const head = d.head * P;
         if (d.swell) garnOff = 9;
@@ -5519,10 +5519,10 @@ const Zapf = (() => {
         if (d.swell) garnOff = 9 * (1 - e);
         paint(lvl, d.swell ? lvl : P - head, d.surge ? .55 * (1 - e) : null);
         if (d.surge) $("zfHaze").setAttribute("fill", "#c99a6a");
-        const cap = d.fall ? 1.02 : 1;   /* Sekt-Schaum darf kurz über den Rand (Anzeige bleibt bei 100 %) */
+        const cap = d.fall ? 1.05 : 1;   /* Sekt-Schaum darf kurz bis 105 % über den Rand (unsichtbare Toleranz, Anzeige bleibt bei 100 %) */
         pctBox(fmtPct(Math.min(lvl, d.fall ? 1 : 1.02)));
         if (lvl > cap) { result(lvl, true); return; }
-        if (k >= 1) { result(finalL, false); return; }
+        if (k >= 1) { result(finalL, finalL > 1); return; }   /* bleibt der Sekt nach dem Zusammenfallen über dem Rand, ist er übergelaufen */
       } else if (bubbles.length && glass) {
         paint(P > 0 ? Math.max(P, finalL) : 0, P - d.head * P);
       }
