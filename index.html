@@ -919,6 +919,14 @@ a { color: inherit; }
 @keyframes zdStream { 0%, 44% { transform: scaleY(1); opacity: 1; } 46%, 100% { transform: scaleY(0); opacity: 0; } }
 .zd-foam { clip-path: inset(0 0 0 0); }
 @media (prefers-reduced-motion: reduce) { .zd-beer, .zd-foam, .zd-stream { animation: none; } .zd-beer { transform: scaleY(.72); } }
+.zs svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.zs .zs-beer, .zs .zs-foam, .zs .zs-stream { transform-box: fill-box; }
+.zs .zs-beer { transform-origin: 50% 100%; animation: zdBeer 3.2s ease-in-out infinite; }
+.zs .zs-foam { transform-origin: 50% 100%; animation: zdFoam 3.2s ease-in-out infinite; }
+.zs .zs-stream { transform-origin: 50% 0; animation: zdStream 3.2s linear infinite; }
+.zs .zs-handle { transform-box: fill-box; transform-origin: 50% 100%; animation: zsHandle 3.2s ease-in-out infinite; }
+@keyframes zsHandle { 0%, 44% { transform: rotate(-24deg); } 50%, 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .zs .zs-beer, .zs .zs-foam, .zs .zs-stream, .zs .zs-handle { animation: none; } .zs .zs-beer { transform: scaleY(.72); } .zs .zs-foam { transform: scaleY(.9); } .zs .zs-stream { opacity: 0; } }
 /* Impressum/Datenschutz unter den Kacheln */
 .menu-legal { flex: none; display: flex; justify-content: center; gap: 8px; padding: 6px 0 0; font-size: 11.5px; color: rgba(255,255,255,.45); }
 .menu-legal a { color: rgba(255,255,255,.65); font-weight: 600; text-decoration: none; }
@@ -1423,6 +1431,18 @@ body.fg-open { overflow: hidden; }
 .bd-arrow { position: absolute; right: 9%; top: 30%; width: 18px; color: #2bff88; filter: drop-shadow(0 0 4px #2bff88); animation: bdArrow 3s ease-in-out infinite; }
 @keyframes bdFlip { 0%, 30% { transform: translateX(-60%) rotateY(90deg) rotate(6deg); opacity: 0; } 45%, 85% { transform: rotate(6deg); opacity: 1; } 100% { transform: rotate(6deg); opacity: 0; } }
 @keyframes bdArrow { 0%, 100% { transform: translateY(2px); opacity: .5; } 20%, 40% { transform: translateY(-4px); opacity: 1; } }
+/* Busfahrer-Kachel: Filz mit Webstruktur, Goldrahmen, Kartenstapel, Pfeile hoch/runter */
+.bd-felt { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bd-deck { position: absolute; left: 7%; top: 30%; width: 24%; aspect-ratio: 5 / 7; transform: rotate(-12deg); }
+.bd-deck i { position: absolute; inset: 0; border-radius: 5px; border: 2px solid #fff; background: repeating-linear-gradient(45deg, #b3122e 0 4px, #8a0b22 4px 8px); box-shadow: 0 3px 6px rgba(0,0,0,.4); }
+.bd-deck i:nth-child(2) { transform: translate(2px, -2px); } .bd-deck i:nth-child(3) { transform: translate(4px, -4px); }
+.tile-bus .bd-card { width: 29%; top: 24%; }
+.tile-bus .bd-card.a { left: 31%; }
+.tile-bus .bd-card.b { left: 52%; }
+.tile-bus .bd-arrow { right: 6%; top: 24%; }
+.tile-bus .bd-arrow.dn { top: 40%; color: #ff4d6d; filter: drop-shadow(0 0 4px #ff4d6d); animation-delay: -1.5s; }
+.app.dezember .bd-deck i { background: linear-gradient(160deg, #b51a30, #7d0a1e); border-color: #f6efe1; box-shadow: inset 0 0 0 2px #9a1027, inset 0 0 0 3px #e9b77c, 0 3px 6px rgba(0,0,0,.4); }
+
 @media (prefers-reduced-motion: reduce) { .bd-card.b, .bd-arrow { animation: none; } .pcard.deal, .pcard.wrong { animation: none; } }
 /* ===== Dezember: Minispiel-Kacheln ===== */
 .app.dezember .tile-bus { background: radial-gradient(1.2px 1.2px at 18% 22%, rgba(255,255,255,.7) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 72% 14%, rgba(255,255,255,.6) 50%, transparent 51%), radial-gradient(1px 1px at 88% 48%, rgba(255,255,255,.6) 50%, transparent 51%), radial-gradient(1.4px 1.4px at 8% 58%, rgba(255,255,255,.5) 50%, transparent 51%), radial-gradient(1.2px 1.2px at 52% 8%, rgba(255,255,255,.6) 50%, transparent 51%), radial-gradient(120% 90% at 50% 15%, #17885a, #07402a 60%, #04261a); border-color: #e9b77c; box-shadow: 0 0 16px rgba(233,183,124,.3); }
@@ -1581,6 +1601,246 @@ body.fg-open { overflow: hidden; }
 .hm-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .hm-quick .tile-btn { height: 118px; border-radius: 22px; }
 .hm-quick .tile-rank b { font-size: 16px; }
+
+/* ===== Schnellmenü unten: Glas-Leiste ===== */
+.tabbar { position: absolute; z-index: 40; left: 12px; right: 12px; bottom: max(8px, calc(var(--safe-b) - 12px)); height: 62px; padding: 5px; display: flex; border-radius: 31px;
+  background: rgba(26,20,46,.78); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,.2); box-shadow: 0 14px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.14);
+  font-family: var(--f-body); transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s; }
+.tabbar a { flex: 1; min-width: 0; height: 52px; border-radius: 26px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  color: rgba(255,255,255,.72); font-size: 10.5px; font-weight: 700; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: background .25s, color .25s; }
+.tabbar a svg { width: 22px; height: 22px; }
+.tabbar a.on { background: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(255,255,255,.12); color: #fff; }
+.tabbar a.on svg { color: #ffcf4a; }
+.tabbar a:active { transform: scale(.94); }
+.app.game-solo .tabbar, .app.tabbar-off .tabbar, .app.kbd-open .tabbar { transform: translateY(140%); opacity: 0; pointer-events: none; }
+/* Platz unten, damit nichts hinter der Leiste verschwindet */
+.app.has-tabbar .view-menu::after, .app.has-tabbar .view-detail::after, .app.has-tabbar .view-club::after { content: ""; display: block; height: calc(84px + var(--safe-b)); }
+.app.has-tabbar .swipe-hint { bottom: calc(84px + max(8px, calc(var(--safe-b) - 12px))); }
+/* Tab-Seiten: kein Zurück-Knopf */
+.tab-page .d-head .back, .app.tab-root .view-detail .d-head .back { visibility: hidden; }
+.tp-chip { display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin: 2px 0 16px; border-radius: 18px; color: #fff; text-decoration: none;
+  background: linear-gradient(120deg, rgba(45,107,255,.22), rgba(255,46,136,.18)); border: 1px solid rgba(255,255,255,.14); }
+.tp-chip small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.tp-chip b { display: block; font-size: 17px; margin-top: 2px; }
+.tp-chip i { margin-left: auto; flex: none; font-style: normal; font-size: 12px; font-weight: 800; padding: 6px 10px; border-radius: 999px; background: #ff2e88; color: #fff; }
+.tp-drinks .more { display: none; }
+.tp-pay { margin: 18px 0 6px; }
+.tp-tn { display: flex; align-items: center; gap: 12px; padding: 14px; margin: 2px 0 16px; border-radius: 20px; background: linear-gradient(120deg, #ff2e88, #ff8a3d); color: #fff; text-decoration: none; }
+.tp-tn > span:first-child { font-size: 28px; } .tp-tn b { display: block; font-size: 17px; } .tp-tn small { font-size: 12.5px; opacity: .92; } .tp-tn i { margin-left: auto; width: 22px; flex: none; }
+.tp-game { margin: 0 0 16px; border-radius: 24px; overflow: hidden; isolation: isolate; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); }
+.tp-game .tile-btn.tp-art { position: relative; display: flex; flex-direction: column; justify-content: flex-end; margin: 0; overflow: hidden; text-decoration: none; }
+.tp-game .tp-art b { font: 400 24px/1 var(--f-display); text-transform: uppercase; color: #fff; }
+.tp-game .tp-art small { display: block; margin-top: 4px; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.75); }
+.tp-lb { display: grid; color: #fff; min-width: 0; }
+.tp-rows { display: grid; gap: 5px; min-width: 0; }
+.tp-rows h4 { margin: 0; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+.tp-rows p { margin: 0; display: flex; gap: 8px; align-items: baseline; font-size: 13px; font-weight: 700; }
+.tp-rows p em { font-style: normal; color: #ffcf4a; width: 12px; }
+.tp-rows p span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tp-rows p small { margin-left: auto; flex: none; color: rgba(255,255,255,.75); font-weight: 600; font-size: 12.5px; }
+.tp-rows .tp-wait { color: rgba(255,255,255,.6); font-weight: 600; }
+.tp-play { grid-row: span 1; padding: 12px 18px; border-radius: 14px; background: #fff; color: #14111f; font-weight: 800; font-size: 15px; text-decoration: none; }
+.tp-mine { grid-column: 1 / -1; margin: 0; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; color: rgba(124,243,228,.9); }
+.tp-mine b { color: #7cf3e4; }
+.tp-prof { display: flex; align-items: center; gap: 14px; margin: 6px 0 12px; color: #fff; }
+.tp-ava { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; font: 400 30px var(--f-display);
+  background: conic-gradient(from 210deg, #2d6bff, #ff2e88, #ffb347, #2d6bff); box-shadow: 0 0 0 3px #07060f, 0 0 0 5px rgba(255,255,255,.25), 0 0 22px rgba(255,46,136,.5); }
+.tp-prof b { display: block; font-size: 22px; word-break: break-word; }
+.tp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tp-tags > * { padding: 4px 10px; border-radius: 999px; font: 800 12px var(--f-body); background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); color: #fff; text-decoration: none; }
+.tp-tags a { background: #ff2e88; border-color: #ff2e88; }
+.tp-nameform { display: flex; gap: 8px; margin: 0 0 14px; }
+.tp-nameform[hidden] { display: none; }
+.tp-nameform input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); color: #fff; font: 600 16px var(--f-body); }
+.tp-nameform button { padding: 0 16px; border-radius: 14px; border: 0; background: #fff; color: #14111f; font: 800 15px var(--f-body); }
+.tp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 4px 0 6px; }
+.tp-stats div { padding: 12px 6px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); text-align: center; color: #fff; }
+.tp-stats b { display: block; font: 400 26px var(--f-display); }
+.tp-stats small { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6); }
+.tp-h { margin: 20px 0 10px; font: 400 16px var(--f-display); text-transform: uppercase; color: #fff; display: flex; align-items: center; gap: 8px; }
+.tp-h::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,.28), transparent); }
+.tp-bests { display: grid; gap: 8px; }
+.tp-best { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: #fff; text-decoration: none; font-weight: 700; }
+.tp-best-i { flex: none; width: 34px; height: 34px; border-radius: 11px; border-width: 1.5px; border-style: solid; display: grid; place-items: center; font-size: 18px; box-shadow: none !important; }
+.tp-best em { margin-left: auto; font-style: normal; color: #ffcf4a; }
+.tp-bdg { margin-top: 4px; }
+.tp-empty { color: rgba(255,255,255,.65); font-size: 14px; }
+.tp-all { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: #fff; font-weight: 800; text-decoration: none; }
+.tp-all span { margin-left: auto; color: #ffcf4a; } .tp-all svg { width: 18px; height: 18px; }
+.tp-note { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,.5); text-align: center; }
+
+/* --- Drinks-Seite v99: Motto-Banner oben am Rand, Theme-Farben, Special-Kacheln quer --- */
+.view-detail.clubby.drinks-page:not(.no-ev) { color: var(--frost); background: radial-gradient(120% 420px at 50% 0, color-mix(in srgb, var(--a3) 26%, transparent), transparent 75%) local, linear-gradient(180deg, var(--night2, var(--night)), var(--night) 520px) local; }
+.drinks-page:not(.no-ev) .d-head { position: absolute; left: 0; right: 0; top: 0; z-index: 5; }
+.drinks-page:not(.no-ev) .page-h { display: none; }
+.drinks-page:not(.no-ev) .club-wrap { padding-top: 0; }
+.tp-hero { position: relative; display: block; overflow: hidden; isolation: isolate; height: calc(270px + var(--safe-t)); margin: 0 -20px; color: #fff; text-decoration: none; background: var(--night); border-bottom: 1px solid color-mix(in srgb, var(--a1) 40%, transparent); }
+.tp-hero .tile-scene { position: absolute; inset: 0; z-index: -2; }
+.tp-hero .tile-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.tp-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, color-mix(in srgb, var(--night) 55%, transparent) 0%, transparent 30%, color-mix(in srgb, var(--night) 70%, transparent) 62%, var(--night) 100%); }
+.tp-hero-txt { position: absolute; left: 20px; right: 20px; bottom: 16px; }
+.tp-hero-lbl { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font: 800 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; background: var(--a3); color: #fff; box-shadow: 0 0 14px color-mix(in srgb, var(--a3) 60%, transparent); }
+.tp-hero-lbl .live-dot { width: 7px; height: 7px; }
+.tp-hero-t { margin: 8px 0 0; font-family: var(--f-display); font-weight: 400; font-size: 44px; line-height: .95; text-transform: uppercase; color: #fff; text-shadow: 0 0 18px var(--a3), 0 2px 10px rgba(0,0,0,.5); }
+.tp-hero-t span { display: block; }
+.tp-hero-sub { margin: 4px 0 0; font-family: var(--f-script); font-size: 22px; color: var(--script, var(--a1)); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.tp-hero-sub s { text-decoration-color: #e8303c; text-decoration-thickness: 2px; }
+.tp-hero-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tp-hero-row span { padding: 5px 10px; border-radius: 999px; font: 800 12.5px var(--f-body); background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.tp-hero-row span.hot { background: var(--a1); color: var(--night); border-color: transparent; }
+.drinks-page .block { margin: 0; }
+.drinks-page .sec-title { color: #fff; }
+.drinks-page .drinks { grid-template-columns: 1fr; gap: 14px; }
+.drinks-page .drink { position: relative; display: grid; grid-template-columns: 124px 1fr; align-items: center; min-height: 156px; border-radius: 26px;
+  background: radial-gradient(90% 120% at 0% 50%, color-mix(in srgb, var(--c) 30%, transparent), transparent 70%), linear-gradient(120deg, color-mix(in srgb, var(--c) 16%, var(--night)), var(--night) 75%);
+  border: 1.5px solid color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 28%, transparent), inset 0 1px 0 rgba(255,255,255,.08); }
+.drinks-page .drink::before { content: "Special"; position: absolute; right: 14px; top: 12px; padding: 3px 9px; border-radius: 999px; font: 800 10px var(--f-body); letter-spacing: .12em; text-transform: uppercase; background: color-mix(in srgb, var(--c) 85%, #fff); color: var(--night); }
+.drinks-page .drink-pic { height: 156px; aspect-ratio: auto; max-height: none; background: radial-gradient(60% 55% at 50% 50%, color-mix(in srgb, var(--c) 60%, transparent), transparent 72%); }
+.drinks-page .drink-pic::after { display: none; }
+.drinks-page .drink-body { padding: 16px 16px 16px 4px; gap: 6px; }
+.drinks-page .drink h3 { font-size: 22px; padding-right: 64px; color: #fff; text-shadow: 0 0 12px color-mix(in srgb, var(--c) 70%, transparent); }
+.drinks-page .drink p { font-size: 13px; }
+.drinks-page .drink .price { font-size: 18px; padding: 7px 16px; background: linear-gradient(90deg, var(--c), color-mix(in srgb, var(--c) 60%, #fff)); color: var(--night); box-shadow: 0 4px 14px color-mix(in srgb, var(--c) 45%, transparent); }
+
+/* Specials im Menü am Clubabend: gleiche große Querkacheln */
+.sp-bigs { grid-template-columns: 1fr; gap: 14px; }
+.sp-big { position: relative; display: grid; grid-template-columns: 124px 1fr; align-items: center; min-height: 156px; border-radius: 26px;
+  background: radial-gradient(90% 120% at 0% 50%, color-mix(in srgb, var(--c) 30%, transparent), transparent 70%), linear-gradient(120deg, color-mix(in srgb, var(--c) 16%, var(--night)), var(--night) 75%);
+  border: 1.5px solid color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 28%, transparent), inset 0 1px 0 rgba(255,255,255,.08); }
+.sp-big::before { content: "Special"; position: absolute; right: 14px; top: 12px; padding: 3px 9px; border-radius: 999px; font: 800 10px var(--f-body); letter-spacing: .12em; text-transform: uppercase; background: color-mix(in srgb, var(--c) 85%, #fff); color: var(--night); }
+.sp-big-pic { height: 156px; aspect-ratio: auto; max-height: none; background: radial-gradient(60% 55% at 50% 50%, color-mix(in srgb, var(--c) 60%, transparent), transparent 72%); }
+.sp-big-pic::after { display: none; }
+.sp-big-body { padding: 16px 16px 16px 4px; gap: 6px; }
+.sp-big h3 { font-size: 22px; padding-right: 64px; color: #fff; text-shadow: 0 0 12px color-mix(in srgb, var(--c) 70%, transparent); }
+.sp-big p { font-size: 13px; }
+.sp-big .price { font-size: 18px; padding: 7px 16px; background: linear-gradient(90deg, var(--c), color-mix(in srgb, var(--c) 60%, #fff)); color: var(--night); box-shadow: 0 4px 14px color-mix(in srgb, var(--c) 45%, transparent); }
+
+.sp-big { text-decoration: none; color: #fff; }
+.sp-big p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: rgba(255,255,255,.72); }
+.ph-karte { width: 100%; }
+/* --- Leiste am Clubabend: zwei Glas-Hälften mit runder Aussparung, in der Mitte der gelbe „An der Bar“-Knopf --- */
+.tabbar.live { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; overflow: visible; }
+.tabbar.live::before { display: none; }
+.tb-side { position: absolute; top: 0; bottom: 0; display: flex; padding: 5px; border-radius: 31px;
+  background: rgba(26,20,46,.78); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,.2); box-shadow: 0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14); }
+.tb-side.l { left: 0; right: calc(50% + 31px); border-radius: 31px 0 0 31px; padding-right: 12px;
+  -webkit-mask: radial-gradient(circle at calc(100% + 31px) 50%, transparent 46px, #000 46.5px); mask: radial-gradient(circle at calc(100% + 31px) 50%, transparent 46px, #000 46.5px); }
+.tb-side.r { right: 0; left: calc(50% + 31px); border-radius: 0 31px 31px 0; padding-left: 12px;
+  -webkit-mask: radial-gradient(circle at -31px 50%, transparent 46px, #000 46.5px); mask: radial-gradient(circle at -31px 50%, transparent 46px, #000 46.5px); }
+.tb-side a { flex: 1; }
+/* feine Leuchtkante entlang der runden Aussparung */
+.tb-ring { position: absolute; left: 50%; top: 50%; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%; pointer-events: none; box-shadow: 0 0 0 1px rgba(255,255,255,.12); clip-path: inset(15px -2px 15px -2px); }
+.tb-fab { position: absolute; left: 50%; top: 50%; z-index: 2; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; text-decoration: none;
+  /* gedecktes PayPal-Gelb als Glas: halbdurchlässig und weichgezeichnet wie die Leiste */
+  background: linear-gradient(180deg, rgba(255,196,57,.36), rgba(214,150,20,.28)), rgba(26,20,46,.55); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); color: #ffe7a8;
+  border: 1px solid rgba(255,214,120,.45); box-shadow: 0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2); transition: transform .2s; -webkit-tap-highlight-color: transparent; }
+.tb-fab:active { transform: scale(.94); }
+.tabbar a.tb-fab { flex: none; width: 74px; height: 74px; border-radius: 50%; color: #ffe7a8; gap: 0; }
+.tb-fab svg path[fill="#003087"] { fill: #ffe7a8; } .tb-fab svg path[fill="#009cde"] { fill: #ffc439; }
+.tabbar a.tb-fab.on { background: linear-gradient(180deg, rgba(255,196,57,.36), rgba(214,150,20,.28)), rgba(26,20,46,.55); }
+.tb-fab svg { width: 30px; height: 30px; }
+.tb-fab-t { font: 800 11px var(--f-body); letter-spacing: .02em; }
+/* --- Leiste mit 6 Tabs am Clubabend --- */
+.tabbar.six a { font-size: 9.5px; }
+.tabbar.six a svg { width: 21px; height: 21px; }
+.tab-ava { width: 24px; height: 24px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; box-shadow: 0 0 0 1.5px rgba(255,255,255,.7); }
+.tab-ava img { width: 100%; height: 100%; object-fit: cover; }
+.tab-ava i { width: 100%; height: 100%; display: grid; place-items: center; font-style: normal; font-size: 13px; }
+.tab-ava b { width: 100%; height: 100%; display: grid; place-items: center; font: 400 12px var(--f-display); background: conic-gradient(from 210deg, #2d6bff, #ff2e88, #ffb347, #2d6bff); }
+.tabbar a.on .tab-ava { box-shadow: 0 0 0 2px #ffcf4a; }
+/* --- Spiele-Seite v99: Hochkant-Kachel wie im Menü --- */
+.tp-game { display: grid; grid-template-columns: 148px 1fr; align-items: stretch; }
+.tp-game .tile-btn.tp-art { height: 196px; border-radius: 24px 0 0 24px; border-width: 0 1px 0 0; padding: 12px; }
+.tp-game .tp-art .tp-art-t { position: relative; z-index: 1; }
+.tp-game .tp-art b { font-size: 18px; }
+.tp-game .tp-art small { font-size: 11.5px; }
+.tp-lb { grid-template-columns: 1fr; align-content: center; gap: 10px; padding: 14px; }
+.tp-play { justify-self: start; padding: 10px 22px; }
+.tp-mine { grid-column: auto; }
+/* --- Profilbild --- */
+.tp-ava { position: relative; border: 0; padding: 0; cursor: pointer; overflow: visible; color: #fff; }
+.tp-ava > img, .tp-ava > i, .tp-ava > b { width: 100%; height: 100%; border-radius: 50%; display: grid; place-items: center; object-fit: cover; font-style: normal; }
+.tp-ava > i { font-size: 36px; }
+.tp-ava > b { font: 400 30px var(--f-display); }
+.tp-ava-cam { position: absolute; right: -2px; bottom: -2px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: #fff; color: #14111f; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
+.tp-ava-cam svg { width: 15px; height: 15px; }
+.tp-avapick { padding: 14px; border-radius: 20px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); color: #fff; }
+.tp-avapick[hidden] { display: none; }
+.tp-avapick p { margin: 0 0 10px; font-weight: 800; }
+.tp-avagrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.tp-avagrid button { aspect-ratio: 1; border: 0; border-radius: 50%; font-size: 22px; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.35); }
+.tp-avaacts { display: flex; gap: 8px; margin-top: 12px; }
+.tp-avaacts > * { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: 14px; border: 0; font: 800 14px var(--f-body); background: rgba(255,255,255,.12); color: #fff; cursor: pointer; }
+.tp-avafile { background: #fff !important; color: #14111f !important; }
+.tp-avafile svg { width: 17px; height: 17px; }
+.tp-avafile input { display: none; }
+.tp-avapick small { display: block; margin-top: 10px; font-size: 11.5px; color: rgba(255,255,255,.55); }
+/* --- Dezember: Leiste mit Schneekante und Gold --- */
+.app.dezember .tabbar { border-color: rgba(233,183,124,.45); }
+.app.dezember .tabbar::before { content: ""; position: absolute; left: 26px; right: 26px; top: -4px; height: 10px; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 V8 C6 3 14 3 20 7 C28 2 40 2 48 6 C58 1 70 2 80 6 C90 2 104 3 112 7 C122 2 136 2 146 6 C156 1 170 2 180 6 C190 3 204 2 214 7 C224 2 238 3 248 6 C258 2 272 2 282 7 C288 4 296 4 300 8 V14 Z' fill='%23f3f6fb'/%3E%3C/svg%3E") center / 100% 100% no-repeat; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+.app.dezember .tabbar a.on svg { color: #e9b77c; }
+.app.dezember .tabbar a.on .tab-ava { box-shadow: 0 0 0 2px #e9b77c; }
+
+/* --- Spiele-Seite v103: breite Kachel, Bestenliste als Lasche darunter (Monat, Allzeit, Du, Vormonate) --- */
+.spiele-page .tp-game { display: block; margin: 0 0 16px; border-radius: 22px; overflow: hidden; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); }
+.spiele-page .tp-game .tile-btn.tp-art { height: 168px; border-radius: 22px 22px 0 0; border-width: 0 0 1px; padding: 12px 14px; }
+.spiele-page .tp-game .tp-art b { font-size: 22px; }
+.spiele-page .tp-game .tp-art small { font-size: 12px; }
+.spiele-page .tile-bus .bd-deck { left: 30%; top: 12%; width: 13%; }
+.spiele-page .tile-bus .bd-card { width: 16%; top: 10%; font-size: 13px; }
+.spiele-page .tile-bus .bd-card.a { left: 46%; } .spiele-page .tile-bus .bd-card.b { left: 61%; }
+.spiele-page .tile-bus .bd-arrow { right: 12%; top: 16%; } .spiele-page .tile-bus .bd-arrow.dn { top: 34%; }
+.spiele-page .tp-lb { display: grid; gap: 6px; padding: 10px 12px 12px; color: #fff; font-family: var(--f-body); }
+.tp-lbh { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.tp-lbh > span:first-child { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); white-space: nowrap; }
+.tp-at { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; font-weight: 600; color: rgba(255,207,74,.85); }
+.tp-at b { color: #ffcf4a; }
+.spiele-page .tp-rows { gap: 3px; }
+.spiele-page .tp-rows p { font-size: 13px; }
+.tp-you { display: flex; align-items: center; gap: 8px; margin-top: 1px; padding-top: 5px; border-top: 1px dashed rgba(255,255,255,.14); font-size: 13px; color: #7cf3e4; }
+.tp-you:empty { display: none; }
+.tp-you > em { font-style: normal; width: 14px; font-weight: 800; }
+.tp-yava { flex: none; width: 18px; height: 18px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; box-shadow: 0 0 0 1px rgba(124,243,228,.7); }
+.tp-yava img { width: 100%; height: 100%; object-fit: cover; } .tp-yava i { width: 100%; height: 100%; display: grid; place-items: center; font-style: normal; font-size: 10px; }
+.tp-yava b { width: 100%; height: 100%; display: grid; place-items: center; font: 400 9px var(--f-display); color: #fff; background: conic-gradient(from 210deg, #2d6bff, #ff2e88, #ffb347, #2d6bff); }
+.tp-you > b { flex: 1; font-weight: 700; }
+.tp-yv { font-weight: 700; }
+.tp-you.off { color: rgba(255,255,255,.5); } .tp-you.off .tp-yava { box-shadow: 0 0 0 1px rgba(255,255,255,.35); } .tp-you.off .tp-yv { font-weight: 600; font-size: 12px; }
+.tp-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 2px; }
+.tp-prev { border: 0; background: none; padding: 6px 0; color: rgba(255,255,255,.7); font: 800 12.5px var(--f-body); cursor: pointer; }
+.tp-prev i { font-style: normal; display: inline-block; transition: transform .2s; } .tp-prev[aria-expanded="true"] i { transform: rotate(180deg); }
+.spiele-page .tp-play { padding: 9px 18px; border-radius: 12px; font-size: 14px; }
+.tp-prevbox { display: grid; gap: 6px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.12); }
+.tp-prevbox[hidden] { display: none; }
+.tp-prevbox .tp-wait, .spiele-page .tp-rows .tp-wait { margin: 0; font-size: 12.5px; line-height: 1.4; font-weight: 600; color: rgba(255,255,255,.62); }
+.tp-pm { display: grid; gap: 2px; font-size: 12.5px; } .tp-pm > b { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.tp-pm span { display: flex; flex-wrap: wrap; gap: 2px 10px; font-weight: 700; } .tp-pm i { font-style: normal; margin-right: 3px; } .tp-pm small { color: rgba(255,255,255,.6); font-weight: 600; }
+.top-mon { font: 700 .55em var(--f-body); opacity: .7; text-transform: none; letter-spacing: 0; }
+/* ===== Feinschliff Standard-Design ===== */
+.tile-rank { position: relative; overflow: hidden; }
+.rk-art { position: absolute; right: 10px; top: 7px; width: 74px; height: 48px; pointer-events: none; }
+.rk-art svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.tile-rank::before { content: ""; position: absolute; right: -20px; top: -20px; width: 130px; height: 110px; background: radial-gradient(closest-side, rgba(255,210,90,.28), transparent); pointer-events: none; }
+.wish-art { display: none; }
+.hm-grid4 .hm-wish .hm-wish-ico { display: none; }
+.hm-grid4 .hm-wish .wish-art { display: block; position: absolute; left: 8px; right: 8px; top: 8px; height: 104px; pointer-events: none; }
+.hm-grid4 .hm-wish .wish-art svg { width: 100%; height: 100%; }
+.hm-sec { display: flex; align-items: baseline; gap: 6px; }
+.hm-sec::before { content: ""; align-self: center; flex: none; width: 6px; height: 18px; border-radius: 3px; background: linear-gradient(180deg, #ff5fa2, #ffb347); box-shadow: 0 0 10px rgba(255,95,162,.6); margin-right: 4px; }
+.hm-sec::after { content: ""; align-self: center; flex: 1; height: 1px; margin-left: 8px; background: linear-gradient(90deg, rgba(255,255,255,.28), transparent); }
+.view-menu { background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px 160px local,
+    radial-gradient(rgba(255,255,255,.055) 1px, transparent 1.4px) 0 0 / 18px 18px local,
+    radial-gradient(55% 22% at 0% 4%, rgba(45,107,255,.34), transparent 70%) 0 0 / 100% 1500px local,
+    radial-gradient(55% 22% at 100% 10%, rgba(255,46,136,.30), transparent 70%) 0 0 / 100% 1500px local,
+    radial-gradient(50% 20% at 100% 42%, rgba(124,58,237,.28), transparent 70%) 0 0 / 100% 1500px local,
+    radial-gradient(50% 20% at 0% 62%, rgba(47,243,224,.18), transparent 70%) 0 0 / 100% 1500px local,
+    radial-gradient(55% 22% at 100% 86%, rgba(255,140,60,.22), transparent 70%) 0 0 / 100% 1500px local,
+    #07060f; }
+
 .hm-pay { justify-content: space-between; }
 .tile-btn.hm-pay .pp-mark svg { display: block; width: 34px; height: 34px; }
 .hm-pay .hm-pay-txt { display: block; margin-top: auto; }
@@ -2355,7 +2615,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "96";
+const APP_V = "104";
 
 const EVENTS = [
   {
@@ -3287,38 +3547,8 @@ function hhStatus(ev, now = new Date()) {
 }
 
 
-function renderDetail(ev) {
-  current = ev;
-  const past = isPast(ev);
-  const sections = [];
-  if (ev.markt) sections.push(["s-markt", ev.markt.titel || "Weihnachtsmarkt"]);
-  if (ev.specials && ev.specials.length) sections.push(["s-specials", "Specials"]);
-  if (ev.happyHour) sections.push(["s-happy", "Happy Hour"]);
-  sections.push(["s-karte", "Getränkekarte"]);
-  const nextLabel = (id) => { const k = sections.findIndex((s) => s[0] === id); return sections[k + 1] ? moreHint("Weiter zu " + sections[k + 1][1]) : ""; };
-
-  const facts = [
-    ["Tag", `${ev.wd} ${ev.dm}`],
-    ["Beginn", `${ev.time} Uhr`],
-    ["Ort", ev.ort]
-  ].map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("");
-
-  const reg = ev.anmeldung && !past ? `
-    <div class="reg">
-      <div class="reg-head"><b>${esc(ev.art || "Anmeldung")}</b><span>Start ${esc(ev.time)} Uhr</span></div>
-      <a class="reg-btn" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener">${esc(ev.anmeldung.text)} ${ICON_EXT}</a>
-      <small>Die Anmeldung läuft über Google Formulare.</small>
-    </div>` : "";
-  const pastBox = past ? `
-    <div class="past-box">
-      <p><b>Dieser Abend ist vorbei.</b> Danke, dass ihr da wart!</p>
-      ${ev.fotos ? (Fotos.enabled(ev) ? `<a class="fg-strip" href="#fotos-${ev.id}" data-fgstrip="${ev.id}" aria-label="Fotos vom Abend ansehen"><span class="fg-strip-pics"></span><span class="fg-strip-txt">${ICON_CAM}Fotos vom Abend ${ICON_ARROW}</span></a>`
-        : `<a class="reg-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">Fotos ansehen ${ICON_EXT}</a>`) : `<p>Die Fotos folgen bald.</p>`}
-    </div>` : "";
-  const items = [...(ev.ablauf || [])];
-  if (ev.musik) items.push({ zeit: ev.musik.zeit.replace(" Uhr", ""), was: ev.musik.text });
-  const timeline = items.length ? `<ul class="timeline">${items.map((a) => `<li><time>${esc(a.zeit)}</time><span>${esc(a.was)}</span></li>`).join("")}</ul>` : "";
-
+/* Markt, Specials, Happy Hour und Getränkekarte eines Abends (Detailseite und Drinks-Tab) */
+function drinkBlocks(ev, nextLabel = () => "") {
   const markt = ev.markt ? `
     <section class="block" id="s-markt" aria-labelledby="h-markt">
       <h3 class="sec-title" id="h-markt">${esc(ev.markt.titel || "Weihnachtsmarkt")}</h3>
@@ -3367,6 +3597,42 @@ function renderDetail(ev) {
       ${KARTE.jugendschutz ? `<p class="menu-legal">${esc(KARTE.jugendschutz)}</p>` : ""}
     </section>`;
 
+  return `${markt}${specials}${hh}${karte}`;
+}
+function renderDetail(ev) {
+  current = ev;
+  const past = isPast(ev);
+  const sections = [];
+  if (ev.markt) sections.push(["s-markt", ev.markt.titel || "Weihnachtsmarkt"]);
+  if (ev.specials && ev.specials.length) sections.push(["s-specials", "Specials"]);
+  if (ev.happyHour) sections.push(["s-happy", "Happy Hour"]);
+  sections.push(["s-karte", "Getränkekarte"]);
+  const nextLabel = (id) => { const k = sections.findIndex((s) => s[0] === id); return sections[k + 1] ? moreHint("Weiter zu " + sections[k + 1][1]) : ""; };
+
+  const facts = [
+    ["Tag", `${ev.wd} ${ev.dm}`],
+    ["Beginn", `${ev.time} Uhr`],
+    ["Ort", ev.ort]
+  ].map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("");
+
+  const reg = ev.anmeldung && !past ? `
+    <div class="reg">
+      <div class="reg-head"><b>${esc(ev.art || "Anmeldung")}</b><span>Start ${esc(ev.time)} Uhr</span></div>
+      <a class="reg-btn" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener">${esc(ev.anmeldung.text)} ${ICON_EXT}</a>
+      <small>Die Anmeldung läuft über Google Formulare.</small>
+    </div>` : "";
+  const pastBox = past ? `
+    <div class="past-box">
+      <p><b>Dieser Abend ist vorbei.</b> Danke, dass ihr da wart!</p>
+      ${ev.fotos ? (Fotos.enabled(ev) ? `<a class="fg-strip" href="#fotos-${ev.id}" data-fgstrip="${ev.id}" aria-label="Fotos vom Abend ansehen"><span class="fg-strip-pics"></span><span class="fg-strip-txt">${ICON_CAM}Fotos vom Abend ${ICON_ARROW}</span></a>`
+        : `<a class="reg-btn" href="${esc(ev.fotos)}" target="_blank" rel="noopener">Fotos ansehen ${ICON_EXT}</a>`) : `<p>Die Fotos folgen bald.</p>`}
+    </div>` : "";
+  const items = [...(ev.ablauf || [])];
+  if (ev.musik) items.push({ zeit: ev.musik.zeit.replace(" Uhr", ""), was: ev.musik.text });
+  const timeline = items.length ? `<ul class="timeline">${items.map((a) => `<li><time>${esc(a.zeit)}</time><span>${esc(a.was)}</span></li>`).join("")}</ul>` : "";
+
+  const blocks = drinkBlocks(ev, nextLabel);
+
   const d = $("detail");
   d.className = `view view-detail t-${ev.thema}`;
   d.style.cssText = themeStyle(ev.th);
@@ -3395,7 +3661,7 @@ function renderDetail(ev) {
       ${sections.map(([id, label], k) => `<button type="button" data-target="${id}" aria-current="${k === 0}">${label}</button>`).join("")}
     </nav>
     <div class="content">
-      ${markt}${specials}${hh}${karte}
+      ${blocks}
       <a class="club-card" href="#ranking">
         <span class="club-card-live"><span class="live-dot"></span>Live</span>
         <b>Sauf-Ranking &amp; Wünsche</b>
@@ -3724,23 +3990,50 @@ const Live = (() => {
 })();
 
 /* Beerpong-Top 10 */
+/* ================= Monats-Bestenlisten =================
+   Jeder neue Eintrag bekommt den Monat (deutsche Zeit, „2026-11“). Die Spiele-Bestenlisten zeigen den laufenden Monat,
+   der Allzeit-Rekord und die Top 3 der Vormonate kommen aus derselben Sammlung. */
+const MONAT_START = "2026-11";   /* erster Monat mit Monatswertung */
+/* eigener Bestwert im laufenden Monat (nur auf dem Handy) */
+function monatBest(key, v) {
+  const k = "exmaMB_" + key, m = monatKey();
+  let c = null; try { c = JSON.parse(localStorage.getItem(k) || "null"); } catch {}
+  if (!c || c.m !== m || v > c.v) { try { localStorage.setItem(k, JSON.stringify({ m, v })); } catch {} }
+}
+function myMonat(key) { try { const c = JSON.parse(localStorage.getItem("exmaMB_" + key) || "null"); return c && c.m === monatKey() ? c.v : null; } catch { return null; } }
+const MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+const monatKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+const monatName = (k = monatKey()) => MONATE[+k.slice(5) - 1] + (k.slice(0, 4) !== String(new Date().getFullYear()) ? " " + k.slice(0, 4) : "");
+const monatPrev = (k, n = 1) => { const [y, m] = k.split("-").map(Number); return monatKey(new Date(y, m - 1 - n, 1)); };
+const entryMonat = (e) => e.monat || monatKey(new Date(e.at && e.at.toMillis ? e.at.toMillis() : typeof e.at === "number" ? e.at : +e.id || Date.now()));
+async function boardList(col, field, sort, local, scope, n) {
+  if (!Live.remote) { const l = local(); return sort(scope === "alle" ? l : l.filter((e) => entryMonat(e) === scope)); }
+  let qs;
+  if (scope === "alle") qs = await FB.db.collection(col).orderBy(field, "desc").limit(n).get();
+  else {
+    try { qs = await FB.db.collection(col).where("monat", "==", scope).orderBy(field, "desc").limit(n).get(); }
+    catch (e) {   /* Index noch nicht angelegt: ohne Sortierung holen und selbst sortieren */
+      if (!e || e.code !== "failed-precondition") throw e;
+      console.warn("Firestore-Index für die Monats-Bestenliste fehlt noch", e);
+      qs = await FB.db.collection(col).where("monat", "==", scope).limit(60).get();
+    }
+  }
+  return sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })));
+}
+
 const Top = {
   KEY: "exmaBeerpongTop",
   sort: (l) => l.sort((a, b) => b.cups - a.cups || a.ms - b.ms).slice(0, 10),
   local() { try { return JSON.parse(localStorage.getItem(this.KEY) || "[]"); } catch { return []; } },
-  async list() {
-    if (!Live.remote) return this.sort(this.local());
-    const qs = await FB.db.collection("beerpong").orderBy("cups", "desc").limit(20).get();
-    return this.sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })));
-  },
+  list(scope = monatKey()) { return boardList("beerpong", "cups", (l) => this.sort(l), () => this.local(), scope, 20); },
   async add(entry) {
     if (!Live.remote) {
       const id = String(Date.now());
-      const l = this.sort([...this.local(), { ...entry, id }]);
+      const l = [...this.local(), { ...entry, id, monat: monatKey() }].sort((a, b) => b.cups - a.cups || a.ms - b.ms).slice(0, 60);
       try { localStorage.setItem(this.KEY, JSON.stringify(l)); } catch {}
       return id;
     }
-    const ref = await FB.db.collection("beerpong").add({ name: entry.name, cups: entry.cups, ms: Math.round(entry.ms), at: FB.fv.serverTimestamp(), uid: FB.user.uid });
+    const ref = await FB.db.collection("beerpong").add({ name: entry.name, cups: entry.cups, ms: Math.round(entry.ms), at: FB.fv.serverTimestamp(), uid: FB.user.uid, monat: monatKey() });
     return ref.id;
   },
   async remove(id) {
@@ -4082,7 +4375,7 @@ async function loadTeamList() {
   document.querySelectorAll(".tl-tabs button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.tl === teamList ? "true" : "false"));
   box.innerHTML = `<p class="prost-small">Lädt …</p>`;
   let list = [];
-  try { list = await L.api().list(); } catch { box.innerHTML = `<p class="prost-small">Liste konnte nicht geladen werden.</p>`; return; }
+  try { list = await L.api().list("alle"); } catch { box.innerHTML = `<p class="prost-small">Liste konnte nicht geladen werden.</p>`; return; }
   box.innerHTML = list.length ? list.map((e, k) => `
     <div class="tl-item"><span class="tl-r">${k + 1}</span><span class="tl-n">${esc(e.name)}</span><span class="tl-s">${esc(L.fmt(e))}</span>
     <button type="button" data-del="${esc(e.id)}" aria-label="Eintrag von ${esc(e.name)} löschen">×</button></div>`).join("")
@@ -4721,6 +5014,8 @@ const Game = (() => {
   function gameOver() {
     over = true; tEnd = performance.now();
     Badges.played("beerpong");
+    if (cleared > (parseInt(store.get("exmaBpBest") || "0", 10) || 0)) store.set("exmaBpBest", String(cleared));
+    monatBest("beerpong", cleared);
     const ms = tEnd - tStart;
     buzz([80, 60, 120]);
     const box = $("bpOver");
@@ -4757,7 +5052,7 @@ const Game = (() => {
     const C = 2 * Math.PI * 9;
     box.innerHTML = `
       <div class="bp-card" role="dialog" aria-label="Bestenliste">
-        <h3>Top 10</h3>
+        <h3>Top 10 <small class="top-mon">${monatName()}</small></h3>
         <ol class="bp-list">${list.length ? list.map((e, i) => `<li class="${mineId && e.id === mineId ? "me" : ""}"><span class="r">${i + 1}</span><span class="n">${esc(e.name)}</span><span class="c">${e.cups} Becher</span><span class="t">${fmt(e.ms)}</span></li>`).join("") : `<li><span></span><span class="n">Noch keine Einträge</span></li>`}</ol>
         <div class="bp-count"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" class="tr"/><circle cx="12" cy="12" r="9" class="fl" id="bpCount" style="stroke-dasharray:${C};stroke-dashoffset:0"/></svg><span id="bpCountTxt">Zurück in 10 s</span></div>
         <div class="row2"><button class="ghost" id="bpAgain" type="button">Nochmal</button><button class="primary" id="bpDone" type="button">Schließen</button></div>
@@ -4838,19 +5133,15 @@ const BusTop = {
   KEY: "exmaBusTop", COL: "busfahrer",
   sort: (l) => l.sort((a, b) => b.score - a.score || busAt(a) - busAt(b)).slice(0, 10),
   local() { try { return JSON.parse(localStorage.getItem(this.KEY) || "[]"); } catch { return []; } },
-  async list() {
-    if (!Live.remote) return this.sort(this.local());
-    const qs = await FB.db.collection(this.COL).orderBy("score", "desc").limit(12).get();
-    return this.sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })));
-  },
+  list(scope = monatKey()) { return boardList(this.COL, "score", (l) => this.sort(l), () => this.local(), scope, 12); },
   async add(entry) {
     if (!Live.remote) {
       const id = String(Date.now());
-      const l = this.sort([...this.local(), { ...entry, id, at: Date.now() }]);
+      const l = [...this.local(), { ...entry, id, at: Date.now(), monat: monatKey() }].sort((a, b) => b.score - a.score).slice(0, 60);
       try { localStorage.setItem(this.KEY, JSON.stringify(l)); } catch {}
       return id;
     }
-    const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, at: FB.fv.serverTimestamp(), uid: FB.user.uid });
+    const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, at: FB.fv.serverTimestamp(), uid: FB.user.uid, monat: monatKey() });
     return ref.id;
   },
   async remove(id) {
@@ -4929,6 +5220,7 @@ const Bus = (() => {
     made++; Badges.tally("bus", 1);
     Badges.bus(made);
     if (made > best) { best = made; store.set("exmaBusBest", String(best)); }
+    monatBest("busfahrer", made);
     if (res === "tie") { toast("Gleich – weiter!"); buzz(30); } else buzz(15);
     hud();
     if (made >= CALLS) { over = true; hud(); toast("Geschafft!"); buzz([80, 60, 80, 60, 200]); setTimeout(() => showOver(true), 1300); return; }
@@ -4977,7 +5269,7 @@ const Bus = (() => {
     box.hidden = false;
     box.innerHTML = `
       <div class="bp-card" role="dialog" aria-label="Bestenliste Busfahrer">
-        <h3>Top 10</h3>
+        <h3>Top 10 <small class="top-mon">${monatName()}</small></h3>
         <ol class="bp-list">${list.length ? list.map((e, k) => `<li class="${mineId && e.id === mineId ? "me" : ""}"><span class="r">${k + 1}</span><span class="n">${esc(e.name)}</span><span class="c">${e.score} / ${CALLS}</span><span class="t"></span></li>`).join("") : `<li><span></span><span class="n">Noch keine Einträge</span></li>`}</ol>
         <div class="row2"><button class="ghost" id="busDone" type="button">Schließen</button><button class="primary" id="busAgain2" type="button">Neu mischen</button></div>
       </div>`;
@@ -5022,19 +5314,15 @@ const ZapfTop = {
   KEY: "exmaZapfTop", COL: "zapfmeister",
   sort: (l) => l.sort((a, b) => b.score - a.score || zapfAt(a) - zapfAt(b)).slice(0, 10),
   local() { try { return JSON.parse(localStorage.getItem(this.KEY) || "[]"); } catch { return []; } },
-  async list() {
-    if (!Live.remote) return this.sort(this.local());
-    const qs = await FB.db.collection(this.COL).orderBy("score", "desc").limit(12).get();
-    return this.sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })));
-  },
+  list(scope = monatKey()) { return boardList(this.COL, "score", (l) => this.sort(l), () => this.local(), scope, 12); },
   async add(entry) {
     if (!Live.remote) {
       const id = String(Date.now());
-      const l = this.sort([...this.local(), { ...entry, id, at: Date.now() }]);
+      const l = [...this.local(), { ...entry, id, at: Date.now(), monat: monatKey() }].sort((a, b) => b.score - a.score).slice(0, 60);
       try { localStorage.setItem(this.KEY, JSON.stringify(l)); } catch {}
       return id;
     }
-    const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, glasses: entry.glasses, at: FB.fv.serverTimestamp(), uid: FB.user.uid });
+    const ref = await FB.db.collection(this.COL).add({ name: entry.name, score: entry.score, glasses: entry.glasses, at: FB.fv.serverTimestamp(), uid: FB.user.uid, monat: monatKey() });
     return ref.id;
   },
   async remove(id) {
@@ -5554,6 +5842,7 @@ const Zapf = (() => {
     const splitG = glass.drink === "guinness" && Math.abs(glass.levelY(P - DRINKS.guinness.head * P) - (glass.yBot - glass.h * .46)) <= 2.2;
     Badges.tally("z", 1); Badges.zapf(n, level, splitG);
     if (totalH > best) { best = totalH; store.set("exmaZapfBest", String(best)); }
+    monatBest("zapfmeister", totalH / 100);
     pctBox(fmtPct(level), "ok", `+${fmtPts(pts)} Punkte`);
     toast(level >= .995 ? "Perfekt gezapft!" : level >= .97 ? "Sauber!" : "Passt!");
     buzz(level >= .995 ? [30, 40, 80] : 25);
@@ -5633,7 +5922,7 @@ const Zapf = (() => {
     const box = $("zfOver"); box.hidden = false;
     box.innerHTML = `
       <div class="bp-card" role="dialog" aria-label="Bestenliste Zapfmeister">
-        <h3>Top 10</h3>
+        <h3>Top 10 <small class="top-mon">${monatName()}</small></h3>
         <ol class="bp-list">${list.length ? list.map((e, k) => `<li class="${mineId && e.id === mineId ? "me" : ""}"><span class="r">${k + 1}</span><span class="n">${esc(e.name)}</span><span class="c">${fmtPts(Math.round(e.score * 100))}</span><span class="t">${e.glasses} Gl.</span></li>`).join("") : `<li><span></span><span class="n">Noch keine Einträge</span></li>`}</ol>
         <div class="row2"><button class="ghost" id="zfDone" type="button">Schließen</button><button class="primary" id="zfAgain2" type="button">Nochmal</button></div>
       </div>`;
@@ -6982,6 +7271,8 @@ const Badges = (() => {
       if (st.champ && st.champ === mine) unlock("champion");
     },
     count: () => BADGE_LIST.filter((b) => have[b.id]).length,
+    visits: () => log.visits.length,
+    runs: () => (log.tot && log.tot.runs) || 0,
     has: (id) => !!have[id],
     latest: () => Object.entries(have).sort((a, b) => b[1] - a[1]).map(([k]) => k).find((k) => BMAP[k]) || null,
     recent: (n) => [...new Set(Object.entries(have).sort((a, b) => b[1] - a[1]).map(([k]) => k).filter((k) => BMAP[k]).map((k) => BMAP[k].grp ? `${BMAP[k].grp}-${topLv(BMAP[k].grp)}` : k))].slice(0, n),
@@ -7540,15 +7831,65 @@ function zapfDemo() {
     for (let i = 0; i < 8; i++) { const x = 10 + i * 20, y = 6 + Math.abs(Math.sin(x / 160 * Math.PI * 2)) * 7 - 1; girl += `<circle cx="${x}" cy="${y.toFixed(1)}" r="4" fill="rgba(255,214,138,.4)"/><circle cx="${x}" cy="${y.toFixed(1)}" r="1.6" fill="#ffe7b0"/>`; }
     return `<span class="zd xm" aria-hidden="true"><svg class="zd-girl" viewBox="0 0 160 26" preserveAspectRatio="none">${girl}</svg><span class="zd-tap"></span><span class="zd-stream"></span><span class="zd-steam"><i></i><i></i></span><span class="zd-glass"><span class="zd-foam"></span><span class="zd-beer"></span><span class="zd-garn"><i class="o"></i><i class="z"></i></span></span><span class="zd-henkel"></span></span>`;
   }
-  return `<span class="zd" aria-hidden="true"><span class="zd-tap"></span><span class="zd-stream"></span><span class="zd-glass"><span class="zd-foam"></span><span class="zd-beer"></span></span></span>`;
+  return zapfSzene();
+}
+/* Standard-Kachel Zapfmeister: Regal mit Flaschen, Neonleiste, Zapfhahn und Willibecher, der sich füllt */
+function zapfSzene() {
+  let sd = 3; const rnd = () => ((sd = (sd * 16807) % 2147483647) / 2147483647);
+  const cols = ["#3d7a3a", "#c98b2a", "#8a3a1e", "#e3d6b0", "#2e4f8a", "#a3263a", "#d8b24a", "#5b8a3a"];
+  let bottles = "";
+  [[60, 0], [104, 1]].forEach(([y, row]) => {
+    let x = 4;
+    while (x < 156) {
+      const w = 7 + rnd() * 5, h = 18 + rnd() * 14, c = cols[Math.floor(rnd() * cols.length)], nw = w * .38;
+      if (!(row === 1 && x > 64 && x < 98)) {
+        bottles += `<rect x="${x.toFixed(1)}" y="${(y - h * .62).toFixed(1)}" width="${w.toFixed(1)}" height="${(h * .62).toFixed(1)}" rx="1.6" fill="${c}"/><rect x="${(x + (w - nw) / 2).toFixed(1)}" y="${(y - h).toFixed(1)}" width="${nw.toFixed(1)}" height="${(h * .4).toFixed(1)}" rx="1" fill="${c}"/><rect x="${(x + w * .18).toFixed(1)}" y="${(y - h * .4).toFixed(1)}" width="${(w * .64).toFixed(1)}" height="${(h * .16).toFixed(1)}" fill="#f6ecd2" opacity=".8"/><rect x="${(x + 1).toFixed(1)}" y="${(y - h * .58).toFixed(1)}" width="1.4" height="${(h * .5).toFixed(1)}" fill="#fff" opacity=".25"/>`;
+      }
+      x += w + 2 + rnd() * 3;
+    }
+  });
+  return `<span class="zd zs" aria-hidden="true"><svg viewBox="0 0 160 200" preserveAspectRatio="xMidYMin slice">
+    <defs>
+      <linearGradient id="zsWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0d06"/><stop offset=".6" stop-color="#3a2210"/><stop offset="1" stop-color="#2a170a"/></linearGradient>
+      <linearGradient id="zsChrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7d838c"/><stop offset=".45" stop-color="#eef1f5"/><stop offset="1" stop-color="#8d939b"/></linearGradient>
+      <linearGradient id="zsBeer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25a"/><stop offset="1" stop-color="#e08a12"/></linearGradient>
+      <clipPath id="zsGlass"><path d="M64 74 L96 74 L92 122 L68 122 Z"/></clipPath>
+    </defs>
+    <rect width="160" height="200" fill="url(#zsWall)"/>
+    <circle cx="26" cy="20" r="16" fill="#ffb347" opacity=".14"/><circle cx="136" cy="30" r="20" fill="#ff5fa2" opacity=".12"/><circle cx="96" cy="8" r="10" fill="#ffd23f" opacity=".14"/>
+    ${bottles}
+    <rect x="0" y="60" width="160" height="3" fill="#5a3a1c"/><rect x="0" y="63" width="160" height="1.6" fill="#2ff3e0" opacity=".75"/><rect x="0" y="62" width="160" height="5" fill="#2ff3e0" opacity=".12"/>
+    <rect x="0" y="104" width="160" height="3" fill="#5a3a1c"/><rect x="0" y="107" width="160" height="1.6" fill="#ff5fa2" opacity=".75"/><rect x="0" y="106" width="160" height="5" fill="#ff5fa2" opacity=".12"/>
+    <rect x="108" y="40" width="9" height="88" rx="2" fill="url(#zsChrome)"/>
+    <rect x="76" y="36" width="41" height="8" rx="4" fill="url(#zsChrome)"/>
+    <rect x="77" y="44" width="6" height="10" rx="1.5" fill="url(#zsChrome)"/>
+    <g class="zs-handle"><rect x="77.5" y="12" width="5" height="25" rx="2.5" fill="#151517"/><rect x="77" y="16" width="6" height="11" rx="1.5" fill="#ffd23f"/></g>
+    <circle cx="112.5" cy="70" r="9" fill="#151517" stroke="#ff5fa2" stroke-width="1.6"/><text x="112.5" y="72.6" text-anchor="middle" font-size="5.6" font-weight="700" fill="#fff" font-family="Georgia, serif">EXMA</text>
+    <rect class="zs-stream" x="79" y="54" width="2.4" height="${122 - 54}" fill="#f3b130"/>
+    <g clip-path="url(#zsGlass)">
+      <rect x="60" y="74" width="40" height="48" fill="rgba(255,255,255,.08)"/>
+      <rect class="zs-foam" x="60" y="74" width="40" height="48" fill="#fffaf0"/>
+      <rect class="zs-beer" x="60" y="74" width="40" height="48" fill="url(#zsBeer)"/>
+    </g>
+    <path d="M64 74 L96 74 L92 122 L68 122 Z" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M67.5 80 L70.5 116" stroke="#fff" stroke-width="1.6" opacity=".35" stroke-linecap="round"/>
+    <rect x="0" y="122" width="160" height="6" fill="#8a5a2a"/><rect x="0" y="122" width="160" height="1.4" fill="#c88a4a"/><rect x="0" y="128" width="160" height="72" fill="#4a2c14"/>
+    <rect x="58" y="120" width="44" height="4" rx="1.5" fill="#1f1f24"/>
+  </svg></span>`;
 }
 
 /* Kleine Demo für die Busfahrer-Kachel */
 function busDemo() {
   return `<span class="bd" aria-hidden="true">
+    <svg class="bd-felt" viewBox="0 0 160 200" preserveAspectRatio="none"><defs><pattern id="bdWeave" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 3h6" stroke="#fff" stroke-width=".6" opacity=".05"/></pattern><radialGradient id="bdSpot" cx=".5" cy=".3" r=".6"><stop offset="0" stop-color="#fff6c8" stop-opacity=".22"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></radialGradient></defs>
+      <rect width="160" height="200" fill="url(#bdWeave)"/><rect width="160" height="200" fill="url(#bdSpot)"/>
+      <rect x="9" y="9" width="142" height="182" rx="16" fill="none" stroke="#ffd23f" stroke-width="1" opacity=".35"/>
+      <ellipse cx="80" cy="66" rx="66" ry="44" fill="none" stroke="#ffd23f" stroke-width=".8" stroke-dasharray="3 3" opacity=".3"/></svg>
+    <span class="bd-deck"><i></i><i></i><i></i></span>
     <span class="bd-card a red">7<i>♥</i></span>
     <span class="bd-card b">K<i>♠</i></span>
     <svg class="bd-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg class="bd-arrow dn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </span>`;
 }
 
@@ -7610,9 +7951,18 @@ function gameDemo() {
   if (isDezember()) return gameDemoXm();
   const p = "gd_";
   const cupS = (cx, ty, w) => { const h = w * 1.12, b = w * .36;
-    return `<path d="M${cx - w / 2} ${ty} L${cx + w / 2} ${ty} L${cx + b} ${ty + h} L${cx - b} ${ty + h} Z" fill="url(#${p}cup)"/>
+    return `<ellipse cx="${cx + 1.5}" cy="${ty + h + .5}" rx="${b * 1.3}" ry="${w * .12}" fill="#000" opacity=".35"/>
+      <path d="M${cx - w / 2} ${ty} L${cx + w / 2} ${ty} L${cx + b} ${ty + h} L${cx - b} ${ty + h} Z" fill="url(#${p}cup)"/>
+      <path d="M${cx - w * .47} ${ty + h * .1} L${cx + w * .47} ${ty + h * .1} L${cx + w * .46} ${ty + h * .17} L${cx - w * .46} ${ty + h * .17} Z" fill="#fff" opacity=".85"/>
+      <path d="M${cx - w * .3} ${ty + h * .25} L${cx - w * .24} ${ty + h * .9}" stroke="#fff" stroke-width="${(w * .07).toFixed(2)}" stroke-linecap="round" opacity=".45"/>
       <ellipse cx="${cx}" cy="${ty}" rx="${w / 2}" ry="${w * .24}" fill="#5c0014" stroke="#fff" stroke-width=".8"/>
-      <ellipse cx="${cx}" cy="${ty + w * .03}" rx="${w * .36}" ry="${w * .16}" fill="#f2b33d"/>`; };
+      <ellipse cx="${cx}" cy="${ty + w * .03}" rx="${w * .36}" ry="${w * .16}" fill="#f2b33d"/>
+      <ellipse cx="${cx - w * .1}" cy="${ty + w * .0}" rx="${w * .14}" ry="${w * .05}" fill="#fff3c4" opacity=".7"/>`; };
+  let stars = "";
+  for (let i = 0; i < 18; i++) stars += `<circle cx="${(i * 47) % 160}" cy="${((i * 29) % 40) + 2}" r="${(.4 + (i % 3) * .35).toFixed(2)}" fill="#fff" opacity="${(.35 + (i % 4) * .15).toFixed(2)}"/>`;
+  let grid = "";
+  for (let k = -6; k <= 6; k++) grid += `<path d="M${80 + k * 6} 56 L${80 + k * 30} 130" stroke="#ff5fd1" stroke-width=".6" opacity=".35"/>`;
+  [60, 66, 74, 85, 100, 120].forEach((y) => { const t = (y - 56) / 74, x0 = 44 - 54 * t, x1 = 116 + 54 * t; grid += `<path d="M${x0.toFixed(1)} ${y} L${x1.toFixed(1)} ${y}" stroke="#ff5fd1" stroke-width=".6" opacity="${(.2 + t * .25).toFixed(2)}"/>`; });
   let cups = "";
   [[3, 52, 15], [2, 61, 16.5], [1, 71, 18]].forEach(([n, y, w]) => { for (let k = 0; k < n; k++) cups += cupS(80 + (k - (n - 1) / 2) * w * 1.05, y, w); });
   const anim = reduceMotion ? `<circle cx="96" cy="40" r="4" fill="#fff"/>` : `
@@ -7620,7 +7970,9 @@ function gameDemo() {
       <circle r="7" fill="#fff"><animate attributeName="r" values="8;4;4" keyTimes="0;.6;1" dur="3s" repeatCount="indefinite"/></circle>
       <animateMotion path="M118 128 Q100 0 80 70" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear" dur="3s" repeatCount="indefinite"/>
     </g>
+    <path d="M118 128 Q100 0 80 70" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="2 5" opacity="0"><animate attributeName="opacity" values="0;.45;.45;0;0" keyTimes="0;.1;.55;.65;1" dur="3s" repeatCount="indefinite"/></path>
     <g opacity="0"><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;.6;.63;.8;1" dur="3s" repeatCount="indefinite"/>
+      <circle cx="80" cy="68" r="9" fill="none" stroke="#ffd166" stroke-width="1.4"><animate attributeName="r" values="3;3;12;12" keyTimes="0;.6;.8;1" dur="3s" repeatCount="indefinite"/></circle>
       <path d="M72 66 l-5 -5 M88 66 l5 -5 M80 63 v-7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
     </g>
     <g opacity="0"><animate attributeName="opacity" values="0;.9;0;0" keyTimes="0;.05;.25;1" dur="3s" repeatCount="indefinite"/>
@@ -7631,11 +7983,19 @@ function gameDemo() {
       <linearGradient id="${p}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b0a4f"/><stop offset=".5" stop-color="#b0127a"/><stop offset="1" stop-color="#ff7a3d"/></linearGradient>
       <linearGradient id="${p}tab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e0838"/><stop offset="1" stop-color="#4a1a86"/></linearGradient>
       <linearGradient id="${p}cup" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a0010"/><stop offset=".3" stop-color="#ff3b3b"/><stop offset="1" stop-color="#6a000e"/></linearGradient>
+      <linearGradient id="${p}sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a8"/><stop offset=".55" stop-color="#ffb347"/><stop offset="1" stop-color="#ff5f6d"/></linearGradient>
     </defs>
     <rect width="160" height="62" fill="url(#${p}sky)"/>
-    <circle cx="80" cy="60" r="26" fill="#ffd166" opacity=".85"/>
+    ${stars}
+    <circle cx="80" cy="60" r="28" fill="#ff9a3d" opacity=".25"/>
+    <circle cx="80" cy="60" r="26" fill="url(#${p}sun)"/>
+    <path d="M52 47 H108 M50 51.5 H110 M48 55 H112" stroke="#b0127a" stroke-width="1.6"/>
+    <path d="M-4 58 L14 44 L24 50 L36 38 L50 56 Z M110 56 L124 40 L134 48 L146 36 L164 58 Z" fill="#3a0d63" opacity=".9"/>
     <path d="M44 56 L116 56 L170 130 L-10 130 Z" fill="url(#${p}tab)"/>
+    ${grid}
+    <path d="M44 56 L-10 130 M116 56 L170 130 M44 56 L116 56" stroke="#2ff3e0" stroke-width="4" opacity=".18"/>
     <path d="M44 56 L-10 130 M116 56 L170 130" stroke="#2ff3e0" stroke-width="1.4"/>
+    <path d="M44 56 L116 56" stroke="#2ff3e0" stroke-width=".9" opacity=".8"/>
     ${cups}
     ${anim}
   </svg>`;
@@ -7679,9 +8039,10 @@ const phaseStyle = (th) => {
 };
 function phSpecials(ev) {
   const list = ev.specials || []; if (!list.length) return "";
-  return `<h3 class="ph-h">Heute im Angebot</h3><div class="ph-specs n${Math.min(list.length, 3)}">${list.map((sp) => {
+  /* große Querkacheln wie auf der Drinks-Seite */
+  return `<h3 class="ph-h">Heute im Angebot</h3><div class="drinks sp-bigs">${list.map((sp) => {
     const d = DRINKS[sp.bild] || DRINKS.lemon;
-    return `<a class="ph-spec" href="#${ev.id}" style="--c:${d.glow}"><span class="ph-art">${drinkArt(sp.bild)}</span><span class="ph-sn"><b>${esc(sp.name)}</b><em>${trEuro(sp.preis)}</em></span></a>`;
+    return `<a class="drink sp-big" href="#drinks" style="--c:${d.glow}"><div class="drink-pic">${drinkArt(sp.bild)}</div><div class="drink-body"><h3>${esc(sp.name)}</h3>${sp.info ? `<p>${esc(sp.info)}</p>` : ""}<span class="price">${euro(sp.preis)}</span></div></a>`;
   }).join("")}</div>`;
 }
 function phHappy(ev, now) {
@@ -7837,7 +8198,14 @@ function buildMenu() {
   };
   const PPM = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg>`;
   const quick = `<div class="hm-quick">
-      <a class="tile-btn tile-rank" href="#ranking"><span class="crowns">${crown}${crown}</span><span><b>Sauf-<br>Ranking</b><small>Counter · Matrikel-Duell</small></span></a>
+      <a class="tile-btn tile-rank" href="#ranking"><span class="rk-art" aria-hidden="true"><svg viewBox="0 0 120 78"><defs><linearGradient id="rkBeer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25a"/><stop offset="1" stop-color="#e08a12"/></linearGradient></defs>
+        ${[[8, 40, "#ff6b6b"], [44, 58, "#ffd23f"], [80, 30, "#ff9a5a"]].map(([x, h, c], i) => `<g><path d="M${x + 26} ${78 - h + 10} h5 a5 5 0 0 1 5 5 v${Math.max(4, h - 26)} a5 5 0 0 1 -5 5 h-5" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2.6"/>
+          <rect x="${x}" y="${78 - h}" width="28" height="${h}" rx="4" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.75)" stroke-width="1.6"/>
+          <rect x="${x + 2}" y="${78 - h + 8}" width="24" height="${h - 10}" rx="2.5" fill="url(#rkBeer)"/>
+          <path d="M${x - 1} ${78 - h + 9} q3.5 -7 7 -2 q3.5 -6 7 -1 q3.5 -6 7 -1 q3.5 -6 8 1 v3 h-29 z" fill="#fffaf0"/>
+          <rect x="${x + 6}" y="${78 - h + 14}" width="3" height="${h - 20}" rx="1.5" fill="#fff" opacity=".35"/>
+          <text x="${x + 14}" y="${78 - 6}" text-anchor="middle" font-size="9" font-weight="800" fill="#7a3d00" font-family="system-ui, sans-serif">${i + 1 === 2 ? 1 : i === 0 ? 2 : 3}</text></g>`).join("")}
+        <g transform="translate(47 2) scale(.92)">${'<path d="M2 16 L0 4 L7 9 L12 0 L17 9 L24 4 L22 16 Z" fill="#ffd23f" stroke="#a87400" stroke-width="1.2" stroke-linejoin="round"/><circle cx="12" cy="11" r="2" fill="#ff5f5f"/>'}</g></svg></span><span><b>Sauf-<br>Ranking</b><small>Counter · Matrikel-Duell</small></span></a>
       <a class="tile-btn tile-pay hm-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen"><span class="pp-mark">${PPM}</span><span class="hm-pay-txt"><span class="pp-word"><i>Pay</i><i>Pal</i></span><small>Bargeldlos zahlen</small></span><i class="pp-go">${ICON_ARROW}</i></a>
     </div>`;
   const games = `
@@ -7847,11 +8215,26 @@ function buildMenu() {
       <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></a></div>
       <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
     </div>
-    <h3 class="hm-sec">Mehr</h3>
+    <h3 class="hm-sec">Rund um die Bar</h3>
     <div class="hm-grid4">
       <a class="tile-btn hm-music" href="#musik" aria-label="Musikwünsche">${MUSIC_ART}${Musik.night() ? `<span class="soon-tag mu-livetag"><i></i>Live</span>` : `<span class="soon-tag">${Musik.nextNight() ? `Ab ${hm(barWindow(Musik.nextNight())[0])} Uhr` : "Bald"}</span>`}<span><b>Musikwünsche</b><small>${Musik.night() ? "Jetzt Song wünschen" : "Wünschen &amp; voten"}</small></span></a>
       ${fotowandTile()}
-      <a class="tile-btn hm-wish" href="#wuensche"><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Drink oder Motto</small></span><i class="hm-go">${ICON_ARROW}</i></a>
+      <a class="tile-btn hm-wish" href="#wuensche"><span class="wish-art" aria-hidden="true"><svg viewBox="0 0 150 100">
+        <g transform="rotate(-7 70 52)">
+          <rect x="22" y="12" width="96" height="82" rx="5" fill="#000" opacity=".28" transform="translate(3 4)"/>
+          <rect x="22" y="12" width="96" height="82" rx="5" fill="#fff6e0"/>
+          <rect x="22" y="12" width="96" height="11" rx="5" fill="#ffcf4a"/><rect x="22" y="18" width="96" height="5" fill="#ffcf4a"/>
+          ${[34, 50, 66, 82, 98].map((x) => `<circle cx="${x}" cy="12" r="3" fill="#2a1406"/><rect x="${x - 1.2}" y="6" width="2.4" height="7" rx="1.2" fill="#9aa0a8"/>`).join("")}
+          <path d="M34 26 V90" stroke="#e8505b" stroke-width="1" opacity=".7"/>
+          ${[40, 56, 72].map((y) => `<path d="M26 ${y + 3} H114" stroke="#9fc3e8" stroke-width=".8" opacity=".7"/>`).join("")}
+          <text x="38" y="40" font-size="13" fill="#2a2a6a" style="font-family:var(--f-script)">Mojito?</text>
+          <text x="38" y="56" font-size="12" fill="#2a2a6a" style="font-family:var(--f-script)">Motto: 2000er!</text>
+          <text x="38" y="72" font-size="12" fill="#2a2a6a" style="font-family:var(--f-script)">mehr Pfeffi</text>
+          <path d="M38 76 q20 4 44 -1" stroke="#e8505b" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </g>
+        <g transform="rotate(38 118 60)"><rect x="112" y="18" width="11" height="62" rx="2" fill="#ffcf4a"/><rect x="112" y="18" width="3.5" height="62" fill="#ffe08a"/><rect x="112" y="14" width="11" height="7" rx="2" fill="#ff8fa3"/><rect x="112" y="20" width="11" height="3" fill="#c9ced6"/><path d="M112 80 L117.5 92 L123 80 Z" fill="#f3d9b0"/><path d="M116 88.5 L117.5 92 L119 88.5 Z" fill="#2a2a2e"/></g>
+        <path d="M128 18 l2.4 5 5.4.6 -4 3.7 1.1 5.3 -4.9 -2.7 -4.9 2.7 1.1 -5.3 -4 -3.7 5.4 -.6z" fill="#ffd23f" stroke="#a87400" stroke-width=".8"/>
+      </svg></span><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Drink oder Motto</small></span><i class="hm-go">${ICON_ARROW}</i></a>
       ${badgeTile()}
     </div>
 `;
@@ -7884,7 +8267,7 @@ function buildMenu() {
           <div class="ph-self" id="phSelf"></div>
           <a class="ph-more" href="#ranking">Zum Matrikel-Ranking ${ICON_ARROW}</a></div>
         ${phHappy(ev, tNow)}${phSpecials(ev)}
-        <div class="ph-row"><a class="ph-btn pp" href="#paypal">PayPal</a><a class="ph-btn" href="#${ev.id}">Getränkekarte</a></div>
+        <a class="ph-btn ph-karte" href="#drinks">Ganze Getränkekarte</a>
       </div>
       ${games}${hero("Heute", null)}${next}${rest}`;
   } else if (ph && ph.phase === "rueck") {
@@ -7932,6 +8315,7 @@ function buildMenu() {
   watchAnim(g);
   dekoApply();
   fitTileTitles();
+  tabSync();
 }
 function fitMenu() {
   document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? (el.closest(".t-xmas") ? 84 : 58) : 34); });
@@ -7945,7 +8329,7 @@ function setMenu(on) {
   if (!on) hideInstallTip();
   else { if (typeof showInstallTip === "function") setTimeout(() => showInstallTip(), 900); }
   $("menu").setAttribute("aria-hidden", on ? "false" : "true");
-  if (on) { document.querySelector('meta[name="theme-color"]').setAttribute("content", "#07060f"); requestAnimationFrame(fitTileTitles); }
+  if (on) { document.querySelector('meta[name="theme-color"]').setAttribute("content", "#07060f"); requestAnimationFrame(fitTileTitles); fillBest(document); }
   else applyTheme(EVENTS[index]);
 }
 
@@ -7968,7 +8352,7 @@ function show(detailOpen) {
   $("detail").setAttribute("aria-hidden", detailOpen ? "false" : "true");
   if (detailOpen) setTimeout(() => { const b = $("backBtn"); if (b) b.focus({ preventScroll: true }); }, 560);
 }
-function route() { routeInner(); afterRoute(); Fotos.strips(); fwCovers(); }
+function route() { routeInner(); afterRoute(); tabSync(); Fotos.strips(); fwCovers(); }
 function routeInner() {
   const id = location.hash.slice(1);
   /* alte Links auf das frühere Karussell landen im Menü */
@@ -7992,6 +8376,9 @@ function routeInner() {
   if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
   if (id === "fotowand") { setMenu(false); renderFotowand(); show(true); return; }
   if (id === "musik") { setMenu(false); renderMusikPage(); show(true); return; }
+  if (id === "drinks") { setMenu(false); renderDrinksPage(); show(true); return; }
+  if (id === "spiele") { setMenu(false); renderSpielePage(); show(true); return; }
+  if (id === "ich") { setMenu(false); renderIchPage(); show(true); return; }
   if (id === "dj") { setMenu(false); renderDjPage(); show(true); return; }
   const i = EVENTS.findIndex((ev) => ev.id === id);
   /* Vorbei: Infos zum Abend braucht keiner mehr – direkt zu den Fotos */
@@ -8005,6 +8392,236 @@ function routeInner() {
   }
   show(false);
   setMenu(true);
+}
+
+/* ================= Schnellmenü unten (Glas-Leiste) und die Tab-Seiten Drinks · Spiele · Ich ================= */
+const TAB_IDS = ["drinks", "spiele", "ich"];
+const TAB_ICON = {
+  start: '<path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  drinks: '<path d="M5 4h14l-7 8zM12 12v7M8 20h8"/><path d="M16.5 4l2-2.5"/>',
+  spiele: '<rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7 10.5v4M5 12.5h4"/><circle cx="15.5" cy="11.2" r="1"/><circle cx="17.8" cy="13.6" r="1"/>',
+  musik: '<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+  ich: '<circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-2.5L17 21l-1.5-8"/>'
+};
+const TABS = [["start", "", "Start"], ["drinks", "drinks", "Drinks"], ["spiele", "spiele", "Spiele"], ["musik", "musik", "Musik"], ["ich", "ich", "Ich"]];
+/* am Clubabend selbst (Beginn bis 1:30) sind Sauf-Ranking und PayPal wichtiger als die Spiele */
+const TABS_LIVE = [["start", "", "Start"], ["drinks", "drinks", "Drinks"], ["ranking", "ranking", "Ranking"], ["paypal", "paypal", "PayPal"], ["musik", "musik", "Musik"], ["ich", "ich", "Ich"]];
+TAB_ICON.ranking = '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z"/><path d="M5 21h14"/>';
+TAB_ICON.paypal = '<path d="M7 21l2.2-14h5.3c2.7 0 4.2 1.5 3.7 4-.5 2.8-2.6 4.2-5.4 4.2h-2.3L9.6 21z"/><path d="M5.5 17.5L7.8 3h5.3c1.6 0 2.8.5 3.4 1.4"/>';
+/* welcher Tab leuchtet bei welcher Seite */
+function tabFor(id) {
+  if (!id) return "start";
+  if (["drinks", "paypal"].includes(id)) return "drinks";
+  if (["spiele", "beerpong", "busfahrer", "zapfmeister", "turnier"].includes(id)) return "spiele";
+  if (["musik"].includes(id)) return "musik";
+  if (["ich", "abzeichen"].includes(id)) return "ich";
+  return null;
+}
+const TAB_HIDE = ["team", "turnier-team", "dj", "polnischen"];
+let tabMode = "", tabAva = "";
+function tabbarRender() {
+  const bar = $("tabbar"); if (!bar) return;
+  const ph = clubPhase(), mode = ph && ph.phase === "live" ? "live" : "normal", av = avatarKey();
+  if (mode === tabMode && av === tabAva) return;
+  tabMode = mode; tabAva = av;
+  const tab = ([k, h, t]) => `<a href="#${h}" data-tab="${k}">${k === "ich" && av ? `<span class="tab-ava">${avatarHTML()}</span>` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${TAB_ICON[k]}</svg>`}<span>${t}</span></a>`;
+  bar.classList.toggle("live", mode === "live");
+  if (mode === "live") {
+    const T = Object.fromEntries(TABS.map((x) => [x[0], x]));
+    bar.innerHTML = `<div class="tb-side l">${tab(T.start)}${tab(T.drinks)}</div>
+      <a class="tb-fab" id="tbFab" href="${esc(CLUB.paypal)}" target="_blank" rel="noopener" aria-label="Mit PayPal bezahlen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#009cde" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.1a.8.8 0 0 0-.8.7l-1.1 6.8a.5.5 0 0 0 .5.6h2.8a.7.7 0 0 0 .7-.6l.6-3.8a.7.7 0 0 1 .7-.6h.5c3.1 0 5.4-1.3 6-4.9.3-1.6 0-2.9-.9-3.9z"/></svg>
+        <span class="tb-fab-t">PayPal</span>
+      </a>
+      <div class="tb-side r">${tab(T.musik)}${tab(T.ich)}</div>`;
+  } else bar.innerHTML = TABS.map(tab).join("");
+  /* Start antippen, wenn man schon auf der Startseite ist: nach ganz oben */
+  bar.querySelector('[data-tab="start"]').addEventListener("click", (e) => {
+    if (!location.hash.slice(1)) { e.preventDefault(); $("menu").scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); }
+  });
+}
+function tabbarInit() {
+  if ($("tabbar")) return;
+  app.insertAdjacentHTML("beforeend", `<nav class="tabbar" id="tabbar" aria-label="Schnellmenü"></nav>`);
+  app.classList.add("has-tabbar");
+  tabbarRender();
+  /* Tastatur offen: Leiste weg, sonst verdeckt sie das Eingabefeld */
+  document.addEventListener("focusin", (e) => { if (e.target.matches("input, textarea, select")) app.classList.add("kbd-open"); });
+  document.addEventListener("focusout", () => setTimeout(() => { if (!document.activeElement || !document.activeElement.matches("input, textarea, select")) app.classList.remove("kbd-open"); }, 60));
+  tabSync();
+}
+function tabSync() {
+  const bar = $("tabbar"); if (!bar) return;
+  tabbarRender();
+  const id = location.hash.slice(1), on = tabFor(id);
+  bar.querySelectorAll("[data-tab]").forEach((a) => { a.classList.toggle("on", a.dataset.tab === on); if (a.dataset.tab === on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  app.classList.toggle("tabbar-off", TAB_HIDE.includes(id));
+  app.classList.toggle("tab-root", [...TAB_IDS, "musik"].includes(id));
+}
+/* welcher Abend gerade zählt: heute/live, sonst der nächste */
+function drinksEvent() {
+  const ph = clubPhase();
+  if (ph && ph.ev && !isPast(ph.ev)) return { ev: ph.ev, label: ph.phase === "live" ? "Läuft gerade" : "Heute Abend" };
+  const ev = EVENTS.find((e) => !isPast(e));
+  return ev ? { ev, label: "Nächster Abend" } : null;
+}
+function renderDrinksPage() {
+  const de = drinksEvent(), ev = de && de.ev, ph = clubPhase();
+  const live = ph && ph.phase === "live";
+  const hh = ev && ev.happyHour ? hhStatus(ev) : null;
+  const hero = ev ? `<a class="tp-hero" href="#${ev.id}" aria-label="${esc(ev.titel.join(" "))} – Infos zum Abend">
+      <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="${(SCENE_VB[ev.thema] && SCENE_VB[ev.thema].fw) || "0 140 400 520"}" preserveAspectRatio="xMidYMid slice"></svg>`).join("")}</div>
+      <div class="tp-hero-txt">
+        <span class="tp-hero-lbl">${live ? '<i class="live-dot"></i>' : ""}${esc(de.label)}</span>
+        <h2 class="tp-hero-t">${titleHTML(ev)}</h2>
+        ${ev.untertitel ? `<p class="tp-hero-sub">${subHTML(ev)}</p>` : ""}
+        <div class="tp-hero-row"><span>${esc(ev.wd)} ${esc(ev.dm)}</span><span>ab ${esc(ev.time)} Uhr</span>${hh && !hh.muted ? `<span class="hot">Happy Hour ${esc(ev.happyHour.von)}–${esc(ev.happyHour.bis)}</span>` : ""}</div>
+      </div>
+    </a>` : "";
+  const blocks = ev ? drinkBlocks(ev) : drinkBlocks({ thema: "club" });
+  pageShell("drinks-page" + (ev ? "" : " no-ev"), "Drinks", `
+    ${hero}
+    ${live ? `<a class="club-card" href="#ranking"><span class="club-card-live"><span class="live-dot"></span>Live</span><b>Sauf-Ranking</b><span>Trag ein, was du dir geholt hast</span><i>${ICON_ARROW}</i></a>` : ""}
+    <div class="tp-drinks">${blocks}</div>
+    <a class="pay-btn tp-pay" href="${esc(CLUB.paypal)}" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#009cde" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.1a.8.8 0 0 0-.8.7l-1.1 6.8a.5.5 0 0 0 .5.6h2.8a.7.7 0 0 0 .7-.6l.6-3.8a.7.7 0 0 1 .7-.6h.5c3.1 0 5.4-1.3 6-4.9.3-1.6 0-2.9-.9-3.9z"/></svg>
+      Mit PayPal bezahlen
+    </a>`);
+  if (!ev) return;
+  /* Mottofarben und -schrift des Abends für die ganze Seite, Szene als Banner */
+  const d = $("detail");
+  d.classList.add("t-" + ev.thema);
+  d.style.cssText = themeStyle(ev.th);
+  const layers = (SCENES[ev.thema] || sceneIce)();
+  d.querySelectorAll(".tp-hero .tile-scene svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `dh${k}_`); });
+  fitTitle(d.querySelector(".tp-hero-t"), 52);
+}
+
+const GAME_TABS = [
+  { key: "beerpong", emo: "🏓", cls: "tile-game", name: "Beerpong", sub: "Becher treffen", art: () => gameDemo(), mine: () => { const b = parseInt(store.get("exmaBpBest") || "0", 10); return b ? `${b} Becher` : ""; } },
+  { key: "busfahrer", emo: "🃏", cls: "tile-bus", name: "Busfahrer", sub: "Höher oder tiefer", art: () => busDemo(), mine: () => { const b = parseInt(store.get("exmaBusBest") || "0", 10); return b ? `${b} / 51` : ""; } },
+  { key: "zapfmeister", emo: "🍺", cls: "tile-zapf", name: "Zapfmeister", sub: "Perfekt zapfen", art: () => zapfDemo(), mine: () => { const b = parseInt(store.get("exmaZapfBest") || "0", 10); return b ? `${(b / 100).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Pkt.` : ""; } }
+];
+const GAME_VAL = { beerpong: (e) => e.cups, busfahrer: (e) => e.score, zapfmeister: (e) => e.score };
+const GAME_UNIT = { beerpong: (n) => `${Math.round(n)} Becher`, busfahrer: (n) => `${Math.round(n)} ${Math.round(n) === 1 ? "Karte" : "Karten"}`,
+  zapfmeister: (n) => `${n.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Pkt.` };
+const gameFmt = (key, v) => BEST_SRC[key].fmt(key === "beerpong" ? { cups: v } : { score: v });
+function renderSpielePage() {
+  const tev = EVENTS.find((e) => e.turnier && !isPast(e));
+  const tn = tev ? (tnOpen(tev) ? `<a class="tp-tn" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>`
+    : `<a class="tp-tn" href="#${tev.id}"><span>🏆</span><span><b>Beerpong-Turnier</b><small>${esc(tev.wd)} ${esc(tev.dm)} ab ${esc(tev.time)} Uhr · ${esc(tev.titel.join(" "))}</small></span><i>${ICON_ARROW}</i></a>`) : "";
+  pageShell("spiele-page", "Spiele", `
+    ${tn}
+    ${GAME_TABS.map((g) => `<article class="tp-game">
+      <a class="tile-btn ${g.cls} tp-art" href="#${g.key}" aria-label="${g.name} spielen">${g.key === "zapfmeister" ? g.art().replace("xMidYMin slice", "xMidYMid slice") : g.art()}<span class="tp-art-t"><b>${g.name}</b><small>${g.sub}</small></span></a>
+      <div class="tp-lb">
+        <div class="tp-lbh"><span>Bestenliste ${esc(monatName())}</span><span class="tp-at" data-at="${g.key}"></span></div>
+        <div class="tp-rows" data-top="${g.key}"><p class="tp-wait">Lädt …</p></div>
+        <div class="tp-you" data-you="${g.key}"></div>
+        <div class="tp-foot"><button type="button" class="tp-prev" data-prev="${g.key}" aria-expanded="false">Vormonate <i aria-hidden="true">▾</i></button><a class="tp-play" href="#${g.key}">Spielen ▸</a></div>
+        <div class="tp-prevbox" data-prevbox="${g.key}" hidden></div>
+      </div>
+    </article>`).join("")}`);
+  document.querySelectorAll("[data-prev]").forEach((b) => b.addEventListener("click", () => togglePrev(b)));
+  fillTops(0);
+}
+function fillTops(tries) {
+  if (!Live.remote && !FB.off) { if (tries < 12) setTimeout(() => fillTops(tries + 1), 800); return; }
+  document.querySelectorAll("[data-top]").forEach(async (el) => {
+    const key = el.dataset.top, val = GAME_VAL[key];
+    let l = [], best = null;
+    try { [l, best] = await Promise.all([loadTop(key), loadTop(key, "alle", 1).then((x) => x[0] || null).catch(() => null)]); }
+    catch { if (el.isConnected) el.innerHTML = `<p class="tp-wait">Gerade nicht erreichbar</p>`; return; }
+    if (!el.isConnected) return;
+    const top3 = l.slice(0, 3);
+    el.innerHTML = top3.length ? top3.map((e, i) => `<p><em>${i + 1}</em><span>${esc(e.name)}</span><small>${esc(BEST_SRC[key].fmt(e))}</small></p>`).join("")
+      : `<p class="tp-wait">Platz 1 ist diesen Monat noch frei – hol ihn dir!</p>`;
+    const at = document.querySelector(`[data-at="${key}"]`);
+    if (at) at.innerHTML = best ? `👑 Allzeit: <b>${esc(best.name)}</b> · ${esc(BEST_SRC[key].fmt(best))}` : "";
+    const you = document.querySelector(`[data-you="${key}"]`); if (!you) return;
+    const v = myMonat(key);
+    if (v == null) { you.className = "tp-you off"; you.innerHTML = `<em>–</em><span class="tp-yava">${avatarHTML()}</span><b>Du</b><span class="tp-yv">noch kein Spiel im ${esc(monatName())}</span>`; return; }
+    const above = l.filter((e) => val(e) > v).length, full = l.length >= 5 && v < val(l[4]);
+    const rank = full ? "6+" : String(above + 1);
+    you.className = "tp-you";
+    you.innerHTML = `<em>${rank}</em><span class="tp-yava">${avatarHTML()}</span><b>Du</b><span class="tp-yv">${esc(gameFmt(key, v))}</span>`;
+  });
+}
+async function togglePrev(btn) {
+  const key = btn.dataset.prev, box = document.querySelector(`[data-prevbox="${key}"]`); if (!box) return;
+  const open = box.hidden; box.hidden = !open; btn.setAttribute("aria-expanded", String(open));
+  if (!open || box.dataset.done) return;
+  const months = []; for (let m = monatPrev(monatKey()); m >= MONAT_START && months.length < 6; m = monatPrev(m)) months.push(m);
+  if (!months.length) { box.innerHTML = `<p class="tp-wait">Die erste Monatswertung läuft gerade. Ab ${esc(monatName(monatKey(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 1))))} stehen hier die Top 3 vom ${esc(monatName())}.</p>`; box.dataset.done = "1"; return; }
+  box.innerHTML = `<p class="tp-wait">Lädt …</p>`;
+  const rows = [];
+  for (const m of months) {
+    let l = []; try { l = await loadTop(key, m, 3); } catch {}
+    if (l.length) rows.push(`<div class="tp-pm"><b>${esc(monatName(m))}</b><span>${l.map((e, i) => `<i>${["🥇", "🥈", "🥉"][i]}</i>${esc(e.name)} <small>${esc(BEST_SRC[key].fmt(e))}</small>`).join("")}</span></div>`);
+  }
+  box.innerHTML = rows.join("") || `<p class="tp-wait">Aus den Vormonaten gibt es noch keine Einträge.</p>`;
+  box.dataset.done = "1";
+}
+/* Profilbild: eigenes Foto (verkleinert, nur auf dem Handy) oder ein Motiv aus der Auswahl */
+const AVA_PRESETS = [["🍺", "#ffd25a", "#e08a12"], ["🍹", "#ff5fa2", "#ff9a3d"], ["🥂", "#f6e39a", "#c9a24a"], ["🎧", "#2d6bff", "#7c3aed"], ["🕺", "#ff2e88", "#7c3aed"], ["💃", "#ff4d6d", "#b0127a"],
+  ["😎", "#2ff3e0", "#2d6bff"], ["🦄", "#f0abfc", "#7c3aed"], ["🐻", "#c98b2a", "#6b3a1e"], ["🔥", "#ffb347", "#ff2e88"], ["👑", "#ffd23f", "#ff8a3d"], ["🎲", "#5b8a3a", "#17885a"]];
+const avatarKey = () => store.get("exmaAvatar") || "";
+function avatarHTML() {
+  const a = avatarKey(), name = playerName();
+  if (a.startsWith("img:")) return `<img src="${a.slice(4)}" alt="">`;
+  if (a.startsWith("emo:")) { const p = AVA_PRESETS[+a.slice(4)] || AVA_PRESETS[0]; return `<i style="background:linear-gradient(135deg,${p[1]},${p[2]})">${p[0]}</i>`; }
+  return `<b>${esc((name || "?").trim().charAt(0).toUpperCase())}</b>`;
+}
+function avatarFromFile(file) {
+  return new Promise((res, rej) => {
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const S = 192, c = document.createElement("canvas"); c.width = c.height = S;
+      const k = Math.min(img.naturalWidth, img.naturalHeight), x = (img.naturalWidth - k) / 2, y = (img.naturalHeight - k) / 2;
+      c.getContext("2d").drawImage(img, x, y, k, k, 0, 0, S, S);
+      URL.revokeObjectURL(url); res(c.toDataURL("image/jpeg", .82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error("Bild")); };
+    img.src = url;
+  });
+}
+function renderIchPage() {
+  const name = playerName(), mat = store.get("exmaMatrikel"), got = Badges.count(), N = Badges.list().length;
+  const recent = Badges.recent(9).filter((id) => BADGE_LIST.some((b) => b.id === id));
+  const best = GAME_TABS.map((g) => `<a class="tp-best" href="#${g.key}"><span class="tp-best-i ${g.cls}" aria-hidden="true">${g.emo}</span><b>${g.name}</b><em>${g.mine() ? esc(g.mine()) : "–"}</em></a>`).join("");
+  pageShell("ich-page", "Ich", `
+    <div class="tp-prof">
+      <button type="button" class="tp-ava" id="tpAva" aria-label="Profilbild ändern">${avatarHTML()}<span class="tp-ava-cam" aria-hidden="true">${ICON_CAM}</span></button>
+      <div><b id="tpName">${name ? esc(name) : "Noch ohne Namen"}</b>
+        <span class="tp-tags">${mat ? `<span>Matrikel ${esc(String(mat).replace(/^M/i, ""))}</span>` : `<a href="#ranking">Matrikel wählen</a>`}<button type="button" id="tpEdit">Name ändern</button></span></div>
+    </div>
+    <div class="tp-avapick" id="tpAvaPick" hidden>
+      <p>Profilbild wählen</p>
+      <div class="tp-avagrid">${AVA_PRESETS.map((p, k) => `<button type="button" data-ava="emo:${k}" style="background:linear-gradient(135deg,${p[1]},${p[2]})" aria-label="Motiv ${p[0]}">${p[0]}</button>`).join("")}</div>
+      <div class="tp-avaacts"><label class="tp-avafile">${ICON_CAM}Eigenes Foto<input type="file" accept="image/*" id="tpAvaFile"></label>${avatarKey() ? `<button type="button" data-ava="">Entfernen</button>` : ""}</div>
+      <small>Dein Bild bleibt nur auf diesem Handy und wird nirgends hochgeladen.</small>
+    </div>
+    <form class="tp-nameform" id="tpForm" hidden><input id="tpInput" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(name)}"><button type="submit">Speichern</button></form>
+    <div class="tp-stats"><div><b>${Badges.visits()}</b><small>Clubabende</small></div><div><b>${got}</b><small>Abzeichen</small></div><div><b>${Badges.runs()}</b><small>Runden gezockt</small></div></div>
+    <h3 class="tp-h">Deine Bestwerte</h3>
+    <div class="tp-bests">${best}</div>
+    <h3 class="tp-h">Zuletzt freigeschaltet</h3>
+    ${recent.length ? `<div class="bdg-grid tp-bdg">${recent.map((id) => { const b = BADGE_LIST.find((x) => x.id === id);
+      return `<button type="button" class="bdg" style="--tc:${BADGE_TIER[b.tier]}" data-b="${b.id}" aria-label="${esc(b.name)}">${Badges.chip(b.id)}<b>${esc(b.name)}</b></button>`; }).join("")}</div>`
+      : `<p class="tp-empty">Noch keine Abzeichen – komm zum nächsten Clubabend oder zock eine Runde!</p>`}
+    <a class="tp-all" href="#abzeichen">Alle Abzeichen ansehen <span>${got} / ${N}</span>${ICON_ARROW}</a>
+    <p class="tp-note">Name, Bestwerte und Abzeichen sind nur auf diesem Handy gespeichert.</p>`);
+  document.querySelectorAll(".ich-page [data-b]").forEach((b) => b.addEventListener("click", () => Badges.card(b.dataset.b, false)));
+  $("tpEdit").addEventListener("click", () => { const f = $("tpForm"); f.hidden = !f.hidden; if (!f.hidden) $("tpInput").focus(); });
+  $("tpAva").addEventListener("click", () => { const p = $("tpAvaPick"); p.hidden = !p.hidden; });
+  const setAva = (v) => { if (v) store.set("exmaAvatar", v); else { try { localStorage.removeItem("exmaAvatar"); } catch {} } renderIchPage(); tabSync(); };
+  document.querySelectorAll("#tpAvaPick [data-ava]").forEach((b) => b.addEventListener("click", () => setAva(b.dataset.ava)));
+  $("tpAvaFile").addEventListener("change", async (e) => {
+    const f = e.target.files && e.target.files[0]; if (!f) return;
+    try { setAva("img:" + await avatarFromFile(f)); } catch { alert("Das Bild konnte nicht geladen werden."); }
+  });
+  $("tpForm").addEventListener("submit", (e) => { e.preventDefault(); const n = $("tpInput").value.trim().slice(0, 16); if (!n) return; setPlayerName(n); renderIchPage(); });
+  Badges.art();
 }
 /* ================= Impressum & Datenschutz ================= */
 function renderLegal(which) {
@@ -8206,15 +8823,17 @@ const BEST_SRC = {
   zapfmeister: { api: () => ZapfTop, col: "zapfmeister", field: "score", fmt: (e) => `${(e.score || 0).toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Pkt.` }
 };
 const BEST_TTL = 15 * 60 * 1000;   /* Platz 1 höchstens alle 15 Minuten neu lesen (3 × 5 Lesezugriffe) */
-async function loadBest(key) {
-  const src = BEST_SRC[key], ck = "exmaBest_" + key;
-  if (!Live.remote) return (await src.api().list())[0] || null;
-  try { const c = JSON.parse(localStorage.getItem(ck) || "null"); if (c && Date.now() - c.t < BEST_TTL) return c.e; } catch {}
-  const qs = await FB.db.collection(src.col).orderBy(src.field, "desc").limit(5).get();
-  const e = src.api().sort(qs.docs.map((d) => ({ id: d.id, ...d.data() })))[0] || null;
-  try { localStorage.setItem(ck, JSON.stringify({ t: Date.now(), e })); } catch {}
-  return e;
+/* scope: Monat „2026-11“ (Standard: laufender Monat) oder „alle“. Vergangene Monate ändern sich nicht mehr → dauerhaft gemerkt. */
+async function loadTop(key, scope = monatKey(), n = 5) {
+  const src = BEST_SRC[key], ck = `exmaBest_${key}_${scope}`;
+  if (!Live.remote) return (await src.api().list(scope)).slice(0, n);
+  const past = scope !== "alle" && scope < monatKey();
+  try { const c = JSON.parse(localStorage.getItem(ck) || "null"); if (c && c.l && (past || Date.now() - c.t < BEST_TTL)) return c.l; } catch {}
+  const l = (await boardList(src.col, src.field, (x) => src.api().sort(x), () => [], scope, n)).slice(0, n).map(({ name, score, cups, ms, glasses }) => ({ name, score, cups, ms, glasses }));
+  try { localStorage.setItem(ck, JSON.stringify({ t: Date.now(), l })); } catch {}
+  return l;
 }
+async function loadBest(key) { return (await loadTop(key))[0] || null; }
 function fillBest(root) {
   if (!Live.remote && !FB.off) return;   /* Verbindung steht noch nicht fest: kommt gleich von selbst */
   root.querySelectorAll("[data-best]").forEach(async (el) => {
@@ -8227,7 +8846,7 @@ function fillBest(root) {
   });
 }
 const CROWN_MINI = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z" fill="currentColor"/></svg>`;
-const clearBestCache = () => { ["beerpong", "busfahrer", "zapfmeister"].forEach((k) => { try { localStorage.removeItem("exmaBest_" + k); } catch {} }); };
+const clearBestCache = () => { ["beerpong", "busfahrer", "zapfmeister"].forEach((k) => ["alle", monatKey()].forEach((sc) => { try { localStorage.removeItem(`exmaBest_${k}_${sc}`); } catch {} })); };
 
 /* ================= Beerpong-Turnier (Miami Vibes) =================
    Alles liegt in EINEM Datenbank-Dokument turnier/<id>. Spieler hören live mit (onSnapshot),
@@ -8752,6 +9371,7 @@ function renderTurnierAdmin() {
 /* ================= Eigene Seiten: Wünsche und Team ================= */
 function pageShell(cls, title, inner) {
   current = null;
+  if (TAB_IDS.includes(location.hash.slice(1))) cls += " tab-page";
   const d = $("detail");
   d.className = "view view-detail clubby " + cls;
   d.style.cssText = themeStyle(THEMEN.club);
@@ -9190,6 +9810,7 @@ addEventListener("resize", () => { if (!$("tresen").hidden) trScale(); });
 goTo(index);
 buildMenu();
 initFirebase();
+tabbarInit();
 route();
 Badges.init();
 fitAll();
