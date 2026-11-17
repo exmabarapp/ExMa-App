@@ -2355,7 +2355,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "92";
+const APP_V = "94";
 
 const EVENTS = [
   {
@@ -5077,7 +5077,9 @@ const Zapf = (() => {
   const SPECIAL = [
     () => ({ name: "Sektflöte", art: "in der", drink: "sekt", h: r(190, 215), wb: 26, wt: r(56, 62), stem: 70, curve: .65 }),
     () => ({ name: "Weizenglas", drink: "weizen", h: r(280, 305), wb: 62, wt: r(94, 100), waist: 14 }),
-    () => ({ name: "Guinness-Glas", drink: "guinness", h: r(238, 258), wb: 76, wt: r(100, 106), bulge: 14, bulgeAt: .82 })
+    () => ({ name: "Guinness-Glas", drink: "guinness", h: r(238, 258), wb: 76, wt: r(100, 106), bulge: 14, bulgeAt: .82 }),
+    /* durchsichtige Bierflasche (klassische Euroflasche): gerader Bauch, kurze Schulter, langer Hals – unten langsam, im Hals sehr schnell */
+    () => ({ name: "Bierflasche", art: "in der", drink: "bier", h: r(262, 276), prof: [70, 72, 72, 72, 72, 72, 72, 72, 72, 70, 60, 38, 28, 26, 26, 26, 26, 28], base: 14, rate: .42, bottle: true })
   ];
   const SHOT = () => ({ name: "Schnapsglas", drink: "pfeffi", h: r(74, 84), wb: 34, wt: r(44, 48), base: 17, rate: .4 });
   const CLASSIC = () => ({ name: "Willibecher", drink: "bier", h: 225, wb: 84, wt: 108, classic: true });
@@ -5377,6 +5379,7 @@ const Zapf = (() => {
       ${hl(g, -1, 8, 16, 14, ".42", 5)}${hl(g, -1, 16, 24, 40, ".16", 2.5)}${hl(g, 1, 7, 30, 30, ".2", 2)}
       ${g.drink === "guinness" ? (() => { const y = g.yBot - g.h * .46, w = g.width(.46); return `<text x="${CX}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="${Math.min(16, w * .15).toFixed(1)}" letter-spacing="1.5" fill="#f4e6c4" opacity=".92">GUINNESS</text>`; })() : ""}
       ${drops}
+      ${g.bottle ? `<rect x="${(CX - g.wTop / 2 - 2).toFixed(1)}" y="${g.yRim - 1}" width="${(g.wTop + 4).toFixed(1)}" height="9" rx="3.5" fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.8)" stroke-width="1.4"/><path d="M${(CX - g.width(.5) / 2 + 4).toFixed(1)} ${(g.yBot - .5 * g.h).toFixed(1)} Q${CX} ${(g.yBot - .5 * g.h + 5).toFixed(1)} ${(CX + g.width(.5) / 2 - 4).toFixed(1)} ${(g.yBot - .5 * g.h).toFixed(1)}" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>` : ""}
       ${g.classic ? `<path d="M${CX - g.wTop / 2 + 1} ${g.yRim + 26} L${CX + g.wTop / 2 - 1} ${g.yRim + 26}" stroke="rgba(255,255,255,.4)" stroke-width="3"/>` : ""}
       ${d.swell ? garnish(g) : ""}
       <path id="zfDome" d="" fill="${d.foam}"/>
@@ -7711,6 +7714,21 @@ function phaseTick() {
   document.querySelectorAll("#menuGrid [data-to]").forEach((el) => { el.style.width = (100 * (+el.dataset.to - now) / (+el.dataset.to - +el.dataset.from)).toFixed(1) + "%"; });
 }
 let prunedAt = minIndex();
+/* Lange Kacheltitel (z. B. „Zapfmeister“, „Musikwünsche“) passend verkleinern, damit nichts über den Rand ragt */
+function fitTileTitles() {
+  document.querySelectorAll(".tile-btn b").forEach((e) => {
+    if (!e.offsetWidth) return;
+    const tile = e.closest(".tile-btn"), cs = getComputedStyle(tile);
+    const limit = () => tile.getBoundingClientRect().right - parseFloat(cs.paddingRight) - (parseFloat(cs.borderRightWidth) || 0);
+    /* nur der Text zählt (kleine Zusatz-Punkte o. Ä. im Titel nicht) */
+    const right = () => { let m = -1e9; e.childNodes.forEach((n) => { if (n.nodeType === 3 && n.nodeValue.trim()) { const rg = document.createRange(); rg.selectNodeContents(n); for (const r of rg.getClientRects()) m = Math.max(m, r.right); } }); return m; };
+    e.style.removeProperty("font-size");
+    let fs = parseFloat(getComputedStyle(e).fontSize), k = 0;
+    while (right() > limit() + .5 && fs > 9 && k++ < 40) { fs -= .5; e.style.setProperty("font-size", fs + "px", "important"); }
+  });
+}
+if (document.fonts) { document.fonts.ready.then(fitTileTitles); document.fonts.addEventListener && document.fonts.addEventListener("loadingdone", fitTileTitles); }
+window.addEventListener("resize", () => { clearTimeout(fitTileTitles.t); fitTileTitles.t = setTimeout(fitTileTitles, 150); });
 setInterval(phaseTick, 1000);
 /* Dezember-Look schaltet sich am 1.12. um 0:00 von selbst ein (und am 1.1. wieder aus) – auch wenn die App gerade offen ist */
 setInterval(() => { if (isDezember() !== app.classList.contains("dezember")) buildMenu(); }, 30000);
@@ -7911,6 +7929,7 @@ function buildMenu() {
   fitMenu();
   watchAnim(g);
   dekoApply();
+  fitTileTitles();
 }
 function fitMenu() {
   document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? (el.closest(".t-xmas") ? 84 : 58) : 34); });
@@ -7924,7 +7943,7 @@ function setMenu(on) {
   if (!on) hideInstallTip();
   else { if (typeof showInstallTip === "function") setTimeout(() => showInstallTip(), 900); }
   $("menu").setAttribute("aria-hidden", on ? "false" : "true");
-  if (on) document.querySelector('meta[name="theme-color"]').setAttribute("content", "#07060f");
+  if (on) { document.querySelector('meta[name="theme-color"]').setAttribute("content", "#07060f"); requestAnimationFrame(fitTileTitles); }
   else applyTheme(EVENTS[index]);
 }
 
