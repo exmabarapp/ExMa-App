@@ -1424,6 +1424,29 @@ body.fg-open { overflow: hidden; }
 @keyframes bdFlip { 0%, 30% { transform: translateX(-60%) rotateY(90deg) rotate(6deg); opacity: 0; } 45%, 85% { transform: rotate(6deg); opacity: 1; } 100% { transform: rotate(6deg); opacity: 0; } }
 @keyframes bdArrow { 0%, 100% { transform: translateY(2px); opacity: .5; } 20%, 40% { transform: translateY(-4px); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .bd-card.b, .bd-arrow { animation: none; } .pcard.deal, .pcard.wrong { animation: none; } }
+/* ===== Dezember: Minispiel-Kacheln ===== */
+.app.dezember .tile-bus { background: radial-gradient(1.2px 1.2px at 18% 22%, rgba(255,255,255,.7) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 72% 14%, rgba(255,255,255,.6) 50%, transparent 51%), radial-gradient(1px 1px at 88% 48%, rgba(255,255,255,.6) 50%, transparent 51%), radial-gradient(1.4px 1.4px at 8% 58%, rgba(255,255,255,.5) 50%, transparent 51%), radial-gradient(1.2px 1.2px at 52% 8%, rgba(255,255,255,.6) 50%, transparent 51%), radial-gradient(120% 90% at 50% 15%, #17885a, #07402a 60%, #04261a); border-color: #e9b77c; box-shadow: 0 0 16px rgba(233,183,124,.3); }
+.app.dezember .bd-card { background: linear-gradient(160deg, #fffdf7, #f4ead6); box-shadow: inset 0 0 0 3px #fffdf7, inset 0 0 0 4px rgba(201,162,74,.85), 0 4px 10px rgba(0,0,0,.4); }
+.app.dezember .bd-card::after { content: ""; position: absolute; right: 2px; top: 2px; width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath d='M19.0 21.0 L19.7 24.6 L22.1 25.5 L22.6 29.5 L25.9 28.7 L26.8 32.0 L30.6 30.5 L32.5 32.1 L36.0 31.0 L35.3 27.4 L32.9 26.5 L32.4 22.5 L29.1 23.3 L28.2 20.0 L24.4 21.5 L22.5 19.9Z' fill='%233f7350'/%3E%3Cpath d='M19.0 21.0 L23.2 22.4 L25.3 20.5 L29.8 22.3 L30.6 18.3 L34.5 19.3 L34.8 14.5 L37.4 13.4 L38.0 9.0 L33.8 7.6 L31.7 9.5 L27.2 7.7 L26.4 11.7 L22.5 10.7 L22.2 15.5 L19.6 16.6Z' fill='%232f6b3c'/%3E%3Cpath d='M19.0 21.0 L14.7 20.9 L13.5 23.2 L8.8 22.7 L9.5 26.6 L5.5 26.7 L7.0 31.2 L5.0 32.9 L6.0 37.0 L10.3 37.1 L11.5 34.8 L16.2 35.3 L15.5 31.4 L19.5 31.3 L18.0 26.8 L20.0 25.1Z' fill='%232f6b3c'/%3E%3Ccircle cx='17' cy='17' r='3.6' fill='%23c4362f'/%3E%3Ccircle cx='22.5' cy='19.5' r='3.6' fill='%23c4362f'/%3E%3Ccircle cx='16.5' cy='23' r='3.6' fill='%23c4362f'/%3E%3C/svg%3E") center / contain no-repeat; }
+.app.dezember .bd-card.b::before { content: ""; position: absolute; left: 14%; top: 4%; width: 26px; height: 21px; transform: rotate(-14deg); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 48'%3E%3Cpath d='M8 36 C10 18 24 6 40 8 C48 9 54 14 56 22 C50 18 44 18 40 22 C36 28 34 34 34 38 Z' fill='%23c4362f'/%3E%3Crect x='2' y='32' width='38' height='12' rx='6' fill='%23f3ead8'/%3E%3Ccircle cx='56' cy='24' r='5.5' fill='%23f3ead8'/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+.app.dezember .bd-card.b { padding-top: 8px; }
+.zd-girl { position: absolute; left: 0; top: 0; width: 100%; height: 26px; }
+.zd.xm .zd-stream { background: #9e1a2e; height: 16%; }
+.app.dezember .tile-game { border-color: #ffdf9e; box-shadow: 0 0 16px rgba(255,207,122,.3); }
+.zd.xm .zd-glass { width: 34px; height: 40px; bottom: 38%; margin-left: -17px; border-radius: 0 0 9px 9px; }
+.zd.xm .zd-beer { background: linear-gradient(180deg, #b3263a, #4a0814); }
+.zd.xm .zd-foam { background: #8a1626; }
+.zd-henkel { position: absolute; left: 50%; bottom: calc(38% + 9px); width: 12px; height: 22px; margin-left: 16px; border: 2px solid rgba(255,255,255,.7); border-left: none; border-radius: 0 10px 10px 0; }
+.zd-garn { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; animation: zdGarn 3.2s ease-in-out infinite; }
+.zd-garn .o { position: absolute; left: 4px; top: -6px; width: 13px; height: 12px; border-radius: 50%; background: radial-gradient(circle, #ffad3b 55%, #fff0c8 56% 70%, #e07a1f 71%); }
+.zd-garn .z { position: absolute; left: 18px; top: -18px; width: 4px; height: 28px; border-radius: 2px; background: linear-gradient(90deg, #b06a38, #8a4a22 60%, #5e2f12); transform: rotate(24deg); }
+@keyframes zdGarn { 0% { transform: translateY(100%); } 45% { transform: translateY(28%); } 60%, 92% { transform: translateY(5%); } 100% { transform: translateY(100%); } }
+.zd-steam { position: absolute; left: 50%; bottom: calc(38% + 40px); width: 20px; height: 18px; margin-left: -10px; }
+.zd-steam i { position: absolute; bottom: 0; width: 3px; height: 14px; border-radius: 2px; background: rgba(255,255,255,.5); filter: blur(1px); animation: zdSteam 3.2s ease-in-out infinite; opacity: 0; }
+.zd-steam i:first-child { left: 4px; } .zd-steam i:last-child { right: 4px; animation-delay: -1.2s; }
+@keyframes zdSteam { 0%, 50% { opacity: 0; transform: translateY(4px); } 70% { opacity: .7; } 100% { opacity: 0; transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) { .zd-garn, .zd-steam i { animation: none; } .zd-garn { transform: translateY(28%); } }
+
 
 /* ---------- Hauptmenü ---------- */
 .view-menu {
@@ -2332,7 +2355,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "91";
+const APP_V = "92";
 
 const EVENTS = [
   {
@@ -7504,6 +7527,14 @@ function renderBadgePage() {
 
 /* Kleine Demo für die Zapfmeister-Kachel: Glas füllt sich, Schaum steigt nach */
 function zapfDemo() {
+  if (isDezember()) {
+    let girl = "";
+    for (let x = -4; x <= 164; x += 6) { const y = 6 + Math.abs(Math.sin(x / 160 * Math.PI * 2)) * 7;
+      for (let k = 0; k < 4; k++) { const a = (-70 + k * 45 + (x % 2) * 10) * Math.PI / 180; girl += `<path d="M${x} ${y.toFixed(1)} l${(Math.cos(a) * 6).toFixed(1)} ${(Math.sin(a) * 6).toFixed(1)}" stroke="${k % 2 ? "#2a5236" : "#3a6d4a"}" stroke-width="2.2" stroke-linecap="round"/>`; } }
+    [[20, "#c4362f"], [60, "#e9b77c"], [100, "#c4362f"], [140, "#e9b77c"]].forEach(([x, c]) => { const y = 6 + Math.abs(Math.sin(x / 160 * Math.PI * 2)) * 7 + 7; girl += `<circle cx="${x}" cy="${y.toFixed(1)}" r="4" fill="${c}"/><circle cx="${x - 1.2}" cy="${(y - 1.2).toFixed(1)}" r="1.1" fill="#fff" opacity=".6"/>`; });
+    for (let i = 0; i < 8; i++) { const x = 10 + i * 20, y = 6 + Math.abs(Math.sin(x / 160 * Math.PI * 2)) * 7 - 1; girl += `<circle cx="${x}" cy="${y.toFixed(1)}" r="4" fill="rgba(255,214,138,.4)"/><circle cx="${x}" cy="${y.toFixed(1)}" r="1.6" fill="#ffe7b0"/>`; }
+    return `<span class="zd xm" aria-hidden="true"><svg class="zd-girl" viewBox="0 0 160 26" preserveAspectRatio="none">${girl}</svg><span class="zd-tap"></span><span class="zd-stream"></span><span class="zd-steam"><i></i><i></i></span><span class="zd-glass"><span class="zd-foam"></span><span class="zd-beer"></span><span class="zd-garn"><i class="o"></i><i class="z"></i></span></span><span class="zd-henkel"></span></span>`;
+  }
   return `<span class="zd" aria-hidden="true"><span class="zd-tap"></span><span class="zd-stream"></span><span class="zd-glass"><span class="zd-foam"></span><span class="zd-beer"></span></span></span>`;
 }
 
@@ -7516,8 +7547,62 @@ function busDemo() {
   </span>`;
 }
 
+/* Dezember-Version der Beerpong-Kachel: Glühweintassen, Winternacht, Lichterkette */
+function gameDemoXm() {
+  const p = "gdx_";
+  const mug = (cx, ty, w, k) => { const h = w * 1.08, b = w * .44, hp = `M${(cx + w * .44).toFixed(1)} ${(ty + h * .26).toFixed(1)} C${(cx + w * .86).toFixed(1)} ${(ty + h * .2).toFixed(1)} ${(cx + w * .86).toFixed(1)} ${(ty + h * .78).toFixed(1)} ${(cx + b).toFixed(1)} ${(ty + h * .82).toFixed(1)}`;
+    const fx = cx - w * .02, fy = ty + h * .55, fr = w * .14;
+    return `<path d="${hp}" fill="none" stroke="#5a0a16" stroke-width="${(w * .13).toFixed(1)}" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#b3202e" stroke-width="${(w * .05).toFixed(1)}" stroke-linecap="round"/>
+      <path d="M${cx - w / 2} ${ty} L${cx + w / 2} ${ty} L${cx + b} ${ty + h - 2} Q${cx + b} ${ty + h} ${cx + b - 2} ${ty + h} L${cx - b + 2} ${ty + h} Q${cx - b} ${ty + h} ${cx - b} ${ty + h - 2} Z" fill="url(#${p}mug)"/>
+      <path d="M${cx - w * .49} ${ty + h * .14} L${cx + w * .49} ${ty + h * .14}" stroke="#e9b77c" stroke-width="${(w * .05).toFixed(1)}"/>
+      <path d="M${fx - fr} ${fy} L${fx + fr} ${fy} M${fx - fr * .5} ${fy - fr * .87} L${fx + fr * .5} ${fy + fr * .87} M${fx - fr * .5} ${fy + fr * .87} L${fx + fr * .5} ${fy - fr * .87}" stroke="#fff6e6" stroke-width=".9" stroke-linecap="round"/>
+      <ellipse cx="${cx}" cy="${ty}" rx="${w / 2}" ry="${w * .24}" fill="#f3ead8" stroke="#7a0e1c" stroke-width=".6"/>
+      <ellipse cx="${cx}" cy="${ty + w * .03}" rx="${w * .38}" ry="${w * .16}" fill="#6e0f20"/>
+      ${k % 2 ? `<ellipse cx="${cx + w * .08}" cy="${ty + w * .03}" rx="${w * .14}" ry="${w * .07}" fill="#ffad3b" stroke="#e07a1f" stroke-width=".7"/>` : ""}`; };
+  let cups = "";
+  let n0 = 0;
+  [[3, 52, 15], [2, 61, 16.5], [1, 71, 18]].forEach(([n, y, w]) => { for (let k = 0; k < n; k++) cups += mug(78 + (k - (n - 1) / 2) * w * 1.12, y, w, n0++); });
+  const tree = (x, y, h, c) => { const w = h * .62; return `<path d="M${x} ${y - h} L${x + w / 2} ${y} L${x - w / 2} ${y} Z" fill="${c}"/><path d="M${x} ${y - h} L${x + w * .14} ${y - h * .7} L${x} ${y - h * .76} L${x - w * .14} ${y - h * .7} Z" fill="#eef3fa"/><path d="M${x - w / 2} ${y} Q${x} ${y - h * .12} ${x + w / 2} ${y} Z" fill="#eef3fa" opacity=".8"/>`; };
+  let lights = "";
+  const cols = ["#ff6b5e", "#ffd98a", "#8fe3a8", "#ffd98a", "#8ab8ff"];
+  for (let i = 0; i < 9; i++) { const x = 6 + i * 18.5, q = (x / 160 * 2) % 1, y = 14 + Math.sin(q * Math.PI) * 9;
+    lights += `<circle cx="${x.toFixed(1)}" cy="${(y + 2.5).toFixed(1)}" r="3" fill="${cols[i % 5]}" opacity=".3"/><ellipse cx="${x.toFixed(1)}" cy="${(y + 2.5).toFixed(1)}" rx="1.2" ry="1.7" fill="${cols[i % 5]}"/>`; }
+  let snow = "";
+  for (let i = 0; i < 22; i++) snow += `<circle cx="${((i * 37) % 160)}" cy="${((i * 53) % 128)}" r="${(.5 + (i % 3) * .4).toFixed(1)}" fill="#fff" opacity="${(.4 + (i % 4) * .12).toFixed(2)}"/>`;
+  const anim = reduceMotion ? `<circle cx="96" cy="40" r="4" fill="#fff"/>` : `
+    <g opacity="0"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.6;.62;1" dur="3s" repeatCount="indefinite"/>
+      <circle r="7" fill="#fff"><animate attributeName="r" values="8;4;4" keyTimes="0;.6;1" dur="3s" repeatCount="indefinite"/></circle>
+      <animateMotion path="M118 128 Q100 0 78 70" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear" dur="3s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0"><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;.6;.63;.8;1" dur="3s" repeatCount="indefinite"/>
+      <path d="M70 66 l-5 -5 M86 66 l5 -5 M78 63 v-7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+    </g>
+    <g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".5">
+      <path d="M62 46 q-3 -4 0 -8 q3 -4 0 -8"><animate attributeName="opacity" values="0;.8;0" dur="2.6s" repeatCount="indefinite"/></path>
+      <path d="M94 46 q3 -4 0 -8 q-3 -4 0 -8"><animate attributeName="opacity" values="0;.8;0" dur="2.6s" begin="1.3s" repeatCount="indefinite"/></path>
+    </g>`;
+  return `<svg class="game-demo" viewBox="0 0 160 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="${p}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1a33"/><stop offset=".6" stop-color="#1d3a64"/><stop offset="1" stop-color="#7a2f4a"/></linearGradient>
+      <linearGradient id="${p}sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6a6"/><stop offset=".6" stop-color="#ff9a62"/><stop offset="1" stop-color="#e2455b"/></linearGradient>
+      <linearGradient id="${p}tab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1e3e"/><stop offset="1" stop-color="#3d3a78"/></linearGradient>
+      <linearGradient id="${p}mug" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4f0812"/><stop offset=".3" stop-color="#c42a38"/><stop offset=".55" stop-color="#a11a2a"/><stop offset="1" stop-color="#45060f"/></linearGradient>
+    </defs>
+    <rect width="160" height="62" fill="url(#${p}sky)"/>
+    <circle cx="80" cy="60" r="26" fill="url(#${p}sun)" opacity=".9"/>
+    <path d="M54 48 H106 M52 52 H108" stroke="#1d3a64" stroke-width="1.4"/>
+    ${tree(14, 58, 18, "#16294a")}${tree(30, 58, 13, "#16294a")}${tree(132, 58, 15, "#16294a")}${tree(148, 58, 20, "#16294a")}
+    <path d="M44 56 L116 56 L170 130 L-10 130 Z" fill="url(#${p}tab)"/>
+    <path d="M44 56 L-10 130 M116 56 L170 130" stroke="#ffdf9e" stroke-width="1.4"/>
+    <path d="M-4 14 Q38 32 80 14 Q122 32 164 14" fill="none" stroke="#1d2a22" stroke-width=".8"/>
+    ${lights}${snow}
+    ${cups}
+    ${anim}
+  </svg>`;
+}
 /* Kleine Demo-Animation für die Minispiel-Kachel */
 function gameDemo() {
+  if (isDezember()) return gameDemoXm();
   const p = "gd_";
   const cupS = (cx, ty, w) => { const h = w * 1.12, b = w * .36;
     return `<path d="M${cx - w / 2} ${ty} L${cx + w / 2} ${ty} L${cx + b} ${ty + h} L${cx - b} ${ty + h} Z" fill="url(#${p}cup)"/>
@@ -7628,7 +7713,7 @@ function phaseTick() {
 let prunedAt = minIndex();
 setInterval(phaseTick, 1000);
 /* Dezember-Look schaltet sich am 1.12. um 0:00 von selbst ein (und am 1.1. wieder aus) – auch wenn die App gerade offen ist */
-setInterval(() => { if (isDezember() !== app.classList.contains("dezember")) dekoApply(); }, 30000);
+setInterval(() => { if (isDezember() !== app.classList.contains("dezember")) buildMenu(); }, 30000);
 /* ================= Hauptmenü ================= */
 /* ================= Dezember-Look (1.–31.12.): Menü geschmückt, Schnee ================= */
 const isDezember = (d = new Date()) => berlin({ month: "numeric" }).format(d) === "12";
