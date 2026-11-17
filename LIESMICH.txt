@@ -91,3 +91,15 @@ MUSIKWÜNSCHE & DJ-PULT
   Unten „Dauerhaft gesperrt“ mit „Entsperren“. Gesperrtes lehnt auch die Datenbank ab (Regeln).
 - Daten: Firestore musik/<Abend-ID> (ein Dokument pro Abend), musikSperre/… und musikSperreInfo/….
 - WICHTIG: Für die Musikwünsche müssen die neuen firestore.rules in Firebase eingefügt werden.
+
+
+ExMa X-Mas (02.12.) – seit v86
+- Abend in EVENTS mit thema "xmas": Birken, Holzbuden, Lichterkette (flacher Stil, Szene in sceneXmas).
+- Untertitel "Not So Silent Night"; das Wort aus "streich" wird rot durchgestrichen (Feld weglassen = kein Gag).
+- Infokasten auf der großen Kachel: Feld "kachelInfo" (zeit = fett, text = darunter).
+- Special Drinks: Christmas Spritz (bild "spritz") und Lebkuchen Espresso Martini (bild "martini").
+  Preis noch offen: preis: null zeigt "Preis folgt" – einfach die Zahl eintragen, z. B. preis: 4.5
+- Happy Hour: happyHour: null = keine. Bei Bedarf wie bei der Vodka Night eintragen.
+- Gold-Abzeichen "Glühwein-Gang" (abzeichen: "xmas") gibt es für alle, die an dem Abend dabei sind.
+- Bildausschnitte für Vorschau-Karte, Polaroid und Tresen: SCENE_VB im Code.
+- Bei jedem Update APP_V in index.html und VERSION in sw.js zusammen hochzählen.
