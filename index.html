@@ -85,7 +85,7 @@ a { color: inherit; }
   transition: transform .55s cubic-bezier(.7,0,.2,1), opacity .55s ease;
 }
 .view-detail { transform: translateX(100%); z-index: 5; }
-.app.is-detail .view-hero { transform: translateX(-30%); opacity: .35; pointer-events: none; }
+
 .app.is-detail .view-detail { transform: translateX(0); }
 .app:not(.is-detail) .view-detail { visibility: hidden; transition: transform .55s cubic-bezier(.7,0,.2,1), visibility 0s .55s; }
 
@@ -120,31 +120,18 @@ a { color: inherit; }
 .pay-page .foot { margin-top: 34px; }
 
 /* ---------- Startansicht: Karussell ---------- */
-.view-hero { z-index: 1; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
-.track { position: absolute; inset: 0; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
-.track.dragging { transition: none; }
-.slide {
-  position: absolute; top: 0; bottom: 0; width: 100%;
-  display: flex; flex-direction: column;
-  padding: calc(76px + var(--safe-t)) 20px calc(92px + var(--safe-b));
-  isolation: isolate;
-  overflow: hidden;
-  cursor: pointer;
-  background: var(--night);
-}
-.slide.past .scene { filter: saturate(.55) brightness(.8); }
-.scene { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
-.layer { position: absolute; inset: -22px; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
-.layer svg { width: 100%; height: 100%; display: block; }
-@media (hover: none) { .layer { transition: none; } }
 
-.topbar {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 4;
-  display: flex; align-items: center; gap: 12px;
-  padding: calc(16px + var(--safe-t)) 20px 0;
-  pointer-events: none;
-}
-.topbar > * { pointer-events: auto; }
+
+
+
+
+
+
+
+
+
+
+
 .logo {
   width: 46px; height: 46px;
   border-radius: 50%;
@@ -155,22 +142,11 @@ a { color: inherit; }
 .club b { display: block; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
 .club { min-width: 0; flex: 1 1 auto; }
 .club b, .club span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.topbar .icon-btn { width: 40px; height: 40px; }
-.topbar .icon-btn + .icon-btn { margin-left: -4px !important; }
+
+
 .club span { font-size: 12.5px; color: color-mix(in srgb, var(--frost) 75%, transparent); }
-.icon-btn {
-  margin-left: auto;
-  width: 44px; height: 44px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: rgba(5, 8, 22, .55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  text-decoration: none;
-  flex: none;
-}
-.icon-btn svg { width: 20px; height: 20px; }
+
+
 
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
@@ -229,48 +205,18 @@ a { color: inherit; }
   text-shadow: 0 0 4px #fff, 0 0 16px var(--a3), 0 0 34px var(--a3);
 }
 
-.when {
-  margin-top: 16px;
-  display: inline-flex; align-items: center; gap: 14px;
-  padding: 8px 18px 8px 16px;
-  border-radius: 22px;
-  border: 2px solid var(--a3);
-  background: rgba(5, 8, 22, .62);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 22px color-mix(in srgb, var(--a3) 55%, transparent), inset 0 0 18px color-mix(in srgb, var(--a3) 25%, transparent);
-}
-.when { max-width: 100%; }
-.when-date {
-  font-family: var(--f-display);
-  font-size: calc(var(--ws, 1) * clamp(34px, 11vw, 50px));
-  white-space: nowrap;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: #fff;
-  text-shadow: 0 0 3px #fff, 0 0 18px var(--a3);
-}
-.when-meta { display: grid; gap: 2px; line-height: 1.15; }
-.when-meta b { font-weight: 800; font-size: calc(var(--ws, 1) * 17px); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
-.when-meta span { font-weight: 800; font-size: calc(var(--ws, 1) * 14.5px); color: var(--a1); white-space: nowrap; }
-.music, .play-btn { max-width: 100%; }
 
-.music {
-  margin-top: 10px;
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 9px 16px 9px 12px;
-  border-radius: 999px;
-  border: 1.5px solid var(--a1);
-  background: rgba(5, 8, 22, .62);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-size: 15px; font-weight: 600;
-  box-shadow: 0 0 18px color-mix(in srgb, var(--a1) 40%, transparent);
-}
-.music svg { width: 20px; height: 20px; color: var(--a1); flex: none; animation: beat .6s ease-in-out infinite alternate; }
-.music b { font-weight: 800; color: var(--a1); font-variant-numeric: tabular-nums; }
-@keyframes beat { from { transform: scale(1); } to { transform: scale(1.15); } }
-.hero-spacer { flex: 1; min-height: 20px; }
+
+
+
+
+
+
+
+
+
+
+
 
 /* Installationshinweis */
 .install-tip {
@@ -309,26 +255,10 @@ a { color: inherit; }
 .install-tip.bottom .arrow-tip { top: auto; bottom: -28px; right: 50%; margin-right: -17px; transform: rotate(180deg); animation-name: tipBobDown; }
 @keyframes tipBob { 50% { transform: translate(3px, -4px); } }
 @keyframes tipBobDown { 0%, 100% { transform: rotate(180deg) translateY(0); } 50% { transform: rotate(180deg) translateY(-5px); } }
-.cta-wrap { display: grid; gap: 10px; }
-.cta {
-  width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px;
-  padding: 8px 8px 8px 24px;
-  border: none;
-  border-radius: 999px;
-  background: var(--frost);
-  color: var(--night);
-  font-weight: 800; font-size: 17px;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, .14), 0 0 40px color-mix(in srgb, var(--a1) 55%, transparent);
-}
-.cta i {
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--night); color: var(--a1);
-  display: grid; place-items: center;
-  font-style: normal;
-}
-.cta i svg { width: 22px; height: 22px; animation: nudge 1.6s ease-in-out infinite; }
+
+
+
+
 .reg-btn {
   display: flex; align-items: center; justify-content: center; gap: 10px;
   height: 54px;
@@ -340,68 +270,34 @@ a { color: inherit; }
   box-shadow: 0 0 28px color-mix(in srgb, var(--a3) 65%, transparent);
 }
 .reg-btn svg { width: 20px; height: 20px; }
-.cta-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
-.cta-row .cta { padding-left: 18px; font-size: 16px; white-space: nowrap; gap: 8px; }
-.reg-mini {
-  display: flex; align-items: center; gap: 6px;
-  height: 52px; padding: 0 14px;
-  white-space: nowrap;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--a3), #ff8a3d);
-  color: #fff; text-decoration: none;
-  font-weight: 800; font-size: 14px;
-  box-shadow: 0 0 22px color-mix(in srgb, var(--a3) 60%, transparent);
-}
-.reg-mini svg { width: 16px; height: 16px; }
 
-.pager {
-  position: absolute; left: 0; right: 0; bottom: calc(14px + var(--safe-b)); z-index: 4;
-  display: grid; justify-items: center; gap: 6px;
-  pointer-events: none;
-}
-.dots { display: flex; gap: 6px; pointer-events: auto; }
-.dots button {
-  width: 8px; height: 8px; padding: 0; border: none; border-radius: 999px;
-  background: rgba(255,255,255,.35);
-  transition: width .3s, background .3s;
-  position: relative;
-}
-.dots button::after { content: ""; position: absolute; inset: -10px -4px; }
-.dots button[aria-current="true"] { width: 26px; background: var(--frost); }
-.pager-hint { font-size: 12.5px; color: color-mix(in srgb, var(--frost) 70%, transparent); text-shadow: 0 1px 6px #000; }
-.arrow {
-  position: absolute; top: 50%; z-index: 4;
-  width: 44px; height: 44px; margin-top: -22px;
-  border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
-  background: rgba(5,8,22,.55);
-  display: none; place-items: center;
-}
-.arrow { border: 1.5px solid color-mix(in srgb, var(--a3) 70%, transparent); background: color-mix(in srgb, var(--night) 70%, transparent); color: var(--a1); box-shadow: 0 0 12px color-mix(in srgb, var(--a3) 30%, transparent); }
-.arrow .chev { width: 20px; height: 20px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Pfeil im Stil des Ziel-Abends */
-.arrow.to-miami {
-  border: 2px solid #2ff3e0; color: #fff;
-  background:
-    repeating-linear-gradient(180deg, transparent 0 26px, rgba(18,4,31,.85) 26px 28px, transparent 28px 31px, rgba(18,4,31,.85) 31px 34px),
-    linear-gradient(180deg, #fff27a 0%, #ffb347 35%, #ff5f6d 65%, #ff2e88 100%);
-  box-shadow: 0 0 10px rgba(47,243,224,.55), 0 0 18px rgba(255,46,136,.35);
-}
-.arrow.to-miami .chev { filter: drop-shadow(0 1px 2px rgba(18,4,31,.9)); stroke-width: 3; }
-.arrow.to-miami .arrow-date text { fill: #2ff3e0; filter: drop-shadow(0 0 3px rgba(47,243,224,.8)); }
-.arrow.to-eis {
-  border: 2px solid #9fe3ff; color: #fff;
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #bfe9ff 30%, #2d6bff 100%);
-  box-shadow: 0 0 10px rgba(159,227,255,.6), 0 0 18px rgba(255,63,200,.3);
-}
-.arrow.to-eis .chev { filter: drop-shadow(0 1px 2px rgba(5,8,22,.9)); stroke-width: 3; }
-.arrow.to-eis .arrow-date text { fill: #9fe3ff; }
+
+
+
+
+
+
 .arrow-date { position: absolute; left: -14px; top: -14px; width: 72px; height: 72px; overflow: visible; pointer-events: none; }
 .arrow-date text { font-family: var(--f-body); font-size: 9px; font-weight: 800; letter-spacing: 1.5px; fill: var(--a1); opacity: .9; }
-.arrow.prev { left: 8px; }
-.arrow.next { right: 8px; }
-.arrow[hidden] { display: none !important; }
-.arrow { display: grid; }
-@media (hover: none) { .arrow { width: 40px; height: 40px; margin-top: -20px; } .arrow .chev { width: 18px; height: 18px; } .arrow-date { left: -16px; top: -16px; } .arrow.prev { left: 6px; } .arrow.next { right: 6px; } }
+
+
+
+
+@media (hover: none) {   .arrow-date { left: -16px; top: -16px; }   }
 
 /* Szene: CSS-Animationen */
 .twinkle { animation: twinkle 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
@@ -734,17 +630,8 @@ a { color: inherit; }
 
 
 /* ---------- Club live ---------- */
-.club-handle {
-  pointer-events: auto;
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 2px; padding: 6px 14px 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.25);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  color: #fff; text-decoration: none; font-weight: 800; font-size: 13px;
-}
-.club-handle svg.up { width: 16px; height: 16px; animation: up 1.4s ease-in-out infinite; }
+
+
 .crown-mini { width: 17px; height: 17px; filter: drop-shadow(0 0 5px rgba(255,207,74,.7)); animation: crownBob 2.4s ease-in-out infinite; }
 .crown-mini:last-child { animation-delay: -1.2s; }
 @keyframes up { 50% { transform: translateY(-3px); } }
@@ -782,7 +669,7 @@ a { color: inherit; }
   z-index: 6;
 }
 .app.is-club .view-club { transform: translateY(0); }
-.app.is-club .view-hero { transform: translateY(-18%); opacity: .3; pointer-events: none; }
+
 .app:not(.is-club) .view-club { visibility: hidden; transition: transform .55s cubic-bezier(.7,0,.2,1), visibility 0s .55s; }
 .club-head { display: flex; align-items: center; gap: 12px; padding: calc(14px + var(--safe-t)) 20px 0; }
 .club-head .down {
@@ -902,30 +789,19 @@ a { color: inherit; }
 
 
 /* ---------- Beerpong ---------- */
-.play-btn {
-  margin-top: 10px;
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 8px 18px 8px 8px;
-  border-radius: 999px; border: 2px solid #2ff3e0;
-  background: rgba(18, 4, 31, .7);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  color: #fff; text-align: left;
-  box-shadow: 0 0 20px rgba(47,243,224,.45);
-  animation: playGlow 2s ease-in-out infinite;
-}
-.play-btn svg { width: 40px; height: 40px; flex: none; animation: ballHop 1.2s ease-in-out infinite; }
-.play-btn b { display: block; font-size: 16px; font-weight: 800; }
-.play-btn small { display: block; font-size: 12.5px; color: #2ff3e0; }
-@keyframes playGlow { 50% { box-shadow: 0 0 34px rgba(47,243,224,.75); } }
+
+
+
+
 @keyframes ballHop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
 /* Start-Animation: Inhalte sausen weg, der Tisch zoomt auf die Becher */
-.slide > :not(.scene) { transition: transform .6s cubic-bezier(.6,0,.4,1), opacity .5s; }
-.slide.launching > :not(.scene):nth-child(odd) { transform: translateX(-130%); opacity: 0; }
-.slide.launching > :not(.scene):nth-child(even) { transform: translateX(130%); opacity: 0; }
-.slide .scene { transition: transform .8s cubic-bezier(.6,0,.3,1), opacity .8s; transform-origin: 50% 74%; }
-.slide.launching .scene { transform: scale(2.6); opacity: .0; }
-.app.is-game .topbar, .app.is-game .pager, .app.is-game .arrow { opacity: 0; pointer-events: none; transition: opacity .3s; }
+
+
+
+
+
+
 
 .view-game {
   z-index: 30; background: #12041f;
@@ -1009,8 +885,8 @@ a { color: inherit; }
 }
 @media (prefers-reduced-motion: reduce) { .tile-banner { animation: none; } }
 .app.game-solo > *:not(.view-game):not(.view-bus):not(.view-zapf):not(.view-pol) { visibility: hidden !important; }
-.app.hero-off .view-hero { visibility: hidden !important; }
-.app.hero-off .view-hero * { animation-play-state: paused !important; }
+
+
 /* Menü: Kacheln außerhalb des Bildschirms und das Menü unter einer Unterseite pausieren */
 .anim-off, .anim-off * { animation-play-state: paused !important; }
 .app:not(.is-menu) .view-menu *, .app.is-detail .view-menu *, .app.is-club .view-menu * { animation-play-state: paused !important; }
@@ -1049,7 +925,7 @@ a { color: inherit; }
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none;
 }
 .app.is-zapf .view-zapf { opacity: 1; pointer-events: auto; }
-.app.is-zapf .topbar, .app.is-zapf .pager, .app.is-zapf .arrow { opacity: 0; pointer-events: none; }
+
 .zf-cam { position: absolute; inset: 0; transform-origin: 50% 50%; transition: transform .7s cubic-bezier(.2,.8,.2,1); will-change: transform; }
 .zf-cam svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .zf-hud { position: absolute; left: 0; right: 0; top: 0; z-index: 3; display: grid; grid-template-columns: 44px 1fr 1fr 1fr; gap: 8px; align-items: center;
@@ -1414,7 +1290,7 @@ body.fg-open { overflow: hidden; }
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none;
 }
 .app.is-pol .view-pol { opacity: 1; pointer-events: auto; }
-.app.is-pol .topbar, .app.is-pol .pager, .app.is-pol .arrow { opacity: 0; pointer-events: none; }
+
 .view-pol canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .pl-blur { position: absolute; inset: 0; pointer-events: none; --b: 0px; --r: 62%;
   backdrop-filter: blur(var(--b)); -webkit-backdrop-filter: blur(var(--b));
@@ -1454,7 +1330,7 @@ body.fg-open { overflow: hidden; }
 }
 .view-bus::before { content: ""; position: absolute; inset: 10px; border-radius: 28px; border: 1.5px solid rgba(255,210,63,.35); box-shadow: inset 0 0 40px rgba(0,0,0,.35), 0 0 18px rgba(255,210,63,.12); pointer-events: none; }
 .app.is-bus .view-bus { opacity: 1; pointer-events: auto; }
-.app.is-bus .topbar, .app.is-bus .pager, .app.is-bus .arrow { opacity: 0; pointer-events: none; }
+
 .bus-hud { position: relative; width: 100%; display: grid; grid-template-columns: 44px 1fr 1fr 1fr; gap: 8px; align-items: center; }
 .view-bus .bp-stat small { color: #ffd23f; }
 .bus-prog { width: 100%; height: 5px; margin-top: 10px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden; }
@@ -1540,7 +1416,7 @@ body.fg-open { overflow: hidden; }
   transition: opacity .4s ease, transform .45s cubic-bezier(.2,.8,.2,1), visibility 0s .45s;
 }
 .app.is-menu .view-menu { opacity: 1; visibility: visible; transform: none; transition: opacity .4s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
-.app.is-menu .view-hero { pointer-events: none; }
+
 .menu-head { display: flex; align-items: center; gap: 12px; padding: 2px 4px 12px; }
 .menu-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1.5fr) minmax(0, .5fr) minmax(0, .58fr); gap: 10px; }
 .mtile {
@@ -2184,11 +2060,13 @@ body.fg-open { overflow: hidden; }
 .t-xmas .script s, .t-xmas .tile-sub s { text-decoration: none; position: relative; color: var(--frost); opacity: .92; }
 .t-xmas .script s::after, .t-xmas .tile-sub s::after { content: ""; position: absolute; left: -2px; right: -2px; top: 55%; height: .08em; min-height: 2px; background: var(--a3); transform: rotate(-6deg); border-radius: 2px; }
 .t-xmas .tile-scene svg { top: 0 !important; }
+.t-xmas.tile-ev { border-color: rgba(184,116,60,.6); box-shadow: 0 0 22px rgba(233,183,124,.12); }
+.t-xmas .tile-date, .t-xmas .tile-extra { border-color: rgba(233,183,124,.6); }
 .t-xmas.tile-ev::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 42%; z-index: -1; background: linear-gradient(180deg, transparent, rgba(18,27,22,.92) 55%, #121b16); pointer-events: none; }
 .t-xmas .chip { border-color: rgba(243,234,216,.5); }
 .t-xmas .script { margin-top: 12px; }
-.t-xmas .when { border-color: var(--a1); box-shadow: none; background: rgba(18,27,22,.82); }
-.t-xmas .when-date { text-shadow: none; }
+
+
 .fw-mini.t-xmas .tile-title { font-size: 34px; }
 /* sparsame Bewegung: Lichterkette glimmt, Kerzen flackern, Dampf steigt, ein paar Flocken */
 .xm-glow { animation: xmGlow 3.2s ease-in-out infinite; }
@@ -2216,31 +2094,6 @@ body.fg-open { overflow: hidden; }
       </header>
       <div class="menu-grid" id="menuGrid"></div>
       <nav class="menu-legal" aria-label="Rechtliches"><a href="#impressum">Impressum</a><span aria-hidden="true">·</span><a href="#datenschutz">Datenschutz</a><span aria-hidden="true">·</span><a href="#team">Team-Login</a></nav>
-    </section>
-
-    <!-- Startansicht: ein Abend pro Seite, wischen zum Wechseln -->
-    <section class="view view-hero" id="hero" aria-label="Clubabende" aria-roledescription="Karussell">
-      <div class="track" id="track"></div>
-
-      <header class="topbar">
-        <img class="logo" src="logo.png" alt="Logo ExMa Bar">
-        <div class="club"><b id="clubName"></b><span id="clubSub"></span></div>
-        <a class="icon-btn" href="#" id="menuBtn" aria-label="Hauptmenü" style="margin-left:auto">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>
-        </a>
-        <a class="icon-btn" id="igTop" target="_blank" rel="noopener" aria-label="ExMa Bar auf Instagram" style="margin-left:0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-      </header>
-
-      <button class="arrow prev" id="prevBtn" type="button" aria-label="Vorheriger Abend"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><svg class="arrow-date" viewBox="0 0 72 72" aria-hidden="true"><path id="arcPrev" d="M8 36 A28 28 0 0 0 64 36" fill="none"/><text><textPath href="#arcPrev" startOffset="50%" text-anchor="middle" id="prevDate"></textPath></text></svg></button>
-      <button class="arrow next" id="nextBtn" type="button" aria-label="Nächster Abend"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><svg class="arrow-date" viewBox="0 0 72 72" aria-hidden="true"><path id="arcNext" d="M8 36 A28 28 0 0 0 64 36" fill="none"/><text><textPath href="#arcNext" startOffset="50%" text-anchor="middle" id="nextDate"></textPath></text></svg></button>
-
-      <div class="pager">
-        <div class="dots" id="dots" role="tablist" aria-label="Abend wählen"></div>
-        <div class="pager-hint" id="pagerHint"></div>
-        <a class="club-handle" href="#ranking"><svg class="up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg><svg class="crown-mini" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#ffcf4a"/><circle cx="3" cy="7.5" r="1.6" fill="#ffcf4a"/><circle cx="12" cy="4.5" r="1.6" fill="#ffcf4a"/><circle cx="21" cy="7.5" r="1.6" fill="#ffcf4a"/></svg>Sauf-Ranking &amp; Wünsche<svg class="crown-mini" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#ffcf4a"/><circle cx="3" cy="7.5" r="1.6" fill="#ffcf4a"/><circle cx="12" cy="4.5" r="1.6" fill="#ffcf4a"/><circle cx="21" cy="7.5" r="1.6" fill="#ffcf4a"/></svg></a>
-      </div>
     </section>
 
     <!-- Für Netlify Forms: damit Netlify das Wunsch-Formular beim Hochladen erkennt -->
@@ -2409,7 +2262,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "86";
+const APP_V = "88";
 
 const EVENTS = [
   {
@@ -3294,168 +3147,27 @@ function mixAnim() {
   </svg>`;
 }
 
-/* ================= Startseite aufbauen ================= */
+/* ================= Ausgewählter Abend =================
+   Früher gab es hier ein Wisch-Karussell als Startansicht. Das ist raus: Start ist immer das Menü.
+   index merkt sich nur noch, welcher Abend gerade gemeint ist (Farben, Rechtliches, Detailseite). */
 let index = startIndex();
-const slides = [];
-
-function slideHTML(ev, i) {
-  const past = isPast(ev);
-  const meta = ev.ablauf
-    ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>")
-    : `ab ${esc(ev.time)} Uhr`;
-  const reg = ev.anmeldung && !past
-    ? `<a class="reg-mini" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop aria-label="${esc(ev.anmeldung.text)}">Anmelden ${ICON_EXT}</a>` : "";
-  const ctaText = past ? "Fotos ansehen" : (ev.specials && ev.specials.length ? "Drinks & Infos" : "Infos zum Abend");
-  return `
-    <div class="scene" aria-hidden="true">${DEPTHS.map((d, k) => `<div class="layer" data-depth="${d}"><svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMax slice"></svg></div>`).join("")}</div>
-    <div class="chips">${[chip(status(ev)), ev.art ? `<span class="chip">${esc(ev.art)}</span>` : ""].join("")}</div>
-    <h${i === index ? 1 : 2} class="title">${titleHTML(ev)}</h${i === index ? 1 : 2}>
-    <p class="script">${subHTML(ev)}</p>
-    <div><div class="when"><div class="when-date">${esc(ev.dm)}</div><div class="when-meta"><b>${esc(ev.wdLong)}</b><span>${meta}</span></div></div></div>
-    ${ev.musik ? `<div><div class="music">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b> · ${esc(ev.musik.text)}</span></div></div>` : ""}
-    ${!ev.musik && ev.kachelInfo ? `<div><div class="music">${ICON_MARKT}<span><b>${esc(ev.kachelInfo.zeit)}</b> · ${esc(ev.kachelInfo.text)}</span></div></div>` : ""}
-    ${ev.spiel === "beerpong" ? `<div><button class="play-btn" type="button" data-stop data-play>${ICON_BALL}<span><b>Beerpong spielen</b><small>Wisch den Ball in die Becher</small></span></button></div>` : ""}
-    <div class="hero-spacer"></div>
-    ${reg
-      ? `<div class="cta-row"><button class="cta" type="button" data-open><span>${ctaText}</span><i>${ICON_ARROW}</i></button>${reg}</div>`
-      : `<div class="cta-wrap"><button class="cta" type="button" data-open><span>${ctaText}</span><i>${ICON_ARROW}</i></button></div>`}`;
-}
-
-function buildSlides() {
-  const track = $("track");
-  track.innerHTML = "";
-  EVENTS.forEach((ev, i) => {
-    const s = document.createElement("article");
-    s.className = `slide t-${ev.thema}${isPast(ev) ? " past" : ""}`;
-    s.style.cssText = themeStyle(ev.th) + `;left:${i * 100}%`;
-    s.setAttribute("aria-roledescription", "Seite");
-    s.setAttribute("aria-label", `${ev.titel.join(" ")}, ${ev.wdLong} ${ev.dm}`);
-    s.innerHTML = slideHTML(ev, i);
-    const layers = SCENES[ev.thema] ? SCENES[ev.thema]() : sceneIce();
-    s.querySelectorAll(".layer svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `s${i}l${k}_`); if (reduceMotion && svg.pauseAnimations) svg.pauseAnimations(); });
-    const pb = s.querySelector("[data-play]");
-    if (pb) pb.addEventListener("click", (e) => { if (dragMoved) return; e.stopPropagation(); launchGame(s); });
-    s.addEventListener("click", (e) => {
-      if (dragMoved || e.target.closest("[data-stop]")) return;
-      openDetail(ev);
-    });
-    track.appendChild(s);
-    slides.push(s);
-  });
-  $("dots").innerHTML = EVENTS.map((ev, i) =>
-    `<button type="button" role="tab" aria-label="${esc(ev.titel.join(" "))}, ${esc(ev.dm)}"></button>`).join("");
-  [...$("dots").children].forEach((b, i) => b.addEventListener("click", () => goTo(i)));
-  pruneSlides();
-}
-
+const minIndex = () => startIndex();
 function applyTheme(ev) {
   const st = themeStyle(ev.th);
   $("stage").style.cssText = st;
   app.style.cssText = st;
   document.querySelector('meta[name="theme-color"]').setAttribute("content", ev.th.night);
 }
-
-/* Vorbei = weg: Das Karussell beginnt immer beim nächsten Abend. Vergangene Abende leben nur noch als Polaroid auf der Fotowand weiter. */
-const minIndex = () => startIndex();
-function pruneSlides() {
-  const m = minIndex();
-  slides.forEach((s, k) => { s.style.display = k < m ? "none" : ""; });
-  [...$("dots").children].forEach((b, k) => { b.style.display = k < m ? "none" : ""; });
-  if (index < m) goTo(m, false);
-}
-function goTo(i, animate = true) {
+function goTo(i) {
   index = Math.max(minIndex(), Math.min(EVENTS.length - 1, i));
-  const track = $("track");
-  if (!animate) track.classList.add("dragging");
-  track.style.transform = `translateX(${-index * 100}%)`;
-  if (!animate) requestAnimationFrame(() => track.classList.remove("dragging"));
-  [...$("dots").children].forEach((b, k) => b.setAttribute("aria-current", k === index ? "true" : "false"));
-  slides.forEach((s, k) => s.setAttribute("aria-hidden", k === index ? "false" : "true"));
-  $("prevBtn").hidden = index <= minIndex();
-  $("nextBtn").hidden = index === EVENTS.length - 1;
-  /* Pfeile tragen Farben und Datum des Abends, zu dem sie führen */
-  const prevEv = index - 1 >= minIndex() ? EVENTS[index - 1] : null;
-  [["prevBtn", "prevDate", prevEv], ["nextBtn", "nextDate", EVENTS[index + 1]]].forEach(([b, t, e]) => {
-    if (!e) return;
-    $(b).style.cssText = themeStyle(e.th);
-    $(b).className = `arrow ${b === "prevBtn" ? "prev" : "next"} to-${e.thema}`;
-    $(t).textContent = e.dm;
-    $(b).setAttribute("aria-label", `${e.titel.join(" ")} am ${e.dm}`);
-  });
-  const next = EVENTS[index + 1], prev = prevEv;
-  $("pagerHint").textContent = next ? `Wischen: ${next.titel.join(" ")} am ${next.dm}` : prev ? `Zurück wischen: ${prev.titel.join(" ")}` : "";
   applyTheme(EVENTS[index]);
-  resetParallax();
-  placeArrows();
 }
-
-/* Wischen auf der Startseite */
-let dragX = null, dragY = null, dragDX = 0, dragDY = 0, dragMoved = false, dragLock = null;
-const heroEl = $("hero");
-heroEl.addEventListener("pointerdown", (e) => {
-  if (app.classList.contains("is-detail")) return;
-  dragX = e.clientX; dragY = e.clientY; dragDX = 0; dragDY = 0; dragMoved = false; dragLock = null;
-});
-heroEl.addEventListener("pointermove", (e) => {
-  parallaxPointer(e);
-  if (dragX === null) return;
-  const dx = e.clientX - dragX, dy = e.clientY - dragY;
-  if (dragLock === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) dragLock = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
-  dragDY = dy;
-  if (dragLock !== "x") return;
-  dragMoved = true;
-  let d = dx;
-  if ((index === 0 && dx > 0) || (index === EVENTS.length - 1 && dx < 0)) d = dx * .3;
-  dragDX = d;
-  const track = $("track");
-  track.classList.add("dragging");
-  track.style.transform = `translateX(calc(${-index * 100}% + ${d}px))`;
-});
-function endDrag() {
-  if (dragX === null) return;
-  const track = $("track");
-  track.classList.remove("dragging");
-  const w = heroEl.clientWidth;
-  if (dragLock === "x" && Math.abs(dragDX) > Math.min(80, w * .2)) goTo(index + (dragDX < 0 ? 1 : -1));
-  else goTo(index);
-  if (dragLock === "y" && dragDY < -70) { dragMoved = true; location.hash = "ranking"; }
-  dragX = null;
-  setTimeout(() => { dragMoved = false; }, 50);
-}
-heroEl.addEventListener("pointerup", endDrag);
-heroEl.addEventListener("pointercancel", endDrag);
-heroEl.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") { endDrag(); resetParallax(); } });
-$("prevBtn").addEventListener("click", () => goTo(index - 1));
-$("nextBtn").addEventListener("click", () => goTo(index + 1));
+/* Vorbei = weg: Vergangene Abende leben nur noch als Polaroid auf der Fotowand weiter. */
+function pruneSlides() { if (index < minIndex()) goTo(minIndex()); }
 document.addEventListener("keydown", (e) => {
   if (app.classList.contains("is-club")) { if (e.key === "Escape") closeClub(); return; }
-  if (app.classList.contains("is-detail")) { if (e.key === "Escape") closeDetail(); return; }
-  if (e.key === "ArrowRight") goTo(index + 1);
-  if (e.key === "ArrowLeft") goTo(index - 1);
+  if (app.classList.contains("is-detail")) { if (e.key === "Escape") closeDetail(); }
 });
-
-/* Parallaxe der aktiven Szene */
-function moveLayers(nx, ny) {
-  const s = slides[index]; if (!s) return;
-  s.querySelectorAll(".layer").forEach((l) => {
-    const d = parseFloat(l.dataset.depth);
-    l.style.transform = `translate3d(${(nx * d).toFixed(1)}px, ${(ny * d * .6).toFixed(1)}px, 0)`;
-  });
-}
-function parallaxPointer(e) {
-  if (reduceMotion || e.pointerType !== "mouse") return;
-  const r = heroEl.getBoundingClientRect();
-  moveLayers(((e.clientX - r.left) / r.width - .5) * 2, ((e.clientY - r.top) / r.height - .5) * 2);
-}
-function resetParallax() { slides.forEach((s) => s.querySelectorAll(".layer").forEach((l) => (l.style.transform = ""))); }
-if (!reduceMotion && matchMedia("(hover: none)").matches) {
-  let t = 0;
-  const tick = () => {
-    if (!app.classList.contains("is-detail") && !document.hidden && dragX === null) { t += .006; moveLayers(Math.sin(t) * .8, Math.cos(t * 1.3) * .5); }
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
 
 /* ================= Detailansicht ================= */
 let current = null;
@@ -3793,7 +3505,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche", "abende"];
+  const OTHER = ["fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !id.startsWith("fotos-") && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -4371,13 +4083,6 @@ function showClub(open) {
 
 
 /* ================= Beerpong-Spiel ================= */
-function launchGame(slide) {
-  if (reduceMotion) { location.hash = "beerpong"; return; }
-  slide.classList.add("launching");
-  setTimeout(() => { location.hash = "beerpong"; }, 520);
-  setTimeout(() => slide.classList.remove("launching"), 1300);
-}
-
 const Game = (() => {
   const cv = $("bpCanvas"), ctx = cv.getContext("2d");
   let W = 0, H = 0, dpr = 1, running = false, raf = 0;
@@ -4840,7 +4545,7 @@ const Game = (() => {
 let soloTimer = 0;
 function soloView(on) {
   clearTimeout(soloTimer);
-  const svgs = document.querySelectorAll(".view-hero svg, .view-detail svg");
+  const svgs = document.querySelectorAll(".view-detail svg");
   if (on) {
     soloTimer = setTimeout(() => {
       app.classList.add("game-solo");
@@ -5099,6 +4804,7 @@ const Zapf = (() => {
   ];
   const SHOT = () => ({ name: "Schnapsglas", drink: "pfeffi", h: r(74, 84), wb: 34, wt: r(44, 48), base: 17, rate: .4 });
   const CLASSIC = () => ({ name: "Willibecher", drink: "bier", h: 225, wb: 84, wt: 108, classic: true });
+  window.ZAPF_GLAESER = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT].map((f) => f().name);   /* für das Abzeichen „Sauerei“ */
   const HINTS = {
     bier: "Klassisch: Der Schaum steigt nach dem Loslassen noch ein Stück.",
     weizen: "Weizen schäumt kräftig nach – lieber früher loslassen!",
@@ -5448,7 +5154,7 @@ const Zapf = (() => {
       pctBox("Übergelaufen!", "bad", fmtPct(Math.min(level, 1.02)).replace(/^1[0-9]{2},[0-9]+/, "über 100,000"));
       $("zfSpill").setAttribute("opacity", 1);
       document.querySelectorAll("#zfSpill .zf-drip").forEach((el, i) => el.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { duration: 700 + i * 200, easing: "ease-in", fill: "forwards" }));
-      buzz([60, 40, 140]); Badges.unlock("sauerei");
+      buzz([60, 40, 140]); Badges.spill(glass.name);
       return setTimeout(() => gameOver("Übergelaufen!", "Der Schaum ist über den Rand gelaufen."), 1500);
     }
     const pct = Math.round(level * 100 * 1000) / 1000, need = minPct();
@@ -6291,6 +5997,7 @@ const BADGE_STUFEN = {
   bust: { name: "Vielfahrer", unit: "Karten", need: [200, 500, 1000, 2000], sum: true, txt: (n) => `Insgesamt ${fmtNum(n)} Karten richtig umgedreht.` },
   z: { name: "Zapfmeister", unit: "Gläser", need: [3, 5, 10, 15], txt: (n) => `${n} Gläser in einem Spiel gezapft.` },
   zt: { name: "Dauerzapfer", unit: "Gläser", need: [200, 500, 1000, 2000], sum: true, txt: (n) => `Insgesamt ${fmtNum(n)} Gläser gezapft.` },
+  zock: { name: "Dauerzocker", unit: "Runden", need: [100, 500, 1000, 2500], sum: true, txt: (n) => `Insgesamt ${fmtNum(n)} Runden Minispiele gespielt.` },
   polt: { name: "Heimweg-Marathon", unit: "km", need: [2000, 5000, 10000, 21000], sum: true, km: true, txt: (n) => `Im Polnischen insgesamt ${n / 1000} km gelaufen.` }
 };
 const STUFE_FARBE = ["", "Grün", "Blau", "Rot", "Lila"];
@@ -6346,8 +6053,8 @@ const BADGE_LIST = [
   "@z",
   "@zt",
   {"id": "milli", "name": "Millimeterarbeit", "desc": "Füllmenge über 99,900 %.", "tier": 4, "cat": "Minispiele"},
-  {"id": "sauerei", "name": "Sauerei", "desc": "Beim Zapfmeister ist dir das Glas übergelaufen.", "tier": 1, "cat": "Minispiele"},
-  {"id": "dauerzocker", "name": "Dauerzocker", "desc": "100 Runden Minispiele gespielt.", "tier": 3, "cat": "Minispiele"},
+  {"id": "sauerei", "name": "Sauerei", "desc": "Beim Zapfmeister jede Glassorte einmal überlaufen lassen.", "tier": 3, "cat": "Minispiele"},
+  "@zock",
   /* Geheim – thematisch sortiert */
   {"id": "abgang", "name": "Polnischer Abgang", "desc": "Das geheime Spiel gefunden.", "tier": 2, "cat": "Geheim"},
   {"id": "heim", "name": "Heimgekommen", "desc": "Im Polnischen die Haustür erreicht.", "tier": 3, "cat": "Geheim"},
@@ -6369,8 +6076,10 @@ const Badges = (() => {
   let have = read("exmaBadges", {}), log = read("exmaBadgeLog", { visits: [], eve: {} });
   log.visits = log.visits || []; log.eve = log.eve || {};
   /* Zähler über alle Spiele: Becher, Karten, Gläser, Meter (Polnischen), Runden, Busfahrer-Fehlstarts */
-  log.tot = { bp: 0, bus: 0, z: 0, pol: 0, runs: 0, bus0: 0, ...(log.tot || {}) };
-  { const MIG = { bp1: "bp-1", bp2: "bp-2", treff: "bp-3", bus1: "bus-1", bus2: "bus-2", busfahrer: "bus-3", z1: "z-1", z2: "z-2", zapf: "z-3", neu: "abende-1", stamm: "abende-2", inventar: "abende-3" }; let ch = false;
+  log.tot = { bp: 0, bus: 0, z: 0, pol: 0, runs: 0, bus0: 0, spill: [], ...(log.tot || {}) };
+  /* Sauerei ist seit v88 schwerer (jede Glassorte überlaufen) – das alte, zu leichte Abzeichen wird einmalig zurückgesetzt */
+  if (!log.tot.spillV2) { log.tot.spillV2 = 1; delete have.sauerei; try { localStorage.setItem("exmaBadges", JSON.stringify(have)); localStorage.setItem("exmaBadgeLog", JSON.stringify(log)); } catch {} }
+  { const MIG = { bp1: "bp-1", bp2: "bp-2", treff: "bp-3", bus1: "bus-1", bus2: "bus-2", busfahrer: "bus-3", z1: "z-1", z2: "z-2", zapf: "z-3", neu: "abende-1", stamm: "abende-2", inventar: "abende-3", dauerzocker: "zock-1" }; let ch = false;
     for (const [o, nw] of Object.entries(MIG)) if (have[o]) { if (!have[nw]) have[nw] = have[o]; delete have[o]; ch = true; }
     for (const g of Object.keys(BADGE_STUFEN)) for (let k = 4; k > 1; k--) if (have[`${g}-${k}`]) for (let j = 1; j < k; j++) if (!have[`${g}-${j}`]) { have[`${g}-${j}`] = have[`${g}-${k}`] - (k - j); ch = true; }
     if (ch) try { localStorage.setItem("exmaBadges", JSON.stringify(have)); } catch {} }
@@ -6385,7 +6094,7 @@ const Badges = (() => {
   function art() {
     if (artP) return artP;
     artP = fetch("abzeichen.svg?v=" + APP_V).then((r) => (r.ok ? r.text() : Promise.reject(r.status))).then((t) => {
-      syms = {}; for (const m of t.matchAll(/<symbol id="b-([^"]+)"[\s\S]*?<\/symbol>/g)) syms[m[1]] = m[0];
+      syms = {}; for (const m of t.matchAll(/<symbol id="b-([a-z0-9-]+)"[\s\S]*?<\/symbol>/g)) syms[m[1]] = m[0];   /* nur echte IDs – der Kommentar oben in der Datei zählt nicht */
       const box = document.createElement("div"); box.id = "badgeArt"; box.setAttribute("aria-hidden", "true");
       box.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
       box.innerHTML = `<svg width="0" height="0"><filter id="bdgGrey"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".42"/></feComponentTransfer></filter></svg><svg width="0" height="0" id="badgeSyms"></svg>`;
@@ -6436,10 +6145,10 @@ const Badges = (() => {
     if (!(n > 0)) return;
     log.tot[k] = (log.tot[k] || 0) + n; save();
     if (TOT_GRP[k]) stufe(TOT_GRP[k], log.tot[k]);
-    if (k === "runs" && log.tot.runs >= 100) unlock("dauerzocker");
+    if (k === "runs") stufe("zock", log.tot.runs);
     if (k === "bus0" && log.tot.bus0 >= 5) unlock("pechvogel");
   }
-  const cur = (g) => g === "abende" ? log.visits.length : g === "samm" ? BADGE_LIST.filter((b) => have[b.id] && b.grp !== "samm").length : log.tot[{ bpt: "bp", bust: "bus", zt: "z", polt: "pol" }[g]] || 0;
+  const cur = (g) => g === "abende" ? log.visits.length : g === "samm" ? BADGE_LIST.filter((b) => have[b.id] && b.grp !== "samm").length : log.tot[{ bpt: "bp", bust: "bus", zt: "z", polt: "pol", zock: "runs" }[g]] || 0;
   function stufe(g, n) {
     const reach = BADGE_STUFEN[g].need.filter((x) => n >= x).length;
     for (let k = 1; k < reach; k++) { const id = `${g}-${k}`; if (!have[id]) { have[id] = Date.now() - (reach - k); save(); } }
@@ -6489,7 +6198,7 @@ const Badges = (() => {
     const wins = Object.values(log.eve).filter((e) => e.win && e.win === e.mat).length;
     if (id === "dynastie") return `${Math.min(wins, 3)} von 3 Siegen deiner Matrikel`;
     if (id === "mottofan") return `${Math.min(mottos().length, 3)} von 3 Mottos`;
-    if (id === "dauerzocker") return `${Math.min(log.tot.runs, 100)} von 100 Runden`;
+    if (id === "sauerei") { const all = window.ZAPF_GLAESER || [], n = all.filter((g) => log.tot.spill.includes(g)).length; return `${n} von ${all.length} Glassorten übergelaufen`; }
     if (id === "pechvogel") return `${Math.min(log.tot.bus0, 5)} von 5`;
     const b = BMAP[id]; if (b && b.grp) { const d = BADGE_STUFEN[b.grp], need = d.need[b.lv - 1];
       return d.sum ? `${stufeFmt(b.grp, Math.min(cur(b.grp), need)).replace(/ [^ ]+$/, "")} von ${stufeFmt(b.grp, need)}` : `Ziel: ${stufeFmt(b.grp, need)} in einem Spiel`; }
@@ -6555,7 +6264,7 @@ const Badges = (() => {
     wrap(x, b.desc, 860).slice(0, 2).forEach((l, i) => x.fillText(l, CX, 1356 + i * 56));
     /* Pillen: Stufe + Sammlung */
     const lv = b.tier === 0 ? "★ Gold" : "★".repeat(b.tier) + " " + STUFE_FARBE[b.tier];
-    const pills = [lv, `${BADGE_LIST.filter((q) => have[q.id]).length} von ${BADGE_LIST.length} Abzeichen`];
+    const pills = [lv, `${BADGE_LIST.filter((q) => have[q.id]).length} von ${Badges.list().length} Abzeichen`];
     x.font = '800 34px "Bricolage Grotesque", sans-serif';
     const pw = pills.map((t) => x.measureText(t).width + 56), tot = pw[0] + pw[1] + 20; let px = CX - tot / 2;
     pills.forEach((t, i) => { rr(x, px, 1440, pw[i], 64, 32); x.fillStyle = i ? "rgba(255,255,255,.12)" : c; x.fill(); x.lineWidth = 3; x.strokeStyle = i ? "rgba(255,255,255,.35)" : NAVY; x.stroke();
@@ -6682,6 +6391,14 @@ const Badges = (() => {
   }
   return {
     BMAP, chip, art, unlock, drink, played, board, card, tick, tally, _shot: shot,
+    /* Zapfmeister: diese Glassorte ist übergelaufen – Sauerei, wenn jede Sorte einmal dabei war */
+    spill(name) {
+      if (!log.tot.spill.includes(name)) { log.tot.spill.push(name); save(); }
+      const all = window.ZAPF_GLAESER || [];
+      if (all.length && all.every((g) => log.tot.spill.includes(g))) unlock("sauerei");
+    },
+    /* sichtbare Abzeichen: Abzeichen kommender Abende erst ab Beginn des Abends zeigen */
+    list() { const now = new Date(); return BADGE_LIST.filter((b) => have[b.id] || !EVENTS.some((e) => e.abzeichen === b.id && now < e.startDate)); },
     /* Musikwünsche: Feuer verteilt, eigener Wunsch auf Platz 1, eigene Richtung vorn */
     musik(d, u, mineKs) {
       const all = Object.values(d.w || {});
@@ -6715,7 +6432,7 @@ const Badges = (() => {
   };
 })();
 function updateTile() {
-  const got = Badges.count(), N = BADGE_LIST.length;
+  const got = Badges.count(), N = Badges.list().length;
   const n = $("hmBadgeN"); if (n) n.textContent = `${got} von ${N}`;
   const bar = $("hmBadgeBar"); if (bar) bar.style.width = `${(100 * got / N).toFixed(1)}%`;
   const d = document.querySelector(".hm-badges"); if (d) d.classList.toggle("new", !!store.get("exmaBadgeNew"));
@@ -7222,9 +6939,9 @@ function renderFotoPage(ev) {
 
 function renderBadgePage() {
   store.set("exmaBadgeNew", "");
-  const got = Badges.count();
+  const got = Badges.count(), VIS = Badges.list();
   const cats = BADGE_CATS.map((c) => {
-    const list = BADGE_LIST.filter((b) => b.cat === c), n = list.filter((b) => Badges.has(b.id)).length;
+    const list = VIS.filter((b) => b.cat === c), n = list.filter((b) => Badges.has(b.id)).length;
     const shown = [], seen = new Set();
     for (const b of list) {
       if (!b.grp) { shown.push(b); continue; }
@@ -7237,11 +6954,11 @@ function renderBadgePage() {
   }).join("");
   pageShell("badge-page", "Abzeichen", `
     <div id="abzeichenPage">
-      <div class="bdg-hero"><div class="bdg-top"><div class="bdg-count"><b>${got}</b><span>von ${BADGE_LIST.length} Abzeichen</span></div>
+      <div class="bdg-hero"><div class="bdg-top"><div class="bdg-count"><b>${got}</b><span>von ${VIS.length} Abzeichen</span></div>
         <button type="button" class="bdg-info" id="bdgInfo" aria-expanded="false" aria-controls="bdgNote" aria-label="Wo werden meine Abzeichen gespeichert?">i</button></div>
       <p class="bdg-note" id="bdgNote" hidden>Deine Abzeichen werden nur auf diesem Handy gespeichert – nicht online. Wenn du dein Handy wechselst, den Browserverlauf bzw. die Websitedaten löschst oder die App neu installierst, sind sie weg. Abzeichen rund um den Clubabend zählen von 21:00 bis 1:30 Uhr.</p>
-      <div class="bdg-bar"><i style="width:${(100 * got / BADGE_LIST.length).toFixed(1)}%"></i></div>
-      <div class="bdg-tiers">${[0, 1, 2, 3, 4].map((t) => { const l = BADGE_LIST.filter((b) => b.tier === t); return `<span style="--tc:${BADGE_TIER[t]}"><i></i>${l.filter((b) => Badges.has(b.id)).length}/${l.length}</span>`; }).join("")}</div></div>
+      <div class="bdg-bar"><i style="width:${(100 * got / VIS.length).toFixed(1)}%"></i></div>
+      <div class="bdg-tiers">${[0, 1, 2, 3, 4].map((t) => { const l = VIS.filter((b) => b.tier === t); return `<span style="--tc:${BADGE_TIER[t]}"><i></i>${l.filter((b) => Badges.has(b.id)).length}/${l.length}</span>`; }).join("")}</div></div>
       ${cats}
     </div>`);
   $("bdgInfo").addEventListener("click", (e) => { const n = $("bdgNote"); n.hidden = !n.hidden; e.currentTarget.setAttribute("aria-expanded", String(!n.hidden)); });
@@ -7533,7 +7250,6 @@ function setMenu(on) {
   if (!on) hideInstallTip();
   else { if (typeof showInstallTip === "function") setTimeout(() => showInstallTip(), 900); }
   $("menu").setAttribute("aria-hidden", on ? "false" : "true");
-  heroEl.setAttribute("aria-hidden", on ? "true" : "false");
   if (on) document.querySelector('meta[name="theme-color"]').setAttribute("content", "#07060f");
   else applyTheme(EVENTS[index]);
 }
@@ -7554,13 +7270,14 @@ function goBack(fallback) {
 /* ================= Navigation ================= */
 function show(detailOpen) {
   app.classList.toggle("is-detail", detailOpen);
-  heroEl.setAttribute("aria-hidden", detailOpen ? "true" : "false");
   $("detail").setAttribute("aria-hidden", detailOpen ? "false" : "true");
   if (detailOpen) setTimeout(() => { const b = $("backBtn"); if (b) b.focus({ preventScroll: true }); }, 560);
 }
 function route() { routeInner(); afterRoute(); Fotos.strips(); fwCovers(); }
 function routeInner() {
   const id = location.hash.slice(1);
+  /* alte Links auf das frühere Karussell landen im Menü */
+  if (id === "abende") { navReplace = true; location.replace("#"); return; }
   if (id !== "turnier" && id !== "turnier-team") tnStop();
   trackNav(id);
   if (id === "beerpong") { Bus.close(); Zapf.close(); Pol.close(); Game.open(); return; }
@@ -7592,7 +7309,7 @@ function routeInner() {
     return;
   }
   show(false);
-  setMenu(id !== "abende");
+  setMenu(true);
 }
 /* ================= Impressum & Datenschutz ================= */
 function renderLegal(which) {
@@ -7665,7 +7382,7 @@ function renderLegal(which) {
 }
 
 function openDetail(ev) { if (isPast(ev)) { location.hash = "fotos-" + ev.id; return; } if (location.hash !== "#" + ev.id) location.hash = ev.id; else { renderDetail(ev); show(true); } }
-function closeDetail() { goBack(app.classList.contains("is-menu") ? "" : "abende"); }
+function closeDetail() { goBack(""); }
 window.addEventListener("hashchange", route);
 
 
@@ -8438,26 +8155,7 @@ function swipeGo(dir, from = 0) {
     location.replace("#" + next);
   };
 }
-/* Die Startansicht (Karussell) liegt unter Menü und Unterseiten. Solange sie verdeckt ist,
-   wird sie ausgeblendet und ihre Animationen pausieren – das spart viel Rechenzeit. */
-let heroTimer = 0;
-function heroSleep() {
-  clearTimeout(heroTimer);
-  const covered = ["is-menu", "is-detail", "is-club"].some((c) => app.classList.contains(c));
-  const svgs = () => heroEl.querySelectorAll("svg");
-  if (covered) {
-    heroTimer = setTimeout(() => {
-      if (!["is-menu", "is-detail", "is-club"].some((c) => app.classList.contains(c))) return;
-      app.classList.add("hero-off");
-      svgs().forEach((v) => v.pauseAnimations && v.pauseAnimations());
-    }, 650);
-  } else if (app.classList.contains("hero-off")) {
-    app.classList.remove("hero-off");
-    if (!reduceMotion) svgs().forEach((v) => v.unpauseAnimations && v.unpauseAnimations());
-  }
-}
 function afterRoute() {
-  heroSleep();
   updateSwipeHint();
   if (!pendingSwipe) return;
   const { dir, out, anim } = pendingSwipe; pendingSwipe = null;
@@ -8523,36 +8221,13 @@ function fitTitle(el, max) {
   const widest = Math.max(...[...el.children].map((s) => s.getBoundingClientRect().width));
   if (widest > avail) el.style.fontSize = Math.floor(max * avail / widest) + "px";
 }
-/* Pfeile mittig in den freien Bereich (Szene) zwischen Infos und Buttons setzen, nie über Text */
-function placeArrows() {
-  const s = slides[index]; if (!s) return;
-  const sp = s.querySelector(".hero-spacer"); if (!sp) return;
-  const hr = heroEl.getBoundingClientRect(), r = sp.getBoundingClientRect();
-  const top = Math.max(r.top - hr.top + 30, (r.top + r.bottom) / 2 - hr.top);
-  ["prevBtn", "nextBtn"].forEach((id) => { $(id).style.top = top.toFixed(0) + "px"; });
-}
-function fitWhen(slide) {
-  const box = slide.querySelector(".when"); if (!box) return;
-  box.style.setProperty("--ws", 1);
-  const ps = getComputedStyle(slide);
-  const avail = slide.clientWidth - parseFloat(ps.paddingLeft) - parseFloat(ps.paddingRight);
-  for (let i = 0; i < 3; i++) {
-    const wNow = box.scrollWidth;
-    if (wNow <= avail) break;
-    const cur = parseFloat(box.style.getPropertyValue("--ws")) || 1;
-    box.style.setProperty("--ws", (cur * avail / wNow * .98).toFixed(3));
-  }
-}
 function fitAll() {
-  const w = Math.min(app.clientWidth, 480), h = app.clientHeight;
-  slides.forEach((s) => { fitTitle(s.querySelector(".title"), Math.min(104, w * .3, h * .105)); fitWhen(s); });
-  placeArrows();
+  const w = Math.min(app.clientWidth, 480);
   fitTitle($("dTitle"), Math.min(76, w * .2));
 }
 
 /* Live-Status jede halbe Minute auffrischen */
 function refreshLive() {
-  slides.forEach((s, i) => { const c = s.querySelector(".chips .chip"); if (c) c.outerHTML = chip(status(EVENTS[i])); });
   if (current) {
     const ds = $("dStatus"); if (ds) ds.innerHTML = chip(status(current));
     const hc = $("hhChip"); if (hc && current.happyHour) hc.innerHTML = chip(hhStatus(current));
@@ -8762,11 +8437,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && !$
 document.addEventListener("contextmenu", (e) => { if (!$("tresen").hidden) e.preventDefault(); });
 addEventListener("resize", () => { if (!$("tresen").hidden) trScale(); });
    /* Start */
-$("clubName").textContent = CLUB.name;
-$("clubSub").textContent = CLUB.sub;
-$("igTop").href = CLUB.instagram;
-buildSlides();
-goTo(index, false);
+goTo(index);
 buildMenu();
 initFirebase();
 route();
