@@ -831,6 +831,10 @@ a { color: inherit; }
 .bp-help { position: absolute; left: 24px; right: 24px; bottom: calc(26px + var(--safe-b)); text-align: center; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,.85); pointer-events: none; transition: opacity .4s; }
 .bp-help b { display: block; font-size: 18px; color: #fff; margin-bottom: 4px; }
 .bp-help.hide { opacity: 0; }
+.app.dezember .bp-stat small { color: #ffd98a; }
+.zf-steam { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; animation: zfSteam 3.3s ease-in-out infinite; }
+@keyframes zfSteam { 0% { opacity: 0; transform: translateY(6px) scaleY(.7); } 35% { opacity: .32; } 100% { opacity: 0; transform: translateY(-16px) scaleY(1.1); } }
+.app.dezember .bp-toast { text-shadow: 0 0 16px #e2554b, 0 0 30px #c4362f; }
 .bp-over[hidden] { display: none; }
 .bp-over { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 20px; background: rgba(10, 2, 18, .78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .bp-card { box-sizing: border-box; min-width: 0; max-width: 100%; width: min(360px, 100%); padding: 22px 20px; border-radius: 26px; background: #fff; color: #1a0b2e; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,.5); animation: pop .4s cubic-bezier(.2,.9,.25,1.2); }
@@ -1381,6 +1385,25 @@ body.fg-open { overflow: hidden; }
 .bus-foot { margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 12px; color: rgba(255,255,255,.7); text-align: center; line-height: 1.35; }
 .bus-foot button { flex: none; height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.25); color: #fff; font: 700 12px var(--f-body); }
 .view-bus .bp-toast { top: 44%; text-shadow: 0 0 16px #ffd23f, 0 0 30px #ffd23f; }
+/* ===== Dezember: Busfahrer mit weihnachtlichem Kartendeck ===== */
+.app.dezember .view-bus { background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Cg opacity='0.2'%3E%3Cpath d='M34.0 40.0L36.9 40.8M35.6 40.4l0.5 0.8M35.6 40.4l0.8 -0.5M34.0 40.0L34.8 42.9M34.4 41.6l-0.4 0.8M34.4 41.6l0.8 0.5M34.0 40.0L31.9 42.1M32.8 41.2l-1.0 0.0M32.8 41.2l-0.0 1.0M34.0 40.0L31.1 39.2M32.4 39.6l-0.5 -0.8M32.4 39.6l-0.8 0.5M34.0 40.0L33.2 37.1M33.6 38.4l0.4 -0.8M33.6 38.4l-0.8 -0.5M34.0 40.0L36.1 37.9M35.2 38.8l1.0 -0.0M35.2 38.8l0.0 -1.0' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.26'%3E%3Cpath d='M170.0 22.0L172.9 22.8M171.6 22.4l0.5 0.8M171.6 22.4l0.8 -0.5M170.0 22.0L170.8 24.9M170.4 23.6l-0.4 0.8M170.4 23.6l0.8 0.5M170.0 22.0L167.9 24.1M168.8 23.2l-1.0 0.0M168.8 23.2l-0.0 1.0M170.0 22.0L167.1 21.2M168.4 21.6l-0.5 -0.8M168.4 21.6l-0.8 0.5M170.0 22.0L169.2 19.1M169.6 20.4l0.4 -0.8M169.6 20.4l-0.8 -0.5M170.0 22.0L172.1 19.9M171.2 20.8l1.0 -0.0M171.2 20.8l0.0 -1.0' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.2'%3E%3Cpath d='M250.0 120.0L253.9 121.0M252.1 120.6l0.7 1.1M252.1 120.6l1.1 -0.6M250.0 120.0L251.0 123.9M250.6 122.1l-0.6 1.1M250.6 122.1l1.1 0.7M250.0 120.0L247.2 122.8M248.4 121.6l-1.3 0.0M248.4 121.6l-0.0 1.3M250.0 120.0L246.1 119.0M247.9 119.4l-0.7 -1.1M247.9 119.4l-1.1 0.6M250.0 120.0L249.0 116.1M249.4 117.9l0.6 -1.1M249.4 117.9l-1.1 -0.7M250.0 120.0L252.8 117.2M251.6 118.4l1.3 -0.0M251.6 118.4l0.0 -1.3' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.14'%3E%3Cpath d='M96.0 150.0L98.9 150.8M97.6 150.4l0.5 0.8M97.6 150.4l0.8 -0.5M96.0 150.0L96.8 152.9M96.4 151.6l-0.4 0.8M96.4 151.6l0.8 0.5M96.0 150.0L93.9 152.1M94.8 151.2l-1.0 0.0M94.8 151.2l-0.0 1.0M96.0 150.0L93.1 149.2M94.4 149.6l-0.5 -0.8M94.4 149.6l-0.8 0.5M96.0 150.0L95.2 147.1M95.6 148.4l0.4 -0.8M95.6 148.4l-0.8 -0.5M96.0 150.0L98.1 147.9M97.2 148.8l1.0 -0.0M97.2 148.8l0.0 -1.0' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.14'%3E%3Cpath d='M200.0 230.0L202.9 230.8M201.6 230.4l0.5 0.8M201.6 230.4l0.8 -0.5M200.0 230.0L200.8 232.9M200.4 231.6l-0.4 0.8M200.4 231.6l0.8 0.5M200.0 230.0L197.9 232.1M198.8 231.2l-1.0 0.0M198.8 231.2l-0.0 1.0M200.0 230.0L197.1 229.2M198.4 229.6l-0.5 -0.8M198.4 229.6l-0.8 0.5M200.0 230.0L199.2 227.1M199.6 228.4l0.4 -0.8M199.6 228.4l-0.8 -0.5M200.0 230.0L202.1 227.9M201.2 228.8l1.0 -0.0M201.2 228.8l0.0 -1.0' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.26'%3E%3Cpath d='M30.0 250.0L33.9 251.0M32.1 250.6l0.7 1.1M32.1 250.6l1.1 -0.6M30.0 250.0L31.0 253.9M30.6 252.1l-0.6 1.1M30.6 252.1l1.1 0.7M30.0 250.0L27.2 252.8M28.4 251.6l-1.3 0.0M28.4 251.6l-0.0 1.3M30.0 250.0L26.1 249.0M27.9 249.4l-0.7 -1.1M27.9 249.4l-1.1 0.6M30.0 250.0L29.0 246.1M29.4 247.9l0.6 -1.1M29.4 247.9l-1.1 -0.7M30.0 250.0L32.8 247.2M31.6 248.4l1.3 -0.0M31.6 248.4l0.0 -1.3' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.14'%3E%3Cpath d='M140.0 300.0L143.9 301.0M142.1 300.6l0.7 1.1M142.1 300.6l1.1 -0.6M140.0 300.0L141.0 303.9M140.6 302.1l-0.6 1.1M140.6 302.1l1.1 0.7M140.0 300.0L137.2 302.8M138.4 301.6l-1.3 0.0M138.4 301.6l-0.0 1.3M140.0 300.0L136.1 299.0M137.9 299.4l-0.7 -1.1M137.9 299.4l-1.1 0.6M140.0 300.0L139.0 296.1M139.4 297.9l0.6 -1.1M139.4 297.9l-1.1 -0.7M140.0 300.0L142.8 297.2M141.6 298.4l1.3 -0.0M141.6 298.4l0.0 -1.3' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.26'%3E%3Cpath d='M270.0 330.0L272.9 330.8M271.6 330.4l0.5 0.8M271.6 330.4l0.8 -0.5M270.0 330.0L270.8 332.9M270.4 331.6l-0.4 0.8M270.4 331.6l0.8 0.5M270.0 330.0L267.9 332.1M268.8 331.2l-1.0 0.0M268.8 331.2l-0.0 1.0M270.0 330.0L267.1 329.2M268.4 329.6l-0.5 -0.8M268.4 329.6l-0.8 0.5M270.0 330.0L269.2 327.1M269.6 328.4l0.4 -0.8M269.6 328.4l-0.8 -0.5M270.0 330.0L272.1 327.9M271.2 328.8l1.0 -0.0M271.2 328.8l0.0 -1.0' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='0.2'%3E%3Cpath d='M60.0 370.0L65.3 371.4M62.9 370.8l0.9 1.5M62.9 370.8l1.6 -0.8M60.0 370.0L61.4 375.3M60.8 372.9l-0.8 1.6M60.8 372.9l1.5 0.9M60.0 370.0L56.1 373.9M57.9 372.1l-1.8 0.1M57.9 372.1l-0.1 1.8M60.0 370.0L54.7 368.6M57.1 369.2l-0.9 -1.5M57.1 369.2l-1.6 0.8M60.0 370.0L58.6 364.7M59.2 367.1l0.8 -1.6M59.2 367.1l-1.5 -0.9M60.0 370.0L63.9 366.1M62.1 367.9l1.8 -0.1M62.1 367.9l0.1 -1.8' stroke='%23fff' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Ccircle cx='83' cy='69' r='0.7' fill='%23fff' opacity='0.17'/%3E%3Ccircle cx='278' cy='332' r='1.3' fill='%23fff' opacity='0.30'/%3E%3Ccircle cx='58' cy='124' r='1.2' fill='%23fff' opacity='0.29'/%3E%3Ccircle cx='256' cy='352' r='0.7' fill='%23fff' opacity='0.26'/%3E%3Ccircle cx='202' cy='202' r='0.8' fill='%23fff' opacity='0.23'/%3E%3Ccircle cx='27' cy='374' r='1.4' fill='%23fff' opacity='0.25'/%3E%3Ccircle cx='90' cy='364' r='1.1' fill='%23fff' opacity='0.32'/%3E%3Ccircle cx='254' cy='203' r='1.0' fill='%23fff' opacity='0.26'/%3E%3Ccircle cx='129' cy='65' r='0.9' fill='%23fff' opacity='0.31'/%3E%3Ccircle cx='13' cy='19' r='1.2' fill='%23fff' opacity='0.18'/%3E%3Ccircle cx='160' cy='188' r='0.9' fill='%23fff' opacity='0.35'/%3E%3Ccircle cx='59' cy='165' r='0.8' fill='%23fff' opacity='0.27'/%3E%3Ccircle cx='83' cy='142' r='1.3' fill='%23fff' opacity='0.19'/%3E%3Ccircle cx='168' cy='362' r='0.7' fill='%23fff' opacity='0.13'/%3E%3Ccircle cx='69' cy='306' r='1.2' fill='%23fff' opacity='0.17'/%3E%3Ccircle cx='99' cy='71' r='1.0' fill='%23fff' opacity='0.13'/%3E%3Ccircle cx='209' cy='358' r='1.5' fill='%23fff' opacity='0.29'/%3E%3Ccircle cx='288' cy='7' r='0.9' fill='%23fff' opacity='0.34'/%3E%3Ccircle cx='233' cy='164' r='1.4' fill='%23fff' opacity='0.26'/%3E%3Ccircle cx='245' cy='117' r='0.8' fill='%23fff' opacity='0.22'/%3E%3Ccircle cx='41' cy='153' r='1.5' fill='%23fff' opacity='0.20'/%3E%3Ccircle cx='3' cy='18' r='0.8' fill='%23fff' opacity='0.30'/%3E%3Ccircle cx='109' cy='116' r='0.7' fill='%23fff' opacity='0.35'/%3E%3Ccircle cx='127' cy='83' r='0.7' fill='%23fff' opacity='0.13'/%3E%3Ccircle cx='51' cy='271' r='0.7' fill='%23fff' opacity='0.13'/%3E%3Ccircle cx='147' cy='100' r='1.5' fill='%23fff' opacity='0.15'/%3E%3C/svg%3E") 0 0 / 300px 400px,
+    radial-gradient(90% 55% at 50% 42%, rgba(255,236,190,.08), transparent 70%),
+    radial-gradient(130% 80% at 50% 40%, #13683f 0%, #083d27 55%, #031a11 100%); }
+.app.dezember .view-bus::before { border-color: rgba(233,183,124,.55); }
+.app.dezember .bus-deck i { border-color: #f6efe1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 110'%3E%3Cellipse cx='50' cy='58' rx='40' ry='48' fill='%238a0b22' stroke='%23e9b77c' stroke-width='3'/%3E%3Cellipse cx='50' cy='58' rx='34.5' ry='42.5' fill='none' stroke='%23e9b77c' stroke-width='1' opacity='.7'/%3E%3Cpath d='M50 30 L63 52 H56 L68 70 H58 L72 88 H28 L42 70 H32 L44 52 H37 Z' fill='%23e9b77c'/%3E%3Crect x='46' y='88' width='8' height='7' fill='%23c9a24a'/%3E%3Cpath d='M50 17 l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.1-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z' fill='%23ffe2a8'/%3E%3Ccircle cx='40' cy='64' r='2.2' fill='%23c4362f'/%3E%3Ccircle cx='58' cy='76' r='2.2' fill='%23f3ead8'/%3E%3Ccircle cx='52' cy='58' r='2' fill='%23f3ead8'/%3E%3Ccircle cx='44' cy='82' r='2.2' fill='%23f3ead8'/%3E%3Ccircle cx='62' cy='62' r='1.8' fill='%23c4362f'/%3E%3C/svg%3E") center / 74% auto no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M7 7L11.2 7.0M9.3 7.0l1.0 0.9M9.3 7.0l1.0 -0.9M7 7L9.1 10.6M8.2 9.0l-0.3 1.3M8.2 9.0l1.3 0.4M7 7L4.9 10.6M5.8 9.0l-1.3 0.4M5.8 9.0l0.3 1.3M7 7L2.8 7.0M4.7 7.0l-1.0 -0.9M4.7 7.0l-1.0 0.9M7 7L4.9 3.4M5.8 5.0l0.3 -1.3M5.8 5.0l-1.3 -0.4M7 7L9.1 3.4M8.2 5.0l1.3 -0.4M8.2 5.0l-0.3 -1.3' stroke='%23f3d9a6' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3Cpath d='M21 21L25.2 21.0M23.3 21.0l1.0 0.9M23.3 21.0l1.0 -0.9M21 21L23.1 24.6M22.2 23.0l-0.3 1.3M22.2 23.0l1.3 0.4M21 21L18.9 24.6M19.8 23.0l-1.3 0.4M19.8 23.0l0.3 1.3M21 21L16.8 21.0M18.7 21.0l-1.0 -0.9M18.7 21.0l-1.0 0.9M21 21L18.9 17.4M19.8 19.0l0.3 -1.3M19.8 19.0l-1.3 -0.4M21 21L23.1 17.4M22.2 19.0l1.3 -0.4M22.2 19.0l-0.3 -1.3' stroke='%23f3d9a6' stroke-width='0.9' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='21' cy='7' r='1' fill='%23f3d9a6'/%3E%3Ccircle cx='7' cy='21' r='1' fill='%23f3d9a6'/%3E%3C/svg%3E") 0 0 / 22px 22px, linear-gradient(160deg, #b51a30, #7d0a1e);
+  box-shadow: inset 0 0 0 4px #9a1027, inset 0 0 0 5.5px #e9b77c, 0 6px 16px rgba(0,0,0,.4); }
+.app.dezember .pcard { background: linear-gradient(160deg, #fffdf7, #f4ead6); }
+.app.dezember .pcard::before { content: ""; position: absolute; inset: 6px; border-radius: 11px; border: 1.5px solid rgba(201,162,74,.8); box-shadow: inset 0 0 0 3px rgba(255,255,255,.6), inset 0 0 0 4px rgba(201,162,74,.35); pointer-events: none; }
+.app.dezember .pcard::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath d='M19.0 21.0 L19.7 24.6 L22.1 25.5 L22.6 29.5 L25.9 28.7 L26.8 32.0 L30.6 30.5 L32.5 32.1 L36.0 31.0 L35.3 27.4 L32.9 26.5 L32.4 22.5 L29.1 23.3 L28.2 20.0 L24.4 21.5 L22.5 19.9Z' fill='%233f7350' stroke='%231f4a2a' stroke-width='.8' stroke-linejoin='round'/%3E%3Cpath d='M19 21 L36 31' stroke='%238fbf8a' stroke-width='.9' opacity='.8'/%3E%3Cpath d='M19.0 21.0 L23.2 22.4 L25.3 20.5 L29.8 22.3 L30.6 18.3 L34.5 19.3 L34.8 14.5 L37.4 13.4 L38.0 9.0 L33.8 7.6 L31.7 9.5 L27.2 7.7 L26.4 11.7 L22.5 10.7 L22.2 15.5 L19.6 16.6Z' fill='%232f6b3c' stroke='%231f4a2a' stroke-width='.8' stroke-linejoin='round'/%3E%3Cpath d='M19 21 L38 9' stroke='%238fbf8a' stroke-width='.9' opacity='.8'/%3E%3Cpath d='M19.0 21.0 L14.7 20.9 L13.5 23.2 L8.8 22.7 L9.5 26.6 L5.5 26.7 L7.0 31.2 L5.0 32.9 L6.0 37.0 L10.3 37.1 L11.5 34.8 L16.2 35.3 L15.5 31.4 L19.5 31.3 L18.0 26.8 L20.0 25.1Z' fill='%232f6b3c' stroke='%231f4a2a' stroke-width='.8' stroke-linejoin='round'/%3E%3Cpath d='M19 21 L6 37' stroke='%238fbf8a' stroke-width='.9' opacity='.8'/%3E%3Ccircle cx='17' cy='17' r='3.6' fill='%23c4362f' stroke='%238e2420' stroke-width='.6'/%3E%3Ccircle cx='15.9' cy='15.8' r='1.1' fill='%23fff' opacity='.7'/%3E%3Ccircle cx='22.5' cy='19.5' r='3.6' fill='%23c4362f' stroke='%238e2420' stroke-width='.6'/%3E%3Ccircle cx='21.4' cy='18.3' r='1.1' fill='%23fff' opacity='.7'/%3E%3Ccircle cx='16.5' cy='23' r='3.6' fill='%23c4362f' stroke='%238e2420' stroke-width='.6'/%3E%3Ccircle cx='15.4' cy='21.8' r='1.1' fill='%23fff' opacity='.7'/%3E%3C/svg%3E") right 6px top 6px / 44px 44px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cg transform='rotate(180 21 22)'%3E%3Cpath d='M19.0 21.0 L19.7 24.6 L22.1 25.5 L22.6 29.5 L25.9 28.7 L26.8 32.0 L30.6 30.5 L32.5 32.1 L36.0 31.0 L35.3 27.4 L32.9 26.5 L32.4 22.5 L29.1 23.3 L28.2 20.0 L24.4 21.5 L22.5 19.9Z' fill='%233f7350' stroke='%231f4a2a' stroke-width='.8' stroke-linejoin='round'/%3E%3Cpath d='M19 21 L36 31' stroke='%238fbf8a' stroke-width='.9' opacity='.8'/%3E%3Cpath d='M19.0 21.0 L23.2 22.4 L25.3 20.5 L29.8 22.3 L30.6 18.3 L34.5 19.3 L34.8 14.5 L37.4 13.4 L38.0 9.0 L33.8 7.6 L31.7 9.5 L27.2 7.7 L26.4 11.7 L22.5 10.7 L22.2 15.5 L19.6 16.6Z' fill='%232f6b3c' stroke='%231f4a2a' stroke-width='.8' stroke-linejoin='round'/%3E%3Cpath d='M19 21 L38 9' stroke='%238fbf8a' stroke-width='.9' opacity='.8'/%3E%3Cpath d='M19.0 21.0 L14.7 20.9 L13.5 23.2 L8.8 22.7 L9.5 26.6 L5.5 26.7 L7.0 31.2 L5.0 32.9 L6.0 37.0 L10.3 37.1 L11.5 34.8 L16.2 35.3 L15.5 31.4 L19.5 31.3 L18.0 26.8 L20.0 25.1Z' fill='%232f6b3c' stroke='%231f4a2a' stroke-width='.8' stroke-linejoin='round'/%3E%3Cpath d='M19 21 L6 37' stroke='%238fbf8a' stroke-width='.9' opacity='.8'/%3E%3Ccircle cx='17' cy='17' r='3.6' fill='%23c4362f' stroke='%238e2420' stroke-width='.6'/%3E%3Ccircle cx='15.9' cy='15.8' r='1.1' fill='%23fff' opacity='.7'/%3E%3Ccircle cx='22.5' cy='19.5' r='3.6' fill='%23c4362f' stroke='%238e2420' stroke-width='.6'/%3E%3Ccircle cx='21.4' cy='18.3' r='1.1' fill='%23fff' opacity='.7'/%3E%3Ccircle cx='16.5' cy='23' r='3.6' fill='%23c4362f' stroke='%238e2420' stroke-width='.6'/%3E%3Ccircle cx='15.4' cy='21.8' r='1.1' fill='%23fff' opacity='.7'/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 44px 44px no-repeat; }
+.app.dezember .pcard .cn { z-index: 1; padding: 2px; border-radius: 6px; background: linear-gradient(160deg, #fffdf7, #f8f0e0); }
+.app.dezember .view-bus .bp-toast { text-shadow: 0 0 16px #e9b77c, 0 0 30px #c4362f; }
+.app.dezember .bus-hist span { background: #fbf5e8; box-shadow: inset 0 0 0 1px rgba(201,162,74,.6); }
+.app.dezember .pcard .face::before { content: ""; position: absolute; top: calc(50% - 64px); left: calc(50% - 40px); width: 54px; height: 43px; transform: rotate(-12deg);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 48'%3E%3Cpath d='M8 36 C10 18 24 6 40 8 C48 9 54 14 56 22 C50 18 44 18 40 22 C36 28 34 34 34 38 Z' fill='%23c4362f'/%3E%3Cpath d='M40 8 C48 9 54 14 56 22' fill='none' stroke='%238e2420' stroke-width='2'/%3E%3Crect x='2' y='32' width='38' height='12' rx='6' fill='%23f3ead8'/%3E%3Ccircle cx='56' cy='24' r='5.5' fill='%23f3ead8'/%3E%3C/svg%3E") center / contain no-repeat; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+
 .view-bus .bp-toast.bad { text-shadow: 0 0 16px #ff2e88, 0 0 30px #ff2e88; }
 .view-bus .bp-card h3 { color: #0d8a4f; }
 .view-bus .bp-card h3.bad { color: #ff2e88; }
@@ -2079,6 +2102,53 @@ body.fg-open { overflow: hidden; }
 .xm-snow { animation: xmSnow 9s linear infinite; }
 @keyframes xmSnow { from { transform: translateY(-40px); } to { transform: translateY(220px); } }
 @media (prefers-reduced-motion: reduce) { .xm-glow, .xm-flame, .xm-steam, .xm-snow { animation: none; } }
+/* ================= Weihnachtsmarkt ================= */
+.mk-row { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 0; }
+.mk-row + .mk-row { border-top: 1px dashed rgba(234,217,184,.22); }
+.mk-ico svg { width: 44px; height: 44px; display: block; }
+.mk-nm b { display: block; font-size: 15px; font-weight: 800; color: #fff; }
+.mk-nm small { display: block; font-size: 12px; color: var(--dim); margin-top: 1px; }
+.mk-nm em { display: inline-block; margin-top: 4px; font-style: normal; font-size: 11.5px; font-weight: 800; color: var(--a1); padding: 2px 8px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--a1) 55%, transparent); }
+.mk-pr { font-size: 18px; font-weight: 800; color: var(--frost); white-space: nowrap; }
+.mk-when { margin: -4px 0 10px; font-size: 13px; font-weight: 700; color: var(--a1); }
+.mk-card { padding: 6px 14px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid color-mix(in srgb, var(--a1) 35%, transparent); }
+.ph-markt { display: grid; gap: 8px; padding: 12px 14px 8px; border-radius: 18px; text-decoration: none; color: #fff; background: linear-gradient(160deg, #1c2a21, #121b16); border: 1.5px solid rgba(233,183,124,.55); }
+.ph-markt.on { box-shadow: 0 0 22px rgba(233,183,124,.18); }
+.ph-markt .mk-head { display: grid; gap: 2px; }
+.ph-markt .mk-head b { font-family: "Gloock", Georgia, serif; font-weight: 400; font-size: 22px; color: #f3ead8; }
+.ph-markt .mk-head small { font-size: 12px; font-weight: 700; color: #e9b77c; }
+.ph-markt .mk-tag { display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 3px 10px; border-radius: 999px; background: #f3ead8; color: #1c2a21; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.ph-markt .mk-tag .ph-dot { background: #c4362f; box-shadow: none; }
+.ph-markt .mk-nm small { color: #a9b5a6; } .ph-markt .mk-nm em { color: #e9b77c; border-color: rgba(233,183,124,.5); }
+/* Tresen: Markttafel */
+.tr-hh.markt { background: linear-gradient(170deg, #1f2e24, #121b16); border: 3px solid rgba(233,183,124,.7); justify-content: flex-start; padding: 30px 40px 26px; }
+.tr-hh.markt .tr-tag { background: #f3ead8; color: #1c2a21; }
+.tr-mk-title { margin-top: 10px; font-family: "Gloock", Georgia, serif; font-size: 78px; line-height: 1; color: #f3ead8; }
+.tr-mk-list { width: 100%; margin-top: 18px; display: grid; gap: 4px; text-align: left; }
+.tr-mk-row { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; align-items: center; gap: 20px; padding: 12px 6px; }
+.tr-mk-row + .tr-mk-row { border-top: 2px dashed rgba(234,217,184,.25); }
+.tr-mk-ico svg { width: 96px; height: 96px; display: block; }
+.tr-mk-nm b { display: block; font-size: 38px; font-weight: 800; color: #fff; line-height: 1.05; }
+.tr-mk-nm small { display: block; font-size: 22px; color: #a9b5a6; margin-top: 4px; }
+.tr-mk-nm em { display: inline-block; margin-top: 8px; font-style: normal; font-size: 22px; font-weight: 800; color: #e9b77c; padding: 3px 14px; border-radius: 999px; border: 2px solid rgba(233,183,124,.55); }
+.tr-mk-pr { font-size: 52px; font-weight: 800; color: #f3ead8; white-space: nowrap; }
+.tr-mk-foot { margin-top: auto; padding-top: 14px; font-size: 26px; font-weight: 800; color: #e9b77c; }
+.tr-mk-foot b { font-variant-numeric: tabular-nums; color: #fff; }
+/* ================= Dezember-Look ================= */
+.app.dezember .menu-head { padding-top: calc(48px + var(--safe-t)); }
+#dekoGirl { position: absolute; left: 0; right: 0; top: calc(var(--safe-t) + 2px); height: 56px; pointer-events: none; }
+.deko-girl { width: 100%; height: 100%; display: block; filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); }
+.deko-li { animation: dekoLi 2.8s ease-in-out infinite; }
+@keyframes dekoLi { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+.menu-head { position: relative; }
+.app.dezember .menu-head .logo { position: relative; }
+.deko-hut { position: absolute; left: 6px; top: calc(32px + var(--safe-t)); width: 46px; height: 37px; transform: rotate(-14deg); filter: drop-shadow(0 2px 2px rgba(0,0,0,.4)); pointer-events: none; z-index: 2; }
+#dekoSnow { position: sticky; top: 0; height: 0; z-index: 7; pointer-events: none; }
+.deko-snow { position: absolute; left: -14px; right: -14px; top: 0; height: 100vh; height: 100dvh; overflow: hidden; pointer-events: none; }
+.deko-snow i { position: absolute; top: -12px; border-radius: 50%; background: #fff; animation-name: dekoFall, dekoSway; animation-timing-function: linear, ease-in-out; animation-iteration-count: infinite, infinite; animation-direction: normal, alternate; will-change: transform; }
+@keyframes dekoFall { from { transform: translateY(0); } to { transform: translateY(105vh); } }
+@keyframes dekoSway { from { translate: -10px 0; } to { translate: 10px 0; } }
+@media (prefers-reduced-motion: reduce) { .deko-snow, .deko-li { animation: none; } .deko-snow { display: none; } }
 </style>
 </head>
 <body>
@@ -2262,7 +2332,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "88";
+const APP_V = "91";
 
 const EVENTS = [
   {
@@ -2333,11 +2403,19 @@ const EVENTS = [
       { zeit: "21:00", was: "Clubabend", kurz: "Club" }
     ],
     kachelInfo: { zeit: "Weihnachtsmarkt", text: "Glühwein · Bratwurst · Waffeln" },  // Infokasten auf der großen Kachel
+    markt: {                     // Weihnachtsmarkt: eigener Block im Menü, auf der Abend-Seite und auf dem Tresen-Bildschirm
+      titel: "Weihnachtsmarkt", von: "18:00", bis: "21:00",
+      angebote: [
+        { name: "Glühwein / Punsch", preis: 2.0, extra: "Schuss", extraPreis: 0.5, bild: "gluehwein" },
+        { name: "Bratwurst", info: "im Brötchen", preis: 2.5, bild: "wurst" },
+        { name: "Waffeln", info: "mit Zimt & Zucker oder Puderzucker", preis: 2.0, extra: "heiße Kirschen", extraPreis: 0.5, bild: "waffel" }
+      ]
+    },
     mitbringen: null,
     fotos: null,
     specials: [
-      { name: "Christmas Spritz", info: "Glüh-Spritz: Prosecco verfeinert mit Aperol oder Zimtsirup, frischem Rosmarin oder Granatapfelkernen", preis: null, bild: "spritz" },
-      { name: "Lebkuchen Espresso Martini", info: "Herber Espresso Martini mit einem Schuss Lebkuchen- oder Gewürzsirup", preis: null, bild: "martini" }
+      { name: "Christmas Spritz", info: "Glüh-Spritz: Prosecco verfeinert mit Aperol oder Zimtsirup, frischem Rosmarin oder Granatapfelkernen", preis: 2.0, bild: "spritz" },
+      { name: "Lebkuchen Espresso Martini", info: "Herber Espresso Martini mit einem Schuss Lebkuchen- oder Gewürzsirup", preis: 2.0, bild: "martini" }
     ],
     happyHour: null              // noch offen
   }
@@ -3190,6 +3268,7 @@ function renderDetail(ev) {
   current = ev;
   const past = isPast(ev);
   const sections = [];
+  if (ev.markt) sections.push(["s-markt", ev.markt.titel || "Weihnachtsmarkt"]);
   if (ev.specials && ev.specials.length) sections.push(["s-specials", "Specials"]);
   if (ev.happyHour) sections.push(["s-happy", "Happy Hour"]);
   sections.push(["s-karte", "Getränkekarte"]);
@@ -3217,6 +3296,13 @@ function renderDetail(ev) {
   if (ev.musik) items.push({ zeit: ev.musik.zeit.replace(" Uhr", ""), was: ev.musik.text });
   const timeline = items.length ? `<ul class="timeline">${items.map((a) => `<li><time>${esc(a.zeit)}</time><span>${esc(a.was)}</span></li>`).join("")}</ul>` : "";
 
+  const markt = ev.markt ? `
+    <section class="block" id="s-markt" aria-labelledby="h-markt">
+      <h3 class="sec-title" id="h-markt">${esc(ev.markt.titel || "Weihnachtsmarkt")}</h3>
+      <p class="mk-when">${esc(ev.wd)} ${esc(ev.dm)} · ${esc(ev.markt.von)}–${esc(ev.markt.bis)} Uhr, danach Club</p>
+      <div class="mk-card">${ev.markt.angebote.map(marktRow).join("")}</div>
+      ${nextLabel("s-markt")}
+    </section>` : "";
   const specials = ev.specials && ev.specials.length ? `
     <section class="block" id="s-specials" aria-labelledby="h-specials">
       <h3 class="sec-title" id="h-specials">Specials des Abends</h3>
@@ -3286,7 +3372,7 @@ function renderDetail(ev) {
       ${sections.map(([id, label], k) => `<button type="button" data-target="${id}" aria-current="${k === 0}">${label}</button>`).join("")}
     </nav>
     <div class="content">
-      ${specials}${hh}${karte}
+      ${markt}${specials}${hh}${karte}
       <a class="club-card" href="#ranking">
         <span class="club-card-live"><span class="live-dot"></span>Live</span>
         <b>Sauf-Ranking &amp; Wünsche</b>
@@ -4124,7 +4210,7 @@ const Game = (() => {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height;
     cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    tableCv = null;
+    tableCv = null; XM = isDezember();
   }
   const fmt = (ms) => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
   function hud() {
@@ -4318,15 +4404,99 @@ const Game = (() => {
 
   /* ---------- Zeichnen ---------- */
   /* Der Tisch ändert sich nie: einmal in ein Zwischenbild zeichnen, danach nur noch kopieren (spart viel Rechenzeit) */
-  let tableCv = null;
+  let tableCv = null, XM = false;
   function drawTable() {
     if (!tableCv || tableCv.width !== cv.width || tableCv.height !== cv.height) {
       tableCv = document.createElement("canvas");
       tableCv.width = cv.width; tableCv.height = cv.height;
       const tc = tableCv.getContext("2d"); tc.setTransform(dpr, 0, 0, dpr, 0, 0);
-      paintTable(tc);
+      (XM ? paintTableXm : paintTable)(tc);
     }
     ctx.drawImage(tableCv, 0, 0, W, H);
+    if (XM) drawSnowXm();
+  }
+  /* ===== Dezember: Winternacht, verschneite Tannen, Lichterkette um den Tisch ===== */
+  function paintTableXm(ctx) {
+    const g = geo();
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, "#09142a"); bg.addColorStop(.44, "#1a3560"); bg.addColorStop(.62, "#7a2f4a"); bg.addColorStop(1, "#09142a");
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    /* Sterne */
+    let sd = 7; const rnd = () => ((sd = (sd * 16807) % 2147483647) / 2147483647);
+    ctx.fillStyle = "#fff";
+    for (let i = 0; i < 70; i++) { ctx.globalAlpha = .25 + rnd() * .6; ctx.beginPath(); ctx.arc(rnd() * W, rnd() * (g.yF - H * .08), .5 + rnd() * 1.1, 0, Math.PI * 2); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    /* Wintersonne am Horizont (gleiche Form wie sonst, warme Farben) */
+    const sun = ctx.createLinearGradient(0, g.yF - H * .2, 0, g.yF);
+    sun.addColorStop(0, "#ffe6a6"); sun.addColorStop(.55, "#ff9a62"); sun.addColorStop(1, "#e2455b");
+    ctx.save(); ctx.globalAlpha = .82; ctx.fillStyle = sun;
+    ctx.beginPath(); ctx.arc(g.cx, g.yF, W * .3, Math.PI, 0); ctx.fill();
+    ctx.globalAlpha = 1; ctx.fillStyle = "#1a3560";
+    for (let i = 0; i < 5; i++) ctx.fillRect(0, g.yF - (i + 1) * H * .03, W, 2 + i);
+    ctx.restore();
+    /* verschneiter Boden am Horizont */
+    const gr0 = ctx.createLinearGradient(0, g.yF - 4, 0, g.yF + H * .2);
+    gr0.addColorStop(0, "rgba(214,226,242,.55)"); gr0.addColorStop(1, "rgba(214,226,242,0)");
+    ctx.fillStyle = gr0; ctx.fillRect(0, g.yF - 2, W, H * .2);
+    /* Tannen links und rechts, hinten kleiner und blasser */
+    const tree = (x, y, h, col, snow) => {
+      const w = h * .62;
+      ctx.fillStyle = "#3b2a22"; ctx.fillRect(x - h * .04, y - h * .08, h * .08, h * .1);
+      for (let k = 0; k < 3; k++) {
+        const ty = y - h * .08 - k * h * .26, tw = w * (1 - k * .24), th = h * .44;
+        ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(x, ty - th); ctx.lineTo(x + tw / 2, ty); ctx.lineTo(x - tw / 2, ty); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = snow; ctx.beginPath();
+        ctx.moveTo(x, ty - th); ctx.lineTo(x + tw * .17, ty - th * .62); ctx.quadraticCurveTo(x + tw * .06, ty - th * .55, x, ty - th * .66);
+        ctx.quadraticCurveTo(x - tw * .08, ty - th * .54, x - tw * .2, ty - th * .6); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(x - tw / 2, ty); ctx.quadraticCurveTo(x - tw * .3, ty - h * .03, x - tw * .12, ty - h * .005);
+        ctx.quadraticCurveTo(x + tw * .1, ty - h * .035, x + tw / 2, ty); ctx.lineTo(x + tw / 2, ty + 1.5); ctx.lineTo(x - tw / 2, ty + 1.5); ctx.closePath(); ctx.fill();
+      }
+    };
+    const far = "#16294a", near = "#0e1e36";
+    [[.04, .07], [.13, .1], [.2, .065], [.8, .07], [.88, .105], [.97, .075]].forEach(([fx, fh]) => tree(W * fx, g.yF + 2, H * fh, far, "rgba(232,240,250,.75)"));
+    [[.08, .15], [.93, .16]].forEach(([fx, fh]) => tree(W * fx, g.yF + H * .06, H * fh, near, "#eef3fa"));
+    /* Tisch */
+    const a = proj(-1, 1), b = proj(1, 1), c = proj(1, 0), d = proj(-1, 0);
+    const tg = ctx.createLinearGradient(0, a.y, 0, d.y);
+    tg.addColorStop(0, "#1a1e3e"); tg.addColorStop(1, "#3d3a78");
+    ctx.fillStyle = tg;
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y); ctx.closePath(); ctx.fill();
+    ctx.save(); ctx.clip();
+    /* Puderschnee auf dem Tisch */
+    for (let i = 0; i < 160; i++) { const z = rnd(), x = rnd() * 2 - 1, p = proj(x, z); ctx.globalAlpha = .08 + rnd() * .22; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(p.x, p.y, (.6 + rnd() * 1.4) * p.s * 1.6, 0, Math.PI * 2); ctx.fill(); }
+    ctx.restore(); ctx.globalAlpha = 1;
+    ctx.save(); ctx.shadowColor = "#ffcf7a"; ctx.shadowBlur = 14; ctx.strokeStyle = "#ffdf9e"; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y); ctx.closePath(); ctx.stroke(); ctx.restore();
+    ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 2;
+    const m1 = proj(0, 1), m2 = proj(0, 0); ctx.beginPath(); ctx.moveTo(m1.x, m1.y); ctx.lineTo(m2.x, m2.y); ctx.stroke();
+    ctx.fillStyle = "#0d1830"; ctx.fillRect(d.x, d.y, c.x - d.x, H - d.y);
+    /* Lichterkette quer über den Himmel, in zwei Bögen durchhängend */
+    const cols = ["#ff6b5e", "#ffd98a", "#8fe3a8", "#ffd98a", "#8ab8ff"];
+    const yC = H * .125, sagH = H * .045;
+    const at = (t) => { const x = -8 + (W + 16) * t, q = (t * 2) % 1; return [x, yC + Math.sin(q * Math.PI) * sagH - (t < .5 ? 0 : 0)]; };
+    ctx.strokeStyle = "#1d2a22"; ctx.lineWidth = 1.6; ctx.beginPath();
+    for (let i = 0; i <= 120; i++) { const [x, y] = at(i / 120); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+    ctx.stroke();
+    for (let i = 0; i < 14; i++) {
+      const [x, y] = at((i + .5) / 14), col = cols[i % cols.length];
+      const glow = ctx.createRadialGradient(x, y + 7, 0, x, y + 7, 16);
+      glow.addColorStop(0, col); glow.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.globalAlpha = .55; ctx.fillStyle = glow; ctx.fillRect(x - 16, y - 9, 32, 32); ctx.globalAlpha = 1;
+      ctx.fillStyle = "#2b3a2c"; ctx.fillRect(x - 2.2, y - 1, 4.4, 4);
+      ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(x, y + 7.5, 3.6, 5, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(255,255,255,.8)"; ctx.beginPath(); ctx.arc(x - 1.1, y + 6, 1.3, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  /* fallender Schnee über dem Tisch (pro Bild nur 34 Punkte, kostet fast nichts) */
+  function drawSnowXm() {
+    const t = performance.now() / 1000;
+    ctx.fillStyle = "#fff";
+    for (let i = 0; i < 34; i++) {
+      const s1 = (i * 0.6180339) % 1, s2 = (i * 0.4142135) % 1, sp = 18 + s2 * 26, r = .8 + s1 * 1.8;
+      const y = (s2 * H + t * sp) % (H + 10) - 5, x = s1 * W + Math.sin(t * .7 + i) * 12;
+      ctx.globalAlpha = .35 + s2 * .45; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
   }
   function paintTable(ctx) {
     const bg = ctx.createLinearGradient(0, 0, 0, H);
@@ -4351,7 +4521,89 @@ const Game = (() => {
     const m1 = proj(0, 1), m2 = proj(0, 0); ctx.beginPath(); ctx.moveTo(m1.x, m1.y); ctx.lineTo(m2.x, m2.y); ctx.stroke();
     ctx.fillStyle = "#24083e"; ctx.fillRect(d.x, d.y, c.x - d.x, H - d.y);
   }
+  /* ===== Dezember: Glühweintasse statt rotem Becher (gleiche Größe und Trefferfläche) ===== */
+  function drawMug(c) {
+    const p = proj(c.x, c.z), w = geo().w0 * D * .92 * p.s, h = w * 1.15;
+    let alpha = 1, sc = 1;
+    if (c.dying) { alpha = c.dying; sc = 1 + (1 - c.dying) * .4; }
+    ctx.save(); ctx.globalAlpha = alpha; ctx.translate(p.x, p.y); ctx.scale(sc, sc);
+    ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.beginPath(); ctx.ellipse(0, 2, w * .6, w * .15, 0, 0, Math.PI * 2); ctx.fill();
+    const top = -h, bw = w * .44, hl = w / 2;
+    /* Henkel rechts */
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#5a0a16"; ctx.lineWidth = w * .13;
+    ctx.beginPath(); ctx.moveTo(hl * .9, top + h * .24); ctx.bezierCurveTo(w * .86, top + h * .2, w * .86, top + h * .74, bw * .98, top + h * .8); ctx.stroke();
+    ctx.strokeStyle = "#a31c2c"; ctx.lineWidth = w * .06;
+    ctx.beginPath(); ctx.moveTo(hl * .92, top + h * .26); ctx.bezierCurveTo(w * .82, top + h * .23, w * .82, top + h * .7, bw, top + h * .77); ctx.stroke();
+    /* Körper: glasierte Keramik */
+    const gr = ctx.createLinearGradient(-w / 2, 0, w / 2, 0);
+    gr.addColorStop(0, "#4f0812"); gr.addColorStop(.28, "#c42a38"); gr.addColorStop(.5, "#a11a2a"); gr.addColorStop(1, "#45060f");
+    ctx.fillStyle = gr;
+    const rr = w * .1;
+    ctx.beginPath(); ctx.moveTo(-hl, top); ctx.lineTo(hl, top); ctx.lineTo(bw, -rr); ctx.quadraticCurveTo(bw, 0, bw - rr, 0); ctx.lineTo(-bw + rr, 0); ctx.quadraticCurveTo(-bw, 0, -bw, -rr); ctx.closePath(); ctx.fill();
+    /* Goldstreifen oben und unten */
+    ctx.fillStyle = "#e9b77c";
+    ctx.beginPath(); ctx.moveTo(-hl * .995, top + h * .13); ctx.lineTo(hl * .995, top + h * .13); ctx.lineTo(hl * .99, top + h * .165); ctx.lineTo(-hl * .99, top + h * .165); ctx.closePath(); ctx.fill();
+    ctx.fillRect(-bw * .99, -h * .13, bw * 1.98, h * .03);
+    /* Schneeflocken-Druck */
+    ctx.strokeStyle = "rgba(255,248,236,.92)"; ctx.lineWidth = Math.max(1, w * .028);
+    const flake = (fx, fy, r) => {
+      for (let k = 0; k < 6; k++) {
+        const an = k * Math.PI / 3, ex = fx + Math.cos(an) * r, ey = fy + Math.sin(an) * r * .95;
+        ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(ex, ey);
+        const mx = fx + Math.cos(an) * r * .55, my = fy + Math.sin(an) * r * .55 * .95;
+        ctx.moveTo(mx, my); ctx.lineTo(mx + Math.cos(an + .7) * r * .3, my + Math.sin(an + .7) * r * .3);
+        ctx.moveTo(mx, my); ctx.lineTo(mx + Math.cos(an - .7) * r * .3, my + Math.sin(an - .7) * r * .3);
+        ctx.stroke();
+      }
+    };
+    flake(-w * .02, top + h * .52, w * .15);
+    ctx.fillStyle = "rgba(255,248,236,.85)";
+    [[-w * .29, top + h * .33, .025], [w * .22, top + h * .7, .022], [w * .26, top + h * .34, .016], [-w * .24, top + h * .72, .018]].forEach(([x, y, r]) => { ctx.beginPath(); ctx.arc(x, y, w * r, 0, Math.PI * 2); ctx.fill(); });
+    /* Glanzlicht */
+    ctx.fillStyle = "rgba(255,255,255,.28)"; ctx.fillRect(-w * .34, top + h * .22, w * .055, h * .62);
+    /* Rand: cremefarbene Innenglasur, dann Glühwein */
+    ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.ellipse(0, top, w / 2, w * .26, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "#7a0e1c"; ctx.lineWidth = 1.5; ctx.stroke();
+    const wine = ctx.createRadialGradient(-w * .12, top + w * .01, 1, 0, top + w * .04, w * .42);
+    wine.addColorStop(0, "#b3263a"); wine.addColorStop(.6, "#6e0f20"); wine.addColorStop(1, "#3d0610");
+    ctx.fillStyle = wine; ctx.beginPath(); ctx.ellipse(0, top + w * .04, w * .4, w * .2, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "rgba(255,200,170,.22)"; ctx.beginPath(); ctx.ellipse(-w * .13, top + w * .0, w * .12, w * .04, -.2, 0, Math.PI * 2); ctx.fill();
+    /* Einlage: Orangenscheibe oder Sternanis (je Becher fest) */
+    if (c.id < .4) {
+      const ox = w * .1, oy = top + w * .05, orx = w * .15, ory = w * .075;
+      ctx.fillStyle = "#e8892a"; ctx.beginPath(); ctx.ellipse(ox, oy, orx, ory, .15, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#ffc46b"; ctx.beginPath(); ctx.ellipse(ox, oy, orx * .8, ory * .78, .15, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#f7e2b5"; ctx.lineWidth = Math.max(.7, w * .012);
+      for (let k = 0; k < 8; k++) { const an = k * Math.PI / 4; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + Math.cos(an) * orx * .78, oy + Math.sin(an) * ory * .76); ctx.stroke(); }
+    } else if (c.id < .65) {
+      const ax = -w * .08, ay = top + w * .06, r = w * .085;
+      ctx.fillStyle = "#6b3a1e"; ctx.beginPath();
+      for (let k = 0; k < 16; k++) { const an = k * Math.PI / 8, rr2 = k % 2 ? r * .35 : r; ctx.lineTo(ax + Math.cos(an) * rr2, ay + Math.sin(an) * rr2 * .5); }
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#a8683a"; ctx.beginPath(); ctx.ellipse(ax, ay, r * .22, r * .11, 0, 0, Math.PI * 2); ctx.fill();
+    }
+    if (c.hits > 0 && !c.dying) {
+      ctx.strokeStyle = "#ffd27a"; ctx.lineWidth = 3; ctx.shadowColor = "#ffd27a"; ctx.shadowBlur = 16;
+      ctx.beginPath(); ctx.ellipse(0, top, w / 2 + 3, w * .26 + 3, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+    /* Dampf (nur bei manchen Tassen, langsam wabernd) */
+    if (c.id > .45 && !c.dying) {
+      const t = performance.now() / 1000;
+      ctx.lineWidth = w * .07; ctx.lineCap = "round";
+      for (let k = 0; k < 2; k++) {
+        const ph = (t * .45 + k * .5 + c.id * 3) % 1, x0 = (k ? .12 : -.1) * w;
+        ctx.strokeStyle = `rgba(255,255,255,${(.22 * Math.sin(ph * Math.PI)).toFixed(3)})`;
+        ctx.beginPath();
+        for (let j = 0; j <= 8; j++) { const q = j / 8, y = top - w * .05 - (ph * .5 + q * .55) * w, x = x0 + Math.sin(q * 5 + t * 1.6 + k * 2) * w * .07; j ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
   function drawCup(c) {
+    if (XM) return drawMug(c);
     const p = proj(c.x, c.z), w = geo().w0 * D * .92 * p.s, h = w * 1.15;
     let alpha = 1, sc = 1;
     if (c.dying) { alpha = c.dying; sc = 1 + (1 - c.dying) * .4; }
@@ -4781,7 +5033,9 @@ const Zapf = (() => {
     weizen:   { name: "Weizen",   liq: ["#fbc75c", "#d58a1e"], foam: "#fffdf5", head: .22, rise: .095, riseMs: 1400, stream: "#f0b445", haze: .32 },
     guinness: { name: "Guinness", liq: ["#2c140a", "#0f0603"], foam: "#efdfbf", head: .09, rise: .042, riseMs: 1900, stream: "#3a1b0d", surge: true },
     pfeffi:   { name: "Pfeffi",   liq: ["#8ef5a8", "#1f9e48"], foam: "#c4ffd3", head: 0, rise: .022, riseMs: 450, stream: "#5fe082", still: true },
-    sekt:     { name: "Sekt",     liq: ["#fbf0bd", "#ecd27e"], foam: "#fffbe6", head: .10, rise: .088, riseMs: 600, stream: "#f6e39a", fall: .046, bubbles: true }
+    sekt:     { name: "Sekt",     liq: ["#fbf0bd", "#ecd27e"], foam: "#fffbe6", head: .10, rise: .088, riseMs: 600, stream: "#f6e39a", fall: .046, bubbles: true },
+    /* Dezember: kein Schaum – Orange, Zimtstange und Sternanis steigen nach dem Loslassen langsam auf und heben den Pegel */
+    gluehwein: { name: "Glühwein", liq: ["#b3263a", "#4a0814"], foam: "#8a1626", head: 0, rise: .05, riseMs: 1800, stream: "#9e1a2e", still: true, swell: true }
   };
   const r = (a, b) => a + Math.random() * (b - a);
   /* Glasformen (normales Bier) – zufällig schmal/breit, hoch/klein */
@@ -4804,15 +5058,23 @@ const Zapf = (() => {
   ];
   const SHOT = () => ({ name: "Schnapsglas", drink: "pfeffi", h: r(74, 84), wb: 34, wt: r(44, 48), base: 17, rate: .4 });
   const CLASSIC = () => ({ name: "Willibecher", drink: "bier", h: 225, wb: 84, wt: 108, classic: true });
+  /* Dezember-Gläser (zählen nicht fürs Abzeichen „Sauerei“) */
+  const XMAS = [
+    () => ({ name: "Glühweinglas", drink: "gluehwein", h: r(176, 194), prof: [74, r(88, 94), r(92, 98), r(86, 90)], handle: true, base: 13 }),
+    () => ({ name: "Punschglas", drink: "gluehwein", h: r(150, 166), prof: [58, r(84, 90), r(92, 98), r(84, 88)], handle: true, stem: 22, base: 11 })
+  ];
+  let XM = false;
   window.ZAPF_GLAESER = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT].map((f) => f().name);   /* für das Abzeichen „Sauerei“ */
   const HINTS = {
     bier: "Klassisch: Der Schaum steigt nach dem Loslassen noch ein Stück.",
     weizen: "Weizen schäumt kräftig nach – lieber früher loslassen!",
     guinness: "Guinness braucht Geduld: Die Krone baut sich langsam auf.",
     sekt: "Sekt schäumt erst hoch und fällt dann zusammen – nicht überlaufen lassen!",
-    pfeffi: "Kleines Glas, kaum Nachlauf – aber du hast nur einen Wimpernschlag."
+    pfeffi: "Kleines Glas, kaum Nachlauf – aber du hast nur einen Wimpernschlag.",
+    gluehwein: "Orange und Zimtstange steigen nach dem Loslassen langsam auf – der Pegel klettert noch ein Stück!"
   };
 
+  let garnOff = 0;
   let state = "off", running = false, n = 0, totalH = 0, glass = null, P = 0, delta = 0, peak = 0, finalL = 0, tSettle = 0, tPour = 0, last = 0, raf = 0, bubbles = [];
   let best = parseInt(store.get("exmaZapfBest") || "0", 10) || 0;
   const svg = () => $("zfSvg");
@@ -4822,6 +5084,87 @@ const Zapf = (() => {
   const fmtPct = (x) => (x * 100).toLocaleString("de-DE", { minimumFractionDigits: 3, maximumFractionDigits: 3 }) + " %";
   const buzz = (ms) => { try { navigator.vibrate && navigator.vibrate(ms); } catch {} };
 
+  /* ---------- Dezember-Schmuck für die Bar ---------- */
+  const XM_HOLLY = (() => {
+    const leaf = (bx, by, tx, ty, W) => {
+      const dx = tx - bx, dy = ty - by, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux, pts = [[bx, by]], back = [];
+      for (let k = 1; k < 8; k++) { const t = k / 8, w = Math.sin(Math.PI * t) ** .8 * W * (k % 2 ? 1.18 : .62); pts.push([bx + ux * L * t + nx * w, by + uy * L * t + ny * w]); back.unshift([bx + ux * L * t - nx * w, by + uy * L * t - ny * w]); }
+      return "M" + [...pts, [tx, ty], ...back].map((p) => p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" L") + "Z";
+    };
+    let g = "";
+    [[19, 21, 36, 31, 5, "#3f7350"], [19, 21, 38, 9, 6.2, "#2f6b3c"], [19, 21, 6, 37, 6.2, "#2f6b3c"]].forEach(([a, b, c, d, w, col]) => { g += `<path d="${leaf(a, b, c, d, w)}" fill="${col}" stroke="#1f4a2a" stroke-width=".8" stroke-linejoin="round"/><path d="M${a} ${b} L${c} ${d}" stroke="#8fbf8a" stroke-width=".9" opacity=".8"/>`; });
+    [[17, 17], [22.5, 19.5], [16.5, 23]].forEach(([x, y]) => { g += `<circle cx="${x}" cy="${y}" r="3.6" fill="#c4362f" stroke="#8e2420" stroke-width=".6"/><circle cx="${x - 1.1}" cy="${y - 1.2}" r="1.1" fill="#fff" opacity=".7"/>`; });
+    return g;
+  })();
+  /* Herrnhuter Stern (flach gezeichnet, leuchtend) */
+  function xmStern(cx, cy, R, hang) {
+    let g = `<path d="M${cx} ${cy - hang} V${cy - R * .4}" stroke="#2a1a10" stroke-width="1.4"/><circle cx="${cx}" cy="${cy}" r="${R * 2.1}" fill="url(#zfStarGlow)"/>`;
+    const n = 12;
+    for (let k = 0; k < n; k++) {
+      const a = k / n * Math.PI * 2 - Math.PI / 2, a1 = a - .2, a2 = a + .2, rb = R * .36;
+      const tip = [cx + Math.cos(a) * R, cy + Math.sin(a) * R], b1 = [cx + Math.cos(a1) * rb, cy + Math.sin(a1) * rb], b2 = [cx + Math.cos(a2) * rb, cy + Math.sin(a2) * rb], m = [cx + Math.cos(a) * rb * .9, cy + Math.sin(a) * rb * .9];
+      const P = (q) => q[0].toFixed(1) + " " + q[1].toFixed(1);
+      g += `<path d="M${P(b1)} L${P(tip)} L${P(m)} Z" fill="#fff6dc"/><path d="M${P(b2)} L${P(tip)} L${P(m)} Z" fill="#efc77a"/>`;
+    }
+    const r2 = R * .42;
+    g += `<path d="M${cx} ${cy - r2} L${cx + r2} ${cy} L${cx} ${cy} Z" fill="#fff6dc"/><path d="M${cx + r2} ${cy} L${cx} ${cy + r2} L${cx} ${cy} Z" fill="#e6b660"/><path d="M${cx} ${cy + r2} L${cx - r2} ${cy} L${cx} ${cy} Z" fill="#f3d699"/><path d="M${cx - r2} ${cy} L${cx} ${cy - r2} L${cx} ${cy} Z" fill="#fffaf0"/>`;
+    return g;
+  }
+  /* Tannengirlande unter dem Neon-Schriftzug, Herrnhuter Sterne oben */
+  function xmBack() {
+    const y0 = 154, sag = 18, swags = 3, Y = (x) => y0 + Math.abs(Math.sin(x / 400 * Math.PI * swags)) * sag;
+    let g = `<defs><radialGradient id="zfStarGlow"><stop offset="0" stop-color="#ffd98a" stop-opacity=".55"/><stop offset=".5" stop-color="#ffb347" stop-opacity=".16"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs>`;
+    g += xmStern(56, 214, 17, 44) + xmStern(346, 208, 15, 38);
+    for (let x = -6; x <= 406; x += 7) {
+      const y = Y(x);
+      for (let k = 0; k < 5; k++) { const a = (-75 + k * 37 + (x % 2) * 10) * Math.PI / 180, l = 8 + (k % 2) * 3.5;
+        g += `<path d="M${x} ${y.toFixed(1)} l${(Math.cos(a) * l).toFixed(1)} ${(Math.sin(a) * l).toFixed(1)}" stroke="${k % 2 ? "#2a5236" : "#3a6d4a"}" stroke-width="2.6" stroke-linecap="round"/>`; }
+    }
+    [[22, "#c4362f"], [88, "#e9b77c"], [156, "#c4362f"], [244, "#e9b77c"], [312, "#c4362f"], [378, "#f3ead8"]].forEach(([x, c]) => { const y = Y(x) + 6;
+      g += `<path d="M${x} ${y - 6} v5" stroke="#8a6a3a" stroke-width="1"/><circle cx="${x}" cy="${y + 4.5}" r="6.5" fill="${c}"/><circle cx="${x - 2}" cy="${y + 2.5}" r="1.8" fill="#fff" opacity=".6"/><rect x="${x - 2.4}" y="${y - 2.5}" width="4.8" height="2.6" fill="#c9a24a"/>`; });
+    for (let i = 0; i < 16; i++) { const x = 8 + i * 25.5, y = Y(x) - 3 + (i % 2) * 6, warm = i % 3 !== 1;
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6.5" fill="${warm ? "rgba(255,214,138,.45)" : "rgba(226,85,75,.45)"}"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.6" fill="${warm ? "#ffe7b0" : "#ff8a7a"}"/>`; }
+    return g;
+  }
+  /* Tannenbaum in der Holzkiste links, Geschenke rechts auf dem Tresen */
+  function xmCounter() {
+    const cx = 72, base = 588;
+    let t = `<ellipse cx="${cx}" cy="${TABLE - 1}" rx="40" ry="5" fill="#000" opacity=".4"/>`;
+    [[0, 76, 40], [1, 62, 36], [2, 48, 32], [3, 32, 26]].forEach(([k, w, h]) => {
+      const yb = base - k * 24, yt = yb - h - 6;
+      t += `<path d="M${cx} ${yt} C${cx + w * .18} ${yt + h * .35} ${cx + w * .36} ${yb - 10} ${cx + w / 2} ${yb - 2} Q${cx + w * .25} ${yb + 4} ${cx} ${yb - 1} Q${cx - w * .25} ${yb + 4} ${cx - w / 2} ${yb - 2} C${cx - w * .36} ${yb - 10} ${cx - w * .18} ${yt + h * .35} ${cx} ${yt} Z" fill="${k % 2 ? "#2f6b3c" : "#3a7a48"}"/>`;
+      t += `<path d="M${cx} ${yt} C${cx + w * .18} ${yt + h * .35} ${cx + w * .36} ${yb - 10} ${cx + w / 2} ${yb - 2} Q${cx + w * .25} ${yb + 4} ${cx} ${yb - 1} Z" fill="#000" opacity=".16"/>`;
+    });
+    /* Lichterkette in Bögen und Kugeln */
+    [[base - 14, 34], [base - 38, 27], [base - 62, 20]].forEach(([y, w], i) => {
+      t += `<path d="M${cx - w} ${y - 6} Q${cx} ${y + 6} ${cx + w} ${y - 8}" stroke="#1b2a1d" stroke-width="1" fill="none"/>`;
+      for (let k = 0; k < 5; k++) { const q = (k + .5) / 5, x = cx - w + 2 * w * q, yy = (1 - q) * (1 - q) * (y - 6) + 2 * (1 - q) * q * (y + 6) + q * q * (y - 8);
+        t += `<circle cx="${x.toFixed(1)}" cy="${(yy + 2).toFixed(1)}" r="5" fill="rgba(255,214,138,.35)"/><circle cx="${x.toFixed(1)}" cy="${(yy + 2).toFixed(1)}" r="2" fill="${(k + i) % 3 === 1 ? "#ff8a7a" : "#ffe7b0"}"/>`; }
+    });
+    [[cx - 22, base - 4, "#c4362f"], [cx + 18, base - 24, "#e9b77c"], [cx - 12, base - 46, "#e9b77c"], [cx + 10, base - 70, "#c4362f"], [cx + 26, base - 2, "#f3ead8"]].forEach(([x, y, c]) => { t += `<circle cx="${x}" cy="${y}" r="4.6" fill="${c}"/><circle cx="${x - 1.5}" cy="${y - 1.5}" r="1.3" fill="#fff" opacity=".6"/>`; });
+    /* Stern */
+    t += `<path transform="translate(${cx} ${base - 112})" d="M0 -9 L2.6 -2.8 9.2 -2.8 3.9 1.2 5.9 7.6 0 3.8 -5.9 7.6 -3.9 1.2 -9.2 -2.8 -2.6 -2.8 Z" fill="#ffd98a" stroke="#c9902f" stroke-width=".8"/><circle cx="${cx}" cy="${base - 112}" r="16" fill="url(#zfStarGlow)"/>`;
+    /* Holzkiste */
+    t += `<rect x="${cx - 22}" y="${base - 2}" width="44" height="${TABLE - base - 2}" rx="2" fill="#7a4a26"/><rect x="${cx - 22}" y="${base + 5}" width="44" height="1.4" fill="#4e2c14"/><rect x="${cx - 22}" y="${base - 2}" width="44" height="2.4" fill="#a8703e"/>`;
+    /* Geschenke */
+    const gift = (x, y, w, h, col, band, dark) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${col}"/><rect x="${x + w * .62}" y="${y}" width="${w * .38}" height="${h}" fill="${dark}" opacity=".35"/><rect x="${x - 1.5}" y="${y - 4}" width="${w + 3}" height="6" rx="1.5" fill="${col}"/><rect x="${x + w / 2 - 3}" y="${y - 4}" width="6" height="${h + 4}" fill="${band}"/><rect x="${x - 1.5}" y="${y + h * .45}" width="${w + 3}" height="5" fill="${band}" opacity="0"/>
+      <path d="M${x + w / 2} ${y - 4} C${x + w / 2 - 12} ${y - 16} ${x + w / 2 - 15} ${y - 2} ${x + w / 2} ${y - 4} Z M${x + w / 2} ${y - 4} C${x + w / 2 + 12} ${y - 16} ${x + w / 2 + 15} ${y - 2} ${x + w / 2} ${y - 4} Z" fill="${band}"/>`;
+    t += `<ellipse cx="350" cy="${TABLE - 1}" rx="30" ry="4" fill="#000" opacity=".4"/>` + gift(328, 568, 30, 28, "#c4362f", "#e9b77c", "#5a0a16") + gift(350, 580, 24, 16, "#2f6b3c", "#f3ead8", "#0f2a18");
+    return t;
+  }
+  /* Einlage im Glühwein: Orange, Zimtstange, Sternanis – unter der Oberfläche blasser */
+  function garnish(g) {
+    const ox = CX - 16, sx = CX + 8;
+    const items = `
+      <g transform="rotate(-18 ${ox} 3)"><ellipse cx="${ox}" cy="3" rx="15.5" ry="14.5" fill="#e07a1f"/><ellipse cx="${ox}" cy="3" rx="13.5" ry="12.5" fill="#fff0c8"/><ellipse cx="${ox}" cy="3" rx="11.8" ry="10.9" fill="#ffad3b"/>
+        ${Array.from({ length: 8 }, (_, k) => { const a = k * Math.PI / 4; return `<path d="M${ox} 3 L${(ox + Math.cos(a) * 11.8).toFixed(1)} ${(3 + Math.sin(a) * 10.9).toFixed(1)}" stroke="#ffe3a8" stroke-width="1.3"/>`; }).join("")}<circle cx="${ox}" cy="3" r="1.6" fill="#fff0c8"/></g>
+      <g transform="rotate(26 ${sx} 14)"><rect x="${sx - 4.5}" y="-64" width="9" height="78" rx="4" fill="#8a4a22"/><rect x="${sx - 4.5}" y="-64" width="3" height="78" rx="1.5" fill="#b06a38"/><path d="M${sx + 1} -60 V10" stroke="#5e2f12" stroke-width="1.2"/><ellipse cx="${sx}" cy="-64" rx="4.5" ry="2" fill="#6e3818"/><path d="M${sx - 2.5} -64 a2.5 1.6 0 1 1 4 0" fill="none" stroke="#c9884e" stroke-width="1"/></g>
+      <g transform="translate(${CX + 26} 0) scale(1 .5)">${Array.from({ length: 8 }, (_, k) => { const a = k * Math.PI / 4; return `<path d="M0 0 L${(Math.cos(a - .28) * 4).toFixed(1)} ${(Math.sin(a - .28) * 4).toFixed(1)} L${(Math.cos(a) * 10).toFixed(1)} ${(Math.sin(a) * 10).toFixed(1)} L${(Math.cos(a + .28) * 4).toFixed(1)} ${(Math.sin(a + .28) * 4).toFixed(1)} Z" fill="${k % 2 ? "#6b3a1e" : "#7e4626"}"/>`; }).join("")}<circle r="2.4" fill="#a8683a"/></g>`;
+    const steam = [-.22, .05, .28].map((k, i) => `<path class="zf-steam" style="animation-delay:${(-i * 1.1).toFixed(1)}s" d="M${(CX + k * g.wTop).toFixed(1)} ${g.yRim - 6} c-7 -10 7 -16 0 -26 c-6 -9 6 -14 0 -22" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`).join("");
+    return `<clipPath id="zfAbove"><rect x="0" y="-400" width="400" height="400"/></clipPath>
+      <g id="zfGarn"><g opacity=".4">${items}</g><g clip-path="url(#zfAbove)">${items}</g>
+        <ellipse cx="${CX - 16}" cy="0" rx="15" ry="2.2" fill="#d13a4e" opacity=".55"/><ellipse cx="${CX + 26}" cy="0" rx="10" ry="1.6" fill="#d13a4e" opacity=".4"/></g>${steam}`;
+  }
   /* ---------- Hintergrund: Holz, Schnapsregal, Zapfanlage ---------- */
   function background() {
     let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
@@ -4829,11 +5172,11 @@ const Zapf = (() => {
     /* Bokeh-Lichter im Hintergrund */
     let bokeh = "";
     for (let k = 0; k < 16; k++) {
-      const c = ["#ffb347", "#ff5fa2", "#2ff3e0", "#ffd23f"][k % 4];
+      const c = (XM ? ["#ffb347", "#ff6b5e", "#ffd98a", "#8fe3a8"] : ["#ffb347", "#ff5fa2", "#2ff3e0", "#ffd23f"])[k % 4];
       bokeh += `<circle cx="${(rnd() * 400).toFixed(0)}" cy="${(30 + rnd() * 200).toFixed(0)}" r="${(10 + rnd() * 26).toFixed(0)}" fill="url(#zfBok)" style="color:${c}" opacity="${(.25 + rnd() * .35).toFixed(2)}"/>`;
     }
     /* Regal mit hinterleuchteten Flaschen */
-    let shelves = "";
+    let shelves = "", nb = 0;
     [262, 372, 482].forEach((y, si) => {
       shelves += `<rect x="0" y="${y - 104}" width="400" height="104" fill="url(#zfBack${si % 2})"/>`;
       let x = 4;
@@ -4850,6 +5193,9 @@ const Zapf = (() => {
           <rect x="${x + 4}" y="${y - bh * .52}" width="${w - 8}" height="2" fill="${c}" opacity=".7"/>
           <rect x="${x + w * .2}" y="${y - bh + 5}" width="${w * .12}" height="${bh - 12}" rx="2" fill="#fff" opacity=".35"/>
         </g>`;
+        /* Dezember: jede 7. Flasche bekommt eine kleine Weihnachtsmütze */
+        if (XM && ++nb % 7 === 3) { const hx = x + w / 2, hy = y - h - 4;
+          shelves += `<g transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)}) rotate(${nb % 2 ? -12 : 10})"><path d="M-8 1 C-7 -9 -1 -15 6 -13 C9 -12 11 -9 12 -5 C9 -7 6 -7 4 -5 C2 -2 1 1 1 2 Z" fill="#c4362f"/><rect x="-10" y="-1" width="13" height="5" rx="2.5" fill="#f3ead8"/><circle cx="12" cy="-4.5" r="2.4" fill="#f3ead8"/></g>`; }
         x += w + 3 + rnd() * 5;
       }
       /* Glasboden mit Neonkante */
@@ -4891,6 +5237,7 @@ const Zapf = (() => {
     <rect x="118" y="142" width="164" height="3" rx="1.5" fill="#2ff3e0"/>
     <rect x="110" y="139" width="180" height="9" rx="4.5" fill="#2ff3e0" opacity=".18"/>
     ${shelves}
+    ${XM ? xmBack() : ""}
     <rect x="0" y="500" width="400" height="${TABLE - 500}" fill="#120805"/>
     <rect x="0" y="500" width="400" height="2" fill="#2ff3e0" opacity=".8"/>
     <rect x="0" y="502" width="400" height="14" fill="url(#zfLed0)" opacity=".7"/>
@@ -4907,12 +5254,14 @@ const Zapf = (() => {
     <rect x="0" y="${TABLE + 96}" width="400" height="7" rx="3.5" fill="url(#zfBrass)"/>
     <rect x="128" y="${TABLE - 9}" width="144" height="10" rx="3" fill="#18181c" stroke="url(#zfChromeH)" stroke-width="1.2"/>
     ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((k) => `<rect x="${134 + k * 11.5}" y="${TABLE - 7}" width="6" height="6" rx="1" fill="#050506"/>`).join("")}
+    ${XM ? xmCounter() : ""}
     <g id="zfGlass"></g>
     <rect id="zfStream" x="197.5" y="${NOZZLE}" width="5" height="0" rx="2.5" fill="#f3b130" opacity=".95"/>
     <rect x="289" y="232" width="26" height="${TABLE - 232 - 8}" rx="7" fill="url(#zfChrome)"/>
     <circle cx="302" cy="300" r="20" fill="#120812" stroke="#ff5fa2" stroke-width="2.5"/>
     <circle cx="302" cy="300" r="23" fill="none" stroke="#ff5fa2" stroke-opacity=".3" stroke-width="4"/>
     <image href="logo.png" x="287" y="285" width="30" height="30" clip-path="url(#zfMedal)"/>
+    ${XM ? `<g transform="translate(283 262) scale(.62)">${XM_HOLLY}</g>` : ""}
     <rect x="280" y="${TABLE - 15}" width="44" height="11" rx="4" fill="url(#zfChromeH)"/>
     <rect x="186" y="230" width="134" height="22" rx="11" fill="url(#zfChromeH)"/>
     <rect x="192" y="236" width="120" height="3" rx="1.5" fill="#fff" opacity=".7"/>
@@ -4975,13 +5324,13 @@ const Zapf = (() => {
     const stemSVG = g.stem ? `<rect x="${CX - 3}" y="${g.yBot - 2}" width="6" height="${g.stem}" fill="url(#zfGlassFill)" stroke="rgba(255,255,255,.7)" stroke-width="1.2"/>
       <ellipse cx="${CX}" cy="${TABLE - 3}" rx="${g.stem > 40 ? 31 : 27}" ry="4.5" fill="rgba(255,255,255,.22)" stroke="rgba(255,255,255,.8)" stroke-width="1.4"/>` : "";
     const hp = `M${CX + g.wb / 2 - 2} ${g.yRim + 32} C${CX + g.wb / 2 + 42} ${g.yRim + 30} ${CX + g.wb / 2 + 42} ${g.yBot - 28} ${CX + g.wb / 2 - 2} ${g.yBot - 30}`;
-    const handle = g.mug ? `<path d="${hp}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="13" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#2a150a" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" transform="translate(-2 -2)"/>` : "";
+    const handle = g.mug || g.handle ? `<path d="${hp}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="13" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#2a150a" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/><path d="${hp}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" transform="translate(-2 -2)"/>` : "";
     /* aufsteigende Kohlensäure (Sekt kräftig, Bier dezent, Guinness keine) */
     const nb = d.bubbles ? 12 : g.drink === "guinness" || d.still ? 0 : 7;
     bubbles = Array.from({ length: nb }, () => ({ x: CX + r(-.34, .34) * g.wb, p: Math.random(), v: r(.25, .6), s: d.bubbles ? 1.7 : r(.8, 1.3) }));
     /* Kondenswasser-Tropfen auf dem Glas */
     let drops = "";
-    for (let k = 0; k < 22; k++) {
+    for (let k = 0; k < (d.swell ? 0 : 22); k++) {
       const f = r(.05, .8), y = g.yBot - f * g.h, w = g.width(f);
       drops += `<circle cx="${(CX + r(-.42, .42) * w).toFixed(1)}" cy="${y.toFixed(1)}" r="${r(.7, 1.8).toFixed(1)}" fill="#fff" opacity="${r(.18, .45).toFixed(2)}"/>`;
     }
@@ -5006,6 +5355,7 @@ const Zapf = (() => {
       ${g.drink === "guinness" ? (() => { const y = g.yBot - g.h * .46, w = g.width(.46); return `<text x="${CX}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="${Math.min(16, w * .15).toFixed(1)}" letter-spacing="1.5" fill="#f4e6c4" opacity=".92">GUINNESS</text>`; })() : ""}
       ${drops}
       ${g.classic ? `<path d="M${CX - g.wTop / 2 + 1} ${g.yRim + 26} L${CX + g.wTop / 2 - 1} ${g.yRim + 26}" stroke="rgba(255,255,255,.4)" stroke-width="3"/>` : ""}
+      ${d.swell ? garnish(g) : ""}
       <path id="zfDome" d="" fill="${d.foam}"/>
       <ellipse cx="${CX}" cy="${g.yRim}" rx="${g.wTop / 2}" ry="3.5" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="2"/>
       <path d="M${CX - wM / 2 + 2} ${yM} L${CX - wM / 2 + 15} ${yM}" stroke="#ffd23f" stroke-width="2.2"/>
@@ -5036,6 +5386,8 @@ const Zapf = (() => {
         dome.setAttribute("d", `M${CX - hw} ${g.yRim + 2} C${CX - hw} ${g.yRim - hgt * 1.3} ${CX + hw} ${g.yRim - hgt * 1.3} ${CX + hw} ${g.yRim + 2} Z`);
       } else dome.setAttribute("d", "");
     }
+    const gn = $("zfGarn");
+    if (gn) gn.setAttribute("transform", `translate(0 ${(yL + garnOff).toFixed(1)})`);
     if (bubbles.length) {
       const kids = $("zfBub").children, t = performance.now() / 1000;
       bubbles.forEach((b, k) => { const p = (b.p + t * b.v) % 1; kids[k].setAttribute("cx", b.x); kids[k].setAttribute("cy", yI - p * lh); });
@@ -5073,8 +5425,10 @@ const Zapf = (() => {
   function nextGlass() {
     n++;
     const roll = Math.random();
-    const spec = n === 1 ? CLASSIC() : roll < .09 ? SHOT() : roll < .32 ? SPECIAL[Math.floor(Math.random() * SPECIAL.length)]() : NORMAL[Math.floor(Math.random() * NORMAL.length)]();
+    const spec = XM && (n === 1 || Math.random() < .3) ? XMAS[Math.floor(Math.random() * XMAS.length)]()
+      : n === 1 ? CLASSIC() : roll < .09 ? SHOT() : roll < .32 ? SPECIAL[Math.floor(Math.random() * SPECIAL.length)]() : NORMAL[Math.floor(Math.random() * NORMAL.length)]();
     glass = geom(spec);
+    garnOff = 0;
     drawGlass(glass);
     P = 0; paint(0, 0);
     hud(); pctBox("");
@@ -5123,6 +5477,7 @@ const Zapf = (() => {
         const wf = Math.min(2.6, Math.max(.35, (glass.wRef / glass.wAt(P)) ** 2));
         P += pourRate() * ramp * wf * dt / 1000;
         const head = d.head * P;
+        if (d.swell) garnOff = 9;
         paint(P, P - head);
         $("zfStream").setAttribute("height", Math.max(0, glass.levelY(P) - NOZZLE));
         if (P > 1) { P = 1; $("zfHandle").style.transform = ""; $("zfStream").setAttribute("height", 0); result(1.02, true); return; }
@@ -5135,7 +5490,8 @@ const Zapf = (() => {
           lvl = P + (peak - P) * (1 - Math.pow(1 - up, 3)) - (peak - finalL) * (down * down * (3 - 2 * down));
         } else lvl = P + (peak - P) * e;
         const head = d.head * P;
-        paint(lvl, P - head, d.surge ? .55 * (1 - e) : null);
+        if (d.swell) garnOff = 9 * (1 - e);
+        paint(lvl, d.swell ? lvl : P - head, d.surge ? .55 * (1 - e) : null);
         if (d.surge) $("zfHaze").setAttribute("fill", "#c99a6a");
         const cap = d.fall ? 1.02 : 1;   /* Sekt-Schaum darf kurz über den Rand (Anzeige bleibt bei 100 %) */
         pctBox(fmtPct(Math.min(lvl, d.fall ? 1 : 1.02)));
@@ -5155,7 +5511,7 @@ const Zapf = (() => {
       $("zfSpill").setAttribute("opacity", 1);
       document.querySelectorAll("#zfSpill .zf-drip").forEach((el, i) => el.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { duration: 700 + i * 200, easing: "ease-in", fill: "forwards" }));
       buzz([60, 40, 140]); Badges.spill(glass.name);
-      return setTimeout(() => gameOver("Übergelaufen!", "Der Schaum ist über den Rand gelaufen."), 1500);
+      return setTimeout(() => gameOver("Übergelaufen!", DRINKS[glass.drink].swell ? "Orange und Zimtstange haben den Glühwein über den Rand gedrückt." : "Der Schaum ist über den Rand gelaufen."), 1500);
     }
     const pct = Math.round(level * 100 * 1000) / 1000, need = minPct();
     if (pct < need) {
@@ -5270,13 +5626,14 @@ const Zapf = (() => {
   $("zfClose").addEventListener("click", () => goBack(""));
 
   return {
-    _dbg: { state: () => ({ state, n, totalH, P, peak, finalL, glass: glass && { name: glass.name, drink: glass.drink, h: Math.round(glass.h), avgW: Math.round(glass.avgW) } }), start: () => startPour(), stop: () => stopPour(), setP: (p) => { P = p; }, show: (i, lv = .8) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT]; glass = geom(list[i]()); drawGlass(glass); const d = DRINKS[glass.drink]; paint(lv, lv - d.head * lv - .05, d.haze != null ? d.haze : null); return glass.name; }, force: (i) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT]; glass = geom(list[i]()); drawGlass(glass); P = 0; finalL = 0; paint(0, 0); state = "ready"; return glass.name; }, pct: () => $("zfPct").textContent },
+    _dbg: { state: () => ({ state, n, totalH, P, peak, finalL, glass: glass && { name: glass.name, drink: glass.drink, h: Math.round(glass.h), avgW: Math.round(glass.avgW) } }), start: () => startPour(), stop: () => stopPour(), setP: (p) => { P = p; }, show: (i, lv = .8) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT, ...XMAS]; glass = geom(list[i]()); garnOff = 0; drawGlass(glass); const d = DRINKS[glass.drink]; paint(lv, lv - d.head * lv - .05, d.haze != null ? d.haze : null); return glass.name; }, force: (i) => { const list = [CLASSIC, ...NORMAL, ...SPECIAL, SHOT, ...XMAS]; glass = geom(list[i]()); drawGlass(glass); P = 0; finalL = 0; paint(0, 0); state = "ready"; return glass.name; }, pct: () => $("zfPct").textContent },
     open() {
       if (running) return;
       running = true;
       app.classList.add("is-zapf");
       $("zapf").setAttribute("aria-hidden", "false");
-      if (!svg().firstElementChild) svg().innerHTML = background();
+      XM = isDezember();
+      if (!svg().firstElementChild || svg().dataset.xm !== String(XM)) { svg().innerHTML = background(); svg().dataset.xm = String(XM); }
       soloView(true);
       state = "intro"; n = 0; totalH = 0; hud(); info(null); pctBox("");
       $("zfGlass").innerHTML = "";
@@ -5349,7 +5706,21 @@ const Pol = (() => {
     { id: "team",    top: "#141418", pants: "#2c2c34", shoe: "#ffffff", hair: "curly", team: true },
     { id: "gips",    top: "#2e9a6a", pants: "#3b3b52", shoe: "#222", hair: "short", cast: true }
   ];
+  /* Dezember: der Weihnachtsmann als spielbare Figur (kommt in etwa jeder 5. Runde) */
+  const SANTA = { id: "santa", top: "#c4362f", pants: "#b02a2f", shoe: "#1a1a1e", hair: "none", belly: true, santa: true };
+  const pickFig = () => {
+    const f = XM && Math.random() < .2 ? SANTA : pick(FIG);
+    return { ...f, skin: f.santa ? "#f1c9a5" : pick(SKIN), hairC: pick(HAIR) };
+  };
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  /* Dezember: Winterjacke, Schal, Mütze + Handschuhe (je Figur passend) */
+  let XM = false;
+  const WIN = {
+    hoodie: ["#c4362f", "#f3ead8", "#2f6b3c"], zopf: ["#7a2f4a", "#f3ead8", "#f3ead8"], hawaii: ["#2f6b3c", "#ffb347", "#c4362f"],
+    glitzer: ["#f3ead8", "#d83aa8", "#d83aa8"], trikot: ["#1f3a6e", "#e3344a", "#e3344a"], ersti: ["#5b8fd8", "#f6b928", "#ff5d73"],
+    team: ["#2a2a33", "#ff3fc8", "#ff3fc8"], gips: ["#8e2420", "#e9b77c", "#2f6b3c"],
+    santa: ["#c4362f", "#f3ead8", "#1a1a1e"]
+  };
 
   /* ---------- Zustand ---------- */
   let running = false, raf = 0, last = 0, acc = 0, state = "off";
@@ -5368,7 +5739,7 @@ const Pol = (() => {
   ];
   const LINES = ["Der Boden war schneller.", "Hier wohnst du jetzt.", "Kurze Pause auf dem Gehweg.", "Die Schwerkraft gewinnt immer.", "Mal kurz den Asphalt testen.", "Der Gehweg sagt Hallo.", "Wird schon keiner gesehen haben."];
   const CAUSE = {
-    pfuetze: "Pfütze erwischt.", gully: "Gullydeckel. Natürlich.", kopf: "Kopfsteinpflaster ist kein Freund.", banane: "Bananenschale. Ein Klassiker.",
+    get pfuetze() { return XM ? "Glatteis erwischt." : "Pfütze erwischt."; }, gully: "Gullydeckel. Natürlich.", kopf: "Kopfsteinpflaster ist kein Freund.", banane: "Bananenschale. Ein Klassiker.",
     flasche: "Die Flasche war's nicht wert.", bier: "Wer kann zu Freibier schon Nein sagen?", hick: "Hicks … und weg.", kotzen: "Danach ging gar nichts mehr.",
     blackout: "Filmriss.", doppelt: "Zu viele von dir.", bergab: "Bergab ging's dann schnell.", bergauf: "Bergauf war zu steil."
   };
@@ -5402,7 +5773,7 @@ const Pol = (() => {
   function trigger(ev) {
     const p = power();
     switch (ev.k) {
-      case "pfuetze": om -= 1.45 * p; pose = { k: "slip", t: 0, dur: 0.75 }; splash("#9fd3ff", 18); say("Rutsch!"); break;
+      case "pfuetze": om -= 1.45 * p; pose = { k: "slip", t: 0, dur: 0.75 }; splash(XM ? "#eaf6ff" : "#9fd3ff", 18); say(XM ? "Glatteis!" : "Rutsch!"); break;
       case "gully": om += 1.35 * p; pose = { k: "stumble", t: 0, dur: 0.6 }; ev.hit = tms; sparks(); say("Klonk – Stolper!"); break;
       case "banane": om -= 2.0 * p; pose = { k: "banana", t: 0, dur: 1.0 }; peel(); say("Huiii!"); break;
       case "flasche": reach = 0.9; reachA = 0; reachEv = ev; say("Ooh, eine Flasche!"); break;
@@ -5512,6 +5883,7 @@ const Pol = (() => {
     ctx.globalAlpha = 1;
     ctx.fillStyle = "#fff6d8"; ctx.beginPath(); ctx.arc(W * .8, H * .14, 26 * U, 0, 7); ctx.fill();
     ctx.fillStyle = "#18205a"; ctx.beginPath(); ctx.arc(W * .8 + 11 * U, H * .14 - 6 * U, 24 * U, 0, 7); ctx.fill();
+    if (XM) santaFly();
     /* Häuser (langsam, Parallaxe) */
     const off = (d * PX() * .25) % (houses.reduce((s, h) => s + h.w * U + 14 * U, 0));
     let x = -off;
@@ -5520,10 +5892,87 @@ const Pol = (() => {
       if (x + w > 0 && x < W) {
         ctx.fillStyle = h.c; ctx.fillRect(x, top, w, hh + 30 * U);
         if (h.roof) { ctx.beginPath(); ctx.moveTo(x - 4 * U, top); ctx.lineTo(x + w / 2, top - 28 * U); ctx.lineTo(x + w + 4 * U, top); ctx.fill(); }
-        h.win.forEach((on, i) => { const cx = x + 12 * U + (i % 2) * (w / 2), cy = top + 16 * U + Math.floor(i / 2) * 28 * U; if (cy < ground - 40 * U) { ctx.fillStyle = on ? "#ffd56b" : "#0f143a"; ctx.fillRect(cx, cy, 14 * U, 16 * U); } });
+        h.win.forEach((on, i) => { const cx = x + 12 * U + (i % 2) * (w / 2), cy = top + 16 * U + Math.floor(i / 2) * 28 * U; if (cy < ground - 40 * U) { ctx.fillStyle = on ? "#ffd56b" : "#0f143a"; ctx.fillRect(cx, cy, 14 * U, 16 * U);
+          /* Dezember: Schwibbogen im Fenster (Erzgebirge lässt grüßen) */
+          if (XM && on && i % 3 !== 2) { ctx.fillStyle = "#6a3a14"; ctx.beginPath(); ctx.arc(cx + 7 * U, cy + 15 * U, 6 * U, Math.PI, 0); ctx.lineTo(cx + 13 * U, cy + 16 * U); ctx.lineTo(cx + 1 * U, cy + 16 * U); ctx.fill();
+            ctx.fillStyle = "#ffd56b"; ctx.beginPath(); ctx.arc(cx + 7 * U, cy + 15 * U, 4 * U, Math.PI, 0); ctx.fill();
+            ctx.fillStyle = "#fff6d8"; for (let k = 0; k < 5; k++) { const an = Math.PI + (k + .5) / 5 * Math.PI; ctx.beginPath(); ctx.arc(cx + 7 * U + Math.cos(an) * 7.2 * U, cy + 15 * U + Math.sin(an) * 7.2 * U, 1 * U, 0, 7); ctx.fill(); } } } });
+        if (XM) { ctx.fillStyle = "#e8eef9";
+          if (h.roof) { ctx.beginPath(); ctx.moveTo(x - 5 * U, top + 1 * U); ctx.lineTo(x + w / 2, top - 29.5 * U); ctx.lineTo(x + w + 5 * U, top + 1 * U); ctx.lineTo(x + w - 2 * U, top + 2 * U); ctx.quadraticCurveTo(x + w * .8, top - 9 * U, x + w * .66, top - 15 * U); ctx.lineTo(x + w / 2, top - 22 * U); ctx.quadraticCurveTo(x + w * .3, top - 10 * U, x + 4 * U, top + 3 * U); ctx.closePath(); ctx.fill(); }
+          else { ctx.beginPath(); ctx.roundRect(x - 2 * U, top - 5 * U, w + 4 * U, 8 * U, 4 * U); ctx.fill(); }
+          for (let k = 0; k < 2; k++) { ctx.beginPath(); ctx.ellipse(x + w * (.3 + k * .4), top - (h.roof ? 0 : 5) * U, w * .12, 3 * U, 0, Math.PI, 0); ctx.fill(); } }
       }
       x += w + 14 * U;
     }
+  }
+  /* ===== Dezember: Weihnachtsmann fliegt mit dem Rentierschlitten über den Himmel (alle 20 s, ca. 7 s sichtbar) ===== */
+  function reindeer(x, y, ph, lead) {
+    const c = "#8a5530", dk = "#6b3f22";
+    ctx.save(); ctx.translate(x, y);
+    /* Beine im Galopp */
+    ctx.strokeStyle = dk; ctx.lineWidth = 2.6; ctx.lineCap = "round";
+    [[-9, 0], [-5, 1.6], [8, .8], [12, 2.4]].forEach(([lx, o]) => { const a = Math.sin(ph + o) * .7; ctx.beginPath(); ctx.moveTo(lx, 4); ctx.lineTo(lx + Math.sin(a) * 9, 4 + Math.cos(a) * 9); ctx.stroke(); });
+    ctx.fillStyle = c; ctx.beginPath(); ctx.ellipse(2, 0, 15, 7, -.08, 0, 7); ctx.fill();
+    ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.ellipse(16, -3, 3.5, 3, 0, 0, 7); ctx.fill();
+    /* Hals + Kopf (Blick nach links) */
+    ctx.fillStyle = c; ctx.beginPath(); ctx.moveTo(-8, -4); ctx.lineTo(-16, -15); ctx.lineTo(-11, -17); ctx.lineTo(-3, -3); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(-17, -17, 6, 4.2, -.3, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(-22, -15.5, 3.4, 2.6, -.2, 0, 7); ctx.fill();
+    ctx.strokeStyle = "#e9cf9a"; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(-15, -20); ctx.lineTo(-13, -28); ctx.moveTo(-14, -24); ctx.lineTo(-18, -27); ctx.moveTo(-13, -28); ctx.lineTo(-9, -31); ctx.moveTo(-12, -20); ctx.lineTo(-8, -26); ctx.lineTo(-4, -27); ctx.stroke();
+    ctx.fillStyle = "#1a1020"; ctx.beginPath(); ctx.arc(-18, -18.5, 1, 0, 7); ctx.fill();
+    if (lead) { const g = ctx.createRadialGradient(-25, -15.5, 0, -25, -15.5, 9); g.addColorStop(0, "rgba(255,80,80,.8)"); g.addColorStop(1, "rgba(255,80,80,0)"); ctx.fillStyle = g; ctx.fillRect(-34, -25, 18, 18); ctx.fillStyle = "#ff3b3b"; }
+    else ctx.fillStyle = "#2a1a14";
+    ctx.beginPath(); ctx.arc(-25, -15.5, lead ? 2.4 : 1.6, 0, 7); ctx.fill();
+    /* Geschirr */
+    ctx.fillStyle = "#c4362f"; ctx.fillRect(-4, -6, 4, 12); ctx.fillStyle = "#e9b77c"; ctx.beginPath(); ctx.arc(-2, 6, 1.6, 0, 7); ctx.fill();
+    ctx.restore();
+  }
+  function santaFly() {
+    const per = 20, vis = 7, t = (tms / 1000) % per;
+    if (t > vis) return;
+    const k = t / vis, sc = U * .95;
+    const x0 = W + 260 * sc - k * (W + 560 * sc), y0 = H * .25 + Math.sin(k * Math.PI * 2) * 14 * U - k * 30 * U, ph = tms / 90;
+    ctx.save(); ctx.translate(x0, y0); ctx.scale(sc, sc); ctx.rotate(.05);
+    /* Glitzerspur hinter dem Schlitten */
+    ctx.fillStyle = "#ffe7a8";
+    for (let i = 0; i < 14; i++) { const sx = 70 + i * 13, sy = 14 + Math.sin(i * .9 + tms / 300) * 5 + i * 1.6; ctx.globalAlpha = (1 - i / 14) * .8; ctx.beginPath(); ctx.arc(sx, sy, 2.2 - i * .12, 0, 7); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    /* Zügel */
+    ctx.strokeStyle = "#e9b77c"; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(-6, -2); ctx.quadraticCurveTo(-60, 8 + Math.sin(ph) * 2, -122, -2); ctx.stroke();
+    [-46, -90, -134].forEach((rx, i) => reindeer(rx, 2 + Math.sin(ph + i) * 2.5, ph + i * 1.3, i === 2));
+    /* Sack */
+    ctx.fillStyle = "#8a6a3a"; ctx.beginPath(); ctx.ellipse(46, -12, 13, 15, .25, 0, 7); ctx.fill();
+    ctx.fillStyle = "#6e5230"; ctx.beginPath(); ctx.ellipse(41, -26, 5, 3, .3, 0, 7); ctx.fill();
+    ctx.fillStyle = "#c4362f"; ctx.fillRect(38, -32, 8, 6); ctx.fillStyle = "#2f6b3c"; ctx.fillRect(46, -33, 7, 7); ctx.fillStyle = "#e9b77c"; ctx.fillRect(41, -32, 2, 6);
+    /* Weihnachtsmann (fehlt, wenn man ihn selbst spielt – die Rentiere suchen ihn) */
+    const solo = fig && fig.santa;
+    if (!solo) {
+    ctx.fillStyle = "#c4362f"; ctx.beginPath(); ctx.ellipse(20, -12, 13, 14, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.ellipse(11, -16, 9, 10, .2, 0, 7); ctx.fill();
+    ctx.fillStyle = "#f1c9a5"; ctx.beginPath(); ctx.arc(14, -27, 7, 0, 7); ctx.fill();
+    ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.ellipse(10, -22, 6, 7, .3, 0, 7); ctx.fill();
+    ctx.fillStyle = "#e8505b"; ctx.beginPath(); ctx.arc(8.5, -27, 2, 0, 7); ctx.fill();
+    ctx.fillStyle = "#1a1020"; ctx.beginPath(); ctx.arc(11, -30, 1, 0, 7); ctx.fill();
+    ctx.fillStyle = "#c4362f"; ctx.beginPath(); ctx.moveTo(7, -32); ctx.quadraticCurveTo(14, -46, 28, -38); ctx.lineTo(21, -32); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.roundRect(6, -35, 17, 5, 2.5); ctx.fill(); ctx.beginPath(); ctx.arc(28.5, -37.5, 3, 0, 7); ctx.fill();
+    /* Arm winkt */
+    ctx.save(); ctx.translate(22, -20); ctx.rotate(-2.3 + Math.sin(tms / 160) * .35);
+    ctx.strokeStyle = "#c4362f"; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 12); ctx.stroke();
+    ctx.fillStyle = "#1a1a1e"; ctx.beginPath(); ctx.arc(0, 14, 3, 0, 7); ctx.fill(); ctx.restore();
+    }
+    /* Schlitten */
+    ctx.fillStyle = "#a8202c";
+    ctx.beginPath(); ctx.moveTo(-6, -8); ctx.quadraticCurveTo(-10, 4, 0, 6); ctx.lineTo(56, 6); ctx.quadraticCurveTo(64, 4, 62, -14); ctx.lineTo(54, -12); ctx.lineTo(50, -2); ctx.lineTo(4, -2); ctx.quadraticCurveTo(0, -6, 2, -10); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#c4362f"; ctx.fillRect(4, -2, 46, 6);
+    ctx.strokeStyle = "#e9b77c"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(6, 1); ctx.lineTo(50, 1); ctx.stroke();
+    ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(-8, 8); ctx.quadraticCurveTo(-14, 12, -9, 14); ctx.lineTo(60, 14); ctx.moveTo(10, 6); ctx.lineTo(10, 14); ctx.moveTo(46, 6); ctx.lineTo(46, 14); ctx.stroke();
+    ctx.restore();
+    /* „Ho ho ho!“ in der Mitte des Flugs */
+    if (k > .35 && k < .65) { const al = Math.sin((k - .35) / .3 * Math.PI);
+      ctx.globalAlpha = al; ctx.font = `800 ${14 * U}px "Bricolage Grotesque", sans-serif`; ctx.textAlign = "center"; ctx.fillStyle = "#fff6d8";
+      ctx.lineWidth = 4 * U; ctx.strokeStyle = "rgba(10,14,40,.55)"; const txt = solo ? "Chef, wo bist du?!" : "Ho ho ho!"; ctx.strokeText(txt, x0 + 30 * sc, y0 + 38 * sc); ctx.fillText(txt, x0 + 30 * sc, y0 + 38 * sc); ctx.globalAlpha = 1; }
   }
   function worldX(m) { return W * .34 + (m - d) * PX(); }
   function lamp(x, ground) {
@@ -5532,6 +5981,7 @@ const Pol = (() => {
     gl.addColorStop(0, "rgba(255,214,120,.55)"); gl.addColorStop(1, "rgba(255,214,120,0)");
     ctx.fillStyle = gl; ctx.beginPath(); ctx.moveTo(x + 24 * U, ground - 170 * U); ctx.lineTo(x - 50 * U, ground); ctx.lineTo(x + 100 * U, ground); ctx.fill();
     ctx.fillStyle = "#ffe08a"; ctx.beginPath(); ctx.ellipse(x + 24 * U, ground - 172 * U, 9 * U, 5 * U, 0, 0, 7); ctx.fill();
+    if (XM) { ctx.fillStyle = "#eef3fb"; ctx.beginPath(); ctx.ellipse(x + 10 * U, ground - 178 * U, 16 * U, 4 * U, -.25, Math.PI, 0); ctx.fill(); ctx.beginPath(); ctx.ellipse(x, ground - 2 * U, 16 * U, 7 * U, 0, Math.PI, 0); ctx.fill(); }
   }
   function sign(x, ground, kind) {
     const u = U;
@@ -5551,13 +6001,16 @@ const Pol = (() => {
     const first = Math.floor((d - 20) / 11) * 11;
     for (let m = first; m < d + 30; m += 11) { const x = worldX(m + 5); if (x > -150 && x < W + 150) lamp(x, ground); }
     [0, 50, 150, 300, 500].forEach((m) => { const x = worldX(m + (m ? 2 : -3)); if (x > -260 && x < W + 260) sign(x, ground, m); });
-    /* Gehweg */
-    ctx.fillStyle = "#3b3f6b"; ctx.fillRect(0, ground, W, H - ground);
-    ctx.fillStyle = "#4a4f82"; ctx.fillRect(0, ground, W, 8 * U);
-    ctx.strokeStyle = "rgba(255,255,255,.07)"; ctx.lineWidth = 2;
+    /* Gehweg (im Dezember verschneit) */
+    ctx.fillStyle = XM ? "#9ba8cf" : "#3b3f6b"; ctx.fillRect(0, ground, W, H - ground);
+    ctx.fillStyle = XM ? "#dfe7f6" : "#4a4f82"; ctx.fillRect(0, ground, W, 8 * U);
+    if (XM) { const t0 = Math.floor((d - 15) / 1.3) * 1.3; ctx.fillStyle = "#eef3fb";
+      for (let m = t0; m < d + 20; m += 1.3) { const x = worldX(m); ctx.beginPath(); ctx.ellipse(x, ground + 1 * U, (14 + (Math.abs(Math.sin(m * 7.3)) * 14)) * U, (4 + Math.abs(Math.sin(m * 3.1)) * 3) * U, 0, Math.PI, 0); ctx.fill(); } }
+    ctx.strokeStyle = XM ? "rgba(40,50,110,.1)" : "rgba(255,255,255,.07)"; ctx.lineWidth = 2;
     const t0 = Math.floor((d - 15) / 2) * 2;
     for (let m = t0; m < d + 20; m += 2) { const x = worldX(m); ctx.beginPath(); ctx.moveTo(x, ground + 8 * U); ctx.lineTo(x - 18 * U, H); ctx.stroke(); }
     ctx.fillStyle = "#23264a"; ctx.fillRect(0, ground + 70 * U, W, H);
+    if (XM) { ctx.fillStyle = "#cfd8ee"; ctx.fillRect(0, ground + 66 * U, W, 5 * U); ctx.fillStyle = "rgba(220,230,250,.18)"; ctx.fillRect(0, ground + 71 * U, W, 10 * U); }
     /* Kotzlachen bleiben liegen */
     decals.forEach((k) => { const x = worldX(k.m); if (x < -120 || x > W + 120) return; const w = (16 + 34 * k.w) * U;
       ctx.fillStyle = "rgba(170,205,70,.9)"; ctx.beginPath(); ctx.ellipse(x, ground + 4 * U, w, 6 * U + 2 * U * k.w, 0, 0, 7); ctx.fill();
@@ -5567,7 +6020,14 @@ const Pol = (() => {
       if (!ev.ground) continue;
       const x = worldX(ev.at); if (x < -200 || x > W + 300) continue;
       ctx.save(); ctx.translate(x, ground + 3 * U);
-      if (ev.k === "pfuetze") { ctx.fillStyle = "#4f86ff"; ctx.beginPath(); ctx.ellipse(0, 0, 38 * U, 7 * U, 0, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.beginPath(); ctx.ellipse(-10 * U, -1 * U, 12 * U, 2 * U, 0, 0, 7); ctx.fill(); }
+      if (ev.k === "pfuetze" && XM) {
+        const ig = ctx.createLinearGradient(-40 * U, 0, 40 * U, 0); ig.addColorStop(0, "#9fd0f2"); ig.addColorStop(.5, "#d9f1ff"); ig.addColorStop(1, "#8ec4ea");
+        ctx.fillStyle = ig; ctx.beginPath(); ctx.ellipse(0, 0, 42 * U, 7.5 * U, 0, 0, 7); ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 1.4 * U; ctx.stroke();
+        ctx.strokeStyle = "rgba(90,140,190,.55)"; ctx.lineWidth = 1 * U; ctx.beginPath(); ctx.moveTo(-14 * U, -2 * U); ctx.lineTo(-4 * U, 1 * U); ctx.lineTo(6 * U, -3 * U); ctx.lineTo(18 * U, 2 * U); ctx.moveTo(-4 * U, 1 * U); ctx.lineTo(-2 * U, 5 * U); ctx.moveTo(6 * U, -3 * U); ctx.lineTo(10 * U, -6 * U); ctx.stroke();
+        ctx.fillStyle = "rgba(255,255,255,.9)"; ctx.beginPath(); ctx.ellipse(-20 * U, -2 * U, 9 * U, 1.4 * U, -.08, 0, 7); ctx.fill(); ctx.beginPath(); ctx.ellipse(24 * U, 1 * U, 5 * U, 1 * U, -.08, 0, 7); ctx.fill();
+        const tw = Math.abs(Math.sin(tms / 260 + ev.at)); ctx.globalAlpha = tw; ctx.fillStyle = "#fff"; ctx.beginPath(); for (let k = 0; k < 8; k++) { const rr = k % 2 ? 1 * U : 4.5 * U, aa = k * Math.PI / 4; ctx.lineTo(-24 * U + Math.cos(aa) * rr, -4 * U + Math.sin(aa) * rr); } ctx.fill(); ctx.globalAlpha = 1;
+      } else if (ev.k === "pfuetze") { ctx.fillStyle = "#4f86ff"; ctx.beginPath(); ctx.ellipse(0, 0, 38 * U, 7 * U, 0, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.5)"; ctx.beginPath(); ctx.ellipse(-10 * U, -1 * U, 12 * U, 2 * U, 0, 0, 7); ctx.fill(); }
       if (ev.k === "gully") {
         const k = ev.hit != null ? Math.max(0, 1 - (tms - ev.hit) / 450) : 0, j = k * Math.abs(Math.sin((tms - (ev.hit || 0)) / 40));
         ctx.fillStyle = "#0c0d1c"; ctx.beginPath(); ctx.ellipse(0, 0, 27 * U, 6.5 * U, 0, 0, 7); ctx.fill();
@@ -5618,7 +6078,13 @@ const Pol = (() => {
       ctx.strokeStyle = cast ? "#f4f4f4" : (front ? f.pants : shade(f.pants, .72)); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.lineWidth = (cast ? 17 : 14) * u;
       const t1 = legL * 0.5, sl = legL * 0.5 - 6 * u, fx2 = -Math.sin(knee) * sl, fy2 = t1 + Math.cos(knee) * sl;
       ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, t1); ctx.lineTo(fx2, fy2); ctx.stroke();
-      ctx.fillStyle = cast ? "#f4f4f4" : f.shoe; ctx.beginPath(); ctx.ellipse(fx2 + 6 * u, fy2 + 4 * u, 12 * u, 6 * u, -knee * 0.4, 0, 7); ctx.fill();
+      const boot = XM && !cast;
+      if (boot) { /* Winterstiefel mit Fellrand */
+        const dx = fx2, dy = fy2 - t1, L = Math.hypot(dx, dy) || 1, bx = dx * .55, by = t1 + dy * .55;
+        ctx.strokeStyle = f.santa ? (front ? "#1f1f24" : "#141418") : front ? "#5a3a24" : "#47301f"; ctx.lineWidth = 15.5 * u; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(fx2, fy2); ctx.stroke();
+        ctx.strokeStyle = "#efe6d4"; ctx.lineWidth = 17 * u; ctx.lineCap = "butt"; ctx.beginPath(); ctx.moveTo(bx - dx / L * 3 * u, by - dy / L * 3 * u); ctx.lineTo(bx + dx / L * 2 * u, by + dy / L * 2 * u); ctx.stroke(); ctx.lineCap = "round";
+      }
+      ctx.fillStyle = cast ? "#f4f4f4" : boot ? (f.santa ? (front ? "#1f1f24" : "#141418") : front ? "#5a3a24" : "#47301f") : f.shoe; ctx.beginPath(); ctx.ellipse(fx2 + 6 * u, fy2 + 4 * u, 12 * u, 6 * u, -knee * 0.4, 0, 7); ctx.fill();
       ctx.restore();
     };
     leg(sw2, false);
@@ -5638,18 +6104,41 @@ const Pol = (() => {
     if (f.jersey) { ctx.fillStyle = "#fff"; ctx.font = `${16 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("10", 2 * u, shY + 30 * u); }
     if (f.team) { ctx.fillStyle = "#ff3fc8"; ctx.font = `${10 * u}px "Dela Gothic One", sans-serif`; ctx.textAlign = "center"; ctx.fillText("EXMA", 0, shY + 24 * u); }
     if (f.hood) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.ellipse(-10 * u, shY - 2 * u, 16 * u, 9 * u, 0, 0, 7); ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2 * u; ctx.beginPath(); ctx.moveTo(4 * u, shY + 4 * u); ctx.lineTo(6 * u, shY + 22 * u); ctx.stroke(); }
+    if (f.santa) { /* Mantel: Fellstreifen, Gürtel mit Goldschnalle, Fellsaum */
+      ctx.fillStyle = "#f3ead8";
+      ctx.beginPath(); ctx.roundRect(-3 * u, shY + 2 * u, 9 * u, hipY - shY + 6 * u, 4 * u); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(-21 * u, hipY + 1 * u, 52 * u, 10 * u, 5 * u); ctx.fill();
+      ctx.fillStyle = "rgba(0,0,0,.06)"; for (let k = 0; k < 6; k++) { ctx.beginPath(); ctx.arc((-16 + k * 9) * u, hipY + 9 * u, 3 * u, 0, 7); ctx.fill(); }
+      ctx.fillStyle = "#1a1a1e"; ctx.beginPath(); ctx.roundRect(-20 * u, hipY - 14 * u, 50 * u, 8 * u, 2 * u); ctx.fill();
+      ctx.strokeStyle = "#e9b77c"; ctx.lineWidth = 2.4 * u; ctx.beginPath(); ctx.roundRect(-1 * u, hipY - 16 * u, 11 * u, 12 * u, 2 * u); ctx.stroke();
+      ctx.fillStyle = "rgba(255,255,255,.14)"; ctx.beginPath(); ctx.ellipse(-8 * u, (hipY + shY) / 2, 4 * u, 16 * u, 0, 0, 7); ctx.fill();
+    } else if (XM) { /* offene Steppjacke über dem eigenen Oberteil */
+      const wj = (WIN[f.id] || WIN.hoodie)[0], bot = hipY + 12 * u, hgt = bot - (shY - 3 * u), wide = f.belly ? 6 * u : 0;
+      ctx.fillStyle = wj;
+      ctx.beginPath(); ctx.roundRect(-22 * u, shY - 3 * u, 17 * u, hgt, [13 * u, 3 * u, 3 * u, 9 * u]); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(6 * u + wide, shY - 3 * u, 16 * u, hgt, [3 * u, 13 * u, 9 * u, 3 * u]); ctx.fill();
+      ctx.strokeStyle = shade(wj, .78); ctx.lineWidth = 1.6 * u;
+      for (let k = 1; k < 5; k++) { const yy = shY - 3 * u + hgt * k / 5; ctx.beginPath(); ctx.moveTo(-21 * u, yy); ctx.quadraticCurveTo(-13 * u, yy + 2.2 * u, -6 * u, yy); ctx.moveTo(7 * u + wide, yy); ctx.quadraticCurveTo(14 * u + wide, yy + 2.2 * u, 21 * u + wide, yy); ctx.stroke(); }
+      ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.4 * u; ctx.beginPath(); ctx.moveTo(-6 * u, shY + 2 * u); ctx.lineTo(-6 * u, bot - 3 * u); ctx.moveTo(7 * u + wide, shY + 2 * u); ctx.lineTo(7 * u + wide, bot - 3 * u); ctx.stroke();
+      ctx.fillStyle = "rgba(255,255,255,.14)"; ctx.beginPath(); ctx.roundRect(-19 * u, shY + 1 * u, 4 * u, hgt * .55, 2 * u); ctx.fill();
+    }
     /* Arme: schlenkern, rudern beim Kippen, Posen */
     const arm = (base, front) => {
       ctx.save(); ctx.translate(0, shY + 6 * u); ctx.rotate(base);
-      const sc = f.jacket ? "#4b74a8" : f.top;
-      ctx.strokeStyle = front ? sc : shade(sc, .75); ctx.lineCap = "round"; ctx.lineWidth = 12 * u;
+      const sc = XM ? (WIN[f.id] || WIN.hoodie)[0] : f.jacket ? "#4b74a8" : f.top;
+      ctx.strokeStyle = front ? sc : shade(sc, .75); ctx.lineCap = "round"; ctx.lineWidth = (XM ? 14.5 : 12) * u;
       ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 44 * u); ctx.stroke();
       if (front && holdBottle && !opts.ghost) {
         ctx.save(); ctx.translate(0, 50 * u); ctx.rotate(opts.drink ? 2.3 : 0);
         ctx.fillStyle = "#3f8f4a"; ctx.fillRect(-5 * u, -4 * u, 10 * u, 22 * u); ctx.fillRect(-2.5 * u, 18 * u, 5 * u, 9 * u);
         ctx.fillStyle = "#f6c518"; ctx.fillRect(-5 * u, 3 * u, 10 * u, 7 * u); ctx.restore();
       }
-      ctx.fillStyle = f.skin; ctx.beginPath(); ctx.arc(0, 48 * u, 6 * u, 0, 7); ctx.fill();
+      if (XM) { /* Fäustlinge mit Bündchen */
+        const gc = (WIN[f.id] || WIN.hoodie)[2];
+        ctx.fillStyle = front ? gc : shade(gc, .8); ctx.beginPath(); ctx.ellipse(0, 50 * u, 7 * u, 8.5 * u, 0, 0, 7); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(-5 * u, 46 * u, 3 * u, 4.2 * u, -.5, 0, 7); ctx.fill();
+        ctx.fillStyle = "#efe6d4"; ctx.beginPath(); ctx.roundRect(-7.5 * u, 40 * u, 15 * u, 5 * u, 2.5 * u); ctx.fill();
+      } else { ctx.fillStyle = f.skin; ctx.beginPath(); ctx.arc(0, 48 * u, 6 * u, 0, 7); ctx.fill(); }
       if (front && f.band) { ctx.fillStyle = "#ff3fc8"; ctx.fillRect(-6 * u, 38 * u, 12 * u, 4 * u); }
       if (front && f.heels) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.moveTo(-4 * u, 50 * u); ctx.lineTo(12 * u, 58 * u); ctx.lineTo(10 * u, 64 * u); ctx.lineTo(-6 * u, 60 * u); ctx.fill(); }
       ctx.restore();
@@ -5678,6 +6167,25 @@ const Pol = (() => {
     if (f.hair === "long") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 4 * u, hr * 1.06, Math.PI * .9, Math.PI * 2.05); ctx.fill(); ctx.beginPath(); ctx.roundRect(hx - hr - 6 * u, hy - 8 * u, 20 * u, 50 * u, 10 * u); ctx.fill(); }
     if (f.hair === "ponytail") { ctx.beginPath(); ctx.arc(hx - 2 * u, hy - 5 * u, hr * 1.02, Math.PI * 1.0, Math.PI * 2.05); ctx.fill(); ctx.beginPath(); ctx.ellipse(hx - hr - 6 * u, hy - 12 * u + Math.sin(walk) * 3 * u, 8 * u, 18 * u, -0.6 + Math.sin(walk) * .2, 0, 7); ctx.fill(); }
     if (f.hood) { ctx.fillStyle = f.top; ctx.beginPath(); ctx.arc(hx - 6 * u, hy + 2 * u, hr * .9, Math.PI * .55, Math.PI * 1.25); ctx.lineTo(hx - 6 * u, hy + 2 * u); ctx.fill(); }
+    if (f.santa) { /* Zipfelmütze, Spitze hängt nach hinten und wippt */
+      const cy0 = hy - 10 * u, sw3 = Math.sin(tms / 240) * 3 * u;
+      ctx.fillStyle = "#c4362f"; ctx.beginPath();
+      ctx.moveTo(hx - hr - 1 * u, cy0 + 2 * u); ctx.quadraticCurveTo(hx - hr * .6, cy0 - hr * 1.5, hx + 4 * u, cy0 - hr * 1.05);
+      ctx.quadraticCurveTo(hx + hr * .9, cy0 - hr * .7, hx + hr + 1 * u, cy0 + 2 * u); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(hx - hr * .2, cy0 - hr * 1.1); ctx.quadraticCurveTo(hx - hr * 1.2, cy0 - hr * 1.5, hx - hr * 1.55 + sw3, cy0 - hr * .35); ctx.lineTo(hx - hr * 1.25 + sw3, cy0 - hr * .3); ctx.quadraticCurveTo(hx - hr * .9, cy0 - hr * 1.05, hx - hr * .5, cy0 - hr * .6); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "rgba(0,0,0,.12)"; ctx.beginPath(); ctx.moveTo(hx + 4 * u, cy0 - hr * 1.05); ctx.quadraticCurveTo(hx + hr * .9, cy0 - hr * .7, hx + hr + 1 * u, cy0 + 2 * u); ctx.lineTo(hx + hr * .4, cy0 + 2 * u); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.roundRect(hx - hr * 1.1 - 1 * u, cy0 - 3 * u, hr * 2.2, 10 * u, 5 * u); ctx.fill();
+      ctx.beginPath(); ctx.arc(hx - hr * 1.42 + sw3, cy0 - hr * .25, 7.5 * u, 0, 7); ctx.fill();
+    } else if (XM) { /* Strickmütze mit Bommel */
+      const hc = (WIN[f.id] || WIN.hoodie)[2], cy0 = hy - 9 * u;
+      ctx.fillStyle = hc; ctx.beginPath(); ctx.ellipse(hx - 1 * u, cy0, hr * 1.04, hr * 1.02, 0, Math.PI, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = shade(hc, .8); ctx.lineWidth = 1.5 * u;
+      for (let k = -2; k <= 2; k++) { ctx.beginPath(); ctx.moveTo(hx - 1 * u + k * 8 * u, cy0 - 2 * u); ctx.quadraticCurveTo(hx - 1 * u + k * 6 * u, cy0 - hr * .7, hx - 1 * u + k * 2.5 * u, cy0 - hr * .98); ctx.stroke(); }
+      ctx.fillStyle = shade(hc, .86); ctx.beginPath(); ctx.roundRect(hx - hr * 1.08 - 1 * u, cy0 - 3 * u, hr * 2.16, 9 * u, 4.5 * u); ctx.fill();
+      ctx.strokeStyle = shade(hc, .68); ctx.lineWidth = 1.2 * u; ctx.beginPath(); for (let k = 0; k < 9; k++) { const xx = hx - hr + 2 * u + k * hr * .23; ctx.moveTo(xx, cy0 - 2 * u); ctx.lineTo(xx, cy0 + 5 * u); } ctx.stroke();
+      ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.arc(hx - 4 * u + Math.sin(tms / 300) * 1.5 * u, cy0 - hr - 5 * u, 7.5 * u, 0, 7); ctx.fill();
+      ctx.fillStyle = "rgba(0,0,0,.08)"; ctx.beginPath(); ctx.arc(hx - 2 * u, cy0 - hr - 3 * u, 5 * u, 0, 7); ctx.fill();
+    }
     /* Gesicht: halb zu, rote Nase – oder weit auf beim Hicksen */
     ctx.strokeStyle = "#2a1a22"; ctx.lineWidth = 2.6 * u; ctx.lineCap = "round";
     if (f.shades) { ctx.fillStyle = "#14141c"; ctx.beginPath(); ctx.roundRect(hx + 2 * u, hy - 8 * u, 24 * u, 10 * u, 4 * u); ctx.fill(); }
@@ -5693,6 +6201,14 @@ const Pol = (() => {
         ctx.lineWidth = 1.8 * u; ctx.beginPath(); ctx.moveTo(ex - 4.6 * u, ey + 0.9 * u); ctx.lineTo(ex + 4.6 * u, ey + 0.5 * u); ctx.stroke(); ctx.lineWidth = 2.6 * u; }
     });
     ctx.fillStyle = sick ? "rgba(120,170,60,.6)" : "rgba(255,90,110,.5)"; ctx.beginPath(); ctx.arc(hx + 18 * u, hy + 8 * u, (opts.puff ? 9 : 5.5) * u, 0, 7); ctx.fill();
+    if (f.santa) { /* weißer Rauschebart */
+      ctx.fillStyle = "#f6f1e6"; ctx.beginPath();
+      ctx.moveTo(hx - 12 * u, hy - 2 * u); ctx.quadraticCurveTo(hx - 18 * u, hy + 26 * u, hx + 2 * u, hy + 38 * u);
+      ctx.quadraticCurveTo(hx + 12 * u, hy + 42 * u, hx + 18 * u, hy + 32 * u); ctx.quadraticCurveTo(hx + 30 * u, hy + 22 * u, hx + 27 * u, hy + 7 * u);
+      ctx.quadraticCurveTo(hx + 14 * u, hy + 4 * u, hx + 4 * u, hy + 10 * u); ctx.quadraticCurveTo(hx - 4 * u, hy + 4 * u, hx - 12 * u, hy - 2 * u); ctx.fill();
+      ctx.fillStyle = "#e4dccb"; [[-6, 28], [4, 34], [14, 29]].forEach(([dx, dy]) => { ctx.beginPath(); ctx.arc(hx + dx * u, hy + dy * u, 5 * u, 0, 7); ctx.fill(); });
+      ctx.fillStyle = "#fffaf0"; ctx.beginPath(); ctx.ellipse(hx + 15 * u, hy + 9 * u, 9 * u, 4.5 * u, -.25, 0, 7); ctx.fill(); ctx.beginPath(); ctx.ellipse(hx + 28 * u, hy + 8 * u, 7 * u, 4 * u, .35, 0, 7); ctx.fill();
+    }
     ctx.fillStyle = sick ? "#8fbf5a" : "#e8505b"; ctx.beginPath(); ctx.arc(hx + 25 * u, hy + 3 * u, 5 * u, 0, 7); ctx.fill();
     ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.arc(hx + 26.5 * u, hy + 1.5 * u, 1.5 * u, 0, 7); ctx.fill();
     if (opts.mouthOpen) { ctx.fillStyle = "#3a1420"; ctx.beginPath(); ctx.ellipse(hx + 15 * u, hy + 13 * u, 5 * u, 6 * u, 0, 0, 7); ctx.fill(); }
@@ -5706,6 +6222,16 @@ const Pol = (() => {
       ctx.globalAlpha = a;
     }
     ctx.restore();
+    if (XM && !f.santa) { /* Schal mit Streifen und flatterndem Ende */
+      const sc2 = (WIN[f.id] || WIN.hoodie)[1], st = shade(sc2, .72);
+      ctx.save(); ctx.translate(7 * u, shY + 1 * u); ctx.rotate(.18 + Math.sin(tms / 260) * .12 * drunk);
+      ctx.fillStyle = sc2; ctx.beginPath(); ctx.roundRect(-4.5 * u, 0, 10 * u, 32 * u, 3 * u); ctx.fill();
+      ctx.fillStyle = st; ctx.fillRect(-4.5 * u, 10 * u, 10 * u, 3.5 * u); ctx.fillRect(-4.5 * u, 18 * u, 10 * u, 3.5 * u);
+      ctx.strokeStyle = sc2; ctx.lineWidth = 1.6 * u; ctx.beginPath(); for (let k = 0; k < 4; k++) { ctx.moveTo((-3 + k * 2.6) * u, 31 * u); ctx.lineTo((-3 + k * 2.6) * u, 36 * u); } ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = sc2; ctx.beginPath(); ctx.roundRect(-14 * u, shY - 7 * u, 29 * u, 13 * u, 6.5 * u); ctx.fill();
+      ctx.fillStyle = st; ctx.fillRect(-6 * u, shY - 7 * u, 3.5 * u, 13 * u); ctx.fillRect(4 * u, shY - 7 * u, 3.5 * u, 13 * u);
+    }
     arm(front, true);
     ctx.restore();
     ctx.restore();
@@ -5796,6 +6322,16 @@ const Pol = (() => {
     ctx.globalAlpha = 1;
     ctx.restore();
     ctx.restore();
+    if (XM) { /* Schneefall: drei Tiefen, Wind kommt beim Laufen von vorn */
+      ctx.fillStyle = "#fff";
+      for (let i = 0; i < 46; i++) {
+        const s1 = (i * 0.6180339) % 1, s2 = (i * 0.7548776) % 1, z = .5 + (i % 3) * .35, sp = (34 + s2 * 30) * z * U;
+        const x = (((s1 * (W + 40) - d * PX() * .22 * z + Math.sin(tms / 900 + i) * 14 * U) % (W + 40)) + W + 40) % (W + 40) - 20;
+        const y = ((s2 * (H + 20) + tms / 1000 * sp) % (H + 20)) - 10;
+        ctx.globalAlpha = .45 + z * .3; ctx.beginPath(); ctx.arc(x, y, (1 + z * 1.5) * U, 0, 7); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
     active.forEach((a) => { if (a.k === "bierhand") bierhand(a.t, ground); });
     /* Rand-Hinweise zum Tippen */
     ["l", "r"].forEach((s) => { const k = padFlash[s]; if (k <= 0) return; const g = ctx.createLinearGradient(s === "l" ? 0 : W, 0, s === "l" ? 70 : W - 70, 0); g.addColorStop(0, `rgba(255,63,200,${.45 * k})`); g.addColorStop(1, "rgba(255,63,200,0)"); ctx.fillStyle = g; ctx.fillRect(s === "l" ? 0 : W - 70, 0, 70, H); });
@@ -5855,8 +6391,8 @@ const Pol = (() => {
   }
   function newGame() {
     $("plOver").hidden = true; $("plOver").innerHTML = "";
-    const base = pick(FIG);
-    fig = { ...base, skin: pick(SKIN), hairC: pick(HAIR) };
+    XM = isDezember();
+    fig = pickFig();
     th = (Math.random() < .5 ? -1 : 1) * 0.04; om = 0; d = 0; tms = 0; walk = 0; noiseV = 0; noiseT = 0; speed = 3;
     inputs = []; events = []; active = []; fx = []; ghosts = 0; blackUntil = 0; slope = 0; slopeT = 0; cobble = 0;
     fallT = 0; cause = ""; causeAt = -1e9; milestonesShown = {}; greenT = 0; reach = 0; reachBack = 0; holdBottle = false; hickT = 0; acc = 0; last = 0;
@@ -5940,7 +6476,7 @@ const Pol = (() => {
   let bound = false;
 
   return {
-    _dbg: { tune: (o) => Object.assign(TUNE, o), st: () => ({ state, th, om, d, tms, speed, fig: fig && fig.id, cause, ghosts, slope, events: events.map((e) => e.k + "@" + Math.round(e.at)) }), tap, set: (o) => { if ("th" in o) th = o.th; if ("d" in o) d = o.d; if ("om" in o) om = o.om; }, trigger: (k, dir = 1) => trigger({ k, dir, len: k === "kopf" ? 9 : 16 }), calm: () => { events = []; nextEv = { k: null, at: d + 9999 }; }, place: (k, ahead = 1.2) => { const ev = { k, at: d + ahead, ground: true, len: k === "kopf" ? 9 : 0, dir: 1, done: false }; events.push(ev); return ev; }, frame: (dt) => { frameDt = dt || 1 / 60; draw(); frameDt = 0; }, fig: (id) => { const b = FIG.find((f) => f.id === id); if (b) fig = { ...b, skin: SKIN[2], hairC: HAIR[0] }; }, step: (n) => { const was = state; state = "play"; for (let i = 0; i < n && state === "play"; i++) { step(); fx.forEach((p) => { p.t += DT; }); } fx = fx.filter((p) => p.t < p.life); if (state === "play") state = was; hud(); draw(); }, newGame, pause: (p) => { state = p ? "pause" : "play"; } },
+    _dbg: { tune: (o) => Object.assign(TUNE, o), st: () => ({ state, th, om, d, tms, speed, fig: fig && fig.id, cause, ghosts, slope, events: events.map((e) => e.k + "@" + Math.round(e.at)) }), tap, set: (o) => { if ("tms" in o) tms = o.tms; if ("th" in o) th = o.th; if ("d" in o) d = o.d; if ("om" in o) om = o.om; }, trigger: (k, dir = 1) => trigger({ k, dir, len: k === "kopf" ? 9 : 16 }), calm: () => { events = []; nextEv = { k: null, at: d + 9999 }; }, place: (k, ahead = 1.2) => { const ev = { k, at: d + ahead, ground: true, len: k === "kopf" ? 9 : 0, dir: 1, done: false }; events.push(ev); return ev; }, frame: (dt) => { frameDt = dt || 1 / 60; draw(); frameDt = 0; }, fig: (id) => { const b = [...FIG, SANTA].find((f) => f.id === id); if (b) fig = { ...b, skin: SKIN[2], hairC: HAIR[0] }; }, step: (n) => { const was = state; state = "play"; for (let i = 0; i < n && state === "play"; i++) { step(); fx.forEach((p) => { p.t += DT; }); } fx = fx.filter((p) => p.t < p.life); if (state === "play") state = was; hud(); draw(); }, newGame, pause: (p) => { state = p ? "pause" : "play"; } },
     open() {
       if (running) return;
       if (!bound) { bind(); bound = true; }
@@ -5951,8 +6487,8 @@ const Pol = (() => {
       $("pol").setAttribute("aria-hidden", "false");
       soloView(true);
       best = parseFloat(store.get("exmaPolBest") || "0") || 0;
-      seed(); resize();
-      fig = { ...pick(FIG), skin: pick(SKIN), hairC: pick(HAIR) };
+      seed(); resize(); XM = isDezember();
+      fig = pickFig();
       th = 0; om = 0; d = 0; tms = 0; walk = 0; events = []; active = []; fx = []; ghosts = 0; blackUntil = 0; slope = 0; greenT = 0; reach = 0; reachBack = 0; holdBottle = false;
       state = "intro"; hud();
       intro();
@@ -7037,10 +7573,12 @@ function clubPhase(now = new Date()) {
   }
   return null;
 }
+/* Turnier-Kachel im Menü erst ab 1 Stunde vor Turnierbeginn (Miami: 17 Uhr) */
+const tnOpen = (ev, now = new Date()) => now >= ev.startDate.getTime() - 3600e3;
 const phaseKey = (ph, now = new Date()) => {
   if (!ph) return "none";
   const hh = trHH(ph.ev), h = !hh ? "-" : now < hh.from ? "soon" : now < hh.to ? "on" : "off";
-  return [ph.phase, ph.ev.id, h, ph.last ? "last" : ""].join("|");
+  return [ph.phase, ph.ev.id, h, ph.last ? "last" : "", ph.ev.turnier && tnOpen(ph.ev, now) ? "tn" : "", marktOn(ph.ev, now) ? "mk" : ""].join("|");
 };
 /* Farben des Abends für die Abend-Kacheln (wie in der Tresen-Ansicht) */
 const phaseStyle = (th) => {
@@ -7089,7 +7627,56 @@ function phaseTick() {
 }
 let prunedAt = minIndex();
 setInterval(phaseTick, 1000);
+/* Dezember-Look schaltet sich am 1.12. um 0:00 von selbst ein (und am 1.1. wieder aus) – auch wenn die App gerade offen ist */
+setInterval(() => { if (isDezember() !== app.classList.contains("dezember")) dekoApply(); }, 30000);
 /* ================= Hauptmenü ================= */
+/* ================= Dezember-Look (1.–31.12.): Menü geschmückt, Schnee ================= */
+const isDezember = (d = new Date()) => berlin({ month: "numeric" }).format(d) === "12";
+/* Tannengirlande mit Lichtern und Kugeln über dem Menükopf */
+function dekoGirlande() {
+  let g = "";
+  const pts = [];
+  for (let i = 0; i <= 40; i++) { const x = i * 10, y = 14 + Math.sin((x / 400) * Math.PI) * 22; pts.push([x, y]); }
+  /* Zweige: viele kurze Nadelbüschel entlang der Kurve */
+  pts.forEach(([x, y], i) => {
+    for (let k = 0; k < 5; k++) {
+      const a = (-70 + k * 35 + (i % 2) * 12) * Math.PI / 180, l = 9 + (k % 2) * 4;
+      g += `<path d="M${x} ${y} l${(Math.cos(a) * l).toFixed(1)} ${(Math.sin(a) * l).toFixed(1)}" stroke="${k % 2 ? "#2f5a3c" : "#3f7350"}" stroke-width="3" stroke-linecap="round"/>`;
+    }
+  });
+  const balls = [[38, "#c4362f"], [104, "#e9b77c"], [168, "#c4362f"], [232, "#f3ead8"], [296, "#e9b77c"], [360, "#c4362f"]];
+  balls.forEach(([x, c]) => { const y = 14 + Math.sin((x / 400) * Math.PI) * 22 + 8;
+    g += `<path d="M${x} ${y - 8} v6" stroke="#8a6a3a" stroke-width="1"/><circle cx="${x}" cy="${y + 4}" r="6.5" fill="${c}"/><circle cx="${x - 2}" cy="${y + 2}" r="1.8" fill="#fff" opacity=".6"/><rect x="${x - 2.4}" y="${y - 3}" width="4.8" height="2.6" fill="#c9a24a"/>`; });
+  for (let i = 0; i < 13; i++) { const x = 15 + i * 30, y = 14 + Math.sin((x / 400) * Math.PI) * 22 - 4 + (i % 2) * 7;
+    g += `<circle class="deko-li" style="animation-delay:${(-i * .45).toFixed(2)}s" cx="${x}" cy="${y}" r="6" fill="${i % 3 === 1 ? "rgba(226,85,75,.45)" : "rgba(255,214,138,.5)"}"/><circle cx="${x}" cy="${y}" r="2.6" fill="${i % 3 === 1 ? "#ff8a7a" : "#ffe7b0"}"/>`; }
+  return `<svg class="deko-girl" viewBox="0 0 400 54" preserveAspectRatio="none" aria-hidden="true">${g}</svg>`;
+}
+/* Mütze für das Logo */
+const DEKO_HUT = `<svg class="deko-hut" viewBox="0 0 60 48" aria-hidden="true"><path d="M8 36 C10 18 24 6 40 8 C48 9 54 14 56 22 C50 18 44 18 40 22 C36 28 34 34 34 38 Z" fill="#c4362f"/><path d="M40 8 C48 9 54 14 56 22" fill="none" stroke="#8e2420" stroke-width="2"/><rect x="2" y="32" width="38" height="12" rx="6" fill="#f3ead8"/><circle cx="56" cy="24" r="5.5" fill="#f3ead8"/></svg>`;
+/* leichter Schneefall im Menü: wenige Flocken, nur per CSS-Transform (ruckelfrei) */
+function dekoSchnee() {
+  let f = "";
+  for (let i = 0; i < 18; i++) {
+    const x = (i * 53) % 100, d = 9 + (i % 5) * 2.2, s = 3 + (i % 3) * 1.6, delay = -((i * 1.7) % d);
+    f += `<i style="left:${x}%;width:${s}px;height:${s}px;animation-duration:${d.toFixed(1)}s,${(d / 3).toFixed(1)}s;animation-delay:${delay.toFixed(1)}s,${delay.toFixed(1)}s;opacity:${(.45 + (i % 4) * .12).toFixed(2)}"></i>`;
+  }
+  return `<div class="deko-snow" aria-hidden="true">${f}</div>`;
+}
+function dekoApply() {
+  const on = isDezember();
+  app.classList.toggle("dezember", on);
+  const head = document.querySelector(".menu-head");
+  if (!head) return;
+  if (on && !$("dekoGirl")) {
+    head.insertAdjacentHTML("afterbegin", `<div id="dekoGirl">${dekoGirlande()}</div>`);
+    const logo = head.querySelector(".logo"); if (logo) logo.insertAdjacentHTML("afterend", DEKO_HUT);
+    $("menu").insertAdjacentHTML("afterbegin", `<div id="dekoSnow">${dekoSchnee()}</div>`);
+  } else if (!on && $("dekoGirl")) {
+    ["dekoGirl", "dekoSnow"].forEach((id) => $(id) && $(id).remove());
+    const h = head.querySelector(".deko-hut"); if (h) h.remove();
+  }
+}
+
 /* Nur Kacheln animieren, die gerade auf dem Bildschirm sind (spart auf älteren Handys viel Rechenzeit) */
 const animIO = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => {
   e.target.classList.toggle("anim-off", !e.isIntersecting);
@@ -7169,23 +7756,24 @@ function buildMenu() {
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
     </div>`;
   /* ---- je nach Phase zusammensetzen ---- */
-  const tnTile = (ev) => ev && ev.turnier ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : "";
+  const tnTile = (ev) => ev && ev.turnier && tnOpen(ev) ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : "";
   const hero = (label, cdTo) => evA ? `<div class="hm-hero">${evTile(evA, label, true, cdTo)}</div>${ph && ph.phase !== "rueck" ? "" : tnTile(evA)}` : `<div class="tile-btn hm-nextsoon"><small>Nächster Abend</small><b>Folgt bald</b><span>Infos kommen hier und auf Instagram.</span></div>`;
   const next = evB ? nextStrip(evB) : "";
   let html;
   if (ph && ph.phase === "tag") {
     const ev = ph.ev, i = EVENTS.indexOf(ev);
     html = `${hero("Heute Abend!", ph.open.getTime())}
-      <div class="ph-block" style="${phaseStyle(ev.th)}">
+      <div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
         ${tnTile(ev)}
-        ${phSpecials(ev)}${phHappy(ev, tNow)}
+        ${phMarkt(ev, tNow)}${phSpecials(ev)}${phHappy(ev, tNow)}
         <div class="ph-row"><button type="button" class="ph-btn wa" data-share="${i}">${ICON_WA}Freunde einladen</button><a class="ph-btn" href="#${ev.id}">Drinks &amp; Preise</a></div>
       </div>
       ${quick}${games}${next}${rest}`;
   } else if (ph && ph.phase === "live") {
     const ev = ph.ev;
-    html = `<div class="ph-block" style="${phaseStyle(ev.th)}">
+    html = `<div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
         ${tnTile(ev)}
+        ${phMarkt(ev, tNow)}
         <a class="ph-live-head${ph.last ? " last" : ""}" href="#${ev.id}"><span class="ph-dot"></span><b>${esc(ev.titel.join(" "))}</b><span>${ph.last ? "Letzte Runde! Schluss um" : "Live · Theke offen bis"} ${trClockFmt(ph.close)}</span></a>
         <div class="ph-count"><small>Heute über den Tresen</small><b id="phCount">–</b><span id="phThree"></span>
           <div class="ph-self" id="phSelf"></div>
@@ -7196,7 +7784,7 @@ function buildMenu() {
       ${games}${hero("Heute", null)}${next}${rest}`;
   } else if (ph && ph.phase === "rueck") {
     const ev = ph.ev;
-    html = `<div class="ph-block" style="${phaseStyle(ev.th)}">
+    html = `<div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
         <div class="ph-rueck"><small>${esc(ev.titel.join(" "))} · Endstand</small><h3>Danke fürs Kommen!</h3>
           <div class="ph-rn"><b id="phCount">–</b><span>Getränke über den Tresen</span></div>
           <p class="ph-lead" id="phLead"></p>
@@ -7237,6 +7825,7 @@ function buildMenu() {
   });
   fitMenu();
   watchAnim(g);
+  dekoApply();
 }
 function fitMenu() {
   document.querySelectorAll(".tile-title").forEach((el) => { if (!el.closest(".fw-mini")) fitTitle(el, el.closest(".hm-hero") ? (el.closest(".t-xmas") ? 84 : 58) : 34); });
@@ -8307,6 +8896,7 @@ function trSpecials(ev) {
 }
 function trRender(ev) {
   const t = $("tresen"), th = ev ? ev.th : THEMEN.eis;
+  t.className = ev ? "t-" + ev.thema : "";
   const v = th.verlauf || [th.a1, th.a3, th.a2], mid = v[Math.floor(v.length / 2)];
   t.style.cssText = themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgv:linear-gradient(180deg,${v.join(",")});--tgA:${v[0]};--tgM:${mid};--tgZ:${v[v.length - 1]};--tgbg:linear-gradient(120deg,${(v.length > 3 ? v.slice(1) : v).join(",")})`;
   const layers = (ev && SCENES[ev.thema] ? SCENES[ev.thema] : sceneIce)();
@@ -8320,6 +8910,58 @@ function trRender(ev) {
   TR.state = null;
 }
 const trClockFmt = (d) => berlin({ hour: "2-digit", minute: "2-digit" }).format(d);
+/* ================= Weihnachtsmarkt (ev.markt): Zeitfenster, Symbole, Bausteine ================= */
+function marktWindow(ev) {
+  if (!ev || !ev.markt) return null;
+  const day = isoDay(ev.startDate), off = ev.start.slice(-6);
+  const from = new Date(`${day}T${ev.markt.von}:00${off}`), to = new Date(`${day}T${ev.markt.bis}:00${off}`);
+  return [from, to];
+}
+const marktOn = (ev, now = new Date()) => { const w = marktWindow(ev); return !!w && now >= w[0] && now < w[1]; };
+const marktSoon = (ev, now = new Date()) => { const w = marktWindow(ev); return !!w && now < w[0]; };
+const mEuro = (n) => trEuro(n);
+/* flache Symbole: Glühweintasse, Bratwurst im Brötchen, Waffelherz */
+function marktArt(kind) {
+  if (kind === "gluehwein") return `<svg viewBox="0 0 64 64" aria-hidden="true">
+    <path class="xm-steam" d="M24 16 C20 11 28 8 24 2" fill="none" stroke="#ead9b8" stroke-width="2.6" stroke-linecap="round"/><path class="xm-steam s2" d="M34 16 C30 11 38 8 34 2" fill="none" stroke="#ead9b8" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M12 20 H46 V42 C46 52 39 58 29 58 C19 58 12 52 12 42 Z" fill="#c4362f"/><path d="M46 26 C58 26 58 44 46 44" fill="none" stroke="#c4362f" stroke-width="5"/>
+    <rect x="12" y="20" width="34" height="5" fill="#8e2420"/><path d="M18 34 h22" stroke="#ead9b8" stroke-width="2" stroke-dasharray="3 3"/>
+    <g transform="translate(40 14) rotate(28)"><rect x="-2.6" y="0" width="5.2" height="20" rx="2" fill="#8a4b22"/><path d="M-1 2 V18" stroke="#b56b35" stroke-width="1.4"/></g></svg>`;
+  if (kind === "wurst") return `<svg viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M6 36 C6 28 14 26 32 26 C50 26 58 28 58 36 C58 44 50 48 32 48 C14 48 6 44 6 36 Z" fill="#e2b06a"/>
+    <path d="M10 33 C10 29 16 28 32 28 C48 28 54 29 54 33 C54 37 48 38 32 38 C16 38 10 37 10 33 Z" fill="#a8502a"/>
+    <path d="M14 31 C24 29 40 29 50 31" stroke="#d07a46" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M14 34 q4 -3 8 0 t8 0 t8 0 t8 0 t6 0" fill="none" stroke="#f6c344" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M6 38 C10 46 20 50 32 50 C44 50 54 46 58 38" fill="none" stroke="#c98d4a" stroke-width="2"/></svg>`;
+  return `<svg viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M32 56 C10 42 4 28 10 18 C16 9 27 11 32 19 C37 11 48 9 54 18 C60 28 54 42 32 56 Z" fill="#e2a85a"/>
+    <path d="M32 50 C15 39 10 28 14 21 C19 14 27 16 32 23 C37 16 45 14 50 21 C54 28 49 39 32 50 Z" fill="none" stroke="#b97a32" stroke-width="1.6"/>
+    <path d="M20 22 L44 46 M28 18 L50 40 M14 30 L36 52 M38 16 L54 32 M44 18 L18 44 M50 26 L26 50 M36 16 L14 38" stroke="#b97a32" stroke-width="1.6" opacity=".8"/>
+    <g fill="#f3ead8" opacity=".95"><circle cx="24" cy="24" r="1.4"/><circle cx="38" cy="22" r="1.2"/><circle cx="30" cy="34" r="1.4"/><circle cx="42" cy="34" r="1.3"/><circle cx="22" cy="36" r="1.1"/><circle cx="34" cy="44" r="1.2"/></g>
+    <circle cx="46" cy="14" r="5" fill="#b3122e"/><circle cx="54" cy="20" r="4.4" fill="#c4362f"/><circle cx="44.6" cy="12.6" r="1.4" fill="#ff9aa8"/>
+    <path d="M46 9 C47 5 50 3 53 3" stroke="#3f6b3a" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`;
+}
+const marktRow = (a) => `<div class="mk-row"><span class="mk-ico">${marktArt(a.bild)}</span><span class="mk-nm"><b>${esc(a.name)}</b>${a.info ? `<small>${esc(a.info)}</small>` : ""}${a.extra ? `<em>+ ${esc(a.extra)} ${mEuro(a.extraPreis)}</em>` : ""}</span><span class="mk-pr">${mEuro(a.preis)}</span></div>`;
+/* Menü: während des Markts oben im Live-Block, vorher als Vorschau am Abendtag */
+function phMarkt(ev, now) {
+  const w = marktWindow(ev); if (!w || now >= w[1]) return "";
+  const on = now >= w[0];
+  return `<a class="ph-markt${on ? " on" : ""}" href="#${ev.id}">
+      <span class="mk-head"><span class="mk-tag">${on ? `<i class="ph-dot"></i>Jetzt offen` : `Ab ${esc(ev.markt.von)} Uhr`}</span><b>${esc(ev.markt.titel || "Weihnachtsmarkt")}</b>
+        <small>${on ? `Club ab ${esc(ev.markt.bis)} Uhr · noch <span data-cd="${w[1].getTime()}"></span>` : `${esc(ev.markt.von)}–${esc(ev.markt.bis)} Uhr, danach Club`}</small></span>
+      <span class="mk-list">${ev.markt.angebote.map(marktRow).join("")}</span></a>`;
+}
+/* Tresen: große Markttafel in der Mitte */
+function trMarktBoard(ev, now) {
+  const w = marktWindow(ev);
+  return `<div class="tr-mk-snow"></div><div class="tr-tag"><span class="tr-live"></span>Jetzt offen</div>
+    <div class="tr-mk-title">${esc(ev.markt.titel || "Weihnachtsmarkt")}</div>
+    <div class="tr-mk-list">${ev.markt.angebote.map((a) => `<div class="tr-mk-row"><span class="tr-mk-ico">${marktArt(a.bild)}</span>
+      <span class="tr-mk-nm"><b>${esc(a.name)}</b>${a.info ? `<small>${esc(a.info)}</small>` : ""}${a.extra ? `<em>+ ${esc(a.extra)} ${mEuro(a.extraPreis)}</em>` : ""}</span>
+      <span class="tr-mk-pr">${mEuro(a.preis)}</span></div>`).join("")}</div>
+    <div class="tr-mk-foot">Club ab ${esc(ev.markt.bis)} Uhr · noch <b id="trCd"></b></div>`;
+}
+
 function trCountdown(ms) {
   const s = Math.max(0, Math.ceil(ms / 1000)), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60;
   return (h ? h + ":" + String(m).padStart(2, "0") : String(m).padStart(2, "0")) + ":" + String(x).padStart(2, "0");
@@ -8329,7 +8971,7 @@ function trCenter(ev, now) {
   const hh = trHH(ev), o = trOffer(ev), statt = trNormalPrice(o);
   const [open, close] = ev ? barWindow(ev) : [null, null];
   const last = close && now >= new Date(close.getTime() - 15 * 6e4) && now <= close;
-  const state = last ? "last" : hh && now >= hh.from && now < hh.to ? "on" : hh && now < hh.from ? "soon" : "clock";
+  const state = last ? "last" : ev && marktOn(ev, now) ? "markt" : hh && now >= hh.from && now < hh.to ? "on" : hh && now < hh.from ? "soon" : "clock";
   const box = $("trHH");
   if (state !== TR.state) {
     TR.state = state;
@@ -8340,7 +8982,8 @@ function trCenter(ev, now) {
     const offerTxt = o ? `${esc(o.name)}${price && !longName ? " " + price : ""}` : "";
     const offerSmall = [longName && price ? `${price}${o.zusatz ? " " + esc(o.zusatz) : ""}` : o && o.zusatz ? esc(o.zusatz) : "",
       statt != null ? `statt ${trEuro(statt)}` : ""].filter(Boolean).map((x) => x + " · ").join("");
-    if (state === "soon") box.innerHTML = `<div class="tr-tag dim">${now < open ? "Heute Abend" : "Gleich geht's los"}</div>
+    if (state === "markt") box.innerHTML = trMarktBoard(ev, now);
+    else if (state === "soon") box.innerHTML = `<div class="tr-tag dim">${now < open ? "Heute Abend" : "Gleich geht's los"}</div>
         <div class="tr-small">Happy Hour in</div><div class="tr-cd" id="trCd"></div>
         <div class="tr-next"><span>ab ${esc(ev.happyHour.von)} Uhr</span>${offerTxt ? `<b>${offerTxt}</b>` : ""}<small>${offerSmall}bis ${esc(ev.happyHour.bis)} Uhr</small></div>`;
     else if (state === "on") box.innerHTML = `<div class="tr-stripes"></div><div class="tr-tag"><span class="tr-live"></span>Jetzt läuft</div>
@@ -8352,11 +8995,12 @@ function trCenter(ev, now) {
         <div class="tr-sub">Die Theke schließt um ${trClockFmt(close)} Uhr</div><div class="tr-sub2">Danke, dass ihr da wart!</div>`;
     else box.innerHTML = `<div class="tr-tag dim">${ev && now < open ? "Heute Abend" : "Schön, dass ihr da seid"}</div>
         <div class="tr-cd" id="trCd"></div>
-        <div class="tr-sub">${ev && now < open ? `Theke öffnet um ${trClockFmt(open)} Uhr` : close && now <= close ? `Theke offen bis ${trClockFmt(close)} Uhr` : "Bis zum nächsten Clubabend!"}</div>`;
+        <div class="tr-sub">${ev && ev.markt && marktSoon(ev, now) ? `${esc(ev.markt.titel || "Weihnachtsmarkt")} ab ${esc(ev.markt.von)} Uhr` : ev && now < open ? `Theke öffnet um ${trClockFmt(open)} Uhr` : close && now <= close ? `Theke offen bis ${trClockFmt(close)} Uhr` : "Bis zum nächsten Clubabend!"}</div>`;
     trMenu(ev, state === "on");
     box.querySelectorAll(".tr-big").forEach((h) => fitLine(h, 40));
   }
-  if (state === "soon") $("trCd").textContent = trCountdown(hh.from - now);
+  if (state === "markt") $("trCd").textContent = trCountdown(marktWindow(ev)[1] - now);
+  else if (state === "soon") $("trCd").textContent = trCountdown(hh.from - now);
   else if (state === "on") {
     $("trBar").style.width = (100 * (hh.to - now) / (hh.to - hh.from)).toFixed(2) + "%";
     $("trLeft").textContent = `noch ${Math.ceil((hh.to - now) / 6e4)} Min.`;
