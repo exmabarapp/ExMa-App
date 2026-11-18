@@ -2667,7 +2667,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "111";
+const APP_V = "112";
 
 const EVENTS = [
   {
@@ -4061,8 +4061,17 @@ const entryMonat = (e) => e.monat || monatKey(new Date(e.at && e.at.toMillis ? e
 async function boardList(col, field, sort, local, scope, n) {
   if (!Live.remote) { const l = local(); return sort(scope === "alle" ? l : l.filter((e) => entryMonat(e) === scope)); }
   let qs;
-  if (scope === "alle") qs = await FB.db.collection(col).orderBy(field, "desc").limit(n).get();
-  else if (scope === MONAT_START) {
+  if (scope === "alle") {
+    /* Allzeit: Firestore sortiert Gleichstände (gleiche Becher/Punkte) nur nach Dokument-ID.
+       Darum alle Einträge mit dem Grenzwert nachladen und selbst sortieren (Zeit entscheidet). */
+    const top = await FB.db.collection(col).orderBy(field, "desc").limit(n).get();
+    const docs = new Map(top.docs.map((d) => [d.id, d]));
+    if (top.docs.length) {
+      const edge = top.docs[top.docs.length - 1].data()[field];
+      try { (await FB.db.collection(col).where(field, "==", edge).limit(60).get()).docs.forEach((d) => docs.set(d.id, d)); } catch (e) { console.warn("Gleichstand nachladen", e); }
+    }
+    return sort([...docs.values()].map((d) => ({ id: d.id, ...d.data() })));
+  } else if (scope === MONAT_START) {
     /* Startmonat: Einträge von vor dem Update haben noch kein Monatsfeld → nach Datum holen (alle Einträge des Monats) */
     const [y, m] = scope.split("-").map(Number);
     qs = await FB.db.collection(col).where("at", ">=", new Date(y, m - 1, 1)).where("at", "<", new Date(y, m, 1)).limit(120).get();
@@ -8935,6 +8944,8 @@ const CROWN_MINI = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.
 const clearBestCache = () => { ["beerpong", "busfahrer", "zapfmeister"].forEach((k) => ["alle", monatKey()].forEach((sc) => { try { localStorage.removeItem(`exmaBest2_${k}_${sc}`); } catch {} })); };
 /* alte Zwischenspeicher-Einträge aufräumen */
 try { Object.keys(localStorage).filter((k) => /^exmaBest_/.test(k)).forEach((k) => localStorage.removeItem(k)); } catch {}
+/* v112: Allzeit-Rekorde bei Gleichstand wurden falsch gewählt → gemerkte Allzeit-Werte einmal verwerfen */
+try { if (localStorage.getItem("exmaBestFix") !== "112") { ["beerpong", "busfahrer", "zapfmeister"].forEach((k) => localStorage.removeItem(`exmaBest2_${k}_alle`)); localStorage.setItem("exmaBestFix", "112"); } } catch {}
 
 /* ================= Beerpong-Turnier (Miami Vibes) =================
    Alles liegt in EINEM Datenbank-Dokument turnier/<id>. Spieler hören live mit (onSnapshot),
