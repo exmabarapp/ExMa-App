@@ -733,6 +733,9 @@ a { color: inherit; }
 .pin { box-sizing: border-box; width: 100%; height: 50px; border-radius: 14px; border: 1px solid var(--c-line); background: rgba(0,0,0,.35); color: var(--c-text); font: inherit; font-size: 22px; letter-spacing: .4em; text-align: center; padding: 0 12px; }
 .pin-go { height: 50px; padding: 0 18px; border-radius: 999px; border: none; background: var(--c-gold); color: #1a0d11; font-weight: 800; }
 .pin-err { margin: 8px 0 0; color: #ff9a9a; font-size: 13.5px; }
+.pin-err.ok { color: #8fe3a5; }
+.pin.pin-mail { font-size: 16px; letter-spacing: normal; text-align: left; padding: 0 16px; }
+.tm-acc > .pin { width: calc(100% - 36px); margin-bottom: 2px; }
 .shake { animation: shake .35s; }
 @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 
@@ -2173,6 +2176,39 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
 .advt-win { display: grid; gap: 4px; margin-top: 8px; padding: 14px; border-radius: 16px; background: rgba(255,214,138,.1); border: 1px solid rgba(255,214,138,.4); font: 600 13px var(--f-body); }
 .advt-win small { font: 800 10.5px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: #ffd68a; }
 .advt-win > b { font: 400 26px "Gloock", serif; }
+/* Team: Nutzung */
+.nz-tabs { display: flex; gap: 6px; margin: 0 0 14px; }
+.nz-tabs button { flex: 1; white-space: nowrap; padding: 9px 4px; border-radius: 12px; border: 1px solid var(--c-line); background: rgba(255,255,255,.04); color: rgba(255,255,255,.7); font: 800 12px var(--f-body); }
+.nz-tabs button.on { background: #fff; color: #14111f; border-color: #fff; }
+.nz-kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.nz-kpi div { padding: 12px 10px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+.nz-kpi b { display: block; font: 400 24px/1 var(--f-display); color: #fff; white-space: nowrap; }
+.nz-kpi small { display: block; margin-top: 6px; font: 700 11px/1.25 var(--f-body); color: var(--c-dim); }
+.nz-kpi i { font-style: normal; font: 800 11px var(--f-body); color: #7cf29a; }
+.nz h4 { margin: 18px 0 8px; font: 800 11px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--c-dim); display: flex; justify-content: space-between; gap: 8px; }
+.nz h4:first-child { margin-top: 0; }
+.nz h4 span { letter-spacing: 0; text-transform: none; font-weight: 700; }
+.nz-hours { display: flex; align-items: flex-end; gap: 5px; height: 110px; padding: 0 2px; }
+.nz-hours div { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 5px; min-width: 0; }
+.nz-hours span { width: 100%; border-radius: 6px 6px 3px 3px; background: linear-gradient(180deg, #ff5ca8, #b04dff); }
+.nz-hours span.pk { background: linear-gradient(180deg, #ffd76a, #ff8a3d); }
+.nz-hours em { font-style: normal; font: 700 10px var(--f-body); color: var(--c-dim); }
+.nz-hours b { font: 800 10px var(--f-body); color: #fff; }
+.nz-pages { display: grid; gap: 7px; }
+.nz-pages div { display: grid; grid-template-columns: 92px 1fr 40px; align-items: center; gap: 8px; font: 700 13px var(--f-body); color: #fff; }
+.nz-pages i { height: 10px; border-radius: 6px; background: rgba(255,255,255,.08); overflow: hidden; }
+.nz-pages i::before { content: ""; display: block; height: 100%; width: var(--w); border-radius: 6px; background: #7cf3e4; }
+.nz-pages b { text-align: right; font: 800 12px var(--f-body); color: var(--c-dim); }
+.nz-split { display: flex; height: 14px; border-radius: 8px; overflow: hidden; margin-top: 2px; }
+.nz-split span { display: block; height: 100%; }
+.nz-leg { display: flex; gap: 14px; margin-top: 8px; font: 700 12px var(--f-body); color: var(--c-dim); flex-wrap: wrap; }
+.nz-leg i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 5px; }
+.nz-cmp { display: grid; gap: 8px; }
+.nz-cmp div { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.04); font: 700 13px var(--f-body); color: #fff; }
+.nz-cmp div > span { flex: 1; } .nz-cmp small { display: block; font-size: 11px; color: var(--c-dim); }
+.nz-cmp b { font: 400 20px var(--f-display); }
+.nz-cmp div.cur { border: 1px solid rgba(124,242,154,.4); background: rgba(124,242,154,.08); }
+.nz-note { margin: 14px 0 0; font: 600 11.5px/1.4 var(--f-body); color: var(--c-dim); }
 /* ---- Hauptmenü v110: drei Spiele nebeneinander, Fotowand breit, Semester ---- */
 .hm-games { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; gap: 8px; }
 .hm-games .tile-btn { height: 192px; border-radius: 18px; padding: 10px !important; }
@@ -2705,7 +2741,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "123";
+const APP_V = "125";
 
 const EVENTS = [
   {
@@ -3917,8 +3953,11 @@ const FB_VERSION = "10.12.2";
 /* Fotogalerie: API-Schlüssel für Google Drive (liest nur öffentlich freigegebene Ordner).
    Leer = die App verlinkt den Drive-Ordner nur. Einrichtung siehe LIESMICH. */
 const DRIVE_KEY = "";
-const TEAM_EMAIL = "club@ba-glauchau.de";          /* Team-Konto in Firebase */
-const TEAM_PW = (pin) => "exma-team-" + pin;         /* Passwort = exma-team- + PIN */
+/* Team-Login: jede Person hat einen eigenen Zugang in Firebase (E-Mail + PIN).
+   Passwort in Firebase = exma-team- + PIN. Wer zum Team gehört, steht in Firestore unter team/liste (Feld „mails“) –
+   das prüfen die Firestore-Regeln. Im Code steht kein Passwort und kein Prüfwert. */
+const TEAM_PW = (pin) => "exma-team-" + pin;
+const teamMail = () => ((FB.user && !FB.user.isAnonymous && FB.user.email) || "").toLowerCase();
 const PAUSE_SEK = 20;                                 /* Sperrzeit für Gäste in Sekunden (muss zu firestore.rules passen) */
 
 const FB = { ready: false, db: null, auth: null, user: null, fv: null };
@@ -3940,8 +3979,9 @@ async function initFirebase() {
     FB.auth.onAuthStateChanged((u) => {
       FB.user = u;
       if (!u) { FB.auth.signInAnonymously().catch(() => {}); return; }
-      const team = !!u.email && u.email.toLowerCase() === TEAM_EMAIL;
+      const team = !u.isAnonymous && !!u.email;
       if (team !== teamAuthed) { teamAuthed = team; renderTeam(); }
+      if (team) teamPruefen().catch(() => {});
       if (!FB.ready) { FB.ready = true; Live.goRemote(); fillBest(document); }
     });
   } catch (e) { console.warn("Firebase nicht erreichbar, lokaler Modus", e); FB.off = true; fillBest(document); }
@@ -3967,7 +4007,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["advent", "advent-team", "fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
+  const OTHER = ["advent", "advent-team", "nutzung", "fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !id.startsWith("fotos-") && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -4388,20 +4428,35 @@ function fitClubTitle() {
   if (widest > avail) h.style.fontSize = Math.floor(42 * avail / widest) + "px";
 }
 
-/* Team-PIN: im Code steht nur ein Prüfwert, nicht der PIN selbst */
-const TEAM_PIN_HASH = "a5f1079d6ed113af4fbf6d1c214cc0eb99be4684f33e473d5627131964340a39";
-let teamAuthed = (() => { try { return sessionStorage.getItem("exmaTeam") === "1"; } catch { return false; } })();
-async function checkPin(pin) {
-  try {
-    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("exma:" + pin));
-    return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("") === TEAM_PIN_HASH;
-  } catch { return false; }
+let teamAuthed = false;
+/* PIN für das Entsperren des Tresens ohne Netz: nur für diese Sitzung, gesalzen gehasht, nie im Code */
+async function pinHash(pin, salt) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(salt + ":" + pin));
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+async function trMerken(pin) {
+  try { const salt = crypto.getRandomValues(new Uint32Array(4)).join("-"); sessionStorage.setItem("exmaTrPin", salt + "|" + await pinHash(pin, salt)); } catch {}
+}
+async function trLokal(pin) {
+  try { const [salt, h] = (sessionStorage.getItem("exmaTrPin") || "").split("|"); return !!h && h === await pinHash(pin, salt); } catch { return false; }
+}
+/* steht die angemeldete Adresse auf der Team-Liste? Sonst wieder abmelden */
+async function teamPruefen() {
+  try { await FB.db.doc("team/liste").get(); return true; }
+  catch (e) {
+    if (e && e.code === "permission-denied" && teamAuthed) {
+      teamAuthed = false; try { await FB.auth.signOut(); } catch {}
+      renderTeam(); const err = $("tPinErr"); if (err) { err.textContent = "Diese E-Mail steht nicht auf der Team-Liste."; err.hidden = false; }
+      return false;
+    }
+    throw e;
+  }
 }
 /* verständliche Fehlermeldungen für den Team-Login (Code in Klammern hilft bei der Fehlersuche) */
 function loginError(e) {
   const c = (e && e.code) || "unbekannt";
-  if (["auth/invalid-credential", "auth/wrong-password", "auth/invalid-login-credentials", "auth/invalid-password"].includes(c)) return "Falscher PIN – oder das Passwort des Team-Kontos in Firebase stimmt nicht.";
-  if (c === "auth/user-not-found") return "Das Team-Konto club@ba-glauchau.de fehlt in Firebase (Authentication → Nutzer).";
+  if (["auth/invalid-credential", "auth/wrong-password", "auth/invalid-login-credentials", "auth/invalid-password", "auth/user-not-found"].includes(c)) return "E-Mail oder PIN falsch.";
+  if (c === "auth/invalid-email") return "Bitte eine gültige E-Mail-Adresse eingeben.";
   if (c === "auth/operation-not-allowed") return "In Firebase ist „E-Mail-Adresse/Passwort“ noch nicht aktiviert (Authentication → Anmeldemethode).";
   if (c === "auth/too-many-requests") return "Zu viele Versuche. Bitte in ein paar Minuten nochmal.";
   if (c === "auth/network-request-failed") return "Keine Internetverbindung.";
@@ -4412,33 +4467,39 @@ function renderTeamLogin(a) {
   a.innerHTML = `
     <section class="cbox team" aria-label="Team-Login">
       <h3>Team-Login</h3>
-      <label for="tPin" class="pin-label">PIN eingeben</label>
+      <label for="tMail" class="pin-label">E-Mail</label>
+      <input id="tMail" class="pin pin-mail" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" value="${esc((() => { try { return localStorage.getItem("exmaTeamMail") || ""; } catch { return ""; } })())}">
+      <label for="tPin" class="pin-label">PIN</label>
       <div class="pin-row">
-        <input id="tPin" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off">
+        <input id="tPin" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="current-password">
         <button type="button" id="tPinGo" class="pin-go">Anmelden</button>
       </div>
       <p class="pin-err" id="tPinErr" hidden>Falscher PIN.</p>
     </section>`;
   const inp = $("tPin");
   const fail = (msg) => { $("tPinErr").textContent = msg; $("tPinErr").hidden = false; inp.value = ""; inp.classList.remove("shake"); void inp.offsetWidth; inp.classList.add("shake"); inp.focus(); };
+  const mailInp = $("tMail");
   const go = async () => {
-    const pin = inp.value.trim();
-    if (!pin) return;
-    if (Live.remote) {
-      try { await FB.auth.signInWithEmailAndPassword(TEAM_EMAIL, TEAM_PW(pin)); }
+    const pin = inp.value.trim(), mail = mailInp.value.trim().toLowerCase();
+    if (!mail) { mailInp.focus(); return; }
+    if (!pin) { inp.focus(); return; }
+    if (!Live.remote) { fail(FB.off ? "Keine Verbindung zur Datenbank – der Team-Login braucht Internet." : "Verbindung wird aufgebaut – bitte gleich nochmal."); return; }
+    {
+      try { await FB.auth.signInWithEmailAndPassword(mail, TEAM_PW(pin)); }
       catch (e) { console.warn("Team-Login", e); fail(loginError(e)); return; }
+      try { localStorage.setItem("exmaTeamMail", mail); } catch {}
+      await trMerken(pin);
       teamAuthed = true;
+      try { if (!(await teamPruefen())) return; } catch (e) { console.warn("Team-Liste", e); }
       try { await Live.ensureStats(); }
       catch (e) { console.warn("Zähler anlegen", e); renderTeam(); alertTeam(`Angemeldet, aber der Zähler konnte nicht angelegt werden (${e && e.code || "Fehler"}). Sind die Firestore-Regeln veröffentlicht?`); return; }
       renderTeam();
-      return;
     }
-    if (await checkPin(pin)) { teamAuthed = true; try { sessionStorage.setItem("exmaTeam", "1"); } catch {} renderTeam(); }
-    else fail("Falscher PIN.");
   };
   $("tPinGo").addEventListener("click", go);
   inp.addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
-  setTimeout(() => inp.focus(), 100);
+  mailInp.addEventListener("keydown", (e) => { if (e.key === "Enter") inp.focus(); });
+  setTimeout(() => (mailInp.value ? inp : mailInp).focus(), 100);
 }
 function alertTeam(msg) {
   const a = $("teamArea"); if (!a) return;
@@ -4493,6 +4554,7 @@ function renderTeam() {
       <a class="tm-go" href="#dj"><span aria-hidden="true">🎧</span><b>DJ-Pult</b><small>Musikwünsche</small></a>
       <a class="tm-go" href="#turnier-team"><span aria-hidden="true">🏆</span><b>Turnier</b><small>Turnierleitung</small></a>
       <a class="tm-go" href="#advent-team"><span aria-hidden="true">🎄</span><b>Advent</b><small>Türchen &amp; Gewinne</small></a>
+      <a class="tm-go" href="#nutzung"><span aria-hidden="true">📊</span><b>Nutzung</b><small>Wer die App nutzt</small></a>
     </div>
     <section class="cbox team" aria-label="Zähler">
       <h3>Zähler</h3>
@@ -4520,7 +4582,19 @@ function renderTeam() {
       </div>
       <p class="prost-small">Zum Bestätigen zweimal tippen.</p>
     </details>
+    <details class="cbox team tm-acc">
+      <summary><span>Mein Zugang <small>${esc(teamMail())}</small></span></summary>
+      <label for="pAlt" class="pin-label">Aktueller PIN</label>
+      <input id="pAlt" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="current-password">
+      <label for="pNeu" class="pin-label">Neuer PIN (6–8 Ziffern)</label>
+      <input id="pNeu" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="new-password">
+      <label for="pNeu2" class="pin-label">Neuen PIN wiederholen</label>
+      <input id="pNeu2" class="pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="new-password">
+      <div class="team-row"><button type="button" class="wide" id="pGo">PIN ändern</button></div>
+      <p class="pin-err" id="pErr" hidden></p>
+    </details>
     <button type="button" class="team-logout" id="tLogout">Abmelden</button>`;
+  $("pGo").addEventListener("click", pinAendern);
   loadWishList();
      $("tTresen").addEventListener("click", openTresen);
   loadTeamList();
@@ -4545,10 +4619,36 @@ function renderTeam() {
   armed("tResetM", "Matrikel-Duell auf 0", () => Live.resetMatrikel().catch(() => alertTeam("Zurücksetzen hat nicht geklappt.")));
   armed("tClearList", "Ganze Liste leeren", () => TEAM_LISTS[teamList].api().clear().then(loadTeamList).catch(() => alertTeam("Löschen hat nicht geklappt.")));
   $("tLogout").addEventListener("click", async () => {
-    teamAuthed = false; try { sessionStorage.removeItem("exmaTeam"); } catch {}
+    teamAuthed = false; try { sessionStorage.removeItem("exmaTrPin"); } catch {}
     if (Live.remote) { try { await FB.auth.signOut(); } catch {} }
     renderTeam();
   });
+}
+
+async function pinAendern() {
+  const alt = $("pAlt").value.trim(), neu = $("pNeu").value.trim(), neu2 = $("pNeu2").value.trim(), err = $("pErr"), btn = $("pGo");
+  const msg = (t, ok) => { err.textContent = t; err.hidden = false; err.classList.toggle("ok", !!ok); };
+  if (!alt) return msg("Bitte den aktuellen PIN eingeben.");
+  if (!/^[0-9]{6,8}$/.test(neu)) return msg("Der neue PIN braucht 6 bis 8 Ziffern.");
+  if (neu !== neu2) return msg("Die beiden neuen PINs sind nicht gleich.");
+  if (neu === alt) return msg("Der neue PIN ist derselbe wie der alte.");
+  const u = FB.auth && FB.auth.currentUser;
+  if (!u || !u.email) return msg("Nicht angemeldet.");
+  btn.disabled = true; btn.textContent = "Wird geändert …";
+  try {
+    await u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email, TEAM_PW(alt)));
+    await u.updatePassword(TEAM_PW(neu));
+    await trMerken(neu);
+    ["pAlt", "pNeu", "pNeu2"].forEach((id) => { $(id).value = ""; });
+    msg("PIN geändert. Ab jetzt mit dem neuen PIN anmelden.", true);
+  } catch (e) {
+    console.warn("PIN ändern", e);
+    const c = (e && e.code) || "";
+    msg(["auth/wrong-password", "auth/invalid-credential", "auth/invalid-login-credentials"].includes(c) ? "Der aktuelle PIN stimmt nicht."
+      : c === "auth/too-many-requests" ? "Zu viele Versuche. Bitte in ein paar Minuten nochmal."
+      : c === "auth/network-request-failed" ? "Keine Internetverbindung."
+      : `Hat nicht geklappt (${c || "Fehler"}).`);
+  } finally { btn.disabled = false; btn.textContent = "PIN ändern"; }
 }
 
 const WISH_TEXT = {
@@ -8468,7 +8568,7 @@ function routeInner() {
   /* alte Links auf das frühere Karussell landen im Menü */
   if (id === "abende") { navReplace = true; location.replace("#"); return; }
   if (id !== "turnier" && id !== "turnier-team") tnStop();
-  trackNav(id);
+  trackNav(id); Nutzung.seite(id);
   if (id === "beerpong") { Bus.close(); Zapf.close(); Pol.close(); Game.open(); return; }
   if (id === "busfahrer") { Game.close(); Zapf.close(); Pol.close(); Bus.open(); return; }
   if (id === "zapfmeister") { Game.close(); Bus.close(); Pol.close(); Zapf.open(); return; }
@@ -8484,6 +8584,7 @@ function routeInner() {
   if (id === "team") { renderTeamPage(); show(true); return; }
   if (id === "advent") { setMenu(false); renderAdvent(); show(true); return; }
   if (id === "advent-team") { setMenu(false); renderAdventTeam(); show(true); return; }
+  if (id === "nutzung") { setMenu(false); renderNutzungTeam(); show(true); return; }
   if (id === "turnier") { renderTurnier(); show(true); return; }
   if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
   if (id === "fotowand") { setMenu(false); renderFotowand(); show(true); return; }
@@ -8529,7 +8630,7 @@ function tabFor(id) {
   if (id === "advent") return "start";
   return null;
 }
-const TAB_HIDE = ["team", "turnier-team", "advent-team", "dj", "polnischen"];
+const TAB_HIDE = ["team", "turnier-team", "advent-team", "nutzung", "dj", "polnischen"];
 let tabMode = "", tabAva = "";
 function tabbarRender() {
   const bar = $("tabbar"); if (!bar) return;
@@ -10245,6 +10346,133 @@ function advTopfZeigen(t, boxId = "advTopf") {
   box.innerHTML = `<p class="prost-small"><b>${t.gesamt}</b> Lose von <b>${t.liste.length}</b> Leuten im Topf.</p><div class="advt-list">${t.liste.slice(0, 60).map((p, i) => `<div class="advt-it"><b>${i + 1}</b><span>${esc(p.name)}<small>${esc([p.stg, p.mat ? p.mat + "er" : ""].filter(Boolean).join(" · "))}${p.konten > 1 ? ` · ${p.konten} Konten zusammengelegt` : ""}</small></span><em>${p.lose} ${p.lose === 1 ? "Los" : "Lose"}</em></div>`).join("")}</div>`;
 }
 
+/* ================= Nutzungszahlen (nur Summen, keine Namen, keine Geräte-Kennung) =================
+   nutzung/<Tag>_<0–4> = { g: Geräte, neu: neue Geräte, inst: als App installiert, p: { seite: Aufrufe }, h: { "21": Geräte in der Stunde }, m: { "24": Geräte } }
+   Der „Tag“ läuft von 6 bis 6 Uhr – ein Clubabend zählt komplett zu seinem Datum. Jedes Gerät sammelt auf dem Handy und schickt
+   höchstens alle 15 Minuten EINEN Schreibvorgang mit Zählern (beim Verlassen der App). 5 Dokumente pro Tag, damit es um 22 Uhr nicht staut.
+   Lesen nur im Team-Bereich (Nutzung): 5 Lesezugriffe pro angezeigtem Tag. */
+const Nutzung = (() => {
+  const K = "exmaNutz", SH = (() => { let v = +store.get("exmaNutzShard"); if (!(v >= 0 && v <= 4)) { v = Math.floor(Math.random() * 5); store.set("exmaNutzShard", String(v)); } return v; })();
+  const tag = (d = new Date()) => isoDay(new Date(d.getTime() - 6 * 3600e3));
+  const jget = () => { try { return JSON.parse(localStorage.getItem(K)) || {}; } catch { return {}; } };
+  const jset = (v) => { try { localStorage.setItem(K, JSON.stringify(v)); } catch {} };
+  const SEITE = (id) => !id ? "start" : id.startsWith("fotos-") || id === "fotowand" ? "fotowand"
+    : ["beerpong", "busfahrer", "zapfmeister", "polnischen", "spiele", "turnier"].includes(id) ? "spiele"
+    : ["ich", "abzeichen"].includes(id) ? "ich" : ["drinks", "paypal"].includes(id) ? "drinks"
+    : ["musik", "ranking", "wuensche", "advent"].includes(id) ? id
+    : EVENTS.some((e) => e.id === id) ? "abend" : "";
+  let st = jget(), lastFlush = +store.get("exmaNutzLast") || 0;
+  /* st = { tag, sent: { g, neu, inst, m, h: [Stunden] }, pend: { p: {}, h: {}, g, neu, inst, m } } */
+  function bucket() {
+    const t = tag();
+    if (st.tag !== t) {
+      if (st.tag && st.pend && Object.keys(st.pend).length) { st.alt = { tag: st.tag, pend: st.pend }; }
+      st = { tag: t, sent: { h: [] }, pend: {}, alt: st.alt };
+    }
+    const p = st.pend, s = st.sent;
+    if (!s.g && !p.g) { p.g = 1;
+      if (!store.get("exmaNutzErst")) { p.neu = 1; store.set("exmaNutzErst", t); }
+      if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) p.inst = 1;
+      p.m = store.get("exmaMatrikel") || "x"; }
+    const hr = String(+berlin({ hour: "2-digit", hourCycle: "h23" }).formatToParts(new Date()).find((x) => x.type === "hour").value);
+    if (!s.h.includes(hr) && !(p.h && p.h[hr])) { p.h = p.h || {}; p.h[hr] = 1; }
+    return p;
+  }
+  function seite(id) {
+    if (FB.off || window.__zeitVorschau || teamAuthed) return;
+    const k = SEITE(id); if (!k) return;
+    const p = bucket(); p.p = p.p || {}; p.p[k] = (p.p[k] || 0) + 1; jset(st);
+  }
+  async function senden(force) {
+    if (!Live.remote || !FB.user || window.__zeitVorschau || teamAuthed) return;
+    if (!force && Date.now() - lastFlush < 15 * 60e3) return;
+    const jobs = [];
+    if (st.alt) jobs.push([st.alt.tag, st.alt.pend, true]);
+    if (st.pend && Object.keys(st.pend).length) jobs.push([st.tag, st.pend, false]);
+    if (!jobs.length) return;
+    lastFlush = Date.now(); store.set("exmaNutzLast", String(lastFlush));
+    for (const [t, p, alt] of jobs) {
+      const inc = FB.fv.increment, upd = {};   /* set + merge: verschachtelte Zähler als Objekte, nicht als „a.b“ */
+      if (p.g) upd.g = inc(1);
+      if (p.neu) upd.neu = inc(1);
+      if (p.inst) upd.inst = inc(1);
+      if (p.m) upd.m = { [p.m]: inc(1) };
+      if (p.h && Object.keys(p.h).length) upd.h = Object.fromEntries(Object.entries(p.h).map(([k, v]) => [k, inc(v)]));
+      if (p.p && Object.keys(p.p).length) upd.p = Object.fromEntries(Object.entries(p.p).map(([k, v]) => [k, inc(Math.min(v, 200))]));
+      try {
+        await FB.db.doc(`nutzung/${t}_${SH}`).set(upd, { merge: true });
+        if (alt) delete st.alt;
+        else { st.sent.g = st.sent.g || !!p.g; st.sent.h = [...new Set([...st.sent.h, ...Object.keys(p.h || {})])]; st.pend = {}; }
+        jset(st);
+      } catch (e) { console.warn("Nutzung", e); if (alt && e && e.code === "permission-denied") { delete st.alt; jset(st); } }
+    }
+  }
+  addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") senden(false); });
+  addEventListener("pagehide", () => senden(false));
+  return { seite, senden, tag };
+})();
+
+/* ---------- Team: Nutzung ansehen ---------- */
+let nutzSicht = "abend";
+async function nutzLaden(tage) {
+  const out = {}, key = (t) => "exmaNutzCache_" + t, heute = Nutzung.tag();
+  await Promise.all(tage.map(async (t) => {
+    if (t !== heute) { try { const c = JSON.parse(sessionStorage.getItem(key(t))); if (c) { out[t] = c; return; } } catch {} }
+    const docs = await Promise.all([0, 1, 2, 3, 4].map((i) => FB.db.doc(`nutzung/${t}_${i}`).get()));
+    const sum = { g: 0, neu: 0, inst: 0, p: {}, h: {}, m: {} };
+    docs.forEach((d) => { if (!d.exists) return; const v = d.data();
+      sum.g += v.g || 0; sum.neu += v.neu || 0; sum.inst += v.inst || 0;
+      for (const f of ["p", "h", "m"]) for (const [k, x] of Object.entries(v[f] || {})) sum[f][k] = (sum[f][k] || 0) + x; });
+    out[t] = sum; if (t !== heute) try { sessionStorage.setItem(key(t), JSON.stringify(sum)); } catch {}
+  }));
+  return out;
+}
+function renderNutzungTeam() {
+  if (!teamAuthed) { location.hash = "team"; return; }
+  pageShell("nutz-team team-page", "Nutzung", `<section class="cbox team nz">
+    <div class="nz-tabs" role="group" aria-label="Zeitraum">${[["abend", "Letzter Abend"], ["heute", "Heute"], ["woche", "7 Tage"]].map(([k, t]) => `<button type="button" data-nz="${k}" class="${k === nutzSicht ? "on" : ""}">${t}</button>`).join("")}</div>
+    <div id="nzBox"><p class="prost-small">Lädt …</p></div>
+    <p class="nz-note">Gezählt werden nur Summen pro Tag (6 bis 6 Uhr) – keine Namen, keine Geräte-Kennungen. Das Team-Handy zählt nicht mit.</p></section>`);
+  document.querySelectorAll("[data-nz]").forEach((b) => b.addEventListener("click", () => { nutzSicht = b.dataset.nz; document.querySelectorAll("[data-nz]").forEach((x) => x.classList.toggle("on", x === b)); nutzZeigen(); }));
+  nutzZeigen();
+}
+async function nutzZeigen() {
+  const box = $("nzBox"); if (!box) return;
+  box.innerHTML = `<p class="prost-small">Lädt …</p>`;
+  const heute = Nutzung.tag(), now = new Date();
+  const abende = EVENTS.filter((e) => new Date(e.startDate) <= now).map((e) => ({ e, t: isoDay(new Date(e.startDate)) }));
+  const letzter = abende[abende.length - 1];
+  let tage, titel;
+  if (nutzSicht === "abend") { if (!letzter) { box.innerHTML = `<p class="prost-small">Noch kein Clubabend vorbei.</p>`; return; } tage = [letzter.t]; titel = `${letzter.e.titel.join(" ")} · ${letzter.e.wd} ${letzter.e.dm}`; }
+  else if (nutzSicht === "heute") { tage = [heute]; titel = "Heute (seit 6 Uhr)"; }
+  else { tage = Array.from({ length: 7 }, (_, i) => Nutzung.tag(new Date(now.getTime() - i * 864e5))); titel = "Letzte 7 Tage"; }
+  let data;
+  try { data = await nutzLaden([...new Set([...tage, ...abende.slice(-4).map((a) => a.t)])]); }
+  catch (e) { box.innerHTML = `<p class="prost-small">Fehler (${esc(e.code || e.message)}). Sind die neuen Firestore-Regeln veröffentlicht?</p>`; return; }
+  const sum = { g: 0, neu: 0, inst: 0, p: {}, h: {}, m: {} };
+  tage.forEach((t) => { const v = data[t]; if (!v) return; sum.g += v.g; sum.neu += v.neu; sum.inst += v.inst; for (const f of ["p", "h", "m"]) for (const [k, x] of Object.entries(v[f])) sum[f][k] = (sum[f][k] || 0) + x; });
+  const pv = Object.values(sum.p).reduce((a, b) => a + b, 0);
+  const NAMEN = { start: "Start", drinks: "Drinks", spiele: "Spiele", musik: "Musik", ranking: "Ranking", fotowand: "Fotowand", ich: "Ich", advent: "Advent", wuensche: "Wünsche", abend: "Abend-Infos" };
+  const seiten = Object.entries(sum.p).sort((a, b) => b[1] - a[1]).slice(0, 8), pmax = seiten.length ? seiten[0][1] : 1;
+  const ord = (h) => (+h + 18) % 24;   /* Abend zuerst: 6 Uhr … 5 Uhr */
+  const hs = Object.keys(sum.h).sort((a, b) => ord(a) - ord(b));
+  let hours = [];
+  if (hs.length) { const a = ord(hs[0]), z = ord(hs[hs.length - 1]); for (let o = a; o <= z; o++) { const h = String((o + 6) % 24); hours.push([h, sum.h[h] || 0]); } }
+  if (hours.length > 12) hours = hours.filter(([, v]) => v > 0);
+  const hmax = Math.max(1, ...hours.map(([, v]) => v));
+  const MC = { 24: "#ff5ca8", 25: "#7cf3e4", 26: "#ffcf4a", andere: "rgba(255,255,255,.3)", x: "rgba(255,255,255,.18)" };
+  const ms = Object.entries(sum.m).sort((a, b) => (a[0] > b[0] ? 1 : -1)), mtot = ms.reduce((a, [, v]) => a + v, 0) || 1;
+  const vgl = abende.slice(-4).reverse().map((a) => [a, (data[a.t] || {}).g || 0]);
+  const tg = nutzSicht === "woche" ? "Geräte-Tage" : "Geräte";
+  box.innerHTML = `<h4>${esc(titel)}</h4>
+    <div class="nz-kpi"><div><b>${sum.g.toLocaleString("de-DE")}</b><small>${tg}${sum.neu ? ` <i>+${sum.neu} neu</i>` : ""}</small></div><div><b>${pv.toLocaleString("de-DE")}</b><small>Seiten­aufrufe</small></div><div><b>${sum.g ? Math.round(100 * sum.inst / sum.g) : 0}&thinsp;%</b><small>als App installiert</small></div></div>
+    ${hours.length ? `<h4>Geräte pro Stunde</h4><div class="nz-hours">${hours.map(([h, v]) => `<div><b>${v || ""}</b><span class="${v === hmax ? "pk" : ""}" style="height:${Math.max(3, Math.round(78 * v / hmax))}px"></span><em>${h}</em></div>`).join("")}</div>` : ""}
+    ${seiten.length ? `<h4>Beliebteste Seiten <span>Aufrufe</span></h4><div class="nz-pages">${seiten.map(([k, v]) => `<div>${esc(NAMEN[k] || k)}<i style="--w:${(100 * v / pmax).toFixed(0)}%"></i><b>${v}</b></div>`).join("")}</div>` : `<p class="prost-small">Noch keine Daten für diesen Zeitraum.</p>`}
+    ${ms.length ? `<h4>Matrikel <span>${tg}</span></h4><div class="nz-split">${ms.map(([k, v]) => `<span style="width:${(100 * v / mtot).toFixed(1)}%;background:${MC[k] || MC.x}"></span>`).join("")}</div>
+      <div class="nz-leg">${ms.map(([k, v]) => `<span><i style="background:${MC[k] || MC.x}"></i>${k === "x" ? "ohne" : k === "andere" ? "andere" : k + "er"} ${v}</span>`).join("")}</div>` : ""}
+    ${vgl.length ? `<h4>Clubabende im Vergleich <span>Geräte</span></h4><div class="nz-cmp">${vgl.map(([a, g], i) => `<div class="${i === 0 ? "cur" : ""}"><span>${esc(a.e.titel.join(" "))}<small>${esc(a.e.wd)} ${esc(a.e.dm)}</small></span><b>${g}</b></div>`).join("")}</div>` : ""}`;
+}
+
 /* ================= PayPal-Seite ================= */
 function renderPay() {
   current = null;
@@ -10607,15 +10835,18 @@ function closeTresen() {
   $("tresen").hidden = true;
 }
 
-/* PIN prüfen: gegen Firebase (ohne die App an- oder abzumelden). Ohne Netz gilt der lokale Prüfwert. */
+/* PIN prüfen: gegen Firebase mit der angemeldeten Adresse (ohne die App an- oder abzumelden). Ohne Netz gilt der PIN dieser Sitzung. */
 async function trCheckPin(pin) {
+  const mail = teamMail();
+  if (!mail) return trLokal(pin);
   try {
     const r = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + FIREBASE_CONFIG.apiKey, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: TEAM_EMAIL, password: TEAM_PW(pin), returnSecureToken: false })
+      body: JSON.stringify({ email: mail, password: TEAM_PW(pin), returnSecureToken: false })
     });
+    if (r.ok) await trMerken(pin);
     return r.ok;
-  } catch { return checkPin(pin); }
+  } catch { return trLokal(pin); }
 }
 
 function trModal(open) {
