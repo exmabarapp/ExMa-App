@@ -1604,7 +1604,7 @@ body.fg-open { overflow: hidden; }
 
 /* ===== Schnellmenü unten: Glas-Leiste ===== */
 .tabbar { position: absolute; z-index: 40; left: 12px; right: 12px; bottom: max(8px, calc(var(--safe-b) - 12px)); height: 62px; padding: 5px; display: flex; border-radius: 31px;
-  background: rgba(26,20,46,.78); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  background: rgba(26,20,46,.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,.2); box-shadow: 0 14px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.14);
   font-family: var(--f-body); transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s; }
 .tabbar a { flex: 1; min-width: 0; height: 52px; border-radius: 26px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
@@ -1687,7 +1687,7 @@ body.fg-open { overflow: hidden; }
 .tp-hero-sub { margin: 4px 0 0; font-family: var(--f-script); font-size: 22px; color: var(--script, var(--a1)); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
 .tp-hero-sub s { text-decoration-color: #e8303c; text-decoration-thickness: 2px; }
 .tp-hero-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.tp-hero-row span { padding: 5px 10px; border-radius: 999px; font: 800 12.5px var(--f-body); background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.tp-hero-row span { padding: 5px 10px; border-radius: 999px; font: 800 12.5px var(--f-body); background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.22); }
 .tp-hero-row span.hot { background: var(--a1); color: var(--night); border-color: transparent; }
 .drinks-page .block { margin: 0; }
 .drinks-page .sec-title { color: #fff; }
@@ -1723,7 +1723,7 @@ body.fg-open { overflow: hidden; }
 .tabbar.live { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; overflow: visible; }
 .tabbar.live::before { display: none; }
 .tb-side { position: absolute; top: 0; bottom: 0; display: flex; padding: 5px; border-radius: 31px;
-  background: rgba(26,20,46,.78); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  background: rgba(26,20,46,.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,.2); box-shadow: 0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14); }
 .tb-side.l { left: 0; right: calc(50% + 31px); border-radius: 31px 0 0 31px; padding-right: 12px;
   -webkit-mask: radial-gradient(circle at calc(100% + 31px) 50%, transparent 46px, #000 46.5px); mask: radial-gradient(circle at calc(100% + 31px) 50%, transparent 46px, #000 46.5px); }
@@ -1735,7 +1735,7 @@ body.fg-open { overflow: hidden; }
 .tb-fab { position: absolute; left: 50%; top: 50%; z-index: 2; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; text-decoration: none;
   /* gedecktes PayPal-Gelb als Glas: halbdurchlässig und weichgezeichnet wie die Leiste */
-  background: linear-gradient(180deg, rgba(255,196,57,.36), rgba(214,150,20,.28)), rgba(26,20,46,.55); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); color: #ffe7a8;
+  background: linear-gradient(180deg, rgba(255,196,57,.36), rgba(214,150,20,.28)), rgba(26,20,46,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: #ffe7a8;
   border: 1px solid rgba(255,214,120,.45); box-shadow: 0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2); transition: transform .2s; -webkit-tap-highlight-color: transparent; }
 .tb-fab:active { transform: scale(.94); }
 .tabbar a.tb-fab { flex: none; width: 74px; height: 74px; border-radius: 50%; color: #ffe7a8; gap: 0; }
@@ -1832,13 +1832,11 @@ body.fg-open { overflow: hidden; }
 .hm-sec::before { content: ""; align-self: center; flex: none; width: 6px; height: 18px; border-radius: 3px; background: linear-gradient(180deg, #ff5fa2, #ffb347); box-shadow: 0 0 10px rgba(255,95,162,.6); margin-right: 4px; }
 .hm-sec::after { content: ""; align-self: center; flex: 1; height: 1px; margin-left: 8px; background: linear-gradient(90deg, rgba(255,255,255,.28), transparent); }
 .view-menu { background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px 160px local,
-    radial-gradient(rgba(255,255,255,.055) 1px, transparent 1.4px) 0 0 / 18px 18px local,
-    radial-gradient(55% 22% at 0% 4%, rgba(45,107,255,.34), transparent 70%) 0 0 / 100% 1500px local,
-    radial-gradient(55% 22% at 100% 10%, rgba(255,46,136,.30), transparent 70%) 0 0 / 100% 1500px local,
-    radial-gradient(50% 20% at 100% 42%, rgba(124,58,237,.28), transparent 70%) 0 0 / 100% 1500px local,
-    radial-gradient(50% 20% at 0% 62%, rgba(47,243,224,.18), transparent 70%) 0 0 / 100% 1500px local,
-    radial-gradient(55% 22% at 100% 86%, rgba(255,140,60,.22), transparent 70%) 0 0 / 100% 1500px local,
+    radial-gradient(55% 28% at 0% 0%, rgba(45,107,255,.32), transparent 70%),
+    radial-gradient(55% 28% at 100% 6%, rgba(255,46,136,.28), transparent 70%),
+    radial-gradient(50% 30% at 100% 55%, rgba(124,58,237,.22), transparent 70%),
+    radial-gradient(50% 30% at 0% 80%, rgba(47,243,224,.14), transparent 70%),
+    radial-gradient(80% 30% at 50% 110%, rgba(255,140,60,.2), transparent 70%),
     #07060f; }
 
 .hm-pay { justify-content: space-between; }
@@ -2615,7 +2613,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "104";
+const APP_V = "105";
 
 const EVENTS = [
   {
@@ -4010,10 +4008,13 @@ async function boardList(col, field, sort, local, scope, n) {
   if (!Live.remote) { const l = local(); return sort(scope === "alle" ? l : l.filter((e) => entryMonat(e) === scope)); }
   let qs;
   if (scope === "alle") qs = await FB.db.collection(col).orderBy(field, "desc").limit(n).get();
-  else {
+  else if (scope === MONAT_START) {
+    /* Startmonat: Einträge von vor dem Update haben noch kein Monatsfeld → nach Datum holen (alle Einträge des Monats) */
+    const [y, m] = scope.split("-").map(Number);
+    qs = await FB.db.collection(col).where("at", ">=", new Date(y, m - 1, 1)).where("at", "<", new Date(y, m, 1)).limit(120).get();
+  } else {
     try { qs = await FB.db.collection(col).where("monat", "==", scope).orderBy(field, "desc").limit(n).get(); }
-    catch (e) {   /* Index noch nicht angelegt: ohne Sortierung holen und selbst sortieren */
-      if (!e || e.code !== "failed-precondition") throw e;
+    catch (e) {   /* Index noch nicht angelegt (oder anderer Fehler): ohne Sortierung holen und selbst sortieren */
       console.warn("Firestore-Index für die Monats-Bestenliste fehlt noch", e);
       qs = await FB.db.collection(col).where("monat", "==", scope).limit(60).get();
     }
@@ -7834,32 +7835,34 @@ function zapfDemo() {
   return zapfSzene();
 }
 /* Standard-Kachel Zapfmeister: Regal mit Flaschen, Neonleiste, Zapfhahn und Willibecher, der sich füllt */
-function zapfSzene() {
+function zapfSzene(wide = false) {
+  const W = wide ? 320 : 160, dx = wide ? 125 : 0;   /* breit: Zapfhahn rechts, damit der Titel links nichts verdeckt */
   let sd = 3; const rnd = () => ((sd = (sd * 16807) % 2147483647) / 2147483647);
   const cols = ["#3d7a3a", "#c98b2a", "#8a3a1e", "#e3d6b0", "#2e4f8a", "#a3263a", "#d8b24a", "#5b8a3a"];
   let bottles = "";
   [[60, 0], [104, 1]].forEach(([y, row]) => {
     let x = 4;
-    while (x < 156) {
+    while (x < W - 4) {
       const w = 7 + rnd() * 5, h = 18 + rnd() * 14, c = cols[Math.floor(rnd() * cols.length)], nw = w * .38;
-      if (!(row === 1 && x > 64 && x < 98)) {
+      if (!(row === 1 && x > 64 + dx && x < 98 + dx)) {
         bottles += `<rect x="${x.toFixed(1)}" y="${(y - h * .62).toFixed(1)}" width="${w.toFixed(1)}" height="${(h * .62).toFixed(1)}" rx="1.6" fill="${c}"/><rect x="${(x + (w - nw) / 2).toFixed(1)}" y="${(y - h).toFixed(1)}" width="${nw.toFixed(1)}" height="${(h * .4).toFixed(1)}" rx="1" fill="${c}"/><rect x="${(x + w * .18).toFixed(1)}" y="${(y - h * .4).toFixed(1)}" width="${(w * .64).toFixed(1)}" height="${(h * .16).toFixed(1)}" fill="#f6ecd2" opacity=".8"/><rect x="${(x + 1).toFixed(1)}" y="${(y - h * .58).toFixed(1)}" width="1.4" height="${(h * .5).toFixed(1)}" fill="#fff" opacity=".25"/>`;
       }
       x += w + 2 + rnd() * 3;
     }
   });
-  return `<span class="zd zs" aria-hidden="true"><svg viewBox="0 0 160 200" preserveAspectRatio="xMidYMin slice">
+  return `<span class="zd zs" aria-hidden="true"><svg viewBox="${wide ? "0 4 320 150" : "0 0 160 200"}" preserveAspectRatio="${wide ? "xMidYMid" : "xMidYMin"} slice">
     <defs>
       <linearGradient id="zsWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0d06"/><stop offset=".6" stop-color="#3a2210"/><stop offset="1" stop-color="#2a170a"/></linearGradient>
       <linearGradient id="zsChrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7d838c"/><stop offset=".45" stop-color="#eef1f5"/><stop offset="1" stop-color="#8d939b"/></linearGradient>
       <linearGradient id="zsBeer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25a"/><stop offset="1" stop-color="#e08a12"/></linearGradient>
       <clipPath id="zsGlass"><path d="M64 74 L96 74 L92 122 L68 122 Z"/></clipPath>
     </defs>
-    <rect width="160" height="200" fill="url(#zsWall)"/>
-    <circle cx="26" cy="20" r="16" fill="#ffb347" opacity=".14"/><circle cx="136" cy="30" r="20" fill="#ff5fa2" opacity=".12"/><circle cx="96" cy="8" r="10" fill="#ffd23f" opacity=".14"/>
+    <rect width="${W}" height="200" fill="url(#zsWall)"/>
+    <circle cx="26" cy="20" r="16" fill="#ffb347" opacity=".14"/><circle cx="${136 + dx * 2}" cy="30" r="20" fill="#ff5fa2" opacity=".12"/><circle cx="${96 + dx}" cy="8" r="10" fill="#ffd23f" opacity=".14"/>${wide ? `<circle cx="150" cy="26" r="14" fill="#2ff3e0" opacity=".1"/>` : ""}
     ${bottles}
-    <rect x="0" y="60" width="160" height="3" fill="#5a3a1c"/><rect x="0" y="63" width="160" height="1.6" fill="#2ff3e0" opacity=".75"/><rect x="0" y="62" width="160" height="5" fill="#2ff3e0" opacity=".12"/>
-    <rect x="0" y="104" width="160" height="3" fill="#5a3a1c"/><rect x="0" y="107" width="160" height="1.6" fill="#ff5fa2" opacity=".75"/><rect x="0" y="106" width="160" height="5" fill="#ff5fa2" opacity=".12"/>
+    <rect x="0" y="60" width="${W}" height="3" fill="#5a3a1c"/><rect x="0" y="63" width="${W}" height="1.6" fill="#2ff3e0" opacity=".75"/><rect x="0" y="62" width="${W}" height="5" fill="#2ff3e0" opacity=".12"/>
+    <rect x="0" y="104" width="${W}" height="3" fill="#5a3a1c"/><rect x="0" y="107" width="${W}" height="1.6" fill="#ff5fa2" opacity=".75"/><rect x="0" y="106" width="${W}" height="5" fill="#ff5fa2" opacity=".12"/>
+    <g transform="translate(${dx} 0)">
     <rect x="108" y="40" width="9" height="88" rx="2" fill="url(#zsChrome)"/>
     <rect x="76" y="36" width="41" height="8" rx="4" fill="url(#zsChrome)"/>
     <rect x="77" y="44" width="6" height="10" rx="1.5" fill="url(#zsChrome)"/>
@@ -7873,8 +7876,9 @@ function zapfSzene() {
     </g>
     <path d="M64 74 L96 74 L92 122 L68 122 Z" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.6" stroke-linejoin="round"/>
     <path d="M67.5 80 L70.5 116" stroke="#fff" stroke-width="1.6" opacity=".35" stroke-linecap="round"/>
-    <rect x="0" y="122" width="160" height="6" fill="#8a5a2a"/><rect x="0" y="122" width="160" height="1.4" fill="#c88a4a"/><rect x="0" y="128" width="160" height="72" fill="#4a2c14"/>
-    <rect x="58" y="120" width="44" height="4" rx="1.5" fill="#1f1f24"/>
+    </g>
+    <rect x="0" y="122" width="${W}" height="6" fill="#8a5a2a"/><rect x="0" y="122" width="${W}" height="1.4" fill="#c88a4a"/><rect x="0" y="128" width="${W}" height="72" fill="#4a2c14"/>
+    <rect x="${58 + dx}" y="120" width="44" height="4" rx="1.5" fill="#1f1f24"/>
   </svg></span>`;
 }
 
@@ -8146,8 +8150,10 @@ function dekoApply() {
 /* Nur Kacheln animieren, die gerade auf dem Bildschirm sind (spart auf älteren Handys viel Rechenzeit) */
 const animIO = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => {
   e.target.classList.toggle("anim-off", !e.isIntersecting);
+  /* SVG-eigene Animationen (Beerpong-Ball) laufen sonst weiter */
+  e.target.querySelectorAll("svg.game-demo").forEach((sv) => { if (sv.pauseAnimations) e.isIntersecting ? sv.unpauseAnimations() : sv.pauseAnimations(); });
 }), { rootMargin: "60px 0px" }) : null;
-function watchAnim(root) { if (animIO) root.querySelectorAll(".mtile, .hm-card, .tile-btn, .hm-sign").forEach((el) => animIO.observe(el)); }
+function watchAnim(root) { if (animIO) root.querySelectorAll(".mtile, .hm-card, .tile-btn, .hm-sign, .tp-hero, .drink").forEach((el) => animIO.observe(el)); }
 function buildMenu() {
   const g = $("menuGrid");
   const now = startIndex();
@@ -8494,6 +8500,7 @@ function renderDrinksPage() {
   d.style.cssText = themeStyle(ev.th);
   const layers = (SCENES[ev.thema] || sceneIce)();
   d.querySelectorAll(".tp-hero .tile-scene svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `dh${k}_`); });
+  watchAnim(d);
   fitTitle(d.querySelector(".tp-hero-t"), 52);
 }
 
@@ -8513,7 +8520,7 @@ function renderSpielePage() {
   pageShell("spiele-page", "Spiele", `
     ${tn}
     ${GAME_TABS.map((g) => `<article class="tp-game">
-      <a class="tile-btn ${g.cls} tp-art" href="#${g.key}" aria-label="${g.name} spielen">${g.key === "zapfmeister" ? g.art().replace("xMidYMin slice", "xMidYMid slice") : g.art()}<span class="tp-art-t"><b>${g.name}</b><small>${g.sub}</small></span></a>
+      <a class="tile-btn ${g.cls} tp-art" href="#${g.key}" aria-label="${g.name} spielen">${g.key === "zapfmeister" && !isDezember() ? zapfSzene(true) : g.art()}<span class="tp-art-t"><b>${g.name}</b><small>${g.sub}</small></span></a>
       <div class="tp-lb">
         <div class="tp-lbh"><span>Bestenliste ${esc(monatName())}</span><span class="tp-at" data-at="${g.key}"></span></div>
         <div class="tp-rows" data-top="${g.key}"><p class="tp-wait">Lädt …</p></div>
@@ -8523,6 +8530,7 @@ function renderSpielePage() {
       </div>
     </article>`).join("")}`);
   document.querySelectorAll("[data-prev]").forEach((b) => b.addEventListener("click", () => togglePrev(b)));
+  watchAnim($("detail"));
   fillTops(0);
 }
 function fillTops(tries) {
@@ -8842,7 +8850,7 @@ function fillBest(root) {
       const e = await loadBest(key); if (!el.isConnected) return;
       el.innerHTML = e ? `${CROWN_MINI}<span><b>${esc(e.name)}</b> · ${esc(BEST_SRC[key].fmt(e))}</span>` : `${CROWN_MINI}<span>1. Platz noch frei</span>`;
       el.classList.add("on");
-    } catch { el.textContent = ""; }
+    } catch (e) { console.warn("Platz 1", key, e); el.innerHTML = `${CROWN_MINI}<span>Bestenliste gerade nicht erreichbar</span>`; el.classList.add("on"); }
   });
 }
 const CROWN_MINI = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z" fill="currentColor"/></svg>`;
