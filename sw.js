@@ -4,7 +4,7 @@
    Bei jeder neuen Version VERSION hochzählen.
    Der Speichername enthält den Pfad der App: So stören sich Original und Testversion
    unter derselben Domain nicht gegenseitig. */
-const VERSION = "exma-v";96
+const VERSION = "exma-v";97
 const SCOPE = self.registration.scope;
 const CACHE = VERSION + "|" + SCOPE;
 const CORE = [
