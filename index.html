@@ -1793,7 +1793,14 @@ body.fg-open { overflow: hidden; }
 .spiele-page .tile-bus .bd-card { width: 16%; top: 10%; font-size: 13px; }
 .spiele-page .tile-bus .bd-card.a { left: 46%; } .spiele-page .tile-bus .bd-card.b { left: 61%; }
 .spiele-page .tile-bus .bd-arrow { right: 12%; top: 16%; } .spiele-page .tile-bus .bd-arrow.dn { top: 34%; }
-.spiele-page .tp-lb { display: grid; gap: 6px; padding: 10px 12px 12px; color: #fff; font-family: var(--f-body); }
+.spiele-page .tp-lb { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 10px 12px 12px; color: #fff; font-family: var(--f-body); }
+/* nichts darf breiter werden als die Karte (lange Namen, breite Schrift auf manchen Handys) */
+.spiele-page .tp-lb > *, .spiele-page .tp-rows p, .spiele-page .tp-you, .tp-lbh { min-width: 0; max-width: 100%; }
+.spiele-page .tp-rows p small, .tp-yv { flex: none; white-space: nowrap; }
+.spiele-page .tp-rows p span, .tp-you > b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tp-lbh > span:first-child { flex: none; }
+.tp-you.off .tp-yv { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.tp-foot { min-width: 0; } .spiele-page .tp-play { flex: none; }
 .tp-lbh { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .tp-lbh > span:first-child { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); white-space: nowrap; }
 .tp-at { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; font-weight: 600; color: rgba(255,207,74,.85); }
@@ -2613,7 +2620,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "105";
+const APP_V = "106";
 
 const EVENTS = [
   {
@@ -8522,7 +8529,7 @@ function renderSpielePage() {
     ${GAME_TABS.map((g) => `<article class="tp-game">
       <a class="tile-btn ${g.cls} tp-art" href="#${g.key}" aria-label="${g.name} spielen">${g.key === "zapfmeister" && !isDezember() ? zapfSzene(true) : g.art()}<span class="tp-art-t"><b>${g.name}</b><small>${g.sub}</small></span></a>
       <div class="tp-lb">
-        <div class="tp-lbh"><span>Bestenliste ${esc(monatName())}</span><span class="tp-at" data-at="${g.key}"></span></div>
+        <div class="tp-lbh"><span>Top ${esc(monatName())}</span><span class="tp-at" data-at="${g.key}"></span></div>
         <div class="tp-rows" data-top="${g.key}"><p class="tp-wait">Lädt …</p></div>
         <div class="tp-you" data-you="${g.key}"></div>
         <div class="tp-foot"><button type="button" class="tp-prev" data-prev="${g.key}" aria-expanded="false">Vormonate <i aria-hidden="true">▾</i></button><a class="tp-play" href="#${g.key}">Spielen ▸</a></div>
@@ -8545,7 +8552,7 @@ function fillTops(tries) {
     el.innerHTML = top3.length ? top3.map((e, i) => `<p><em>${i + 1}</em><span>${esc(e.name)}</span><small>${esc(BEST_SRC[key].fmt(e))}</small></p>`).join("")
       : `<p class="tp-wait">Platz 1 ist diesen Monat noch frei – hol ihn dir!</p>`;
     const at = document.querySelector(`[data-at="${key}"]`);
-    if (at) at.innerHTML = best ? `👑 Allzeit: <b>${esc(best.name)}</b> · ${esc(BEST_SRC[key].fmt(best))}` : "";
+    if (at) at.innerHTML = best ? `👑 Allzeit <b>${esc(best.name)}</b> · ${esc(BEST_SRC[key].fmt(best))}` : "";
     const you = document.querySelector(`[data-you="${key}"]`); if (!you) return;
     const v = myMonat(key);
     if (v == null) { you.className = "tp-you off"; you.innerHTML = `<em>–</em><span class="tp-yava">${avatarHTML()}</span><b>Du</b><span class="tp-yv">noch kein Spiel im ${esc(monatName())}</span>`; return; }
