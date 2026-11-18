@@ -2130,6 +2130,39 @@ body.fg-open { overflow: hidden; }
 .hm-games .tile-btn .hm-best b { display: inline; font-family: var(--f-body); font-size: 10px; font-weight: 800; text-transform: none; letter-spacing: 0; color: rgba(255,255,255,.88); }
 .hm-games .tile-btn b { font-size: 16px; }
 .hm-games .tile-btn small { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.75); }
+/* ---- Hauptmenü v110: drei Spiele nebeneinander, Fotowand breit, Semester ---- */
+.hm-games { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; gap: 8px; }
+.hm-games .tile-btn { height: 178px; border-radius: 18px; padding: 10px !important; }
+.hm-games .tile-btn b { font-size: 14px; }
+.hm-games .tile-btn small { font-size: 10px; }
+.hm-games .mini-tag { display: none; }
+.hm-games .hm-best, .hm-games .tile-btn .hm-best b { font-size: 9.5px; }
+.hm-games .hm-best span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hm-fw-wide .hm-fotowand { height: 150px !important; margin: 0 !important; }
+.hm-fw-wide .fw-p1 { right: 2px; }
+.hm-fw-wide .hm-fotowand .fw-new { top: auto; left: auto; right: 12px; bottom: 12px; }
+.hm-grid2 { margin-top: 12px; }
+.hm-quick.hm-rank1 { grid-template-columns: 1fr; margin-top: 12px; }
+.hm-rank1 .tile-btn { height: 92px; }
+.hm-rank1 .rk-art { right: 18px; top: 12px; width: 100px; height: 66px; }
+.hm-sem { position: relative; display: grid; gap: 10px; padding-left: 26px; }
+.hm-sem::before { content: ""; position: absolute; left: 8px; top: 18px; bottom: 18px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgba(255,255,255,.15), #ff3d7f 40%, rgba(255,255,255,.15)); }
+.sem-it { position: relative; display: flex; align-items: center; gap: 12px; padding: 9px; border-radius: 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: #fff; text-decoration: none; }
+.sem-it::before { content: ""; position: absolute; left: -23px; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: #0d0a18; border: 2px solid rgba(255,255,255,.5); box-sizing: border-box; }
+.sem-it.past::before { background: rgba(255,255,255,.5); }
+.sem-it.now { border-color: color-mix(in srgb, var(--a1) 70%, transparent); background: linear-gradient(90deg, color-mix(in srgb, var(--a1) 22%, transparent), rgba(255,255,255,.04)); }
+.sem-it.now::before { background: var(--a1); border-color: #fff; box-shadow: 0 0 0 4px color-mix(in srgb, var(--a1) 35%, transparent); }
+.sem-th { position: relative; flex: none; width: 80px; height: 58px; border-radius: 13px; overflow: hidden; }
+.sem-th .fw-pic { position: relative; display: block; width: 100%; height: 100%; background: radial-gradient(120% 90% at 50% 25%, color-mix(in srgb, var(--a1) 20%, var(--night)) 0%, var(--night) 72%); }
+.sem-th .fw-pic img { width: 100%; height: 100%; object-fit: cover; }
+.sem-tx { flex: 1; min-width: 0; font: 700 12px/1.3 var(--f-body); color: rgba(255,255,255,.65); }
+.sem-tx > * { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sem-tx small { font: 800 10px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--a1); }
+.sem-tx b { font: 400 17px/1.05 var(--f-display); text-transform: uppercase; color: #fff; margin: 2px 0 3px; }
+.sem-go { flex: none; font: 800 11.5px var(--f-body); padding: 7px 11px; border-radius: 12px; background: rgba(255,255,255,.12); color: #fff; }
+.sem-it.now .sem-go { background: #fff; color: #14111f; }
+.tabbar a.dot { position: relative; }
+.tabbar a.dot::after { content: ""; position: absolute; top: 7px; left: calc(50% + 9px); width: 9px; height: 9px; border-radius: 50%; background: #ff3d7f; box-shadow: 0 0 0 2px rgba(24,19,42,.95); }
 .hm-empty { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 18px; border: 1px dashed rgba(255,255,255,.22); color: rgba(255,255,255,.7); font-size: 13.5px; line-height: 1.4; }
 .hm-empty svg { width: 26px; height: 26px; flex: none; color: rgba(255,255,255,.5); }
 .hm-past { display: grid; grid-auto-flow: column; grid-auto-columns: 46%; gap: 10px; overflow-x: auto; margin: 0 -14px; padding: 0 14px; }
@@ -2629,7 +2662,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "109";
+const APP_V = "110";
 
 const EVENTS = [
   {
@@ -7308,6 +7341,7 @@ function updateTile() {
   const n = $("hmBadgeN"); if (n) n.textContent = `${got} von ${N}`;
   const bar = $("hmBadgeBar"); if (bar) bar.style.width = `${(100 * got / N).toFixed(1)}%`;
   const d = document.querySelector(".hm-badges"); if (d) d.classList.toggle("new", !!store.get("exmaBadgeNew"));
+  if (typeof tabSync === "function" && $("tabbar")) tabSync();
   const ic = $("hmBadgeIco"); if (!ic) return;
   /* Fächer aus drei Chips: die zuletzt geholten vorn, aufgefüllt mit noch gesperrten */
   const ids = Badges.recent(3);
@@ -8221,7 +8255,7 @@ function buildMenu() {
     </div>${reg}</div>`;
   };
   const PPM = `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#003087" d="M7.5 21H4.3a.5.5 0 0 1-.5-.6L6.6 3.4A.8.8 0 0 1 7.4 2.7h6.1c3.3 0 5.3 1.7 4.8 4.9-.6 3.8-3.1 5.5-6.6 5.5H9.9a.8.8 0 0 0-.8.7z"/><path fill="#0079c1" d="M19.3 7.9c-.7 3.9-3.3 5.7-6.9 5.7h-1.6a.9.9 0 0 0-.9.7L9 20.6a.5.5 0 0 0 .5.6h2.8a.8.8 0 0 0 .8-.6l.6-3.6a.8.8 0 0 1 .8-.7h.5c3 0 5.2-1.3 5.8-4.7.3-1.6.1-2.9-.5-3.7z"/></svg>`;
-  const quick = `<div class="hm-quick">
+  const quick = `<div class="hm-quick hm-rank1">
       <a class="tile-btn tile-rank" href="#ranking"><span class="rk-art" aria-hidden="true"><svg viewBox="0 0 120 78"><defs><linearGradient id="rkBeer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd25a"/><stop offset="1" stop-color="#e08a12"/></linearGradient></defs>
         ${[[8, 40, "#ff6b6b"], [44, 58, "#ffd23f"], [80, 30, "#ff9a5a"]].map(([x, h, c], i) => `<g><path d="M${x + 26} ${78 - h + 10} h5 a5 5 0 0 1 5 5 v${Math.max(4, h - 26)} a5 5 0 0 1 -5 5 h-5" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2.6"/>
           <rect x="${x}" y="${78 - h}" width="28" height="${h}" rx="4" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.75)" stroke-width="1.6"/>
@@ -8230,19 +8264,18 @@ function buildMenu() {
           <rect x="${x + 6}" y="${78 - h + 14}" width="3" height="${h - 20}" rx="1.5" fill="#fff" opacity=".35"/>
           <text x="${x + 14}" y="${78 - 6}" text-anchor="middle" font-size="9" font-weight="800" fill="#7a3d00" font-family="system-ui, sans-serif">${i + 1 === 2 ? 1 : i === 0 ? 2 : 3}</text></g>`).join("")}
         <g transform="translate(47 2) scale(.92)">${'<path d="M2 16 L0 4 L7 9 L12 0 L17 9 L24 4 L22 16 Z" fill="#ffd23f" stroke="#a87400" stroke-width="1.2" stroke-linejoin="round"/><circle cx="12" cy="11" r="2" fill="#ff5f5f"/>'}</g></svg></span><span><b>Sauf-<br>Ranking</b><small>Counter · Matrikel-Duell</small></span></a>
-      <a class="tile-btn tile-pay hm-pay" href="#paypal" aria-label="PayPal – bargeldlos bezahlen"><span class="pp-mark">${PPM}</span><span class="hm-pay-txt"><span class="pp-word"><i>Pay</i><i>Pal</i></span><small>Bargeldlos zahlen</small></span><i class="pp-go">${ICON_ARROW}</i></a>
     </div>`;
   const games = `
-    <h3 class="hm-sec">Minispiele <small>zum Wischen</small></h3>
+    <h3 class="hm-sec">Minispiele <small>Rekord im ${esc(monatName())}</small></h3>
     <div class="hm-games">
            <div class="hm-game"><a class="tile-btn tile-game" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span><b>Beerpong</b><small>Becher treffen</small></span><p class="hm-best" data-best="beerpong" aria-label="Platz 1 Beerpong"></p></a></div>
       <div class="hm-game"><a class="tile-btn tile-bus" href="#busfahrer">${busDemo()}<span class="mini-tag">Minispiel</span><span><b>Busfahrer</b><small>Höher oder tiefer</small></span><p class="hm-best" data-best="busfahrer" aria-label="Platz 1 Busfahrer"></p></a></div>
       <div class="hm-game"><a class="tile-btn tile-zapf" href="#zapfmeister">${zapfDemo()}<span class="mini-tag">Minispiel</span><span><b>Zapfmeister</b><small>Perfekt zapfen</small></span><p class="hm-best" data-best="zapfmeister" aria-label="Platz 1 Zapfmeister"></p></a></div>
-    </div>
+    </div>`;
+  const bar = `
     <h3 class="hm-sec">Rund um die Bar</h3>
-    <div class="hm-grid4">
-      <a class="tile-btn hm-music" href="#musik" aria-label="Musikwünsche">${MUSIC_ART}${Musik.night() ? `<span class="soon-tag mu-livetag"><i></i>Live</span>` : `<span class="soon-tag">${Musik.nextNight() ? `Ab ${hm(barWindow(Musik.nextNight())[0])} Uhr` : "Bald"}</span>`}<span><b>Musikwünsche</b><small>${Musik.night() ? "Jetzt Song wünschen" : "Wünschen &amp; voten"}</small></span></a>
-      ${fotowandTile()}
+    <div class="hm-fw-wide">${fotowandTile()}</div>
+    <div class="hm-grid4 hm-grid2">
       <a class="tile-btn hm-wish" href="#wuensche"><span class="wish-art" aria-hidden="true"><svg viewBox="0 0 150 100">
         <g transform="rotate(-7 70 52)">
           <rect x="22" y="12" width="96" height="82" rx="5" fill="#000" opacity=".28" transform="translate(3 4)"/>
@@ -8259,9 +8292,9 @@ function buildMenu() {
         <g transform="rotate(38 118 60)"><rect x="112" y="18" width="11" height="62" rx="2" fill="#ffcf4a"/><rect x="112" y="18" width="3.5" height="62" fill="#ffe08a"/><rect x="112" y="14" width="11" height="7" rx="2" fill="#ff8fa3"/><rect x="112" y="20" width="11" height="3" fill="#c9ced6"/><path d="M112 80 L117.5 92 L123 80 Z" fill="#f3d9b0"/><path d="M116 88.5 L117.5 92 L119 88.5 Z" fill="#2a2a2e"/></g>
         <path d="M128 18 l2.4 5 5.4.6 -4 3.7 1.1 5.3 -4.9 -2.7 -4.9 2.7 1.1 -5.3 -4 -3.7 5.4 -.6z" fill="#ffd23f" stroke="#a87400" stroke-width=".8"/>
       </svg></span><span class="hm-wish-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span><b>Wünsche</b><small>Drink oder Motto</small></span><i class="hm-go">${ICON_ARROW}</i></a>
-      ${badgeTile()}
+      <a class="tile-btn hm-music" href="#musik" aria-label="Musikwünsche">${MUSIC_ART}${Musik.night() ? `<span class="soon-tag mu-livetag"><i></i>Live</span>` : `<span class="soon-tag">${Musik.nextNight() ? `Ab ${hm(barWindow(Musik.nextNight())[0])} Uhr` : "Bald"}</span>`}<span><b>Musikwünsche</b><small>${Musik.night() ? "Jetzt Song wünschen" : "Wünschen &amp; voten"}</small></span></a>
     </div>
-`;
+    ${quick}`;
   const rest = `
     <div class="hm-contact">
       <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
@@ -8271,6 +8304,26 @@ function buildMenu() {
   const tnTile = (ev) => ev && ev.turnier && tnOpen(ev) ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : "";
   const hero = (label, cdTo) => evA ? `<div class="hm-hero">${evTile(evA, label, true, cdTo)}</div>${ph && ph.phase !== "rueck" ? "" : tnTile(evA)}` : `<div class="tile-btn hm-nextsoon"><small>Nächster Abend</small><b>Folgt bald</b><span>Infos kommen hier und auf Instagram.</span></div>`;
   const next = evB ? nextStrip(evB) : "";
+  /* Semester-Zeitstrahl: der letzte Abend (Fotos), der aktuelle und alle kommenden */
+  const semester = (() => {
+    const pastAll = EVENTS.filter((e) => isPast(e)), up = EVENTS.filter((e) => !isPast(e));
+    const list = up.length ? [pastAll[pastAll.length - 1], ...up].filter(Boolean).slice(0, 5) : pastAll.slice(-3);
+    if (list.length < 2) return "";
+    const day = 864e5, t0 = new Date(tNow); t0.setHours(0, 0, 0, 0);
+    const when = (e) => { const d = Math.round((new Date(e.startDate).setHours(0, 0, 0, 0) - t0) / day);
+      return d <= 0 ? "Heute" : d === 1 ? "Morgen" : d < 7 ? `In ${d} Tagen` : d < 14 ? "Nächste Woche" : `In ${Math.round(d / 7)} Wochen`; };
+    const row = (e) => {
+      const past = isPast(e), now = !past && e === up[0];
+      const w = when(e), lab = past ? "Rückblick" : now && (w === "Heute" || w === "Morgen" || /Tagen/.test(w)) ? "Diese Woche" : w;
+      const a0 = e.ablauf && e.ablauf[0], info = a0 ? `${esc(a0.kurz || a0.was)} ${esc(a0.zeit)}` : `${esc(e.time)} Uhr`;
+      const href = past && e.fotos ? `#fotos-${e.id}` : `#${e.id}`;
+      return `<a class="sem-it${past ? " past" : ""}${now ? " now" : ""}" href="${href}" style="${themeStyle(e.th)}">
+        <span class="sem-th"${past ? ` data-cover="${e.id}"` : ""}><span class="fw-pic">${fwScene(e)}${fwMini(e)}</span></span>
+        <span class="sem-tx"><small>${lab}</small><b>${esc(e.titel.join(" "))}</b><span>${esc(e.wd)} ${esc(e.dm)} · ${past ? (e.fotos ? "Fotos ansehen" : "Fotos folgen") : info}</span></span>
+        <span class="sem-go">${past && e.fotos ? "Fotos" : "Infos"}</span></a>`;
+    };
+    return `<h3 class="hm-sec">Semester <small>alle Abende</small></h3><div class="hm-sem">${list.map(row).join("")}</div>`;
+  })();
   let html;
   if (ph && ph.phase === "tag") {
     const ev = ph.ev, i = EVENTS.indexOf(ev);
@@ -8280,7 +8333,7 @@ function buildMenu() {
         ${phMarkt(ev, tNow)}${phSpecials(ev)}${phHappy(ev, tNow)}
         <div class="ph-row"><button type="button" class="ph-btn wa" data-share="${i}">${ICON_WA}Freunde einladen</button><a class="ph-btn" href="#${ev.id}">Drinks &amp; Preise</a></div>
       </div>
-      ${quick}${games}${next}${rest}`;
+      ${games}${bar}${next}${semester}${rest}`;
   } else if (ph && ph.phase === "live") {
     const ev = ph.ev;
     html = `<div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
@@ -8293,7 +8346,7 @@ function buildMenu() {
         ${phHappy(ev, tNow)}${phSpecials(ev)}
         <a class="ph-btn ph-karte" href="#drinks">Ganze Getränkekarte</a>
       </div>
-      ${games}${hero("Heute", null)}${next}${rest}`;
+      ${games}${bar}${hero("Heute", null)}${next}${rest}`;
   } else if (ph && ph.phase === "rueck") {
     const ev = ph.ev;
     html = `<div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
@@ -8304,8 +8357,8 @@ function buildMenu() {
           ${ev.fotos ? `<a class="ph-btn" href="#fotos-${ev.id}">${ICON_CAM}Fotos vom Abend</a>` : `<p class="ph-note">${ICON_CAM}Fotos vom Abend folgen in der Fotowand.</p>`}
         </div>
       </div>
-      ${hero("Als Nächstes", null)}${next}${quick}${games}${rest}`;
-  } else html = `${hero("Diese Woche", null)}${next}${quick}${games}${rest}`;
+      ${hero("Als Nächstes", null)}${next}${games}${bar}${semester}${rest}`;
+  } else html = `${hero("Diese Woche", null)}${next}${games}${bar}${semester}${rest}`;
   g.innerHTML = html;
   if (phSub) { phSub(); phSub = null; }
   if (ph && ph.phase !== "tag") phSub = Live.subscribe(phLive);
@@ -8479,6 +8532,7 @@ function tabSync() {
   tabbarRender();
   const id = location.hash.slice(1), on = tabFor(id);
   bar.querySelectorAll("[data-tab]").forEach((a) => { a.classList.toggle("on", a.dataset.tab === on); if (a.dataset.tab === on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  const ich = bar.querySelector('[data-tab="ich"]'); if (ich) ich.classList.toggle("dot", !!store.get("exmaBadgeNew"));
   app.classList.toggle("tabbar-off", TAB_HIDE.includes(id));
   app.classList.toggle("tab-root", [...TAB_IDS, "musik"].includes(id));
 }
