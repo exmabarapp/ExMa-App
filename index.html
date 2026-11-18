@@ -2050,6 +2050,46 @@ body.fg-open { overflow: hidden; }
 .adv-grid .dr.y .pn{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 16px 16px no-repeat, linear-gradient(170deg,#f6cf8a 0%,#e4ad66 100%)!important}
 .adv-grid .dr.y .pn > span{color:#6e1a20}
 .adv-grid .dr.g.today .pn, .adv-grid .dr.y.today .pn{box-shadow:0 0 0 2px #fff3cf,0 0 24px 6px rgba(255,190,90,.7)}
+.adv-quiz { display: grid; gap: 8px; margin-top: 14px; }
+.adv-quiz > b { font: 800 15px/1.35 var(--f-body); }
+.adv-quiz button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.05); color: #fff; font: 700 14.5px var(--f-body); text-align: left; cursor: pointer; }
+.adv-quiz button span { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; background: rgba(255,214,138,.18); color: #ffd68a; font: 800 12px var(--f-body); }
+.adv-quiz button.ok { border-color: #7cf29a; background: rgba(124,242,154,.14); }
+.adv-quiz button.ok span { background: #7cf29a; color: #06301a; }
+.adv-quiz button.bad { border-color: #e2554b; background: rgba(226,85,75,.16); }
+.adv-quiz button:disabled { cursor: default; }
+.adv-quiz small { font: 600 12px var(--f-body); color: rgba(255,255,255,.55); }
+.adv-meme { margin-top: 14px; border-radius: 16px; overflow: hidden; background: #0b0910; border: 1px solid rgba(255,255,255,.12); text-align: center; }
+.adv-meme b { display: block; padding: 10px 12px; font: 400 17px/1.32 "Dela Gothic One", Impact, sans-serif; text-transform: uppercase; color: #fff; -webkit-text-stroke: .6px #000; text-shadow: 0 2px 0 #000, 0 -1px 0 #000, 1px 0 0 #000, -1px 0 0 #000; letter-spacing: .02em; }
+.adv-meme .pic { background: radial-gradient(80% 90% at 50% 40%, #3a2a3a, #120c14); }
+.adv-meme .pic svg, .adv-meme .pic img { display: block; width: 100%; max-height: 190px; object-fit: cover; }
+.adv-team .advt-chk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #fff; }
+.adv-team .advt-chk input { width: auto; }
+.advt-q { margin-top: 12px; padding: 10px 12px 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,.15); }
+.advt-q legend { padding: 0 6px; font: 800 11.5px var(--f-body); color: var(--c-dim); }
+.adv-team .advt-opt { display: flex; align-items: center; gap: 8px; }
+.adv-team .advt-opt input[type=radio] { width: 22px; height: 22px; flex: none; }
+.adv-team .advt-opt span { flex: none; width: 18px; font-weight: 800; color: #ffd68a; }
+.advt-q small { display: block; margin-top: 6px; font: 600 11.5px var(--f-body); color: var(--c-dim); }
+.adv-rub { position: relative; margin-top: 14px; border-radius: 22px; overflow: hidden; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.adv-rub-in > :first-child { margin-top: 0; }
+.adv-rub-cv { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; border-radius: 22px; }
+.adv-rub-hint { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); padding: 4px 10px; border-radius: 999px; background: rgba(61,13,20,.85); color: #ffd68a; font: 800 11px var(--f-body); letter-spacing: .08em; pointer-events: none; transition: opacity .3s; }
+.adv-bingo { margin-top: 14px; }
+.adv-bgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.adv-bgrid button { position: relative; aspect-ratio: 1; border: 0; padding: 0; background: none; perspective: 400px; cursor: pointer; }
+.adv-bgrid .bk, .adv-bgrid .fr { position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; transition: transform .45s cubic-bezier(.3,.7,.2,1); display: grid; place-items: center; }
+.adv-bgrid .bk { background: linear-gradient(170deg, #fbf4e4, #efe2c4); box-shadow: inset 0 0 0 1px rgba(176,132,58,.6), 0 3px 8px rgba(0,0,0,.3); }
+.adv-bgrid .bk::after { content: "?"; font: 400 30px "Gloock", serif; color: #6e1a20; opacity: .55; }
+.adv-bgrid .fr { transform: rotateY(180deg); background: #1d2a22; box-shadow: inset 0 0 0 1px rgba(233,183,124,.4); }
+.adv-bgrid .fr svg { width: 70%; height: 70%; }
+.adv-bgrid .fr i { font-style: normal; font-size: 26px; opacity: .35; }
+.adv-bgrid button.open .bk { transform: rotateY(-180deg); }
+.adv-bgrid button.open .fr { transform: rotateY(0); }
+.adv-bgrid button.g .fr { background: radial-gradient(circle at 50% 45%, #4a1f22, #1d0d10); box-shadow: inset 0 0 0 2px #e9c36f, 0 0 16px rgba(255,190,90,.35); }
+.adv-bgrid button:not(.mine).open .fr { opacity: .55; }
+.adv-bgrid button:disabled { cursor: default; }
+.adv-bst { text-align: center; font-size: 14px !important; }
 .adv-hint { margin: 12px 2px 0; font: 600 12px/1.4 var(--f-body); color: rgba(255,255,255,.6); text-align: center; }
 .adv-bed { margin-top: 14px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.04); font: 600 12px/1.5 var(--f-body); color: rgba(255,255,255,.65); }
 .adv-bed summary { cursor: pointer; font-weight: 800; color: rgba(255,255,255,.85); }
@@ -2069,6 +2109,8 @@ body.fg-open { overflow: hidden; }
 .adv-sheet .adv-load { color: rgba(255,255,255,.55); }
 .adv-img { display: block; width: 100%; margin-top: 14px; border-radius: 16px; }
 .adv-rew { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 14px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+.adv-rew[hidden] { display: none; }
+body:has(#advSheet) .bdg-over { z-index: 95; }
 .adv-rew .ic { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(226,85,75,.2); color: #e9c36f; }
 .adv-rew .ic svg { width: 24px; height: 24px; }
 .adv-rew div { flex: 1; min-width: 0; font: 700 12.5px/1.35 var(--f-body); color: rgba(255,255,255,.65); }
@@ -2662,7 +2704,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "118";
+const APP_V = "121";
 
 const EVENTS = [
   {
@@ -4106,7 +4148,7 @@ const Top = {
 /* Wünsche */
 const Wishes = {
   async send(w) {
-    if (Live.remote) { await FB.db.collection("wuensche").add({ ...w, at: FB.fv.serverTimestamp() }); Advent.frei(); return "ok"; }
+    if (Live.remote) { await FB.db.collection("wuensche").add({ ...w, at: FB.fv.serverTimestamp() }); Advent.aufgabe("wunsch"); return "ok"; }
     if (/netlify\.app$/.test(location.hostname)) {
       const r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ "form-name": "wunsch", ...w }).toString() });
       if (!r.ok) throw new Error("netlify");
@@ -6853,7 +6895,7 @@ const Pol = (() => {
       running = true;
       cv = $("plCanvas"); ctx = cv.getContext("2d");
       app.classList.add("is-pol");
-      Badges.unlock("abgang");
+      Badges.unlock("abgang"); window.__advAufgabe && window.__advAufgabe("geheim");
       $("pol").setAttribute("aria-hidden", "false");
       soloView(true);
       best = parseFloat(store.get("exmaPolBest") || "0") || 0;
@@ -6914,6 +6956,7 @@ const BADGE_LIST = [
   {"id": "eiskalt", "name": "Eiskalt", "desc": "Bei der Vodka Night dabei.", "tier": 0, "cat": "Gold"},
   {"id": "miami", "name": "Miami Vice", "desc": "Bei Miami Vibes dabei.", "tier": 0, "cat": "Gold"},
   {"id": "xmas", "name": "Glühwein-Gang", "desc": "Bei ExMa X-Mas dabei.", "tier": 0, "cat": "Gold"},
+  {"id": "regenbogen", "name": "Heiligabend", "desc": "Das 24. Türchen im Adventskalender geöffnet.", "tier": 0, "cat": "Gold"},
   {"id": "champion", "name": "Champion", "desc": "Das Beerpong-Turnier gewonnen.", "tier": 0, "cat": "Gold"},
   {"id": "bpgold", "name": "Beerpong Gold", "desc": "50 Becher in einem Spiel getroffen.", "tier": 0, "cat": "Gold"},
   {"id": "endstation", "name": "Busfahrer Gold", "desc": "Alle 51 Karten richtig – Endstation!", "tier": 0, "cat": "Gold"},
@@ -7034,6 +7077,7 @@ const Badges = (() => {
     store.set("exmaBadgeNew", "1");
     queue.push(id); updateTile();
     if (!showing) setTimeout(next, 400);
+    if (id !== "regenbogen" && window.__advAufgabe) window.__advAufgabe("abzeichen");
     sammCheck();
   }
   /* Sammler: zählt alle Abzeichen außer den Sammler-Stufen; Gold = alles außer den goldenen */
@@ -7801,8 +7845,8 @@ const Fotos = (() => {
   function shareCur() {
     const f = files[cur], url = location.origin + location.pathname + "#fotos-" + evNow.id;
     const t = `Fotos vom Abend „${evNow.titel.join(" ")}“ in der ExMa-App`;
-    if (navigator.share) navigator.share({ title: t, text: t, url }).catch(() => {});
-    else window.open(`https://wa.me/?text=${encodeURIComponent(t + " " + url)}`, "_blank", "noopener");
+    if (navigator.share) navigator.share({ title: t, text: t, url }).then(() => window.__advAufgabe && window.__advAufgabe("foto")).catch(() => {});
+    else { window.open(`https://wa.me/?text=${encodeURIComponent(t + " " + url)}`, "_blank", "noopener"); window.__advAufgabe && window.__advAufgabe("foto"); }
   }
   return { fid, enabled, list, img, strips, open, close };
 })();
@@ -9498,33 +9542,33 @@ function renderTeamPage() {
    Kosten:     ~1 Schreibvorgang pro Person und Tag, 1 Lesezugriff pro neuem Türchen. */
 const ADV_Y = 2026, ADV_H = 8;
 const ADV_SPIEL = { beerpong: ["Beerpong", "cups", "Becher"], busfahrer: ["Busfahrer", "score", "Karten"], zapfmeister: ["Zapfmeister", "score", "Punkte"], polnischen: ["Polnischen", "dm", "dm"] };
-const ADV_ART = { start: "Start", glueck: "Glückstürchen", erste5: "Erste 5", quiz: "Quizfrage", challenge: "Challenge", inhalt: "Für dich", versteck: "Versteck", finale: "Finale" };
+const ADV_ART = { start: "Start", glueck: "Glückstürchen", bingo: "Glühwein-Bingo", erste5: "Erste 5", quiz: "Quizfrage", challenge: "Challenge", inhalt: "Für dich", versteck: "Versteck", finale: "Finale" };
 /* Grobgerüst – im Team-Bereich mit „Vorlage einspielen“ in die Datenbank, danach dort frei änderbar */
 const ADV_VORLAGE = {
-  1: { art: "start", titel: "Der Hauptpreis steht fest: ein Airfryer!", text: "Am 24. Dezember verlosen wir einen Airfryer unter allen, die mitmachen. Dein erstes Los hast du mit diesem Türchen schon sicher – jedes weitere Türchen und jede Challenge bringt dir mehr. Abholen kannst du ihn im Club." },
-  2: { art: "glueck", titel: "Heute ist X-Mas!", text: "Weihnachtsmarkt ab 18 Uhr, Club ab 21 Uhr. Heute gewinnen 5 Türchenöffner ein Freigetränk für heute Abend – ob du dabei bist, siehst du sofort.", preis: "1 Freigetränk", plaetze: [3, 7, 12, 14, 19], btnT: "Infos zum Abend", btnL: "#exma-xmas" },
-  3: { art: "quiz", titel: "Quizfrage", text: "Seit wann gibt es die ExMa Bar? Die Auflösung steht morgen hier – Kneipenquiz-Training schadet nie." },
-  4: { art: "challenge", titel: "Busfahrer-Challenge", text: "Schaff heute mindestens 20 Karten im Busfahrer und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "busfahrer", min: 20 }, btnT: "Busfahrer spielen", btnL: "#busfahrer" },
-  5: { art: "inhalt", titel: "Glühwein nach ExMa-Art", text: "Unser Rezept vom Weihnachtsmarkt – auch alkoholfrei." },
-  6: { art: "versteck", titel: "Irgendwo auf dem Campus …", text: "Wir haben etwas versteckt. Das Bild zeigt, wo ungefähr. Wer es findet, darf es behalten." },
-  7: { art: "challenge", titel: "Sag uns, was fehlt", text: "Welcher Drink, welches Motto oder welches Spiel fehlt euch noch? Schreib uns heute einen Wunsch.", belohnung: "1 Extra-Los", ch: { spiel: "frei", min: 0 }, btnT: "Wunsch abgeben", btnL: "#wuensche" },
-  8: { art: "inhalt", titel: "Matrikel-Duell", text: "Welche Matrikel hat bis heute die meisten Türchen geöffnet? Die Auflösung gibt’s morgen im Club." },
-  9: { art: "glueck", titel: "Letzter Club vor den Prüfungen", text: "Heute gewinnen 5 Türchenöffner ein Freigetränk für heute Abend – ob du dabei bist, siehst du sofort.", preis: "1 Freigetränk", plaetze: [2, 6, 11, 15, 23], },
-  10: { art: "challenge", titel: "Zapfmeister-Challenge", text: "Prüfungsphase – kurze Pause gefällig? Zapf heute mindestens 900 Punkte und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "zapfmeister", min: 900 }, btnT: "Zapfmeister spielen", btnL: "#zapfmeister" },
-  11: { art: "quiz", titel: "Quizfrage", text: "" },
+  1: { art: "start", titel: "Willkommen im ExMa-Adventskalender!", text: "Ab heute geht hier jeden Morgen um 8 Uhr ein Türchen auf – bis Heiligabend.\n\nSo geht’s: Jedes Türchen, das du am selben Tag öffnest, ist ein Los. Manche Türchen haben eine kleine Aufgabe – die gibt ein Extra-Los. An den Clubabenden warten Glückstürchen mit Freigetränken.\n\nUnd am 24. verlosen wir unter allen Losen einen Airfryer. Dein erstes Los hast du hiermit schon sicher. 🎟️" },
+  2: { art: "glueck", titel: "Heute ist X-Mas! 🎄", text: "Weihnachtsmarkt ab 18 Uhr, Club ab 21 Uhr. Heute verlosen wir unter allen, die dieses Türchen öffnen, 5 Freigetränke für den Abend – ob du dabei bist, siehst du sofort.", preis: "1 Freigetränk", plaetze: [3, 7, 12, 14, 19], btnT: "Infos zum Abend", btnL: "#exma-xmas", meme: { oben: "Wenn du dachtest, heute ist dein Glückstag", unten: "und dann doch wieder selbst zahlst", art: "geld" } },
+  3: { art: "challenge", titel: "Teil ein Foto von X-Mas", text: "Die ersten Bilder von gestern sind auf der Fotowand. Such dir eins aus und teil es mit jemandem – dafür gibt’s ein Extra-Los.", belohnung: "1 Extra-Los", ch: { spiel: "foto", min: 0 }, btnT: "Zur Fotowand", btnL: "#fotowand" },
+  4: { art: "challenge", titel: "Busfahrer für den Heimweg", text: "Uniwoche geschafft! Für die Fahrt nach Hause: Schaff im Busfahrer mindestens 20 Karten und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "busfahrer", min: 20 }, btnT: "Busfahrer spielen", btnL: "#busfahrer" },
+  5: { art: "inhalt", titel: "Unsere X-Mas-Drinks zum Nachmixen", text: "Christmas Spritz\n100 ml Prosecco, 4 cl Aperol (oder 2 cl Zimtsirup), ein Schuss Soda, Eis. Mit einem Rosmarinzweig und ein paar Granatapfelkernen servieren.\n\nLebkuchen Espresso Martini\n4 cl Wodka, 3 cl Kaffeelikör, 3 cl frischer Espresso, 1–2 cl Lebkuchensirup. Mit viel Eis kräftig shaken, ins gekühlte Glas abseihen, drei Kaffeebohnen obendrauf." },
+  6: { art: "versteck", titel: "Wir haben etwas versteckt …", text: "Irgendwo auf dem Campus wartet eine Überraschung auf dich. Hier ist der erste Hinweis: der Umkreis, in dem es liegt. Wer es findet, darf es behalten!\n\nMorgen gibt’s ein genaueres Bild." },
+  7: { art: "quiz", ch: { spiel: "quiz", min: 0 }, titel: "Näher dran …", text: "Noch nicht gefunden? Hier ist ein genaueres Bild vom Versteck. Und eine Quizfrage für ein Extra-Los:", belohnung: "1 Extra-Los", quiz: { frage: "Frage eintragen", opts: ["Antwort A", "Antwort B", "Antwort C", "Antwort D"], ok: 0 } },
+  8: { art: "inhalt", titel: "Morgen ist Club!", text: "Der letzte Clubabend vor den Prüfungen steht an – hier kommt das Motto: …" },
+  9: { art: "glueck", titel: "Letzter Club vor den Prüfungen", text: "Heute verlosen wir unter allen, die dieses Türchen öffnen, nochmal 5 Freigetränke für den Abend – ob du dabei bist, siehst du sofort.", preis: "1 Freigetränk", plaetze: [2, 6, 11, 15, 23], meme: { oben: "Ich: öffne das Glückstürchen", unten: "Das Freigetränk:", art: "renner" } },
+  10: { art: "inhalt", titel: "Viel Erfolg beim Lernen! 📚", text: "Ab heute ist Prüfungsphase – wir drücken euch alle Daumen.\n\nTipp: 25 Minuten lernen, 5 Minuten Pause. Und für die Pause: …" },
+  11: { art: "challenge", titel: "Zapfmeister in der Lernpause", text: "Kurz den Kopf frei kriegen: Zapf mindestens 900 Punkte und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "zapfmeister", min: 900 }, btnT: "Zapfmeister spielen", btnL: "#zapfmeister" },
   12: { art: "inhalt", titel: "Hinter den Kulissen", text: "So entsteht ein Clubabend – vom Aufbau bis zum letzten Glas." },
-  13: { art: "inhalt", titel: "", text: "" },
-  14: { art: "inhalt", titel: "Bild des Semesters", text: "Welches Foto von der Fotowand ist euer Favorit?", btnT: "Zur Fotowand", btnL: "#fotowand" },
-  15: { art: "challenge", titel: "Beerpong-Challenge", text: "Triff heute mindestens 10 Becher und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "beerpong", min: 10 }, btnT: "Beerpong spielen", btnL: "#beerpong" },
-  16: { art: "quiz", titel: "Wer ist das?", text: "Ein Babyfoto aus dem Team – wer ist es?" },
-  17: { art: "quiz", titel: "Quizfrage", text: "" },
-  18: { art: "inhalt", titel: "", text: "" },
-  19: { art: "inhalt", titel: "Punsch-Rezept", text: "" },
-  20: { art: "inhalt", titel: "Unsere Weihnachts-Playlist", text: "" },
-  21: { art: "inhalt", titel: "Bis bald, 26er!", text: "" },
-  22: { art: "inhalt", titel: "Frohe Weihnachten!", text: "" },
-  23: { art: "challenge", titel: "Heimaturlaub-Challenge", text: "Polnischen gegen den Weihnachtsmann: Schaff heute mindestens 1 km.", belohnung: "1 Extra-Los", ch: { spiel: "polnischen", min: 10000 }, btnT: "Polnischen spielen", btnL: "#polnischen" },
-  24: { art: "finale", titel: "Das Finale", text: "Heute verlosen wir den Airfryer unter allen Losen. Viel Glück!" },
+  13: { art: "quiz", ch: { spiel: "quiz", min: 0 }, titel: "Quiz für die Lernpause", text: "Kurze Frage, Extra-Los bei richtiger Antwort:", belohnung: "1 Extra-Los", quiz: { frage: "Wie viele Rentiere ziehen den Schlitten des Weihnachtsmanns – Rudolph nicht mitgezählt?", opts: ["6", "8", "9", "12"], ok: 1 } },
+  14: { art: "challenge", titel: "Dein Wunsch, unser Plan", text: "Was soll es nächstes Semester geben – ein Drink, ein Motto, ein Spiel? Das Los gibt’s heute nur für einen Wunsch.", belohnung: "1 Los fürs Finale", ch: { spiel: "wunsch", min: 0 }, nurAufgabe: true, btnT: "Wunsch abgeben", btnL: "#wuensche" },
+  15: { art: "challenge", titel: "Beerpong-Challenge", text: "Triff mindestens 15 Becher und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "beerpong", min: 15 }, btnT: "Beerpong spielen", btnL: "#beerpong" },
+  16: { art: "inhalt", titel: "Heute gibt’s 10 Gratislose! 🎁", text: "Weil ihr so fleißig lernt: Hol dir mit einem Tipp 10 Gratislose für den Airfryer.", btnT: "🎁 10 Gratislose abholen", btnL: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", streich: true },
+  17: { art: "quiz", ch: { spiel: "quiz", min: 0 }, titel: "Was kostet eigentlich so ein Clubabend?", text: "Für jeden Clubabend kaufen wir vorher ein – Getränke, Deko, alles. Rate mal:", belohnung: "1 Extra-Los", quiz: { frage: "Was haben unsere letzten 3 Einkäufe für die Clubabende zusammen gekostet?", opts: ["… €", "… €", "… €", "… €"], ok: 0 } },
+  18: { art: "quiz", ch: { spiel: "quiz", min: 0 }, titel: "Quiz für die Lernpause", text: "Kurze Frage, Extra-Los bei richtiger Antwort:", belohnung: "1 Extra-Los", quiz: { frage: "In welchem Jahr wurde „Stille Nacht, heilige Nacht“ zum ersten Mal gesungen?", opts: ["1718", "1818", "1868", "1918"], ok: 1 } },
+  19: { art: "bingo", ch: { spiel: "bingo", min: 0 }, titel: "Glühwein-Bingo", text: "Unter den 9 Feldern verstecken sich 3 Glühweine. Du hast 7 Versuche – findest du alle drei, bekommst du ein Extra-Los. Nur ein Spiel pro Person!", belohnung: "1 Extra-Los", bingo: { versuche: 7 } },
+  20: { art: "challenge", ch: { spiel: "teilen", min: 0 }, titel: "Schick die App weiter 📲", text: "4. Advent – und bald sind alle über die Feiertage weg. Schick die ExMa-App an Leute aus deinem Studiengang, die sie noch nicht haben. Fürs Teilen gibt’s ein Extra-Los.", belohnung: "1 Extra-Los", teilen: true },
+  21: { art: "inhalt", titel: "Plätzchen aus dem Airfryer", text: "Damit ihr wisst, was ihr mit dem Hauptpreis anstellt:\n\n250 g Mehl, 125 g kalte Butter, 100 g Zucker, 1 Ei, 1 Päckchen Vanillezucker, 1 Prise Salz zu einem Teig kneten und 30 Minuten kalt stellen. Ausrollen, ausstechen und auf Backpapier in den Airfryer legen. Bei 160 °C etwa 6–8 Minuten backen, bis die Ränder leicht goldig sind. Auskühlen lassen, verzieren, fertig." },
+  22: { art: "challenge", titel: "Sammelfieber", text: "Hol dir heute ein neues Abzeichen – egal welches. Dafür gibt’s ein Extra-Los.", belohnung: "1 Extra-Los", ch: { spiel: "abzeichen", min: 0 }, btnT: "Meine Abzeichen", btnL: "#abzeichen" },
+  23: { art: "challenge", titel: "Das geheime Spiel", text: "In der App versteckt sich ein Spiel, das nirgends im Menü steht. Hinweis: Manchmal muss man einfach hartnäckig sein – tipp ein paar Mal ganz schnell auf etwas, das du oben auf fast jeder Seite siehst. Wer es heute findet, bekommt ein Extra-Los.", belohnung: "1 Extra-Los", ch: { spiel: "geheim", min: 0 } },
+  24: { art: "finale", titel: "Frohe Weihnachten! 🌈", text: "Danke, dass ihr 24 Tage dabei wart. Als Geschenk gibt’s heute ein besonderes Abzeichen für alle, die dieses Türchen öffnen.\n\nUnd heute Abend ziehen wir den Gewinner des Airfryers – schau später nochmal rein!" },
 };
 const ADV_BED = `Teilnahme: alle Gäste der ExMa Bar, ausgenommen das Clubteam. Für die Verlosung sind Name, Studiengang und Matrikel Pflicht. Pro Person zählt ein Konto – Anmeldungen mit gleichem Namen und gleicher Matrikel werden vor der Ziehung zusammengelegt.
 Lose: Jedes Türchen, das am Tag selbst (8 Uhr bis 8 Uhr am Folgetag) geöffnet wird, gibt 1 Los. Challenges geben Extra-Lose.
@@ -9563,14 +9607,22 @@ const Advent = (() => {
   if (me.name && !me.stg) me.name = "";   /* ältere Anmeldung ohne Studiengang: einmal neu anmelden */
   const seen = () => new Set(jget(K_SEEN, []));
   const markSeen = (n) => { const s = seen(); s.add(n); jset(K_SEEN, [...s]); };
-  const lose = () => me.o.length + me.c.length;
+  const lose = () => me.o.length + me.c.filter((n) => !(me.qf || []).includes(n)).length;
   const uid = () => FB.user && FB.user.uid;
 
   async function load() {
     if (!Live.remote || !uid() || loaded) return me;
     try {
       const [t, nm] = await Promise.all([FB.db.doc("adventT/" + uid()).get(), FB.db.doc("adventName/" + uid()).get()]);
-      if (t.exists) { const d = t.data(); me.o = Object.keys(d.o || {}).map(Number); me.c = Object.keys(d.c || {}).map(Number); }
+      if (t.exists) {
+        const d = t.data(); me.o = Object.keys(d.o || {}).map(Number); me.c = Object.keys(d.c || {}).map(Number);
+        me.qa = {}; me.qf = [];
+        for (const [k, v] of Object.entries(d.c || {})) if (v && v.ref === "b:0") me.qf.push(+k);
+        for (const [k, v] of Object.entries(d.c || {})) if (v && typeof v.ref === "string" && v.ref.startsWith("q:")) {
+          const i = +v.ref.slice(2), cd = jget(K_T(k), null); me.qa[k] = i;
+          if (cd && cd.d && cd.d.quiz && cd.d.quiz.ok !== i) me.qf.push(+k);
+        }
+      }
       if (nm.exists) { const v = nm.data(); me.name = v.name; me.stg = v.stg || ""; me.mat = v.mat; }
       loaded = true; jset(K_ME, me);
     } catch (e) { console.warn("Advent laden", e); }
@@ -9616,11 +9668,22 @@ const Advent = (() => {
     if (!ch || ch.spiel !== spiel || wert < ch.min) return;
     try { await challenge(n, refId); } catch (e) { console.warn("Challenge", e); }
   }
-  /* Challenge ohne Spielstand (z. B. „Wunsch abgeben“): zählt, wenn die heutige Challenge „ohne Prüfung“ ist */
-  function frei() {
+  /* Aufgabe ohne Spielstand: „wunsch“, „foto“, „abzeichen“, „geheim“ (oder „frei“ = Wunsch). Zählt nur, wenn das heutige Türchen genau diese Aufgabe hat. */
+  function aufgabe(kind) {
     const n = advHeute(); if (!n) return;
     const d = jget(K_T(n), null); const ch = d && d.d && d.d.ch;
-    if (ch && ch.spiel === "frei") challenge(n, "").catch((e) => console.warn("Challenge", e));
+    if (ch && (ch.spiel === kind || (kind === "wunsch" && ch.spiel === "frei"))) challenge(n, "").catch((e) => console.warn("Challenge", e));
+  }
+  window.__advAufgabe = aufgabe;
+  /* Quiz: eine Antwort pro Türchen (die Regeln verbieten Änderungen). Nur die richtige gibt ein Los. */
+  async function quiz(n, i, ok) {
+    if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.c.includes(n)) return false;
+    me.qa = me.qa || {}; me.qa[n] = i;
+    if (i !== ok) { me.qf = [...new Set([...(me.qf || []), n])]; }
+    const ref = FB.db.doc("adventT/" + uid()), v = { at: FB.fv.serverTimestamp(), ref: "q:" + i };
+    try { await ref.update({ ["c." + n]: v }); }
+    catch (e) { if (e && e.code === "not-found") await ref.set({ o: {}, c: { [n]: v } }); else throw e; }
+    me.c.push(n); jset(K_ME, me); return true;
   }
   async function platz(n) {
     if (!Live.remote || !uid()) return null;
@@ -9643,6 +9706,15 @@ const Advent = (() => {
       const r = { plaetze: pl, platz: i >= 0 ? i + 1 : 0 }; jset(K, r); return r;
     } catch (e) { console.warn("Glückstürchen", e); return null; }
   }
+  /* Glühwein-Bingo: Ergebnis einmalig speichern – b:1 gewonnen (Los), b:0 verloren (kein Los, aber gesperrt) */
+  async function bingo(n, gewonnen) {
+    if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.c.includes(n)) return false;
+    if (!gewonnen) me.qf = [...new Set([...(me.qf || []), n])];
+    const ref = FB.db.doc("adventT/" + uid()), v = { at: FB.fv.serverTimestamp(), ref: gewonnen ? "b:1" : "b:0" };
+    try { await ref.update({ ["c." + n]: v }); }
+    catch (e) { if (e && e.code === "not-found") await ref.set({ o: {}, c: { [n]: v } }); else throw e; }
+    me.c.push(n); jset(K_ME, me); return true;
+  }
   async function eingeloest(n) {
     try { return (await FB.db.doc(`adventEinl/${uid()}_${n}`).get()).exists; } catch { return false; }
   }
@@ -9655,7 +9727,7 @@ const Advent = (() => {
       return z.exists ? { ich: false, ...z.data() } : { offen: true };
     } catch (e) { console.warn("Finale", e); return null; }
   }
-  return { me: () => me, load, inhalt, anmelden, oeffnen, challenge, spielstand, frei, platz, glueck, eingeloest, finale, seen, lose, uid };
+  return { me: () => me, load, inhalt, anmelden, oeffnen, challenge, spielstand, aufgabe, quiz, bingo, platz, glueck, eingeloest, finale, seen, lose, uid };
 })();
 function toastAdv(t) {
   let el = $("advToast");
@@ -9757,6 +9829,7 @@ function advTap(b) {
   b.classList.add("opening");
   setTimeout(() => { b.classList.remove("opening", "today"); b.classList.add("open"); advSheet(n); }, 720);
 }
+addEventListener("hashchange", () => { if ($("advSheet")) advClose(); });   /* Türchen-Karte schließt bei jedem Seitenwechsel, auch mit der Zurück-Geste */
 function advClose() { const s = $("advSheet"); if (!s) return; s.classList.add("out"); $("advSheetBg").classList.add("out"); setTimeout(() => { s.remove(); $("advSheetBg") && $("advSheetBg").remove(); }, 260); }
 async function advSheet(n) {
   advClose();
@@ -9769,16 +9842,30 @@ async function advSheet(n) {
   if (!d || d.zu) { $("advTitel").textContent = d && d.zu ? "Noch zu" : "Gleich da"; body.innerHTML = `<p>${d && d.zu ? "Dieses Türchen geht erst um 8 Uhr auf." : Live.remote ? "Hier kommt gleich noch was rein – schau später nochmal vorbei." : "Der Adventskalender braucht eine Internetverbindung."}</p>`; return; }
   $("advTitel").textContent = d.titel || "Türchen " + n;
   const me = Advent.me(), heute = n === advHeute();
-  const btn = d.btnL ? `<a class="adv-btn" href="${esc(d.btnL)}" data-advgo>${esc(d.btnT || "Los geht’s")} →</a>` : "";
+  const ext = /^https?:/.test(d.btnL || "");
+  const btn = d.teilen ? `<button type="button" class="adv-btn" id="advShare">📲 App teilen</button>`
+    : d.btnL ? `<a class="adv-btn" href="${esc(d.btnL)}"${ext ? ` target="_blank" rel="noopener"` : ""} data-advgo>${esc(d.btnT || "Los geht’s")}${ext ? "" : " →"}</a>` : "";
+  const ch = d.ch || (d.quiz ? { spiel: "quiz" } : null), chDone = me.c.includes(n);
+  const chSt = !chDone ? (heute ? "offen" : "vorbei") : (me.qf || []).includes(n) ? (d.bingo ? "✗ verloren" : "✗ falsch") : "✓ geschafft";
   body.innerHTML = `
     <span class="chip">✦ ${esc(ADV_ART[d.art] || "Türchen")}</span>
     ${d.bild ? `<img class="adv-img" src="${esc(d.bild)}" alt="">` : ""}
     ${d.text ? `<p>${esc(d.text).replace(/\n/g, "<br>")}</p>` : ""}
     <div id="advExtra"></div>
-    <div class="adv-rew" id="advRew"><span class="ic">${advIcon("los")}</span><div><b>1 Los fürs Finale</b><span>${heute ? "fürs Öffnen – nur heute bis morgen 8 Uhr" : "gab es am " + n + ". Dezember"}</span></div><span class="st" id="advSt">…</span></div>
-    ${d.ch ? `<div class="adv-rew"><span class="ic">${advIcon("stern")}</span><div><b>${esc(d.belohnung || "1 Extra-Los")}</b><span>für die Challenge${heute ? " – nur heute" : ""}</span></div><span class="st${me.c.includes(n) ? " ok" : ""}" id="advChSt">${me.c.includes(n) ? "✓ geschafft" : heute ? "offen" : "vorbei"}</span></div>` : ""}
+    <div class="adv-rew" id="advRew"${d.nurAufgabe ? " hidden" : ""}><span class="ic">${advIcon("los")}</span><div><b>1 Los fürs Finale</b><span>${heute ? "fürs Öffnen – nur heute bis morgen 8 Uhr" : "gab es am " + n + ". Dezember"}</span></div><span class="st" id="advSt">…</span></div>
+    ${ch ? `<div class="adv-rew"><span class="ic">${advIcon(d.nurAufgabe ? "los" : "stern")}</span><div><b>${esc(d.belohnung || "1 Extra-Los")}</b><span>${d.quiz ? "für die richtige Antwort" : d.bingo ? "wenn du alle 3 Glühweine findest" : d.nurAufgabe ? "nur mit der Aufgabe" : "für die Challenge"}${heute ? " – nur heute" : ""}</span></div><span class="st${chDone && !(me.qf || []).includes(n) ? " ok" : chDone ? " bad" : ""}" id="advChSt">${chSt}</span></div>` : ""}
     ${btn}`;
-  body.querySelectorAll("[data-advgo]").forEach((a) => a.addEventListener("click", advClose));
+  const sh = $("advShare");
+  if (sh) sh.addEventListener("click", () => {
+    const url = location.origin + location.pathname, text = "Hol dir die ExMa-App – Adventskalender, Minispiele und alles zu den Clubabenden:";
+    const done = () => { if (window.__advAufgabe) window.__advAufgabe("teilen"); };
+    if (navigator.share) navigator.share({ title: "ExMa Bar", text, url }).then(done).catch(() => {});
+    else { window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, "_blank", "noopener"); done(); }
+  });
+  body.querySelectorAll("[data-advgo]").forEach((el) => el.addEventListener("click", () => {
+    if (d.streich) { setTimeout(() => { const ex = $("advExtra"); if (ex) ex.innerHTML = `<p class="adv-miss">Reingefallen! 😄 Dein normales Los hast du trotzdem.</p>`; }, 400); return; }
+    advClose();
+  }));
   if (!me.name && Live.remote) { advAnmeldung(n, d); return; }
   await advLos(n, d);
 }
@@ -9808,7 +9895,8 @@ function advAnmeldung(n, d) {
 async function advLos(n, d) {
   const st = $("advSt"), me = Advent.me();
   let neu = false;
-  try { neu = await Advent.oeffnen(n); } catch (e) { console.warn("Los", e); if (st) { st.textContent = "nicht gespeichert"; st.className = "st bad"; } }
+  if (n === 24 && advOffen(24) && typeof Badges !== "undefined") Badges.unlock("regenbogen");
+  try { neu = d.nurAufgabe ? (advMarkSeen(n), false) : await Advent.oeffnen(n); } catch (e) { console.warn("Los", e); if (st) { st.textContent = "nicht gespeichert"; st.className = "st bad"; } }
   if (st && !st.classList.contains("bad")) {
     const has = me.o.includes(n);
     st.textContent = has ? "✓ im Topf" : n === advHeute() ? "offen" : "verpasst";
@@ -9816,6 +9904,8 @@ async function advLos(n, d) {
     if (neu) { advProg(); toastAdv("Los gesichert! 🎟️"); const b = document.querySelector(`.dr[data-n="${n}"] .rw`); if (!b) { const dr = document.querySelector(`.dr[data-n="${n}"]`); dr && dr.insertAdjacentHTML("beforeend", `<span class="rw">${advIcon("los")}</span>`); } }
   }
   const ex = $("advExtra"); if (!ex) return;
+  if (d.quiz) advQuiz(n, d);
+  if (d.bingo) advBingo(n, d);
   if (d.art === "erste5") {
     const pl = await Advent.platz(n);
     if (!$("advExtra")) return;
@@ -9827,10 +9917,11 @@ async function advLos(n, d) {
   }
   if (d.art === "glueck" && me.o.includes(n)) {
     const g = await Advent.glueck(n, d); if (!$("advExtra") || !g) return;
-    if (g.platz && g.plaetze.includes(g.platz)) {
-      ex.innerHTML = advTicket(`Glückwunsch – einer von ${g.plaetze.length} Gewinnern!`, d.preis || "Gewinn", advCode(Advent.uid(), n), n === advHeute() ? "Glückstürchen · heute an der Bar" : "Glückstürchen");
-      advClock(); if (await Advent.eingeloest(n)) advTicketDone(); advKonfetti();
-    } else ex.innerHTML = `<p class="adv-miss">Diesmal kein Gewinn – dein Los fürs Finale hast du trotzdem.</p>`;
+    const win = !!(g.platz && g.plaetze.includes(g.platz));
+    const inner = win ? advTicket(`Glückwunsch – einer von ${g.plaetze.length} Gewinnern!`, d.preis || "Gewinn", advCode(Advent.uid(), n), n === advHeute() ? "Glückstürchen · heute an der Bar" : "Glückstürchen")
+      : advMeme(d.meme) + `<p class="adv-miss">Diesmal kein Freigetränk – dein Los fürs Finale hast du trotzdem.</p>`;
+    const fertig = async (neu) => { if (!win) return; advClock(); if (await Advent.eingeloest(n)) advTicketDone(); if (neu) advKonfetti(); };
+    advRubbel(ex, inner, "exmaAdvRub" + n, fertig);
   }
   if (d.art === "finale" && advOffen(24)) {
     const f = await Advent.finale(); if (!$("advExtra") || !f) return;
@@ -9838,6 +9929,104 @@ async function advLos(n, d) {
     else if (!f.offen) ex.innerHTML = `<p class="adv-miss">Gezogen! Der Airfryer geht an <b>${esc(f.name || "")}</b>${f.mat ? ` (Matrikel ${esc(f.mat)})` : ""}. ${f.gesamt ? `${f.gesamt} Lose von ${f.teilnehmer} Leuten waren im Topf.` : ""} Danke fürs Mitmachen und frohe Weihnachten!</p>`;
     else ex.innerHTML = `<p class="adv-miss">Die Ziehung kommt heute. Schau später nochmal rein!</p>`;
   }
+}
+function advMarkSeen(n) { try { const k = "exmaAdvSeen", a = new Set(JSON.parse(localStorage.getItem(k) || "[]")); a.add(n); localStorage.setItem(k, JSON.stringify([...a])); } catch {} }
+/* Quiz mit Auswahl: eine Antwort, richtige gibt ein Extra-Los */
+function advQuiz(n, d) {
+  const ex = $("advExtra"), q = d.quiz, me = Advent.me(); if (!ex || !q) return;
+  const heute = n === advHeute(), done = me.c.includes(n), mine = me.qa ? me.qa[n] : undefined;
+  const show = done || !heute;
+  ex.innerHTML = `<div class="adv-quiz"><b>${esc(q.frage || "")}</b>${(q.opts || []).map((o, i) => `<button type="button" data-q="${i}" class="${show && i === q.ok ? "ok" : ""}${show && i === mine && i !== q.ok ? " bad" : ""}"${show ? " disabled" : ""}><span>${"ABCD"[i]}</span>${esc(o)}</button>`).join("")}
+    ${show && !done ? `<small>Richtig war ${"ABCD"[q.ok]}. Antworten ging nur am ${n}. Dezember.</small>` : ""}</div>`;
+  if (show) return;
+  ex.querySelectorAll("[data-q]").forEach((b) => b.addEventListener("click", async () => {
+    if (!me.name) { toastAdv("Bitte erst anmelden"); return; }
+    const i = +b.dataset.q;
+    ex.querySelectorAll("[data-q]").forEach((x) => { x.disabled = true; });
+    try { await Advent.quiz(n, i, q.ok); } catch (e) { console.warn("Quiz", e); toastAdv("Antwort nicht gespeichert – Internet?"); ex.querySelectorAll("[data-q]").forEach((x) => { x.disabled = false; }); return; }
+    ex.querySelectorAll("[data-q]").forEach((x) => { const k = +x.dataset.q; x.classList.toggle("ok", k === q.ok); x.classList.toggle("bad", k === i && i !== q.ok); });
+    const st = $("advChSt"); if (st) { st.textContent = i === q.ok ? "✓ richtig" : "✗ falsch"; st.className = "st " + (i === q.ok ? "ok" : "bad"); }
+    if (i === q.ok) { toastAdv("Richtig! Extra-Los 🎟️"); advKonfetti(); } else toastAdv(`Leider falsch – richtig war ${"ABCD"[q.ok]}`);
+    advProg();
+  }));
+}
+/* Rubbellos: Ergebnis liegt unter einer goldenen Rubbelschicht; ab ca. 45 % freigerubbelt wird alles aufgedeckt (einmal pro Türchen) */
+function advRubbel(box, inner, key, fertig) {
+  if (store.get(key) === "1") { box.innerHTML = inner; fertig(false); return; }
+  box.innerHTML = `<div class="adv-rub"><div class="adv-rub-in">${inner}</div><canvas class="adv-rub-cv" aria-label="Rubbellos – zum Aufdecken rubbeln"></canvas><span class="adv-rub-hint">✦ Hier rubbeln ✦</span></div>`;
+  const wrap = box.querySelector(".adv-rub"), cv = wrap.querySelector("canvas"), hint = wrap.querySelector(".adv-rub-hint");
+  requestAnimationFrame(() => {
+    const r = wrap.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    const c = cv.getContext("2d"); c.scale(dpr, dpr);
+    const g = c.createLinearGradient(0, 0, r.width, r.height);
+    g.addColorStop(0, "#c99a4a"); g.addColorStop(.35, "#f3d48a"); g.addColorStop(.6, "#b7832f"); g.addColorStop(1, "#e9c36f");
+    c.fillStyle = g; c.fillRect(0, 0, r.width, r.height);
+    c.globalAlpha = .18; c.fillStyle = "#6d4a12";
+    for (let y = 8; y < r.height; y += 16) for (let x = (y / 16) % 2 ? 8 : 0; x < r.width; x += 16) { c.beginPath(); c.arc(x, y, 2, 0, 7); c.fill(); }
+    c.globalAlpha = 1; c.fillStyle = "#3d0d14"; c.font = "400 26px Gloock, serif"; c.textAlign = "center"; c.fillText("Rubbellos", r.width / 2, r.height / 2 - 4);
+    c.font = "700 13px 'Bricolage Grotesque', sans-serif"; c.fillText("Mit dem Finger freirubbeln", r.width / 2, r.height / 2 + 20);
+    c.globalCompositeOperation = "destination-out";
+    let down = false, last = null, moves = 0, done = false;
+    const pos = (e) => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+    const scratch = (p) => { c.lineWidth = 34; c.lineCap = "round"; c.beginPath(); c.moveTo(...(last || p)); c.lineTo(...p); c.stroke(); last = p; };
+    const check = () => {
+      const d = c.getImageData(0, 0, cv.width, cv.height).data; let clear = 0, tot = 0;
+      for (let i = 3; i < d.length; i += 4 * 64) { tot++; if (d[i] < 40) clear++; }
+      if (clear / tot > .45) reveal();
+    };
+    const reveal = () => { if (done) return; done = true; cv.style.transition = "opacity .5s"; cv.style.opacity = "0"; hint.remove(); setTimeout(() => cv.remove(), 520); store.set(key, "1"); fertig(true); };
+    cv.addEventListener("pointerdown", (e) => { down = true; last = null; cv.setPointerCapture(e.pointerId); hint.style.opacity = "0"; scratch(pos(e)); });
+    cv.addEventListener("pointermove", (e) => { if (!down) return; scratch(pos(e)); if (++moves % 12 === 0) check(); });
+    cv.addEventListener("pointerup", () => { down = false; check(); });
+    cv.addEventListener("pointercancel", () => { down = false; });
+  });
+}
+/* Glühwein-Bingo: 3 Glühweine unter 9 Feldern, begrenzte Versuche, ein Spiel pro Person */
+const ADV_GW = `<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 16h20v16a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8z" fill="#c4362f" stroke="#1f2a44" stroke-width="2.2" stroke-linejoin="round"/><path d="M32 20c7 0 7 10 0 10" fill="none" stroke="#1f2a44" stroke-width="5"/><path d="M32 20c7 0 7 10 0 10" fill="none" stroke="#c4362f" stroke-width="2.4"/><path d="M14 20h16" stroke="#8e2420" stroke-width="3"/><path d="M17 12c-2-3 2-4 0-7M23 12c-2-3 2-4 0-7M29 12c-2-3 2-4 0-7" stroke="#f3ead8" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="25" cy="29" r="3" fill="#f3d48a"/></svg>`;
+function advBingo(n, d) {
+  const ex = $("advExtra"), me = Advent.me(); if (!ex) return;
+  const heute = n === advHeute(), done = me.c.includes(n), max = Math.max(3, Math.min(9, (d.bingo && d.bingo.versuche) || 7));
+  let h = 2166136261; for (const ch of `${Advent.uid() || "x"}|${n}|bingo`) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  const gw = new Set(); while (gw.size < 3) { h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0; gw.add(h % 9); }
+  const K = "exmaAdvB" + n; let flips = []; try { flips = JSON.parse(localStorage.getItem(K) || "[]"); } catch {}
+  const render = () => {
+    const found = flips.filter((i) => gw.has(i)).length, left = max - flips.length, over = done || found === 3 || left <= 0 || !heute;
+    ex.innerHTML = `<div class="adv-bingo"><div class="adv-bgrid">${Array.from({ length: 9 }, (_, i) => {
+      const open = flips.includes(i) || (over && (done || !heute || found === 3 || left <= 0));
+      const isG = gw.has(i);
+      return `<button type="button" data-b="${i}" class="${open ? "open" : ""}${open && isG ? " g" : ""}${flips.includes(i) ? " mine" : ""}"${open || over ? " disabled" : ""}><span class="bk"></span><span class="fr">${isG ? ADV_GW : "<i>❄</i>"}</span></button>`; }).join("")}</div>
+      <p class="adv-bst">${!heute && !done ? "Gespielt werden konnte nur am " + n + ". Dezember." : found === 3 ? "Alle 3 Glühweine gefunden! 🎉" : left <= 0 || (done && (me.qf || []).includes(n)) ? "Keine Versuche mehr – diesmal nicht." : `Gefunden: <b>${found}/3</b> · noch <b>${left}</b> ${left === 1 ? "Versuch" : "Versuche"}`}</p></div>`;
+    if (over) return;
+    ex.querySelectorAll("[data-b]").forEach((b) => b.addEventListener("click", async () => {
+      if (!me.name) { toastAdv("Bitte erst anmelden"); return; }
+      const i = +b.dataset.b; if (flips.includes(i)) return;
+      flips.push(i); try { localStorage.setItem(K, JSON.stringify(flips)); } catch {}
+      const f = flips.filter((x) => gw.has(x)).length, l = max - flips.length;
+      if (f === 3 || l <= 0) {
+        try { await Advent.bingo(n, f === 3); } catch (e) { console.warn("Bingo", e); toastAdv("Ergebnis nicht gespeichert – Internet?"); }
+        const st = $("advChSt"); if (st) { st.textContent = f === 3 ? "✓ geschafft" : "✗ verloren"; st.className = "st " + (f === 3 ? "ok" : "bad"); }
+        if (f === 3) { toastAdv("Bingo! Extra-Los 🎟️"); advKonfetti(); } else toastAdv("Leider nicht – morgen gibt’s ein neues Türchen");
+        advProg();
+      }
+      render();
+    }));
+  };
+  render();
+}
+/* Meme für alle ohne Gewinn: eigenes Bild (Link) oder gezeichnete Szene mit Text oben/unten */
+const ADV_MEME_ART = {
+  geld: `<svg viewBox="0 0 200 120" aria-hidden="true"><rect x="52" y="44" width="96" height="62" rx="10" fill="#5a3a22" stroke="#1d120a" stroke-width="3"/><path d="M52 60h96" stroke="#1d120a" stroke-width="3"/><rect x="118" y="62" width="30" height="20" rx="5" fill="#7a5231" stroke="#1d120a" stroke-width="3"/><circle cx="130" cy="72" r="3" fill="#e9b77c"/>
+    <g transform="translate(96 30)"><ellipse cx="-11" cy="-4" rx="12" ry="8" fill="#d8cfc0" stroke="#1d120a" stroke-width="2.5" transform="rotate(-25 -11 -4)"/><ellipse cx="11" cy="-4" rx="12" ry="8" fill="#d8cfc0" stroke="#1d120a" stroke-width="2.5" transform="rotate(25 11 -4)"/><ellipse cx="0" cy="2" rx="4" ry="9" fill="#6b5a48" stroke="#1d120a" stroke-width="2"/><path d="M-2 -7l-5-7M2 -7l5-7" stroke="#1d120a" stroke-width="2" stroke-linecap="round"/></g>
+    <path d="M70 34c-6-4-10-1-12 3M136 30c5-3 9 0 11 4" stroke="#f3ead8" stroke-width="2" stroke-linecap="round" fill="none" opacity=".6"/></svg>`,
+  renner: `<svg viewBox="0 0 200 120" aria-hidden="true"><path d="M20 98h70" stroke="#f3ead8" stroke-width="3" stroke-linecap="round" opacity=".35"/><path d="M28 84h46M34 70h34" stroke="#f3ead8" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+    <g transform="translate(122 20)"><path d="M0 0h40l-6 52H6z" fill="#ffd27a" fill-opacity=".85" stroke="#1d120a" stroke-width="3" stroke-linejoin="round"/><path d="M2 14h36" stroke="#fff3cf" stroke-width="4" opacity=".8"/><circle cx="14" cy="24" r="3" fill="#1d120a"/><circle cx="27" cy="24" r="3" fill="#1d120a"/><path d="M14 34q6 5 13 0" stroke="#1d120a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M10 52l-10 22M30 52l14 18" stroke="#1d120a" stroke-width="4" stroke-linecap="round"/><path d="M-4 76h10M42 72l8-4" stroke="#1d120a" stroke-width="4" stroke-linecap="round"/><path d="M0 18l-16 10M40 18l14-12" stroke="#1d120a" stroke-width="4" stroke-linecap="round"/></g></svg>`,
+};
+function advMeme(m) {
+  if (!m) return "";
+  const pic = m.bild ? `<img src="${esc(m.bild)}" alt="">` : (ADV_MEME_ART[m.art] || ADV_MEME_ART.geld);
+  return `<div class="adv-meme">${m.oben ? `<b class="o">${esc(m.oben)}</b>` : ""}<div class="pic">${pic}</div>${m.unten ? `<b class="u">${esc(m.unten)}</b>` : ""}</div>`;
 }
 const advTicket = (head, preis, code, sub, name) => `<div class="tk" id="advTk"><small>${esc(sub)}</small><b>${esc(preis)}</b><span class="who">${esc(head)}</span>
   <div class="row"><span class="clk" id="advClk"></span><span class="tk-r"><span class="live">LIVE</span><span class="code">${esc(code || "")}</span><span class="nm">${esc(name || Advent.me().name || "")}</span></span></div></div>
@@ -9893,7 +10082,18 @@ async function advEditor(n) {
     <label>Bild (Link, optional)<input id="aeBild" placeholder="https://… oder bilder/advent6.jpg" value="${esc(v.bild || "")}"></label>
     <label>Belohnung der Challenge<input id="aeBel" maxlength="60" value="${esc(v.belohnung || "1 Extra-Los")}"></label>
     <div class="advt-2"><label>Knopf-Text<input id="aeBtnT" maxlength="40" value="${esc(v.btnT || "")}"></label><label>Knopf-Link<input id="aeBtnL" placeholder="#busfahrer" value="${esc(v.btnL || "")}"></label></div>
-    <div class="advt-2"><label>Challenge<select id="aeSp"><option value="">keine</option><option value="frei"${ch.spiel === "frei" ? " selected" : ""}>ohne Prüfung</option>${Object.entries(ADV_SPIEL).map(([k, x]) => `<option value="${k}"${ch.spiel === k ? " selected" : ""}>${x[0]} (${x[2]})</option>`).join("")}</select></label><label>Mindestens<input id="aeMin" type="number" min="0" value="${ch.min || ""}"></label></div>
+    <div class="advt-2"><label>Challenge<select id="aeSp"><option value="">keine</option>${[["wunsch", "Wunsch abgeben"], ["foto", "Foto teilen"], ["teilen", "App teilen (Knopf im Türchen)"], ["abzeichen", "neues Abzeichen"], ["geheim", "geheimes Spiel finden"]].map(([k, t]) => `<option value="${k}"${ch.spiel === k || (k === "wunsch" && ch.spiel === "frei") ? " selected" : ""}>${t}</option>`).join("")}${Object.entries(ADV_SPIEL).map(([k, x]) => `<option value="${k}"${ch.spiel === k ? " selected" : ""}>${x[0]} (${x[2]})</option>`).join("")}</select></label><label>Mindestens<input id="aeMin" type="number" min="0" value="${ch.min || ""}"></label></div>
+    <label>Bingo-Versuche (nur bei Art „Glühwein-Bingo“)<input id="aeBv" type="number" min="3" max="9" value="${(v.bingo && v.bingo.versuche) || 7}"></label>
+    <label class="advt-chk"><input type="checkbox" id="aeNur"${v.nurAufgabe ? " checked" : ""}> Los nur für die Aufgabe (Öffnen allein gibt kein Los)</label>
+    <label class="advt-chk"><input type="checkbox" id="aeStreich"${v.streich ? " checked" : ""}> Streich-Knopf (nach dem Tippen: „Reingefallen!“)</label>
+    <fieldset class="advt-q"><legend>Quiz (nur bei Art „Quizfrage“)</legend>
+      <label>Frage<input id="aeQf" maxlength="200" value="${esc((v.quiz && v.quiz.frage) || "")}"></label>
+      ${[0, 1, 2, 3].map((i) => `<label class="advt-opt"><input type="radio" name="aeQok" value="${i}"${v.quiz && v.quiz.ok === i ? " checked" : ""} aria-label="richtig"> <span>${"ABCD"[i]}</span><input id="aeQ${i}" maxlength="80" value="${esc((v.quiz && v.quiz.opts && v.quiz.opts[i]) || "")}"></label>`).join("")}
+      <small>Den Kreis vor der richtigen Antwort antippen.</small></fieldset>
+    <fieldset class="advt-q"><legend>Meme ohne Gewinn (nur Glückstürchen)</legend>
+      <label>Text oben<input id="aeMo" maxlength="80" value="${esc((v.meme && v.meme.oben) || "")}"></label>
+      <label>Text unten<input id="aeMu" maxlength="80" value="${esc((v.meme && v.meme.unten) || "")}"></label>
+      <div class="advt-2"><label>Bild<select id="aeMa"><option value="geld"${v.meme && v.meme.art === "geld" ? " selected" : ""}>Leeres Portemonnaie</option><option value="renner"${v.meme && v.meme.art === "renner" ? " selected" : ""}>Weglaufendes Glas</option></select></label><label>oder eigenes Bild (Link)<input id="aeMb" value="${esc((v.meme && v.meme.bild) || "")}"></label></div></fieldset>
     <label>Preis (Glückstürchen / Erste 5)<input id="aePreis" maxlength="40" placeholder="z. B. 1 Freigetränk" value="${esc(v.preis || "")}"></label>
     <label>Glücksplätze (nur bei Glückstürchen)<input id="aePl" placeholder="3, 7, 12, 14, 19" value="${esc((v.plaetze || []).join(", "))}"></label>
     <div class="team-row"><button type="button" id="aeZuf">5 Plätze zufällig wählen (1–30)</button></div>
@@ -9907,7 +10107,18 @@ async function advEditor(n) {
     if ($("aeArt").value === "glueck" && !pl.length) { alertTeam("Bitte die Glücksplätze eintragen."); return; }
     const sp = $("aeSp").value, out = { art: $("aeArt").value, titel: $("aeTitel").value.trim(), text: $("aeText").value.trim(), bild: $("aeBild").value.trim(), belohnung: $("aeBel").value.trim(), btnT: $("aeBtnT").value.trim(), btnL: $("aeBtnL").value.trim(), preis: $("aePreis").value.trim() };
     if (out.art === "glueck") out.plaetze = [...new Set(pl)].sort((x, y) => x - y);
-    if (sp) out.ch = { spiel: sp, feld: sp === "frei" ? "" : ADV_SPIEL[sp][1], min: +$("aeMin").value || 0 };
+    if (out.art === "bingo") { out.bingo = { versuche: Math.max(3, Math.min(9, +$("aeBv").value || 7)) }; out.ch = { spiel: "bingo", feld: "", min: 0 }; }
+    if (out.ch && out.ch.spiel === "teilen") out.teilen = true;
+    if ($("aeNur").checked) out.nurAufgabe = true;
+    if ($("aeStreich").checked) out.streich = true;
+    if (out.art === "quiz") {
+      out.ch = { spiel: "quiz", feld: "", min: 0 };
+      const opts = [0, 1, 2, 3].map((i) => $("aeQ" + i).value.trim()).filter(Boolean), okEl = document.querySelector('input[name="aeQok"]:checked');
+      if (!$("aeQf").value.trim() || opts.length < 2 || !okEl) { alertTeam("Quiz: Frage, mindestens zwei Antworten und die richtige Antwort angeben."); return; }
+      out.quiz = { frage: $("aeQf").value.trim(), opts, ok: Math.min(+okEl.value, opts.length - 1) };
+    }
+    if ($("aeMo").value.trim() || $("aeMu").value.trim() || $("aeMb").value.trim()) out.meme = { oben: $("aeMo").value.trim(), unten: $("aeMu").value.trim(), art: $("aeMa").value, bild: $("aeMb").value.trim() };
+    if (sp) out.ch = { spiel: sp, feld: ADV_SPIEL[sp] ? ADV_SPIEL[sp][1] : "", min: +$("aeMin").value || 0 };
     try {
       await FB.db.doc("advent/t" + n).set(out);
       try { localStorage.removeItem("exmaAdvT" + n); } catch {} toastAdv(`Türchen ${n} gespeichert`); advEditor(n);
@@ -9921,7 +10132,7 @@ async function advSeed() {
     for (let n = 1; n <= 24; n++) {
       const ref = FB.db.doc("advent/t" + n);
       if ((await ref.get()).exists) continue;
-      const v = { ...ADV_VORLAGE[n] }; if (v.ch) v.ch = { ...v.ch, feld: v.ch.spiel === "frei" ? "" : ADV_SPIEL[v.ch.spiel][1] };
+      const v = { ...ADV_VORLAGE[n] }; if (v.ch) v.ch = { ...v.ch, feld: ADV_SPIEL[v.ch.spiel] ? ADV_SPIEL[v.ch.spiel][1] : "" };
       await ref.set(v); k++;
     }
     toastAdv(k ? `${k} Türchen aus der Vorlage eingespielt` : "Alle Türchen sind schon gefüllt");
@@ -9991,7 +10202,8 @@ async function advFinTeam() {
 async function advTopf(boxId = "advTopf") {
   const box = $(boxId); if (box) box.innerHTML = `<p class="prost-small">Lädt …</p>`;
   try {
-    const [ts, ns] = await Promise.all([FB.db.collection("adventT").get(), FB.db.collection("adventName").get()]);
+    const [ts, ns, ds] = await Promise.all([FB.db.collection("adventT").get(), FB.db.collection("adventName").get(), FB.db.collection("advent").get()]);
+    const qok = {}; ds.docs.forEach((d) => { const v = d.data(); if (v.quiz) qok[d.id.slice(1)] = "q:" + v.quiz.ok; });
     const names = Object.fromEntries(ns.docs.map((d) => [d.id, d.data()]));
     const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ").trim();
     const ex = new Set(($("advEx") ? $("advEx").value : "").split("\n").map(norm).filter(Boolean));
@@ -10000,7 +10212,7 @@ async function advTopf(boxId = "advTopf") {
       const nm = names[d.id]; if (!nm || d.id === Advent.uid()) return;
       if (ex.has(norm(nm.name))) return;
       const key = norm(nm.name) + "|" + (nm.mat || "");   /* gleicher Name + gleiche Matrikel = eine Person */
-      const v = d.data(), l = Object.keys(v.o || {}).length + Object.keys(v.c || {}).length; if (!l) return;
+      const v = d.data(), l = Object.keys(v.o || {}).length + Object.entries(v.c || {}).filter(([k, x]) => (!qok[k] || (x && x.ref === qok[k])) && !(x && x.ref === "b:0")).length; if (!l) return;
       const cur = by.get(key);
       if (cur) { cur.lose += l; cur.konten++; if (l > cur.max) { cur.max = l; cur.uid = d.id; } }
       else by.set(key, { uid: d.id, name: nm.name, mat: nm.mat, stg: nm.stg || "", lose: l, max: l, konten: 1 });
