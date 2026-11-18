@@ -2090,6 +2090,7 @@ body.fg-open { overflow: hidden; }
 .adv-bgrid button:not(.mine).open .fr { opacity: .55; }
 .adv-bgrid button:disabled { cursor: default; }
 .adv-bst { text-align: center; font-size: 14px !important; }
+.adv-pv { margin: 0 0 10px !important; padding: 8px 12px; border-radius: 12px; background: #ffd23f; color: #241500 !important; font: 800 12.5px/1.35 var(--f-body) !important; }
 .adv-hint { margin: 12px 2px 0; font: 600 12px/1.4 var(--f-body); color: rgba(255,255,255,.6); text-align: center; }
 .adv-bed { margin-top: 14px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.04); font: 600 12px/1.5 var(--f-body); color: rgba(255,255,255,.65); }
 .adv-bed summary { cursor: pointer; font-weight: 800; color: rgba(255,255,255,.85); }
@@ -2704,7 +2705,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "121";
+const APP_V = "123";
 
 const EVENTS = [
   {
@@ -9563,7 +9564,7 @@ const ADV_VORLAGE = {
   16: { art: "inhalt", titel: "Heute gibt’s 10 Gratislose! 🎁", text: "Weil ihr so fleißig lernt: Hol dir mit einem Tipp 10 Gratislose für den Airfryer.", btnT: "🎁 10 Gratislose abholen", btnL: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", streich: true },
   17: { art: "quiz", ch: { spiel: "quiz", min: 0 }, titel: "Was kostet eigentlich so ein Clubabend?", text: "Für jeden Clubabend kaufen wir vorher ein – Getränke, Deko, alles. Rate mal:", belohnung: "1 Extra-Los", quiz: { frage: "Was haben unsere letzten 3 Einkäufe für die Clubabende zusammen gekostet?", opts: ["… €", "… €", "… €", "… €"], ok: 0 } },
   18: { art: "quiz", ch: { spiel: "quiz", min: 0 }, titel: "Quiz für die Lernpause", text: "Kurze Frage, Extra-Los bei richtiger Antwort:", belohnung: "1 Extra-Los", quiz: { frage: "In welchem Jahr wurde „Stille Nacht, heilige Nacht“ zum ersten Mal gesungen?", opts: ["1718", "1818", "1868", "1918"], ok: 1 } },
-  19: { art: "bingo", ch: { spiel: "bingo", min: 0 }, titel: "Glühwein-Bingo", text: "Unter den 9 Feldern verstecken sich 3 Glühweine. Du hast 7 Versuche – findest du alle drei, bekommst du ein Extra-Los. Nur ein Spiel pro Person!", belohnung: "1 Extra-Los", bingo: { versuche: 7 } },
+  19: { art: "bingo", ch: { spiel: "bingo", min: 0 }, titel: "Glühwein-Bingo", text: "Unter den 9 Feldern verstecken sich 3 Glühweine. Deck so lange Felder auf, wie du willst – findest du alle drei, bevor die 6 leeren Felder aufgedeckt sind, bekommst du ein Extra-Los. Nur ein Spiel pro Person!", belohnung: "1 Extra-Los", bingo: {} },
   20: { art: "challenge", ch: { spiel: "teilen", min: 0 }, titel: "Schick die App weiter 📲", text: "4. Advent – und bald sind alle über die Feiertage weg. Schick die ExMa-App an Leute aus deinem Studiengang, die sie noch nicht haben. Fürs Teilen gibt’s ein Extra-Los.", belohnung: "1 Extra-Los", teilen: true },
   21: { art: "inhalt", titel: "Plätzchen aus dem Airfryer", text: "Damit ihr wisst, was ihr mit dem Hauptpreis anstellt:\n\n250 g Mehl, 125 g kalte Butter, 100 g Zucker, 1 Ei, 1 Päckchen Vanillezucker, 1 Prise Salz zu einem Teig kneten und 30 Minuten kalt stellen. Ausrollen, ausstechen und auf Backpapier in den Airfryer legen. Bei 160 °C etwa 6–8 Minuten backen, bis die Ränder leicht goldig sind. Auskühlen lassen, verzieren, fertig." },
   22: { art: "challenge", titel: "Sammelfieber", text: "Hol dir heute ein neues Abzeichen – egal welches. Dafür gibt’s ein Extra-Los.", belohnung: "1 Extra-Los", ch: { spiel: "abzeichen", min: 0 }, btnT: "Meine Abzeichen", btnL: "#abzeichen" },
@@ -9599,8 +9600,13 @@ const advCode = (uid, n) => {
   return out.slice(0, 3) + "-" + out.slice(3);
 };
 
+/* Zeit-Vorschau (?zeit=…): eigener Speicher, nichts geht in die Datenbank. Türchen-Inhalt kommt aus der Datenbank,
+   wenn das Gerät im Team angemeldet ist (die Regeln erlauben dem Team alles), sonst aus der Vorlage. */
+const ADV_PV = !!window.__zeitVorschau;
+const advK = (k) => (ADV_PV ? k + "V" : k);
 const Advent = (() => {
-  const K_ME = "exmaAdvMe", K_SEEN = "exmaAdvSeen", K_T = (n) => "exmaAdvT" + n;
+  const PV = ADV_PV;
+  const K_ME = advK("exmaAdvMe"), K_SEEN = advK("exmaAdvSeen"), K_T = (n) => advK("exmaAdvT" + n);
   const jget = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } };
   const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
   let me = jget(K_ME, { o: [], c: [], name: "", stg: "", mat: "" }), loaded = false;
@@ -9611,7 +9617,7 @@ const Advent = (() => {
   const uid = () => FB.user && FB.user.uid;
 
   async function load() {
-    if (!Live.remote || !uid() || loaded) return me;
+    if (PV || !Live.remote || !uid() || loaded) return me;
     try {
       const [t, nm] = await Promise.all([FB.db.doc("adventT/" + uid()).get(), FB.db.doc("adventName/" + uid()).get()]);
       if (t.exists) {
@@ -9630,6 +9636,11 @@ const Advent = (() => {
   }
   /* Inhalt eines Türchens: einmal laden, dann vom Handy (2 h, damit spätere Korrekturen ankommen) */
   async function inhalt(n) {
+    if (PV) {
+      const tpl = ADV_VORLAGE[n] ? { ...ADV_VORLAGE[n], vorschau: true } : null;
+      if (!Live.remote) return tpl;
+      try { const s = await FB.db.doc("advent/t" + n).get(); return s.exists ? { ...s.data(), vorschau: true } : tpl; } catch { return tpl; }
+    }
     const c = jget(K_T(n), null);
     if (c && Date.now() - c.t < 2 * 3600e3) return c.d;
     if (!Live.remote) return c ? c.d : null;
@@ -9640,12 +9651,14 @@ const Advent = (() => {
     } catch (e) { if (e && e.code === "permission-denied") return { zu: true }; return c ? c.d : null; }
   }
   async function anmelden(name, stg, mat) {
+    if (PV) { me.name = name; me.stg = stg; me.mat = mat; jset(K_ME, me); return; }
     await FB.db.doc("adventName/" + uid()).set({ name, stg, mat });
     me.name = name; me.stg = stg; me.mat = mat; jset(K_ME, me);
   }
   /* Los für das heutige Türchen (nur am Tag selbst, nur einmal) */
   async function oeffnen(n) {
     markSeen(n);
+    if (PV) { if (!me.name || n !== advHeute() || me.o.includes(n)) return false; me.o.push(n); jset(K_ME, me); return true; }
     if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.o.includes(n)) return false;
     const ref = FB.db.doc("adventT/" + uid()), ts = FB.fv.serverTimestamp();
     try { await ref.update({ ["o." + n]: ts }); }
@@ -9653,6 +9666,7 @@ const Advent = (() => {
     me.o.push(n); jset(K_ME, me); return true;
   }
   async function challenge(n, refId) {
+    if (PV) { if (!me.name || n !== advHeute() || me.c.includes(n)) return false; me.c.push(n); jset(K_ME, me); toastAdv(`Challenge geschafft – Extra-Los für Türchen ${n}! 🎟️ (Vorschau)`); const st = $("advChSt"); if (st) { st.textContent = "✓ geschafft"; st.className = "st ok"; } advProg(); return true; }
     if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.c.includes(n)) return false;
     const ref = FB.db.doc("adventT/" + uid()), v = { at: FB.fv.serverTimestamp(), ref: refId || "" };
     try { await ref.update({ ["c." + n]: v }); }
@@ -9677,6 +9691,7 @@ const Advent = (() => {
   window.__advAufgabe = aufgabe;
   /* Quiz: eine Antwort pro Türchen (die Regeln verbieten Änderungen). Nur die richtige gibt ein Los. */
   async function quiz(n, i, ok) {
+    if (PV) { if (!me.name || n !== advHeute() || me.c.includes(n)) return false; me.qa = me.qa || {}; me.qa[n] = i; if (i !== ok) me.qf = [...new Set([...(me.qf || []), n])]; me.c.push(n); jset(K_ME, me); return true; }
     if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.c.includes(n)) return false;
     me.qa = me.qa || {}; me.qa[n] = i;
     if (i !== ok) { me.qf = [...new Set([...(me.qf || []), n])]; }
@@ -9696,6 +9711,7 @@ const Advent = (() => {
   }
   /* Glückstürchen: Es gewinnen die Türchenöffner auf den Plätzen aus dem Türchen. Ergebnis sofort, einmal geprüft und gemerkt. */
   async function glueck(n, d) {
+    if (PV) { const pl = ((d && d.plaetze) || [1]).map(Number); return { plaetze: pl, platz: new URLSearchParams(location.search).has("gewinn") ? pl[0] : 0 }; }
     const K = "exmaAdvG" + n, c = jget(K, null); if (c) return c;
     if (!Live.remote || !uid()) return null;
     const pl = ((d && d.plaetze) || []).map(Number).filter((x) => x > 0).sort((a, b) => a - b);
@@ -9708,6 +9724,7 @@ const Advent = (() => {
   }
   /* Glühwein-Bingo: Ergebnis einmalig speichern – b:1 gewonnen (Los), b:0 verloren (kein Los, aber gesperrt) */
   async function bingo(n, gewonnen) {
+    if (PV) { if (!me.name || n !== advHeute() || me.c.includes(n)) return false; if (!gewonnen) me.qf = [...new Set([...(me.qf || []), n])]; me.c.push(n); jset(K_ME, me); return true; }
     if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.c.includes(n)) return false;
     if (!gewonnen) me.qf = [...new Set([...(me.qf || []), n])];
     const ref = FB.db.doc("adventT/" + uid()), v = { at: FB.fv.serverTimestamp(), ref: gewonnen ? "b:1" : "b:0" };
@@ -9716,9 +9733,11 @@ const Advent = (() => {
     me.c.push(n); jset(K_ME, me); return true;
   }
   async function eingeloest(n) {
+    if (PV) return false;
     try { return (await FB.db.doc(`adventEinl/${uid()}_${n}`).get()).exists; } catch { return false; }
   }
   async function finale() {
+    if (PV) return { offen: true };
     if (!Live.remote || !uid()) return null;
     try {
       const g = await FB.db.doc("adventGewinn/" + uid()).get();
@@ -9848,6 +9867,7 @@ async function advSheet(n) {
   const ch = d.ch || (d.quiz ? { spiel: "quiz" } : null), chDone = me.c.includes(n);
   const chSt = !chDone ? (heute ? "offen" : "vorbei") : (me.qf || []).includes(n) ? (d.bingo ? "✗ verloren" : "✗ falsch") : "✓ geschafft";
   body.innerHTML = `
+    ${d.vorschau ? `<p class="adv-pv">Vorschau – hier wird nichts gespeichert, Lose zählen nicht.</p>` : ""}
     <span class="chip">✦ ${esc(ADV_ART[d.art] || "Türchen")}</span>
     ${d.bild ? `<img class="adv-img" src="${esc(d.bild)}" alt="">` : ""}
     ${d.text ? `<p>${esc(d.text).replace(/\n/g, "<br>")}</p>` : ""}
@@ -9866,7 +9886,7 @@ async function advSheet(n) {
     if (d.streich) { setTimeout(() => { const ex = $("advExtra"); if (ex) ex.innerHTML = `<p class="adv-miss">Reingefallen! 😄 Dein normales Los hast du trotzdem.</p>`; }, 400); return; }
     advClose();
   }));
-  if (!me.name && Live.remote) { advAnmeldung(n, d); return; }
+  if (!me.name && (Live.remote || ADV_PV)) { advAnmeldung(n, d); return; }
   await advLos(n, d);
 }
 function advAnmeldung(n, d) {
@@ -9921,7 +9941,7 @@ async function advLos(n, d) {
     const inner = win ? advTicket(`Glückwunsch – einer von ${g.plaetze.length} Gewinnern!`, d.preis || "Gewinn", advCode(Advent.uid(), n), n === advHeute() ? "Glückstürchen · heute an der Bar" : "Glückstürchen")
       : advMeme(d.meme) + `<p class="adv-miss">Diesmal kein Freigetränk – dein Los fürs Finale hast du trotzdem.</p>`;
     const fertig = async (neu) => { if (!win) return; advClock(); if (await Advent.eingeloest(n)) advTicketDone(); if (neu) advKonfetti(); };
-    advRubbel(ex, inner, "exmaAdvRub" + n, fertig);
+    advRubbel(ex, inner, advK("exmaAdvRub" + n), fertig);
   }
   if (d.art === "finale" && advOffen(24)) {
     const f = await Advent.finale(); if (!$("advExtra") || !f) return;
@@ -9930,7 +9950,7 @@ async function advLos(n, d) {
     else ex.innerHTML = `<p class="adv-miss">Die Ziehung kommt heute. Schau später nochmal rein!</p>`;
   }
 }
-function advMarkSeen(n) { try { const k = "exmaAdvSeen", a = new Set(JSON.parse(localStorage.getItem(k) || "[]")); a.add(n); localStorage.setItem(k, JSON.stringify([...a])); } catch {} }
+function advMarkSeen(n) { try { const k = advK("exmaAdvSeen"), a = new Set(JSON.parse(localStorage.getItem(k) || "[]")); a.add(n); localStorage.setItem(k, JSON.stringify([...a])); } catch {} }
 /* Quiz mit Auswahl: eine Antwort, richtige gibt ein Extra-Los */
 function advQuiz(n, d) {
   const ex = $("advExtra"), q = d.quiz, me = Advent.me(); if (!ex || !q) return;
@@ -9986,24 +10006,24 @@ function advRubbel(box, inner, key, fertig) {
 const ADV_GW = `<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 16h20v16a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8z" fill="#c4362f" stroke="#1f2a44" stroke-width="2.2" stroke-linejoin="round"/><path d="M32 20c7 0 7 10 0 10" fill="none" stroke="#1f2a44" stroke-width="5"/><path d="M32 20c7 0 7 10 0 10" fill="none" stroke="#c4362f" stroke-width="2.4"/><path d="M14 20h16" stroke="#8e2420" stroke-width="3"/><path d="M17 12c-2-3 2-4 0-7M23 12c-2-3 2-4 0-7M29 12c-2-3 2-4 0-7" stroke="#f3ead8" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="25" cy="29" r="3" fill="#f3d48a"/></svg>`;
 function advBingo(n, d) {
   const ex = $("advExtra"), me = Advent.me(); if (!ex) return;
-  const heute = n === advHeute(), done = me.c.includes(n), max = Math.max(3, Math.min(9, (d.bingo && d.bingo.versuche) || 7));
+  const heute = n === advHeute(), done = me.c.includes(n);
   let h = 2166136261; for (const ch of `${Advent.uid() || "x"}|${n}|bingo`) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
   const gw = new Set(); while (gw.size < 3) { h = Math.imul(h ^ (h >>> 13), 1274126177) >>> 0; gw.add(h % 9); }
-  const K = "exmaAdvB" + n; let flips = []; try { flips = JSON.parse(localStorage.getItem(K) || "[]"); } catch {}
+  const K = advK("exmaAdvB" + n); let flips = []; try { flips = JSON.parse(localStorage.getItem(K) || "[]"); } catch {}
   const render = () => {
-    const found = flips.filter((i) => gw.has(i)).length, left = max - flips.length, over = done || found === 3 || left <= 0 || !heute;
+    const found = flips.filter((i) => gw.has(i)).length, leer = flips.length - found, verloren = leer >= 6, over = done || found === 3 || verloren || !heute;
     ex.innerHTML = `<div class="adv-bingo"><div class="adv-bgrid">${Array.from({ length: 9 }, (_, i) => {
-      const open = flips.includes(i) || (over && (done || !heute || found === 3 || left <= 0));
+      const open = flips.includes(i) || over;
       const isG = gw.has(i);
       return `<button type="button" data-b="${i}" class="${open ? "open" : ""}${open && isG ? " g" : ""}${flips.includes(i) ? " mine" : ""}"${open || over ? " disabled" : ""}><span class="bk"></span><span class="fr">${isG ? ADV_GW : "<i>❄</i>"}</span></button>`; }).join("")}</div>
-      <p class="adv-bst">${!heute && !done ? "Gespielt werden konnte nur am " + n + ". Dezember." : found === 3 ? "Alle 3 Glühweine gefunden! 🎉" : left <= 0 || (done && (me.qf || []).includes(n)) ? "Keine Versuche mehr – diesmal nicht." : `Gefunden: <b>${found}/3</b> · noch <b>${left}</b> ${left === 1 ? "Versuch" : "Versuche"}`}</p></div>`;
+      <p class="adv-bst">${!heute && !done ? "Gespielt werden konnte nur am " + n + ". Dezember." : found === 3 ? "Alle 3 Glühweine gefunden! 🎉" : verloren || (done && (me.qf || []).includes(n)) ? "Alle leeren Felder aufgedeckt – diesmal nicht." : `Glühweine: <b>${found}/3</b> · leere Felder: <b>${leer}/6</b>`}</p></div>`;
     if (over) return;
     ex.querySelectorAll("[data-b]").forEach((b) => b.addEventListener("click", async () => {
       if (!me.name) { toastAdv("Bitte erst anmelden"); return; }
       const i = +b.dataset.b; if (flips.includes(i)) return;
       flips.push(i); try { localStorage.setItem(K, JSON.stringify(flips)); } catch {}
-      const f = flips.filter((x) => gw.has(x)).length, l = max - flips.length;
-      if (f === 3 || l <= 0) {
+      const f = flips.filter((x) => gw.has(x)).length, l = flips.length - f;
+      if (f === 3 || l >= 6) {
         try { await Advent.bingo(n, f === 3); } catch (e) { console.warn("Bingo", e); toastAdv("Ergebnis nicht gespeichert – Internet?"); }
         const st = $("advChSt"); if (st) { st.textContent = f === 3 ? "✓ geschafft" : "✗ verloren"; st.className = "st " + (f === 3 ? "ok" : "bad"); }
         if (f === 3) { toastAdv("Bingo! Extra-Los 🎟️"); advKonfetti(); } else toastAdv("Leider nicht – morgen gibt’s ein neues Türchen");
@@ -10083,7 +10103,6 @@ async function advEditor(n) {
     <label>Belohnung der Challenge<input id="aeBel" maxlength="60" value="${esc(v.belohnung || "1 Extra-Los")}"></label>
     <div class="advt-2"><label>Knopf-Text<input id="aeBtnT" maxlength="40" value="${esc(v.btnT || "")}"></label><label>Knopf-Link<input id="aeBtnL" placeholder="#busfahrer" value="${esc(v.btnL || "")}"></label></div>
     <div class="advt-2"><label>Challenge<select id="aeSp"><option value="">keine</option>${[["wunsch", "Wunsch abgeben"], ["foto", "Foto teilen"], ["teilen", "App teilen (Knopf im Türchen)"], ["abzeichen", "neues Abzeichen"], ["geheim", "geheimes Spiel finden"]].map(([k, t]) => `<option value="${k}"${ch.spiel === k || (k === "wunsch" && ch.spiel === "frei") ? " selected" : ""}>${t}</option>`).join("")}${Object.entries(ADV_SPIEL).map(([k, x]) => `<option value="${k}"${ch.spiel === k ? " selected" : ""}>${x[0]} (${x[2]})</option>`).join("")}</select></label><label>Mindestens<input id="aeMin" type="number" min="0" value="${ch.min || ""}"></label></div>
-    <label>Bingo-Versuche (nur bei Art „Glühwein-Bingo“)<input id="aeBv" type="number" min="3" max="9" value="${(v.bingo && v.bingo.versuche) || 7}"></label>
     <label class="advt-chk"><input type="checkbox" id="aeNur"${v.nurAufgabe ? " checked" : ""}> Los nur für die Aufgabe (Öffnen allein gibt kein Los)</label>
     <label class="advt-chk"><input type="checkbox" id="aeStreich"${v.streich ? " checked" : ""}> Streich-Knopf (nach dem Tippen: „Reingefallen!“)</label>
     <fieldset class="advt-q"><legend>Quiz (nur bei Art „Quizfrage“)</legend>
@@ -10107,7 +10126,7 @@ async function advEditor(n) {
     if ($("aeArt").value === "glueck" && !pl.length) { alertTeam("Bitte die Glücksplätze eintragen."); return; }
     const sp = $("aeSp").value, out = { art: $("aeArt").value, titel: $("aeTitel").value.trim(), text: $("aeText").value.trim(), bild: $("aeBild").value.trim(), belohnung: $("aeBel").value.trim(), btnT: $("aeBtnT").value.trim(), btnL: $("aeBtnL").value.trim(), preis: $("aePreis").value.trim() };
     if (out.art === "glueck") out.plaetze = [...new Set(pl)].sort((x, y) => x - y);
-    if (out.art === "bingo") { out.bingo = { versuche: Math.max(3, Math.min(9, +$("aeBv").value || 7)) }; out.ch = { spiel: "bingo", feld: "", min: 0 }; }
+    if (out.art === "bingo") { out.bingo = {}; out.ch = { spiel: "bingo", feld: "", min: 0 }; }
     if (out.ch && out.ch.spiel === "teilen") out.teilen = true;
     if ($("aeNur").checked) out.nurAufgabe = true;
     if ($("aeStreich").checked) out.streich = true;
