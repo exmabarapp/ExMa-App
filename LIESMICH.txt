@@ -18,8 +18,9 @@ Bei jeder neuen Version in sw.js die Zahl bei VERSION erhöhen.
 Firebase (gemeinsame Zahlen, Bestenliste, Wünsche, Team-Login):
 - Projekt: exma-bar-app (console.firebase.google.com)
 - Sicherheitsregeln: Inhalt von firestore.rules unter Firestore Database -> Regeln einfügen
-- Team-Konto: club@ba-glauchau.de, Passwort = "exma-team-" + PIN (aktuell PIN 9876)
-  PIN ändern = in Firebase unter Authentication -> Nutzer das Passwort ändern.
+- Team-Login: jede Person hat einen eigenen Zugang (E-Mail + PIN), angelegt unter Authentication -> Nutzer.
+  Wer zum Team gehört, steht in Firestore unter team/liste (Feld „mails“). PIN ändern: in der App unter „Mein Zugang“.
+  Details siehe Version 125 weiter unten. PINs gehören nie in diese Datei oder in den Code.
 
 Beerpong-Turnier (Miami Vibes):
 - Spieler: Kachel "Beerpong-Turnier" im Menü und auf der Miami-Seite (Link-Ende #turnier).
@@ -86,7 +87,7 @@ MUSIKWÜNSCHE & DJ-PULT
   Pro Handy 1 eigener Wunsch alle 10 Minuten. Gleiche Songs (auch Remix/andere Schreibweise) werden zusammengelegt,
   ein zweiter Wunsch zählt dann als 🔥-Stimme. Dazu „Was soll mehr laufen?“ (Techno, Charts, Hip-Hop, Party-Klassiker).
 - Wird ein Wunsch gespielt, sieht der Gast „Dein Song läuft!“ und bekommt das Abzeichen „Dein Song läuft!“.
-- DJ: im Team-Bereich mit PIN anmelden → „DJ-Pult öffnen“ (…/#dj). Liste nach Votes, Knöpfe
+- DJ: im Team-Bereich mit E-Mail + PIN anmelden → „DJ-Pult öffnen“ (…/#dj). Liste nach Votes, Knöpfe
   „Gespielt“, „Passt nicht“ (nur heute weg) und „Sperren“ (dauerhaft: nur dieser Song oder ganzer Interpret).
   Unten „Dauerhaft gesperrt“ mit „Entsperren“. Gesperrtes lehnt auch die Datenbank ab (Regeln).
 - Daten: Firestore musik/<Abend-ID> (ein Dokument pro Abend), musikSperre/… und musikSperreInfo/….
@@ -103,3 +104,190 @@ ExMa X-Mas (02.12.) – seit v86
 - Gold-Abzeichen "Glühwein-Gang" (abzeichen: "xmas") gibt es für alle, die an dem Abend dabei sind.
 - Bildausschnitte für Vorschau-Karte, Polaroid und Tresen: SCENE_VB im Code.
 - Bei jedem Update APP_V in index.html und VERSION in sw.js zusammen hochzählen.
+
+=== Version 91/92: Dezember-Look (schaltet sich selbst ein) ===
+Vom 1.12. 0:00 bis 31.12. 23:59 automatisch, danach wieder aus – auch bei offener App.
+- Menü: Tannengirlande mit Lichtern, Mütze am Logo, leichter Schnee; Minispiel-Kacheln im Dezember-Look (v92)
+- Beerpong: Glühweintassen, Winternacht mit Tannen, Lichterkette, Schneefall
+- Busfahrer: Weihnachts-Kartenrücken, Goldrahmen und Stechpalme auf den Karten, Mütze für König/Dame/Bube
+- Zapfmeister: Glühwein im Glühwein-/Punschglas – Orange und Zimtstange steigen nach dem Loslassen auf
+  und heben den Pegel (kann überlaufen); Bar mit Girlande, Herrnhuter Sternen, Baum und Geschenken.
+  Die Glühweingläser zählen nicht fürs Abzeichen „Sauerei“.
+- Polnischen: Winterkleidung, Schnee, Schwibbögen, Glatteis statt Pfützen,
+  Weihnachtsmann fliegt vorbei – und ist in etwa jeder 5. Runde selbst die Spielfigur.
+Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
+
+=== Version 93 ===
+- Kacheltitel (z. B. „Zapfmeister“, „Musikwünsche“) werden automatisch kleiner, wenn sie nicht in die Kachel passen.
+- Zapfmeister: neues Glas „Bierflasche“ (durchsichtige Euroflasche, Form in v94 überarbeitet) – unten langsam, im Hals schnell. Zählt fürs Abzeichen „Sauerei“ (jetzt 15 Glassorten).
+
+=== Version 95 ===
+- Zapfmeister: Bierflasche füllt sich schneller (im Hals so schnell wie der Willibecher am Rand),
+  Sektflöte langsamer. Sekt-Schaum darf unsichtbar bis 105 % hochsteigen; bleibt er nach dem
+  Zusammenfallen über 100 %, gilt er als übergelaufen.
+
+=== Version 96 ===
+- Bierflasche: Füllen nach Physik – gleiche Menge pro Zeit, im engen Hals steigt das Bier ca. 3,4× so schnell wie im Bauch.
+
+=== Version 97: Feinschliff Standard-Design ===
+- Kacheln: Zapfmeister als kleine Bar-Szene, Beerpong mit Sternen/Bergen/Neon-Gitter, Busfahrer mit Kartenstapel,
+  Goldrahmen und Pfeilen hoch/runter, Sauf-Ranking mit Bierkrug-Treppchen, Wünsche als Notizblock.
+- Überschriften mit Leuchtbalken; „Mehr“ heißt jetzt „Rund um die Bar“.
+- Hintergrund: Punktraster, Körnung und Farbschimmer, die beim Scrollen mitlaufen.
+- Fix: Platz 1 in den Minispiel-Kacheln wird beim Zurückkehren ins Menü neu geladen (vorher erst, wenn das Menü neu aufgebaut wurde).
+
+=== Version 98: Schnellmenü unten ===
+- Glas-Leiste unten mit Start · Drinks · Spiele · Musik · Ich (in Spielen, bei offener Tastatur und auf Team-Seiten ausgeblendet).
+  Start antippen auf der Startseite = nach oben scrollen.
+- Neue Seiten: #drinks (Karte, Specials, Happy Hour, PayPal des aktuellen/nächsten Abends),
+  #spiele (alle Minispiele mit Top 3, eigenem Rekord, Turnier-Hinweis), #ich (Name, Matrikel, Zahlen, Bestwerte, letzte Abzeichen).
+- Bestenlisten-Cache merkt jetzt die Top 5 (Kacheln und Spiele-Seite teilen sich die Lesezugriffe).
+
+=== Version 99 ===
+- Drinks-Seite: Motto-Banner ganz oben (Szene, Titel, Datum, Happy Hour) in den Farben des Abends, Special-Drinks als große Querkacheln.
+- Schnellmenü am Clubabend (Beginn bis 1:30): Start · Drinks · Ranking · PayPal · Musik · Ich (Spiele fliegen dafür raus).
+- Spiele-Seite: Hochkant-Kachel wie im Menü, damit die Animationen ganz zu sehen sind.
+- Ich: Profilbild wählbar (eigenes Foto, wird verkleinert und nur auf dem Handy gespeichert, oder eins von 12 Motiven); erscheint auch im Ich-Tab.
+- Dezember: Leiste mit Schneehaube und Gold.
+
+=== Version 100 ===
+- Schnellmenü am Clubabend: links Start · Drinks, rechts Musik · Ich, in der Mitte ein großer gelber PayPal-Knopf
+  in einer runden Aussparung (öffnet direkt PayPal). Ranking bleibt über die Startseite erreichbar.
+
+=== Version 101 ===
+- Startseite am Clubabend: großer PayPal-Knopf raus (PayPal ist jetzt unten in der Leiste),
+  Specials als große Querkacheln wie auf der Drinks-Seite, darunter „Ganze Getränkekarte“.
+
+=== Version 102 ===
+- PayPal-Knopf in der Leiste gedeckter: halbdurchlässiges Glas in PayPal-Gelb statt glänzend.
+
+=== Version 103: Monats-Bestenlisten ===
+- Beerpong, Busfahrer und Zapfmeister haben jetzt eine Bestenliste pro Monat (erster Monat: November 2026).
+  Neue Einträge bekommen das Feld „monat“ (z. B. "2026-11"). Ältere Einträge zählen nur noch zum Allzeit-Rekord.
+- Spiele-Seite: breite Kachel, darunter Top 3 des Monats, Allzeit-Rekord, eigene Zeile „Du“ (Platz, Monatsbestwert,
+  Abstand zum Treppchen) und „Vormonate“ (Top 3 der letzten bis zu 6 Monate).
+- In den Spielen heißt die Liste „Top 10 · <Monat>“. Platz 1 in den Menü-Kacheln = Platz 1 des Monats.
+- Team-Seite zeigt zum Löschen weiterhin alle Einträge. Polnischen bleibt Allzeit.
+- firestore.rules geändert (Feld „monat“ erlaubt, nur aktueller Monat).
+- 3 Firestore-Indizes nötig (siehe firestore.indexes.json): beerpong (monat ↑, cups ↓), busfahrer (monat ↑, score ↓),
+  zapfmeister (monat ↑, score ↓). Ohne Index funktioniert es trotzdem, kostet aber mehr Lesezugriffe.
+
+=== Version 104 ===
+- Spiele-Seite: „Du“-Zeile schlicht wie eine Listenzeile (Platz, kleines Profilbild, Monatsbestwert), Treppchen-Hinweis entfernt.
+
+=== Version 105 ===
+- Spiele-Seite: Zapfmeister-Kachel als breite Bar-Szene (Zapfhahn und Glas immer ganz im Bild).
+- November (Startmonat): Bestenliste zählt auch Einträge von vor dem Update (nach Datum), damit Top 3 und Platz 1 sofort da sind.
+- Platz 1 in den Menü-Kacheln zeigt bei Verbindungsproblemen einen Hinweis statt nichts.
+- Leistung: Menü-Hintergrund ohne Rauschfilter/Punktraster, schwächere Weichzeichnung der Leiste,
+  Animationen auf Spiele-/Drinks-Seite pausieren außerhalb des Bildschirms.
+
+=== Version 106 ===
+- Spiele-Seite: Bestenliste ragte bei breiter Schrift über den Kartenrand – jetzt passt alles, lange Namen werden mit … gekürzt.
+
+=== Version 107 ===
+- Bestenlisten-Zwischenspeicher neu (alte, leere November-Listen von v103/v104 werden verworfen); leere Listen nur 2 Min. gemerkt.
+
+=== Version 108 ===
+- Ruckeln beim Scrollen: Während gescrollt wird, halten alle Kachel-Animationen an und die Leiste wird nicht weichgezeichnet (danach automatisch wieder an).
+
+=== Version 109 ===
+- Kein Live-Weichzeichner mehr: Leiste und PayPal-Knopf mit festem Milchglas-Look.
+- Kachel-Grafiken auf eigener Ebene (beim Scrollen wird nur das fertige Bild verschoben), animiert wird nur, was zu ≥ 60 % sichtbar ist.
+- Spiele-/Drinks-Seite: Abschnitte weit unten werden erst gezeichnet, wenn man hinscrollt.
+
+=== Version 110 ===
+- Reihenfolge: Abend → Kommende Woche → Minispiele → Rund um die Bar → Semester → Instagram/E-Mail.
+- Minispiele: alle drei nebeneinander (kein Wischen mehr), mit Platz 1 im laufenden Monat.
+- Fotowand über die ganze Breite, darunter Wünsche + Musikwünsche, darunter das Sauf-Ranking als schmale Kachel.
+- Neu: Semester-Zeitstrahl (letzter Abend mit Fotos, aktueller Abend hervorgehoben, alle kommenden).
+- PayPal-Kachel und Abzeichen-Kachel nicht mehr auf der Startseite: PayPal steckt in der Drinks-Seite und am Clubabend in der Leiste, Abzeichen unter „Ich“. Neue Abzeichen zeigen einen roten Punkt am Ich-Knopf.
+- Clubabend-, Tag- und Rückblick-Ansicht bleiben, nur mit dem neuen Spiele-/Bar-Block.
+
+=== Version 111 ===
+- Minispiel-Kacheln: Rekord jetzt zweizeilig und größer (Name weiß, Wert gold), Kacheln etwas höher.
+
+=== Version 112 ===
+- Allzeit-Rekord: bei Gleichstand (gleiche Becher/Punkte) hat Firestore zufällig einen Eintrag genommen. Jetzt werden alle Gleichstände geladen und wie in der Monatsliste nach Zeit entschieden. Gemerkte Allzeit-Werte werden einmalig verworfen.
+
+=== Version 113 ===
+- Aufgeräumt: nicht mehr benutzter Code entfernt (alte Abzeichen-Kachel, PayPal-Kachel, alte Menü- und Leisten-Reste, ungenutzte Konstanten/Funktionen, ~70 tote CSS-Regeln). Aussehen und Funktion unverändert (Seiten pixelgleich geprüft).
+
+=== Version 114 – Adventskalender (Etappe 1) ===
+- Neue Seite #advent: Papier-Türchen mit goldenen Ecken, hinter offenen Türchen wächst das X-Mas-Winterbild zusammen. Kachel im Hauptmenü vom 1. bis 26.12.
+- Türchen öffnen um 8 Uhr (Serverzeit). Los nur am Tag selbst (8 Uhr bis 8 Uhr). Einmalige Anmeldung mit Name + Matrikel.
+- Challenges: Spielstand (Beerpong/Busfahrer/Zapfmeister/Polnischen) wird von den Regeln geprüft; „ohne Prüfung“ = Wunsch abgeben.
+- Erste 5 per Abfrage (kein Zähler). Gewinnkarte mit Live-Uhr und Code; das Team hakt im Team-Bereich ab.
+- Team-Bereich → Advent: Türchen bearbeiten, Vorlage einspielen, Erste 5 einlösen, Finale auslosen (einmalig, Ergebnis nicht änderbar).
+- NEU: firestore.rules (Sammlungen advent, adventName, adventT, adventEinl, adventZiehung, adventGewinn) – muss veröffentlicht werden.
+
+=== Version 115 ===
+- Adventskalender: einige Türchen in Salbeigrün (3, 16, 20, 21) und Goldgelb (11, 12, 15, 22) aus dem X-Mas-Design.
+- Anmeldung Pflicht: Name, Studiengang, Matrikel und Matrikelnummer. Doppelte Konten werden über die Matrikelnummer zusammengelegt.
+- Neu: Glückstürchen – es gewinnen die Türchenöffner auf geheimen Plätzen (z. B. 3, 7, 12, 14, 19). Die Plätze stehen in adventGeheim und sind erst ab der Auflösungszeit lesbar. Türchen 2 und 9 in der Vorlage.
+- Team → Advent: „Stand“ zählt die Lose im Topf; „Gewinner des Tages“ zeigt die Gewinner auf den Glücksplätzen zum Einlösen.
+- firestore.rules geändert (adventName mit Studiengang/Matrikelnummer, neue Sammlung adventGeheim).
+
+=== Version 116 ===
+- Adventskalender: Matrikelnummer entfernt (Datenschutz). Pflicht sind Name, Studiengang und Matrikel; doppelte Konten werden über Name + Matrikel zusammengelegt.
+- Glückstürchen: Ergebnis sofort nach dem Öffnen. Die Gewinnplätze stehen im Türchen selbst, keine Freischaltung und kein Extra-Dokument mehr (adventGeheim entfällt).
+- firestore.rules angepasst.
+
+=== Version 117 ===
+- Glückstürchen: Gewinner sehen „Glückwunsch – einer von 5 Gewinnern!“ statt ihrer Platznummer; ohne Gewinn kurz „Diesmal kein Gewinn – dein Los fürs Finale hast du trotzdem.“ Name steht auf der Gewinnkarte jetzt unter dem Code.
+
+=== Version 118 ===
+- Adventskalender-Kachel neu: Nachthimmel mit Lichterkette (jedes geöffnete Türchen = ein Lämpchen, heute pulsiert rot), Dorf mit Weihnachtslichtern in der Ferne, Tür im Kalender-Look (Papier, Goldecken, Messing-Knauf) mit Lichtschein.
+- firestore.rules unverändert seit v116.
+
+=== Version 119 – Inhalte Adventskalender ===
+- Neue Vorlage für alle 24 Türchen (Quiz-Fragen, Rezepte, Challenges, Glückstürchen 2 und 9, Streich am 16., Finale am 24.).
+- Neue Aufgaben: Foto von der Fotowand teilen, Wunsch abgeben, neues Abzeichen holen, geheimes Spiel finden – jeweils nur am Tag selbst.
+- Quiz mit Auswahl (A–D): eine Antwort pro Türchen, nur die richtige gibt ein Extra-Los (zählt auch im Topf nur, wenn richtig).
+- Glückstürchen: Wer nicht gewinnt, sieht ein Meme (gezeichnet, Text im Editor änderbar, oder eigenes Bild per Link).
+- Türchen 14: Los nur mit Aufgabe. Türchen 16: Streich-Knopf. Türchen 24: neues Abzeichen „Regenbogen“ (abzeichen.svg geändert).
+- Editor im Team-Bereich: Quiz-Antworten, Meme-Texte, „Los nur für die Aufgabe“, „Streich-Knopf“.
+- Türchen-Karte schließt sich bei jedem Seitenwechsel.
+- firestore.rules geändert (Aufgaben ohne Spielstand und Quiz erlaubt).
+
+=== Version 120 ===
+- Abzeichen vom 24. Türchen neu: „Heiligabend“ mit regenbogenfarbenem Rand, geschmücktem Tannenbaum und goldenem Lorbeer; steht jetzt bei den goldenen Abzeichen (abzeichen.svg geändert).
+
+=== Version 121 ===
+- Glückstürchen sind jetzt Rubbellose: Ergebnis unter goldener Rubbelschicht, ab ca. 45 % freigerubbelt wird aufgedeckt (einmal pro Türchen).
+- Türchen 17: Quiz „Was kosten unsere letzten 3 Einkäufe?“ (Beträge im Editor eintragen).
+- Türchen 19: Glühwein-Bingo – 3 Glühweine unter 9 Feldern, 7 Versuche (im Editor einstellbar), ein Spiel pro Person.
+- Türchen 20: App teilen – Knopf öffnet das Teilen-Menü, Extra-Los.
+- firestore.rules geändert (Aufgaben „teilen“ und „bingo“).
+
+=== Version 122 ===
+- Glühwein-Bingo: bis zu 9 Felder aufdecken; gewonnen, wenn alle 3 Glühweine gefunden sind, bevor die 6 leeren Felder aufgedeckt sind (Chance 2/3). Anzeige „Glühweine x/3 · leere Felder y/6“.
+
+=== Version 123 ===
+- Adventskalender in der Zeit-Vorschau (?zeit=…): Türchen öffnen sich zum Ausprobieren. Inhalt aus der Datenbank, wenn das Gerät im Team angemeldet ist, sonst aus der Vorlage. Nichts wird gespeichert (eigener Speicher, keine Lose). Mit &gewinn im Link zeigt das Rubbellos einen Gewinn.
+
+=== Version 124 ===
+- Team-Bereich: neue Kachel „Nutzung" (neben Turnier) mit Auswertung
+  · Ansichten: Letzter Abend / Heute / 7 Tage
+  · Geräte (davon neu), Seitenaufrufe, Anteil als App installiert
+  · Geräte pro Stunde, beliebteste Seiten, Matrikel-Verteilung, Clubabende im Vergleich
+- Zählung: nur Tagessummen (Tag läuft 6–6 Uhr), keine Namen/Geräte-Kennungen
+  · jedes Gerät schreibt höchstens alle 15 Min. (beim Verlassen/Wegwischen der App)
+  · Team-Handy und Zeit-Vorschau (?zeit=) zählen nicht mit
+  · Datenbank: Sammlung „nutzung", 5 Dokumente pro Tag; Team liest 5 Dokumente je Tag
+- firestore.rules: neuer Block „nutzung" (Schreiben nur für den aktuellen Tag, Lesen nur Team)
+
+=== Version 125 ===
+- Team-Login mit eigenem Zugang pro Person: E-Mail + PIN (Passwort in Firebase = exma-team- + PIN).
+- Im Code steht kein Passwort und kein PIN-Prüfwert mehr.
+- Wer zum Team gehört, steht in Firestore: Sammlung „team“, Dokument „liste“, Feld „mails“ (Array, Adressen kleingeschrieben).
+  Die Firestore-Regeln prüfen diese Liste. Ändern nur in der Firebase-Konsole.
+- Team-Bereich: „Mein Zugang“ zeigt die angemeldete Adresse und ermöglicht „PIN ändern“ (6–8 Ziffern).
+- Tresenmodus beenden: PIN der angemeldeten Person. Ohne Netz gilt der PIN dieser Sitzung.
+- Team-Login braucht Internet (kein Offline-Login mehr).
+- firestore.rules geändert (isTeam über team/liste, neuer Block „team“).
+
+  Neue Person ins Team:   1. Authentication → Nutzer hinzufügen (E-Mail, Passwort exma-team-<Start-PIN>)
+                          2. danach Adresse in team/liste → mails ergänzen
+                          3. Person meldet sich an und ändert unter „Mein Zugang“ den PIN
+  Person verlässt Team:   Adresse aus team/liste → mails löschen und den Nutzer unter Authentication löschen
