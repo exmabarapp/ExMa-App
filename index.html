@@ -156,9 +156,7 @@ a { color: inherit; }
   font-size: 12.5px; font-weight: 800;
   letter-spacing: .08em; text-transform: uppercase;
   border: 1px solid color-mix(in srgb, var(--a1) 55%, transparent);
-  background: rgba(5, 8, 22, .5);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(5, 8, 22, .68);
   font-variant-numeric: tabular-nums;
 }
 .chip.hot { border-color: transparent; background: var(--a3); color: #fff; box-shadow: 0 0 18px color-mix(in srgb, var(--a3) 70%, transparent); }
@@ -1604,7 +1602,7 @@ body.fg-open { overflow: hidden; }
 
 /* ===== Schnellmenü unten: Glas-Leiste ===== */
 .tabbar { position: absolute; z-index: 40; left: 12px; right: 12px; bottom: max(8px, calc(var(--safe-b) - 12px)); height: 62px; padding: 5px; display: flex; border-radius: 31px;
-  background: rgba(26,20,46,.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(48,40,78,.95), rgba(24,19,42,.96));
   border: 1px solid rgba(255,255,255,.2); box-shadow: 0 14px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.14);
   font-family: var(--f-body); transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s; }
 .tabbar a { flex: 1; min-width: 0; height: 52px; border-radius: 26px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
@@ -1723,7 +1721,7 @@ body.fg-open { overflow: hidden; }
 .tabbar.live { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; overflow: visible; }
 .tabbar.live::before { display: none; }
 .tb-side { position: absolute; top: 0; bottom: 0; display: flex; padding: 5px; border-radius: 31px;
-  background: rgba(26,20,46,.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(48,40,78,.95), rgba(24,19,42,.96));
   border: 1px solid rgba(255,255,255,.2); box-shadow: 0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14); }
 .tb-side.l { left: 0; right: calc(50% + 31px); border-radius: 31px 0 0 31px; padding-right: 12px;
   -webkit-mask: radial-gradient(circle at calc(100% + 31px) 50%, transparent 46px, #000 46.5px); mask: radial-gradient(circle at calc(100% + 31px) 50%, transparent 46px, #000 46.5px); }
@@ -1735,12 +1733,12 @@ body.fg-open { overflow: hidden; }
 .tb-fab { position: absolute; left: 50%; top: 50%; z-index: 2; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; text-decoration: none;
   /* gedecktes PayPal-Gelb als Glas: halbdurchlässig und weichgezeichnet wie die Leiste */
-  background: linear-gradient(180deg, rgba(255,196,57,.36), rgba(214,150,20,.28)), rgba(26,20,46,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: #ffe7a8;
+  background: linear-gradient(180deg, #8a6a24, #5e4514); color: #ffe7a8;
   border: 1px solid rgba(255,214,120,.45); box-shadow: 0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2); transition: transform .2s; -webkit-tap-highlight-color: transparent; }
 .tb-fab:active { transform: scale(.94); }
 .tabbar a.tb-fab { flex: none; width: 74px; height: 74px; border-radius: 50%; color: #ffe7a8; gap: 0; }
 .tb-fab svg path[fill="#003087"] { fill: #ffe7a8; } .tb-fab svg path[fill="#009cde"] { fill: #ffc439; }
-.tabbar a.tb-fab.on { background: linear-gradient(180deg, rgba(255,196,57,.36), rgba(214,150,20,.28)), rgba(26,20,46,.55); }
+.tabbar a.tb-fab.on { background: linear-gradient(180deg, #8a6a24, #5e4514); }
 .tb-fab svg { width: 30px; height: 30px; }
 .tb-fab-t { font: 800 11px var(--f-body); letter-spacing: .02em; }
 /* --- Leiste mit 6 Tabs am Clubabend --- */
@@ -1827,13 +1825,16 @@ body.fg-open { overflow: hidden; }
 .tp-pm span { display: flex; flex-wrap: wrap; gap: 2px 10px; font-weight: 700; } .tp-pm i { font-style: normal; margin-right: 3px; } .tp-pm small { color: rgba(255,255,255,.6); font-weight: 600; }
 .top-mon { font: 700 .55em var(--f-body); opacity: .7; text-transform: none; letter-spacing: 0; }
 
-/* --- Leistung beim Scrollen (v108) --- */
+/* --- Leistung beim Scrollen (v109) ---
+   Kachel-Grafiken bekommen eine eigene Ebene: das Handy malt sie einmal und schiebt beim Scrollen nur das fertige Bild.
+   Animiert wird nur, was ruhig und zu mindestens 60 % im Bild steht (siehe animIO). */
 .app.is-scrolling .tile-btn *, .app.is-scrolling .tp-hero *, .app.is-scrolling .drink *, .app.is-scrolling .hm-card *, .app.is-scrolling .mtile * { animation-play-state: paused !important; }
-.app.is-scrolling .tabbar:not(.live), .app.is-scrolling .tb-side, .app.is-scrolling .tb-fab { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
-.app.is-scrolling .tabbar:not(.live), .app.is-scrolling .tb-side { background-color: rgba(26,20,46,.95) !important; }
-.app.is-scrolling .tb-fab { background: linear-gradient(180deg, rgba(120,92,30,.96), rgba(96,70,20,.96)) !important; }
+.tile-btn > .game-demo, .tile-btn > .bd, .tile-btn > .zd, .tile-btn > .mu-art, .tp-hero .tile-scene, .drink-pic { will-change: transform; transform: translateZ(0); }
 .spiele-page .tp-game, .drinks-page .drink { contain: layout paint; }
 .spiele-page .tp-game .tile-btn.tp-art { box-shadow: none; }
+/* weit unterhalb des Bildschirms gar nicht erst zeichnen */
+.spiele-page .tp-game { content-visibility: auto; contain-intrinsic-size: auto 330px; }
+.drinks-page .tp-drinks .block { content-visibility: auto; contain-intrinsic-size: auto 600px; }
 /* ===== Feinschliff Standard-Design ===== */
 .tile-rank { position: relative; overflow: hidden; }
 .rk-art { position: absolute; right: 10px; top: 7px; width: 74px; height: 48px; pointer-events: none; }
@@ -2628,7 +2629,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "108";
+const APP_V = "109";
 
 const EVENTS = [
   {
@@ -8164,10 +8165,12 @@ function dekoApply() {
 
 /* Nur Kacheln animieren, die gerade auf dem Bildschirm sind (spart auf älteren Handys viel Rechenzeit) */
 const animIO = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => {
-  e.target.classList.toggle("anim-off", !e.isIntersecting);
+  /* nur Kacheln, die zu mindestens 60 % zu sehen sind, bewegen sich – der Rest bleibt ein stehendes Bild */
+  const big = e.target.offsetHeight > innerHeight * .9, show = e.isIntersecting && (big || e.intersectionRatio >= .6);
+  e.target.classList.toggle("anim-off", !show);
   /* SVG-eigene Animationen (Beerpong-Ball) laufen sonst weiter */
-  e.target.querySelectorAll("svg.game-demo").forEach((sv) => { if (sv.pauseAnimations) e.isIntersecting ? sv.unpauseAnimations() : sv.pauseAnimations(); });
-}), { rootMargin: "60px 0px" }) : null;
+  e.target.querySelectorAll("svg.game-demo").forEach((sv) => { if (sv.pauseAnimations) show && !app.classList.contains("is-scrolling") ? sv.unpauseAnimations() : sv.pauseAnimations(); });
+}), { threshold: [0, .3, .6, .9] }) : null;
 function watchAnim(root) { if (animIO) root.querySelectorAll(".mtile, .hm-card, .tile-btn, .hm-sign, .tp-hero, .drink").forEach((el) => animIO.observe(el)); }
 function buildMenu() {
   const g = $("menuGrid");
