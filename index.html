@@ -1985,6 +1985,151 @@ body.fg-open { overflow: hidden; }
 .hm-games .tile-btn .hm-best b { display: inline; font-family: var(--f-body); font-size: 10px; font-weight: 800; text-transform: none; letter-spacing: 0; color: rgba(255,255,255,.88); }
 .hm-games .tile-btn b { font-size: 16px; }
 .hm-games .tile-btn small { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.75); }
+/* ===== Adventskalender (v114) ===== */
+.adv-tile { position: relative; display: block; height: 176px; margin: 14px 0 0; border-radius: 26px; overflow: hidden; color: #fff; text-decoration: none;
+  background: radial-gradient(120% 140% at 70% 0%, #2a2140 0%, #141026 45%, #09070f 100%); border: 1px solid rgba(233,183,124,.4); box-shadow: 0 10px 26px rgba(0,0,0,.45); }
+.adv-tile svg.k { position: absolute; left: 0; top: 0; width: 100%; height: 56px; z-index: 2; }
+.adv-tile svg.dorf { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 78px; z-index: 1; }
+.adv-tile .adv-puls { animation: advPuls 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes advPuls { 50% { opacity: .1; transform: scale(.7); } }
+.adv-tile .tx { position: absolute; left: 18px; top: 50px; z-index: 3; display: grid; gap: 5px; max-width: 62%; }
+.adv-tile .lab { font: 800 10.5px var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: #f2c178; }
+.adv-tile .ttl { font: 400 25px/1 "Gloock", serif; }
+.adv-tile .ttl em { font: italic 400 26px "Instrument Serif", serif; color: #f2c178; }
+.adv-tile .sub { font: 700 12.5px/1.35 var(--f-body); color: rgba(255,255,255,.78); text-shadow: 0 1px 6px #09070f; }
+.adv-tile .sp { position: absolute; right: 6px; top: 124px; width: 110px; height: 26px; z-index: 2; background: radial-gradient(60% 100% at 30% 0%, rgba(255,206,130,.4), transparent 75%); }
+.adv-tile .md { position: absolute; right: 26px; top: 50px; width: 62px; height: 82px; z-index: 3; perspective: 320px; }
+.adv-tile .md .fr { position: absolute; inset: -5px; border-radius: 9px; background: #100c1a; box-shadow: inset 0 0 0 1px rgba(233,183,124,.55), 0 6px 14px rgba(0,0,0,.5); }
+.adv-tile .md .fr::before { content: ""; position: absolute; left: -2px; right: -2px; top: -3px; height: 5px; border-radius: 5px 5px 3px 3px; background: linear-gradient(180deg, #fff, #d8d2e8); opacity: .9; }
+.adv-tile .md .l { position: absolute; inset: 0; border-radius: 6px; background: radial-gradient(75% 75% at 35% 45%, #fff3cf 0%, #ffcf7a 40%, #b8641f 85%); box-shadow: 0 0 26px 8px rgba(255,190,90,.45); }
+.adv-tile .md .d { position: absolute; inset: 0; border-radius: 6px; transform-origin: 0 50%; transform: rotateY(-34deg); background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 5px top 5px / 12px 12px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 5px top 5px / 12px 12px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 5px bottom 5px / 12px 12px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 5px bottom 5px / 12px 12px no-repeat, linear-gradient(170deg, #fbf4e4, #efe2c4); box-shadow: 5px 0 10px rgba(0,0,0,.45); display: grid; place-items: center; }
+.adv-tile .md .d b { font: 400 34px/1 "Gloock", serif; color: #6e1a20; }
+.adv-tile .md .d::after { content: ""; position: absolute; right: 6px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f3d48a, #a87a2c); }
+.adv-tile.zu .md .d { transform: rotateY(-6deg); }
+.adv-tile.zu .md .l { box-shadow: 0 0 12px 2px rgba(255,190,90,.25); }
+.adv-tile.zu .sp { opacity: .35; }
+@media (prefers-reduced-motion: reduce) { .adv-tile .adv-puls { animation: none; } }
+.adv-prog { display: flex; align-items: center; gap: 12px; margin: 2px 0 14px; padding: 12px 14px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); font: 700 12.5px var(--f-body); color: rgba(255,255,255,.75); }
+.adv-prog b { color: #fff; }
+.adv-prog .bar { flex: 1; height: 8px; border-radius: 6px; background: rgba(255,255,255,.1); overflow: hidden; }
+.adv-prog .bar i { display: block; height: 100%; background: linear-gradient(90deg, #ffd68a, #e2554b); }
+.adv-lose { display: inline-flex; align-items: center; gap: 5px; }
+.adv-lose svg { width: 16px; height: 16px; color: #e9c36f; }
+.adv-board { position: relative; border-radius: 24px; overflow: hidden; padding: 10px; border: 1px solid rgba(255,214,138,.35); box-shadow: 0 14px 30px rgba(0,0,0,.5); }
+.adv-bg { position: absolute; inset: 0; background: linear-gradient(180deg, #0d1622, #1b2a22); }
+.adv-bg svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.adv-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 78px; gap: 7px; }
+.adv-grid .dr { position: relative; padding: 0; border: 0; background: none; border-radius: 10px; perspective: 500px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.adv-grid .dr.big { grid-column: span 2; grid-row: span 2; }
+.adv-grid .dr.wide { grid-column: span 2; }
+.adv-grid .dr .pn { position: absolute; inset: 0; border-radius: 10px; transform-origin: 0 50%; transition: transform .7s cubic-bezier(.3,.7,.2,1), box-shadow .7s; box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 4px 10px rgba(0,0,0,.28); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.adv-grid .dr .pn::after { content: ""; position: absolute; right: 7px; top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f3d48a, #a87a2c); }
+.adv-grid .dr .pn > span { position: relative; font: 400 28px/1 "Gloock", serif; color: #6e1a20; }
+.adv-grid .dr.big .pn > span { font-size: 58px; }
+.adv-grid .dr.wide .pn > span { font-size: 30px; }
+.adv-grid .dr .pn em { position: absolute; bottom: 7px; left: 0; right: 0; text-align: center; font: italic 400 11px "Instrument Serif", serif; color: #6e1a2099; }
+.adv-grid .dr.r .pn > span { color: #f6e7c8; }
+.adv-grid .dr.r .pn em { color: #f3d48acc; }
+.adv-grid .dr.open, .adv-grid .dr.opening { box-shadow: inset 0 0 0 1px rgba(243,212,138,.6), inset 0 0 14px rgba(0,0,0,.45); }
+.adv-grid .dr.open .pn, .adv-grid .dr.opening .pn { transform: rotateY(-82deg); box-shadow: -2px 0 6px rgba(0,0,0,.4); }
+.adv-grid .dr.opening::before { content: ""; position: absolute; inset: 0; border-radius: 10px; background: radial-gradient(70% 70% at 45% 45%, #fff3cf 0%, #ffbf55 40%, transparent 80%); animation: advLight .72s ease-out forwards; }
+@keyframes advLight { 0% { opacity: 0; } 40% { opacity: 1; } 100% { opacity: 0; } }
+.adv-grid .dr .rw { position: absolute; right: 6px; bottom: 6px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: rgba(12,8,10,.72); color: #f3d48a; }
+.adv-grid .dr .rw svg { width: 13px; height: 13px; }
+.adv-grid .dr.today .pn { box-shadow: 0 0 0 2px #c9963c, 0 0 24px 6px rgba(255,190,90,.7); }
+.adv-grid .dr.today::after { content: "HEUTE"; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); padding: 1px 7px; border-radius: 999px; background: #e9c36f; color: #3d0d14; font: 800 8.5px var(--f-body); letter-spacing: .1em; z-index: 2; }
+.adv-grid .dr.wig .pn { animation: advWig .45s; }
+@keyframes advWig { 20% { transform: rotate(-3deg); } 40% { transform: rotate(3deg); } 60% { transform: rotate(-2deg); } 80% { transform: rotate(1deg); } }
+@media (prefers-reduced-motion: reduce) { .adv-grid .dr .pn { transition: none; } .adv-grid .dr.wig .pn { animation: none; } }
+.adv-grid .dr .pn{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 16px 16px no-repeat, linear-gradient(170deg,#fbf4e4 0%,#efe2c4 100%)!important}
+.adv-grid .dr .pn::before{display:none}
+.adv-grid .dr.today .pn{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23b0843a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23b0843a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 16px 16px no-repeat, linear-gradient(170deg,#fff2cf,#f3d796)!important}
+.adv-grid .dr.r .pn{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23f3d48a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23f3d48a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23f3d48a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23f3d48a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23f3d48a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23f3d48a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23f3d48a%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23f3d48a%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 16px 16px no-repeat, linear-gradient(170deg,#8a2229 0%,#631219 100%)!important}
+.adv-grid .dr.g .pn{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23e9c98f%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23e9c98f%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23e9c98f%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23e9c98f%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23e9c98f%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23e9c98f%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%23e9c98f%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%23e9c98f%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 16px 16px no-repeat, linear-gradient(170deg,#6b8361 0%,#4a5d43 100%)!important}
+.adv-grid .dr.g .pn > span{color:#f6ead0}.adv-grid .dr.g .pn em{color:#f3d48acc}
+.adv-grid .dr.y .pn{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%280%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%2890%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28180%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 16px 16px no-repeat, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cg%20transform%3D%22rotate%28270%209%209%29%22%20fill%3D%22none%22%20stroke%3D%22%238a5a1c%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M2.5%2015V7.5Q2.5%202.5%207.5%202.5H15%22/%3E%3Cpath%20d%3D%22M5.5%2015V9Q5.5%205.5%209%205.5H15%22%20opacity%3D%22.55%22/%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%221.1%22%20fill%3D%22%238a5a1c%22%20stroke%3D%22none%22/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 16px 16px no-repeat, linear-gradient(170deg,#f6cf8a 0%,#e4ad66 100%)!important}
+.adv-grid .dr.y .pn > span{color:#6e1a20}
+.adv-grid .dr.g.today .pn, .adv-grid .dr.y.today .pn{box-shadow:0 0 0 2px #fff3cf,0 0 24px 6px rgba(255,190,90,.7)}
+.adv-hint { margin: 12px 2px 0; font: 600 12px/1.4 var(--f-body); color: rgba(255,255,255,.6); text-align: center; }
+.adv-bed { margin-top: 14px; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.04); font: 600 12px/1.5 var(--f-body); color: rgba(255,255,255,.65); }
+.adv-bed summary { cursor: pointer; font-weight: 800; color: rgba(255,255,255,.85); }
+.adv-bed p { margin: 8px 0 0; }
+.adv-sheet-bg { position: fixed; inset: 0; z-index: 90; background: rgba(5,3,8,.6); animation: advFade .25s; }
+.adv-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 91; max-width: 560px; margin: 0 auto; max-height: 86vh; overflow-y: auto; padding: 12px 18px calc(26px + env(safe-area-inset-bottom)); border-radius: 28px 28px 0 0; background: linear-gradient(180deg, #2a1016 0%, #14080c 60%); border-top: 1px solid rgba(255,214,138,.45); color: #fff; box-shadow: 0 -20px 40px rgba(0,0,0,.5); animation: advUp .32s cubic-bezier(.2,.8,.2,1); }
+.adv-sheet.out, .adv-sheet-bg.out { opacity: 0; transition: opacity .25s; }
+@keyframes advUp { from { transform: translateY(40%); opacity: 0; } }
+@keyframes advFade { from { opacity: 0; } }
+.adv-sheet .grip { width: 42px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.25); margin: 0 auto 14px; }
+.adv-sheet .hd { display: flex; align-items: center; gap: 14px; }
+.adv-sheet .num { flex: none; width: 64px; height: 74px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(170deg, #fbf4e4, #efe2c4); font: 400 44px/1 "Gloock", serif; color: #6e1a20; box-shadow: 0 0 22px rgba(255,200,100,.45); }
+.adv-sheet .hd small { display: block; font: 800 10.5px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: #ffd68a; }
+.adv-sheet .hd b { display: block; margin-top: 4px; font: 400 25px/1.05 "Gloock", serif; }
+.adv-sheet .chip { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 5px 11px; border-radius: 999px; background: rgba(124,242,154,.14); border: 1px solid rgba(124,242,154,.4); font: 800 11.5px var(--f-body); color: #7cf29a; }
+.adv-sheet p { margin: 10px 0 0; font: 500 15px/1.5 var(--f-body); color: rgba(255,255,255,.85); }
+.adv-sheet .adv-load { color: rgba(255,255,255,.55); }
+.adv-img { display: block; width: 100%; margin-top: 14px; border-radius: 16px; }
+.adv-rew { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 14px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+.adv-rew .ic { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(226,85,75,.2); color: #e9c36f; }
+.adv-rew .ic svg { width: 24px; height: 24px; }
+.adv-rew div { flex: 1; min-width: 0; font: 700 12.5px/1.35 var(--f-body); color: rgba(255,255,255,.65); }
+.adv-rew div b { display: block; font: 800 15px var(--f-body); color: #fff; }
+.adv-rew .st { flex: none; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,.1); font: 800 11px var(--f-body); color: rgba(255,255,255,.75); }
+.adv-rew .st.ok { background: rgba(124,242,154,.18); color: #7cf29a; }
+.adv-rew .st.bad { background: rgba(226,85,75,.25); color: #ffb3ad; }
+.adv-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 16px; height: 52px; border: 0; border-radius: 16px; background: #ffd68a; color: #2a1016; font: 800 16px var(--f-body); text-decoration: none; cursor: pointer; }
+.adv-form { display: grid; gap: 10px; margin-top: 16px; padding: 14px; border-radius: 18px; background: rgba(255,214,138,.08); border: 1px solid rgba(255,214,138,.35); }
+.adv-form > b { font: 800 15px var(--f-body); }
+.adv-form input { height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.3); color: #fff; font: 600 16px var(--f-body); }
+.adv-mats { display: flex; gap: 6px; }
+.adv-mats button { flex: 1; height: 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.05); color: #fff; font: 800 13px var(--f-body); }
+.adv-mats button[aria-pressed="true"] { background: #ffd68a; color: #2a1016; border-color: #ffd68a; }
+.adv-form .adv-btn { margin-top: 2px; }
+.adv-form small { font: 600 11.5px/1.4 var(--f-body); color: rgba(255,255,255,.55); }
+.adv-miss { padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.05); font-size: 14px !important; }
+.tk { position: relative; margin-top: 16px; padding: 18px; border-radius: 22px; overflow: hidden; background: linear-gradient(135deg, #7a1c22, #3d0d14); border: 1.5px solid #ffd68a; box-shadow: 0 0 30px rgba(255,200,100,.35); }
+.tk::before { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.2) 45%, transparent 60%); animation: advShine 2.4s linear infinite; }
+@keyframes advShine { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+.tk small { position: relative; font: 800 10.5px var(--f-body); letter-spacing: .14em; text-transform: uppercase; color: #ffd68a; }
+.tk b { position: relative; display: block; margin: 6px 0 4px; font: 400 26px/1.05 "Gloock", serif; }
+.tk .who { position: relative; font: 700 13px var(--f-body); color: rgba(255,255,255,.8); }
+.tk .row { position: relative; display: flex; justify-content: space-between; align-items: flex-end; margin-top: 14px; padding-top: 12px; border-top: 1px dashed rgba(255,214,138,.5); }
+.tk .clk { font: 400 34px/1 "Gloock", serif; font-variant-numeric: tabular-nums; }
+.tk .clk span { font-size: 20px; color: #ffd68a; }
+.tk .tk-r { display: grid; justify-items: end; gap: 4px; }
+.tk .live { display: inline-flex; align-items: center; gap: 6px; font: 800 11px var(--f-body); color: #7cf29a; }
+.tk .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #7cf29a; box-shadow: 0 0 0 4px rgba(124,242,154,.25); animation: advPulse 1.2s ease-in-out infinite; }
+@keyframes advPulse { 50% { box-shadow: 0 0 0 7px rgba(124,242,154,0); } }
+.tk .code { font: 800 13px var(--f-body); letter-spacing: .2em; color: #ffd68a; }
+.tk .nm { max-width: 150px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 700 11.5px var(--f-body); color: rgba(255,255,255,.75); }
+.tk.done { filter: saturate(.4); border-color: #7cf29a; }
+.tk.done::before { animation: none; display: none; }
+.adv-tkhint { font-size: 13px !important; color: rgba(255,255,255,.6) !important; }
+.adv-toast { position: fixed; left: 50%; top: calc(14px + env(safe-area-inset-top)); z-index: 120; transform: translate(-50%, -20px); max-width: 88vw; padding: 10px 16px; border-radius: 14px; background: #1b0d12; border: 1px solid rgba(255,214,138,.5); color: #fff; font: 700 13.5px var(--f-body); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+.adv-toast.show { opacity: 1; transform: translate(-50%, 0); }
+.adv-konf { position: fixed; inset: 0; z-index: 130; pointer-events: none; overflow: hidden; }
+.adv-konf i { position: absolute; top: -12px; width: 8px; height: 12px; border-radius: 2px; animation: advKonf 1.4s cubic-bezier(.3,.6,.4,1) forwards; }
+@keyframes advKonf { to { transform: translateY(105vh) rotate(540deg); } }
+/* Team */
+.tm-launch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.advt-days { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; margin: 8px 0 12px; }
+.advt-days button { height: 34px; border-radius: 10px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.05); color: #fff; font: 800 13px var(--f-body); }
+.advt-days button[aria-pressed="true"] { background: #ffd68a; color: #2a1016; }
+.adv-team label { display: grid; gap: 4px; margin-top: 10px; font: 800 11.5px var(--f-body); color: var(--c-dim); }
+.adv-team input, .adv-team select, .adv-team textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.3); color: #fff; font: 600 15px/1.4 var(--f-body); }
+.advt-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.advt-row { display: flex; gap: 8px; margin-top: 8px; }
+.advt-row select { flex: 1; }
+.advt-row button { flex: none; padding: 0 16px; border-radius: 12px; border: 0; background: #ffd68a; color: #2a1016; font: 800 14px var(--f-body); }
+.advt-list { display: grid; gap: 8px; margin-top: 12px; }
+.advt-it { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.05); }
+.advt-it > b { flex: none; width: 26px; font: 400 20px "Gloock", serif; color: #ffd68a; }
+.advt-it > span { flex: 1; min-width: 0; font: 800 14px var(--f-body); }
+.advt-it small { display: block; font: 600 11.5px var(--f-body); color: var(--c-dim); }
+.advt-it em { flex: none; font-style: normal; font: 800 12px var(--f-body); color: #7cf29a; }
+.advt-it button { flex: none; padding: 8px 12px; border-radius: 10px; border: 0; background: #7cf29a; color: #06301a; font: 800 13px var(--f-body); }
+.advt-win { display: grid; gap: 4px; margin-top: 8px; padding: 14px; border-radius: 16px; background: rgba(255,214,138,.1); border: 1px solid rgba(255,214,138,.4); font: 600 13px var(--f-body); }
+.advt-win small { font: 800 10.5px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: #ffd68a; }
+.advt-win > b { font: 400 26px "Gloock", serif; }
 /* ---- Hauptmenü v110: drei Spiele nebeneinander, Fotowand breit, Semester ---- */
 .hm-games { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; gap: 8px; }
 .hm-games .tile-btn { height: 192px; border-radius: 18px; padding: 10px !important; }
@@ -2517,7 +2662,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "113";
+const APP_V = "118";
 
 const EVENTS = [
   {
@@ -3779,7 +3924,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
+  const OTHER = ["advent", "advent-team", "fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !id.startsWith("fotos-") && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -3961,7 +4106,7 @@ const Top = {
 /* Wünsche */
 const Wishes = {
   async send(w) {
-    if (Live.remote) { await FB.db.collection("wuensche").add({ ...w, at: FB.fv.serverTimestamp() }); return "ok"; }
+    if (Live.remote) { await FB.db.collection("wuensche").add({ ...w, at: FB.fv.serverTimestamp() }); Advent.frei(); return "ok"; }
     if (/netlify\.app$/.test(location.hostname)) {
       const r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ "form-name": "wunsch", ...w }).toString() });
       if (!r.ok) throw new Error("netlify");
@@ -4304,6 +4449,7 @@ function renderTeam() {
       <button type="button" class="tm-go" id="tTresen"><span aria-hidden="true">🖥️</span><b>Tresen</b><small>Vollbild am Laptop</small></button>
       <a class="tm-go" href="#dj"><span aria-hidden="true">🎧</span><b>DJ-Pult</b><small>Musikwünsche</small></a>
       <a class="tm-go" href="#turnier-team"><span aria-hidden="true">🏆</span><b>Turnier</b><small>Turnierleitung</small></a>
+      <a class="tm-go" href="#advent-team"><span aria-hidden="true">🎄</span><b>Advent</b><small>Türchen &amp; Gewinne</small></a>
     </div>
     <section class="cbox team" aria-label="Zähler">
       <h3>Zähler</h3>
@@ -4946,7 +5092,7 @@ const Game = (() => {
       if (!n) { name.focus(); name.style.borderColor = "#ff2e88"; return; }
       const btn = $("bpSave"); btn.disabled = true; btn.textContent = "Speichert …";
       let id = null;
-      try { id = await Top.add({ name: n, cups: cleared, ms: Math.max(1000, Math.round(ms)) }); setPlayerName(n); clearBestCache(); }
+      try { id = await Top.add({ name: n, cups: cleared, ms: Math.max(1000, Math.round(ms)) }); setPlayerName(n); Advent.spielstand("beerpong", cleared, id); clearBestCache(); }
       catch { btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
       { const l = await Top.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
     });
@@ -5164,7 +5310,7 @@ const Bus = (() => {
         if (!n) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
         const btn = $("busSave"); btn.disabled = true; btn.textContent = "Speichert …";
         let id = null;
-        try { id = await BusTop.add({ name: n, score: made }); saved = true; store.set("exmaBusName", n); setPlayerName(n); clearBestCache(); }
+        try { id = await BusTop.add({ name: n, score: made }); saved = true; Advent.spielstand("busfahrer", made, id); store.set("exmaBusName", n); setPlayerName(n); clearBestCache(); }
         catch (e) { console.warn("Busfahrer speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
         { const l = await BusTop.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
       });
@@ -5818,7 +5964,7 @@ const Zapf = (() => {
         if (!nm) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
         const btn = $("zfSave"); btn.disabled = true; btn.textContent = "Speichert …";
         let id = null;
-        try { id = await ZapfTop.add({ name: nm, score: Math.round(totalH) / 100, glasses }); saved = true; store.set("exmaZapfName", nm); setPlayerName(nm); clearBestCache(); }
+        try { id = await ZapfTop.add({ name: nm, score: Math.round(totalH) / 100, glasses }); saved = true; Advent.spielstand("zapfmeister", Math.round(totalH) / 100, id); store.set("exmaZapfName", nm); setPlayerName(nm); clearBestCache(); }
         catch (e) { console.warn("Zapfmeister speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
         { const l = await ZapfTop.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
       });
@@ -6658,7 +6804,7 @@ const Pol = (() => {
         if (!nm) { inp.focus(); inp.style.borderColor = "#ff2e88"; return; }
         const btn = $("plSave"); btn.disabled = true; btn.textContent = "Speichert …";
         let id = null;
-        try { id = await PolTop.add({ name: nm, dm, ms }); saved = true; setPlayerName(nm); }
+        try { id = await PolTop.add({ name: nm, dm, ms }); saved = true; Advent.spielstand("polnischen", dm, id); setPlayerName(nm); }
         catch (e) { console.warn("Polnischen speichern", e); btn.disabled = false; btn.textContent = "Nochmal versuchen"; return; }
         { const l = await PolTop.list().catch(() => []); Badges.board(l, id); showTop(l, id); }
       });
@@ -8175,7 +8321,7 @@ function buildMenu() {
         ${phMarkt(ev, tNow)}${phSpecials(ev)}${phHappy(ev, tNow)}
         <div class="ph-row"><button type="button" class="ph-btn wa" data-share="${i}">${ICON_WA}Freunde einladen</button><a class="ph-btn" href="#${ev.id}">Drinks &amp; Preise</a></div>
       </div>
-      ${games}${bar}${next}${semester}${rest}`;
+      ${advTile()}${games}${bar}${next}${semester}${rest}`;
   } else if (ph && ph.phase === "live") {
     const ev = ph.ev;
     html = `<div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
@@ -8188,7 +8334,7 @@ function buildMenu() {
         ${phHappy(ev, tNow)}${phSpecials(ev)}
         <a class="ph-btn ph-karte" href="#drinks">Ganze Getränkekarte</a>
       </div>
-      ${games}${bar}${hero("Heute", null)}${next}${rest}`;
+      ${advTile()}${games}${bar}${hero("Heute", null)}${next}${rest}`;
   } else if (ph && ph.phase === "rueck") {
     const ev = ph.ev;
     html = `<div class="ph-block t-${ev.thema}" style="${phaseStyle(ev.th)}">
@@ -8199,8 +8345,8 @@ function buildMenu() {
           ${ev.fotos ? `<a class="ph-btn" href="#fotos-${ev.id}">${ICON_CAM}Fotos vom Abend</a>` : `<p class="ph-note">${ICON_CAM}Fotos vom Abend folgen in der Fotowand.</p>`}
         </div>
       </div>
-      ${hero("Als Nächstes", null)}${next}${games}${bar}${semester}${rest}`;
-  } else html = `${hero("Diese Woche", null)}${next}${games}${bar}${semester}${rest}`;
+      ${hero("Als Nächstes", null)}${advTile()}${next}${games}${bar}${semester}${rest}`;
+  } else html = `${hero("Diese Woche", null)}${advTile()}${next}${games}${bar}${semester}${rest}`;
   g.innerHTML = html;
   if (phSub) { phSub(); phSub = null; }
   if (ph && ph.phase !== "tag") phSub = Live.subscribe(phLive);
@@ -8291,6 +8437,8 @@ function routeInner() {
   if (id === "abzeichen") { renderBadgePage(); show(true); return; }
   if (id.startsWith("fotos-")) { const ev = EVENTS.find((e) => "fotos-" + e.id === id); if (ev) { setMenu(false); renderFotoPage(ev); show(true); return; } }
   if (id === "team") { renderTeamPage(); show(true); return; }
+  if (id === "advent") { setMenu(false); renderAdvent(); show(true); return; }
+  if (id === "advent-team") { setMenu(false); renderAdventTeam(); show(true); return; }
   if (id === "turnier") { renderTurnier(); show(true); return; }
   if (id === "turnier-team") { renderTurnierAdmin(); show(true); return; }
   if (id === "fotowand") { setMenu(false); renderFotowand(); show(true); return; }
@@ -8333,9 +8481,10 @@ function tabFor(id) {
   if (["spiele", "beerpong", "busfahrer", "zapfmeister", "turnier"].includes(id)) return "spiele";
   if (["musik"].includes(id)) return "musik";
   if (["ich", "abzeichen"].includes(id)) return "ich";
+  if (id === "advent") return "start";
   return null;
 }
-const TAB_HIDE = ["team", "turnier-team", "dj", "polnischen"];
+const TAB_HIDE = ["team", "turnier-team", "advent-team", "dj", "polnischen"];
 let tabMode = "", tabAva = "";
 function tabbarRender() {
   const bar = $("tabbar"); if (!bar) return;
@@ -9336,6 +9485,533 @@ function renderWishPage() {
 function renderTeamPage() {
   pageShell("team-page", "Team-Bereich", `<div id="teamArea" class="team-area"></div>`);
   renderTeam();
+}
+
+/* ================= Adventskalender (1.–24. Dezember) =================
+   Inhalte:    advent/t1 … advent/t24 – schreibt nur das Team; lesbar erst ab 8 Uhr des Tages (prüfen die Regeln, Serverzeit).
+   Teilnahme:  adventT/<Konto>    = { o: { "7": Zeit }, c: { "4": { at, ref } } }   (öffentlich lesbar, ohne Namen)
+               adventName/<Konto> = { name, mat }                                    (nur Besitzer und Team)
+   Lose:       jedes am Tag selbst (8 Uhr bis 8 Uhr) geöffnete Türchen + jede erledigte Challenge = 1 Los.
+   Erste 5:    Abfrage adventT orderBy("o.<Tag>") limit 5 – kein eigener Zähler nötig.
+   Einlösen:   das Team markiert adventEinl/<Konto>_<Tag> (Liste im Team-Bereich).
+   Finale:     Team zieht ein Los → adventZiehung/finale (einmalig) + adventGewinn/<Konto> (Code: nur Gewinner und Team).
+   Kosten:     ~1 Schreibvorgang pro Person und Tag, 1 Lesezugriff pro neuem Türchen. */
+const ADV_Y = 2026, ADV_H = 8;
+const ADV_SPIEL = { beerpong: ["Beerpong", "cups", "Becher"], busfahrer: ["Busfahrer", "score", "Karten"], zapfmeister: ["Zapfmeister", "score", "Punkte"], polnischen: ["Polnischen", "dm", "dm"] };
+const ADV_ART = { start: "Start", glueck: "Glückstürchen", erste5: "Erste 5", quiz: "Quizfrage", challenge: "Challenge", inhalt: "Für dich", versteck: "Versteck", finale: "Finale" };
+/* Grobgerüst – im Team-Bereich mit „Vorlage einspielen“ in die Datenbank, danach dort frei änderbar */
+const ADV_VORLAGE = {
+  1: { art: "start", titel: "Der Hauptpreis steht fest: ein Airfryer!", text: "Am 24. Dezember verlosen wir einen Airfryer unter allen, die mitmachen. Dein erstes Los hast du mit diesem Türchen schon sicher – jedes weitere Türchen und jede Challenge bringt dir mehr. Abholen kannst du ihn im Club." },
+  2: { art: "glueck", titel: "Heute ist X-Mas!", text: "Weihnachtsmarkt ab 18 Uhr, Club ab 21 Uhr. Heute gewinnen 5 Türchenöffner ein Freigetränk für heute Abend – ob du dabei bist, siehst du sofort.", preis: "1 Freigetränk", plaetze: [3, 7, 12, 14, 19], btnT: "Infos zum Abend", btnL: "#exma-xmas" },
+  3: { art: "quiz", titel: "Quizfrage", text: "Seit wann gibt es die ExMa Bar? Die Auflösung steht morgen hier – Kneipenquiz-Training schadet nie." },
+  4: { art: "challenge", titel: "Busfahrer-Challenge", text: "Schaff heute mindestens 20 Karten im Busfahrer und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "busfahrer", min: 20 }, btnT: "Busfahrer spielen", btnL: "#busfahrer" },
+  5: { art: "inhalt", titel: "Glühwein nach ExMa-Art", text: "Unser Rezept vom Weihnachtsmarkt – auch alkoholfrei." },
+  6: { art: "versteck", titel: "Irgendwo auf dem Campus …", text: "Wir haben etwas versteckt. Das Bild zeigt, wo ungefähr. Wer es findet, darf es behalten." },
+  7: { art: "challenge", titel: "Sag uns, was fehlt", text: "Welcher Drink, welches Motto oder welches Spiel fehlt euch noch? Schreib uns heute einen Wunsch.", belohnung: "1 Extra-Los", ch: { spiel: "frei", min: 0 }, btnT: "Wunsch abgeben", btnL: "#wuensche" },
+  8: { art: "inhalt", titel: "Matrikel-Duell", text: "Welche Matrikel hat bis heute die meisten Türchen geöffnet? Die Auflösung gibt’s morgen im Club." },
+  9: { art: "glueck", titel: "Letzter Club vor den Prüfungen", text: "Heute gewinnen 5 Türchenöffner ein Freigetränk für heute Abend – ob du dabei bist, siehst du sofort.", preis: "1 Freigetränk", plaetze: [2, 6, 11, 15, 23], },
+  10: { art: "challenge", titel: "Zapfmeister-Challenge", text: "Prüfungsphase – kurze Pause gefällig? Zapf heute mindestens 900 Punkte und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "zapfmeister", min: 900 }, btnT: "Zapfmeister spielen", btnL: "#zapfmeister" },
+  11: { art: "quiz", titel: "Quizfrage", text: "" },
+  12: { art: "inhalt", titel: "Hinter den Kulissen", text: "So entsteht ein Clubabend – vom Aufbau bis zum letzten Glas." },
+  13: { art: "inhalt", titel: "", text: "" },
+  14: { art: "inhalt", titel: "Bild des Semesters", text: "Welches Foto von der Fotowand ist euer Favorit?", btnT: "Zur Fotowand", btnL: "#fotowand" },
+  15: { art: "challenge", titel: "Beerpong-Challenge", text: "Triff heute mindestens 10 Becher und speicher dein Ergebnis.", belohnung: "1 Extra-Los", ch: { spiel: "beerpong", min: 10 }, btnT: "Beerpong spielen", btnL: "#beerpong" },
+  16: { art: "quiz", titel: "Wer ist das?", text: "Ein Babyfoto aus dem Team – wer ist es?" },
+  17: { art: "quiz", titel: "Quizfrage", text: "" },
+  18: { art: "inhalt", titel: "", text: "" },
+  19: { art: "inhalt", titel: "Punsch-Rezept", text: "" },
+  20: { art: "inhalt", titel: "Unsere Weihnachts-Playlist", text: "" },
+  21: { art: "inhalt", titel: "Bis bald, 26er!", text: "" },
+  22: { art: "inhalt", titel: "Frohe Weihnachten!", text: "" },
+  23: { art: "challenge", titel: "Heimaturlaub-Challenge", text: "Polnischen gegen den Weihnachtsmann: Schaff heute mindestens 1 km.", belohnung: "1 Extra-Los", ch: { spiel: "polnischen", min: 10000 }, btnT: "Polnischen spielen", btnL: "#polnischen" },
+  24: { art: "finale", titel: "Das Finale", text: "Heute verlosen wir den Airfryer unter allen Losen. Viel Glück!" },
+};
+const ADV_BED = `Teilnahme: alle Gäste der ExMa Bar, ausgenommen das Clubteam. Für die Verlosung sind Name, Studiengang und Matrikel Pflicht. Pro Person zählt ein Konto – Anmeldungen mit gleichem Namen und gleicher Matrikel werden vor der Ziehung zusammengelegt.
+Lose: Jedes Türchen, das am Tag selbst (8 Uhr bis 8 Uhr am Folgetag) geöffnet wird, gibt 1 Los. Challenges geben Extra-Lose.
+Glückstürchen: Es gewinnen die Türchenöffner auf festgelegten Plätzen (z. B. der 3., 7. und 12.). Ob du gewonnen hast, siehst du direkt nach dem Öffnen.
+Ziehung: am 24. Dezember ${ADV_Y} per Zufall in der App durch das Clubteam. Der Gewinn wird in der App angezeigt; Vorname und Matrikel geben wir ggf. auf Instagram bekannt.
+Abholung: im Club gegen Abhol-Code und Studentenausweis (der Name muss übereinstimmen). Keine Barauszahlung.
+Daten: Name, Studiengang und Matrikel sieht nur das Clubteam. Wir nutzen sie nur für den Adventskalender und löschen sie nach der Abholung.`;
+
+const advParts = (d = new Date()) => {
+  const p = Object.fromEntries(berlin({ year: "numeric", month: "numeric", day: "numeric", hour: "numeric", hourCycle: "h23" }).formatToParts(d).map((x) => [x.type, +x.value || 0]));
+  return { y: p.year, m: p.month, d: p.day, h: p.hour };
+};
+/* Türchen, für das es gerade ein Los gibt (8 Uhr bis 8 Uhr) – 0 außerhalb */
+function advHeute(d = new Date()) {
+  const s = advParts(new Date(d.getTime() - ADV_H * 3600e3));
+  return s.y === ADV_Y && s.m === 12 && s.d <= 24 ? s.d : 0;
+}
+/* Ist Türchen n schon offen (ab 8 Uhr seines Tages)? */
+function advOffen(n, d = new Date()) {
+  const p = advParts(d);
+  if (p.y !== ADV_Y || p.m < 12) return p.y > ADV_Y;
+  return p.d > n || (p.d === n && p.h >= ADV_H);
+}
+const advZeit = () => { const p = advParts(); return p.y === ADV_Y && p.m === 12 && p.d <= 26; };
+const advCode = (uid, n) => {
+  const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", str = `${uid}|${n}|exma`; let h = 2166136261, out = "";
+  for (let r = 0; r < 6; r++) { for (const ch of str + r) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } out += A[h % 32]; }
+  return out.slice(0, 3) + "-" + out.slice(3);
+};
+
+const Advent = (() => {
+  const K_ME = "exmaAdvMe", K_SEEN = "exmaAdvSeen", K_T = (n) => "exmaAdvT" + n;
+  const jget = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } };
+  const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+  let me = jget(K_ME, { o: [], c: [], name: "", stg: "", mat: "" }), loaded = false;
+  if (me.name && !me.stg) me.name = "";   /* ältere Anmeldung ohne Studiengang: einmal neu anmelden */
+  const seen = () => new Set(jget(K_SEEN, []));
+  const markSeen = (n) => { const s = seen(); s.add(n); jset(K_SEEN, [...s]); };
+  const lose = () => me.o.length + me.c.length;
+  const uid = () => FB.user && FB.user.uid;
+
+  async function load() {
+    if (!Live.remote || !uid() || loaded) return me;
+    try {
+      const [t, nm] = await Promise.all([FB.db.doc("adventT/" + uid()).get(), FB.db.doc("adventName/" + uid()).get()]);
+      if (t.exists) { const d = t.data(); me.o = Object.keys(d.o || {}).map(Number); me.c = Object.keys(d.c || {}).map(Number); }
+      if (nm.exists) { const v = nm.data(); me.name = v.name; me.stg = v.stg || ""; me.mat = v.mat; }
+      loaded = true; jset(K_ME, me);
+    } catch (e) { console.warn("Advent laden", e); }
+    return me;
+  }
+  /* Inhalt eines Türchens: einmal laden, dann vom Handy (2 h, damit spätere Korrekturen ankommen) */
+  async function inhalt(n) {
+    const c = jget(K_T(n), null);
+    if (c && Date.now() - c.t < 2 * 3600e3) return c.d;
+    if (!Live.remote) return c ? c.d : null;
+    try {
+      const s = await FB.db.doc("advent/t" + n).get();
+      const d = s.exists ? s.data() : null;
+      jset(K_T(n), { t: Date.now(), d }); return d;
+    } catch (e) { if (e && e.code === "permission-denied") return { zu: true }; return c ? c.d : null; }
+  }
+  async function anmelden(name, stg, mat) {
+    await FB.db.doc("adventName/" + uid()).set({ name, stg, mat });
+    me.name = name; me.stg = stg; me.mat = mat; jset(K_ME, me);
+  }
+  /* Los für das heutige Türchen (nur am Tag selbst, nur einmal) */
+  async function oeffnen(n) {
+    markSeen(n);
+    if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.o.includes(n)) return false;
+    const ref = FB.db.doc("adventT/" + uid()), ts = FB.fv.serverTimestamp();
+    try { await ref.update({ ["o." + n]: ts }); }
+    catch (e) { if (e && e.code === "not-found") await ref.set({ o: { [n]: ts }, c: {} }); else throw e; }
+    me.o.push(n); jset(K_ME, me); return true;
+  }
+  async function challenge(n, refId) {
+    if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.c.includes(n)) return false;
+    const ref = FB.db.doc("adventT/" + uid()), v = { at: FB.fv.serverTimestamp(), ref: refId || "" };
+    try { await ref.update({ ["c." + n]: v }); }
+    catch (e) { if (e && e.code === "not-found") await ref.set({ o: {}, c: { [n]: v } }); else throw e; }
+    me.c.push(n); jset(K_ME, me); toastAdv(`Challenge geschafft – Extra-Los für Türchen ${n}! 🎟️`);
+    const st = $("advChSt"); if (st) { st.textContent = "✓ geschafft"; st.className = "st ok"; }
+    if (typeof advProg === "function") advProg(); return true;
+  }
+  /* Nach jedem gespeicherten Spielstand: passt er zur heutigen Challenge? */
+  async function spielstand(spiel, wert, refId) {
+    const n = advHeute(); if (!n || me.c.includes(n) || !me.name) return;
+    const d = jget(K_T(n), null); const ch = d && d.d && d.d.ch;
+    if (!ch || ch.spiel !== spiel || wert < ch.min) return;
+    try { await challenge(n, refId); } catch (e) { console.warn("Challenge", e); }
+  }
+  /* Challenge ohne Spielstand (z. B. „Wunsch abgeben“): zählt, wenn die heutige Challenge „ohne Prüfung“ ist */
+  function frei() {
+    const n = advHeute(); if (!n) return;
+    const d = jget(K_T(n), null); const ch = d && d.d && d.d.ch;
+    if (ch && ch.spiel === "frei") challenge(n, "").catch((e) => console.warn("Challenge", e));
+  }
+  async function platz(n) {
+    if (!Live.remote || !uid()) return null;
+    try {
+      const q = await FB.db.collection("adventT").orderBy("o." + n).limit(5).get();
+      const i = q.docs.findIndex((d) => d.id === uid());
+      if (i >= 0) return i + 1;
+      return me.o.includes(n) ? 6 : null;
+    } catch (e) { console.warn("Erste 5", e); return null; }
+  }
+  /* Glückstürchen: Es gewinnen die Türchenöffner auf den Plätzen aus dem Türchen. Ergebnis sofort, einmal geprüft und gemerkt. */
+  async function glueck(n, d) {
+    const K = "exmaAdvG" + n, c = jget(K, null); if (c) return c;
+    if (!Live.remote || !uid()) return null;
+    const pl = ((d && d.plaetze) || []).map(Number).filter((x) => x > 0).sort((a, b) => a - b);
+    if (!me.o.includes(n) || !pl.length) { const r = { plaetze: pl, platz: 0 }; jset(K, r); return r; }
+    try {
+      const q = await FB.db.collection("adventT").orderBy("o." + n).limit(pl[pl.length - 1]).get();
+      const i = q.docs.findIndex((d) => d.id === uid());
+      const r = { plaetze: pl, platz: i >= 0 ? i + 1 : 0 }; jset(K, r); return r;
+    } catch (e) { console.warn("Glückstürchen", e); return null; }
+  }
+  async function eingeloest(n) {
+    try { return (await FB.db.doc(`adventEinl/${uid()}_${n}`).get()).exists; } catch { return false; }
+  }
+  async function finale() {
+    if (!Live.remote || !uid()) return null;
+    try {
+      const g = await FB.db.doc("adventGewinn/" + uid()).get();
+      if (g.exists) return { ich: true, ...g.data() };
+      const z = await FB.db.doc("adventZiehung/finale").get();
+      return z.exists ? { ich: false, ...z.data() } : { offen: true };
+    } catch (e) { console.warn("Finale", e); return null; }
+  }
+  return { me: () => me, load, inhalt, anmelden, oeffnen, challenge, spielstand, frei, platz, glueck, eingeloest, finale, seen, lose, uid };
+})();
+function toastAdv(t) {
+  let el = $("advToast");
+  if (!el) { el = document.createElement("div"); el.id = "advToast"; el.className = "adv-toast"; document.body.appendChild(el); }
+  el.textContent = t; el.classList.remove("show"); void el.offsetWidth; el.classList.add("show");
+  clearTimeout(toastAdv.t); toastAdv.t = setTimeout(() => el.classList.remove("show"), 3200);
+}
+
+/* ---------- Kachel im Hauptmenü (1.–26.12.): Lichterkette im Nachthimmel, Dorf in der Ferne ---------- */
+let advDorfSvg = "";
+function advDorf() {
+  if (advDorfSvg) return advDorfSvg;
+  const W = 390; let x = -6, houses = "", wins = "", snow = "", rnd = 7;
+  const R = () => { rnd = (rnd * 9301 + 49297) % 233280; return rnd / 233280; };
+  while (x < W + 10) {
+    const w = 20 + R() * 26, h = 16 + R() * 24, base = 78, roof = 7 + R() * 10, top = base - h;
+    if (R() < .14) { const cx = x + w / 2; houses += `<path d="M${x.toFixed(1)} ${base}V${top.toFixed(1)}L${(cx - 4).toFixed(1)} ${(top - 4).toFixed(1)}L${cx.toFixed(1)} ${(top - 22).toFixed(1)}L${(cx + 4).toFixed(1)} ${(top - 4).toFixed(1)}L${(x + w).toFixed(1)} ${top.toFixed(1)}V${base}Z" fill="#2a2347"/>`; wins += `<rect x="${(cx - 1.2).toFixed(1)}" y="${(top - 8).toFixed(1)}" width="2.4" height="3" fill="#ffcf7a" opacity=".85"/>`; }
+    else {
+      houses += `<path d="M${x.toFixed(1)} ${base}V${top.toFixed(1)}L${(x + w / 2).toFixed(1)} ${(top - roof).toFixed(1)}L${(x + w).toFixed(1)} ${top.toFixed(1)}V${base}Z" fill="${R() < .5 ? "#2a2347" : "#231d3c"}"/>`;
+      snow += `<path d="M${(x - 1).toFixed(1)} ${(top + .5).toFixed(1)}L${(x + w / 2).toFixed(1)} ${(top - roof - .5).toFixed(1)}L${(x + w + 1).toFixed(1)} ${(top + .5).toFixed(1)}L${(x + w / 2).toFixed(1)} ${(top - roof + 2.2).toFixed(1)}Z" fill="#e4def5" opacity=".7"/>`;
+      const nw = Math.floor(w / 8);
+      for (let k = 0; k < nw; k++) if (R() < .75) { const wx = x + 4 + k * 8, wy = top + 4 + R() * (h - 10); wins += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="3" height="3.8" rx=".5" fill="${R() < .2 ? "#ff8a5a" : "#ffcf7a"}" opacity="${(.6 + R() * .4).toFixed(2)}"/>`; }
+    }
+    x += w + 2 + R() * 6;
+  }
+  const tiny = Array.from({ length: 28 }, (_, i) => `<circle cx="${(i * 14.3 + 5).toFixed(1)}" cy="${(36 + Math.sin(i * 1.7) * 4).toFixed(1)}" r=".9" fill="${["#ffd27a", "#ff6a5a", "#9fe0ff", "#fff0c4"][i % 4]}" opacity=".7"/>`).join("");
+  advDorfSvg = `<svg class="dorf" viewBox="0 0 ${W} 78" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="advDn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2140" stop-opacity="0"/><stop offset="1" stop-color="#3a2f5a" stop-opacity=".55"/></linearGradient><filter id="advDg"><feGaussianBlur stdDeviation="1.6"/></filter></defs>
+    <rect x="0" y="16" width="${W}" height="62" fill="url(#advDn)"/>${houses}${snow}<g filter="url(#advDg)">${wins}</g>${wins}${tiny}<rect x="0" y="72" width="${W}" height="6" fill="#e4def5" opacity=".22"/></svg>`;
+  return advDorfSvg;
+}
+function advTile() {
+  if (!advZeit()) return "";
+  const p = advParts(), seen = Advent.seen(), heute = advHeute();
+  const n = heute || Math.min(24, p.d), offen = advOffen(n), weih = p.d > 24;
+  const neu = offen && !weih && !seen.has(n);
+  const k = [...seen].filter((x) => x <= 24).length;
+  const W = 390, pts = Array.from({ length: 24 }, (_, i) => [14 + i * ((W - 28) / 23), 12 + 14 * Math.sin(Math.PI * (i / 23)) + (i % 2 ? 3 : 0)]);
+  const wire = "M0 10 " + pts.map(([x, y]) => `L${x.toFixed(1)} ${(y - 6).toFixed(1)}`).join(" ") + ` L${W} 10`;
+  const bulbs = pts.map(([x, y], i) => {
+    const t = neu && i + 1 === n, lit = seen.has(i + 1);
+    const col = t ? "#ff5a4a" : lit ? ["#ffd27a", "#e9b77c", "#fff0c4"][i % 3] : "#3a3550";
+    return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)})">${t ? `<circle class="adv-puls" r="13" fill="${col}" opacity=".35"/>` : lit ? `<circle r="9" fill="${col}" opacity=".28"/>` : ""}<rect x="-2.2" y="-8" width="4.4" height="4" rx="1" fill="#141020"/><ellipse cy="${t ? 1.5 : .5}" rx="${t ? 4.6 : 3.4}" ry="${t ? 6.4 : 5}" fill="${col}"/></g>`;
+  }).join("");
+  const nxt = Math.min(24, n + 1);
+  const [ttl, sub, tur] = weih ? ["Frohe <em>Weihnachten</em>", "Wer hat den Airfryer gewonnen?", 24]
+    : !offen ? [`Türchen <em>${n}</em> kommt`, "Heute um 8 Uhr geht’s los", n]
+    : neu ? [`Türchen <em>${n}</em> leuchtet`, k ? `${k} ${k === 1 ? "Licht" : "Lichter"} an · noch ${24 - n} bis Heiligabend` : `Noch ${24 - n} Türchen bis Heiligabend`, n]
+    : n === 24 ? ["Heute ist <em>Finale</em>", "Der Airfryer wird verlost", 24]
+    : [`Türchen <em>${nxt}</em> kommt`, `${p.d === n + 1 ? "Heute" : "Morgen"} um 8 Uhr${k ? ` · ${k} ${k === 1 ? "Licht" : "Lichter"} an` : ""}`, nxt];
+  return `<a class="adv-tile${neu ? "" : " zu"}" href="#advent" aria-label="Adventskalender"><svg class="k" viewBox="0 0 ${W} 56" preserveAspectRatio="none" aria-hidden="true"><path d="${wire}" fill="none" stroke="#06050a" stroke-width="1.6"/>${bulbs}</svg>${advDorf()}
+    <span class="tx"><span class="lab">Adventskalender</span><span class="ttl">${ttl}</span><span class="sub">${sub}</span></span>
+    <span class="sp" aria-hidden="true"></span><span class="md" aria-hidden="true"><span class="fr"></span><span class="l"></span><span class="d"><b>${tur}</b></span></span></a>`;
+}
+
+/* ---------- Kalender-Seite ---------- */
+const ADV_LAYOUT = [[14], [3], [24, "big"], [19], [8], [11], [6, "wide"], [21], [1], [16], [9], [22], [5], [12], [18], [2], [20], [7], [13], [4], [10], [23], [15], [17]];
+const ADV_ROT = [2, 6, 9, 24], ADV_GRUEN = [3, 16, 20, 21], ADV_GELB = [11, 12, 15, 22];
+const ADV_IC = {
+  los: '<path d="M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M14 8v10" stroke-dasharray="2 2"/>',
+  ok: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  stern: '<path d="M12 4l2.2 5 5.3.5-4 3.6 1.2 5.2L12 15.6 7.3 18.3l1.2-5.2-4-3.6 5.3-.5z"/>',
+};
+const advIcon = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ADV_IC[k]}</svg>`;
+function renderAdvent() {
+  const me = Advent.me(), seen = Advent.seen(), heute = advHeute();
+  const X = EVENTS.find((e) => e.thema === "xmas") || EVENTS[EVENTS.length - 1];
+  const scene = (SCENES.xmas || sceneIce)().slice(0, 3).map((l, k) => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "adv" + k + "_")}</svg>`).join("");
+  const door = ([n, sp]) => {
+    const open = seen.has(n) || me.o.includes(n), today = !open && advOffen(n) && n === heute;
+    const cls = ["dr", ADV_ROT.includes(n) ? "r" : ADV_GRUEN.includes(n) ? "g" : ADV_GELB.includes(n) ? "y" : "", sp || "", open ? "open" : today ? "today" : advOffen(n) ? "" : "fut"].join(" ");
+    const sub = { 2: "Club", 9: "Club", 6: "Versteck", 24: "Finale" }[n];
+    const ic = me.c.includes(n) ? "stern" : me.o.includes(n) ? "los" : "ok";
+    return `<button type="button" class="${cls}" data-n="${n}" aria-label="Türchen ${n}"><span class="pn"><span>${n}</span>${sub ? `<em>${sub}</em>` : ""}</span>${open ? `<span class="rw">${advIcon(ic)}</span>` : ""}</button>`;
+  };
+  const L = Advent.lose(), N = Math.max(seen.size, me.o.length);
+  pageShell("adv-page t-xmas", "Adventskalender", `
+    <div class="adv-prog"><span><b id="advN">${N}</b> von 24 geöffnet</span><span class="bar"><i id="advBar" style="width:${(100 * N / 24).toFixed(1)}%"></i></span><span class="adv-lose">${advIcon("los")} <b id="advLose">${L}</b> <span id="advLoseW">${L === 1 ? "Los" : "Lose"}</span></span></div>
+    <div class="adv-board" style="${themeStyle(X.th)}"><div class="adv-bg" aria-hidden="true">${scene}</div><div class="adv-grid">${ADV_LAYOUT.map(door).join("")}</div></div>
+    <p class="adv-hint">Jedes Türchen öffnet um 8 Uhr. Ein Los gibt’s nur am Tag selbst – hinter offenen Türchen wächst das Winterbild zusammen.</p>
+    <details class="adv-bed"><summary>Teilnahmebedingungen</summary><p>${esc(ADV_BED).replace(/\n/g, "<br>")}</p></details>`);
+  document.querySelectorAll(".adv-bg svg").forEach((s) => s.pauseAnimations && s.pauseAnimations());
+  document.querySelectorAll(".adv-grid .dr").forEach((b) => b.addEventListener("click", () => advTap(b)));
+  Advent.load().then(advProg);
+}
+function advProg() {
+  const me = Advent.me(), N = new Set([...Advent.seen(), ...me.o]).size, L = Advent.lose();
+  if ($("advN")) { $("advN").textContent = N; $("advBar").style.width = (100 * N / 24).toFixed(1) + "%"; }
+  if ($("advLose")) { $("advLose").textContent = L; $("advLoseW").textContent = L === 1 ? "Los" : "Lose"; }
+}
+function advTap(b) {
+  const n = +b.dataset.n;
+  if (!advOffen(n)) {
+    b.classList.remove("wig"); void b.offsetWidth; b.classList.add("wig");
+    const p = advParts();
+    toastAdv(p.m === 12 || p.y > ADV_Y ? `Türchen ${n} geht am ${n}.12. um 8 Uhr auf` : `Der Kalender startet am 1. Dezember um 8 Uhr`);
+    return;
+  }
+  if (b.classList.contains("open")) { advSheet(n); return; }
+  b.classList.add("opening");
+  setTimeout(() => { b.classList.remove("opening", "today"); b.classList.add("open"); advSheet(n); }, 720);
+}
+function advClose() { const s = $("advSheet"); if (!s) return; s.classList.add("out"); $("advSheetBg").classList.add("out"); setTimeout(() => { s.remove(); $("advSheetBg") && $("advSheetBg").remove(); }, 260); }
+async function advSheet(n) {
+  advClose();
+  const p = new Date(ADV_Y, 11, n).toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long" });
+  document.body.insertAdjacentHTML("beforeend", `<div class="adv-sheet-bg" id="advSheetBg"></div><div class="adv-sheet t-xmas" id="advSheet" role="dialog" aria-label="Türchen ${n}"><div class="grip"></div>
+    <div class="hd"><span class="num">${n}</span><span><small>${esc(p)}</small><b id="advTitel">…</b></span></div><div id="advBody"><p class="adv-load">Lädt …</p></div></div>`);
+  $("advSheetBg").addEventListener("click", advClose);
+  const d = await Advent.inhalt(n);
+  const body = $("advBody"); if (!body) return;
+  if (!d || d.zu) { $("advTitel").textContent = d && d.zu ? "Noch zu" : "Gleich da"; body.innerHTML = `<p>${d && d.zu ? "Dieses Türchen geht erst um 8 Uhr auf." : Live.remote ? "Hier kommt gleich noch was rein – schau später nochmal vorbei." : "Der Adventskalender braucht eine Internetverbindung."}</p>`; return; }
+  $("advTitel").textContent = d.titel || "Türchen " + n;
+  const me = Advent.me(), heute = n === advHeute();
+  const btn = d.btnL ? `<a class="adv-btn" href="${esc(d.btnL)}" data-advgo>${esc(d.btnT || "Los geht’s")} →</a>` : "";
+  body.innerHTML = `
+    <span class="chip">✦ ${esc(ADV_ART[d.art] || "Türchen")}</span>
+    ${d.bild ? `<img class="adv-img" src="${esc(d.bild)}" alt="">` : ""}
+    ${d.text ? `<p>${esc(d.text).replace(/\n/g, "<br>")}</p>` : ""}
+    <div id="advExtra"></div>
+    <div class="adv-rew" id="advRew"><span class="ic">${advIcon("los")}</span><div><b>1 Los fürs Finale</b><span>${heute ? "fürs Öffnen – nur heute bis morgen 8 Uhr" : "gab es am " + n + ". Dezember"}</span></div><span class="st" id="advSt">…</span></div>
+    ${d.ch ? `<div class="adv-rew"><span class="ic">${advIcon("stern")}</span><div><b>${esc(d.belohnung || "1 Extra-Los")}</b><span>für die Challenge${heute ? " – nur heute" : ""}</span></div><span class="st${me.c.includes(n) ? " ok" : ""}" id="advChSt">${me.c.includes(n) ? "✓ geschafft" : heute ? "offen" : "vorbei"}</span></div>` : ""}
+    ${btn}`;
+  body.querySelectorAll("[data-advgo]").forEach((a) => a.addEventListener("click", advClose));
+  if (!me.name && Live.remote) { advAnmeldung(n, d); return; }
+  await advLos(n, d);
+}
+function advAnmeldung(n, d) {
+  const rew = $("advRew"); if (!rew) return;
+  const mats = ["24", "25", "26", "andere"];
+  rew.insertAdjacentHTML("afterend", `<form class="adv-form" id="advForm">
+    <b>Einmal anmelden für die Lose</b>
+    <input id="advName" maxlength="30" autocomplete="name" placeholder="Vor- und Nachname" value="${esc(Advent.me().name || playerName())}">
+    <input id="advStg" maxlength="40" placeholder="Studiengang" value="${esc(Advent.me().stg || "")}">
+    <div class="adv-mats">${mats.map((m) => `<button type="button" data-mat="${m}" aria-pressed="${store.get("exmaMatrikel") === m}">${m === "andere" ? "andere" : m + "er"}</button>`).join("")}</div>
+    <button type="submit" class="adv-btn">Los sichern</button><small>Pflicht für die Verlosung, damit wir den Gewinn eindeutig zuordnen können. Sieht nur das Clubteam. Siehe Teilnahmebedingungen.</small></form>`);
+  $("advSt").textContent = "offen";
+  let mat = store.get("exmaMatrikel") || "";
+  $("advForm").querySelectorAll("[data-mat]").forEach((b) => b.addEventListener("click", () => { mat = b.dataset.mat; $("advForm").querySelectorAll("[data-mat]").forEach((x) => x.setAttribute("aria-pressed", x === b)); }));
+  $("advForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("advName").value.trim().replace(/\s+/g, " ");
+    if (name.length < 3 || !name.includes(" ")) { toastAdv("Bitte Vor- und Nachname eintragen"); $("advName").focus(); return; }
+    const stg = $("advStg").value.trim().replace(/\s+/g, " ");
+    if (stg.length < 2) { toastAdv("Bitte deinen Studiengang eintragen"); $("advStg").focus(); return; }
+    if (!mat) { toastAdv("Bitte deine Matrikel wählen"); return; }
+    try { await Advent.anmelden(name, stg, mat); $("advForm").remove(); await advLos(n, d); }
+    catch (err) { console.warn(err); toastAdv("Speichern hat nicht geklappt – Internet?"); }
+  });
+}
+async function advLos(n, d) {
+  const st = $("advSt"), me = Advent.me();
+  let neu = false;
+  try { neu = await Advent.oeffnen(n); } catch (e) { console.warn("Los", e); if (st) { st.textContent = "nicht gespeichert"; st.className = "st bad"; } }
+  if (st && !st.classList.contains("bad")) {
+    const has = me.o.includes(n);
+    st.textContent = has ? "✓ im Topf" : n === advHeute() ? "offen" : "verpasst";
+    st.className = "st" + (has ? " ok" : "");
+    if (neu) { advProg(); toastAdv("Los gesichert! 🎟️"); const b = document.querySelector(`.dr[data-n="${n}"] .rw`); if (!b) { const dr = document.querySelector(`.dr[data-n="${n}"]`); dr && dr.insertAdjacentHTML("beforeend", `<span class="rw">${advIcon("los")}</span>`); } }
+  }
+  const ex = $("advExtra"); if (!ex) return;
+  if (d.art === "erste5") {
+    const pl = await Advent.platz(n);
+    if (!$("advExtra")) return;
+    if (pl && pl <= 5) {
+      ex.innerHTML = advTicket("Glückwunsch – du warst schnell genug!", d.preis || "Gewinn", advCode(Advent.uid(), n), n === advHeute() ? "nur heute an der Bar" : "Gewinn");
+      advClock(); if (await Advent.eingeloest(n)) advTicketDone();
+      advKonfetti();
+    } else if (pl) ex.innerHTML = `<p class="adv-miss">Diesmal waren 5 andere schneller. Dein Los fürs Finale hast du trotzdem.</p>`;
+  }
+  if (d.art === "glueck" && me.o.includes(n)) {
+    const g = await Advent.glueck(n, d); if (!$("advExtra") || !g) return;
+    if (g.platz && g.plaetze.includes(g.platz)) {
+      ex.innerHTML = advTicket(`Glückwunsch – einer von ${g.plaetze.length} Gewinnern!`, d.preis || "Gewinn", advCode(Advent.uid(), n), n === advHeute() ? "Glückstürchen · heute an der Bar" : "Glückstürchen");
+      advClock(); if (await Advent.eingeloest(n)) advTicketDone(); advKonfetti();
+    } else ex.innerHTML = `<p class="adv-miss">Diesmal kein Gewinn – dein Los fürs Finale hast du trotzdem.</p>`;
+  }
+  if (d.art === "finale" && advOffen(24)) {
+    const f = await Advent.finale(); if (!$("advExtra") || !f) return;
+    if (f.ich) { ex.innerHTML = advTicket("Du hast gewonnen!", f.preis || "Airfryer", f.code, "abholen im Club", f.name); advClock(); if (f.abgeholt) advTicketDone(); advKonfetti(); }
+    else if (!f.offen) ex.innerHTML = `<p class="adv-miss">Gezogen! Der Airfryer geht an <b>${esc(f.name || "")}</b>${f.mat ? ` (Matrikel ${esc(f.mat)})` : ""}. ${f.gesamt ? `${f.gesamt} Lose von ${f.teilnehmer} Leuten waren im Topf.` : ""} Danke fürs Mitmachen und frohe Weihnachten!</p>`;
+    else ex.innerHTML = `<p class="adv-miss">Die Ziehung kommt heute. Schau später nochmal rein!</p>`;
+  }
+}
+const advTicket = (head, preis, code, sub, name) => `<div class="tk" id="advTk"><small>${esc(sub)}</small><b>${esc(preis)}</b><span class="who">${esc(head)}</span>
+  <div class="row"><span class="clk" id="advClk"></span><span class="tk-r"><span class="live">LIVE</span><span class="code">${esc(code || "")}</span><span class="nm">${esc(name || Advent.me().name || "")}</span></span></div></div>
+  <p class="adv-tkhint">An der Bar live in der App zeigen – Screenshots gelten nicht. Das Team hakt den Gewinn in seiner Liste ab.</p>`;
+function advClock() {
+  const tick = () => { const el = $("advClk"); if (!el) return; const t = berlin({ hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(new Date()).split(":"); el.innerHTML = `${t[0]}:${t[1]}<span>:${t[2]}</span>`; setTimeout(tick, 1000); };
+  tick();
+}
+function advTicketDone() { const tk = $("advTk"); if (!tk) return; tk.classList.add("done"); tk.querySelector(".live").textContent = "EINGELÖST ✓"; }
+function advKonfetti() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const box = document.createElement("div"); box.className = "adv-konf";
+  const C = ["#e2554b", "#e9c36f", "#2f6a45", "#f6ead0"];
+  box.innerHTML = Array.from({ length: 36 }, (_, i) => `<i style="left:${(i * 37) % 100}%;background:${C[i % 4]};animation-delay:${(i % 9) * 60}ms;animation-duration:${1300 + (i % 5) * 180}ms"></i>`).join("");
+  document.body.appendChild(box); setTimeout(() => box.remove(), 2600);
+  try { navigator.vibrate && navigator.vibrate(40); } catch {}
+}
+
+/* ---------- Team: Adventskalender verwalten ---------- */
+let advTeamN = 0;
+function renderAdventTeam() {
+  if (!teamAuthed) { location.hash = "team"; return; }
+  const n0 = advTeamN || Math.max(1, Math.min(24, advHeute() || advParts().d || 1));
+  advTeamN = n0;
+  pageShell("adv-team team-page", "Advent · Team", `
+    <section class="cbox team"><h3>Türchen bearbeiten</h3>
+      <div class="advt-days">${Array.from({ length: 24 }, (_, i) => `<button type="button" data-tn="${i + 1}" aria-pressed="${i + 1 === n0}">${i + 1}</button>`).join("")}</div>
+      <div id="advEd"><p class="prost-small">Lädt …</p></div>
+      <div class="team-row"><button type="button" id="advSeed">Vorlage in leere Türchen einspielen</button></div>
+      <p class="prost-small">Türchen gehen um 8 Uhr auf – Änderungen bitte bis zum Vorabend.</p></section>
+    <section class="cbox team"><h3>Stand</h3><p class="prost-small">Zählt alle Lose im Topf (1 Lesezugriff pro Teilnehmer).</p>
+      <div class="team-row"><button type="button" id="advStand">Lose zählen</button></div><div id="advStandBox"></div></section>
+    <section class="cbox team"><h3>Gewinner des Tages · einlösen</h3>
+      <div class="advt-row"><select id="advE5">${[2, 9].concat(Array.from({ length: 24 }, (_, i) => i + 1).filter((x) => x !== 2 && x !== 9)).map((x) => `<option value="${x}">Türchen ${x}</option>`).join("")}</select><button type="button" id="advE5Go">Laden</button></div>
+      <div id="advE5List"></div></section>
+    <section class="cbox team"><h3>Finale · Airfryer</h3>
+      <div id="advFin"><p class="prost-small">Lädt …</p></div></section>`);
+  document.querySelectorAll("[data-tn]").forEach((b) => b.addEventListener("click", () => { advTeamN = +b.dataset.tn; document.querySelectorAll("[data-tn]").forEach((x) => x.setAttribute("aria-pressed", x === b)); advEditor(advTeamN); }));
+  $("advSeed").addEventListener("click", advSeed);
+  $("advE5Go").addEventListener("click", () => advErste5($("advE5").value));
+  $("advStand").addEventListener("click", async () => { const t = await advTopf("advStandBox"); if (t) advTopfZeigen(t, "advStandBox"); });
+  advEditor(n0); advFinTeam();
+}
+async function advEditor(n) {
+  const box = $("advEd"); if (!box) return;
+  let d = null;
+  try { const s = await FB.db.doc("advent/t" + n).get(); d = s.exists ? s.data() : null; } catch (e) { box.innerHTML = `<p class="prost-small">Fehler beim Laden (${esc(e.code || "")}). Sind die neuen Firestore-Regeln veröffentlicht?</p>`; return; }
+  const v = d || ADV_VORLAGE[n] || {}, ch = v.ch || {};
+  box.innerHTML = `<p class="prost-small">${d ? "Gespeichert in der Datenbank." : "Noch leer – Vorschlag aus der Vorlage:"}</p>
+    <label>Art<select id="aeArt">${Object.entries(ADV_ART).map(([k, t]) => `<option value="${k}"${v.art === k ? " selected" : ""}>${t}</option>`).join("")}</select></label>
+    <label>Titel<input id="aeTitel" maxlength="80" value="${esc(v.titel || "")}"></label>
+    <label>Text<textarea id="aeText" rows="5" maxlength="1200">${esc(v.text || "")}</textarea></label>
+    <label>Bild (Link, optional)<input id="aeBild" placeholder="https://… oder bilder/advent6.jpg" value="${esc(v.bild || "")}"></label>
+    <label>Belohnung der Challenge<input id="aeBel" maxlength="60" value="${esc(v.belohnung || "1 Extra-Los")}"></label>
+    <div class="advt-2"><label>Knopf-Text<input id="aeBtnT" maxlength="40" value="${esc(v.btnT || "")}"></label><label>Knopf-Link<input id="aeBtnL" placeholder="#busfahrer" value="${esc(v.btnL || "")}"></label></div>
+    <div class="advt-2"><label>Challenge<select id="aeSp"><option value="">keine</option><option value="frei"${ch.spiel === "frei" ? " selected" : ""}>ohne Prüfung</option>${Object.entries(ADV_SPIEL).map(([k, x]) => `<option value="${k}"${ch.spiel === k ? " selected" : ""}>${x[0]} (${x[2]})</option>`).join("")}</select></label><label>Mindestens<input id="aeMin" type="number" min="0" value="${ch.min || ""}"></label></div>
+    <label>Preis (Glückstürchen / Erste 5)<input id="aePreis" maxlength="40" placeholder="z. B. 1 Freigetränk" value="${esc(v.preis || "")}"></label>
+    <label>Glücksplätze (nur bei Glückstürchen)<input id="aePl" placeholder="3, 7, 12, 14, 19" value="${esc((v.plaetze || []).join(", "))}"></label>
+    <div class="team-row"><button type="button" id="aeZuf">5 Plätze zufällig wählen (1–30)</button></div>
+    <div class="team-row"><button type="button" id="aeSave">Türchen ${n} speichern</button></div>`;
+  $("aeZuf").addEventListener("click", () => {
+    const set = new Set(); while (set.size < 5) { const r = new Uint32Array(1); crypto.getRandomValues(r); set.add(1 + (r[0] % 30)); }
+    $("aePl").value = [...set].sort((a, b) => a - b).join(", ");
+  });
+  $("aeSave").addEventListener("click", async () => {
+    const pl = $("aePl").value.split(/[^0-9]+/).map(Number).filter((x) => x > 0 && x <= 500);
+    if ($("aeArt").value === "glueck" && !pl.length) { alertTeam("Bitte die Glücksplätze eintragen."); return; }
+    const sp = $("aeSp").value, out = { art: $("aeArt").value, titel: $("aeTitel").value.trim(), text: $("aeText").value.trim(), bild: $("aeBild").value.trim(), belohnung: $("aeBel").value.trim(), btnT: $("aeBtnT").value.trim(), btnL: $("aeBtnL").value.trim(), preis: $("aePreis").value.trim() };
+    if (out.art === "glueck") out.plaetze = [...new Set(pl)].sort((x, y) => x - y);
+    if (sp) out.ch = { spiel: sp, feld: sp === "frei" ? "" : ADV_SPIEL[sp][1], min: +$("aeMin").value || 0 };
+    try {
+      await FB.db.doc("advent/t" + n).set(out);
+      try { localStorage.removeItem("exmaAdvT" + n); } catch {} toastAdv(`Türchen ${n} gespeichert`); advEditor(n);
+    }
+    catch (e) { alertTeam(`Speichern fehlgeschlagen (${e.code || e.message}).`); }
+  });
+}
+async function advSeed() {
+  const b = $("advSeed"); b.disabled = true; let k = 0;
+  try {
+    for (let n = 1; n <= 24; n++) {
+      const ref = FB.db.doc("advent/t" + n);
+      if ((await ref.get()).exists) continue;
+      const v = { ...ADV_VORLAGE[n] }; if (v.ch) v.ch = { ...v.ch, feld: v.ch.spiel === "frei" ? "" : ADV_SPIEL[v.ch.spiel][1] };
+      await ref.set(v); k++;
+    }
+    toastAdv(k ? `${k} Türchen aus der Vorlage eingespielt` : "Alle Türchen sind schon gefüllt");
+    advEditor(advTeamN);
+  } catch (e) { alertTeam(`Vorlage einspielen fehlgeschlagen (${e.code || e.message}).`); }
+  b.disabled = false;
+}
+async function advErste5(n) {
+  const box = $("advE5List"); box.innerHTML = `<p class="prost-small">Lädt …</p>`;
+  try {
+    const ds = await FB.db.doc("advent/t" + n).get(), dv = ds.exists ? ds.data() : {};
+    const pl = dv.art === "glueck" && dv.plaetze && dv.plaetze.length ? dv.plaetze.map(Number).sort((a, b) => a - b) : [1, 2, 3, 4, 5];
+    const q = await FB.db.collection("adventT").orderBy("o." + n).limit(pl[pl.length - 1] || 5).get();
+    if (!q.docs.length) { box.innerHTML = `<p class="prost-small">Türchen ${n} hat noch niemand geöffnet.</p>`; return; }
+    const hits = q.docs.map((d, i) => [d, i]).filter(([, i]) => pl.includes(i + 1));
+    if (!hits.length) { box.innerHTML = `<p class="prost-small">${q.docs.length} haben geöffnet – noch keiner auf einem Glücksplatz (${pl.join(", ")}).</p>`; return; }
+    const rows = await Promise.all(hits.map(async ([d, i]) => {
+      const [nm, ei] = await Promise.all([FB.db.doc("adventName/" + d.id).get(), FB.db.doc(`adventEinl/${d.id}_${n}`).get()]);
+      const t = d.data().o[n], ts = t && t.toDate ? t.toDate() : new Date(t);
+      const nv = nm.exists ? nm.data() : {};
+      return { uid: d.id, nr: i + 1, name: nv.name || "?", mat: [nv.stg, nv.mat ? nv.mat + "er" : ""].filter(Boolean).join(" · "), zeit: berlin({ hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(ts), code: advCode(d.id, n), done: ei.exists };
+    }));
+    box.innerHTML = `<div class="advt-list">${rows.map((r) => `<div class="advt-it${r.done ? " done" : ""}"><b>${r.nr}</b><span>${esc(r.name)}<small>${r.mat ? esc(r.mat) + " · " : ""}${r.zeit} Uhr · Code ${r.code}</small></span>${r.done ? `<em>eingelöst ✓</em>` : `<button type="button" data-einl="${r.uid}">Einlösen</button>`}</div>`).join("")}</div>`;
+    box.querySelectorAll("[data-einl]").forEach((b) => b.addEventListener("click", async () => {
+      if (b.dataset.sure !== "1") { b.dataset.sure = "1"; b.textContent = "Sicher?"; return; }
+      try { await FB.db.doc(`adventEinl/${b.dataset.einl}_${n}`).set({ at: FB.fv.serverTimestamp(), n: +n }); advErste5(n); }
+      catch (e) { alertTeam(`Einlösen fehlgeschlagen (${e.code || e.message}).`); }
+    }));
+  } catch (e) { box.innerHTML = `<p class="prost-small">Fehler (${esc(e.code || e.message)}).</p>`; }
+}
+async function advFinTeam() {
+  const box = $("advFin"); if (!box) return;
+  let z = null;
+  try { const s = await FB.db.doc("adventZiehung/finale").get(); z = s.exists ? s.data() : null; } catch (e) { box.innerHTML = `<p class="prost-small">Fehler (${esc(e.code || "")}).</p>`; return; }
+  if (z) {
+    let g = null, iv = {}; try { iv = (await FB.db.doc("adventZiehung/intern").get()).data() || {}; const s = await FB.db.doc("adventGewinn/" + iv.uid).get(); g = s.exists ? s.data() : null; } catch {}
+    const at = z.at && z.at.toDate ? z.at.toDate() : null;
+    box.innerHTML = `<div class="advt-win"><small>Gezogen${at ? " am " + berlin({ day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }).format(at) : ""}</small><b>${esc(iv.voll || z.name)}</b><span>${esc([iv.stg, z.mat ? z.mat + "er" : ""].filter(Boolean).join(" · "))}</span><span>${z.lose} von ${z.gesamt} Losen · ${z.teilnehmer} Leute</span><span>Abhol-Code <b>${esc(g ? g.code : "–")}</b></span></div>
+      ${g && g.abgeholt ? `<p class="prost-small">Abgeholt ✓</p>` : `<div class="team-row"><button type="button" id="advAbg">Als abgeholt markieren</button></div>`}`;
+    $("advAbg") && $("advAbg").addEventListener("click", async (e) => { const b = e.currentTarget; if (b.dataset.sure !== "1") { b.dataset.sure = "1"; b.textContent = "Sicher? Nochmal tippen"; return; }
+      try { await FB.db.doc("adventGewinn/" + iv.uid).update({ abgeholt: FB.fv.serverTimestamp() }); advFinTeam(); } catch (err) { alertTeam(`Fehlgeschlagen (${err.code || err.message}).`); } });
+    return;
+  }
+  box.innerHTML = `<p class="prost-small">Lädt alle Teilnehmer (1 Lesezugriff pro Person) und zieht ein Los. Wer mehr Lose hat, hat eine höhere Chance. Das Ergebnis lässt sich danach nicht mehr ändern.</p>
+    <label>Ausschließen (Clubteam, ein Name pro Zeile)<textarea id="advEx" rows="4" placeholder="Vor- und Nachname">${esc(store.get("exmaAdvEx") || "")}</textarea></label>
+    <div class="team-row"><button type="button" id="advPrev">Topf ansehen</button><button type="button" class="danger" id="advDraw">Jetzt auslosen</button></div><div id="advTopf"></div>`;
+  $("advEx").addEventListener("input", (e) => store.set("exmaAdvEx", e.target.value));
+  $("advPrev").addEventListener("click", async () => { const t = await advTopf(); if (t) advTopfZeigen(t); });
+  $("advDraw").addEventListener("click", async (e) => {
+    const b = e.currentTarget; if (b.dataset.sure !== "1") { b.dataset.sure = "1"; b.textContent = "Wirklich auslosen?"; return; }
+    b.disabled = true;
+    const t = await advTopf(); if (!t || !t.liste.length) { b.disabled = false; return; }
+    const r = new Uint32Array(1); crypto.getRandomValues(r);
+    let x = r[0] % t.gesamt, win = t.liste[0];
+    for (const p of t.liste) { if (x < p.lose) { win = p; break; } x -= p.lose; }
+    const code = advCode(win.uid, "finale" + r[0]);
+    try {
+      const batch = FB.db.batch();
+      batch.set(FB.db.doc("adventZiehung/finale"), { name: win.name.split(" ")[0] + " " + (win.name.split(" ").slice(-1)[0] || "").slice(0, 1) + ".", mat: win.mat, lose: win.lose, gesamt: t.gesamt, teilnehmer: t.liste.length, at: FB.fv.serverTimestamp() });
+      batch.set(FB.db.doc("adventZiehung/intern"), { uid: win.uid, voll: win.name, stg: win.stg, at: FB.fv.serverTimestamp() });
+      batch.set(FB.db.doc("adventGewinn/" + win.uid), { preis: "Airfryer", code, name: win.name, at: FB.fv.serverTimestamp() });
+      await batch.commit(); advKonfetti(); advFinTeam();
+    } catch (err) { alertTeam(`Ziehung fehlgeschlagen (${err.code || err.message}).`); b.disabled = false; }
+  });
+}
+/* Alle Lose laden, Team ausschließen, doppelte Namen zusammenlegen */
+async function advTopf(boxId = "advTopf") {
+  const box = $(boxId); if (box) box.innerHTML = `<p class="prost-small">Lädt …</p>`;
+  try {
+    const [ts, ns] = await Promise.all([FB.db.collection("adventT").get(), FB.db.collection("adventName").get()]);
+    const names = Object.fromEntries(ns.docs.map((d) => [d.id, d.data()]));
+    const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ").trim();
+    const ex = new Set(($("advEx") ? $("advEx").value : "").split("\n").map(norm).filter(Boolean));
+    const by = new Map();
+    ts.docs.forEach((d) => {
+      const nm = names[d.id]; if (!nm || d.id === Advent.uid()) return;
+      if (ex.has(norm(nm.name))) return;
+      const key = norm(nm.name) + "|" + (nm.mat || "");   /* gleicher Name + gleiche Matrikel = eine Person */
+      const v = d.data(), l = Object.keys(v.o || {}).length + Object.keys(v.c || {}).length; if (!l) return;
+      const cur = by.get(key);
+      if (cur) { cur.lose += l; cur.konten++; if (l > cur.max) { cur.max = l; cur.uid = d.id; } }
+      else by.set(key, { uid: d.id, name: nm.name, mat: nm.mat, stg: nm.stg || "", lose: l, max: l, konten: 1 });
+    });
+    const liste = [...by.values()].sort((a, b) => b.lose - a.lose);
+    return { liste, gesamt: liste.reduce((s, p) => s + p.lose, 0) };
+  } catch (e) { if (box) box.innerHTML = `<p class="prost-small">Fehler (${esc(e.code || e.message)}).</p>`; return null; }
+}
+function advTopfZeigen(t, boxId = "advTopf") {
+  const box = $(boxId); if (!box) return;
+  box.innerHTML = `<p class="prost-small"><b>${t.gesamt}</b> Lose von <b>${t.liste.length}</b> Leuten im Topf.</p><div class="advt-list">${t.liste.slice(0, 60).map((p, i) => `<div class="advt-it"><b>${i + 1}</b><span>${esc(p.name)}<small>${esc([p.stg, p.mat ? p.mat + "er" : ""].filter(Boolean).join(" · "))}${p.konten > 1 ? ` · ${p.konten} Konten zusammengelegt` : ""}</small></span><em>${p.lose} ${p.lose === 1 ? "Los" : "Lose"}</em></div>`).join("")}</div>`;
 }
 
 /* ================= PayPal-Seite ================= */
