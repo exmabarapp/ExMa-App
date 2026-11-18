@@ -2132,12 +2132,17 @@ body.fg-open { overflow: hidden; }
 .hm-games .tile-btn small { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 700; color: rgba(255,255,255,.75); }
 /* ---- Hauptmenü v110: drei Spiele nebeneinander, Fotowand breit, Semester ---- */
 .hm-games { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; margin: 0; padding: 0; gap: 8px; }
-.hm-games .tile-btn { height: 178px; border-radius: 18px; padding: 10px !important; }
+.hm-games .tile-btn { height: 192px; border-radius: 18px; padding: 10px !important; }
 .hm-games .tile-btn b { font-size: 14px; }
 .hm-games .tile-btn small { font-size: 10px; }
 .hm-games .mini-tag { display: none; }
-.hm-games .hm-best, .hm-games .tile-btn .hm-best b { font-size: 9.5px; }
-.hm-games .hm-best span { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hm-games .tile-btn small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hm-games .hm-best { align-items: flex-start; gap: 5px; margin-top: 6px; padding-top: 6px; }
+.hm-games .hm-best svg { flex: none; width: 13px; height: 13px; margin-top: 1px; color: #ffcf4a; }
+.hm-games .hm-best span { display: block; min-width: 0; flex: 1; }
+.hm-games .hm-best span > * { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hm-games .tile-btn .hm-best b { font-size: 12px; font-weight: 800; line-height: 1.2; color: #fff; }
+.hm-games .hm-best em { font-style: normal; font-size: 11px; font-weight: 800; line-height: 1.25; color: #ffcf4a; }
 .hm-fw-wide .hm-fotowand { height: 150px !important; margin: 0 !important; }
 .hm-fw-wide .fw-p1 { right: 2px; }
 .hm-fw-wide .hm-fotowand .fw-new { top: auto; left: auto; right: 12px; bottom: 12px; }
@@ -2662,7 +2667,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "110";
+const APP_V = "111";
 
 const EVENTS = [
   {
@@ -8921,9 +8926,9 @@ function fillBest(root) {
     const key = el.dataset.best;
     try {
       const e = await loadBest(key); if (!el.isConnected) return;
-      el.innerHTML = e ? `${CROWN_MINI}<span><b>${esc(e.name)}</b> · ${esc(BEST_SRC[key].fmt(e))}</span>` : `${CROWN_MINI}<span>1. Platz noch frei</span>`;
+      el.innerHTML = e ? `${CROWN_MINI}<span><b>${esc(e.name)}</b><em>${esc(BEST_SRC[key].fmt(e))}</em></span>` : `${CROWN_MINI}<span><b>1. Platz</b><em>noch frei</em></span>`;
       el.classList.add("on");
-    } catch (e) { console.warn("Platz 1", key, e); el.innerHTML = `${CROWN_MINI}<span>Bestenliste gerade nicht erreichbar</span>`; el.classList.add("on"); }
+    } catch (e) { console.warn("Platz 1", key, e); el.innerHTML = `${CROWN_MINI}<span><b>Bestenliste</b><em>gerade offline</em></span>`; el.classList.add("on"); }
   });
 }
 const CROWN_MINI = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z" fill="currentColor"/></svg>`;
