@@ -599,6 +599,45 @@ a { color: inherit; }
     linear-gradient(150deg, #2a0c10, #12070a);
   border: 1px solid rgba(255,90,90,.45);
 }
+.aw-card { margin-top: 12px; position: relative; display: flex; align-items: center; gap: 14px; padding: 16px 70px 16px 16px; border-radius: 24px; text-decoration: none; color: #fff;
+  background: radial-gradient(120% 140% at 100% 0%, rgba(167,139,250,.42), transparent 60%), linear-gradient(150deg, #1d1236, #0e0a1c); border: 1px solid rgba(190,165,255,.5); }
+.aw-card-ico { flex: none; width: 46px; height: 46px; border-radius: 14px; background: rgba(190,165,255,.18); color: #d9c9ff; display: grid; place-items: center; }
+.aw-card-ico svg { width: 26px; height: 26px; }
+.aw-card b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 22px; text-transform: uppercase; line-height: 1; }
+.aw-card small { display: block; margin-top: 4px; color: #d6ccef; font-size: 13.5px; line-height: 1.35; }
+.aw-card i { position: absolute; right: 16px; top: 50%; margin-top: -22px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: #1d1236; display: grid; place-items: center; }
+.aw-card i svg { width: 20px; height: 20px; }
+.hm-aw { position: relative; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: 12px; align-items: center; margin-top: 12px; padding: 12px 14px; border-radius: 16px; text-decoration: none; color: #fff;
+  background: linear-gradient(135deg, rgba(167,139,250,.22), rgba(167,139,250,.06)); border: 1px solid rgba(190,165,255,.45); }
+.hm-aw > span { grid-row: 1 / 3; width: 38px; height: 38px; border-radius: 12px; background: rgba(190,165,255,.2); color: #d9c9ff; display: grid; place-items: center; }
+.hm-aw > span svg { width: 22px; height: 22px; }
+.hm-aw b { font-size: 15px; font-weight: 800; } .hm-aw small { grid-column: 2; color: #cfc4ea; font-size: 12.5px; }
+.hm-aw > svg { grid-column: 3; grid-row: 1 / 3; width: 18px; height: 18px; color: #d9c9ff; }
+.aw-page .club-wrap { display: grid; gap: 14px; }
+.aw-hero { padding: 22px 20px; border-radius: 24px; text-align: center; background: radial-gradient(100% 120% at 50% 0%, rgba(167,139,250,.38), transparent 70%), #160f2b; border: 1px solid rgba(190,165,255,.45); }
+.aw-hero-ico { display: inline-grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: rgba(190,165,255,.2); color: #e3d7ff; margin-bottom: 10px; }
+.aw-hero-ico svg { width: 32px; height: 32px; }
+.aw-hero h3 { margin: 0 0 8px; font-size: 21px; line-height: 1.2; color: #fff; text-transform: none; letter-spacing: 0; }
+.aw-hero p { margin: 0; color: #ddd3f3; font-size: 15px; line-height: 1.5; }
+.aw-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: aw; }
+.aw-steps li { counter-increment: aw; position: relative; padding: 14px 16px 14px 60px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); }
+.aw-steps li::before { content: counter(aw); position: absolute; left: 14px; top: 14px; width: 32px; height: 32px; border-radius: 50%; background: #a78bfa; color: #160f2b; font-weight: 800; display: grid; place-items: center; }
+.aw-steps b { display: block; font-size: 16px; color: #fff; margin-bottom: 3px; }
+.aw-steps span { color: #d8d0ea; font-size: 14.5px; line-height: 1.45; }
+.aw-steps q { color: #fff; font-weight: 800; quotes: "„" "“"; }
+.aw-box { padding: 16px; border-radius: 20px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); }
+.aw-box h3 { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #c9b8ff; }
+.aw-box p { margin: 10px 0 0; color: #d8d0ea; font-size: 14.5px; line-height: 1.45; }
+.aw-rules { display: flex; flex-wrap: wrap; gap: 8px; }
+.aw-rules span { padding: 7px 12px; border-radius: 999px; background: rgba(167,139,250,.16); border: 1px solid rgba(190,165,255,.35); color: #fff; font-size: 13.5px; font-weight: 700; }
+.aw-tel { display: grid; gap: 8px; }
+.aw-tel a { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 14px; background: rgba(255,255,255,.05); color: #fff; text-decoration: none; }
+.aw-tel a b { min-width: 0; font-size: 20px; font-weight: 800; } .aw-tel a b:empty { display: none; }
+.aw-tel a:not(.sos) { grid-template-columns: 1fr auto; }
+.aw-tel a.sos { background: rgba(255,60,80,.14); border: 1px solid rgba(255,90,110,.45); } .aw-tel a.sos b { color: #ff8a98; width: 46px; text-align: center; }
+.aw-tel span { font-size: 14.5px; font-weight: 800; line-height: 1.25; } .aw-tel small { display: block; font-weight: 600; font-size: 12.5px; color: #c7bedb; margin-top: 2px; }
+.aw-tel em { font-style: normal; font-size: 12.5px; font-weight: 800; padding: 6px 10px; border-radius: 999px; background: #fff; color: #1d1236; }
+.aw-mail { display: block; margin-top: 12px; padding: 13px; border-radius: 999px; text-align: center; background: #a78bfa; color: #160f2b; font-weight: 800; text-decoration: none; }
 .club-card b { font-family: var(--f-display); font-weight: 400; font-size: 24px; text-transform: uppercase; line-height: 1; }
 .club-card > span:not(.club-card-live) { color: #f2c9c9; font-size: 14px; }
 .club-card-live { display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #ff8a8a; }
@@ -2753,7 +2792,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "126";
+const APP_V = "127";
 
 const EVENTS = [
   {
@@ -3802,6 +3841,11 @@ function renderDetail(ev) {
         <span class="club-card-live"><span class="live-dot"></span>Live</span>
         <b>Sauf-Ranking &amp; Wünsche</b>
         <span>Counter, Matrikel-Duell &amp; eure Wünsche</span>
+        <i>${ICON_ARROW}</i>
+      </a>
+      <a class="aw-card" href="#awareness">
+        <span class="aw-card-ico" aria-hidden="true">${ICON_AW}</span>
+        <span><b>Awareness</b><small>Du fühlst dich unwohl? Sprich uns an – hier steht, wie.</small></span>
         <i>${ICON_ARROW}</i>
       </a>
       <section class="card" aria-label="Bezahlen">
@@ -8441,6 +8485,7 @@ function buildMenu() {
     </div>
     ${quick}`;
   const rest = `
+    <a class="hm-aw" href="#awareness"><span aria-hidden="true">${ICON_AW}</span><b>Awareness</b><small>Hilfe, wenn du dich unwohl fühlst</small>${ICON_ARROW}</a>
     <div class="hm-contact">
       <a href="${esc(CLUB.instagram)}" target="_blank" rel="noopener">${ICON_IG}<span>Instagram</span></a>
       <a href="mailto:${esc(CLUB.email)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>E-Mail</span></a>
@@ -8591,6 +8636,7 @@ function routeInner() {
   if (id === "impressum" || id === "datenschutz") { renderLegal(id); show(true); return; }
   if (id === "paypal") { renderPay(); show(true); return; }
   if (id === "wuensche") { renderWishPage(); show(true); return; }
+  if (id === "awareness") { setMenu(false); renderAwarenessPage(); show(true); return; }
   if (id === "abzeichen") { renderBadgePage(); show(true); return; }
   if (id.startsWith("fotos-")) { const ev = EVENTS.find((e) => "fotos-" + e.id === id); if (ev) { setMenu(false); renderFotoPage(ev); show(true); return; } }
   if (id === "team") { renderTeamPage(); show(true); return; }
@@ -9654,6 +9700,46 @@ function renderTurnierAdmin() {
 }
 
 /* ================= Eigene Seiten: Wünsche und Team ================= */
+/* ================= Awareness ================= */
+const ICON_AW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.8c0 5.5-7.5 10.1-7.5 10.1z"/><path d="M9.2 12.6l1.9 1.9 3.7-3.8"/></svg>`;
+/* Satz, mit dem man am Tresen Hilfe holt – das ganze Team muss ihn kennen */
+const AWARENESS = { satz: "Ich brauche Awareness" };
+const AW_NUMMERN = [
+  ["112", "Notruf", "Rettungsdienst & Feuerwehr"],
+  ["110", "Polizei", "Wenn du bedroht wirst"],
+  ["116016", "Hilfetelefon Gewalt gegen Frauen", "116 016 · rund um die Uhr, kostenlos, anonym"],
+  ["08001239900", "Hilfetelefon Gewalt an Männern", "0800 123 99 00 · kostenlos"],
+  ["08001110111", "Telefonseelsorge", "0800 111 0 111 · rund um die Uhr, kostenlos"],
+  ["03012074182", "Heimwegtelefon", "030 120 74 182 · begleitet dich am Telefon nach Hause"]
+];
+function renderAwarenessPage() {
+  pageShell("aw-page", "Awareness", `
+    <section class="aw-hero">
+      <span class="aw-hero-ico" aria-hidden="true">${ICON_AW}</span>
+      <h3>Bei uns soll sich jede und jeder wohlfühlen.</h3>
+      <p>Du fühlst dich unwohl, wirst bedrängt oder jemandem geht es nicht gut? Sag Bescheid – wir kümmern uns. Ohne Diskussion und ohne dass du dich erklären musst.</p>
+    </section>
+    <ol class="aw-steps">
+      <li><b>Sprich uns an</b><span>Geh zum Tresen und sag: <q>${esc(AWARENESS.satz)}</q> Wir holen sofort jemanden vom Team und gehen mit dir an einen ruhigen Ort.</span></li>
+      <li><b>Achte auf andere</b><span>Du siehst, dass jemand bedrängt wird oder es jemandem schlecht geht? Sprich die Person an oder hol uns dazu.</span></li>
+      <li><b>Pass auf dein Getränk auf</b><span>Lass dein Glas nicht unbeobachtet. Wird dir plötzlich schwindelig oder komisch, sag sofort Bescheid.</span></li>
+    </ol>
+    <section class="aw-box">
+      <h3>Bei uns gilt</h3>
+      <div class="aw-rules"><span>Nein heißt Nein</span><span>Respekt vor allen</span><span>Kein Platz für Sexismus</span><span>Kein Platz für Rassismus</span><span>Kein Platz für Queerfeindlichkeit</span></div>
+      <p>Wer das nicht respektiert, muss gehen.</p>
+    </section>
+    <section class="aw-box">
+      <h3>Hilfe rund um die Uhr</h3>
+      <div class="aw-tel">${AW_NUMMERN.map(([n, t, d], k) => `<a href="tel:${n}" class="${k < 2 ? "sos" : ""}"><b>${k < 2 ? n : ""}</b><span>${esc(t)}<small>${esc(d)}</small></span><em>Anrufen</em></a>`).join("")}</div>
+    </section>
+    <section class="aw-box">
+      <h3>Lieber später erzählen?</h3>
+      <p>Dir ist bei uns etwas passiert, das du lieber im Nachhinein meldest? Schreib uns – wir behandeln alles vertraulich.</p>
+      <a class="aw-mail" href="mailto:${esc(CLUB.email)}?subject=${encodeURIComponent("Awareness")}">E-Mail an das Clubteam</a>
+    </section>`);
+}
+
 function pageShell(cls, title, inner) {
   current = null;
   if (TAB_IDS.includes(location.hash.slice(1))) cls += " tab-page";
@@ -10428,7 +10514,7 @@ const Nutzung = (() => {
   const SEITE = (id) => !id ? "start" : id.startsWith("fotos-") || id === "fotowand" ? "fotowand"
     : ["beerpong", "busfahrer", "zapfmeister", "polnischen", "spiele", "turnier"].includes(id) ? "spiele"
     : ["ich", "abzeichen"].includes(id) ? "ich" : ["drinks", "paypal"].includes(id) ? "drinks"
-    : ["musik", "ranking", "wuensche", "advent"].includes(id) ? id
+    : ["musik", "ranking", "wuensche", "advent", "awareness"].includes(id) ? id
     : EVENTS.some((e) => e.id === id) ? "abend" : "";
   let st = jget(), lastFlush = +store.get("exmaNutzLast") || 0;
   /* st = { tag, sent: { g, neu, inst, m, h: [Stunden] }, pend: { p: {}, h: {}, g, neu, inst, m } } */
