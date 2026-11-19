@@ -291,3 +291,10 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
                           2. danach Adresse in team/liste → mails ergänzen
                           3. Person meldet sich an und ändert unter „Mein Zugang“ den PIN
   Person verlässt Team:   Adresse aus team/liste → mails löschen und den Nutzer unter Authentication löschen
+
+=== Version 126 ===
+- Beerpong-Turnier: echter Lageplan statt Platzhalter (nach dem Flucht- und Rettungsplan, hochkant: Flur links, Räume 008/009 rechts).
+  · Tisch 1–2 Raum 008 neben der Säule (Finale an Tisch 1), 3–4 im Durchgang 008/009, 5 im Durchgang zu 007,
+    6 quer hinter der Säule in 009, 7–12 im Flur von oben nach unten.
+  · Euer Tisch leuchtet rot; „Auf dem Lageplan zeigen“ scrollt direkt zum Tisch. Gruppenbuchstaben nur in der Gruppenphase.
+  · Tische verschieben: im Code „const LAGEPLAN“ (x/y je Tisch, quer: true für gedrehte Tische).
