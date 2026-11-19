@@ -1832,14 +1832,26 @@ body.fg-open { overflow: hidden; }
 .tn-m div.w { color: #fff; font-weight: 800; } .tn-m div.me { background: color-mix(in srgb, var(--tgM) 28%, transparent); color: #fff; } .tn-m div.ph span { font-style: italic; font-size: 11px; }
 .tn-m em { position: absolute; right: 24px; top: 4px; font-style: normal; font-size: 9px; font-weight: 800; color: #12041f; background: var(--tgA); padding: 0 4px; border-radius: 4px; }
 .tn-m.fin { border-color: #ffd36e; box-shadow: 0 0 14px rgba(255,211,110,.35); }
-.tn-room { position: relative; padding: 70px 18px 46px; border-radius: 20px; background: repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 20px, transparent 20px 40px), #1a0830; border: 2px solid rgba(255,255,255,.18); }
-.tn-bar { position: absolute; left: 18px; right: 18px; top: 14px; height: 40px; border-radius: 12px; background: rgba(255,211,110,.16); border: 1.5px solid rgba(255,211,110,.6); display: grid; place-items: center; font-weight: 800; color: #ffd36e; }
-.tn-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; } .tn-cols > div { display: grid; gap: 12px; }
-.tn-t { position: relative; height: 44px; border-radius: 10px; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center; gap: 6px; }
-.tn-t b { font-size: 18px; font-weight: 800; } .tn-t small { font-size: 10px; color: var(--dim); }
-.tn-t.me { background: #ff2a3d; border-color: #fff; box-shadow: 0 0 22px rgba(255,42,61,.8); } .tn-t.me small { color: #fff; }
-.tn-t i { position: absolute; top: -12px; right: -6px; padding: 1px 8px; border-radius: 999px; background: #fff; color: #c00018; font-style: normal; font-size: 10.5px; font-weight: 800; }
-.tn-door { position: absolute; left: 18px; bottom: -2px; padding: 2px 12px; background: var(--night); border: 2px solid rgba(255,255,255,.18); border-bottom: 0; border-radius: 8px 8px 0 0; font-size: 11px; color: var(--dim); }
+.lp-wrap { padding: 10px 8px; border-radius: 20px; background: #12051f; border: 2px solid rgba(255,255,255,.14); }
+.lp { display: block; width: 100%; height: auto; font-family: var(--f-body); }
+.lp-off { fill: #0b0314; } .lp-wc { fill: #160a26; }
+.lp-room { fill: #1f0b38; } .lp-flur { fill: #1a0a30; }
+.lp-wall line { stroke-width: 4; stroke-linecap: square; }
+.lp-pf rect { fill: rgba(255,255,255,.62); }
+.lp-lbl text { fill: rgba(255,255,255,.32); font-size: 10.5px; font-weight: 800; letter-spacing: .04em; }
+.lp-lbl text.hi { fill: rgba(255,255,255,.7); font-size: 11.5px; }
+.lp-lbl text.wc { text-anchor: middle; font-size: 8.5px; fill: rgba(255,255,255,.5); }
+.lp-lbl text.flur { text-anchor: middle; font-size: 11px; letter-spacing: .5em; fill: rgba(255,255,255,.28); }
+.lp-exit rect { fill: #0c6b3a; } .lp-exit text { fill: #fff; font-size: 9.5px; font-weight: 800; text-anchor: middle; }
+.lp-t > rect:not(.lp-ring) { fill: #2c1450; stroke: rgba(255,255,255,.45); stroke-width: 1.5; }
+.lp-t text { text-anchor: middle; fill: #fff; }
+.lp-n { font-size: 17px; font-weight: 800; } .lp-g { font-size: 9.5px; font-weight: 800; fill: rgba(255,255,255,.55) !important; }
+.lp-t.me > rect:not(.lp-ring) { fill: #ff2a3d; stroke: #fff; stroke-width: 2; filter: drop-shadow(0 0 7px rgba(255,42,61,.9)); }
+.lp-t.me .lp-g { fill: rgba(255,255,255,.85) !important; }
+.lp-ring { fill: none; stroke: #ff2a3d; stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: lpRing 1.6s ease-out infinite; }
+@keyframes lpRing { from { opacity: .9; transform: scale(.85); } to { opacity: 0; transform: scale(1.35); } }
+@media (prefers-reduced-motion: reduce) { .lp-ring { animation: none; opacity: .6; } }
+.lp-pill rect { fill: #fff; } .lp-pill text { fill: #c00018 !important; font-size: 10px; font-weight: 800; }
 .tn-champ { justify-items: center; text-align: center; gap: 2px; border: 2px solid #ffd36e; background: radial-gradient(70% 70% at 50% 25%, rgba(255,211,110,.3), transparent 70%), rgba(255,255,255,.04); box-shadow: 0 0 26px rgba(255,211,110,.3); }
 .tn-champ > div { font-size: 46px; } .tn-champ small { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #ffd36e; }
 .tn-champ b { font-size: 30px; font-weight: 800; background: var(--tg); -webkit-background-clip: text; background-clip: text; color: transparent; } .tn-champ span { font-size: 13px; color: var(--dim); }
@@ -2741,7 +2753,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "125";
+const APP_V = "126";
 
 const EVENTS = [
   {
@@ -9365,13 +9377,65 @@ function tnBracketHTML(st) {
   const col = (keys, title) => `<div class="tn-col"><h4>${title}</h4><div class="tn-cb">${keys.map((k) => box(st.M[k])).join("")}</div></div>`;
   return `<div class="tn-bracket">${col(KO_ROUNDS[0].keys, "Achtelfinale")}${col(KO_ROUNDS[1].keys, "Viertelfinale")}${col(KO_ROUNDS[2].keys, "Halbfinale")}<div class="tn-col"><h4>Finale &amp; Platz 3</h4><div class="tn-cb last">${box(st.M.F)}${box(st.M.P3)}</div></div></div>`;
 }
-/* Lageplan: Platzhalter, bis der echte Plan vom Club da ist */
-const LAGEPLAN = { tische: 12 };
-function tnPlanHTML(hi) {
-  const n = LAGEPLAN.tische, half = Math.ceil(n / 2);
-  const t = (i) => `<div class="tn-t${i === hi ? " me" : ""}" data-t="${i}"><b>${i}</b><small>Gr. ${TN_GROUPS[(i - 1) >> 1] || ""}</small>${i === hi ? "<i>Euer Tisch</i>" : ""}</div>`;
-  return `<div class="tn-room"><div class="tn-bar">Bar</div><div class="tn-cols"><div>${Array.from({ length: half }, (_, k) => t(k + 1)).join("")}</div><div>${Array.from({ length: n - half }, (_, k) => t(half + k + 1)).join("")}</div></div><div class="tn-door">Eingang</div></div>
-    <p class="tn-muted">Platzhalter – wird durch den echten Plan vom Club ersetzt.</p>`;
+/* Lageplan nach dem Flucht- und Rettungsplan (Räume 007–010, Flur 032), hochkant gedreht:
+   oben = linkes Ende des Flurs, links = Flur, rechts = Clubräume 008 und 009.
+   Tische: x/y = linke obere Ecke (Tisch 30 × 70 = 2 m). Tisch 1–2 Gruppe A, 3–4 Gruppe B usw.; ab dem Achtelfinale Tisch 1–8. */
+const LAGEPLAN = {
+  tische: [
+    { n: 1, x: 287, y: 305 }, { n: 2, x: 154, y: 305 },           // Raum 008, rechts und links der Säule
+    { n: 3, x: 235, y: 415 }, { n: 4, x: 172, y: 415 },           // im Durchgang 008 → 009, größtenteils in 009
+    { n: 5, x: 206, y: 214 },                                     // Durchgang 007/008, ragt etwas in 007
+    { n: 6, x: 196, y: 578, quer: true },                         // Raum 009, quer hinter der Säule
+    { n: 7, x: 92, y: 74.4 },
+    { n: 8, x: 92, y: 184.7 },
+    { n: 9, x: 92, y: 295.1 },
+    { n: 10, x: 92, y: 405.4 },
+    { n: 11, x: 92, y: 515.8 },
+    { n: 12, x: 92, y: 626.2 }  // Flur, von oben nach unten
+  ]
+};
+function tnPlanHTML(hi, gruppen) {
+  const W = "rgba(255,255,255,.62)";
+  const wall = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+  const tisch = (t) => {
+    const me = t.n === hi, w = t.quer ? 70 : 30, h = t.quer ? 30 : 70, cx = t.x + w / 2, g = TN_GROUPS[(t.n - 1) >> 1] || "";
+    const nr = t.quer ? `<text x="${cx - (gruppen ? 8 : 0)}" y="${t.y + 21}" class="lp-n">${t.n}</text>${gruppen ? `<text x="${cx + 14}" y="${t.y + 20}" class="lp-g">${g}</text>` : ""}`
+      : `<text x="${cx}" y="${t.y + 36}" class="lp-n">${t.n}</text>${gruppen ? `<text x="${cx}" y="${t.y + 54}" class="lp-g">${g}</text>` : ""}`;
+    const py = t.quer ? t.y + h + 8 : t.y - 25;   /* „Euer Tisch“ über dem Tisch, bei Quertischen darunter */
+    return `<g class="lp-t${me ? " me" : ""}" data-t="${t.n}">
+      ${me ? `<rect class="lp-ring" x="${t.x - 5}" y="${t.y - 5}" width="${w + 10}" height="${h + 10}" rx="9"/>` : ""}
+      <rect x="${t.x}" y="${t.y}" width="${w}" height="${h}" rx="6"/>${nr}
+      ${me ? `<g class="lp-pill"><rect x="${cx - 30}" y="${py}" width="60" height="17" rx="8.5"/><text x="${cx}" y="${py + 12}">Euer Tisch</text></g>` : ""}
+    </g>`;
+  };
+  const tische = LAGEPLAN.tische.filter((t) => t.n !== hi).map(tisch).join("") + LAGEPLAN.tische.filter((t) => t.n === hi).map(tisch).join("");
+  return `<div class="lp-wrap"><svg class="lp" viewBox="0 0 372 770" role="img" aria-label="Lageplan mit ${LAGEPLAN.tische.length} Tischen${hi ? `, euer Tisch: ${hi}` : ""}">
+    <rect class="lp-off" x="0" y="34" width="33" height="515"/>
+    <rect class="lp-off" x="132" y="34" width="230" height="202.5"/>
+    <rect class="lp-off" x="132" y="640" width="230" height="96.5"/>
+    <rect class="lp-room" x="132" y="236.5" width="230" height="403.5"/>
+    <rect class="lp-flur" x="35" y="34" width="95" height="702.5"/>
+    <rect class="lp-wc" x="0" y="549" width="33" height="85"/><rect class="lp-wc" x="0" y="644" width="33" height="92.5"/>
+    <g class="lp-wall" stroke="${W}">
+      ${wall(362, 34, 362, 736.5)}${wall(33, 34, 33, 736.5)}
+      ${wall(131, 34, 131, 246.5)}${wall(131, 319, 131, 359)}${wall(131, 411.5, 131, 471.5)}${wall(131, 521.5, 131, 736.5)}
+      ${wall(362, 236.5, 278.7, 236.5)}${wall(162, 236.5, 131, 236.5)}
+      ${wall(362, 440, 275.4, 440)}${wall(162, 440, 131, 440)}
+      ${wall(362, 640, 131, 640)}${wall(0, 639, 33, 639)}
+    </g>
+    <g class="lp-pf"><rect x="220" y="118" width="28.7" height="37.5"/><rect x="220" y="321.5" width="27.4" height="37.5"/><rect x="217.4" y="523" width="28" height="36"/></g>
+    <g class="lp-lbl">
+      <text x="352" y="56" text-anchor="end">007</text>
+      <text x="352" y="260" text-anchor="end" class="hi">Raum 008</text>
+      <text x="352" y="464" text-anchor="end" class="hi">Raum 009</text>
+      <text x="352" y="662" text-anchor="end">010 Werkstatt</text>
+      <text x="16.5" y="595" class="wc">WC D</text><text x="16.5" y="694" class="wc">WC H</text>
+      <text class="flur" transform="translate(56 385) rotate(-90)">FLUR</text>
+    </g>
+    <g class="lp-exit"><rect x="47" y="6" width="70" height="20" rx="10"/><text x="82" y="20">↑ Notausgang</text>
+      <rect x="47" y="744" width="70" height="20" rx="10"/><text x="82" y="758">↓ Notausgang</text></g>
+    ${tische}
+  </svg></div>`;
 }
 function tnTeamSheet(st) {
   const sh = $("tnSheet"); if (!sh) return;
@@ -9403,9 +9467,14 @@ function renderTurnierBody(st) {
     ${tnBracketHTML(st)}
     <p class="tn-muted">Gruppenspiele, Achtel-, Viertelfinale und Spiel um Platz 3: 10 Minuten. Halbfinale und Finale ohne Zeitlimit. Gleichstand im K.-o.: Golden Goal.</p>
     <h3 class="tn-h" id="tnPlan">Lageplan</h3>
-    ${tnPlanHTML(nx && nx.m ? nx.m.tisch : 0)}`;
+    ${tnPlanHTML(nx && nx.m ? nx.m.tisch : 0, st.phase !== "ko")}`;
   body.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => tnTeamSheet(st)));
-  body.querySelectorAll("[data-plan]").forEach((b) => b.addEventListener("click", () => $("tnPlan").scrollIntoView({ behavior: "smooth", block: "start" })));
+  body.querySelectorAll("[data-plan]").forEach((b) => b.addEventListener("click", () => {
+    const t = body.querySelector(`.lp-t[data-t="${b.dataset.plan}"]`), det = $("detail");
+    if (!t || !det) { $("tnPlan").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    const r = t.getBoundingClientRect();
+    det.scrollBy({ top: r.top + r.height / 2 - innerHeight / 2, behavior: "smooth" });
+  }));
 }
 function renderTurnier() {
   if (tnPage !== "spieler") { tnShell("tn-spieler", `${esc(tnEvent().titel.join(" "))} · ${esc(tnEvent().dm)}`, "Beerpong-Turnier"); tnPage = "spieler"; tnListen(renderTurnierBody); }
