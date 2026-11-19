@@ -298,3 +298,9 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
     6 quer hinter der Säule in 009, 7–12 im Flur von oben nach unten.
   · Euer Tisch leuchtet rot; „Auf dem Lageplan zeigen“ scrollt direkt zum Tisch. Gruppenbuchstaben nur in der Gruppenphase.
   · Tische verschieben: im Code „const LAGEPLAN“ (x/y je Tisch, quer: true für gedrehte Tische).
+
+=== Version 127 ===
+- Neue Seite „Awareness“ (…/#awareness): was tun, wenn man sich unwohl fühlt; Regeln (Nein heißt Nein …);
+  Notruf, Polizei, Hilfetelefone und Heimwegtelefon zum Antippen; vertrauliche Meldung per E-Mail.
+  · Erreichbar über eine Karte auf jeder Clubabend-Seite (unter „Sauf-Ranking & Wünsche“) und über „Awareness“ im Startmenü.
+  · Der Satz für den Tresen steht im Code unter „const AWARENESS“ (aktuell: „Ich brauche Awareness“) – das ganze Team muss ihn kennen.
