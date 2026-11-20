@@ -305,7 +305,7 @@ a { color: inherit; }
 }
 .reg-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .reg-head b { font-family: var(--f-display); font-weight: 400; font-size: 20px; text-transform: uppercase; }
-.reg-head span { font-weight: 800; color: var(--a1); font-variant-numeric: tabular-nums; }
+.reg-head span { font-weight: 800; color: var(--a1); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .reg small { color: var(--dim); font-size: 13px; text-align: center; }
 
 .past-box {
@@ -352,7 +352,8 @@ a { color: inherit; }
 .cal-row { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .cal-row .cal { margin-top: 0; width: 100%; background: none; font-family: inherit; cursor: pointer; }
 .cal-row .cal.share { background: var(--a1); border-color: var(--a1); color: var(--night); }
-.cal-row .cal.wa { background: #25d366; border-color: #25d366; color: #052e16; font-size: 14px; }
+.cal-row .cal.wa { background: #25d366; border-color: #25d366; color: #052e16; font-size: 14px; white-space: nowrap; }
+@media (max-width: 400px) { .cal-row .cal.wa .wa-per { display: none; } }
 .cal-row .cal:disabled { opacity: .6; }
 .cal-hint { margin: 8px 4px 0; font-size: 13px; line-height: 1.4; color: var(--dim); text-align: center; }
 .bring {
@@ -997,8 +998,8 @@ a { color: inherit; }
 .mu-tx b { font-size: 15px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mu-tx small { font-size: 12.5px; color: #c4b0dc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mu-tx em { font-style: normal; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: rgba(255,63,160,.25); color: #ffc2e0; font-size: 11px; font-weight: 800; }
-.mu-list, .dj-list { display: grid; gap: 8px; }
-.mu-row { display: flex; align-items: center; gap: 10px; padding: 7px; border-radius: 14px; background: rgba(255,255,255,.05); }
+.mu-list, .dj-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.mu-row { display: flex; align-items: center; gap: 10px; padding: 7px; border-radius: 14px; background: rgba(255,255,255,.05); min-width: 0; }
 .mu-row.mine { box-shadow: inset 0 0 0 1.5px rgba(255,63,160,.6); }
 .mu-row.played { opacity: .55; }
 .mu-rank { flex: none; width: 22px; text-align: center; font-weight: 800; color: #f6c344; }
@@ -1486,6 +1487,11 @@ body.fg-open { overflow: hidden; }
 .tile-dj b { display: block; color: var(--a1); }
 .tile-reg { background: linear-gradient(90deg, var(--a3), #ff8a3d); color: #fff; box-shadow: 0 0 12px color-mix(in srgb, var(--a3) 55%, transparent); font-size: 11.5px; padding: 6px 10px; }
 .tile-reg svg { width: 12px; height: 12px; }
+/* in der Kachel: Anmelden füllt den Rest der Zeile neben dem Datum */
+.tile-row .tile-reg { flex: 1 1 110px; justify-content: space-between; gap: 10px; }
+.tile-row .tile-reg b { display: block; font-size: 1.25em; line-height: 1.05; }
+.tile-row .tile-reg small { display: block; margin-top: 2px; font-size: .9em; font-weight: 700; opacity: .92; }
+.tile-row .tile-reg svg { width: 16px; height: 16px; flex: none; }
 .game-card {
   position: relative; overflow: hidden; isolation: isolate;
   margin-top: 12px; min-height: 120px; padding: 12px 70px 12px 14px;
@@ -1518,6 +1524,7 @@ body.fg-open { overflow: hidden; }
 .hm-hero .tile-sub { font-size: 26px; }
 .hm-hero .tile-date b { font-size: 24px; }
 .hm-hero .tile-date span { font-size: 12px; }
+.hm-hero .tile-date { padding: 7px 12px; }
 .hm-hero .tile-extra { font-size: 12px; padding: 7px 11px; }
 .hm-hero .tile-go { margin-top: 12px; font-size: 16px; gap: 10px; }
 .hm-hero .tile-go > span { margin-right: auto; }
@@ -2273,6 +2280,8 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
 .hm-games .tile-btn small { font-size: 10px; }
 .hm-games .mini-tag { display: none; }
 .hm-games .tile-btn small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fw-nw { white-space: nowrap; }
+@media (max-width: 380px) { .hm-games .tile-btn small { font-size: 9.2px; letter-spacing: -.02em; } }
 .hm-games .hm-best { align-items: flex-start; gap: 5px; margin-top: 6px; padding-top: 6px; }
 .hm-games .hm-best svg { flex: none; width: 13px; height: 13px; margin-top: 1px; color: #ffcf4a; }
 .hm-games .hm-best span { display: block; min-width: 0; flex: 1; }
@@ -2576,6 +2585,17 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
 .mk-nm small { display: block; font-size: 12px; color: var(--dim); margin-top: 1px; }
 .mk-nm em { display: inline-block; margin-top: 4px; font-style: normal; font-size: 11.5px; font-weight: 800; color: var(--a1); padding: 2px 8px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--a1) 55%, transparent); }
 .mk-pr { font-size: 18px; font-weight: 800; color: var(--frost); white-space: nowrap; }
+.mk-pr small, .tr-mk-pr small { font-size: .6em; font-weight: 800; opacity: .8; }
+.mk-row.var, .tr-mk-row.var { row-gap: 0; }
+.mk-var { display: grid; gap: 3px; grid-column: 2 / -1; margin-top: -6px; }
+.mk-var > span { display: flex; align-items: baseline; gap: 6px; font-size: 12.5px; color: var(--dim); }
+.mk-var i { font-style: normal; flex: 1; min-width: 0; }
+.mk-var b { font-size: 12.5px; font-weight: 800; color: var(--frost); white-space: nowrap; }
+.mk-var > span::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .6; transform: translateY(-2px); }
+.tr-mk-row .mk-var { gap: 6px; margin-top: -8px; }
+.tr-mk-row .mk-var > span, .tr-mk-row .mk-var b { font-size: 26px; }
+.tr-mk-row .mk-var > span { color: #a9b5a6; } .tr-mk-row .mk-var b { color: #f3ead8; }
+.tr-mk-row .mk-var > span::before { width: 9px; height: 9px; transform: translateY(-5px); }
 .mk-when { margin: -4px 0 10px; font-size: 13px; font-weight: 700; color: var(--a1); }
 .mk-card { padding: 6px 14px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid color-mix(in srgb, var(--a1) 35%, transparent); }
 .ph-markt { display: grid; gap: 8px; padding: 12px 14px 8px; border-radius: 18px; text-decoration: none; color: #fff; background: linear-gradient(160deg, #1c2a21, #121b16); border: 1.5px solid rgba(233,183,124,.55); }
@@ -2598,6 +2618,17 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
 .tr-mk-nm small { display: block; font-size: 22px; color: #a9b5a6; margin-top: 4px; }
 .tr-mk-nm em { display: inline-block; margin-top: 8px; font-style: normal; font-size: 22px; font-weight: 800; color: #e9b77c; padding: 3px 14px; border-radius: 999px; border: 2px solid rgba(233,183,124,.55); }
 .tr-mk-pr { font-size: 52px; font-weight: 800; color: #f3ead8; white-space: nowrap; }
+/* viele Angebote (z. B. mit Varianten): alles etwas kleiner, damit die Tafel auf den Bildschirm passt */
+.tr-mk-list.dicht { margin-top: 8px; gap: 0; }
+.tr-mk-list.dicht .tr-mk-row { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 4px 16px; padding: 6px 4px; }
+.tr-mk-list.dicht .tr-mk-ico svg { width: 60px; height: 60px; }
+.tr-mk-list.dicht .tr-mk-nm b { font-size: 28px; }
+.tr-mk-list.dicht .tr-mk-nm small { font-size: 17px; margin-top: 2px; }
+.tr-mk-list.dicht .tr-mk-nm em { font-size: 17px; margin-top: 4px; padding: 1px 10px; }
+.tr-mk-list.dicht .tr-mk-pr { font-size: 36px; }
+.tr-mk-list.dicht .mk-var { gap: 2px; margin-top: -4px; }
+.tr-mk-list.dicht .mk-var > span, .tr-mk-list.dicht .mk-var b { font-size: 19px; }
+.tr-mk-list.dicht .mk-var > span::before { width: 7px; height: 7px; transform: translateY(-3px); }
 .tr-mk-foot { margin-top: auto; padding-top: 14px; font-size: 26px; font-weight: 800; color: #e9b77c; }
 .tr-mk-foot b { font-variant-numeric: tabular-nums; color: #fff; }
 /* ================= Dezember-Look ================= */
@@ -2798,7 +2829,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "130";
+const APP_V = "134";
 
 const EVENTS = [
   {
@@ -2868,12 +2899,17 @@ const EVENTS = [
       { zeit: "18:00", was: "Weihnachtsmarkt", kurz: "Markt" },
       { zeit: "21:00", was: "Clubabend", kurz: "Club" }
     ],
-    kachelInfo: { zeit: "Weihnachtsmarkt", text: "Glühwein · Bratwurst · Waffeln" },  // Infokasten auf der großen Kachel
+    kachelInfo: { zeit: "Weihnachtsmarkt", text: "Glühwein · Bratwurst · Langos · Waffeln" },  // Infokasten auf der großen Kachel
     markt: {                     // Weihnachtsmarkt: eigener Block im Menü, auf der Abend-Seite und auf dem Tresen-Bildschirm
       titel: "Weihnachtsmarkt", von: "18:00", bis: "21:00",
       angebote: [
         { name: "Glühwein / Punsch", preis: 2.0, extra: "Schuss", extraPreis: 0.5, bild: "gluehwein" },
         { name: "Bratwurst", info: "im Brötchen", preis: 2.5, bild: "wurst" },
+        { name: "Langos", bild: "langos", varianten: [   // mehrere Preise: in der Liste steht „ab …“
+          { name: "Schmand/Knobi & Käse", preis: 3.0 },
+          { name: "Veggie mit Käse", preis: 3.5 },
+          { name: "Schmand/Knobi, Schinken & Käse", preis: 4.0 }
+        ] },
         { name: "Waffeln", info: "mit Zimt & Zucker oder Puderzucker", preis: 2.0, extra: "heiße Kirschen", extraPreis: 0.5, bild: "waffel" }
       ]
     },
@@ -3213,13 +3249,13 @@ function sceneMiami() {
   [[4, 474, 27], [3, 490, 29.5], [2, 507, 32], [1, 526, 35]].forEach(([n, y, w]) => {
     for (let k = 0; k < n; k++) cups += cup(200 + (k - (n - 1) / 2) * w * 1.04, y, w);
   });
-  const ballAnim = reduceMotion ? `<circle cx="230" cy="420" r="7" fill="url(#ball)"/>` : `
+  const ballAnim = reduceMotion ? `<circle cx="262" cy="420" r="7" fill="url(#ball)"/>` : `
     <g opacity="0">
-      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.62;.64;1" dur="3.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.05;.62;.64;1" dur="3.6s" repeatCount="indefinite"/>
       <circle r="9" fill="url(#ball)">
-        <animate attributeName="r" values="11;6;6" keyTimes="0;.63;1" dur="3.6s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="10;6;6" keyTimes="0;.63;1" dur="3.6s" repeatCount="indefinite"/>
       </circle>
-      <animateMotion path="M250 700 Q222 330 200 522" keyPoints="0;1;1" keyTimes="0;.63;1" calcMode="linear" dur="3.6s" repeatCount="indefinite"/>
+      <animateMotion path="M326 596 Q270 300 200 522" keyPoints="0;1;1" keyTimes="0;.63;1" calcMode="linear" dur="3.6s" repeatCount="indefinite"/>
     </g>
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;.63;.66;.8;1" dur="3.6s" repeatCount="indefinite"/>
@@ -3833,7 +3869,7 @@ function renderDetail(ev) {
       ${timeline}
       ${past ? "" : `<div class="cal-row">
         <button class="cal" id="calBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>In Kalender</button>
-        <button class="cal share wa" id="shareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.2 9.6c.2 2.2 2.1 4.6 4.6 5.2.6.1 1.3-.4 1.5-1l-1.6-.9-.8.6c-.9-.4-1.8-1.3-2.1-2.1l.6-.8-.8-1.7c-.7.1-1.3.7-1.4 1.3z" fill="currentColor" stroke="none"/></svg>Per WhatsApp teilen</button>
+        <button class="cal share wa" id="shareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.2 9.6c.2 2.2 2.1 4.6 4.6 5.2.6.1 1.3-.4 1.5-1l-1.6-.9-.8.6c-.9-.4-1.8-1.3-2.1-2.1l.6-.8-.8-1.7c-.7.1-1.3.7-1.4 1.3z" fill="currentColor" stroke="none"/></svg><span><span class="wa-per">Per </span>WhatsApp teilen</span></button>
       </div>
       <p class="cal-hint" id="calHint" hidden></p>`}
       ${ev.mitbringen ? `<div class="bring"><b>Bitte mitbringen</b>${esc(ev.mitbringen)}</div>` : ""}
@@ -4219,9 +4255,18 @@ async function boardListDB(col, field, scope, n) {
     }
     return [...docs.values()].map((d) => ({ id: d.id, ...d.data() }));
   } else if (scope === MONAT_START) {
-    /* Startmonat: Einträge von vor dem Update haben noch kein Monatsfeld → nach Datum holen (alle Einträge des Monats) */
-    const [y, m] = scope.split("-").map(Number);
-    qs = await FB.db.collection(col).where("at", ">=", new Date(y, m - 1, 1)).where("at", "<", new Date(y, m, 1)).limit(120).get();
+    /* Startmonat: Einträge mit Monatsfeld sortiert holen + die besten Allzeit-Einträge, die aus diesem Monat
+       stammen, aber noch kein Monatsfeld haben (vor dem Update). Früher: nur die ersten 120 Einträge des Monats –
+       danach tauchten neue Einträge nicht mehr auf (und es gab kein Top-10-Abzeichen). */
+    const [y, m] = scope.split("-").map(Number), a = new Date(y, m - 1, 1).getTime(), b = new Date(y, m, 1).getTime();
+    const ms = (d) => { const t = d.data().at; return t && t.toMillis ? t.toMillis() : t instanceof Date ? t.getTime() : +t || 0; };
+    let neu;
+    try { neu = await FB.db.collection(col).where("monat", "==", scope).orderBy(field, "desc").limit(n).get(); }
+    catch (e) { console.warn("Firestore-Index für die Monats-Bestenliste fehlt noch", e); neu = await FB.db.collection(col).where("monat", "==", scope).limit(60).get(); }
+    const alt = await FB.db.collection(col).orderBy(field, "desc").limit(n).get().catch(() => ({ docs: [] }));
+    const docs = new Map(neu.docs.map((d) => [d.id, d]));
+    alt.docs.forEach((d) => { const x = d.data(); if (!x.monat && ms(d) >= a && ms(d) < b) docs.set(d.id, d); });
+    return [...docs.values()].map((d) => ({ id: d.id, ...d.data() }));
   } else {
     try { qs = await FB.db.collection(col).where("monat", "==", scope).orderBy(field, "desc").limit(n).get(); }
     catch (e) {   /* Index noch nicht angelegt (oder anderer Fehler): ohne Sortierung holen und selbst sortieren */
@@ -7155,6 +7200,8 @@ const BADGE_STUFEN = {
 const STUFE_FARBE = ["", "Grün", "Blau", "Rot", "Lila"];
 /* Wert einer Gruppe lesbar: 1.000 Becher, 2 km, 3 Clubabende */
 const stufeFmt = (g, n) => { const d = BADGE_STUFEN[g]; return d.km ? `${(Math.floor(n / 100) / 10).toLocaleString("de-DE")} km` : `${fmtNum(n)} ${n === 1 && g === "abende" ? "Clubabend" : d.unit}`; };
+/* Abzeichen, die erst ab einem Zeitpunkt in der Liste auftauchen (vorher geheim) */
+const BADGE_AB = { regenbogen: new Date(2026, 11, 24, 8, 0) };   /* Heiligabend: ab Öffnung des 24. Türchens */
 const BADGE_LIST = [
   /* Gold – thematisch sortiert */
   {"id": "eiskalt", "name": "Eiskalt", "desc": "Bei der Vodka Night dabei.", "tier": 0, "cat": "Gold"},
@@ -7552,7 +7599,7 @@ const Badges = (() => {
       if (all.length && all.every((g) => log.tot.spill.includes(g))) unlock("sauerei");
     },
     /* sichtbare Abzeichen: Abzeichen kommender Abende erst ab Beginn des Abends zeigen */
-    list() { const now = new Date(); return BADGE_LIST.filter((b) => have[b.id] || !EVENTS.some((e) => e.abzeichen === b.id && now < e.startDate)); },
+    list() { const now = new Date(); return BADGE_LIST.filter((b) => have[b.id] || (!EVENTS.some((e) => e.abzeichen === b.id && now < e.startDate) && !(BADGE_AB[b.id] && now < BADGE_AB[b.id]))); },
     /* Musikwünsche: Feuer verteilt, eigener Wunsch auf Platz 1, eigene Richtung vorn */
     musik(d, u, mineKs) {
       const all = Object.values(d.w || {});
@@ -7591,7 +7638,7 @@ const Badges = (() => {
 function updateTile() { if (typeof tabSync === "function" && $("tabbar")) tabSync(); }
 /* ================= Musikwünsche =================
    Ein Firestore-Dokument pro Clubabend: musik/<Abend-ID> = { w: { <Song-Schlüssel>: Wunsch }, m: { <Gerät>: Stimmung } }.
-   Gäste lesen 1 Dokument (alle 20 s, nur solange die Seite offen ist), der DJ alle 6 s.
+   Gäste lesen 1 Dokument (alle 5 Minuten, nur solange die Seite offen ist), der DJ alle 6 s.
    Sperren: musikSperre/<Schlüssel> (öffentlich, ohne Namen) + musikSperreInfo/<Schlüssel> (nur Team, mit Namen).
    Die Regeln lehnen Wünsche mit gesperrtem Song oder Interpret ab. Songsuche: iTunes-Suche von Apple (ohne Schlüssel). */
 const MOODS = [["techno", "Techno"], ["charts", "Charts"], ["hiphop", "Hip-Hop"], ["party", "Party-Klassiker"]];
@@ -7917,7 +7964,7 @@ function fotowandTile() {
   return `<a class="tile-btn hm-fotowand" href="#fotowand" aria-label="Fotowand – Fotos aller Clubabende">
     <span class="fw-art" aria-hidden="true"><span class="fw-flash"></span>${pol}<i class="fw-sp sp1">✦</i><i class="fw-sp sp2">✦</i><i class="fw-sp sp3">✦</i></span>
     ${neu ? `<span class="soon-tag fw-new">Neue Fotos</span>` : ""}
-    <span class="fw-txt"><b>Fotowand</b><small>${past.length ? `Fotos von ${past.length} Clubabend${past.length === 1 ? "" : "en"}` : "Fotos aller Clubabende"} ${ICON_ARROW}</small></span></a>`;
+    <span class="fw-txt"><b>Fotowand</b><small><span class="fw-nw">${past.length ? `Fotos von ${past.length} Clubabend${past.length === 1 ? "" : "en"}` : "Fotos aller Clubabende"}&nbsp;${ICON_ARROW}</span></small></span></a>`;
 }
 /* Mini-Titel so skalieren, dass sie ganz ins Polaroid passen */
 function fitMinis(root = document) {
@@ -8451,7 +8498,7 @@ function buildMenu() {
     const i = EVENTS.indexOf(ev);
     const meta = ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
     const extra = ev.anmeldung && !isPast(ev)
-      ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop>Anmelden ${ICON_EXT}</a>`
+      ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop><span><b>Anmelden</b>${ev.art ? `<small>${esc(ev.art)}</small>` : ""}</span>${ICON_EXT}</a>`
       : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>`
       : ev.kachelInfo ? `<div class="tile-extra tile-dj">${ICON_MARKT}<span><b>${esc(ev.kachelInfo.zeit)}</b>${esc(ev.kachelInfo.text)}</span></div>` : "";
     return `<div class="mtile tile-ev t-${ev.thema}" role="link" tabindex="0" data-ev="${i}" style="${themeStyle(ev.th)}" aria-label="${esc(label)}: ${esc(ev.titel.join(" "))}, ${esc(ev.wdLong)} ${esc(ev.dm)} – Infos öffnen">
@@ -10944,6 +10991,13 @@ const marktSoon = (ev, now = new Date()) => { const w = marktWindow(ev); return 
 const mEuro = (n) => trEuro(n);
 /* flache Symbole: Glühweintasse, Bratwurst im Brötchen, Waffelherz */
 function marktArt(kind) {
+  if (kind === "langos") return `<svg viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M8 34 C6 22 16 12 30 11 C44 10 57 17 58 30 C59 43 49 53 34 54 C19 55 9 46 8 34 Z" fill="#c98a3c"/>
+    <path d="M11 33 C10 23 18 15 30 14 C43 13 54 19 55 30 C56 41 47 50 34 51 C21 52 12 44 11 33 Z" fill="#e8b062"/>
+    <path d="M17 31 C17 24 23 20 31 20 C40 19 48 23 48 31 C48 39 41 44 32 44 C23 44 17 39 17 31 Z" fill="#f6efe0"/>
+    <g fill="none" stroke="#f2c230" stroke-width="2.4" stroke-linecap="round"><path d="M22 27 q3 -3 6 0"/><path d="M33 24 q3 2 6 -1"/><path d="M24 36 q3 2 6 -1"/><path d="M36 33 q2 -3 6 -1"/><path d="M29 30 q2 2 4 0"/><path d="M38 39 q2 1 4 -2"/></g>
+    <g fill="#4f8a3c"><circle cx="27" cy="23" r="1.2"/><circle cx="42" cy="29" r="1.2"/><circle cx="30" cy="40" r="1.1"/><circle cx="21" cy="32" r="1"/><circle cx="35" cy="28" r="1"/></g>
+    <g fill="#f3d79a" opacity=".8"><circle cx="15" cy="22" r="1.6"/><circle cx="51" cy="44" r="1.8"/><circle cx="47" cy="17" r="1.4"/><circle cx="14" cy="43" r="1.3"/></g></svg>`;
   if (kind === "gluehwein") return `<svg viewBox="0 0 64 64" aria-hidden="true">
     <path class="xm-steam" d="M24 16 C20 11 28 8 24 2" fill="none" stroke="#ead9b8" stroke-width="2.6" stroke-linecap="round"/><path class="xm-steam s2" d="M34 16 C30 11 38 8 34 2" fill="none" stroke="#ead9b8" stroke-width="2.6" stroke-linecap="round"/>
     <path d="M12 20 H46 V42 C46 52 39 58 29 58 C19 58 12 52 12 42 Z" fill="#c4362f"/><path d="M46 26 C58 26 58 44 46 44" fill="none" stroke="#c4362f" stroke-width="5"/>
@@ -10963,7 +11017,9 @@ function marktArt(kind) {
     <circle cx="46" cy="14" r="5" fill="#b3122e"/><circle cx="54" cy="20" r="4.4" fill="#c4362f"/><circle cx="44.6" cy="12.6" r="1.4" fill="#ff9aa8"/>
     <path d="M46 9 C47 5 50 3 53 3" stroke="#3f6b3a" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`;
 }
-const marktRow = (a) => `<div class="mk-row"><span class="mk-ico">${marktArt(a.bild)}</span><span class="mk-nm"><b>${esc(a.name)}</b>${a.info ? `<small>${esc(a.info)}</small>` : ""}${a.extra ? `<em>+ ${esc(a.extra)} ${mEuro(a.extraPreis)}</em>` : ""}</span><span class="mk-pr">${mEuro(a.preis)}</span></div>`;
+const mkAb = (a) => a.varianten ? Math.min(...a.varianten.map((v) => v.preis)) : a.preis;
+const mkVar = (a) => a.varianten ? `<span class="mk-var">${a.varianten.map((v) => `<span><i>${esc(v.name)}</i><b>${mEuro(v.preis)}</b></span>`).join("")}</span>` : "";
+const marktRow = (a) => `<div class="mk-row${a.varianten ? " var" : ""}"><span class="mk-ico">${marktArt(a.bild)}</span><span class="mk-nm"><b>${esc(a.name)}</b>${a.info ? `<small>${esc(a.info)}</small>` : ""}${a.extra ? `<em>+ ${esc(a.extra)} ${mEuro(a.extraPreis)}</em>` : ""}</span><span class="mk-pr">${a.varianten ? `<small>ab</small> ` : ""}${mEuro(mkAb(a))}</span>${mkVar(a)}</div>`;
 /* Menü: während des Markts oben im Live-Block, vorher als Vorschau am Abendtag */
 function phMarkt(ev, now) {
   const w = marktWindow(ev); if (!w || now >= w[1]) return "";
@@ -10978,9 +11034,9 @@ function trMarktBoard(ev, now) {
   const w = marktWindow(ev);
   return `<div class="tr-mk-snow"></div><div class="tr-tag"><span class="tr-live"></span>Jetzt offen</div>
     <div class="tr-mk-title">${esc(ev.markt.titel || "Weihnachtsmarkt")}</div>
-    <div class="tr-mk-list">${ev.markt.angebote.map((a) => `<div class="tr-mk-row"><span class="tr-mk-ico">${marktArt(a.bild)}</span>
+    <div class="tr-mk-list${ev.markt.angebote.reduce((n, a) => n + 1 + (a.varianten ? a.varianten.length * .6 : 0), 0) > 4 ? " dicht" : ""}">${ev.markt.angebote.map((a) => `<div class="tr-mk-row${a.varianten ? " var" : ""}"><span class="tr-mk-ico">${marktArt(a.bild)}</span>
       <span class="tr-mk-nm"><b>${esc(a.name)}</b>${a.info ? `<small>${esc(a.info)}</small>` : ""}${a.extra ? `<em>+ ${esc(a.extra)} ${mEuro(a.extraPreis)}</em>` : ""}</span>
-      <span class="tr-mk-pr">${mEuro(a.preis)}</span></div>`).join("")}</div>
+      <span class="tr-mk-pr">${a.varianten ? `<small>ab</small> ` : ""}${mEuro(mkAb(a))}</span>${mkVar(a)}</div>`).join("")}</div>
     <div class="tr-mk-foot">Club ab ${esc(ev.markt.bis)} Uhr · noch <b id="trCd"></b></div>`;
 }
 
