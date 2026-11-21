@@ -2868,7 +2868,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "137";
+const APP_V = "138";
 
 const EVENTS = [
   {
@@ -4911,9 +4911,9 @@ const Game = (() => {
   const fmt = (ms) => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
   function hud() {
     if (two()) {
-      $("bpL1").textContent = P[0].name; $("bpCups").textContent = P[0].cups.length;
-      $("bpL2").textContent = phase === "ot" ? "Verläng." : phase === "reb" ? "Nachwurf" : "Runde"; $("bpTime").textContent = round;
-      $("bpL3").textContent = P[1].name; $("bpRound").textContent = P[1].cups.length;
+      $("bpL1").textContent = P[0].name; $("bpCups").textContent = P[0].made;
+      $("bpL2").textContent = phase === "ot" ? "Golden Goal" : phase === "reb" ? "Nachwurf" : "Runde"; $("bpTime").textContent = round;
+      $("bpL3").textContent = P[1].name; $("bpRound").textContent = P[1].made;
       $("bpS1").classList.toggle("on", turn === 0); $("bpS3").classList.toggle("on", turn === 1);
       const rr = $("bpRerack"), ok = canRerack();
       rr.hidden = !ok; if (ok) rr.textContent = `Becher stellen: ${SHAPE_LBL[cups.length]} · 1×`;
@@ -5044,6 +5044,30 @@ const Game = (() => {
     else if (misses >= 2) toast("Daneben!");
     throwsInRound++; hud();
   }
+  /* Becherwand: Liegt der Ball unterhalb des Becherrands im Becher-Grundriss, prallt er seitlich ab */
+  const WALL = .125;
+  function wallCup(x, z) {
+    for (const c of cups) if (!c.dying && Math.hypot(x - c.x, (z - c.z) * 2.45) < WALL) return c;
+    return null;
+  }
+  function wallBounce(b, c) {
+    let nx = b.x - c.x, nz = (b.z - c.z) * 2.45; const nl = Math.hypot(nx, nz) || 1; nx /= nl; nz /= nl;
+    /* Ball an den Rand der Wand zurücksetzen und weg vom Becher abprallen lassen */
+    b.x = c.x + nx * WALL * 1.001; b.z = c.z + nz * WALL * 1.001 / 2.45;
+    Object.assign(b, { phase: "bounce", k: 0, vx: nx * .35 + (Math.random() - .5) * .1, vz: nz * .14 - .05, vh: .25 + Math.random() * .2, h: Math.max(b.h, .02) });
+    registerMiss(false); buzz(12);
+  }
+  /* Ball unterhalb des Rands steckt in einer Becherwand: nach außen schieben, Bewegung in den Becher hinein umkehren */
+  function pushOut(b) {
+    if (b.h >= cupH()) return;
+    const c = wallCup(b.x, b.z); if (!c) return;
+    let nx = b.x - c.x, nz = (b.z - c.z) * 2.45; const nl = Math.hypot(nx, nz) || 1; nx /= nl; nz /= nl;
+    b.x = c.x + nx * WALL * 1.001; b.z = c.z + nz * WALL * 1.001 / 2.45;
+    /* zwischen zwei Bechern eingeklemmt: Ball bleibt oben auf den Rändern liegen */
+    if (wallCup(b.x, b.z)) { b.h = cupH(); b.vh = 0; b.vx = 0; b.vz = 0; return; }
+    const vn = (b.vx || 0) * nx + (b.vz || 0) * 2.45 * nz;
+    if (vn < 0) { b.vx -= 1.4 * vn * nx; b.vz -= 1.4 * vn * nz / 2.45; }
+  }
   const ballR = (z) => Math.max(3, W * .034 * scale(Math.min(Math.max(z, 0), 1.6)) * 1.5);
 
   function stepBall(dt) {
@@ -5065,6 +5089,7 @@ const Game = (() => {
         if (res && res.type === "rim") { rimHop(b, at, res.cup, prev, cur); return; }
       }
       Object.assign(b, cur);
+      if (b.checked && b.h < cupH()) { const w = wallCup(b.x, b.z); if (w) { wallBounce(b, w); return; } }
       /* Ball landet auf dem Tisch: kein Abprallen, er bleibt liegen */
       if (b.t >= 1) {
         if (two() && !b.tb && b.zl > .05 && b.zl < 1) { tableBounce(b); return; }
@@ -5087,6 +5112,7 @@ const Game = (() => {
           registerMiss(true); return;
         }
       }
+      if (b.h < hc) { const w = wallCup(b.x, b.z); if (w) { wallBounce(b, w); return; } }
       if (b.h <= 0) { Object.assign(b, { phase: "drop", k: 0, h: 0, vh: 0, vx: b.vx * .3, vz: b.vz * .3 }); registerMiss(false); }
       return;
     }
@@ -5099,11 +5125,14 @@ const Game = (() => {
     }
     if (b.phase === "bounce") {   /* fällt vom Rand herunter, auf dem Tisch kein weiteres Abprallen */
       b.x += b.vx * s; b.z += b.vz * s; b.h += b.vh * s; b.vh -= 6 * s;
+      pushOut(b);
+      if (b.h === cupH() && !b.vx && !b.vz) b.vh = 0;
       if (b.h < 0) { b.h = 0; b.vh = 0; b.vx *= .5; b.vz *= .5; }
       if (b.k > .8) b.phase = "gone";
     }
     if (b.phase === "drop") {
       b.x += b.vx * s; b.z += b.vz * s; b.vx *= .9; b.vz *= .9;
+      pushOut(b);
       if (b.k > .45) b.phase = "gone";
     }
   }
@@ -5163,12 +5192,13 @@ const Game = (() => {
   /* Spieler th hat alle Becher des anderen getroffen */
   function cleared2(th) {
     const o = 1 - th;
-    if (phase === "reb") {   /* Nachwurf geschafft: Verlängerung mit je 1 Becher */
+    if (phase === "ot") return finish2(th);   /* Golden Goal: wer in der Verlängerung zuerst trifft, gewinnt – kein Nachwurf */
+    if (phase === "reb") {   /* Nachwurf geschafft: Verlängerung mit je 1 Becher (Golden Goal) */
       phase = "ot"; hadOT = true;
       P.forEach((p, i) => { p.cups = [{ x: 0, z: .87, hits: 0, id: Math.random(), pal: i }]; });
       turn = o; cups = P[1 - turn].cups;
       buzz([40, 40, 40, 40, 80]);
-      return showTurn2("Verlängerung!", `Nachwurf geschafft! Jeder hat noch 1 Becher. ${P[turn].name} beginnt.`);
+      return showTurn2("Golden Goal!", `Nachwurf geschafft! Jeder hat noch 1 Becher – wer zuerst trifft, gewinnt. Kein Nachwurf mehr. ${P[turn].name} beginnt.`);
     }
     phase = "reb"; turn = o; cups = P[1 - turn].cups;
     buzz([60, 40, 60]);
@@ -5184,11 +5214,11 @@ const Game = (() => {
     box.hidden = false;
     box.innerHTML = `
       <div class="bp-card" role="dialog" aria-label="${esc(p.name)} ist dran">
-        <p class="bp-kick">${esc(title || (phase === "ot" ? "Verlängerung" : `Runde ${round}`))}</p>
+        <p class="bp-kick">${esc(title || (phase === "ot" ? "Golden Goal" : `Runde ${round}`))}</p>
         <h3 class="pl${turn}">${esc(p.name)}</h3>
         <p class="bp-turn-t">${esc(text || `ist dran und wirft auf die Becher von ${o.name}. Handy weitergeben!`)}</p>
-        <small class="bp-vs-l">Becher übrig</small>
-        <div class="bp-vs"><span>${esc(P[0].name)}</span><b>${P[0].cups.length}</b><b>:</b><b>${P[1].cups.length}</b><span>${esc(P[1].name)}</span></div>
+        <small class="bp-vs-l">Getroffene Becher</small>
+        <div class="bp-vs"><span>${esc(P[0].name)}</span><b>${P[0].made}</b><b>:</b><b>${P[1].made}</b><span>${esc(P[1].name)}</span></div>
         <button class="primary wide" id="bpGo" type="button">Los geht’s</button>
       </div>`;
     $("bpGo").addEventListener("click", () => { box.hidden = true; box.innerHTML = ""; help2(); hud(); });
@@ -5198,9 +5228,9 @@ const Game = (() => {
     const box = $("bpOver"); box.hidden = false;
     box.innerHTML = `
       <div class="bp-card" role="dialog" aria-label="Spielende">
-        <p class="bp-kick">🏆 Gewonnen${hadOT ? " in der Verlängerung" : ""}</p>
+        <p class="bp-kick">🏆 Gewonnen${hadOT ? " per Golden Goal" : ""}</p>
         <h3 class="pl${w}">${esc(P[w].name)}</h3>
-        <p class="bp-turn-t">Getroffene Becher</p>
+        <small class="bp-vs-l" style="margin-top:10px">Getroffene Becher</small>
         <div class="bp-vs"><span>${esc(P[0].name)}</span><b>${P[0].made}</b><b>:</b><b>${P[1].made}</b><span>${esc(P[1].name)}</span></div>
         <div class="row2"><button class="ghost" id="bpDone2" type="button">Schließen</button><button class="primary" id="bpRev" type="button">Revanche</button></div>
       </div>`;
@@ -5223,7 +5253,7 @@ const Game = (() => {
           <li>Beide in <b>denselben</b> Becher: <b>Bombe</b>, der Becher und 3 daneben fliegen raus.</li>
           <li>Ball springt vorher auf dem Tisch auf: <b>Bouncer</b>, zählt 2 Becher.</li>
           <li>Einmal pro Spiel darfst du die Becher des anderen <b>neu stellen</b> lassen.</li>
-          <li>Wer zuerst alle Becher trifft, gewinnt – der andere hat aber noch einen <b>Nachwurf</b>. Schafft er alle, geht’s mit je 1 Becher in die Verlängerung.</li>
+          <li>Wer zuerst alle Becher trifft, gewinnt – der andere hat aber noch einen <b>Nachwurf</b>. Schafft er alle, gibt’s je 1 Becher und <b>Golden Goal</b>: wer zuerst trifft, gewinnt.</li>
         </ul>
         <div class="row2"><button class="ghost" id="bpSolo" type="button">Allein spielen</button><button class="primary" id="bpLos" type="button">Auslosen</button></div>
       </div>`;
@@ -5664,7 +5694,7 @@ const Game = (() => {
   return {
     _dbg: { cups: () => cups.map((c) => ({ ...proj(c.x, c.z), hits: c.hits })), state: () => ({ cleared, misses, round, throwsInRound, over, n: cups.length, zl: ball ? ball.zl : null, xl: ball ? ball.xl : null }), setCups: (n) => { cups = cups.slice(0, n); }, reracked: () => reracked, throwAt: (i, dz = 0) => { const c = cups[i]; if (!c || ball || over) return false; const target = c.z + dz; let lo = target, hi = target + .3; for (let k = 0; k < 30; k++) { const m = (lo + hi) / 2; const bb = { xl: 0, zl: m, apex: 1.25 * (.55 + Math.min(m, 1.2) * .5) }; let tt = .5; for (let j = 0; j < 40; j++) { const hh = traj(bb, tt); tt += (hh.h - cupH()) > 0 ? .5 ** (j + 2) : -(.5 ** (j + 2)); } if (m * tt < target) lo = m; else hi = m; } const zl = (lo + hi) / 2; launch(c.x / (target / zl), zl); return true; }, cupList: () => cups.map((c) => ({ x: c.x, z: c.z, moving: !!c.moving })),
       two: () => ({ mode, turn, phase, round, throwsInRound, over, busy, P: P && P.map((p) => ({ name: p.name, n: p.cups.length, made: p.made, rr: p.rr })) }),
-      draw2: (w) => { names2 = names2[0] ? names2 : ["Anna", "Ben"]; draw2(w); }, launch: (xl, zl) => { if (!ball && !over && !busy) { launch(xl, zl); return true; } return false; }, throwAtT: (i) => { const c = cups[i]; return c ? { x: c.x, z: c.z } : null; }, cut: (n) => { cups.splice(n); hud(); } },
+      draw2: (w) => { names2 = names2[0] ? names2 : ["Anna", "Ben"]; draw2(w); }, launch: (xl, zl) => { if (!ball && !over && !busy) { launch(xl, zl); return true; } return false; }, throwAtT: (i) => { const c = cups[i]; return c ? { x: c.x, z: c.z } : null; }, cut: (n) => { cups.splice(n); hud(); }, ball: () => ball && { x: ball.x, z: ball.z, h: ball.h, ph: ball.phase, hc: cupH(), wall: !!wallCup(ball.x, ball.z) } },
     open(m = 1) {
       if (running) { if (m !== mode) { mode = m; reset(); } return; }
       mode = m;
