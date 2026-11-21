@@ -822,6 +822,43 @@ a { color: inherit; }
 @keyframes zfSteam { 0% { opacity: 0; transform: translateY(6px) scaleY(.7); } 35% { opacity: .32; } 100% { opacity: 0; transform: translateY(-16px) scaleY(1.1); } }
 .app.dezember .bp-toast { text-shadow: 0 0 16px #e2554b, 0 0 30px #c4362f; }
 .bp-over[hidden] { display: none; }
+/* Beerpong zu zweit */
+.bp-pill { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(112px + var(--safe-b)); padding: 10px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.45); color: #fff; font: 800 14px var(--f-body); white-space: nowrap; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.bp-pill[hidden] { display: none; }
+.bp-two { top: calc(104px + var(--safe-t)); bottom: auto; }
+.bp-rr { border: 0; background: linear-gradient(90deg, #ff2e88, #ff8a3d); box-shadow: 0 8px 22px rgba(255,46,136,.4); }
+.view-game.two .bp-miss { display: none; }
+.view-game.two .bp-help { top: calc(96px + var(--safe-t)); bottom: auto; text-shadow: 0 1px 8px rgba(0,0,0,.85); }
+.view-game.two .bp-rr { top: 40%; bottom: auto; }
+.view-game.two .bp-stat small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .06em; }
+.view-game.two #bpS1 { border-color: rgba(255,80,80,.55); } .view-game.two #bpS1 small { color: #ff8a8a; }
+.view-game.two #bpS3 { border-color: rgba(90,150,255,.6); } .view-game.two #bpS3 small { color: #9cc2ff; }
+.view-game.two #bpS1.on { background: rgba(224,20,44,.42); box-shadow: 0 0 18px rgba(255,59,59,.6); }
+.view-game.two #bpS3.on { background: rgba(20,80,224,.45); box-shadow: 0 0 18px rgba(80,140,255,.6); }
+.app.dezember .view-game.two #bpS3 { border-color: rgba(70,200,120,.6); } .app.dezember .view-game.two #bpS3 small { color: #8fe3a8; }
+.app.dezember .view-game.two #bpS3.on { background: rgba(29,122,71,.5); box-shadow: 0 0 18px rgba(70,200,120,.55); }
+.bp-kick { margin: 0 0 2px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #7a6a8f; }
+.bp-card h3.pl0 { color: #e0142c; } .bp-card h3.pl1 { color: #1450e0; } .app.dezember .bp-card h3.pl1 { color: #1d7a47; }
+.bp-turn-t { margin: 6px 0 14px; font-size: 14.5px; line-height: 1.4; color: #4a3d5c; }
+.bp-card .wide { width: 100%; }
+.bp-pl { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+.bp-pl i { flex: none; width: 14px; height: 14px; border-radius: 50%; background: #e0142c; box-shadow: 0 0 0 3px #ffe1e1; }
+.bp-pl.pl1 i { background: #1450e0; box-shadow: 0 0 0 3px #dfe8ff; }
+.app.dezember .bp-pl.pl1 i { background: #1d7a47; box-shadow: 0 0 0 3px #dcf3e5; }
+.bp-rules { list-style: none; margin: 14px 0 4px; padding: 0; text-align: left; font-size: 12.5px; line-height: 1.4; color: #4a3d5c; display: grid; gap: 5px; }
+.bp-rules li { position: relative; padding-left: 16px; } .bp-rules li::before { content: ""; position: absolute; left: 3px; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: #ff2e88; }
+.bp-rules b { color: #1a0b2e; }
+.bp-draw { display: flex; justify-content: center; gap: 10px; margin: 16px 0 8px; }
+.bp-draw span { min-width: 0; max-width: 46%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 11px 16px; border-radius: 14px; background: #efeaf5; font-weight: 800; transition: transform .12s, background .12s, color .12s; }
+.bp-draw span.on.pl0 { background: #e0142c; color: #fff; transform: scale(1.08); }
+.bp-draw span.on.pl1 { background: #1450e0; color: #fff; transform: scale(1.08); }
+.app.dezember .bp-draw span.on.pl1 { background: #1d7a47; }
+.bp-vs { display: flex; justify-content: center; align-items: baseline; gap: 12px; margin: 0 0 14px; font-size: 13px; font-weight: 700; color: #7a6a8f; }
+.bp-vs b { font-family: var(--f-display); font-weight: 400; font-size: 30px; color: #1a0b2e; font-variant-numeric: tabular-nums; }
+.bp-vs span { max-width: 34%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bp-vs-l { display: block; margin-bottom: -2px; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #a497b5; }
+.tp-plays { display: inline-flex; gap: 8px; flex: none; }
+.spiele-page .tp-play.tp-two { background: rgba(255,255,255,.14); color: #fff; border: 1px solid rgba(255,255,255,.25); }
 .bp-over { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 20px; background: rgba(10, 2, 18, .78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .bp-card { box-sizing: border-box; min-width: 0; max-width: 100%; width: min(360px, 100%); padding: 22px 20px; border-radius: 26px; background: #fff; color: #1a0b2e; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,.5); animation: pop .4s cubic-bezier(.2,.9,.25,1.2); }
 @keyframes pop { from { transform: scale(.85); opacity: 0; } }
@@ -2685,15 +2722,17 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
       <canvas id="bpCanvas"></canvas>
       <div class="bp-hud">
         <button class="bp-x" id="bpClose" type="button" aria-label="Spiel beenden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-        <div class="bp-stat"><small>Becher</small><b id="bpCups">0</b></div>
-        <div class="bp-stat"><small>Zeit</small><b id="bpTime">0:00</b></div>
-        <div class="bp-stat"><small>Runde</small><b id="bpRound">1</b></div>
+        <div class="bp-stat" id="bpS1"><small id="bpL1">Becher</small><b id="bpCups">0</b></div>
+        <div class="bp-stat" id="bpS2"><small id="bpL2">Zeit</small><b id="bpTime">0:00</b></div>
+        <div class="bp-stat" id="bpS3"><small id="bpL3">Runde</small><b id="bpRound">1</b></div>
       </div>
       <div class="bp-sub">
         <span class="bp-throws" id="bpThrows" aria-label="Würfe in dieser Runde"><i></i><i></i></span>
         <span class="bp-miss" id="bpMiss" aria-label="Fehlwürfe"><i></i><i></i></span>
       </div>
       <div class="bp-toast" id="bpToast"></div>
+      <button class="bp-pill bp-two" id="bpTwo" type="button" hidden>👥 Zu zweit spielen</button>
+      <button class="bp-pill bp-rr" id="bpRerack" type="button" hidden>Neu stellen</button>
       <div class="bp-help" id="bpHelp"><b>Wisch nach oben, um zu werfen</b>Richtung = Zielen, Tempo = Weite.<br>2 Würfe pro Runde · beide daneben = Game over</div>
       <div class="bp-over" id="bpOver" hidden></div>
     </section>
@@ -2829,7 +2868,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "134";
+const APP_V = "137";
 
 const EVENTS = [
   {
@@ -2874,7 +2913,7 @@ const EVENTS = [
     mitbringen: null,
     fotos: null,
     specials: [
-      { name: "Sex on the Beach", info: "Fruchtiger Klassiker mit Vodka", preis: 2.0, bild: "beach" },
+      { name: "Sex on the Beach", info: "Fruchtiger Klassiker mit Vodka", preis: 3.0, bild: "beach" },
       { name: "Sangria", info: "Rotwein mit frischem Obst", preis: 1.0, bild: "sangria" }
     ],
     happyHour: {
@@ -4105,7 +4144,7 @@ const Live = (() => {
   const emit = (changed) => { const st = toState(flat); subs.forEach((fn) => fn(st, changed)); };
   const statsRef = () => FB.db.doc("live/stats");
   const page = () => location.hash.slice(1);
-  const OTHER = ["advent", "advent-team", "nutzung", "fotowand", "musik", "dj", "ranking", "team", "beerpong", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
+  const OTHER = ["advent", "advent-team", "nutzung", "fotowand", "musik", "dj", "ranking", "team", "beerpong", "beerpong2", "busfahrer", "zapfmeister", "polnischen", "abzeichen", "impressum", "datenschutz", "paypal", "wuensche"];
   const menuVisible = () => { const id = page(); return !id || (!OTHER.includes(id) && !id.startsWith("fotos-") && !EVENTS.some((e) => e.id === id)); };
   const interval = () => (tresen ? 60000 : LIVE_POLL[page()] || (menuMs && menuVisible() ? menuMs : 0));
   const wanted = () => remote && !document.hidden && interval();
@@ -4808,6 +4847,11 @@ const Game = (() => {
   let W = 0, H = 0, dpr = 1, running = false, raf = 0;
   let cups = [], ball = null, particles = [], pending = [];
   let throwsInRound = 0, round = 1, cleared = 0, misses = 0, tStart = 0, tEnd = 0, over = false, swipe = null, helpShown = true, xlUsed = false;
+  /* Zu zweit (ein Handy, abwechselnd): P[i].cups = Becher von Spieler i; wer dran ist (turn), wirft auf die Becher des anderen */
+  let mode = 1, P = null, turn = 0, starter = 0, phase = "normal", busy = false, names2 = ["", ""], hadOT = false;
+  const two = () => mode === 2;
+  const OWN_Z = -.03;   /* Tiefe des vordersten eigenen Bechers (0 = Tischkante unten) */
+  const HELP1 = $("bpHelp").innerHTML;
   const K = 1.0;                       /* Perspektive (kleiner = Becher hinten größer) */
   const D = 0.24, DZ = 0.085;          /* Abstand der Becher */
   const R = 0.115, RZ = 0.042;         /* Trefferradius eines Bechers (Tischkoordinaten) */
@@ -4819,12 +4863,14 @@ const Game = (() => {
     const y = g.yN - (g.yN - g.yF) * (1 - s) / (1 - s1);
     return { x: g.cx + x * g.w0 * s, y: y - h * H * .32 * s, s };
   }
-  function rack() {
-    cups = []; reracked = false;
+  function rackArr(pal = 0) {
+    const a = [];
     [[4, .95], [3, .95 - DZ], [2, .95 - 2 * DZ], [1, .95 - 3 * DZ]].forEach(([n, z]) => {
-      for (let k = 0; k < n; k++) cups.push({ x: (k - (n - 1) / 2) * D, z, hits: 0, id: Math.random() });
+      for (let k = 0; k < n; k++) a.push({ x: (k - (n - 1) / 2) * D, z, hits: 0, id: Math.random(), pal });
     });
+    return a;
   }
+  function rack() { cups = rackArr(0); reracked = false; }
   /* Neu aufstellen: einmal pro Pyramide, bei genau 4 (Raute), 3 (Dreieck) oder 2 (Linie) übrigen Bechern */
   let reracked = false;
   const SHAPES = {
@@ -4832,6 +4878,22 @@ const Game = (() => {
     3: { name: "Dreieck!", pos: (zc) => [[-D * .55, zc + DZ * .6], [D * .55, zc + DZ * .6], [0, zc - DZ * .6]] },
     2: { name: "Linie!",   pos: (zc) => [[0, zc + DZ * .75], [0, zc - DZ * .75]] }
   };
+  /* Zu zweit: einmal pro Spiel und Spieler die gegnerischen Becher zusammenstellen lassen */
+  const SHAPES2 = {
+    ...SHAPES,
+    6: { name: "Dreieck!", pos: (zc) => [[-D, zc + DZ], [0, zc + DZ], [D, zc + DZ], [-D / 2, zc], [D / 2, zc], [0, zc - DZ]] },
+    1: { name: "Mitte!", pos: (zc) => [[0, zc]] }
+  };
+  const SHAPE_LBL = { 6: "Dreieck", 4: "Raute", 3: "Dreieck", 2: "Linie", 1: "Mitte" };
+  const canRerack = () => two() && P && !over && !busy && !ball && throwsInRound === 0 && !P[turn].rr && phase !== "ot" && !!SHAPES2[cups.length]
+    && !(cups.length === 1 && Math.abs(cups[0].x) < .01);
+  function rerack2() {
+    if (!canRerack()) return;
+    const sh = SHAPES2[cups.length], pos = sh.pos(.87);
+    P[turn].rr = true;
+    cups.forEach((c, i) => { c.tx = pos[i][0]; c.tz = pos[i][1]; c.anim = 1; });
+    toast(sh.name); hud();
+  }
   function rerack() {
     const shape = SHAPES[cups.length];
     if (!shape || reracked) return;
@@ -4848,8 +4910,19 @@ const Game = (() => {
   }
   const fmt = (ms) => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
   function hud() {
-    $("bpCups").textContent = cleared;
-    $("bpRound").textContent = round;
+    if (two()) {
+      $("bpL1").textContent = P[0].name; $("bpCups").textContent = P[0].cups.length;
+      $("bpL2").textContent = phase === "ot" ? "Verläng." : phase === "reb" ? "Nachwurf" : "Runde"; $("bpTime").textContent = round;
+      $("bpL3").textContent = P[1].name; $("bpRound").textContent = P[1].cups.length;
+      $("bpS1").classList.toggle("on", turn === 0); $("bpS3").classList.toggle("on", turn === 1);
+      const rr = $("bpRerack"), ok = canRerack();
+      rr.hidden = !ok; if (ok) rr.textContent = `Becher stellen: ${SHAPE_LBL[cups.length]} · 1×`;
+    } else {
+      $("bpCups").textContent = cleared;
+      $("bpRound").textContent = round;
+      $("bpRerack").hidden = true;
+    }
+    $("bpTwo").hidden = two() || !helpShown || round > 1 || throwsInRound > 0 || over;
     [...$("bpThrows").children].forEach((i, k) => i.classList.toggle("used", k < throwsInRound));
     [...$("bpMiss").children].forEach((i, k) => i.classList.toggle("on", k < misses));
   }
@@ -4858,17 +4931,27 @@ const Game = (() => {
 
   /* ---------- Wurf ---------- */
   function start(e) {
-    if (over || ball || e.target.closest("button")) return;
+    if (over || ball || busy || e.target.closest("button")) return;
     swipe = { x0: e.clientX, y0: e.clientY, pts: [[e.clientX, e.clientY, performance.now()]] };
   }
-  function move(e) { if (swipe) { swipe.pts.push([e.clientX, e.clientY, performance.now()]); if (swipe.pts.length > 12) swipe.pts.shift(); } }
+  /* Fingerpunkte der letzten 0,3 s sammeln (inkl. zusammengefasster Zwischenpunkte) – die Geschwindigkeit wird
+     immer über die letzten 0,18 s gemessen, egal wie viele Punkte das Handy gerade liefert (60/120 Hz, Animationen) */
+  const SWIPE_MS = 180;
+  function move(e) {
+    if (!swipe) return;
+    const evs = (e.getCoalescedEvents && e.getCoalescedEvents().length) ? e.getCoalescedEvents() : [e];
+    const now = performance.now();
+    evs.forEach((c) => swipe.pts.push([c.clientX, c.clientY, c.timeStamp && Math.abs(c.timeStamp - now) < 1000 ? c.timeStamp : now]));
+    while (swipe.pts.length > 2 && swipe.pts[swipe.pts.length - 1][2] - swipe.pts[1][2] > 300) swipe.pts.shift();
+  }
   function end(e) {
     if (!swipe) return;
     const sw = swipe; swipe = null;
     const r = cv.getBoundingClientRect();
     const dx = e.clientX - sw.x0, dy = e.clientY - sw.y0;
     if (dy > -30) return;
-    const a = sw.pts[0], b = sw.pts[sw.pts.length - 1];
+    const b = sw.pts[sw.pts.length - 1];
+    const a = sw.pts.find((q) => b[2] - q[2] <= SWIPE_MS) || sw.pts[0];
     const dt = Math.max(16, b[2] - a[2]);
     const v = Math.hypot(b[0] - a[0], b[1] - a[1]) / dt * 1000 / H;   /* Bildschirmhöhen pro Sekunde */
     let zl = speedToDepth(v);
@@ -4937,12 +5020,21 @@ const Game = (() => {
     }
     return null;
   }
-  function registerHit(hit, bounced) {
+  /* Zu zweit: Ball setzt vor den Bechern auf dem Tisch auf und springt weiter (Bouncer = 2 Becher) */
+  function tableBounce(b) {
+    const durS = b.dur / 1000, g = 8 * b.apex / (durS * durS);
+    const vhIn = (-.55 - 4 * b.apex) / durS;
+    Object.assign(b, traj(b, 1), { phase: "hop", tb: true, k: 0, g, h: 0, vx: b.xl / durS * .8, vz: b.zl / durS * .8, vh: Math.abs(vhIn) * .62 });
+    buzz(15);
+  }
+  function registerHit(hit, bounced, table) {
     hit.hits++;
+    if (two() && table) hit.bouncer = (hit.bouncer || 0) + 1;
     misses = 0;
     const sh = cupShape(hit);
     for (let i = 0; i < 18; i++) particles.push({ x: sh.ex, y: sh.ey, vx: (Math.random() - .5) * 4, vy: -Math.random() * 5 - 1, life: 1, c: i % 2 ? "#ffd27a" : "#fff" });
-    toast(hit.hits === 2 ? "Doppelt! +2" : bounced ? "Bounce-Treffer!" : "Treffer!");
+    toast(two() ? (hit.hits >= 2 ? "Bombe!" : table ? "Bouncer! +2" : bounced ? "Vom Rand rein!" : "Treffer!")
+      : hit.hits === 2 ? "Doppelt! +2" : bounced ? "Bounce-Treffer!" : "Treffer!");
     buzz(hit.hits === 2 ? [30, 40, 60] : 40);
     throwsInRound++; hud();
   }
@@ -4974,7 +5066,10 @@ const Game = (() => {
       }
       Object.assign(b, cur);
       /* Ball landet auf dem Tisch: kein Abprallen, er bleibt liegen */
-      if (b.t >= 1) { Object.assign(b, { phase: "drop", k: 0, vx: b.xl * .15, vz: .25, vh: 0, h: 0 }); registerMiss(false); }
+      if (b.t >= 1) {
+        if (two() && !b.tb && b.zl > .05 && b.zl < 1) { tableBounce(b); return; }
+        Object.assign(b, { phase: "drop", k: 0, vx: b.xl * .15, vz: .25, vh: 0, h: 0 }); registerMiss(false);
+      }
       return;
     }
     /* Einmaliger Hüpfer nach Kontakt mit dem Becherrand – kann danach noch in einen Becher fallen */
@@ -4986,7 +5081,7 @@ const Game = (() => {
         const f = (prev.h - hc) / (prev.h - b.h);
         const at = { x: prev.x + (b.x - prev.x) * f, z: prev.z + (b.z - prev.z) * f, h: hc };
         const res = checkRim(at);
-        if (res && res.type === "hit") { Object.assign(b, at, { phase: "cup", cup: res.cup, k: 0 }); registerHit(res.cup, true); return; }
+        if (res && res.type === "hit") { Object.assign(b, at, { phase: "cup", cup: res.cup, k: 0 }); registerHit(res.cup, true, b.tb); return; }
         if (res && res.type === "rim") {   /* zweiter Randkontakt: kein weiterer Bounce, Ball ist weg */
           Object.assign(b, at, { phase: "bounce", k: 0, vx: res.side * (.3 + Math.random() * .2), vz: res.front ? -.2 : .3, vh: .9 });
           registerMiss(true); return;
@@ -5013,15 +5108,19 @@ const Game = (() => {
     }
   }
 
+  /* Welche Becher fliegen raus: getroffene + bei Doppeltreffer (Bombe) die nächsten n + bei Bouncer der nächste */
+  function removalSet(list, bombN) {
+    const rm = new Set(list.filter((c) => c.hits > 0));
+    const near = (c, n) => list.filter((o) => o !== c && !rm.has(o))
+      .sort((a, b) => Math.hypot(a.x - c.x, (a.z - c.z) * 2.5) - Math.hypot(b.x - c.x, (b.z - c.z) * 2.5))
+      .slice(0, n).forEach((o) => rm.add(o));
+    list.filter((c) => c.hits >= 2).forEach((c) => near(c, bombN));
+    list.filter((c) => c.bouncer).forEach((c) => near(c, c.bouncer));
+    return rm;
+  }
   function endRound() {
     /* Treffer werden nach den 2 Würfen der Runde abgeräumt */
-    const doubles = cups.filter((c) => c.hits >= 2);
-    let remove = new Set(cups.filter((c) => c.hits > 0));
-    doubles.forEach((c) => {
-      cups.filter((o) => o !== c && !remove.has(o))
-        .sort((a, b) => Math.hypot(a.x - c.x, (a.z - c.z) * 2.5) - Math.hypot(b.x - c.x, (b.z - c.z) * 2.5))
-        .slice(0, 2).forEach((o) => remove.add(o));
-    });
+    let remove = removalSet(cups, 2);
     remove.forEach((c) => { c.dying = 1; });
     cleared += remove.size; Badges.tally("bp", remove.size);
     Badges.bp(cleared, performance.now() - tStart, [...remove].some((c) => c.moving));
@@ -5034,6 +5133,132 @@ const Game = (() => {
       throwsInRound = 0; misses = 0; round++;
       hud();
     }, remove.size ? 450 : 0);
+  }
+
+  /* ---------- Zu zweit: Ablauf ---------- */
+  function afterBall2() {
+    const allGone = cups.length > 0 && removalSet(cups, 3).size >= cups.length;
+    if (throwsInRound >= 2 || allGone) endTurn2(); else hud();
+  }
+  function endTurn2() {
+    const th = turn, list = cups, rm = removalSet(list, 3);
+    const hitCups = list.filter((c) => c.hits > 0);
+    const ballsBack = throwsInRound >= 2 && hitCups.length === 2 && hitCups.every((c) => c.hits === 1);
+    rm.forEach((c) => { c.dying = 1; });
+    P[th].made += rm.size;
+    busy = true; hud();
+    setTimeout(() => {
+      const rest = list.filter((c) => !rm.has(c));
+      rest.forEach((c) => { c.hits = 0; c.bouncer = 0; });
+      P[1 - th].cups = rest; cups = rest;
+      throwsInRound = 0; busy = false;
+      if (!rest.length) return cleared2(th);
+      if (ballsBack) { toast("Balls back!"); buzz([30, 40, 30]); help2(); hud(); return; }
+      if (phase === "reb") return finish2(1 - th);   /* Nachwurf nicht geschafft */
+      turn = 1 - turn; if (turn === starter) round++;
+      cups = P[1 - turn].cups;
+      showTurn2();
+    }, rm.size ? 450 : 0);
+  }
+  /* Spieler th hat alle Becher des anderen getroffen */
+  function cleared2(th) {
+    const o = 1 - th;
+    if (phase === "reb") {   /* Nachwurf geschafft: Verlängerung mit je 1 Becher */
+      phase = "ot"; hadOT = true;
+      P.forEach((p, i) => { p.cups = [{ x: 0, z: .87, hits: 0, id: Math.random(), pal: i }]; });
+      turn = o; cups = P[1 - turn].cups;
+      buzz([40, 40, 40, 40, 80]);
+      return showTurn2("Verlängerung!", `Nachwurf geschafft! Jeder hat noch 1 Becher. ${P[turn].name} beginnt.`);
+    }
+    phase = "reb"; turn = o; cups = P[1 - turn].cups;
+    buzz([60, 40, 60]);
+    showTurn2("Nachwurf!", `${P[th].name} hat alle Becher getroffen. ${P[o].name} muss jetzt die letzten ${cups.length === 1 ? "Becher" : cups.length + " Becher"} treffen, sonst ist das Spiel vorbei.`);
+  }
+  function help2() {
+    $("bpHelp").innerHTML = `<b>${esc(P[turn].name)}, du bist dran</b>Wisch nach oben, um zu werfen.<br>${phase === "reb" ? "Nachwurf: alle restlichen Becher treffen" : "2 Würfe · beide in verschiedene Becher = Balls back"}`;
+    helpShown = true; $("bpHelp").classList.remove("hide");
+  }
+  function showTurn2(title, text) {
+    hud();
+    const box = $("bpOver"), p = P[turn], o = P[1 - turn];
+    box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="${esc(p.name)} ist dran">
+        <p class="bp-kick">${esc(title || (phase === "ot" ? "Verlängerung" : `Runde ${round}`))}</p>
+        <h3 class="pl${turn}">${esc(p.name)}</h3>
+        <p class="bp-turn-t">${esc(text || `ist dran und wirft auf die Becher von ${o.name}. Handy weitergeben!`)}</p>
+        <small class="bp-vs-l">Becher übrig</small>
+        <div class="bp-vs"><span>${esc(P[0].name)}</span><b>${P[0].cups.length}</b><b>:</b><b>${P[1].cups.length}</b><span>${esc(P[1].name)}</span></div>
+        <button class="primary wide" id="bpGo" type="button">Los geht’s</button>
+      </div>`;
+    $("bpGo").addEventListener("click", () => { box.hidden = true; box.innerHTML = ""; help2(); hud(); });
+  }
+  function finish2(w) {
+    over = true; buzz([80, 60, 120]);
+    const box = $("bpOver"); box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Spielende">
+        <p class="bp-kick">🏆 Gewonnen${hadOT ? " in der Verlängerung" : ""}</p>
+        <h3 class="pl${w}">${esc(P[w].name)}</h3>
+        <p class="bp-turn-t">Getroffene Becher</p>
+        <div class="bp-vs"><span>${esc(P[0].name)}</span><b>${P[0].made}</b><b>:</b><b>${P[1].made}</b><span>${esc(P[1].name)}</span></div>
+        <div class="row2"><button class="ghost" id="bpDone2" type="button">Schließen</button><button class="primary" id="bpRev" type="button">Revanche</button></div>
+      </div>`;
+    $("bpDone2").addEventListener("click", exitGame);
+    $("bpRev").addEventListener("click", () => draw2());
+  }
+  function setup2() {
+    over = true;
+    const box = $("bpOver"); box.hidden = false;
+    const n1 = names2[0] || playerName() || "";
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Beerpong zu zweit">
+        <h3>Zu zweit</h3>
+        <p class="bp-turn-t" style="margin-bottom:4px">Ein Handy, ihr wechselt euch ab.</p>
+        <label class="bp-pl pl0"><i></i><input id="bpN1" maxlength="14" autocomplete="off" placeholder="Spieler 1" value="${esc(n1)}" aria-label="Name Spieler 1"></label>
+        <label class="bp-pl pl1"><i></i><input id="bpN2" maxlength="14" autocomplete="off" placeholder="Spieler 2" value="${esc(names2[1])}" aria-label="Name Spieler 2"></label>
+        <ul class="bp-rules">
+          <li>Pro Runde <b>2 Würfe</b>, wer beginnt, wird ausgelost.</li>
+          <li>Beide Bälle in <b>verschiedene</b> Becher: <b>Balls back</b>.</li>
+          <li>Beide in <b>denselben</b> Becher: <b>Bombe</b>, der Becher und 3 daneben fliegen raus.</li>
+          <li>Ball springt vorher auf dem Tisch auf: <b>Bouncer</b>, zählt 2 Becher.</li>
+          <li>Einmal pro Spiel darfst du die Becher des anderen <b>neu stellen</b> lassen.</li>
+          <li>Wer zuerst alle Becher trifft, gewinnt – der andere hat aber noch einen <b>Nachwurf</b>. Schafft er alle, geht’s mit je 1 Becher in die Verlängerung.</li>
+        </ul>
+        <div class="row2"><button class="ghost" id="bpSolo" type="button">Allein spielen</button><button class="primary" id="bpLos" type="button">Auslosen</button></div>
+      </div>`;
+    $("bpSolo").addEventListener("click", () => { navReplace = true; location.replace("#beerpong"); });
+    $("bpLos").addEventListener("click", () => {
+      names2 = [$("bpN1").value.trim().replace(/\s+/g, " ").slice(0, 14) || "Spieler 1", $("bpN2").value.trim().replace(/\s+/g, " ").slice(0, 14) || "Spieler 2"];
+      if (names2[0] === names2[1]) names2[1] += " 2";
+      draw2();
+    });
+  }
+  /* Auslosen mit kurzer Animation, dann geht’s los */
+  function draw2(forced) {
+    over = true; ball = null; particles = []; busy = false;
+    const box = $("bpOver"); box.hidden = false;
+    box.innerHTML = `
+      <div class="bp-card" role="dialog" aria-label="Auslosen">
+        <p class="bp-kick">🎲 Wer fängt an?</p>
+        <div class="bp-draw"><span class="pl0">${esc(names2[0])}</span><span class="pl1">${esc(names2[1])}</span></div>
+      </div>`;
+    const sp = box.querySelectorAll(".bp-draw span");
+    const win = forced != null ? forced : (Math.random() < .5 ? 0 : 1);
+    const steps = 9 + win + (reduceMotion ? 0 : 2);   /* letzter Schritt landet auf dem Gewinner */
+    let k = 0;
+    const tick = () => {
+      const cur = k % 2; sp.forEach((e, i) => e.classList.toggle("on", i === cur)); buzz(8);
+      if (k >= steps - 1 && cur === win) { setTimeout(() => start2(win), 650); return; }
+      k++; setTimeout(tick, 70 + k * k * 3);
+    };
+    tick();
+  }
+  function start2(first) {
+    P = names2.map((n, i) => ({ name: n, cups: rackArr(i), made: 0, rr: false }));
+    starter = turn = first; phase = "normal"; hadOT = false; round = 1; throwsInRound = 0; misses = 0; over = false; busy = false; ball = null;
+    cups = P[1 - turn].cups;
+    showTurn2("Ausgelost!", `beginnt und wirft auf die Becher von ${P[1 - turn].name}.`);
   }
 
   /* ---------- Zeichnen ---------- */
@@ -5090,8 +5315,10 @@ const Game = (() => {
     [[.04, .07], [.13, .1], [.2, .065], [.8, .07], [.88, .105], [.97, .075]].forEach(([fx, fh]) => tree(W * fx, g.yF + 2, H * fh, far, "rgba(232,240,250,.75)"));
     [[.08, .15], [.93, .16]].forEach(([fx, fh]) => tree(W * fx, g.yF + H * .06, H * fh, near, "#eef3fa"));
     /* Tisch */
-    const a = proj(-1, 1), b = proj(1, 1), c = proj(1, 0), d = proj(-1, 0);
-    const tg = ctx.createLinearGradient(0, a.y, 0, d.y);
+    /* zu zweit läuft der Tisch bis unten durch (man steht davor, die eigenen Becher stehen vorne) */
+    const zN = two() ? -.6 : 0;
+    const a = proj(-1, 1), b = proj(1, 1), c = proj(1, zN), d = proj(-1, zN);
+    const tg = ctx.createLinearGradient(0, a.y, 0, proj(0, 0).y);
     tg.addColorStop(0, "#1a1e3e"); tg.addColorStop(1, "#3d3a78");
     ctx.fillStyle = tg;
     ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y); ctx.closePath(); ctx.fill();
@@ -5102,8 +5329,8 @@ const Game = (() => {
     ctx.save(); ctx.shadowColor = "#ffcf7a"; ctx.shadowBlur = 14; ctx.strokeStyle = "#ffdf9e"; ctx.lineWidth = 2.5;
     ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y); ctx.closePath(); ctx.stroke(); ctx.restore();
     ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 2;
-    const m1 = proj(0, 1), m2 = proj(0, 0); ctx.beginPath(); ctx.moveTo(m1.x, m1.y); ctx.lineTo(m2.x, m2.y); ctx.stroke();
-    ctx.fillStyle = "#0d1830"; ctx.fillRect(d.x, d.y, c.x - d.x, H - d.y);
+    const m1 = proj(0, 1), m2 = proj(0, zN); ctx.beginPath(); ctx.moveTo(m1.x, m1.y); ctx.lineTo(m2.x, m2.y); ctx.stroke();
+    if (!two()) { ctx.fillStyle = "#0d1830"; ctx.fillRect(d.x, d.y, c.x - d.x, H - d.y); }
     /* Lichterkette quer über den Himmel, in zwei Bögen durchhängend */
     const cols = ["#ff6b5e", "#ffd98a", "#8fe3a8", "#ffd98a", "#8ab8ff"];
     const yC = H * .125, sagH = H * .045;
@@ -5144,19 +5371,24 @@ const Game = (() => {
     ctx.globalAlpha = 1; ctx.fillStyle = "#3a0b55";
     for (let i = 0; i < 5; i++) ctx.fillRect(0, g.yF - (i + 1) * H * .03, W, 2 + i);
     ctx.restore();
-    const a = proj(-1, 1), b = proj(1, 1), c = proj(1, 0), d = proj(-1, 0);
-    const tg = ctx.createLinearGradient(0, a.y, 0, d.y);
+    /* zu zweit läuft der Tisch bis unten durch (man steht davor, die eigenen Becher stehen vorne) */
+    const zN = two() ? -.6 : 0;
+    const a = proj(-1, 1), b = proj(1, 1), c = proj(1, zN), d = proj(-1, zN);
+    const tg = ctx.createLinearGradient(0, a.y, 0, proj(0, 0).y);
     tg.addColorStop(0, "#1e0838"); tg.addColorStop(1, "#4a1a86");
     ctx.fillStyle = tg;
     ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y); ctx.closePath(); ctx.fill();
     ctx.save(); ctx.shadowColor = "#2ff3e0"; ctx.shadowBlur = 14; ctx.strokeStyle = "#2ff3e0"; ctx.lineWidth = 2.5;
     ctx.stroke(); ctx.restore();
     ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 2;
-    const m1 = proj(0, 1), m2 = proj(0, 0); ctx.beginPath(); ctx.moveTo(m1.x, m1.y); ctx.lineTo(m2.x, m2.y); ctx.stroke();
-    ctx.fillStyle = "#24083e"; ctx.fillRect(d.x, d.y, c.x - d.x, H - d.y);
+    const m1 = proj(0, 1), m2 = proj(0, zN); ctx.beginPath(); ctx.moveTo(m1.x, m1.y); ctx.lineTo(m2.x, m2.y); ctx.stroke();
+    if (!two()) { ctx.fillStyle = "#24083e"; ctx.fillRect(d.x, d.y, c.x - d.x, H - d.y); }
   }
   /* ===== Dezember: Glühweintasse statt rotem Becher (gleiche Größe und Trefferfläche) ===== */
+  const CUP_PAL = [{ g: ["#7a0010", "#ff3b3b", "#e0142c", "#6a000e"], in: "#5c0014" }, { g: ["#081a5c", "#4d8dff", "#1a56e6", "#06154a"], in: "#0a1a4c" }];
+  const MUG_PAL = [{ g: ["#4f0812", "#c42a38", "#a11a2a", "#45060f"], h1: "#5a0a16", h2: "#a31c2c", st: "#7a0e1c" }, { g: ["#0b3a22", "#2a9a5c", "#1d7a47", "#082c19"], h1: "#0b3a22", h2: "#2f8a55", st: "#0e4a2b" }];
   function drawMug(c) {
+    const pm = MUG_PAL[c.pal || 0];
     const p = proj(c.x, c.z), w = geo().w0 * D * .92 * p.s, h = w * 1.15;
     let alpha = 1, sc = 1;
     if (c.dying) { alpha = c.dying; sc = 1 + (1 - c.dying) * .4; }
@@ -5165,13 +5397,13 @@ const Game = (() => {
     const top = -h, bw = w * .44, hl = w / 2;
     /* Henkel rechts */
     ctx.lineCap = "round";
-    ctx.strokeStyle = "#5a0a16"; ctx.lineWidth = w * .13;
+    ctx.strokeStyle = pm.h1; ctx.lineWidth = w * .13;
     ctx.beginPath(); ctx.moveTo(hl * .9, top + h * .24); ctx.bezierCurveTo(w * .86, top + h * .2, w * .86, top + h * .74, bw * .98, top + h * .8); ctx.stroke();
-    ctx.strokeStyle = "#a31c2c"; ctx.lineWidth = w * .06;
+    ctx.strokeStyle = pm.h2; ctx.lineWidth = w * .06;
     ctx.beginPath(); ctx.moveTo(hl * .92, top + h * .26); ctx.bezierCurveTo(w * .82, top + h * .23, w * .82, top + h * .7, bw, top + h * .77); ctx.stroke();
     /* Körper: glasierte Keramik */
     const gr = ctx.createLinearGradient(-w / 2, 0, w / 2, 0);
-    gr.addColorStop(0, "#4f0812"); gr.addColorStop(.28, "#c42a38"); gr.addColorStop(.5, "#a11a2a"); gr.addColorStop(1, "#45060f");
+    gr.addColorStop(0, pm.g[0]); gr.addColorStop(.28, pm.g[1]); gr.addColorStop(.5, pm.g[2]); gr.addColorStop(1, pm.g[3]);
     ctx.fillStyle = gr;
     const rr = w * .1;
     ctx.beginPath(); ctx.moveTo(-hl, top); ctx.lineTo(hl, top); ctx.lineTo(bw, -rr); ctx.quadraticCurveTo(bw, 0, bw - rr, 0); ctx.lineTo(-bw + rr, 0); ctx.quadraticCurveTo(-bw, 0, -bw, -rr); ctx.closePath(); ctx.fill();
@@ -5198,7 +5430,7 @@ const Game = (() => {
     ctx.fillStyle = "rgba(255,255,255,.28)"; ctx.fillRect(-w * .34, top + h * .22, w * .055, h * .62);
     /* Rand: cremefarbene Innenglasur, dann Glühwein */
     ctx.fillStyle = "#f3ead8"; ctx.beginPath(); ctx.ellipse(0, top, w / 2, w * .26, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = "#7a0e1c"; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.strokeStyle = pm.st; ctx.lineWidth = 1.5; ctx.stroke();
     const wine = ctx.createRadialGradient(-w * .12, top + w * .01, 1, 0, top + w * .04, w * .42);
     wine.addColorStop(0, "#b3263a"); wine.addColorStop(.6, "#6e0f20"); wine.addColorStop(1, "#3d0610");
     ctx.fillStyle = wine; ctx.beginPath(); ctx.ellipse(0, top + w * .04, w * .4, w * .2, 0, 0, Math.PI * 2); ctx.fill();
@@ -5245,13 +5477,14 @@ const Game = (() => {
     ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.beginPath(); ctx.ellipse(0, 2, w * .55, w * .14, 0, 0, Math.PI * 2); ctx.fill();
     const top = -h, bw = w * .36;
     const gr = ctx.createLinearGradient(-w / 2, 0, w / 2, 0);
-    gr.addColorStop(0, "#7a0010"); gr.addColorStop(.3, "#ff3b3b"); gr.addColorStop(.55, "#e0142c"); gr.addColorStop(1, "#6a000e");
+    const pc = CUP_PAL[c.pal || 0];
+    gr.addColorStop(0, pc.g[0]); gr.addColorStop(.3, pc.g[1]); gr.addColorStop(.55, pc.g[2]); gr.addColorStop(1, pc.g[3]);
     ctx.fillStyle = gr;
     ctx.beginPath(); ctx.moveTo(-w / 2, top); ctx.lineTo(w / 2, top); ctx.lineTo(bw, 0); ctx.lineTo(-bw, 0); ctx.closePath(); ctx.fill();
     ctx.fillStyle = "rgba(255,255,255,.9)"; ctx.beginPath(); ctx.moveTo(-w / 2, top); ctx.lineTo(w / 2, top); ctx.lineTo(w * .47, top + h * .14); ctx.lineTo(-w * .47, top + h * .14); ctx.closePath(); ctx.fill();
     ctx.beginPath(); ctx.ellipse(0, top, w / 2, w * .26, 0, 0, Math.PI); ctx.fill();
     ctx.fillStyle = "rgba(255,255,255,.4)"; ctx.fillRect(-w * .3, top + h * .2, w * .07, h * .7);
-    ctx.fillStyle = "#5c0014"; ctx.beginPath(); ctx.ellipse(0, top, w / 2, w * .26, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = pc.in; ctx.beginPath(); ctx.ellipse(0, top, w / 2, w * .26, 0, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5; ctx.stroke();
     const beer = ctx.createRadialGradient(-w * .1, top + w * .02, 1, 0, top + w * .04, w * .4);
     beer.addColorStop(0, "#ffe08a"); beer.addColorStop(1, "#e3a21a");
@@ -5297,7 +5530,7 @@ const Game = (() => {
   function frame(now) {
     if (!running) return;
     const dt = Math.min(120, now - (last || now)); last = now;
-    if (!over) $("bpTime").textContent = fmt(now - tStart);
+    if (!over && !two()) $("bpTime").textContent = fmt(now - tStart);
     /* bewegliche Becher */
     cups.forEach((c) => {
       if (c.anim) { c.x += (c.tx - c.x) * .12; c.z += (c.tz - c.z) * .12; if (Math.abs(c.tx - c.x) + Math.abs(c.tz - c.z) < .002) { c.x = c.tx; c.z = c.tz; c.anim = 0; } }
@@ -5308,7 +5541,8 @@ const Game = (() => {
       stepBall(dt);
       if (ball.phase === "gone") {
         ball = null;
-        if (misses >= 2) {
+        if (two()) afterBall2();
+        else if (misses >= 2) {
           if (!xlUsed && Leben.anzahl() > 0) {
             over = true; const t0 = performance.now();
             Leben.frage($("bpOver"), () => { xlUsed = true; tStart += performance.now() - t0; misses = 0; over = false; toast("❤️ Weiter geht’s!"); if (throwsInRound >= 2) endRound(); else hud(); }, gameOver);
@@ -5325,6 +5559,11 @@ const Game = (() => {
     /* Becher und Ball nach Tiefe zeichnen, damit der Ball hinter Bechern verschwindet */
     const items = cups.map((c) => ({ z: c.z, draw: () => drawCup(c) }));
     if (ball) items.push({ z: ball.phase === "cup" ? ball.z - .0001 : ball.z, draw: drawBall });
+    /* zu zweit: die eigenen Becher vorne am Tisch, gespiegelt, vorderster Becher direkt unter dem Ball */
+    if (two() && P && P[turn].cups.length && !(over && !$("bpOver").hidden && !P[0].cups.length && !P[1].cups.length)) {
+      const own = P[turn].cups, z0 = Math.min(...own.map((c) => c.z));
+      own.forEach((c) => { const m = { x: -c.x, z: OWN_Z - (c.z - z0), hits: 0, pal: c.pal, id: c.id }; items.push({ z: m.z, draw: () => drawCup(m) }); });
+    }
     items.sort((a, b) => b.z - a.z).forEach((it) => it.draw());
     particles.forEach((q) => { ctx.globalAlpha = Math.max(0, q.life); ctx.fillStyle = q.c; ctx.beginPath(); ctx.arc(q.x, q.y, 2.5, 0, Math.PI * 2); ctx.fill(); });
     ctx.globalAlpha = 1;
@@ -5397,9 +5636,20 @@ const Game = (() => {
   function exitGame() { goBack(""); }
 
   function reset() {
-    rack(); ball = null; particles = []; throwsInRound = 0; round = 1; cleared = 0; misses = 0; over = false; xlUsed = false;
-    tStart = performance.now(); $("bpOver").hidden = true; $("bpOver").innerHTML = "";
-    helpShown = true; $("bpHelp").classList.remove("hide");
+    clearInterval(topTimer);
+    ball = null; particles = []; throwsInRound = 0; round = 1; cleared = 0; misses = 0; over = false; xlUsed = false; busy = false; swipe = null;
+    $("game").classList.toggle("two", two()); tableCv = null;
+    $("bpOver").hidden = true; $("bpOver").innerHTML = "";
+    $("bpS1").classList.remove("on"); $("bpS3").classList.remove("on");
+    if (two()) {
+      phase = "normal"; turn = starter = 0;
+      P = [0, 1].map((i) => ({ name: names2[i] || `Spieler ${i + 1}`, cups: [], made: 0, rr: false }));
+      cups = []; helpShown = false; $("bpHelp").classList.add("hide");
+      hud(); setup2(); return;
+    }
+    $("bpL1").textContent = "Becher"; $("bpL2").textContent = "Zeit"; $("bpL3").textContent = "Runde";
+    rack(); tStart = performance.now();
+    $("bpHelp").innerHTML = HELP1; helpShown = true; $("bpHelp").classList.remove("hide");
     hud();
   }
 
@@ -5408,11 +5658,16 @@ const Game = (() => {
   window.addEventListener("pointerup", (e) => { if (running) end(e); });
   window.addEventListener("resize", () => { if (running) resize(); });
   $("bpClose").addEventListener("click", () => { clearInterval(topTimer); exitGame(); });
+  $("bpRerack").addEventListener("click", rerack2);
+  $("bpTwo").addEventListener("click", () => { navReplace = true; location.replace("#beerpong2"); });
 
   return {
-    _dbg: { cups: () => cups.map((c) => ({ ...proj(c.x, c.z), hits: c.hits })), state: () => ({ cleared, misses, round, throwsInRound, over, n: cups.length, zl: ball ? ball.zl : null, xl: ball ? ball.xl : null }), setCups: (n) => { cups = cups.slice(0, n); }, reracked: () => reracked, throwAt: (i, dz = 0) => { const c = cups[i]; if (!c || ball || over) return false; const target = c.z + dz; let lo = target, hi = target + .3; for (let k = 0; k < 30; k++) { const m = (lo + hi) / 2; const bb = { xl: 0, zl: m, apex: 1.25 * (.55 + Math.min(m, 1.2) * .5) }; let tt = .5; for (let j = 0; j < 40; j++) { const hh = traj(bb, tt); tt += (hh.h - cupH()) > 0 ? .5 ** (j + 2) : -(.5 ** (j + 2)); } if (m * tt < target) lo = m; else hi = m; } const zl = (lo + hi) / 2; launch(c.x / (target / zl), zl); return true; }, cupList: () => cups.map((c) => ({ x: c.x, z: c.z, moving: !!c.moving })) },
-    open() {
-      if (running) return;
+    _dbg: { cups: () => cups.map((c) => ({ ...proj(c.x, c.z), hits: c.hits })), state: () => ({ cleared, misses, round, throwsInRound, over, n: cups.length, zl: ball ? ball.zl : null, xl: ball ? ball.xl : null }), setCups: (n) => { cups = cups.slice(0, n); }, reracked: () => reracked, throwAt: (i, dz = 0) => { const c = cups[i]; if (!c || ball || over) return false; const target = c.z + dz; let lo = target, hi = target + .3; for (let k = 0; k < 30; k++) { const m = (lo + hi) / 2; const bb = { xl: 0, zl: m, apex: 1.25 * (.55 + Math.min(m, 1.2) * .5) }; let tt = .5; for (let j = 0; j < 40; j++) { const hh = traj(bb, tt); tt += (hh.h - cupH()) > 0 ? .5 ** (j + 2) : -(.5 ** (j + 2)); } if (m * tt < target) lo = m; else hi = m; } const zl = (lo + hi) / 2; launch(c.x / (target / zl), zl); return true; }, cupList: () => cups.map((c) => ({ x: c.x, z: c.z, moving: !!c.moving })),
+      two: () => ({ mode, turn, phase, round, throwsInRound, over, busy, P: P && P.map((p) => ({ name: p.name, n: p.cups.length, made: p.made, rr: p.rr })) }),
+      draw2: (w) => { names2 = names2[0] ? names2 : ["Anna", "Ben"]; draw2(w); }, launch: (xl, zl) => { if (!ball && !over && !busy) { launch(xl, zl); return true; } return false; }, throwAtT: (i) => { const c = cups[i]; return c ? { x: c.x, z: c.z } : null; }, cut: (n) => { cups.splice(n); hud(); } },
+    open(m = 1) {
+      if (running) { if (m !== mode) { mode = m; reset(); } return; }
+      mode = m;
       running = true;
       app.classList.add("is-game");
       $("game").setAttribute("aria-hidden", "false");
@@ -8720,7 +8975,7 @@ function routeInner() {
   if (id === "abende") { navReplace = true; location.replace("#"); return; }
   if (id !== "turnier" && id !== "turnier-team") tnStop();
   trackNav(id); Nutzung.seite(id);
-  if (id === "beerpong") { Bus.close(); Zapf.close(); Pol.close(); Game.open(); return; }
+  if (id === "beerpong" || id === "beerpong2") { Bus.close(); Zapf.close(); Pol.close(); Game.open(id === "beerpong2" ? 2 : 1); return; }
   if (id === "busfahrer") { Game.close(); Zapf.close(); Pol.close(); Bus.open(); return; }
   if (id === "zapfmeister") { Game.close(); Bus.close(); Pol.close(); Zapf.open(); return; }
   if (id === "polnischen") { Game.close(); Bus.close(); Zapf.close(); Pol.open(); return; }
@@ -8776,7 +9031,7 @@ TAB_ICON.paypal = '<path d="M7 21l2.2-14h5.3c2.7 0 4.2 1.5 3.7 4-.5 2.8-2.6 4.2-
 function tabFor(id) {
   if (!id) return "start";
   if (["drinks", "paypal"].includes(id)) return "drinks";
-  if (["spiele", "beerpong", "busfahrer", "zapfmeister", "turnier"].includes(id)) return "spiele";
+  if (["spiele", "beerpong", "beerpong2", "busfahrer", "zapfmeister", "turnier"].includes(id)) return "spiele";
   if (["musik"].includes(id)) return "musik";
   if (["ich", "abzeichen"].includes(id)) return "ich";
   if (id === "advent") return "start";
@@ -8883,7 +9138,7 @@ function renderSpielePage() {
         <div class="tp-lbh"><span>Top ${esc(monatName())}</span><span class="tp-at" data-at="${g.key}"></span></div>
         <div class="tp-rows" data-top="${g.key}"><p class="tp-wait">Lädt …</p></div>
         <div class="tp-you" data-you="${g.key}"></div>
-        <div class="tp-foot"><button type="button" class="tp-prev" data-prev="${g.key}" aria-expanded="false">Vormonate <i aria-hidden="true">▾</i></button><a class="tp-play" href="#${g.key}">Spielen ▸</a></div>
+        <div class="tp-foot"><button type="button" class="tp-prev" data-prev="${g.key}" aria-expanded="false">Vormonate <i aria-hidden="true">▾</i></button><span class="tp-plays">${g.key === "beerpong" ? `<a class="tp-play tp-two" href="#beerpong2">👥 Zu zweit</a>` : ""}<a class="tp-play" href="#${g.key}">Spielen ▸</a></span></div>
         <div class="tp-prevbox" data-prevbox="${g.key}" hidden></div>
       </div>
     </article>`).join("")}`);
@@ -10644,7 +10899,7 @@ const Nutzung = (() => {
   const jget = () => { try { return JSON.parse(localStorage.getItem(K)) || {}; } catch { return {}; } };
   const jset = (v) => { try { localStorage.setItem(K, JSON.stringify(v)); } catch {} };
   const SEITE = (id) => !id ? "start" : id.startsWith("fotos-") || id === "fotowand" ? "fotowand"
-    : ["beerpong", "busfahrer", "zapfmeister", "polnischen", "spiele", "turnier"].includes(id) ? "spiele"
+    : ["beerpong", "beerpong2", "busfahrer", "zapfmeister", "polnischen", "spiele", "turnier"].includes(id) ? "spiele"
     : ["ich", "abzeichen"].includes(id) ? "ich" : ["drinks", "paypal"].includes(id) ? "drinks"
     : ["musik", "ranking", "wuensche", "advent", "awareness"].includes(id) ? id
     : EVENTS.some((e) => e.id === id) ? "abend" : "";
