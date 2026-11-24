@@ -2868,7 +2868,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "138";
+const APP_V = "139";
 
 const EVENTS = [
   {
@@ -9808,13 +9808,13 @@ function tnBracketHTML(st) {
 const LAGEPLAN = {
   tische: [
     { n: 1, x: 287, y: 305 }, { n: 2, x: 154, y: 305 },           // Raum 008, rechts und links der Säule
-    { n: 3, x: 235, y: 415 }, { n: 4, x: 172, y: 415 },           // im Durchgang 008 → 009, größtenteils in 009
+    { n: 3, x: 235, y: 392 }, { n: 4, x: 172, y: 392 },           // Durchgang 008 → 009, nach oben gerückt
     { n: 5, x: 206, y: 214 },                                     // Durchgang 007/008, ragt etwas in 007
-    { n: 6, x: 196, y: 578, quer: true },                         // Raum 009, quer hinter der Säule
+    { n: 6, x: 190, y: 466, quer: true },                         // quer direkt unter 3 und 4, vor der Säule in 009
     { n: 7, x: 92, y: 74.4 },
     { n: 8, x: 92, y: 184.7 },
     { n: 9, x: 92, y: 295.1 },
-    { n: 10, x: 92, y: 405.4 },
+    { n: 10, x: -48, y: 441, quer: true },                        // Raum links vom Flur, quer
     { n: 11, x: 92, y: 515.8 },
     { n: 12, x: 92, y: 626.2 }  // Flur, von oben nach unten
   ]
@@ -9834,15 +9834,18 @@ function tnPlanHTML(hi, gruppen) {
     </g>`;
   };
   const tische = LAGEPLAN.tische.filter((t) => t.n !== hi).map(tisch).join("") + LAGEPLAN.tische.filter((t) => t.n === hi).map(tisch).join("");
-  return `<div class="lp-wrap"><svg class="lp" viewBox="0 0 372 770" role="img" aria-label="Lageplan mit ${LAGEPLAN.tische.length} Tischen${hi ? `, euer Tisch: ${hi}` : ""}">
+  return `<div class="lp-wrap"><svg class="lp" viewBox="-70 0 442 770" role="img" aria-label="Lageplan mit ${LAGEPLAN.tische.length} Tischen${hi ? `, euer Tisch: ${hi}` : ""}">
     <rect class="lp-off" x="0" y="34" width="33" height="515"/>
     <rect class="lp-off" x="132" y="34" width="230" height="202.5"/>
     <rect class="lp-off" x="132" y="640" width="230" height="96.5"/>
     <rect class="lp-room" x="132" y="236.5" width="230" height="403.5"/>
     <rect class="lp-flur" x="35" y="34" width="95" height="702.5"/>
     <rect class="lp-wc" x="0" y="549" width="33" height="85"/><rect class="lp-wc" x="0" y="644" width="33" height="92.5"/>
+    <defs><linearGradient id="lpFade" x1="0" x2="1"><stop offset="0" stop-color="#12051f"/><stop offset="1" stop-color="#12051f" stop-opacity="0"/></linearGradient></defs>
+    <rect class="lp-room" x="-70" y="393.5" width="103" height="125.5"/><rect x="-70" y="391" width="34" height="131" fill="url(#lpFade)"/>
     <g class="lp-wall" stroke="${W}">
-      ${wall(362, 34, 362, 736.5)}${wall(33, 34, 33, 736.5)}
+      ${wall(362, 34, 362, 736.5)}${wall(33, 34, 33, 420)}${wall(33, 492, 33, 736.5)}
+      <g opacity=".9">${wall(-36, 393.5, 33, 393.5)}${wall(-36, 519, 33, 519)}</g><line x1="-70" y1="393.5" x2="-36" y2="393.5" stroke-dasharray="3 5" opacity=".5"/><line x1="-70" y1="519" x2="-36" y2="519" stroke-dasharray="3 5" opacity=".5"/>
       ${wall(131, 34, 131, 246.5)}${wall(131, 319, 131, 359)}${wall(131, 411.5, 131, 471.5)}${wall(131, 521.5, 131, 736.5)}
       ${wall(362, 236.5, 278.7, 236.5)}${wall(162, 236.5, 131, 236.5)}
       ${wall(362, 440, 275.4, 440)}${wall(162, 440, 131, 440)}
