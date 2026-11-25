@@ -2891,6 +2891,23 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
 #trScene .tk-pylon{display:none}
 .t-tanke .tk-row .n{text-transform:uppercase}
 .t-tanke .tk-row .n small{text-transform:none}
+
+/* Abgesagt: Schild auf der Kachel, Hinweis auf der Abend-Seite, durchgestrichene Programmpunkte */
+.tile-absage { position: relative; z-index: 2; width: max-content; max-width: 100%; margin: 10px auto 0; padding: 6px 14px 5px;
+  border: 3px solid #ff3b3b; border-radius: 10px; background: rgba(20,4,8,.78); transform: rotate(-5deg); text-align: center; pointer-events: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,.5); }
+.tile-absage b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 14px; line-height: 1; text-transform: uppercase; color: #fff;
+  text-decoration: line-through; text-decoration-color: #ff3b3b; text-decoration-thickness: 3px; }
+.tile-absage small { display: block; margin-top: 3px; font-size: 12px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; color: #ff3b3b; }
+s.abg { text-decoration-color: #ff3b3b; text-decoration-thickness: 2px; opacity: .75; }
+.absage { display: flex; gap: 12px; align-items: flex-start; margin: 14px 0 4px; padding: 12px 14px; border-radius: 14px;
+  background: rgba(255,59,59,.14); border: 1.5px solid rgba(255,59,59,.6); text-align: left; }
+.absage .ab-x { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #ff3b3b; color: #fff; font-weight: 900; font-size: 14px; }
+.absage b { display: block; margin-bottom: 2px; color: #fff; font-size: 15px; }
+.absage > span:last-child { font-size: 14px; line-height: 1.4; color: var(--frost); }
+.timeline li.abg s { text-decoration-color: #ff3b3b; text-decoration-thickness: 2px; opacity: .7; }
+.timeline li.abg time { opacity: .5; text-decoration: line-through; }
+.timeline li.abg em { font-style: normal; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #ff3b3b; margin-left: 6px; }
 </style>
 </head>
 <body>
@@ -3076,7 +3093,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "141";
+const APP_V = "142";
 
 const EVENTS = [
   {
@@ -3095,18 +3112,17 @@ const EVENTS = [
     thema: "miami",
     titel: ["Miami", "Vibes"],
     untertitel: "GTA VI Edition",
-    art: "Beerpong-Turnier",
-    banner: "Beerpong-Turnier",  // leuchtendes Schild auf der Menü-Kachel (weglassen = kein Schild)
-    start: "2026-11-25T18:00:00+01:00",
+    absage: {                    // rotes „Abgesagt“-Schild auf der Kachel und Hinweis auf der Abend-Seite
+      was: "Beerpong-Turnier",
+      text: "Das Beerpong-Turnier muss heute leider ausfallen. Der Clubabend ab 21 Uhr findet ganz normal statt."
+    },
+    start: "2026-11-25T21:00:00+01:00",
     ende: "2026-11-26T03:00:00+01:00",
     ort: "ExMa-Bar",
     ablauf: [
-      { zeit: "18:00", was: "Beerpong-Turnier", kurz: "Turnier" },
+      { zeit: "18:00", was: "Beerpong-Turnier", kurz: "Turnier", abgesagt: true },   // abgesagt: durchgestrichen
       { zeit: "21:00", was: "Clubabend", kurz: "Club" }
     ],
-    anmeldung: { link: "https://forms.gle/RQFaHxjdZyxCBgDw8", text: "Zum Turnier anmelden" },
-    spiel: "beerpong",           // zeigt den Button „Beerpong spielen“ unter dem Datum
-    turnier: "miami",            // Beerpong-Turnier mit Gruppen, Spielplan und Turnierbaum (siehe TURNIER)
     mitbringen: null,
     fotos: null,
     specials: [
@@ -4396,7 +4412,7 @@ function renderDetail(ev) {
     </div>` : "";
   const items = [...(ev.ablauf || [])];
   if (ev.musik) items.push({ zeit: ev.musik.zeit.replace(" Uhr", ""), was: ev.musik.text });
-  const timeline = items.length ? `<ul class="timeline">${items.map((a) => `<li><time>${esc(a.zeit)}</time><span>${esc(a.was)}</span></li>`).join("")}</ul>` : "";
+  const timeline = items.length ? `<ul class="timeline">${items.map((a) => a.abgesagt ? `<li class="abg"><time>${esc(a.zeit)}</time><span><s>${esc(a.was)}</s> <em>abgesagt</em></span></li>` : `<li><time>${esc(a.zeit)}</time><span>${esc(a.was)}</span></li>`).join("")}</ul>` : "";
 
   const blocks = drinkBlocks(ev, nextLabel);
 
@@ -4412,6 +4428,7 @@ function renderDetail(ev) {
       <div class="chips"><span class="chip">${esc(ev.wd)} · ${esc(ev.dm)} · ${esc(ev.time)} Uhr</span><span id="dStatus">${chip(status(ev))}</span>${ev.art ? `<span class="chip">${esc(ev.art)}</span>` : ""}</div>
       <h2 class="title" id="dTitle">${titleHTML(ev)}</h2>
       <p class="script">${subHTML(ev)}</p>
+      ${ev.absage && !isPast(ev) ? `<div class="absage" role="note"><span class="ab-x" aria-hidden="true">✕</span><span><b>Abgesagt: ${esc(ev.absage.was)}</b>${esc(ev.absage.text)}</span></div>` : ""}
       ${reg}${pastBox}
       ${ev.turnier ? `<a class="tn-link" href="#turnier"><span>🏆</span><span><b>Beerpong-Turnier</b><small>Gruppen, Spielplan &amp; Turnierbaum – live</small></span><i>${ICON_ARROW}</i></a>` : ""}
       ${ev.spiel === "beerpong" ? `<a class="game-card" href="#beerpong">${gameDemo()}<span class="mini-tag">Minispiel</span><span class="gc-text"><b>Beerpong</b><small>Schon mal fürs Turnier üben</small></span><i>${ICON_ARROW}</i></a>` : ""}
@@ -9292,7 +9309,7 @@ function buildMenu() {
   const evTile = (ev, label, big, cdTo) => {
     if (!ev) return `<div class="mtile tile-empty"><span>Nächster Abend<br>folgt bald</span></div>`;
     const i = EVENTS.indexOf(ev);
-    const meta = ev.ablauf ? ev.ablauf.filter((a) => a.kachel !== false).map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
+    const meta = ev.ablauf ? ev.ablauf.filter((a) => a.kachel !== false).map((a) => a.abgesagt ? `<s class="abg">${esc(a.zeit)} ${esc(a.kurz || a.was)}</s>` : `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
     const extra = ev.anmeldung && !isPast(ev)
       ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop><span><b>Anmelden</b>${ev.art ? `<small>${esc(ev.art)}</small>` : ""}</span>${ICON_EXT}</a>`
       : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>`
@@ -9304,6 +9321,7 @@ function buildMenu() {
         ${chip(status(ev))}
         <h2 class="tile-title">${titleHTML(ev)}</h2>
         <p class="tile-sub">${subHTML(ev)}</p>
+        ${ev.absage && !isPast(ev) ? `<div class="tile-absage" aria-label="${esc(ev.absage.was)} abgesagt"><b>${esc(ev.absage.was)}</b><small>Abgesagt</small></div>` : ""}
         ${ev.banner && !isPast(ev) ? `<div class="tile-banner" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : ""}
       </div>
       <div>
@@ -9320,7 +9338,7 @@ function buildMenu() {
   const evB = evA ? EVENTS[EVENTS.indexOf(evA) + 1] : null;
   const nextStrip = (ev) => {
     const i = EVENTS.indexOf(ev);
-    const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
+    const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.filter((a) => !a.abgesagt).map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
     const open = !isPast(ev);
     const sign = ev.banner && open ? `<div class="hm-sign"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : "";
     const reg = ev.anmeldung && open ? `<a class="hm-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener">${esc(ev.anmeldung.text || "Jetzt anmelden")} ${ICON_EXT}</a>` : "";
@@ -9395,7 +9413,7 @@ function buildMenu() {
     const row = (e) => {
       const past = isPast(e), now = !past && e === up[0];
       const w = when(e), lab = past ? "Rückblick" : now && (w === "Heute" || w === "Morgen" || /Tagen/.test(w)) ? "Diese Woche" : w;
-      const a0 = e.ablauf && e.ablauf[0], info = a0 ? `${esc(a0.kurz || a0.was)} ${esc(a0.zeit)}` : `${esc(e.time)} Uhr`;
+      const a0 = e.ablauf && e.ablauf.find((a) => !a.abgesagt), info = a0 ? `${esc(a0.kurz || a0.was)} ${esc(a0.zeit)}` : `${esc(e.time)} Uhr`;
       const href = past && e.fotos ? `#fotos-${e.id}` : `#${e.id}`;
       return `<a class="sem-it${past ? " past" : ""}${now ? " now" : ""}" href="${href}" style="${themeStyle(e.th)}">
         <span class="sem-th"${past ? ` data-cover="${e.id}"` : ""}><span class="fw-pic">${fwScene(e)}${fwMini(e)}</span></span>
@@ -9867,7 +9885,7 @@ function eventText(ev) {
     `📅 ${ev.wdLong}, ${ev.dm} · ${ev.time} Uhr`,
     `📍 ${ev.ort}, ${CLUB.anschrift.join(", ")}`
   ];
-  if (ev.ablauf && ev.ablauf.length > 1) lines.push(ev.ablauf.map((a) => `${a.zeit} ${a.kurz || a.was}`).join(" · "));
+  if (ev.ablauf && ev.ablauf.length > 1) lines.push(ev.ablauf.map((a) => a.abgesagt ? `${a.kurz || a.was} abgesagt` : `${a.zeit} ${a.kurz || a.was}`).join(" · "));
   if (ev.musik) lines.push(`🎧 ${ev.musik.zeit}${/uhr/i.test(ev.musik.zeit) ? "" : " Uhr"}: ${ev.musik.text}`);
   return lines.join("\n");
 }
