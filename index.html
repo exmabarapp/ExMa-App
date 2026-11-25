@@ -18,9 +18,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Yellowtail&family=Gloock&family=Instrument+Serif:ital@1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* Plan: eine Nachtclub-Welt, bewusst nur dunkel. Jeder Abend bringt sein eigenes Farbthema mit
-   (Vodka Night: Eis + Neon, Miami Vibes: Sonnenuntergang + Türkis). Die Farben kommen als Variablen pro Abend.
+   (Miami Vibes: Sonnenuntergang + Türkis, X-Mas: Weihnachtsmarkt, Volltanken: Tankstelle bei Nacht). Die Farben kommen als Variablen pro Abend.
    Layout: Handy-Spalte. Startseite = Karussell aus Abenden (wischen), Detailansicht schiebt sich von rechts herein. */
 :root {
   --night: #050816;
@@ -500,19 +501,6 @@ a { color: inherit; }
 @keyframes beerLines { 0%, 10% { opacity: 0; } 20%, 36% { opacity: .9; } 48%, 100% { opacity: 0; } }
 @keyframes beerPlus { 0%, 46% { opacity: 0; transform: translateY(8px) scale(.6); } 56% { opacity: 1; transform: translateY(0) scale(1.15); } 62%, 82% { opacity: 1; transform: translateY(0) scale(1); } 92%, 100% { opacity: 0; } }
 
-.mix-level { transform-box: fill-box; transform-origin: bottom; animation: mixLevel 2.4s ease-in-out infinite, mixColor 9.6s step-end infinite; }
-.mix-stream { transform-box: fill-box; transform-origin: top; animation: mixStream 2.4s ease-in-out infinite; }
-.mix-bottle { transform-box: view-box; animation: mixTilt 2.4s ease-in-out infinite; }
-.price-old { transform-box: fill-box; transform-origin: center; animation: priceOld 4.8s ease-in infinite; }
-.price-strike { stroke-dasharray: 52; animation: priceStrike 4.8s ease-out infinite; }
-.price-new { animation: priceNew 4.8s cubic-bezier(.2,.9,.25,1.15) infinite; }
-@keyframes priceOld { 0%, 34% { transform: translateY(0) rotate(0); opacity: 1; } 52% { transform: translateY(70px) rotate(28deg); opacity: 0; } 92% { transform: translateY(0) rotate(0); opacity: 0; } 100% { opacity: 1; } }
-@keyframes priceStrike { 0%, 12% { stroke-dashoffset: 52; } 26%, 100% { stroke-dashoffset: 0; } }
-@keyframes priceNew { 0%, 44% { transform: translateX(120px); opacity: 0; } 46% { opacity: 1; } 60% { transform: translateX(0); } 86% { transform: translateX(0); opacity: 1; } 96%, 100% { transform: translateX(0); opacity: 0; } }
-@keyframes mixLevel { 0% { transform: scaleY(.04); opacity: 0; } 6% { opacity: 1; } 42% { transform: scaleY(1); } 84% { transform: scaleY(1); opacity: 1; } 96%, 100% { transform: scaleY(1); opacity: 0; } }
-@keyframes mixColor { 0% { fill: #4a2410; } 25% { fill: #ffc21f; } 50% { fill: #ff9a1f; } 75% { fill: #efe68a; } }
-@keyframes mixStream { 0%, 4% { transform: scaleY(0); opacity: 1; } 12% { transform: scaleY(1); } 38% { transform: scaleY(1); opacity: 1; } 46%, 100% { transform: scaleY(1); opacity: 0; } }
-@keyframes mixTilt { 0% { transform: rotate(-16deg); } 10%, 38% { transform: rotate(0); } 52%, 100% { transform: rotate(-16deg); } }
 
 /* Getränkekarte */
 .menu-group + .menu-group { margin-top: 22px; }
@@ -2683,6 +2671,226 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
 @keyframes dekoFall { from { transform: translateY(0); } to { transform: translateY(105vh); } }
 @keyframes dekoSway { from { translate: -10px 0; } to { translate: 10px 0; } }
 @media (prefers-reduced-motion: reduce) { .deko-snow, .deko-li { animation: none; } .deko-snow { display: none; } }
+
+/* ===== Volltanken (App) ===== */
+.tk-board { padding: 12px; border-radius: 18px; background: linear-gradient(90deg, #3A3F47, #7B828C 50%, #A9B0B9 55%, #2B2F35); box-shadow: 0 16px 32px rgba(0,0,0,.45); }
+.tk-in { border-radius: 10px; background: #0E1014; padding: 8px; display: grid; gap: 6px; }
+.tk-logo { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 6px; background: linear-gradient(#fff, #E6E2D8); color: #111418; font: 700 22px/1 "Bricolage Grotesque", sans-serif; letter-spacing: -.02em; }
+.tk-logo small { font: 700 10px "IBM Plex Mono", monospace; letter-spacing: .12em; color: #59616B; }
+.tk-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px; background: #15181D; }
+.tk-row .n { font: 700 12px "IBM Plex Mono", monospace; letter-spacing: .12em; color: #E9ECEF; }
+.tk-row .n small { display: block; font: 600 11px var(--f-body); letter-spacing: 0; color: #8E97A3; margin-top: 3px; }
+.tk-row .n small.dn { color: #4BD37B; }
+.tk-row .n small.up { color: #FF6B5A; }
+.tk-row svg { height: 40px; filter: drop-shadow(0 0 5px rgba(255,162,31,.55)); }
+.tk-row.hot { box-shadow: inset 0 0 0 2px #FFA21F; }
+.tk-sale { padding: 6px 10px; border-radius: 6px; background: repeating-linear-gradient(-45deg, #D7263D 0 14px, #B5172B 14px 28px); color: #fff; font: 700 12px/1 "IBM Plex Mono", monospace; letter-spacing: .04em; text-align: center; white-space: nowrap; }
+.tk-row .n small s { color: #8E97A3; }
+.tk-leer { display: flex; gap: 14px; align-items: center; margin-top: 12px; padding: 12px 14px; border-radius: 16px; background: #171F2E; border: 1px solid rgba(255,162,31,.35); color: #C9D2DE; font: 600 12.5px/1.35 var(--f-body); }
+.tk-leer small { display: block; font: 700 10px "IBM Plex Mono", monospace; letter-spacing: .14em; color: #FFA21F; }
+.tk-leer b { font: 700 30px/1 "IBM Plex Mono", monospace; color: #F4F1EA; }
+.tk-alarm { display: flex; gap: 12px; align-items: center; margin-top: 12px; padding: 12px 14px; border-radius: 16px; background: #FFA21F; color: #111418; box-shadow: 0 12px 26px rgba(255,162,31,.25); }
+.tk-alarm b { display: block; font: 700 18px/1.1 "Bricolage Grotesque", sans-serif; letter-spacing: -.01em; }
+.tk-alarm span { font: 600 12.5px/1.35 var(--f-body); }
+.tk-alarm i { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: #111418; color: #FFA21F; font: 700 20px/1 "Bricolage Grotesque", sans-serif; font-style: normal; }
+.tk-sten { font: 700 52px/.9 "Big Shoulders", sans-serif; color: #141414; letter-spacing: .02em; }
+.t-tanke .sec-title { line-height: 1.14 !important; }
+.t-tanke .drink-body h3 { line-height: 1.1 !important; }
+.t-tanke .drink { border-radius: 10px; }
+.t-tanke .drink .price { background: #FFD21F; color: #141414; box-shadow: none; }
+.tp-hero .tk-pct, .tp-ev .tk-pct { display: none; }
+.tk-hh { position: relative; margin-top: 12px; padding: 22px 16px 16px; border-radius: 12px; overflow: hidden; color: #fff;
+  background: radial-gradient(circle at 85% 30%, rgba(255,210,31,.25), transparent 45%), linear-gradient(150deg, #F2343C, #C8141D 70%, #A30F17); box-shadow: 0 16px 34px rgba(224,38,46,.35), inset 0 0 0 1px rgba(255,255,255,.12); }
+.tk-hh .hz { position: absolute; left: 0; right: 0; top: 0; height: 8px; background: repeating-linear-gradient(-45deg, #FFD21F 0 10px, #141414 10px 20px); }
+.tk-hh .top { display: flex; justify-content: space-between; align-items: center; }
+.tk-hh .lbl { display: inline-flex; align-items: center; gap: 6px; font: 700 11px "IBM Plex Mono", monospace; letter-spacing: .16em; }
+.tk-hh .lbl .live-dot { background: #FFD21F; box-shadow: 0 0 0 4px rgba(255,210,31,.3); }
+.tk-hh .cd { padding: 4px 10px; border-radius: 999px; background: #141414; font: 600 12px var(--f-body); color: #F4F2EC; }
+.tk-hh .cd b { font: 700 14px "IBM Plex Mono", monospace; color: #FFD21F; }
+.tk-hh .mid { display: flex; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.tk-hh .ttl span { display: block; font: 700 54px/.82 "Big Shoulders", sans-serif; text-transform: uppercase; letter-spacing: .01em; text-shadow: 0 4px 0 rgba(0,0,0,.18); }
+.tk-hh .ttl span + span { color: #FFD21F; }
+.tk-hh .ttl small { display: block; margin-top: 8px; font: 700 12px "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; opacity: .92; }
+.tk-hh .burst { width: 118px; flex: none; transform: rotate(10deg); filter: drop-shadow(0 8px 10px rgba(0,0,0,.3)); }
+.tk-hh .gauge { display: flex; align-items: center; gap: 8px; font: 700 11px "IBM Plex Mono", monospace; }
+.tk-hh .gauge i { position: relative; flex: 1; height: 10px; border-radius: 5px; background: rgba(20,20,20,.45); }
+.tk-hh .gauge i b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: #FFD21F; }
+.tk-hh .gauge i em { position: absolute; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px #141414; }
+.tk-hh .chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
+.tk-hh .chips span { padding: 7px 6px 6px; border-radius: 8px; background: #141414; text-align: center; }
+.tk-hh .chips small { display: block; font: 700 10px "IBM Plex Mono", monospace; letter-spacing: .08em; color: #F4F2EC; text-transform: uppercase; }
+.tk-hh .chips s { font: 600 11px var(--f-body); color: #8E8E92; margin-right: 4px; }
+.tk-hh .chips b { font: 700 22px/1.1 "Big Shoulders", sans-serif; color: #FFD21F; }
+.t-tanke .tile-title span:first-child, .t-tanke .tile-title span + span { font-size: 1.12em !important; }
+.t-tanke { --f-script: "IBM Plex Mono", monospace; }
+.t-tanke .title, .t-tanke .tile-title, .t-tanke .tp-hero-t { font-family: "Big Shoulders", sans-serif; font-weight: 700; text-transform: uppercase; color: #FFD21F; letter-spacing: .01em; text-shadow: 0 6px 18px rgba(0,0,0,.6); }
+.t-tanke .title span:first-child, .t-tanke .tile-title span:first-child, .t-tanke .tp-hero-t span:first-child { font-size: 1.35em; line-height: .84; }
+.t-tanke .title span + span, .t-tanke .tile-title span + span, .t-tanke .tp-hero-t span + span { font-size: 1.35em; line-height: .84; color: #F4F2EC; -webkit-text-stroke: 0; }
+.t-tanke .script, .t-tanke .tile-sub, .t-tanke .tp-hero-sub { transform: none; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: .56em; color: #C9D2DE; margin-top: .5em; text-shadow: 0 2px 10px rgba(0,0,0,.7); }
+.t-tanke .script, .t-tanke .tile-sub, .t-tanke .tp-hero-sub { display: inline-block; width: fit-content; background: #141414; color: #FFD21F; padding: .3em .5em; box-shadow: inset 0 0 0 2px #FFD21F; }
+.t-tanke.tile-ev { border-color: rgba(255,210,31,.6); }
+.t-tanke .title span:first-child, .t-tanke .title span + span { font-size: 1.15em; }
+.tkv-tanke .tk-board { background: repeating-linear-gradient(-45deg, #FFD21F 0 16px, #141414 16px 32px); padding: 10px; border-radius: 6px; }
+.tkv-tanke .tk-in { background: #FFD21F; border-radius: 2px; }
+.tkv-tanke .tk-logo { background: #141414; color: #FFD21F; border-radius: 2px; font-family: "Big Shoulders", sans-serif; font-size: 26px; letter-spacing: .04em; }
+.tkv-tanke .tk-logo small { color: #FFD21F; }
+.tkv-tanke .tk-sale { background: #E0262E; border-radius: 2px; }
+.tkv-tanke .tk-row { background: transparent; border-bottom: 3px solid #141414; border-radius: 0; }
+.tkv-tanke .tk-row:last-child { border-bottom: 0; }
+.tkv-tanke .tk-row .n { color: #141414; }
+.tkv-tanke .tk-row .n small { color: #4A4220; }
+.tkv-tanke .tk-row .n small.dn { color: #B5171E; }
+.tkv-tanke .tk-row.hot { box-shadow: none; background: none; }
+.tkv-tanke .tk-alarm { background: #141414; color: #F4F2EC; box-shadow: inset 0 0 0 3px #FFD21F; border-radius: 6px; }
+.tkv-tanke .tk-alarm b { color: #FFD21F; font-family: "Big Shoulders", sans-serif; font-size: 22px; letter-spacing: .02em; }
+.tkv-tanke .tk-alarm i { background: #FFD21F; color: #141414; }
+.tkv-tanke .tk-leer { background: #1E1E1F; border: 2px solid #FFD21F; border-radius: 6px; }
+.tkv-tanke .tk-leer small { color: #FFD21F; }
+.row em s { opacity: .55; font-weight: 400; margin-right: 6px; font-size: .85em; }
+.row em b.half { color: var(--a3); }
+.lv-head { display: flex; justify-content: space-between; align-items: center; margin: -4px 0 12px; font: 700 12px var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.lv-head .live-dot { margin-right: 6px; }
+.tp-hero .tk-pylon { transform: translate(158px, 120px) scale(.55); }
+
+.tk-note { margin: 12px 2px 0; font: 500 13px/1.45 var(--f-body); color: var(--dim); }
+
+/* ===== Volltanken am Tresen-Bildschirm ===== */
+#tresen.t-tanke .tr-tt h2{font-family:"Big Shoulders",sans-serif;font-weight:700;color:#FFD21F;text-shadow:none;letter-spacing:.02em}
+#tresen.t-tanke .tr-frame{border-radius:14px}
+.tk-tr{padding:26px 30px!important;justify-content:flex-start!important}
+.tk-tr-board{width:100%;padding:12px;border-radius:10px;background:repeating-linear-gradient(-45deg,#FFD21F 0 18px,#141414 18px 36px)}
+.tk-tr-logo{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;background:#141414;color:#FFD21F;font:700 44px/1 "Big Shoulders",sans-serif;letter-spacing:.04em}
+.tk-tr-logo small{font:700 16px "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.tk-tr-row{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#FFD21F;color:#141414;border-top:4px solid #141414;text-align:left}
+.tk-tr-row span{font:700 24px/1.1 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase}
+.tk-tr-row small{display:block;font:700 17px var(--f-body);letter-spacing:0;text-transform:none;color:#B5171E;margin-top:4px}
+.tk-tr-row small s{color:#6a5d1e}
+.tk-tr-row b{font:700 84px/.9 "Big Shoulders",sans-serif}
+.tk-tr-foot{margin-top:16px;font:700 18px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#FFD21F}
+/* Preisalarm: ganzer Bildschirm blinkt rot-gelb, Banner unten */
+#tkTrAlarm{position:absolute;left:40px;right:40px;bottom:26px;z-index:5;opacity:0;transform:translateY(40px);transition:opacity .4s,transform .4s}
+#tresen.tk-flash #tkTrAlarm{opacity:1;transform:none}
+.tk-tr-al{position:relative;display:flex;align-items:center;gap:28px;padding:28px 36px 24px;border-radius:16px;overflow:hidden;background:#E0262E;color:#fff;box-shadow:0 0 80px rgba(224,38,46,.7)}
+.tk-tr-al .hz{position:absolute;left:0;right:0;top:0;height:14px;background:repeating-linear-gradient(-45deg,#FFD21F 0 16px,#141414 16px 32px)}
+.tk-tr-al .ic{flex:none;display:grid;place-items:center;width:110px;height:110px;border-radius:50%;background:#FFD21F;color:#141414;font:700 64px/1 "Big Shoulders",sans-serif}
+.tk-tr-al small{display:block;font:700 20px "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.tk-tr-al b{display:block;font:700 76px/.95 "Big Shoulders",sans-serif;text-transform:uppercase}
+.tk-tr-al em{font:700 30px var(--f-body);font-style:normal} .tk-tr-al em i{font-style:normal;color:#FFD21F}
+#tresen.tk-flash .tr-shade{animation:tkFlash .5s steps(1) 0s 12}
+@keyframes tkFlash{0%{background:rgba(224,38,46,.55)}50%{background:rgba(255,210,31,.35)}}
+#tresen.tk-flash .tr-frame{animation:tkFrame .5s steps(1) 0s 12}
+@keyframes tkFrame{0%{box-shadow:0 0 0 6px #E0262E,0 0 60px #E0262E}50%{box-shadow:0 0 0 6px #FFD21F,0 0 60px #FFD21F}}
+/* Happy Hour „Tankrabatt“: der ganze Tresen wird rot */
+#tresen.tk-rabatt .tr-shade{background:radial-gradient(70% 80% at 50% 45%,rgba(224,38,46,.55),rgba(80,6,10,.92))}
+#tresen.tk-rabatt .tr-frame{box-shadow:0 0 0 3px #FFD21F,0 0 50px rgba(255,210,31,.35)}
+#tresen.tk-rabatt .tr-tt h2,#tresen.tk-rabatt .tr-clock{color:#fff}
+.tk-tr.hh{background:linear-gradient(150deg,#F2343C,#C8141D 70%,#A30F17)!important;justify-content:center!important;overflow:hidden!important;padding-top:36px!important}
+.tk-tr-hz{position:absolute;left:0;right:0;top:0;height:16px;background:repeating-linear-gradient(-45deg,#FFD21F 0 18px,#141414 18px 36px)}
+.tk-tr-pct{position:relative;margin:0;font:700 230px/.8 "Big Shoulders",sans-serif;letter-spacing:-.02em;color:#FFD21F;text-shadow:10px 10px 0 #141414}
+.tk-tr-pct small{font-size:116px;margin-left:6px;vertical-align:top;line-height:1.1}
+.tk-tr-tape{width:112%;margin:10px -6% 0;padding:14px 0 12px;background:#141414;transform:rotate(-3deg);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.tk-tr-tape span{display:block;font:700 48px/1 "Big Shoulders",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#FFD21F}
+.tk-tr-ex{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;margin-top:26px}
+.tk-tr-ex span{padding:10px 8px;border-radius:10px;background:rgba(20,20,20,.35);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.tk-tr-ex small{display:block;font:700 18px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.tk-tr-ex s{font:600 20px var(--f-body);color:rgba(255,255,255,.7);margin-right:8px}
+.tk-tr-ex b{font:700 46px/1.1 "Big Shoulders",sans-serif;color:#FFD21F}
+.tk-tr-bar{width:100%;height:16px;margin:24px 0 10px;border-radius:10px;background:rgba(20,20,20,.5)}
+.tk-tr-bar i{display:block;height:100%;border-radius:10px;background:#FFD21F}
+.tk-tr-left{font:700 30px var(--f-body);color:#fff} .tk-tr-left b{font-family:"IBM Plex Mono",monospace;color:#FFD21F}
+
+#tresen.t-tanke .tr-kr.hl{margin:0;padding:0;border-radius:0;background:none;box-shadow:none}
+#tresen.t-tanke .tr-kr.hl b.hot{color:#FFD21F}
+.tk-tr.hh .tr-tag{position:absolute;top:34px;left:50%;transform:translateX(-50%);margin:0}
+.tk-tr.hh{padding-top:96px!important}
+
+.tk-tr-row .tk-stamp{display:block;width:max-content;margin-top:10px;padding:4px 12px;transform:rotate(-3deg);transform-origin:left;border:3px solid #D21F27;border-radius:6px;background:rgba(255,255,255,.25);color:#D21F27;font:700 28px/1 "Big Shoulders",sans-serif;font-style:normal;letter-spacing:.03em;text-transform:uppercase}
+
+/* unten links: Karte im Wechsel mit Countdown bzw. Zapfsäule mit Auto */
+.tr-karte{position:relative}
+.tk-tr-box{position:absolute;inset:0;z-index:2;border-radius:inherit;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .6s}
+.tk-tr-box.an{opacity:1}
+.tk-tr-box svg.tka{display:block;width:100%;height:100%}
+.tk-cd{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 36px;background:radial-gradient(circle at 85% 20%,rgba(255,210,31,.18),transparent 50%),#141414}
+.tk-cd-h{display:flex;align-items:center;gap:12px;font:700 22px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:#FFD21F}
+.tk-cd b{font:700 128px/.95 "Big Shoulders",sans-serif;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.tk-cd-t{font:700 28px var(--f-body);color:#F4F2EC}.tk-cd-t i{font-style:normal;color:#FF3B3B}
+.tk-cd-hz{position:absolute;left:0;right:0;bottom:0;height:14px;background:repeating-linear-gradient(-45deg,#FFD21F 0 16px,#141414 16px 32px)}
+/* Auto-Folgen: je 12 s. tanken · brennt · rollt (weg vom Tankwart) · polizei (fährt ohne zu zahlen weg) */
+.tka *{transform-box:fill-box}
+.tka-wagen,.tka-cop,.tka-mann,.tka-schlauch,.tka-dreh,.tka-feuer,.tka-feuer path,.tka-rauch circle,.tka-pistole,.tka-boden,.tka-ruf,.tka-puff circle,.tka-blau{animation-duration:12s;animation-fill-mode:both;animation-iteration-count:1}
+.tka-dreh{transform-origin:center}
+.tka-schlauch,.tka-pistole{opacity:0}
+.tka-ruf,.tka-boden,.tka-puff circle{opacity:0}
+.tka-led{animation:tkaLed 1s steps(1) infinite}
+@keyframes tkaLed{50%{opacity:.35}}
+/* gemeinsame Bausteine */
+@keyframes tkaTank{0%,22%{opacity:0}24%,70%{opacity:1}72%,100%{opacity:0}}
+/* 1 · tanken und wegfahren */
+.tka-tanken .tka-wagen{animation-name:tkaW1}
+@keyframes tkaW1{0%{transform:translateX(-760px);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,74%{transform:translateX(0);animation-timing-function:cubic-bezier(.6,0,.9,.6)}100%{transform:translateX(900px)}}
+.tka-tanken .tka-dreh{animation-name:tkaD1}
+@keyframes tkaD1{0%{transform:rotate(0);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,74%{transform:rotate(1440deg);animation-timing-function:cubic-bezier(.6,0,.9,.6)}100%{transform:rotate(3200deg)}}
+.tka-tanken .tka-schlauch,.tka-tanken .tka-pistole{animation-name:tkaTank}
+.tka-tanken .tka-puff circle{animation-name:tkaPuff}
+@keyframes tkaPuff{0%,74%{opacity:0;transform:translate(0,0) scale(.4)}78%{opacity:.5}92%,100%{opacity:0;transform:translate(-40px,-30px) scale(1.4)}}
+.tka-puff circle{fill:#8E939B}
+/* 2 · brennt ab (Tankwart rennt weg) */
+.tka-brennt .tka-wagen{animation-name:tkaW2}
+@keyframes tkaW2{0%{transform:translateX(-760px);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,86%{transform:translateX(0);opacity:1}100%{transform:translateX(0);opacity:0}}
+.tka-brennt .tka-dreh{animation-name:tkaD2}
+@keyframes tkaD2{0%{transform:rotate(0);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,100%{transform:rotate(1440deg)}}
+.tka-brennt .tka-schlauch,.tka-brennt .tka-pistole{animation-name:tkaTank2}
+@keyframes tkaTank2{0%,22%{opacity:0}24%,42%{opacity:1}44%,100%{opacity:0}}
+.tka-brennt .tka-car{animation:tkaKohle 12s both}
+@keyframes tkaKohle{0%,52%{filter:none}80%,100%{filter:brightness(.18) saturate(0)}}
+.tka-feuer{transform-origin:50% 100%;animation-name:tkaFeuer}
+@keyframes tkaFeuer{0%,40%{transform:scale(0)}48%{transform:scale(.7)}62%{transform:scale(1.5)}80%{transform:scale(2.2)}96%{transform:scale(2.4);opacity:1}100%{transform:scale(2.4);opacity:0}}
+.tka-feuer path{transform-origin:50% 100%;animation:tkaFlacker .32s ease-in-out infinite alternate}
+.tka-feuer .f2{animation-duration:.24s}
+@keyframes tkaFlacker{to{transform:scaleY(.82) scaleX(1.08)}}
+.tka-rauch circle{fill:#3A3D43;opacity:0;animation-name:tkaRauch}
+.tka-rauch circle:nth-child(2){animation-delay:.6s}.tka-rauch circle:nth-child(3){animation-delay:1.2s}
+@keyframes tkaRauch{0%,50%{opacity:0;transform:translateY(0)}70%{opacity:.7}100%{opacity:0;transform:translateY(-60px) scale(1.6)}}
+.tka-brennt .tka-ruf{animation-name:tkaRuf2}
+@keyframes tkaRuf2{0%,44%{opacity:0}46%,60%{opacity:1}62%,100%{opacity:0}}
+.tka-brennt .tka-mann{animation-name:tkaWeg}
+@keyframes tkaWeg{0%,48%{transform:translate(0,0)}52%{transform:translate(-60px,-8px)}56%{transform:translate(-130px,0)}60%{transform:translate(-200px,-8px)}64%{transform:translate(-270px,0)}68%,100%{transform:translate(-460px,0)}}
+/* 3 · rollt weg vom Tankwart */
+.tka-rollt .tka-wagen{animation-name:tkaW3}
+@keyframes tkaW3{0%{transform:translateX(-760px);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,38%{transform:translateX(0);animation-timing-function:ease-in}58%{transform:translateX(70px);animation-timing-function:cubic-bezier(.5,0,.9,.6)}90%,100%{transform:translateX(900px)}}
+.tka-rollt .tka-dreh{animation-name:tkaD3}
+@keyframes tkaD3{0%{transform:rotate(0);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,38%{transform:rotate(1440deg);animation-timing-function:ease-in}58%{transform:rotate(1660deg);animation-timing-function:cubic-bezier(.5,0,.9,.6)}90%,100%{transform:rotate(4300deg)}}
+.tka-rollt .tka-schlauch{transform-box:view-box;transform-origin:262px 146px;animation-name:tkaZug}
+@keyframes tkaZug{0%,22%{opacity:0;transform:scaleX(1)}24%,38%{opacity:1;transform:scaleX(1)}57%{opacity:1;transform:scaleX(1.62)}58%,100%{opacity:0;transform:scaleX(1)}}
+.tka-rollt .tka-pistole{animation-name:tkaTank3}
+@keyframes tkaTank3{0%,22%{opacity:0}24%,57%{opacity:1}58%,100%{opacity:0}}
+.tka-rollt .tka-boden{animation-name:tkaBoden}
+@keyframes tkaBoden{0%,57%{opacity:0;transform:translate(80px,-40px)}62%{opacity:1;transform:translate(60px,0)}100%{opacity:1;transform:translate(60px,0)}}
+.tka-rollt .tka-ruf{animation-name:tkaRuf3}
+@keyframes tkaRuf3{0%,58%{opacity:0}60%,100%{opacity:1}}
+.tka-rollt .tka-mann{animation-name:tkaHinter}
+@keyframes tkaHinter{0%,64%{transform:translate(0,0)}68%{transform:translate(60px,-8px)}72%{transform:translate(130px,0)}76%{transform:translate(200px,-8px)}80%{transform:translate(270px,0)}84%{transform:translate(340px,-8px)}100%{transform:translate(640px,0)}}
+/* 4 · haut ohne zu zahlen ab, Polizei hinterher */
+.tka-polizei .tka-wagen{animation-name:tkaW4}
+@keyframes tkaW4{0%{transform:translateX(-760px);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,52%{transform:translateX(0);animation-timing-function:cubic-bezier(.7,0,1,.5)}64%,100%{transform:translateX(900px)}}
+.tka-polizei .tka-wagen .tka-dreh{animation-name:tkaD4}
+@keyframes tkaD4{0%{transform:rotate(0);animation-timing-function:cubic-bezier(.2,.7,.3,1)}18%,52%{transform:rotate(1440deg);animation-timing-function:cubic-bezier(.7,0,1,.5)}64%,100%{transform:rotate(3800deg)}}
+.tka-polizei .tka-schlauch{animation-name:tkaTank4}.tka-polizei .tka-pistole{animation-name:tkaTank4b}
+@keyframes tkaTank4{0%,22%{opacity:0}24%,52%{opacity:1}53%,100%{opacity:0}}
+@keyframes tkaTank4b{0%,22%{opacity:0}24%,100%{opacity:1}}
+.tka-polizei .tka-boden{animation-name:none}
+.tka-polizei .tka-ruf{animation-name:tkaRuf4}
+@keyframes tkaRuf4{0%,53%{opacity:0}55%,100%{opacity:1}}
+.tka-polizei .tka-cop{animation-name:tkaPol}
+@keyframes tkaPol{0%,60%{transform:translateX(-660px);animation-timing-function:linear}96%,100%{transform:translateX(620px)}}
+.tka-polizei .tka-cop .tka-dreh{animation-name:tkaD5}
+@keyframes tkaD5{0%,60%{transform:rotate(0);animation-timing-function:linear}96%,100%{transform:rotate(3900deg)}}
+.tka-blau{animation:tkaBlau .3s steps(1) infinite}.tka-blau.b2{animation-delay:.15s}
+@keyframes tkaBlau{50%{fill:#1F5BD6}}
+#trScene .tk-pylon{display:none}
+.t-tanke .tk-row .n{text-transform:uppercase}
+.t-tanke .tk-row .n small{text-transform:none}
 </style>
 </head>
 <body>
@@ -2807,7 +3015,7 @@ body:has(#advSheet) .bdg-over { z-index: 95; }
         <div class="tr-spec tr-frame r" id="trSpecR"></div>
       </main>
       <section class="tr-bottom">
-        <div class="tr-karte tr-frame"><div class="tr-kh">Getränkekarte</div><div id="trMenu"></div><div class="tr-pf" id="trPfand"></div></div>
+        <div class="tr-karte tr-frame"><div class="tr-kh">Getränkekarte</div><div id="trMenu"></div><div class="tr-pf" id="trPfand"></div><div class="tk-tr-box" id="tkTrBox"></div></div>
         <div class="tr-qr pp"><img src="paypal-qr.png" alt="PayPal-QR-Code"><span>Bargeldlos bezahlen</span></div>
         <div class="tr-cnt tr-frame"><div class="tr-ct">Heute über den Tresen</div><div class="tr-cn" id="trCount">0</div><div class="tr-duel" id="trDuel"></div></div>
         <div class="tr-qr tr-appqr tr-frame"><svg class="tr-qrsvg" viewBox="0 0 41 41" aria-label="QR-Code zur ExMa-App"><rect width="41" height="41" rx="2" fill="#fff"/><path d="M11 2h1.04v1.04h-1.04zM18 2h1.04v1.04h-1.04zM21 2h1.04v1.04h-1.04zM23 2h1.04v1.04h-1.04zM25 2h1.04v1.04h-1.04zM27 2h1.04v1.04h-1.04zM11 3h1.04v1.04h-1.04zM13 3h1.04v1.04h-1.04zM15 3h1.04v1.04h-1.04zM18 3h1.04v1.04h-1.04zM26 3h1.04v1.04h-1.04zM27 3h1.04v1.04h-1.04zM11 4h1.04v1.04h-1.04zM14 4h1.04v1.04h-1.04zM16 4h1.04v1.04h-1.04zM19 4h1.04v1.04h-1.04zM21 4h1.04v1.04h-1.04zM23 4h1.04v1.04h-1.04zM27 4h1.04v1.04h-1.04zM28 4h1.04v1.04h-1.04zM30 4h1.04v1.04h-1.04zM11 5h1.04v1.04h-1.04zM13 5h1.04v1.04h-1.04zM14 5h1.04v1.04h-1.04zM15 5h1.04v1.04h-1.04zM17 5h1.04v1.04h-1.04zM19 5h1.04v1.04h-1.04zM22 5h1.04v1.04h-1.04zM23 5h1.04v1.04h-1.04zM25 5h1.04v1.04h-1.04zM28 5h1.04v1.04h-1.04zM29 5h1.04v1.04h-1.04zM10 6h1.04v1.04h-1.04zM12 6h1.04v1.04h-1.04zM13 6h1.04v1.04h-1.04zM16 6h1.04v1.04h-1.04zM21 6h1.04v1.04h-1.04zM22 6h1.04v1.04h-1.04zM24 6h1.04v1.04h-1.04zM27 6h1.04v1.04h-1.04zM28 6h1.04v1.04h-1.04zM29 6h1.04v1.04h-1.04zM11 7h1.04v1.04h-1.04zM12 7h1.04v1.04h-1.04zM13 7h1.04v1.04h-1.04zM15 7h1.04v1.04h-1.04zM19 7h1.04v1.04h-1.04zM21 7h1.04v1.04h-1.04zM22 7h1.04v1.04h-1.04zM23 7h1.04v1.04h-1.04zM28 7h1.04v1.04h-1.04zM10 8h1.04v1.04h-1.04zM12 8h1.04v1.04h-1.04zM14 8h1.04v1.04h-1.04zM16 8h1.04v1.04h-1.04zM18 8h1.04v1.04h-1.04zM20 8h1.04v1.04h-1.04zM22 8h1.04v1.04h-1.04zM24 8h1.04v1.04h-1.04zM26 8h1.04v1.04h-1.04zM28 8h1.04v1.04h-1.04zM30 8h1.04v1.04h-1.04zM10 9h1.04v1.04h-1.04zM11 9h1.04v1.04h-1.04zM19 9h1.04v1.04h-1.04zM22 9h1.04v1.04h-1.04zM25 9h1.04v1.04h-1.04zM26 9h1.04v1.04h-1.04zM27 9h1.04v1.04h-1.04zM28 9h1.04v1.04h-1.04zM29 9h1.04v1.04h-1.04zM30 9h1.04v1.04h-1.04zM4 10h1.04v1.04h-1.04zM5 10h1.04v1.04h-1.04zM8 10h1.04v1.04h-1.04zM9 10h1.04v1.04h-1.04zM10 10h1.04v1.04h-1.04zM11 10h1.04v1.04h-1.04zM14 10h1.04v1.04h-1.04zM15 10h1.04v1.04h-1.04zM17 10h1.04v1.04h-1.04zM18 10h1.04v1.04h-1.04zM20 10h1.04v1.04h-1.04zM21 10h1.04v1.04h-1.04zM23 10h1.04v1.04h-1.04zM25 10h1.04v1.04h-1.04zM27 10h1.04v1.04h-1.04zM28 10h1.04v1.04h-1.04zM29 10h1.04v1.04h-1.04zM31 10h1.04v1.04h-1.04zM32 10h1.04v1.04h-1.04zM34 10h1.04v1.04h-1.04zM3 11h1.04v1.04h-1.04zM7 11h1.04v1.04h-1.04zM10 11h1.04v1.04h-1.04zM11 11h1.04v1.04h-1.04zM14 11h1.04v1.04h-1.04zM15 11h1.04v1.04h-1.04zM17 11h1.04v1.04h-1.04zM19 11h1.04v1.04h-1.04zM20 11h1.04v1.04h-1.04zM23 11h1.04v1.04h-1.04zM27 11h1.04v1.04h-1.04zM29 11h1.04v1.04h-1.04zM36 11h1.04v1.04h-1.04zM6 12h1.04v1.04h-1.04zM7 12h1.04v1.04h-1.04zM8 12h1.04v1.04h-1.04zM9 12h1.04v1.04h-1.04zM11 12h1.04v1.04h-1.04zM13 12h1.04v1.04h-1.04zM16 12h1.04v1.04h-1.04zM17 12h1.04v1.04h-1.04zM20 12h1.04v1.04h-1.04zM21 12h1.04v1.04h-1.04zM22 12h1.04v1.04h-1.04zM25 12h1.04v1.04h-1.04zM26 12h1.04v1.04h-1.04zM27 12h1.04v1.04h-1.04zM30 12h1.04v1.04h-1.04zM31 12h1.04v1.04h-1.04zM34 12h1.04v1.04h-1.04zM35 12h1.04v1.04h-1.04zM2 13h1.04v1.04h-1.04zM4 13h1.04v1.04h-1.04zM7 13h1.04v1.04h-1.04zM13 13h1.04v1.04h-1.04zM15 13h1.04v1.04h-1.04zM20 13h1.04v1.04h-1.04zM22 13h1.04v1.04h-1.04zM23 13h1.04v1.04h-1.04zM24 13h1.04v1.04h-1.04zM26 13h1.04v1.04h-1.04zM27 13h1.04v1.04h-1.04zM28 13h1.04v1.04h-1.04zM30 13h1.04v1.04h-1.04zM33 13h1.04v1.04h-1.04zM35 13h1.04v1.04h-1.04zM36 13h1.04v1.04h-1.04zM2 14h1.04v1.04h-1.04zM3 14h1.04v1.04h-1.04zM4 14h1.04v1.04h-1.04zM5 14h1.04v1.04h-1.04zM6 14h1.04v1.04h-1.04zM8 14h1.04v1.04h-1.04zM9 14h1.04v1.04h-1.04zM10 14h1.04v1.04h-1.04zM14 14h1.04v1.04h-1.04zM15 14h1.04v1.04h-1.04zM16 14h1.04v1.04h-1.04zM20 14h1.04v1.04h-1.04zM22 14h1.04v1.04h-1.04zM23 14h1.04v1.04h-1.04zM24 14h1.04v1.04h-1.04zM27 14h1.04v1.04h-1.04zM28 14h1.04v1.04h-1.04zM29 14h1.04v1.04h-1.04zM31 14h1.04v1.04h-1.04zM32 14h1.04v1.04h-1.04zM34 14h1.04v1.04h-1.04zM35 14h1.04v1.04h-1.04zM37 14h1.04v1.04h-1.04zM38 14h1.04v1.04h-1.04zM2 15h1.04v1.04h-1.04zM3 15h1.04v1.04h-1.04zM4 15h1.04v1.04h-1.04zM5 15h1.04v1.04h-1.04zM9 15h1.04v1.04h-1.04zM10 15h1.04v1.04h-1.04zM11 15h1.04v1.04h-1.04zM12 15h1.04v1.04h-1.04zM14 15h1.04v1.04h-1.04zM27 15h1.04v1.04h-1.04zM28 15h1.04v1.04h-1.04zM29 15h1.04v1.04h-1.04zM32 15h1.04v1.04h-1.04zM34 15h1.04v1.04h-1.04zM36 15h1.04v1.04h-1.04zM37 15h1.04v1.04h-1.04zM38 15h1.04v1.04h-1.04zM3 16h1.04v1.04h-1.04zM4 16h1.04v1.04h-1.04zM8 16h1.04v1.04h-1.04zM10 16h1.04v1.04h-1.04zM11 16h1.04v1.04h-1.04zM14 16h1.04v1.04h-1.04zM28 16h1.04v1.04h-1.04zM33 16h1.04v1.04h-1.04zM34 16h1.04v1.04h-1.04zM36 16h1.04v1.04h-1.04zM37 16h1.04v1.04h-1.04zM4 17h1.04v1.04h-1.04zM5 17h1.04v1.04h-1.04zM6 17h1.04v1.04h-1.04zM9 17h1.04v1.04h-1.04zM11 17h1.04v1.04h-1.04zM13 17h1.04v1.04h-1.04zM14 17h1.04v1.04h-1.04zM26 17h1.04v1.04h-1.04zM30 17h1.04v1.04h-1.04zM37 17h1.04v1.04h-1.04zM38 17h1.04v1.04h-1.04zM2 18h1.04v1.04h-1.04zM7 18h1.04v1.04h-1.04zM8 18h1.04v1.04h-1.04zM10 18h1.04v1.04h-1.04zM11 18h1.04v1.04h-1.04zM13 18h1.04v1.04h-1.04zM14 18h1.04v1.04h-1.04zM26 18h1.04v1.04h-1.04zM27 18h1.04v1.04h-1.04zM29 18h1.04v1.04h-1.04zM30 18h1.04v1.04h-1.04zM33 18h1.04v1.04h-1.04zM35 18h1.04v1.04h-1.04zM36 18h1.04v1.04h-1.04zM38 18h1.04v1.04h-1.04zM2 19h1.04v1.04h-1.04zM3 19h1.04v1.04h-1.04zM9 19h1.04v1.04h-1.04zM11 19h1.04v1.04h-1.04zM12 19h1.04v1.04h-1.04zM13 19h1.04v1.04h-1.04zM27 19h1.04v1.04h-1.04zM29 19h1.04v1.04h-1.04zM32 19h1.04v1.04h-1.04zM36 19h1.04v1.04h-1.04zM38 19h1.04v1.04h-1.04zM2 20h1.04v1.04h-1.04zM3 20h1.04v1.04h-1.04zM4 20h1.04v1.04h-1.04zM6 20h1.04v1.04h-1.04zM7 20h1.04v1.04h-1.04zM8 20h1.04v1.04h-1.04zM9 20h1.04v1.04h-1.04zM10 20h1.04v1.04h-1.04zM11 20h1.04v1.04h-1.04zM12 20h1.04v1.04h-1.04zM26 20h1.04v1.04h-1.04zM28 20h1.04v1.04h-1.04zM29 20h1.04v1.04h-1.04zM31 20h1.04v1.04h-1.04zM33 20h1.04v1.04h-1.04zM37 20h1.04v1.04h-1.04zM38 20h1.04v1.04h-1.04zM2 21h1.04v1.04h-1.04zM3 21h1.04v1.04h-1.04zM6 21h1.04v1.04h-1.04zM9 21h1.04v1.04h-1.04zM10 21h1.04v1.04h-1.04zM12 21h1.04v1.04h-1.04zM14 21h1.04v1.04h-1.04zM31 21h1.04v1.04h-1.04zM32 21h1.04v1.04h-1.04zM34 21h1.04v1.04h-1.04zM35 21h1.04v1.04h-1.04zM37 21h1.04v1.04h-1.04zM38 21h1.04v1.04h-1.04zM2 22h1.04v1.04h-1.04zM4 22h1.04v1.04h-1.04zM5 22h1.04v1.04h-1.04zM7 22h1.04v1.04h-1.04zM8 22h1.04v1.04h-1.04zM9 22h1.04v1.04h-1.04zM12 22h1.04v1.04h-1.04zM14 22h1.04v1.04h-1.04zM28 22h1.04v1.04h-1.04zM30 22h1.04v1.04h-1.04zM31 22h1.04v1.04h-1.04zM34 22h1.04v1.04h-1.04zM37 22h1.04v1.04h-1.04zM2 23h1.04v1.04h-1.04zM3 23h1.04v1.04h-1.04zM4 23h1.04v1.04h-1.04zM5 23h1.04v1.04h-1.04zM10 23h1.04v1.04h-1.04zM11 23h1.04v1.04h-1.04zM12 23h1.04v1.04h-1.04zM28 23h1.04v1.04h-1.04zM33 23h1.04v1.04h-1.04zM35 23h1.04v1.04h-1.04zM36 23h1.04v1.04h-1.04zM3 24h1.04v1.04h-1.04zM7 24h1.04v1.04h-1.04zM8 24h1.04v1.04h-1.04zM9 24h1.04v1.04h-1.04zM10 24h1.04v1.04h-1.04zM11 24h1.04v1.04h-1.04zM13 24h1.04v1.04h-1.04zM14 24h1.04v1.04h-1.04zM26 24h1.04v1.04h-1.04zM28 24h1.04v1.04h-1.04zM32 24h1.04v1.04h-1.04zM34 24h1.04v1.04h-1.04zM37 24h1.04v1.04h-1.04zM2 25h1.04v1.04h-1.04zM3 25h1.04v1.04h-1.04zM4 25h1.04v1.04h-1.04zM7 25h1.04v1.04h-1.04zM10 25h1.04v1.04h-1.04zM11 25h1.04v1.04h-1.04zM13 25h1.04v1.04h-1.04zM27 25h1.04v1.04h-1.04zM28 25h1.04v1.04h-1.04zM29 25h1.04v1.04h-1.04zM30 25h1.04v1.04h-1.04zM31 25h1.04v1.04h-1.04zM32 25h1.04v1.04h-1.04zM35 25h1.04v1.04h-1.04zM36 25h1.04v1.04h-1.04zM37 25h1.04v1.04h-1.04zM3 26h1.04v1.04h-1.04zM5 26h1.04v1.04h-1.04zM8 26h1.04v1.04h-1.04zM12 26h1.04v1.04h-1.04zM13 26h1.04v1.04h-1.04zM15 26h1.04v1.04h-1.04zM21 26h1.04v1.04h-1.04zM22 26h1.04v1.04h-1.04zM23 26h1.04v1.04h-1.04zM24 26h1.04v1.04h-1.04zM25 26h1.04v1.04h-1.04zM32 26h1.04v1.04h-1.04zM33 26h1.04v1.04h-1.04zM34 26h1.04v1.04h-1.04zM36 26h1.04v1.04h-1.04zM38 26h1.04v1.04h-1.04zM7 27h1.04v1.04h-1.04zM9 27h1.04v1.04h-1.04zM10 27h1.04v1.04h-1.04zM11 27h1.04v1.04h-1.04zM12 27h1.04v1.04h-1.04zM15 27h1.04v1.04h-1.04zM17 27h1.04v1.04h-1.04zM18 27h1.04v1.04h-1.04zM20 27h1.04v1.04h-1.04zM21 27h1.04v1.04h-1.04zM22 27h1.04v1.04h-1.04zM23 27h1.04v1.04h-1.04zM25 27h1.04v1.04h-1.04zM30 27h1.04v1.04h-1.04zM31 27h1.04v1.04h-1.04zM33 27h1.04v1.04h-1.04zM34 27h1.04v1.04h-1.04zM38 27h1.04v1.04h-1.04zM3 28h1.04v1.04h-1.04zM4 28h1.04v1.04h-1.04zM5 28h1.04v1.04h-1.04zM6 28h1.04v1.04h-1.04zM8 28h1.04v1.04h-1.04zM9 28h1.04v1.04h-1.04zM10 28h1.04v1.04h-1.04zM11 28h1.04v1.04h-1.04zM16 28h1.04v1.04h-1.04zM18 28h1.04v1.04h-1.04zM19 28h1.04v1.04h-1.04zM20 28h1.04v1.04h-1.04zM21 28h1.04v1.04h-1.04zM22 28h1.04v1.04h-1.04zM23 28h1.04v1.04h-1.04zM24 28h1.04v1.04h-1.04zM26 28h1.04v1.04h-1.04zM27 28h1.04v1.04h-1.04zM28 28h1.04v1.04h-1.04zM29 28h1.04v1.04h-1.04zM30 28h1.04v1.04h-1.04zM33 28h1.04v1.04h-1.04zM35 28h1.04v1.04h-1.04zM36 28h1.04v1.04h-1.04zM37 28h1.04v1.04h-1.04zM2 29h1.04v1.04h-1.04zM7 29h1.04v1.04h-1.04zM9 29h1.04v1.04h-1.04zM10 29h1.04v1.04h-1.04zM12 29h1.04v1.04h-1.04zM13 29h1.04v1.04h-1.04zM15 29h1.04v1.04h-1.04zM20 29h1.04v1.04h-1.04zM21 29h1.04v1.04h-1.04zM22 29h1.04v1.04h-1.04zM23 29h1.04v1.04h-1.04zM26 29h1.04v1.04h-1.04zM28 29h1.04v1.04h-1.04zM30 29h1.04v1.04h-1.04zM31 29h1.04v1.04h-1.04zM37 29h1.04v1.04h-1.04zM38 29h1.04v1.04h-1.04zM2 30h1.04v1.04h-1.04zM3 30h1.04v1.04h-1.04zM4 30h1.04v1.04h-1.04zM5 30h1.04v1.04h-1.04zM6 30h1.04v1.04h-1.04zM8 30h1.04v1.04h-1.04zM9 30h1.04v1.04h-1.04zM11 30h1.04v1.04h-1.04zM12 30h1.04v1.04h-1.04zM13 30h1.04v1.04h-1.04zM18 30h1.04v1.04h-1.04zM20 30h1.04v1.04h-1.04zM24 30h1.04v1.04h-1.04zM25 30h1.04v1.04h-1.04zM27 30h1.04v1.04h-1.04zM29 30h1.04v1.04h-1.04zM30 30h1.04v1.04h-1.04zM31 30h1.04v1.04h-1.04zM32 30h1.04v1.04h-1.04zM33 30h1.04v1.04h-1.04zM34 30h1.04v1.04h-1.04zM35 30h1.04v1.04h-1.04zM36 30h1.04v1.04h-1.04zM37 30h1.04v1.04h-1.04zM38 30h1.04v1.04h-1.04zM10 31h1.04v1.04h-1.04zM12 31h1.04v1.04h-1.04zM13 31h1.04v1.04h-1.04zM15 31h1.04v1.04h-1.04zM16 31h1.04v1.04h-1.04zM19 31h1.04v1.04h-1.04zM21 31h1.04v1.04h-1.04zM22 31h1.04v1.04h-1.04zM23 31h1.04v1.04h-1.04zM25 31h1.04v1.04h-1.04zM26 31h1.04v1.04h-1.04zM27 31h1.04v1.04h-1.04zM28 31h1.04v1.04h-1.04zM30 31h1.04v1.04h-1.04zM34 31h1.04v1.04h-1.04zM35 31h1.04v1.04h-1.04zM36 31h1.04v1.04h-1.04zM38 31h1.04v1.04h-1.04zM10 32h1.04v1.04h-1.04zM11 32h1.04v1.04h-1.04zM12 32h1.04v1.04h-1.04zM15 32h1.04v1.04h-1.04zM17 32h1.04v1.04h-1.04zM21 32h1.04v1.04h-1.04zM22 32h1.04v1.04h-1.04zM27 32h1.04v1.04h-1.04zM28 32h1.04v1.04h-1.04zM30 32h1.04v1.04h-1.04zM32 32h1.04v1.04h-1.04zM34 32h1.04v1.04h-1.04zM35 32h1.04v1.04h-1.04zM37 32h1.04v1.04h-1.04zM38 32h1.04v1.04h-1.04zM12 33h1.04v1.04h-1.04zM15 33h1.04v1.04h-1.04zM16 33h1.04v1.04h-1.04zM17 33h1.04v1.04h-1.04zM18 33h1.04v1.04h-1.04zM20 33h1.04v1.04h-1.04zM22 33h1.04v1.04h-1.04zM25 33h1.04v1.04h-1.04zM26 33h1.04v1.04h-1.04zM29 33h1.04v1.04h-1.04zM30 33h1.04v1.04h-1.04zM34 33h1.04v1.04h-1.04zM35 33h1.04v1.04h-1.04zM37 33h1.04v1.04h-1.04zM21 34h1.04v1.04h-1.04zM22 34h1.04v1.04h-1.04zM24 34h1.04v1.04h-1.04zM25 34h1.04v1.04h-1.04zM28 34h1.04v1.04h-1.04zM30 34h1.04v1.04h-1.04zM31 34h1.04v1.04h-1.04zM32 34h1.04v1.04h-1.04zM33 34h1.04v1.04h-1.04zM34 34h1.04v1.04h-1.04zM35 34h1.04v1.04h-1.04zM38 34h1.04v1.04h-1.04zM10 35h1.04v1.04h-1.04zM13 35h1.04v1.04h-1.04zM14 35h1.04v1.04h-1.04zM15 35h1.04v1.04h-1.04zM18 35h1.04v1.04h-1.04zM23 35h1.04v1.04h-1.04zM27 35h1.04v1.04h-1.04zM32 35h1.04v1.04h-1.04zM34 35h1.04v1.04h-1.04zM35 35h1.04v1.04h-1.04zM10 36h1.04v1.04h-1.04zM12 36h1.04v1.04h-1.04zM13 36h1.04v1.04h-1.04zM14 36h1.04v1.04h-1.04zM15 36h1.04v1.04h-1.04zM17 36h1.04v1.04h-1.04zM18 36h1.04v1.04h-1.04zM28 36h1.04v1.04h-1.04zM30 36h1.04v1.04h-1.04zM32 36h1.04v1.04h-1.04zM33 36h1.04v1.04h-1.04zM34 36h1.04v1.04h-1.04zM36 36h1.04v1.04h-1.04zM37 36h1.04v1.04h-1.04zM11 37h1.04v1.04h-1.04zM13 37h1.04v1.04h-1.04zM14 37h1.04v1.04h-1.04zM16 37h1.04v1.04h-1.04zM17 37h1.04v1.04h-1.04zM18 37h1.04v1.04h-1.04zM22 37h1.04v1.04h-1.04zM25 37h1.04v1.04h-1.04zM26 37h1.04v1.04h-1.04zM27 37h1.04v1.04h-1.04zM29 37h1.04v1.04h-1.04zM35 37h1.04v1.04h-1.04zM36 37h1.04v1.04h-1.04zM11 38h1.04v1.04h-1.04zM13 38h1.04v1.04h-1.04zM14 38h1.04v1.04h-1.04zM16 38h1.04v1.04h-1.04zM17 38h1.04v1.04h-1.04zM19 38h1.04v1.04h-1.04zM20 38h1.04v1.04h-1.04zM23 38h1.04v1.04h-1.04zM24 38h1.04v1.04h-1.04zM25 38h1.04v1.04h-1.04zM26 38h1.04v1.04h-1.04zM28 38h1.04v1.04h-1.04zM31 38h1.04v1.04h-1.04zM32 38h1.04v1.04h-1.04zM33 38h1.04v1.04h-1.04zM35 38h1.04v1.04h-1.04zM36 38h1.04v1.04h-1.04zM37 38h1.04v1.04h-1.04zM38 38h1.04v1.04h-1.04z" fill="#050816" shape-rendering="crispEdges"/><rect x="2.5" y="2.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="4" y="4" width="3" height="3" fill="#050816"/><rect x="32.5" y="2.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="34" y="4" width="3" height="3" fill="#050816"/><rect x="2.5" y="32.5" width="6" height="6" fill="none" stroke="#050816"/><rect x="4" y="34" width="3" height="3" fill="#050816"/><rect x="14.98" y="14.98" width="11.04" height="11.04" rx="1.6" fill="#fff"/><image href="icon-192.png" x="15.58" y="15.58" width="9.84" height="9.84"/></svg><span>App holen &amp; mitzählen</span></div>
@@ -2868,29 +3076,18 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "139";
+const APP_V = "141";
 
 const EVENTS = [
   {
-    id: "vodka-night",
-    abzeichen: "eiskalt",   /* Abzeichen für diesen Themenabend (Bild in abzeichen.svg) */
+    id: "vodka-night",           /* vorbei: lebt nur noch als Polaroid auf der Fotowand weiter */
     thema: "eis",
     titel: ["Vodka", "Night"],
     untertitel: "Welcome back Party",
     start: "2026-11-19T21:00:00+01:00",
     ende: "2026-11-20T03:00:00+01:00",
     ort: "ExMa-Bar",
-    musik: { zeit: "22–0 Uhr", text: "Techno mit DJ JvJv" },
-    mitbringen: null,            // z. B. "Weißes T-Shirt" – bei null wird nichts angezeigt
-    fotos: "https://drive.google.com/drive/folders/1D9g5ArT9ux9BlCaDXq4ySc8PG8ejsanm",  // Google-Drive-Ordner (Jeder mit dem Link)
-    specials: [
-      { name: "Vodka Lemon", info: "Vodka mit Lemon", preis: 2.0, bild: "lemon" },
-      { name: "Vodka-E",     info: "Vodka mit Energy", preis: 2.0, bild: "energy" }
-    ],
-    happyHour: {
-      von: "22:00", bis: "23:00", platzhalter: false,
-      angebote: [ { name: "Jede Mische", info: "nur während der Happy Hour", preis: 2.0, zusatz: "pro Glas", animation: "mische" } ]
-    }
+    fotos: "https://drive.google.com/drive/folders/1D9g5ArT9ux9BlCaDXq4ySc8PG8ejsanm"
   },
   {
     id: "miami-vibes",
@@ -2949,7 +3146,7 @@ const EVENTS = [
           { name: "Veggie mit Käse", preis: 3.5 },
           { name: "Schmand/Knobi, Schinken & Käse", preis: 4.0 }
         ] },
-        { name: "Waffeln", info: "mit Zimt & Zucker oder Puderzucker", preis: 2.0, extra: "heiße Kirschen", extraPreis: 0.5, bild: "waffel" }
+        { name: "Waffeln", info: "mit Zimt & Zucker oder Puderzucker", preis: 2.0, extra: "Nutella oder Apfelmus", extraPreis: 0.5, bild: "waffel" }
       ]
     },
     mitbringen: null,
@@ -2959,6 +3156,31 @@ const EVENTS = [
       { name: "Lebkuchen Espresso Martini", info: "Herber Espresso Martini mit einem Schuss Lebkuchen- oder Gewürzsirup", preis: 2.0, bild: "martini" }
     ],
     happyHour: null              // noch offen
+  },
+  {
+    id: "volltanken",
+    thema: "tanke",
+    titel: ["Voll", "tanken"],
+    untertitel: "Räumungsverkauf an der Tanke",
+    art: "Spritpreise fallen",
+    start: "2026-12-09T21:00:00+01:00",
+    ende: "2026-12-10T03:00:00+01:00",
+    ort: "ExMa-Bar",
+    ablauf: [                    /* kachel: false = nur auf der Abend-Seite, nicht auf der Kachel */
+      { zeit: "21:00", was: "Zapfsäulen auf · noch Normalpreis", kurz: "Tanke auf" },
+      { zeit: "??:??", was: "Preissenkungen ohne Ansage – nur nach unten", kurz: "Preise fallen", kachel: false },
+      { zeit: "22:00", was: "Happy Hour · Tankrabatt −50 % auf alles", kurz: "Tankrabatt", kachel: false },
+      { zeit: "0:00", was: "Leerfahrt · der Tank muss leer", kurz: "Leerfahrt" }
+    ],
+    kachelInfo: { zeit: "Bis −50 % auf alles", text: "Tankrabatt 22–23 Uhr" },
+    tanke: true,                 /* Preistafel mit fallenden Preisen (Fahrplan und Tankrabatt in TANKE), Tresen im Tankstellen-Look */
+    mitbringen: null,
+    fotos: null,
+    specials: [
+      { name: "Diesel", info: "Bier mit Cola", preis: 2.0, bild: "diesel" },
+      { name: "Skinny Bitch", info: "Vodka, Wasser, Limettensaft", preis: 1.0, bild: "skinny" }
+    ],
+    happyHour: null              /* der Tankrabatt läuft über TANKE.rabatt */
   }
 ];
 
@@ -2972,7 +3194,7 @@ const KARTE = {
       { name: "Radler", menge: "0,5 l", preis: 2.0 },
       { name: "Wein", menge: "weiß / rot / rosé", preis: 2.0 }
     ]},
-    { gruppe: "Longdrinks", artikel: [
+    { gruppe: "Mische", artikel: [
       { name: "Alle Mischen", menge: "0,4 l", preis: 4.0 },
       { name: "Rum-Cola", menge: "0,4 l", preis: 4.0 },
       { name: "Vodka-E", menge: "0,4 l", preis: 4.0 },
@@ -3002,6 +3224,8 @@ const THEMEN = {
   pay:   { night: "#03122e", night2: "#082152", a1: "#4fc3ff", a2: "#0070e0", a3: "#ffc439", frost: "#f2f8ff", dim: "#9db3d6", script: "#cfe8ff" },
   miami: { night: "#12041f", night2: "#26093f", a1: "#2ff3e0", a2: "#7b2cff", a3: "#ff2e88", frost: "#fff5ee", dim: "#c9a9d6", script: "#ffe2c4",
            verlauf: ["#ffd36e", "#ff8a4c", "#ff3f8e", "#c23fc8", "#6a35c9"] },  /* Sonnenuntergang wie im GTA-VI-Logo */
+  tanke: { night: "#111112", night2: "#1E1E1F", a1: "#FFD21F", a2: "#3A3A3C", a3: "#E0262E", frost: "#F4F2EC", dim: "#A3A3A6", script: "#FFD21F",
+           verlauf: ["#F4F2EC", "#FFD21F", "#E0262E", "#3A3A3C", "#111112"] },
   xmas:  { night: "#121b16", night2: "#1c2a21", a1: "#e9b77c", a2: "#5f7556", a3: "#c4362f", frost: "#f3ead8", dim: "#a9b5a6", script: "#f2c178",
            verlauf: ["#f3ead8", "#e9b77c", "#b8743c", "#c4362f", "#5f7556"] }   /* Glühwein bei Nacht: Creme, Kupfer, Rot, Salbei */
 };
@@ -3030,7 +3254,7 @@ EVENTS.forEach((ev) => {
   ev.wdLong = berlin({ weekday: "long" }).format(ev.startDate);
   ev.dm = berlin({ day: "2-digit", month: "2-digit" }).format(ev.startDate);
   ev.time = berlin({ hour: "2-digit", minute: "2-digit" }).format(ev.startDate);
-  ev.th = THEMEN[ev.thema] || THEMEN.eis;
+  ev.th = THEMEN[ev.thema] || THEMEN.xmas;
 });
 EVENTS.sort((a, b) => a.startDate - b.startDate);
 const isPast = (ev, now = new Date()) => now >= ev.endDate;
@@ -3071,7 +3295,7 @@ const COMMON_DEFS = `
   <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></linearGradient>
   <linearGradient id="cap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5d6a8f"/><stop offset=".3" stop-color="#f4f8ff"/><stop offset=".55" stop-color="#a7b4d4"/><stop offset="1" stop-color="#3b4566"/></linearGradient>`;
 
-/* ---------- Szene 1: Vodka Night (Eis) ---------- */
+/* ---------- Szene Eis + Neon: nur noch fürs Polaroid der Vodka Night auf der Fotowand ---------- */
 function iceCube(x, y, s, rot, blur) {
   const a = s * .43, b = s * .25, h = s * .5;
   return `<g transform="translate(${x} ${y}) rotate(${rot})"${blur ? ` filter="url(#dof${blur})"` : ""}><g>${floatAnim(5 + (x % 3), 7)}
@@ -3490,7 +3714,98 @@ function martiniArt() {
   </svg>`;
 }
 
-const SCENES = { eis: sceneIce, miami: sceneMiami, xmas: sceneXmas };
+/* ---------- Szene: Volltanken (Tankstelle bei Nacht, Preis-Pylon, −10/−20/−50 %) ---------- */
+const SEG = { 0: "abcdef", 1: "bc", 2: "abged", 3: "abgcd", 4: "fgbc", 5: "afgcd", 6: "afgedc", 7: "abc", 8: "abcdefg", 9: "abcdfg" };
+function segDigit(d, x, y, w, h, on, off) {
+  const t = w * .2, g = t * .25, hh = h / 2, sk = w * .08;
+  const P = {
+    a: [[g + t / 2, 0], [w - g - t / 2, 0], [w - g - t, t], [g + t, t]],
+    d: [[g + t, h - t], [w - g - t, h - t], [w - g - t / 2, h], [g + t / 2, h]],
+    g: [[g + t, hh - t / 2], [w - g - t, hh - t / 2], [w - g - t / 2, hh], [w - g - t, hh + t / 2], [g + t, hh + t / 2], [g + t / 2, hh]],
+    f: [[0, g + t / 2], [t, g + t], [t, hh - g - t / 2], [t / 2, hh - g], [0, hh - g - t / 2]],
+    e: [[0, hh + g + t / 2], [t / 2, hh + g], [t, hh + g + t / 2], [t, h - g - t], [0, h - g - t / 2]],
+    b: [[w, g + t / 2], [w, hh - g - t / 2], [w - t / 2, hh - g], [w - t, hh - g - t / 2], [w - t, g + t]],
+    c: [[w, hh + g + t / 2], [w, h - g - t / 2], [w - t, h - g - t], [w - t, hh + g + t / 2], [w - t / 2, hh + g]]
+  };
+  return Object.entries(P).map(([k, pts]) => `<polygon points="${pts.map(([px, py]) => `${(x + px - (py / h) * sk + sk).toFixed(1)},${(y + py).toFixed(1)}`).join(" ")}" fill="${SEG[d].includes(k) ? on : off}"/>`).join("");
+}
+function tkSeg(str, x, y, h, on, off) { let o = "", cx = x; const w = h * .52; for (const ch of str) { if (ch === ",") { o += `<rect x="${cx - w * .05}" y="${y + h - h * .12}" width="${h * .12}" height="${h * .12}" fill="${on}"/>`; cx += w * .22; continue; } o += segDigit(+ch, cx, y, w, h, on, off); cx += w * 1.18; } return o; }
+function sceneTanke() {
+  const A = "#FFD21F", OFF = "rgba(255,210,31,.07)";
+  const defs = `<defs>${COMMON_DEFS}
+    <linearGradient id="aSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A1A1C"/><stop offset=".55" stop-color="#151517"/><stop offset="1" stop-color="#0A0A0B"/></linearGradient>
+    <linearGradient id="aFas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F6F8"/><stop offset="1" stop-color="#B9C0C9"/></linearGradient>
+    <linearGradient id="aUnder" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3D6"/><stop offset="1" stop-color="#D9CBA8"/></linearGradient>
+    <linearGradient id="aCone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF1CC" stop-opacity=".42"/><stop offset="1" stop-color="#FFF1CC" stop-opacity="0"/></linearGradient>
+    <linearGradient id="aPole" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#15181D"/><stop offset=".45" stop-color="#4D545E"/><stop offset=".6" stop-color="#626A75"/><stop offset="1" stop-color="#121418"/></linearGradient>
+    <linearGradient id="aFrame" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2E333A"/><stop offset=".5" stop-color="#7D848E"/><stop offset=".56" stop-color="#B3BAC3"/><stop offset="1" stop-color="#262A30"/></linearGradient>
+    <linearGradient id="aPump" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2A2F37"/><stop offset=".5" stop-color="#454C57"/><stop offset="1" stop-color="#22262C"/></linearGradient>
+    <radialGradient id="aGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFD21F" stop-opacity=".32"/><stop offset="1" stop-color="#FFD21F" stop-opacity="0"/></radialGradient>
+    <pattern id="dHaz" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="16" fill="#FFD21F"/><rect x="8" width="8" height="16" fill="#141414"/></pattern>
+    <filter id="aBlurV" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2 9"/></filter>
+    <filter id="aGlowF" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="aAsph" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .55  0 0 0 0 .58  0 0 0 0 .65  0 0 0 .28 0"/></filter>
+    <filter id="aGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="12"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .4"/></feComponentTransfer></filter>
+    <filter id="aDrop" x="-30%" y="-20%" width="160%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000" flood-opacity=".6"/></filter>
+  </defs>`;
+  const rain = (n, seed, len, op, w) => Array.from({ length: n }, (_, i) => { const x = (i * 83 + seed * 29) % 430 - 15, y = 150 + (i * 137 + seed * 41) % 600; return `<line x1="${x}" y1="${y}" x2="${x - len * .22}" y2="${y + len}" stroke="#C9D6E8" stroke-opacity="${op}" stroke-width="${w}"/>`; }).join("");
+  const lamps = [16, 66, 116, 166, 216];
+  const canopy = `
+    ${lamps.map((x) => `<polygon points="${x},512 ${x + 26},512 ${x + 52},612 ${x - 26},612" fill="url(#aCone)"/>`).join("")}
+    <rect x="-10" y="470" width="266" height="34" fill="url(#aFas)"/>
+    <rect x="-10" y="494" width="266" height="10" fill="url(#dHaz)"/>
+    <text x="22" y="492" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="700" font-size="20" letter-spacing="-.5" fill="#12151A">ExMa</text>
+    <text x="84" y="490" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="7" letter-spacing="1.6" fill="#59616B">TANKSTELLE · BAR</text>
+    <rect x="-10" y="504" width="266" height="8" fill="url(#aUnder)"/>
+    ${lamps.map((x) => `<rect x="${x}" y="506" width="26" height="4" rx="1" fill="#fff"/>`).join("")}
+    <rect x="30" y="512" width="7" height="100" fill="#1E2228"/><rect x="214" y="512" width="7" height="100" fill="#1E2228"/>
+    ${[78, 150].map((x) => `<g transform="translate(${x} 540)"><rect x="0" y="0" width="34" height="68" rx="4" fill="url(#aPump)"/><rect x="5" y="7" width="24" height="15" rx="2" fill="#0E1014"/>
+      <rect x="8" y="11" width="18" height="7" fill="${A}" opacity=".85"/><rect x="5" y="28" width="24" height="3" fill="#FFD21F"/><path d="M34 24 q14 6 8 30" fill="none" stroke="#14161A" stroke-width="3"/><rect x="-3" y="66" width="40" height="4" fill="#3A3F47"/></g>`).join("")}`;
+  const back = defs + `
+    <rect width="400" height="760" fill="url(#aSky)"/>
+    <ellipse cx="320" cy="430" rx="160" ry="200" fill="url(#aGlow)" opacity=".55"/>
+    <g filter="url(#dof2)" opacity=".9">${canopy}</g>
+    <rect x="0" y="608" width="400" height="152" fill="#0C0F14"/><rect x="0" y="608" width="400" height="152" filter="url(#aAsph)"/>
+    <g filter="url(#aBlurV)" opacity=".55">${lamps.map((x) => `<rect x="${x + 4}" y="614" width="18" height="80" fill="#FFF3D6" opacity=".4"/>`).join("")}<rect x="-10" y="612" width="266" height="5" fill="#FFD21F" opacity=".5"/></g>
+    ${rain(46, 1, 16, .14, .8)}
+    <rect width="400" height="760" filter="url(#aGrain)" style="mix-blend-mode:overlay" opacity=".7"/>`;
+  const rows = [["BIER", "1,00", "2,00"], ["MISCHE", "2,00", "4,00"], ["SHOTS", "0,50", "1,00"]];
+  const sign = (refl) => `
+    <rect x="0" y="0" width="140" height="262" rx="7" fill="url(#aFrame)"/>
+    <rect x="5" y="5" width="130" height="252" rx="4" fill="#0D0F13"/>
+    <rect x="9" y="9" width="122" height="44" rx="3" fill="#FFD21F"/><rect x="9" y="45" width="122" height="8" fill="url(#dHaz)"/>
+    <text x="16" y="36" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="700" font-size="22" letter-spacing="-.5" fill="#12151A">ExMa</text>
+    <text x="78" y="33" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="6.2" letter-spacing="1" fill="#59616B">TANKSTELLE</text>
+    ${rows.map(([n, p, o], i) => `<g transform="translate(9 ${60 + i * 64})">
+      <rect width="122" height="58" rx="3" fill="#14171C"/>
+      <text x="6" y="12" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="7.5" letter-spacing="1.2" fill="#E9ECEF">${n}</text>
+      <text x="116" y="12" text-anchor="end" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="7" fill="#8E97A3" text-decoration="line-through">${o}</text>
+      <path d="M8 34 l6 9 l6 -9 z" fill="#FF4A4A"/>
+      <g${refl ? "" : ' filter="url(#aGlowF)"'}>${tkSeg(p, 30, 18, 32, A, OFF)}</g></g>`).join("")}`;
+  const main = defs + `<g class="tk-pylon">
+    <g transform="translate(254 222)" filter="url(#aDrop)">
+      <rect x="57" y="262" width="26" height="124" fill="url(#aPole)"/><rect x="55" y="338" width="30" height="46" fill="url(#dHaz)"/><rect x="44" y="382" width="52" height="8" rx="2" fill="#3A3F47"/>
+      ${sign(false)}
+
+
+    </g>
+    <g transform="translate(254 1002) scale(1 -1)" opacity=".26" filter="url(#aBlurV)">${sign(true)}</g>
+  </g>`;
+  const pct = (txt, x, y, fs, blur, op, col) => `<text x="${x}" y="${y}" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="${fs}" letter-spacing="-1" fill="${col}" opacity="${op}"${blur ? ` filter="url(#pb${blur})"` : ""}>${txt}</text>`;
+  const pdefs = `<defs><linearGradient id="pDark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A0A0B" stop-opacity="0"/><stop offset=".45" stop-color="#0A0A0B" stop-opacity=".6"/><stop offset="1" stop-color="#0A0A0B" stop-opacity=".75"/></linearGradient><filter id="pb6" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="6"/></filter><filter id="pb3" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="3"/></filter><filter id="pb4" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="2.8"/></filter><filter id="pb2.5" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation="1.6"/></filter><filter id="pb1" x="-30%" y="-40%" width="160%" height="180%"><feGaussianBlur stdDeviation=".8"/></filter></defs>`;
+  const sale = pdefs + `<g class="tk-pct">
+      <rect x="0" y="480" width="300" height="130" fill="url(#pDark)"/>
+      ${pct("−10%", 12, 538, 32, 4, .8, "#F4F2EC")}
+      ${pct("−20%", 56, 562, 42, 2.5, .78, "#F4F2EC")}
+      ${pct("−50%", 124, 590, 56, 1, .97, "#FF3B3B")}
+    </g>`;
+  const mid = defs + sale + `<ellipse cx="324" cy="612" rx="74" ry="8" fill="#000" opacity=".5" filter="url(#dof4)"/>`;
+  const front = defs + rain(18, 5, 30, .2, 1.2) + `<rect x="0" y="600" width="400" height="160" fill="url(#fade)"/>`;
+  return [back, mid, main, front];
+}
+
+
+const SCENES = { eis: sceneIce, miami: sceneMiami, xmas: sceneXmas, tanke: sceneTanke };
 /* Bildausschnitte je Motto: Vorschau-Karte (next) und Polaroid (fw); ohne Eintrag gilt der Standard */
 const SCENE_VB = { xmas: { next: "0 420 400 190", fw: "0 270 400 420", tr: "0 370 400 250" } };
 const DEPTHS = [6, 10, 0, -22];
@@ -3498,12 +3813,12 @@ const DEPTHS = [6, 10, 0, -22];
 /* ================= Drink-Bilder ================= */
 let drinkUid = 0;
 const DRINKS = {
-  lemon:  { stops: [["0", "#fbf8d2", .78], [".6", "#f1ea9f", .82], ["1", "#e2d66e", .9]], top: 64, bubbles: 14, glow: "#f3e98a", garnish: "lemon", straw: "#1b1b1b" },
-  energy: { stops: [["0", "#ffe46b", .85], [".55", "#ffc21f", .88], ["1", "#e89400", .92]], top: 66, bubbles: 18, glow: "#ffc21f", garnish: "foam", straw: "#1b1b1b" },
   beach:  { stops: [["0", "#ffd166", .9], [".35", "#ff9f2e", .92], [".7", "#ff5a36", .94], ["1", "#c3102f", .96]], top: 60, bubbles: 0, glow: "#ff7a3d", garnish: "beach", straw: "#ff2e88" },
   sangria: { glow: "#e8344f", custom: true },  /* eigenes Motiv: kleines Glas mit Obst vor einem Tetrapak */
   spritz:  { glow: "#ff7a2e", custom: true },  /* Christmas Spritz: Weinglas, Rosmarin, Zimt, Granatapfel */
-  martini: { glow: "#c8925a", custom: true }   /* Lebkuchen Espresso Martini: Martiniglas, Bohnen, Lebkuchenherz */
+  martini: { glow: "#c8925a", custom: true },  /* Lebkuchen Espresso Martini: Martiniglas, Bohnen, Lebkuchenherz */
+  diesel:  { glow: "#d98a2b", custom: true },  /* Diesel: Bier mit Cola, dahinter Cola- und Bierflasche */
+  skinny:  { glow: "#b6e24a", custom: true }   /* Skinny Bitch: Longdrinkglas mit Eis und Limette */
 };
 /* Sangria: kleines bauchiges Glas mit Obststücken, dahinter ein klassisches Tetrapak (ohne echte Marke) */
 function sangriaArt() {
@@ -3584,11 +3899,66 @@ function sangriaArt() {
     ${orange(128, 98, 14, -24, true)}
   </svg>`;
 }
+/* Volltanken-Specials: Diesel (Bier mit Cola, dahinter Cola- und Bierflasche) und Skinny Bitch */
+function dieselArt() {
+  const p = "dk" + (++drinkUid) + "_";
+  return `<svg viewBox="0 0 160 200" aria-hidden="true"><defs>
+    <linearGradient id="${p}cola" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1a0a05"/><stop offset=".35" stop-color="#3b1a0c"/><stop offset=".5" stop-color="#5a2a14"/><stop offset="1" stop-color="#140703"/></linearGradient>
+    <linearGradient id="${p}beer" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a1c06"/><stop offset=".4" stop-color="#7a4210"/><stop offset=".55" stop-color="#a65d1c"/><stop offset="1" stop-color="#2e1504"/></linearGradient>
+    <linearGradient id="${p}liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a5a22" stop-opacity=".95"/><stop offset=".5" stop-color="#6a3512" stop-opacity=".96"/><stop offset="1" stop-color="#3e1d08" stop-opacity=".98"/></linearGradient>
+    <linearGradient id="${p}gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".2" stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
+  </defs>
+    <g transform="translate(-2 0) translate(38 184) scale(.76 .7) translate(-38 -184)" opacity=".96">
+      <path d="M34 182 C26 182 24 176 25 166 C26 152 30 146 30 134 C30 122 25 116 25 104 C25 92 31 86 32 74 L33 50 L43 50 L44 74 C45 86 51 92 51 104 C51 116 46 122 46 134 C46 146 50 152 51 166 C52 176 50 182 42 182 Z" fill="url(#${p}cola)"/>
+      <rect x="32" y="40" width="12" height="11" rx="2" fill="#d21f26"/><rect x="31" y="38" width="14" height="4" rx="1.5" fill="#ea3a3f"/>
+      <path d="M26 112 C34 109 44 109 51 112 L51 130 C44 127 34 127 26 130 Z" fill="#d21f26"/>
+      <path d="M28 120 C36 116 42 124 50 119" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+      <text x="38" y="141" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="7" fill="#f3e1c8" opacity=".9">COLA</text>
+      <path d="M29 92 C30 82 33 78 34 70" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(2 0) translate(117 184) scale(.8 .72) translate(-117 -184)">
+      <path d="M106 182 Q102 182 102 176 V112 C102 100 110 96 112 88 V54 H122 V88 C124 96 132 100 132 112 V176 Q132 182 128 182 Z" fill="url(#${p}beer)"/>
+      <rect x="111" y="46" width="12" height="9" rx="2" fill="#d9b04a"/><rect x="110" y="44" width="14" height="4" rx="1.5" fill="#f0cf6a"/>
+      <rect x="102" y="124" width="30" height="34" rx="3" fill="#efe2c2"/><rect x="102" y="124" width="30" height="5" fill="#c9302c"/>
+      <text x="117" y="146" text-anchor="middle" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="12" fill="#3a1c06">BIER</text>
+      <path d="M108 106 C109 100 112 96 114 92" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <ellipse cx="80" cy="186" rx="46" ry="6" fill="#000" opacity=".35"/>
+    <path d="M52 78 L108 78 L102 182 Q101 186 96 186 L64 186 Q59 186 58 182 Z" fill="url(#${p}liq)"/>
+    ${Array.from({ length: 12 }, (_, i) => `<circle class="bub" style="animation-delay:${(-(i * .4)).toFixed(2)}s;animation-duration:${(2.4 + (i % 4) * .4).toFixed(1)}s" cx="${62 + (i * 29) % 36}" cy="${170 - (i * 17) % 60}" r="${.9 + (i % 3) * .5}" fill="none" stroke="#ffd9a6" stroke-opacity=".8" stroke-width=".8"/>`).join("")}
+    <path d="M51 80 C50 64 60 60 66 64 C70 54 84 54 88 62 C94 56 108 58 109 70 C113 74 111 82 108 84 L52 84 C48 84 48 80 51 80 Z" fill="#f5ead2"/>
+    <path d="M56 70 C62 66 68 68 70 70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <path d="M52 78 L108 78 L102 182 Q101 186 96 186 L64 186 Q59 186 58 182 Z" fill="url(#${p}gl)"/>
+    <path d="M52 78 L108 78 L102 182 Q101 186 96 186 L64 186 Q59 186 58 182 Z" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.6"/>
+    <path d="M60 96 L64 174" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-linecap="round"/>
+  </svg>`;
+}
+function skinnyArt() {
+  const p = "dk" + (++drinkUid) + "_";
+  const ice = [[70, 92, 22, -10], [92, 102, 24, 12], [74, 122, 21, 16], [94, 136, 19, -8]].map(([x, y, s, r]) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect x="${-s / 2}" y="${-s / 2}" width="${s}" height="${s}" rx="4" fill="#fff" fill-opacity=".35" stroke="#fff" stroke-opacity=".8"/><path d="M${-s / 2 + 3} ${-s / 2 + 5} V${s / 2 - 5}" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/></g>`).join("");
+  let bub = ""; for (let i = 0; i < 16; i++) bub += `<circle class="bub" style="animation-delay:${(-(i * .37)).toFixed(2)}s;animation-duration:${(2.2 + (i % 4) * .5).toFixed(1)}s" cx="${58 + (i * 23) % 46}" cy="${166 - (i * 11) % 40}" r="${.8 + (i % 3) * .5}" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width=".8"/>`;
+  return `<svg viewBox="0 0 160 200" aria-hidden="true"><defs>
+    <linearGradient id="${p}liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eafbe8" stop-opacity=".45"/><stop offset="1" stop-color="#c9f0cf" stop-opacity=".6"/></linearGradient>
+    <radialGradient id="${p}lime" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e9ff9a"/><stop offset=".75" stop-color="#b6e24a"/><stop offset="1" stop-color="#6aa31c"/></radialGradient></defs>
+    <ellipse cx="80" cy="186" rx="40" ry="6" fill="#000" opacity=".3"/>
+    <path d="M118 6 L84 172" stroke="#1b1b1b" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M52 72 H108 L104 180 Q104 184 99 184 H61 Q56 184 56 180 Z" fill="url(#${p}liq)"/>
+    ${ice}${bub}
+    <g transform="translate(68 160) rotate(-20)"><path d="M-16 0 A16 16 0 0 1 16 0 Z" fill="#7cb82a"/><path d="M-13 0 A13 13 0 0 1 13 0 Z" fill="#d8f57a"/></g>
+    <path d="M50 40 H110 L104 180 Q104 186 98 186 H62 Q56 186 56 180 Z" fill="#fff" fill-opacity=".06" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/>
+    <path d="M60 52 L64 174" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+    <g transform="translate(108 44)"><circle r="20" fill="#5f9a18"/><circle r="17" fill="url(#${p}lime)"/>
+      ${Array.from({ length: 8 }, (_, i) => `<line x1="0" y1="0" x2="${(15 * Math.cos(i * Math.PI / 4)).toFixed(1)}" y2="${(15 * Math.sin(i * Math.PI / 4)).toFixed(1)}" stroke="#f6ffd6" stroke-width="1.6"/>`).join("")}<circle r="3" fill="#f6ffd6"/>
+      <rect x="-22" y="-2" width="12" height="4" fill="#0e0e0f" transform="rotate(20)"/></g>
+  </svg>`;
+}
 function drinkArt(kind) {
+  if (kind === "diesel") return dieselArt();
+  if (kind === "skinny") return skinnyArt();
   if (kind === "sangria") return sangriaArt();
   if (kind === "spritz") return spritzArt();
   if (kind === "martini") return martiniArt();
-  const d = DRINKS[kind] || DRINKS.lemon;
+  const d = DRINKS[kind] || DRINKS.beach;
   const p = "dk" + (++drinkUid) + "_";
   const T = d.top, L = 50, R = 110, BOT = 172;
   const stops = d.stops.map(([o, c, a]) => `<stop offset="${o}" stop-color="${c}" stop-opacity="${a}"/>`).join("");
@@ -3609,16 +3979,6 @@ function drinkArt(kind) {
   const straw = (dx, op) => `<path d="M118 6 L${76 + dx} 168" stroke="${d.straw}" stroke-width="6.5" stroke-linecap="round" opacity="${op}"/>
     <path d="M118 6 L${76 + dx} 168" stroke="#fff" stroke-opacity=".28" stroke-width="1.4" stroke-dasharray="${d.straw === "#1b1b1b" ? "0" : "6 6"}" transform="translate(-1.6 0)"/>`;
   let garnish = "";
-  if (d.garnish === "lemon") {
-    let seg = "";
-    for (let i = 0; i < 8; i++) {
-      const a1 = (i / 8) * Math.PI * 2 + .1, a2 = ((i + 1) / 8) * Math.PI * 2 - .1;
-      seg += `<path d="M0 0 L${(Math.cos(a1) * 14).toFixed(1)} ${(Math.sin(a1) * 14).toFixed(1)} A14 14 0 0 1 ${(Math.cos(a2) * 14).toFixed(1)} ${(Math.sin(a2) * 14).toFixed(1)} Z" fill="url(#${p}citrus)"/>`;
-    }
-    garnish = `<g transform="translate(110 40) rotate(-24) scale(.62 1)">
-      <circle r="19" fill="#f2c500"/><circle r="17.5" fill="#ffe14d"/><circle r="16" fill="#fffbe2"/>${seg}<circle r="2" fill="#fffbe2"/>
-      <path d="M-12 -10 A15 15 0 0 1 4 -16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".7"/></g>`;
-  }
   if (d.garnish === "beach") {
     let seg = "";
     for (let i = 0; i < 9; i++) {
@@ -3636,8 +3996,6 @@ function drinkArt(kind) {
       <path d="M48 12 Q70 -10 92 4 Q70 0 48 12 Z" fill="#2ff3e0"/><path d="M48 12 Q60 -4 70 2 L70 2 Q58 2 48 12Z" fill="#ff2e88"/>
       <path d="M70 2 Q80 -4 92 4 Q82 2 70 2Z" fill="#ffd166"/>`;
   }
-  const foam = d.garnish === "foam"
-    ? `<path d="M${L} ${T - 1} q6 -5 12 0 q6 -6 12 0 q6 -5 12 0 q6 -6 12 0 q6 -5 12 0 l0 5 l-60 0 Z" fill="#fff8d8" fill-opacity=".85"/>` : "";
 
   return `<svg viewBox="0 0 160 200" aria-hidden="true">
     <defs>
@@ -3646,7 +4004,6 @@ function drinkArt(kind) {
       <linearGradient id="${p}wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity=".08"/></linearGradient>
       <linearGradient id="${p}base" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="${d.glow}" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
       <linearGradient id="${p}hl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset=".3" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity=".15"/></linearGradient>
-      <radialGradient id="${p}citrus"><stop offset="0" stop-color="#fffbe0"/><stop offset="1" stop-color="#ffe65c"/></radialGradient>
       <radialGradient id="${p}orange"><stop offset="0" stop-color="#ffd59a"/><stop offset="1" stop-color="#ff8a1f"/></radialGradient>
       <radialGradient id="${p}cherry" cx="35%" cy="30%"><stop offset="0" stop-color="#ff6b7d"/><stop offset="1" stop-color="#9a0018"/></radialGradient>
       <filter id="${p}blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="3.5"/></filter>
@@ -3665,7 +4022,7 @@ function drinkArt(kind) {
       ${bubbles}
     </g>
     <ellipse cx="80" cy="${T}" rx="30" ry="3.2" fill="#fff" fill-opacity=".35" stroke="#fff" stroke-opacity=".6" stroke-width=".8"/>
-    ${foam}
+    
     <g clip-path="url(#${p}above)">${straw(0, 1)}</g>
     <path d="M46 38 L46 178 Q46 186 54 186 L106 186 Q114 186 114 178 L114 38" fill="none" stroke="url(#${p}wall)" stroke-width="4"/>
     <path d="M${L} ${BOT} L${R} ${BOT} L114 178 Q114 186 106 186 L54 186 Q46 186 46 178 Z" fill="url(#${p}base)"/>
@@ -3718,52 +4075,6 @@ function beerAnim() {
   </svg>`;
 }
 
-/* Happy-Hour-Animation Vodka Night: Vodka wird eingeschenkt, das Glas füllt sich reihum mit verschiedenen Mischen */
-let mixUid = 0;
-function mixAnim() {
-  const p = "mix" + (++mixUid) + "_";
-  const g = 138;  /* linke Kante des Glases, Glas ist 44 breit und steht mittig */
-  return `<svg class="beer-stage" viewBox="0 0 320 112" aria-hidden="true">
-    <defs>
-      <linearGradient id="${p}bottle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7fc4ff" stop-opacity=".55"/><stop offset=".35" stop-color="#ffffff" stop-opacity=".85"/><stop offset=".6" stop-color="#bfe6ff" stop-opacity=".5"/><stop offset="1" stop-color="#2d6bff" stop-opacity=".7"/></linearGradient>
-      <linearGradient id="${p}glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".3"/><stop offset=".25" stop-color="#fff" stop-opacity=".14"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient>
-      <linearGradient id="${p}bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2a6e"/><stop offset="1" stop-color="#070b24"/></linearGradient>
-      <filter id="${p}sh" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="2.5"/></filter>
-      <clipPath id="${p}in"><rect x="${g + 3}" y="46" width="38" height="49" rx="3"/></clipPath>
-    </defs>
-    <rect x="0" y="98" width="320" height="14" fill="url(#${p}bar)"/>
-    <rect x="0" y="97" width="320" height="2" fill="#9fe3ff" opacity=".6"/>
-    <ellipse cx="${g + 22}" cy="99" rx="26" ry="3.5" fill="#000" opacity=".5" filter="url(#${p}sh)"/>
-    <rect x="${g}" y="42" width="44" height="56" rx="5" fill="#fff" fill-opacity=".06"/>
-    <g clip-path="url(#${p}in)">
-      <rect class="mix-level" x="${g + 3}" y="46" width="38" height="49"/>
-      <rect x="${g + 8}" y="56" width="13" height="13" rx="3" fill="#fff" fill-opacity=".35" stroke="#fff" stroke-opacity=".7" transform="rotate(-10 ${g + 14} 62)"/>
-      <rect x="${g + 23}" y="66" width="12" height="12" rx="3" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-opacity=".6" transform="rotate(12 ${g + 29} 72)"/>
-      <rect x="${g + 10}" y="76" width="11" height="11" rx="3" fill="#fff" fill-opacity=".25" stroke="#fff" stroke-opacity=".5"/>
-    </g>
-    <rect x="${g}" y="42" width="44" height="56" rx="5" fill="url(#${p}glass)"/>
-    <rect x="${g}" y="42" width="44" height="56" rx="5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.5"/>
-    <rect x="${g + 5}" y="48" width="4" height="44" rx="2" fill="#fff" fill-opacity=".5"/>
-    <rect x="${g + 1}" y="91" width="42" height="6" rx="3" fill="#fff" fill-opacity=".22"/>
-    <rect class="mix-stream" x="${g + 21.5}" y="34" width="3" height="60" rx="1.5" fill="#e9f8ff" fill-opacity=".9"/>
-    <g class="mix-bottle" style="transform-origin:${g + 23}px 34px">
-      <g transform="translate(${g + 23} 34) rotate(124)">
-        <path d="M-4 0 L4 0 L4 16 C4 22 13 22 13 30 L13 62 Q13 68 7 68 L-7 68 Q-13 68 -13 62 L-13 30 C-13 22 -4 22 -4 16 Z" fill="url(#${p}bottle)" stroke="#e8f7ff" stroke-width="1.2"/>
-        <rect x="-11" y="38" width="22" height="18" rx="2" fill="#0a1033" stroke="#9fe3ff" stroke-width=".8"/>
-        <text x="0" y="50" text-anchor="middle" font-family="Dela Gothic One, Arial Black, sans-serif" font-size="5.5" fill="#fff" letter-spacing=".5">VODKA</text>
-        <path d="M-8 30 L-8 60" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-      </g>
-    </g>
-    <!-- Preis: die 4 fällt, die 2 gleitet von rechts herein -->
-    <g class="price-old">
-      <text x="262" y="72" text-anchor="middle" font-family="Dela Gothic One, Arial Black, sans-serif" font-size="34" fill="#ffffff" fill-opacity=".85">4€</text>
-      <line class="price-strike" x1="238" y1="62" x2="286" y2="56" stroke="#ff3fc8" stroke-width="4" stroke-linecap="round"/>
-    </g>
-    <g class="price-new">
-      <text x="262" y="72" text-anchor="middle" font-family="Dela Gothic One, Arial Black, sans-serif" font-size="34" fill="#ff3fc8" style="filter: drop-shadow(0 0 6px rgba(255,63,200,.8))">2€</text>
-    </g>
-  </svg>`;
-}
 
 /* ================= Ausgewählter Abend =================
    Früher gab es hier ein Wisch-Karussell als Startansicht. Das ist raus: Start ist immer das Menü.
@@ -3804,7 +4115,206 @@ function hhStatus(ev, now = new Date()) {
 }
 
 /* Markt, Specials, Happy Hour und Getränkekarte eines Abends (Detailseite und Drinks-Tab) */
+/* ================= Volltanken: Preise fallen nach festem Fahrplan =================
+   plan: ab dieser Uhrzeit gelten diese Preise (je Gruppe, nur nach unten, in 10-Cent-Schritten).
+   rabatt: Happy Hour „Tankrabatt“ – in dieser Zeit kostet alles die Hälfte des Normalpreises.
+   Artikel, die günstiger sind als der Normalpreis ihrer Gruppe (z. B. Wasser), bleiben gleich. Specials bleiben immer fest. */
+const TANKE = {
+  plan: [
+    ["21:40", { bw: 1.8, ld: 3.5 }],
+    ["23:30", { bw: 1.7, ld: 3.2, sh: 0.8, af: 1.5 }],
+    ["0:00",  { bw: 1.5, ld: 3.0, sh: 0.6 }]
+  ],
+  rabatt: { von: "22:00", bis: "23:00" },
+  leer: "0:00",
+  basis: { bw: 2.0, ld: 4.0, sh: 1.0, af: 2.0 },
+  gruppen: { "Bier & Wein": "bw", "Mische": "ld", "Shots": "sh", "Alkoholfrei": "af" },
+  tafel: [["Bier · Radler · Wein", "0,5 l / 0,2 l", "bw"], ["Mische", "0,4 l", "ld"], ["Shots", "2 cl", "sh"], ["Softdrinks", "alkoholfrei", "af"]],
+  /* „hh:mm“ am Abend von ev als Datum; Uhrzeiten vor 12 Uhr gehören zur Nacht danach */
+  at(ev, hm) {
+    const [h, m] = hm.split(":").map(Number);
+    const d = new Date(`${isoDay(ev.startDate)}T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00${ev.start.slice(-6)}`);
+    return h < 12 ? new Date(d.getTime() + 864e5) : d;
+  },
+  stand(ev, now = new Date()) {
+    const p = { ...this.basis }, seit = {}; let key = "";
+    const live = now >= ev.startDate && now < ev.endDate;
+    if (live) this.plan.forEach(([z, s]) => { if (now >= this.at(ev, z)) { key = z; Object.entries(s).forEach(([k, v]) => { p[k] = v; seit[k] = z; }); } });
+    const rv = this.at(ev, this.rabatt.von), rb = this.at(ev, this.rabatt.bis);
+    return { live, p, seit, key, hh: live && now >= rv && now < rb, rv, rb, leer: this.at(ev, this.leer) };
+  },
+  /* Preis eines Artikels gerade jetzt; null = Normalpreis */
+  preis(gruppe, preis, st) {
+    const k = this.gruppen[gruppe]; if (!k || !st.live) return null;
+    if (st.hh) return Math.round(preis * 5) / 10;
+    const minus = Math.round((this.basis[k] - st.p[k]) * 10);
+    return minus > 0 && preis >= this.basis[k] ? Math.round(preis * 10 - minus) / 10 : null;
+  },
+  /* Preis einer Tafelzeile (Normalpreis der Gruppe) */
+  zeile(k, st) { return st.hh ? Math.round(this.basis[k] * 5) / 10 : st.p[k]; },
+  key: (st) => `${st.live ? 1 : 0}${st.hh ? "hh" : ""}${st.key}`
+};
+const tkFmt = (v) => v.toFixed(2).replace(".", ",");
+const tkDauer = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)); return `${Math.floor(s / 3600)}:${String(Math.floor(s % 3600 / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
+/* Preisfeld der Getränkekarte (App) */
+function tankeEm(ev, gruppe, preis, st = TANKE.stand(ev)) {
+  const np = TANKE.preis(gruppe, preis, st);
+  return np != null ? `<s>${euro(preis)}</s><b class="half">${euro(np)}</b>` : euro(preis);
+}
+/* Live-Teil der Preistafel: Tafel, Tankrabatt oder Preisalarm, Leerfahrt */
+function tankeLive(ev, now = new Date()) {
+  const st = TANKE.stand(ev, now);
+  const rows = TANKE.tafel.map(([n, sub, k]) => {
+    const b = TANKE.basis[k], cur = TANKE.zeile(k, st);
+    const note = st.hh ? `<small class="dn">▼ −50&nbsp;% Tankrabatt · statt <s>${tkFmt(b)}</s></small>`
+      : cur < b ? `<small class="dn">▼ ${tkFmt(b - cur)} € · statt <s>${tkFmt(b)}</s></small>` : `<small>${st.live ? "noch Normalpreis" : "Normalpreis"}</small>`;
+    return `<div class="tk-row"><span class="n">${n}<small>${sub}</small>${note}</span><span class="tk-sten">${tkFmt(cur)}</span></div>`;
+  }).join("");
+  const star = Array.from({ length: 32 }, (_, i) => { const r = i % 2 ? 40 : 50, a = i * Math.PI / 16 - Math.PI / 2; return `${i ? "L" : "M"}${(56 + r * Math.cos(a)).toFixed(1)} ${(56 + r * Math.sin(a)).toFixed(1)}`; }).join(" ") + " Z";
+  const hh = st.hh ? `<div class="tk-hh">
+        <div class="hz"></div>
+        <div class="top"><span class="lbl"><span class="live-dot"></span>HAPPY HOUR</span><span class="cd">noch <b id="tkHhLeft">${tkDauer(st.rb - now).slice(2)}</b></span></div>
+        <div class="mid">
+          <div class="ttl"><span>Tank</span><span>rabatt</span><small>auf alles · ${esc(TANKE.rabatt.von)}–${esc(TANKE.rabatt.bis)} Uhr</small></div>
+          <svg class="burst" viewBox="0 0 112 112" aria-hidden="true"><path d="${star}" fill="#FFD21F" stroke="#141414" stroke-width="3" stroke-linejoin="round"/>
+            <text x="56" y="62" text-anchor="middle" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="38" fill="#141414">−50</text><text x="56" y="80" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="12" fill="#141414">PROZENT</text></svg>
+        </div>
+        <div class="gauge"><span>${esc(TANKE.rabatt.von)}</span><i><b id="tkHhBar" style="width:${(100 * (now - st.rv) / (st.rb - st.rv)).toFixed(1)}%"></b></i><span>${esc(TANKE.rabatt.bis)}</span></div>
+        <div class="chips">${[["Bier", "bw"], ["Mische", "ld"], ["Shots", "sh"]].map(([n, k]) => `<span><small>${n}</small><s>${tkFmt(TANKE.basis[k])}</s><b>${tkFmt(TANKE.zeile(k, st))}</b></span>`).join("")}</div>
+      </div>` : "";
+  const hit = TANKE.tafel.filter(([, , k]) => st.key && st.seit[k] === st.key);
+  const alarm = !st.hh && hit.length ? `<div class="tk-alarm"><i>▼</i><span><b>Preisalarm ${esc(st.key)} Uhr!</b>${hit.map(([n, , k]) => `${n.split(" · ")[0]} jetzt ${tkFmt(st.p[k])} €`).join(" · ")}. ${now >= st.leer ? "Das sind die Endpreise, bis der Tank leer ist." : "Wann's weiter runtergeht, weiß nur die Tanke."}</span></div>` : "";
+  const leer = st.live && now >= st.leer ? `<div class="tk-leer"><span><small>LEERFAHRT</small><b>läuft</b></span><span>Endpreise, bis nichts mehr da ist.</span></div>`
+    : `<div class="tk-leer"><span><small>LEERFAHRT ${st.live ? "IN" : "AB"}</small><b id="tkLeerLeft">${st.live ? tkDauer(st.leer - now) : esc(TANKE.leer) + " Uhr"}</b></span><span>Ab ${esc(TANKE.leer)} Uhr muss der Tank leer: Endpreise, bis nichts mehr da ist.</span></div>`;
+  return `<div class="lv-head"><span><span class="live-dot"></span>Aktuelle Spritpreise</span><span>${st.live ? "Live" : "ab " + esc(ev.time) + " Uhr"}</span></div>
+      <div class="tk-board"><div class="tk-in">
+        <div class="tk-logo">ExMa<small>TANKSTELLE · BAR</small></div>
+        <div class="tk-sale">RÄUMUNGSVERKAUF · ALLES MUSS RAUS</div>
+        ${rows}
+      </div></div>
+      ${hh}${alarm}${leer}`;
+}
+function tankeBlock(ev, nextLabel = () => "") {
+  return `
+    <section class="block tkv-tanke" id="s-tank" aria-labelledby="h-tank" data-ev="${esc(ev.id)}" data-tk="${TANKE.key(TANKE.stand(ev))}">
+      <h3 class="sec-title" id="h-tank">Preistafel</h3>
+      <div class="tk-live">${tankeLive(ev)}</div>
+      <p class="tk-note">Die Tanke macht Winterpause, und bis dahin muss der Tank leer. Die Preise fallen den ganzen Abend in 10-Cent-Schritten, ohne Ansage und nur nach unten. Von ${esc(TANKE.rabatt.von)} bis ${esc(TANKE.rabatt.bis)} Uhr gibt's Tankrabatt: alles zum halben Preis. Am Tresen zahlst du glatte Beträge, kein Kleingeld nötig.</p>
+      ${nextLabel("s-tank")}
+    </section>`;
+}
+/* Preistafel und Karte in der App aktuell halten: Countdowns jede Sekunde, bei Preisänderung neu aufbauen */
+setInterval(() => {
+  const sec = document.getElementById("s-tank"); if (!sec || document.hidden) return;
+  const ev = EVENTS.find((e) => e.id === sec.dataset.ev); if (!ev) return;
+  const now = new Date(), st = TANKE.stand(ev, now), k = TANKE.key(st);
+  if (k !== sec.dataset.tk) {
+    sec.dataset.tk = k; sec.querySelector(".tk-live").innerHTML = tankeLive(ev, now);
+    document.querySelectorAll("em[data-tkg]").forEach((el) => { el.innerHTML = tankeEm(ev, el.dataset.tkg, +el.dataset.tkp, st); });
+    return;
+  }
+  const l = document.getElementById("tkLeerLeft"); if (l && st.live) l.textContent = tkDauer(st.leer - now);
+  const h = document.getElementById("tkHhLeft"); if (h && st.hh) h.textContent = tkDauer(st.rb - now).slice(2);
+  const b = document.getElementById("tkHhBar"); if (b && st.hh) b.style.width = (100 * (now - st.rv) / (st.rb - st.rv)).toFixed(1) + "%";
+}, 1000);
+
+/* ---------- Volltanken am Tresen-Bildschirm ---------- */
+/* Mitte: Preistafel mit Stempel „Gesenkt“ oder (im Tankrabatt) die rote −50-%-Tafel */
+function trTankeBoard(ev, now, st) {
+  if (st.hh) {
+    return `<div class="tk-tr-hz"></div><div class="tr-tag"><span class="tr-live"></span>Happy Hour</div>
+      <div class="tk-tr-pct">−50<small>%</small></div>
+      <div class="tk-tr-tape"><span>Tankrabatt auf alles</span></div>
+      <div class="tk-tr-ex">${[["Bier", "bw"], ["Mische", "ld"], ["Shots", "sh"]].map(([n, k]) => `<span><small>${n}</small><s>${trEuro(TANKE.basis[k])}</s><b>${trEuro(TANKE.zeile(k, st))}</b></span>`).join("")}</div>
+      <div class="tk-tr-bar"><i id="tkTrBar"></i></div><div class="tk-tr-left">bis ${esc(TANKE.rabatt.bis)} Uhr · noch <b id="tkTrLeft"></b></div>`;
+  }
+  return `<div class="tk-tr-board"><div class="tk-tr-logo">ExMa<small>Tankstelle · Preise live</small></div>
+    ${TANKE.tafel.map(([n, , k]) => { const b = TANKE.basis[k], cur = st.p[k];
+      return `<div class="tk-tr-row"><span>${n}${cur < b ? `<em class="tk-stamp">Gesenkt · −${tkFmt(b - cur)} €</em>` : `<small>Normalpreis</small>`}</span><b>${tkFmt(cur)}</b></div>`; }).join("")}
+    </div><div class="tk-tr-foot">Preise fallen ohne Ansage · nur nach unten</div>`;
+}
+/* Preisalarm: der ganze Bildschirm blinkt 6 Sekunden rot-gelb, unten steht, was jetzt billiger ist */
+function trTankeAlarm(st) {
+  const hit = TANKE.tafel.filter(([, , k]) => st.seit[k] === st.key);
+  const el = $("tkTrAlarm") || (() => { const d = document.createElement("div"); d.id = "tkTrAlarm"; $("trStage").appendChild(d); return d; })();
+  el.innerHTML = `<div class="tk-tr-al"><div class="hz"></div><span class="ic">▼</span><div><small>Preisalarm · ${esc(st.key)} Uhr</small><b>Preise gesenkt!</b>
+    <em>${hit.map(([n, , k]) => `${n.split(" · ")[0]} jetzt <i>${tkFmt(st.p[k])} €</i>`).join("  ·  ")}</em></div></div>`;
+  const t = $("tresen"); t.classList.remove("tk-flash"); void t.offsetWidth; t.classList.add("tk-flash");
+  clearTimeout(TR.tkFlash); TR.tkFlash = setTimeout(() => t.classList.remove("tk-flash"), 12000);
+}
+/* Unten links: Getränkekarte im Wechsel mit dem Countdown zur Happy Hour (davor) bzw. der Zapfsäule mit Auto (ab der Happy Hour) */
+const TK_KARTE = 20, TK_EXTRA = 12;   /* Sekunden Karte, Sekunden Countdown/Auto */
+const TK_FOLGE = ["tanken", "brennt", "tanken", "rollt", "tanken", "polizei"];
+function trTankeBox(ev, now) {
+  const box = $("tkTrBox"); if (!box) return;
+  const st = ev && ev.tanke ? TANKE.stand(ev, now) : null;
+  const vorher = st && now < st.rv && st.rv - now < 12 * 3600e3, auto = st && st.live && now >= st.rv;
+  const s = Math.floor(now / 1000), runde = Math.floor(s / (TK_KARTE + TK_EXTRA)), an = (vorher || auto) && s % (TK_KARTE + TK_EXTRA) >= TK_KARTE;
+  const was = !an ? "" : auto ? "auto" + runde : "cd";
+  if (was !== box.dataset.was) {
+    box.dataset.was = was;
+    box.className = "tk-tr-box" + (an ? " an" : "");
+    if (was === "cd") box.innerHTML = `<div class="tk-cd"><div class="tk-cd-h"><span class="tr-live"></span>Happy Hour in</div><b id="tkCd"></b>
+      <div class="tk-cd-t">Tankrabatt <i>−50&nbsp;%</i> auf alles · ${esc(TANKE.rabatt.von)}–${esc(TANKE.rabatt.bis)} Uhr</div><div class="tk-cd-hz"></div></div>`;
+    else if (an) box.innerHTML = tkAutoSzene(TK_FOLGE[runde % TK_FOLGE.length], st.hh ? "RABATT" : "BIER", st.hh ? "−50%" : tkFmt(st.p.bw));
+    else box.innerHTML = "";
+  }
+  if (was === "cd") $("tkCd").textContent = tkDauer(st.rv - now);
+}
+/* Zapfsäule mit Auto: jede Folge dauert 12 Sekunden (CSS-Animationen, Klasse = Folge) */
+function tkAuto(cls, farbe, polizei) {
+  return `<g class="${cls}"><g class="tka-car">
+    <path d="M6 66 C6 52 8 46 16 45 L28 44 L42 14 C44 10 48 9 56 9 L146 9 C154 9 158 11 164 15 L204 40 L254 45 C265 47 270 54 270 62 L270 72 C270 78 266 80 260 80 L12 80 C8 80 6 78 6 72 Z" fill="${farbe}"/>
+    <path d="M6 66 L270 66 L270 72 C270 78 266 80 260 80 L12 80 C8 80 6 78 6 72 Z" fill="#000" opacity=".22"/>
+    <path d="M48 17 C49 15 51 14 54 14 L98 14 L98 40 L36 40 Z" fill="#B9CCDB"/><path d="M106 14 L144 14 C150 14 154 16 158 19 L186 40 L106 40 Z" fill="#B9CCDB"/>
+    <path d="M146 18 L132 36" stroke="#fff" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/>
+    <rect x="262" y="50" width="8" height="8" rx="2" fill="#FFE9A6"/><rect x="6" y="52" width="7" height="8" rx="2" fill="#E0262E"/>
+    <rect x="112" y="46" width="16" height="3" rx="1.5" fill="#000" opacity=".35"/>
+    ${polizei ? `<rect x="20" y="52" width="240" height="9" fill="#1F5BD6"/><text x="140" y="60" text-anchor="middle" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="10" letter-spacing="2" fill="#fff">POLIZEI</text>
+      <rect x="84" y="2" width="30" height="8" rx="3" fill="#1F5BD6"/><rect class="tka-blau" x="85" y="1" width="13" height="9" rx="3" fill="#6FB6FF"/><rect class="tka-blau b2" x="100" y="1" width="13" height="9" rx="3" fill="#6FB6FF"/>` : `<rect x="38" y="48" width="10" height="7" rx="2" fill="#141414" opacity=".5"/>`}
+  </g>
+  <g class="tka-rad" transform="translate(62 80)"><g class="tka-dreh"><circle r="19" fill="#111"/><circle r="9" fill="#9AA0A8"/><path d="M0 -9 V9 M-9 0 H9" stroke="#555" stroke-width="2.5"/></g></g>
+  <g class="tka-rad" transform="translate(214 80)"><g class="tka-dreh"><circle r="19" fill="#111"/><circle r="9" fill="#9AA0A8"/><path d="M0 -9 V9 M-9 0 H9" stroke="#555" stroke-width="2.5"/></g></g></g>`;
+}
+function tkAutoSzene(folge, schild, led) {
+  const feuer = folge === "brennt" ? `<g transform="translate(56 34)"><g class="tka-feuer">
+      <path class="f1" d="M0 30 C-22 18 -14 -6 -2 -26 C2 -8 14 -10 12 -30 C30 -10 28 18 0 30 Z" fill="#FF7A1A"/>
+      <path class="f2" d="M0 30 C-12 22 -8 6 0 -6 C4 6 12 6 10 -8 C20 8 16 24 0 30 Z" fill="#FFD21F"/></g></g>
+      <g class="tka-rauch"><circle cx="40" cy="-10" r="16"/><circle cx="66" cy="-30" r="22"/><circle cx="40" cy="-56" r="26"/></g>` : "";
+  return `<svg class="tka tka-${folge}" viewBox="0 0 900 262" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="tkaBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#18191D"/><stop offset="1" stop-color="#0E0F12"/></linearGradient>
+      <linearGradient id="tkaKegel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF1CC" stop-opacity=".22"/><stop offset="1" stop-color="#FFF1CC" stop-opacity="0"/></linearGradient>
+      <pattern id="tkaHz" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="20" fill="#FFD21F"/><rect x="10" width="10" height="20" fill="#141414"/></pattern></defs>
+    <rect width="900" height="262" fill="url(#tkaBg)"/>
+    <rect y="0" width="900" height="22" fill="#232529"/><rect y="20" width="900" height="4" fill="#FFD21F"/>
+    ${[120, 330, 540, 750].map((x) => `<path d="M${x - 24} 24 L${x + 24} 24 L${x + 90} 222 L${x - 90} 222 Z" fill="url(#tkaKegel)"/><rect x="${x - 24}" y="22" width="48" height="5" rx="2" fill="#FFF8E1"/>`).join("")}
+    <rect y="222" width="900" height="40" fill="#1C1D21"/><path d="M0 244 H900" stroke="#FFD21F" stroke-width="3" stroke-dasharray="36 28" opacity=".55"/>
+    <rect x="120" y="212" width="200" height="12" rx="3" fill="url(#tkaHz)"/>
+    <g class="tka-saeule">
+      <rect x="178" y="88" width="84" height="126" rx="8" fill="#FFD21F"/><rect x="178" y="88" width="84" height="22" rx="8" fill="#E0262E"/><rect x="178" y="100" width="84" height="10" fill="#E0262E"/>
+      <text x="220" y="104" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="11" fill="#fff" letter-spacing="1.5">${schild}</text>
+      <rect x="188" y="118" width="64" height="34" rx="4" fill="#141414"/>
+      <text class="tka-led" x="220" y="143" text-anchor="middle" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="24" fill="#FF3B3B">${led}</text>
+      <rect x="192" y="162" width="56" height="8" rx="3" fill="#141414" opacity=".25"/><rect x="192" y="176" width="56" height="8" rx="3" fill="#141414" opacity=".25"/>
+      <rect class="tka-halter" x="258" y="128" width="12" height="30" rx="3" fill="#141414"/></g>
+    <g transform="translate(318 0)"><g class="tka-mann">
+        <rect x="-11" y="176" width="9" height="40" rx="4" fill="#2B2F36"/><rect x="3" y="176" width="9" height="40" rx="4" fill="#2B2F36"/>
+        <rect x="-16" y="128" width="32" height="54" rx="12" fill="#E0262E"/><rect x="-16" y="150" width="32" height="6" fill="#FFD21F"/>
+        <circle cy="112" r="14" fill="#E8B48A"/><path d="M-15 108 C-15 92 15 92 15 108 Z" fill="#FFD21F"/><rect x="0" y="104" width="22" height="5" rx="2.5" fill="#FFD21F"/>
+        <path class="tka-arm" d="M8 138 L42 162" stroke="#E0262E" stroke-width="9" stroke-linecap="round"/>
+        <g class="tka-ruf"><text x="18" y="88" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="40" fill="#FFD21F">!</text><text x="32" y="80" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="40" fill="#FFD21F">!</text></g>
+      </g></g>
+    <path class="tka-schlauch" d="M262 146 C300 214 340 206 372 172" fill="none" stroke="#141414" stroke-width="7" stroke-linecap="round"/>
+    <g transform="translate(352 120)"><g class="tka-wagen">${tkAuto("tka-a", "#E0262E", false)}${feuer}
+      <rect class="tka-pistole" x="14" y="48" width="24" height="10" rx="3" fill="#FFD21F" stroke="#141414" stroke-width="2"/></g></g>
+    ${folge === "polizei" ? `<g transform="translate(352 120)"><g class="tka-cop">${tkAuto("tka-p", "#F4F6F8", true)}</g></g>` : ""}
+    ${folge === "rollt" || folge === "polizei" ? `<rect class="tka-boden" x="352" y="208" width="24" height="10" rx="3" fill="#FFD21F" stroke="#141414" stroke-width="2"/>` : ""}
+    <g class="tka-puff"><circle cx="350" cy="190" r="8"/><circle cx="336" cy="184" r="11"/><circle cx="318" cy="178" r="14"/></g>
+  </svg>`;
+}
+
 function drinkBlocks(ev, nextLabel = () => "") {
+  const tanke = ev.tanke ? tankeBlock(ev, nextLabel) : "";
   const markt = ev.markt ? `
     <section class="block" id="s-markt" aria-labelledby="h-markt">
       <h3 class="sec-title" id="h-markt">${esc(ev.markt.titel || "Weihnachtsmarkt")}</h3>
@@ -3816,7 +4326,7 @@ function drinkBlocks(ev, nextLabel = () => "") {
     <section class="block" id="s-specials" aria-labelledby="h-specials">
       <h3 class="sec-title" id="h-specials">Specials des Abends</h3>
       <div class="drinks">${ev.specials.map((d) => `
-        <article class="drink" style="--c:${(DRINKS[d.bild] || DRINKS.lemon).glow}">
+        <article class="drink" style="--c:${(DRINKS[d.bild] || DRINKS.beach).glow}">
           <div class="drink-pic">${drinkArt(d.bild)}</div>
           <div class="drink-body"><h3>${esc(d.name)}</h3>${d.info ? `<p>${esc(d.info)}</p>` : ""}<span class="price">${euro(d.preis)}</span></div>
         </article>`).join("")}</div>
@@ -3836,7 +4346,7 @@ function drinkBlocks(ev, nextLabel = () => "") {
         <span id="hhChip">${chip(hhStatus(ev))}</span>
       </div>
       <ul class="offers">${ev.happyHour.angebote.map((a) => `
-        <li${a.animation ? ' class="offer-anim"' : ""}>${a.animation === "bier" ? beerAnim() : a.animation === "mische" ? mixAnim() : ""}<div><b>${esc(a.name)}</b><span>${esc(a.info || "")}</span></div>
+        <li${a.animation ? ' class="offer-anim"' : ""}>${a.animation === "bier" ? beerAnim() : ""}<div><b>${esc(a.name)}</b><span>${esc(a.info || "")}</span></div>
         <div class="p">${a.preis != null ? `<strong>${euro(a.preis)}</strong>${a.statt ? `<s>statt ${euro(a.statt)}</s>` : ""}${a.zusatz ? `<small>${esc(a.zusatz)}</small>` : ""}` : `<strong>${esc(a.text || "")}</strong>`}</div></li>`).join("")}</ul>
       </div>
       ${nextLabel("s-happy")}
@@ -3848,17 +4358,18 @@ function drinkBlocks(ev, nextLabel = () => "") {
       ${KARTE.platzhalter ? noteHTML("Beispielpreise: Die echte Getränkekarte folgt noch.") : ""}
       ${KARTE.gruppen.map((g) => `<div class="menu-group"><h4>${esc(g.gruppe)}</h4>
         ${g.hinweis ? `<p class="menu-hint">${esc(g.hinweis)}</p>` : ""}
-        ${g.artikel.map((a) => `<div class="row"><b>${esc(a.name)}${a.menge ? `<small>${esc(a.menge)}</small>` : ""}</b><i></i><em>${euro(a.preis)}</em></div>`).join("")}</div>`).join("")}
+        ${g.artikel.map((a) => `<div class="row"><b>${esc(a.name)}${a.menge ? `<small>${esc(a.menge)}</small>` : ""}</b><i></i>${ev.tanke ? `<em data-tkg="${esc(g.gruppe)}" data-tkp="${a.preis}">${tankeEm(ev, g.gruppe, a.preis)}</em>` : `<em>${euro(a.preis)}</em>`}</div>`).join("")}</div>`).join("")}
       ${KARTE.fussnote ? `<p class="menu-foot">${esc(KARTE.fussnote)}</p>` : ""}
       ${KARTE.jugendschutz ? `<p class="menu-legal">${esc(KARTE.jugendschutz)}</p>` : ""}
     </section>`;
 
-  return `${markt}${specials}${hh}${karte}`;
+  return `${tanke}${markt}${specials}${hh}${karte}`;
 }
 function renderDetail(ev) {
   current = ev;
   const past = isPast(ev);
   const sections = [];
+  if (ev.tanke) sections.push(["s-tank", "Preistafel"]);
   if (ev.markt) sections.push(["s-markt", ev.markt.titel || "Weihnachtsmarkt"]);
   if (ev.specials && ev.specials.length) sections.push(["s-specials", "Specials"]);
   if (ev.happyHour) sections.push(["s-happy", "Happy Hour"]);
@@ -8231,7 +8742,7 @@ function fwScenes(root = document) { idle(() => fwScenesNow(root)); }
 function fwScenesNow(root) {
   root.querySelectorAll(".fw-scene:not([data-done])").forEach((el) => {
     el.dataset.done = "1"; const ev = EVENTS.find((e) => e.id === el.dataset.scene); if (!ev) return;
-    const layers = (SCENES[ev.thema] || sceneIce)(), u = fwSceneUid++;
+    const layers = (SCENES[ev.thema] || sceneXmas)(), u = fwSceneUid++;
     const vb = SCENE_VB[ev.thema] && SCENE_VB[ev.thema].fw;
     el.querySelectorAll("svg").forEach((svg, k) => { if (vb) svg.setAttribute("viewBox", vb); svg.innerHTML = layers[k] ? prefixIds(layers[k], `fw${u}l${k}_`) : ""; if (svg.pauseAnimations) svg.pauseAnimations(); });
   });
@@ -8664,7 +9175,7 @@ function phSpecials(ev) {
   const list = ev.specials || []; if (!list.length) return "";
   /* große Querkacheln wie auf der Drinks-Seite */
   return `<h3 class="ph-h">Heute im Angebot</h3><div class="drinks sp-bigs">${list.map((sp) => {
-    const d = DRINKS[sp.bild] || DRINKS.lemon;
+    const d = DRINKS[sp.bild] || DRINKS.beach;
     return `<a class="drink sp-big" href="#drinks" style="--c:${d.glow}"><div class="drink-pic">${drinkArt(sp.bild)}</div><div class="drink-body"><h3>${esc(sp.name)}</h3>${sp.info ? `<p>${esc(sp.info)}</p>` : ""}<span class="price">${euro(sp.preis)}</span></div></a>`;
   }).join("")}</div>`;
 }
@@ -8781,7 +9292,7 @@ function buildMenu() {
   const evTile = (ev, label, big, cdTo) => {
     if (!ev) return `<div class="mtile tile-empty"><span>Nächster Abend<br>folgt bald</span></div>`;
     const i = EVENTS.indexOf(ev);
-    const meta = ev.ablauf ? ev.ablauf.map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
+    const meta = ev.ablauf ? ev.ablauf.filter((a) => a.kachel !== false).map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join("<br>") : `${esc(ev.time)} Uhr`;
     const extra = ev.anmeldung && !isPast(ev)
       ? `<a class="tile-extra tile-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener" data-stop><span><b>Anmelden</b>${ev.art ? `<small>${esc(ev.art)}</small>` : ""}</span>${ICON_EXT}</a>`
       : ev.musik ? `<div class="tile-extra tile-dj">${ICON_HP}<span><b>${esc(ev.musik.zeit)}</b>${esc(ev.musik.text)}</span></div>`
@@ -8946,7 +9457,7 @@ function buildMenu() {
   g.querySelectorAll("[data-cal]").forEach((bt) => bt.addEventListener("click", (e) => { e.stopPropagation(); addToCalendar(EVENTS[+bt.dataset.cal]); }));
   g.querySelectorAll(".tile-ev, .hm-next").forEach((t) => {
     const ev = EVENTS[+t.dataset.ev];
-    const layers = (SCENES[ev.thema] || sceneIce)();
+    const layers = (SCENES[ev.thema] || sceneXmas)();
     const vb = t.classList.contains("hm-next") && SCENE_VB[ev.thema] && SCENE_VB[ev.thema].next;
     t.querySelectorAll(".tile-scene svg").forEach((svg, k) => { if (vb) svg.setAttribute("viewBox", vb); svg.innerHTML = prefixIds(layers[k], `mt${t.dataset.ev}l${k}_`); if (svg.pauseAnimations) svg.pauseAnimations(); });
     if (t.closest(".hm-hero")) fitHeroScene(t, ev);
@@ -9143,7 +9654,7 @@ function renderDrinksPage() {
   const d = $("detail");
   d.classList.add("t-" + ev.thema);
   d.style.cssText = themeStyle(ev.th);
-  const layers = (SCENES[ev.thema] || sceneIce)();
+  const layers = (SCENES[ev.thema] || sceneXmas)();
   d.querySelectorAll(".tp-hero .tile-scene svg").forEach((svg, k) => { svg.innerHTML = prefixIds(layers[k], `dh${k}_`); });
   watchAnim(d);
   fitTitle(d.querySelector(".tp-hero-t"), 52);
@@ -9422,7 +9933,7 @@ function shareWhatsApp(ev) {
 /* ================= Große Kachel: Hauptmotiv an die Kachelhöhe anpassen =================
    top = oberste Kante des Motivs, lip = Vorderkante des Pults (Koordinaten der Szene 400 × 760).
    Das Pult sitzt direkt über den Datums-Feldern, die Flasche möglichst unter dem Untertitel. */
-const HERO_FIT = { eis: { layer: 2, top: 380, lip: 614 } };
+const HERO_FIT = {};   /* je Motto: { layer, top, lip } – derzeit keins nötig */
 function fitHeroScene(t, ev) {
   const f = HERO_FIT[ev.thema]; if (!f) return;
   const svg = t.querySelectorAll(".tile-scene svg")[f.layer]; if (!svg) return;
@@ -10482,7 +10993,7 @@ const advIcon = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColo
 function renderAdvent() {
   const me = Advent.me(), seen = Advent.seen(), heute = advHeute();
   const X = EVENTS.find((e) => e.thema === "xmas") || EVENTS[EVENTS.length - 1];
-  const scene = (SCENES.xmas || sceneIce)().slice(0, 3).map((l, k) => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "adv" + k + "_")}</svg>`).join("");
+  const scene = (SCENES.xmas || sceneXmas)().slice(0, 3).map((l, k) => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "adv" + k + "_")}</svg>`).join("");
   const door = ([n, sp]) => {
     const open = seen.has(n) || me.o.includes(n), today = !open && advOffen(n) && n === heute;
     const cls = ["dr", ADV_ROT.includes(n) ? "r" : ADV_GRUEN.includes(n) ? "g" : ADV_GELB.includes(n) ? "y" : "", sp || "", open ? "open" : today ? "today" : advOffen(n) ? "" : "fut"].join(" ");
@@ -11217,7 +11728,7 @@ function trRows() {
         label = alle ? "Jede " + alle.name.replace(/^alle\s+/i, "").replace(/n$/, "") : g.gruppe.replace(/\s*&\s*/g, " / ");
       } else label = c.items.map((x) => x.name).join(" & ");
       const vol = (c.items.find((x) => isVol(x.menge)) || {}).menge || "";
-      rows.push({ label, vol, preis: c.preis, keys: c.items.map((x) => trKey(x.name)) });
+      rows.push({ label, vol, preis: c.preis, gruppe: g.gruppe, keys: c.items.map((x) => trKey(x.name)) });
     });
   });
   return rows;
@@ -11229,6 +11740,12 @@ function trNormalPrice(o) {
   return r && r.preis !== o.preis ? r.preis : null;
 }
 function trMenu(ev, hhOn) {
+  if (ev && ev.tanke) {
+    const st = TANKE.stand(ev);
+    $("trMenu").innerHTML = trRows().map((r) => { const np = TANKE.preis(r.gruppe, r.preis, st);
+      return `<div class="tr-kr${np != null ? " hl" : ""}"><span>${esc(r.label)}${r.vol ? ` <small>${esc(r.vol)}</small>` : ""}</span><i></i>${np != null ? `<b class="hot"><s>${trEuro(r.preis)}</s> ${trEuro(np)}</b>` : `<b>${trEuro(r.preis)}</b>`}</div>`; }).join("");
+    return;
+  }
   const o = trOffer(ev);
   $("trMenu").innerHTML = trRows().map((r) => {
     const hit = hhOn && o && o.preis != null && (r.keys.includes(trKey(o.name)) || trKey(r.label) === trKey(o.name));
@@ -11238,7 +11755,7 @@ function trMenu(ev, hhOn) {
 }
 function trSpec(el, sp) {
   if (!sp) { el.innerHTML = ""; return; }
-  const d = DRINKS[sp.bild] || DRINKS.lemon;
+  const d = DRINKS[sp.bild] || DRINKS.beach;
   el.style.setProperty("--c", d.glow);
   el.innerHTML = `<div class="tr-rays"></div><div class="tr-halo"></div><div class="tr-stag">★ Special</div>
     <div class="tr-glass">${drinkArt(sp.bild)}</div><div class="tr-nm">${esc(sp.name)}</div><div class="tr-pr">${trEuro(sp.preis)}</div>`;
@@ -11252,16 +11769,17 @@ function trSpecials(ev) {
   trSpec($("trSpecL"), list[k * 2]); trSpec($("trSpecR"), list[k * 2 + 1] || (list.length > 2 ? list[0] : null));
 }
 function trRender(ev) {
-  const t = $("tresen"), th = ev ? ev.th : THEMEN.eis;
+  const t = $("tresen"), th = ev ? ev.th : THEMEN.xmas;
   t.className = ev ? "t-" + ev.thema : "";
   const v = th.verlauf || [th.a1, th.a3, th.a2], mid = v[Math.floor(v.length / 2)];
   t.style.cssText = themeStyle(th) + `;--tg:linear-gradient(120deg,${v.join(",")});--tgv:linear-gradient(180deg,${v.join(",")});--tgA:${v[0]};--tgM:${mid};--tgZ:${v[v.length - 1]};--tgbg:linear-gradient(120deg,${(v.length > 3 ? v.slice(1) : v).join(",")})`;
-  const layers = (ev && SCENES[ev.thema] ? SCENES[ev.thema] : sceneIce)();
+  const layers = (ev && SCENES[ev.thema] ? SCENES[ev.thema] : sceneXmas)();
   const trVB = (ev && SCENE_VB[ev.thema] && SCENE_VB[ev.thema].tr) || "0 0 400 760";
   $("trScene").innerHTML = layers.map((l, k) => `<svg viewBox="${trVB}" preserveAspectRatio="xMidYMid slice">${prefixIds(l, "tr" + k + "_")}</svg>`).join("");
   $("trTitle").textContent = ev ? ev.titel.join(" ") : CLUB.name;
   $("trScript").textContent = ev ? ev.untertitel : CLUB.sub;
   TR.pair = 0; trSpecials(ev);
+  TR.tkKey = undefined; const tb = $("tkTrBox"); tb.dataset.was = ""; tb.className = "tk-tr-box"; tb.innerHTML = "";
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll(".tr-nm").forEach((n) => fitLine(n, 30)));
   $("trPfand").textContent = [KARTE.fussnote, KARTE.jugendschutz].filter(Boolean).join(" · ");
   TR.state = null;
@@ -11337,6 +11855,21 @@ function trCenter(ev, now) {
   const hh = trHH(ev), o = trOffer(ev), statt = trNormalPrice(o);
   const [open, close] = ev ? barWindow(ev) : [null, null];
   const last = close && now >= new Date(close.getTime() - 15 * 6e4) && now <= close;
+  /* Volltanken: Preistafel bzw. Tankrabatt in der Mitte (nur „Letzte Runde“ hat Vorrang) */
+  const tk = ev && ev.tanke ? TANKE.stand(ev, now) : null;
+  $("tresen").classList.toggle("tk-rabatt", !!tk && tk.hh && !last);
+  if (tk && tk.live && !last) {
+    const key = "tk" + TANKE.key(tk), tbox = $("trHH");
+    if (key !== TR.state) {
+      TR.state = key;
+      tbox.className = "tr-hh tr-frame tk-tr " + (tk.hh ? "hh" : "board");
+      tbox.innerHTML = trTankeBoard(ev, now, tk); trMenu(ev, false);
+      if (TR.tkKey !== undefined && tk.key && tk.key !== TR.tkKey) trTankeAlarm(tk);
+      TR.tkKey = tk.key;
+    }
+    if (tk.hh) { $("tkTrLeft").textContent = tkDauer(tk.rb - now).slice(2); $("tkTrBar").style.width = (100 * (now - tk.rv) / (tk.rb - tk.rv)).toFixed(1) + "%"; }
+    return;
+  }
   const state = last ? "last" : ev && marktOn(ev, now) ? "markt" : hh && now >= hh.from && now < hh.to ? "on" : hh && now < hh.from ? "soon" : "clock";
   const box = $("trHH");
   if (state !== TR.state) {
@@ -11386,6 +11919,7 @@ function trTick() {
   if (id !== TR.evId) { TR.evId = id; trRender(ev); }
   $("trClock").textContent = trClockFmt(now);
   trCenter(ev, now);
+  trTankeBox(ev, now);
   const list = (ev && ev.specials) || [];
   const sec = Math.floor(now.getTime() / 1000);
   if (list.length > 2 && sec % 12 === 0 && TR.lastSwap !== sec) { TR.lastSwap = sec; TR.pair = (TR.pair || 0) + 1; trSpecials(ev); }
