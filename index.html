@@ -2908,6 +2908,27 @@ s.abg { text-decoration-color: #ff3b3b; text-decoration-thickness: 2px; opacity:
 .timeline li.abg s { text-decoration-color: #ff3b3b; text-decoration-thickness: 2px; opacity: .7; }
 .timeline li.abg time { opacity: .5; text-decoration: line-through; }
 .timeline li.abg em { font-style: normal; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #ff3b3b; margin-left: 6px; }
+
+/* Volltanken: roter Stempel „Gesenkt“ auch in der App-Preistafel */
+.tk-row .tk-stamp { display: block; width: max-content; margin-top: 6px; padding: 2px 7px; transform: rotate(-3deg); transform-origin: left;
+  border: 2px solid #D21F27; border-radius: 4px; background: rgba(255,255,255,.25); color: #D21F27;
+  font: 700 14px/1.05 "Big Shoulders", "Arial Narrow", sans-serif; font-style: normal; letter-spacing: .03em; text-transform: uppercase; }
+
+/* Benachrichtigungen auf der Ich-Seite */
+.tp-push { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0 4px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #fff; }
+.tp-push.on { border-color: rgba(120,230,160,.45); background: rgba(120,230,160,.08); }
+.tp-push .ic { font-size: 22px; line-height: 1; }
+.tp-push b { display: block; font-size: 15px; }
+.tp-push p { margin: 3px 0 0; font-size: 13px; line-height: 1.4; color: rgba(255,255,255,.72); }
+.tp-push button { margin-top: 10px; padding: 9px 14px; border: 0; border-radius: 999px; background: #fff; color: #141414; font: 800 14px var(--f-body); }
+.tp-push button.tok { background: none; padding: 4px 0 0; color: rgba(255,255,255,.55); font-size: 12px; font-weight: 700; text-decoration: underline; }
+
+/* Frage nach Benachrichtigungen (Aussehen wie der Installations-Hinweis) */
+.push-tip { width: min(330px, calc(100% - 20px)); right: 50%; margin-right: calc(min(330px, calc(100% - 20px)) / -2); }
+.push-tip .later { grid-column: 1 / -1; height: 30px; margin-top: -4px; border: none; background: none; color: #5a6080; font-weight: 700; font-size: 13.5px; }
+.push-toast { position: fixed; left: 50%; bottom: calc(96px + var(--safe-b)); transform: translateX(-50%); z-index: 60; padding: 10px 16px; border-radius: 999px;
+  background: #10142e; color: #fff; font-weight: 800; font-size: 14px; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,.4); animation: pushToast 2.6s both; }
+@keyframes pushToast { 0% { opacity: 0; transform: translate(-50%, 10px); } 10%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
 </style>
 </head>
 <body>
@@ -2940,6 +2961,15 @@ s.abg { text-decoration-color: #ff3b3b; text-decoration-thickness: 2px; opacity:
       <div><b>Hol dir die ExMa-App!</b><p id="installTipText"></p></div>
       <button class="go" id="installTipBtn" type="button" hidden>App installieren</button>
       <button class="x" id="installTipClose" type="button" aria-label="Hinweis schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </aside>
+
+    <!-- Hinweis: Benachrichtigungen erlauben -->
+    <aside class="install-tip push-tip bottom" id="pushTip" role="dialog" aria-label="Benachrichtigungen" hidden>
+      <img src="icon-192.png" alt="">
+      <div><b>Nichts mehr verpassen?</b><p>Wir sagen dir Bescheid bei Absagen, Happy Hour und Neuem zum Clubabend. Nur Wichtiges, versprochen.</p></div>
+      <button class="go" id="pushTipYes" type="button">Benachrichtigungen erlauben</button>
+      <button class="later" id="pushTipNo" type="button">Später</button>
+      <button class="x" id="pushTipClose" type="button" aria-label="Hinweis schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </aside>
 
     <!-- Beerpong-Spiel -->
@@ -3093,7 +3123,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "142";
+const APP_V = "146";
 
 const EVENTS = [
   {
@@ -3175,6 +3205,7 @@ const EVENTS = [
   },
   {
     id: "volltanken",
+    abzeichen: "volltanken",
     thema: "tanke",
     titel: ["Voll", "tanken"],
     untertitel: "Räumungsverkauf an der Tanke",
@@ -4182,8 +4213,8 @@ function tankeLive(ev, now = new Date()) {
   const st = TANKE.stand(ev, now);
   const rows = TANKE.tafel.map(([n, sub, k]) => {
     const b = TANKE.basis[k], cur = TANKE.zeile(k, st);
-    const note = st.hh ? `<small class="dn">▼ −50&nbsp;% Tankrabatt · statt <s>${tkFmt(b)}</s></small>`
-      : cur < b ? `<small class="dn">▼ ${tkFmt(b - cur)} € · statt <s>${tkFmt(b)}</s></small>` : `<small>${st.live ? "noch Normalpreis" : "Normalpreis"}</small>`;
+    const note = st.hh ? `<em class="tk-stamp">Tankrabatt · −50&nbsp;%</em>`
+      : cur < b ? `<em class="tk-stamp">Gesenkt · −${tkFmt(b - cur)} €</em>` : `<small>${st.live ? "noch Normalpreis" : "Normalpreis"}</small>`;
     return `<div class="tk-row"><span class="n">${n}<small>${sub}</small>${note}</span><span class="tk-sten">${tkFmt(cur)}</span></div>`;
   }).join("");
   const star = Array.from({ length: 32 }, (_, i) => { const r = i % 2 ? 40 : 50, a = i * Math.PI / 16 - Math.PI / 2; return `${i ? "L" : "M"}${(56 + r * Math.cos(a)).toFixed(1)} ${(56 + r * Math.sin(a)).toFixed(1)}`; }).join(" ") + " Z";
@@ -4572,6 +4603,32 @@ window.addEventListener("beforeinstallprompt", () => {
   if (tip && !tip.hidden) { $("installTipText").textContent = tipText(); $("installTipBtn").hidden = false; }
 });
 setTimeout(() => showInstallTip(), 1200);
+/* Benachrichtigungen: einmal von selbst fragen (das Handy verlangt trotzdem ein Antippen + Bestätigen).
+   „Später“ = in 5 Tagen wieder, nach 3× „Später“ nicht mehr. Auf dem iPhone erst, wenn die App installiert ist. */
+function showPushTip() {
+  if (inFrame || Push.stand() !== "aus" || !app.classList.contains("is-menu")) return;
+  const tip = $("installTip"); if (tip && !tip.hidden) { setTimeout(showPushTip, 4000); return; }
+  const n = +(store.get("exmaPushNein") || 0), bis = +(store.get("exmaPushBis") || 0);
+  if (n >= 3 || Date.now() < bis) return;
+  const p = $("pushTip"); p.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add("show")));
+}
+function hidePushTip(spaeter) {
+  const p = $("pushTip"); if (p.hidden) return;
+  if (spaeter) { store.set("exmaPushNein", String(+(store.get("exmaPushNein") || 0) + 1)); store.set("exmaPushBis", String(Date.now() + 5 * 864e5)); }
+  p.classList.remove("show"); setTimeout(() => { p.hidden = true; }, 500);
+}
+$("pushTipNo").addEventListener("click", () => hidePushTip(true));
+$("pushTipClose").addEventListener("click", () => hidePushTip(true));
+$("pushTipYes").addEventListener("click", async () => {
+  const b = $("pushTipYes"); b.disabled = true; b.textContent = "Einen Moment …";
+  let ok = false;
+  try { ok = await Push.an(true); } catch (e) { console.warn("Push", e); }
+  hidePushTip(!ok && Notification.permission !== "denied");
+  if (ok) toastPush("Benachrichtigungen sind an 🔔");
+});
+function toastPush(t) { const d = document.createElement("div"); d.className = "push-toast"; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
+setTimeout(showPushTip, alreadyInstalled() ? 3500 : 11500);
 $("appPill").hidden = alreadyInstalled();
 $("appPill").addEventListener("click", () => showInstallTip(true));
 function setupInstall() {
@@ -4615,6 +4672,10 @@ const FIREBASE_CONFIG = {
   appId: "1:103124884760:web:e610d220d735113f7d526d"
 };
 const FB_VERSION = "10.12.2";
+/* Benachrichtigungen (Firebase Cloud Messaging): öffentlicher Web-Push-Schlüssel aus
+   Firebase-Konsole › Projekteinstellungen › Cloud Messaging › Web-Push-Zertifikate. Nicht geheim.
+   Gesendet wird in der Firebase-Konsole unter „Messaging“ (Anleitung in LIESMICH). */
+const PUSH_VAPID = "BHtgzSKFHUOgk6Nanxz-WHStS9S-LnPjCqCf-v5oV-FbzikyMWZoSxtXW8h6CIpqq4Krhfcmm1AY6pcMCmbymQU";
 /* Fotogalerie: API-Schlüssel für Google Drive (liest nur öffentlich freigegebene Ordner).
    Leer = die App verlinkt den Drive-Ordner nur. Einrichtung siehe LIESMICH. */
 const DRIVE_KEY = "";
@@ -4647,7 +4708,7 @@ async function initFirebase() {
       const team = !u.isAnonymous && !!u.email;
       if (team !== teamAuthed) { teamAuthed = team; renderTeam(); }
       if (team) teamPruefen().catch(() => {});
-      if (!FB.ready) { FB.ready = true; Live.goRemote(); fillBest(document); }
+      if (!FB.ready) { FB.ready = true; Live.goRemote(); fillBest(document); if (Push.stand() === "an") Push.an(false).catch(() => {}); }
     });
   } catch (e) { console.warn("Firebase nicht erreichbar, lokaler Modus", e); FB.off = true; fillBest(document); }
 }
@@ -4977,6 +5038,52 @@ const PROST_PAUSE_MS = PAUSE_SEK * 1000;   // Wartezeit zwischen zwei Einträgen
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch {} }
+};
+/* ---------- Benachrichtigungen ---------- */
+const Push = {
+  iosOhneHome: () => /iP(hone|ad|od)/.test(navigator.userAgent) && !(navigator.standalone || matchMedia("(display-mode: standalone)").matches),
+  geht: () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window,
+  stand() {
+    if (!this.geht()) return this.iosOhneHome() ? "ios" : "nein";
+    if (Notification.permission === "denied") return "blockiert";
+    return Notification.permission === "granted" && store.get("exmaPushTok") ? "an" : "aus";
+  },
+  /* Handy bei Firebase anmelden; frag = Erlaubnis abfragen (nur nach Tippen auf den Knopf) */
+  async an(frag) {
+    const perm = frag ? await Notification.requestPermission() : Notification.permission;
+    if (perm !== "granted") return false;
+    if (!window.firebase || !firebase.apps.length) throw new Error("Keine Verbindung");
+    if (!firebase.messaging) await loadScript(`https://www.gstatic.com/firebasejs/${FB_VERSION}/firebase-messaging-compat.js`);
+    if (!(await firebase.messaging.isSupported())) throw new Error("Nicht unterstützt");
+    const reg = await navigator.serviceWorker.ready;
+    const tok = await firebase.messaging().getToken({ vapidKey: PUSH_VAPID, serviceWorkerRegistration: reg });
+    if (!tok) return false;
+    store.set("exmaPushTok", tok); return true;
+  },
+  /* Karte auf der Ich-Seite */
+  karte() {
+    const st = this.stand();
+    const txt = {
+      ios: "Auf dem iPhone geht das nur, wenn die App auf dem Home-Bildschirm liegt: in Safari unten auf Teilen tippen, dann „Zum Home-Bildschirm“. Danach die App von dort öffnen und hier einschalten.",
+      nein: "Dein Browser kann leider keine Benachrichtigungen empfangen.",
+      blockiert: "Du hast Benachrichtigungen für die App blockiert. Einschalten kannst du sie in den Einstellungen deines Handys.",
+      an: "Ist an. Wir melden uns nur bei Wichtigem: Absagen, Happy Hour und Neues zum Clubabend.",
+      aus: "Wir melden uns nur bei Wichtigem: Absagen, Happy Hour und Neues zum Clubabend."
+    }[st];
+    return `<div class="tp-push${st === "an" ? " on" : ""}"><span class="ic" aria-hidden="true">🔔</span><div><b>Benachrichtigungen</b><p>${txt}</p>
+      ${st === "aus" ? `<button type="button" id="pushAn">Benachrichtigungen erlauben</button>` : ""}
+      ${st === "an" ? `<button type="button" class="tok" id="pushTok">Code für Testnachricht kopieren</button>` : ""}</div></div>`;
+  },
+  binden(neu) {
+    const b = $("pushAn");
+    if (b) b.addEventListener("click", async () => {
+      b.disabled = true; b.textContent = "Einen Moment …";
+      try { await this.an(true); } catch (e) { console.warn("Push", e); alert("Das hat nicht geklappt. Prüf deine Internetverbindung und versuch es nochmal."); }
+      neu();
+    });
+    const t = $("pushTok");
+    if (t) t.addEventListener("click", async () => { try { await navigator.clipboard.writeText(store.get("exmaPushTok") || ""); t.textContent = "Kopiert ✓"; } catch { prompt("Code kopieren:", store.get("exmaPushTok") || ""); } });
+  }
 };
 let prostTimer = null, changingMatrikel = false;
 const CLOSE_H = 1, CLOSE_M = 30;   /* Bar schließt um 1:30 Uhr */
@@ -8020,6 +8127,7 @@ const BADGE_LIST = [
   {"id": "eiskalt", "name": "Eiskalt", "desc": "Bei der Vodka Night dabei.", "tier": 0, "cat": "Gold"},
   {"id": "miami", "name": "Miami Vice", "desc": "Bei Miami Vibes dabei.", "tier": 0, "cat": "Gold"},
   {"id": "xmas", "name": "Glühwein-Gang", "desc": "Bei ExMa X-Mas dabei.", "tier": 0, "cat": "Gold"},
+  {"id": "volltanken", "name": "Vollgetankt", "desc": "Bei Volltanken dabei.", "tier": 0, "cat": "Gold"},
   {"id": "regenbogen", "name": "Heiligabend", "desc": "Das 24. Türchen im Adventskalender geöffnet.", "tier": 0, "cat": "Gold"},
   {"id": "champion", "name": "Champion", "desc": "Das Beerpong-Turnier gewonnen.", "tier": 0, "cat": "Gold"},
   {"id": "bpgold", "name": "Beerpong Gold", "desc": "50 Becher in einem Spiel getroffen.", "tier": 0, "cat": "Gold"},
@@ -9783,6 +9891,7 @@ function renderIchPage() {
     </div>
     <form class="tp-nameform" id="tpForm" hidden><input id="tpInput" maxlength="16" autocomplete="nickname" placeholder="z. B. Lena M25" value="${esc(name)}"><button type="submit">Speichern</button></form>
     <div class="tp-stats"><div><b>${Badges.visits()}</b><small>Clubabende</small></div><div><b>${got}</b><small>Abzeichen</small></div><div><b>${Badges.runs()}</b><small>Runden gezockt</small></div></div>
+    ${Push.karte()}
     <h3 class="tp-h">Deine Bestwerte</h3>
     <div class="tp-bests">${best}</div>
     <h3 class="tp-h">Zuletzt freigeschaltet</h3>
@@ -9792,6 +9901,7 @@ function renderIchPage() {
     <a class="tp-all" href="#abzeichen">Alle Abzeichen ansehen <span>${got} / ${N}</span>${ICON_ARROW}</a>
     <p class="tp-note">Name, Bestwerte und Abzeichen sind nur auf diesem Handy gespeichert.</p>`);
   document.querySelectorAll(".ich-page [data-b]").forEach((b) => b.addEventListener("click", () => Badges.card(b.dataset.b, false)));
+  Push.binden(renderIchPage);
   $("tpEdit").addEventListener("click", () => { const f = $("tpForm"); f.hidden = !f.hidden; if (!f.hidden) $("tpInput").focus(); });
   $("tpAva").addEventListener("click", () => { const p = $("tpAvaPick"); p.hidden = !p.hidden; });
   const setAva = (v) => { if (v) store.set("exmaAvatar", v); else { try { localStorage.removeItem("exmaAvatar"); } catch {} } renderIchPage(); tabSync(); };
@@ -9853,6 +9963,7 @@ function renderLegal(which) {
       <p><b>Abzeichen:</b> Welche Abzeichen Sie freigeschaltet haben und die dafür nötigen Angaben (z. B. an welchen Clubabenden die App geöffnet war oder welche Matrikel an einem Abend vorne lag) werden ausschließlich lokal auf Ihrem Gerät gespeichert (Browser-Speicher) und nicht an uns oder Dritte übertragen. Sie können sie jederzeit löschen, indem Sie die Websitedaten im Browser löschen.</p>
       <p><b>Fotos der Clubabende:</b> Die Fotos eines Abends liegen in einem Ordner bei Google Drive (Google Ireland Limited). Wenn Sie die Fotos in der App ansehen, lädt Ihr Gerät die Bilder und die Liste der Fotos direkt von Servern von Google. Dabei wird Ihre IP-Adresse an Google übertragen. Wir erfahren nicht, wer welche Fotos ansieht. Wenn Sie auf einem Foto zu sehen sind und es entfernt haben möchten, tippen Sie im Vollbild auf „Entfernen lassen“ oder schreiben Sie an ${mail}. Wir löschen es umgehend (Art. 17 und Art. 21 DSGVO).</p>
       <p><b>Musikwünsche:</b> Wenn Sie am Clubabend einen Song wünschen, für einen Wunsch stimmen oder bei der Stimmung abstimmen, speichern wir Titel, Interpret, Albumbild-Adresse und die zufällige Kennung Ihres Geräts (kein Name, keine E-Mail) in unserer Datenbank (Google Firebase, Frankfurt). Die Wunschliste ist für alle Gäste sichtbar, ohne Angabe, wer gewünscht hat. Für die Songsuche wird Ihr Suchbegriff direkt an die iTunes-Suche von Apple (Apple Inc.) geschickt, dabei wird Ihre IP-Adresse an Apple übertragen; Albumbilder werden von Apple-Servern geladen.</p>
+      <p><b>Benachrichtigungen:</b> Nur wenn Sie auf der Ich-Seite „Benachrichtigungen erlauben“ antippen und zustimmen, meldet Ihr Browser die App bei Firebase Cloud Messaging (Google Ireland Limited) an. Dabei entsteht eine zufällige Empfangsadresse für Ihr Gerät, über die wir Hinweise zu Clubabenden schicken können. Wir speichern diese Adresse nicht selbst und erfahren nicht, wer Sie sind. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Abschalten können Sie die Benachrichtigungen jederzeit in den Einstellungen Ihres Handys bzw. Browsers.</p>
       <h3>7. Kontakt per E-Mail</h3>
       <p>Wenn Sie uns schreiben, verwenden wir Ihre Angaben nur, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. f DSGVO), und löschen sie, wenn sie nicht mehr gebraucht werden.</p>
       <h3>8. Ihre Rechte</h3>
