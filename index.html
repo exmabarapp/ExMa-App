@@ -3125,7 +3125,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "147";
+const APP_V = "148";
 
 const EVENTS = [
   {
@@ -4708,7 +4708,7 @@ async function initFirebase() {
       FB.user = u;
       if (!u) { FB.auth.signInAnonymously().catch(() => {}); return; }
       const team = !u.isAnonymous && !!u.email;
-      if (team !== teamAuthed) { teamAuthed = team; renderTeam(); }
+      if (team !== teamAuthed) { teamAuthed = team; renderTeam(); if (document.querySelector(".ich-page")) renderIchPage(); }
       if (team) teamPruefen().catch(() => {});
       if (!FB.ready) { FB.ready = true; Live.goRemote(); fillBest(document); if (Push.stand() === "an") Push.an(false).catch(() => {}); }
     });
@@ -5065,6 +5065,7 @@ const Push = {
   /* Karte auf der Ich-Seite */
   karte() {
     const st = this.stand();
+    if (st === "an" && !teamAuthed) return "";            /* Gäste: ist es an, verschwindet die Karte. Testknöpfe nur fürs Team */
     const txt = {
       ios: "Auf dem iPhone geht das nur, wenn die App auf dem Home-Bildschirm liegt: in Safari unten auf Teilen tippen, dann „Zum Home-Bildschirm“. Danach die App von dort öffnen und hier einschalten.",
       nein: "Dein Browser kann leider keine Benachrichtigungen empfangen.",
@@ -5075,7 +5076,7 @@ const Push = {
     return `<div class="tp-push${st === "an" ? " on" : ""}"><span class="ic" aria-hidden="true">🔔</span><div><b>Benachrichtigungen</b><p>${txt}</p>
       ${st === "aus" ? `<button type="button" id="pushAn">Benachrichtigungen erlauben</button>` : ""}
       ${st === "an" ? `<button type="button" class="tst" id="pushTest">Test auf diesem Handy</button><button type="button" class="tok" id="pushTok">Code für Testnachricht kopieren</button>` : ""}
-      <small class="pv" id="pushVer">App ${APP_V}</small></div></div>`;
+      ${teamAuthed ? `<small class="pv" id="pushVer">App ${APP_V}</small>` : ""}</div></div>`;
   },
   binden(neu) {
     const b = $("pushAn");
@@ -5085,7 +5086,7 @@ const Push = {
       neu();
     });
     /* Prüfen: Welche Version hat der Hintergrund-Dienst (sw.js) und kann er Benachrichtigungen empfangen? */
-    if ("serviceWorker" in navigator) navigator.serviceWorker.ready.then((r) => {
+    if ($("pushVer") && "serviceWorker" in navigator) navigator.serviceWorker.ready.then((r) => {
       const ch = new MessageChannel();
       ch.port1.onmessage = (e) => { const v = $("pushVer"); if (v) v.textContent = `App ${APP_V} · Dienst ${String(e.data.version || "?").replace("exma-v", "")}${e.data.push ? "" : " · veraltet, sw.js neu hochladen"}`; };
       if (r.active) r.active.postMessage("version", [ch.port2]);
