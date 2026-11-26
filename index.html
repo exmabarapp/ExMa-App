@@ -1566,6 +1566,7 @@ body.fg-open { overflow: hidden; }
 .hm-next h3 { margin: 4px 0 2px; font-family: var(--f-display); font-weight: 400; font-size: 24px; line-height: 1; text-transform: uppercase; color: #fff; text-shadow: 0 0 12px var(--a3); white-space: nowrap; }
 .hm-next-txt > span { font-size: 12.5px; font-weight: 800; color: var(--a1); text-shadow: 0 1px 3px #000; }
 .hm-next .tile-reg { flex: none; font-size: 12px; padding: 7px 11px; }
+.hm-tank { flex: none; width: 120px; height: 100px; margin: -12px -8px -12px 0; filter: drop-shadow(0 4px 8px rgba(0,0,0,.5)); }
 .hm-go { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--frost); color: var(--night); display: grid; place-items: center; }
 .hm-go svg { width: 16px; height: 16px; }
 .hm-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -3125,7 +3126,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "148";
+const APP_V = "152";
 
 const EVENTS = [
   {
@@ -3856,7 +3857,8 @@ function sceneTanke() {
 
 const SCENES = { eis: sceneIce, miami: sceneMiami, xmas: sceneXmas, tanke: sceneTanke };
 /* Bildausschnitte je Motto: Vorschau-Karte (next) und Polaroid (fw); ohne Eintrag gilt der Standard */
-const SCENE_VB = { xmas: { next: "0 420 400 190", fw: "0 270 400 420", tr: "0 370 400 250" } };
+const SCENE_VB = { xmas: { next: "0 420 400 190", fw: "0 270 400 420", tr: "0 370 400 250" },
+                   tanke: { next: "0 416 250 100" } };   /* Vorschau-Streifen: nur das Tankstellendach, ohne Preise */
 const DEPTHS = [6, 10, 0, -22];
 
 /* ================= Drink-Bilder ================= */
@@ -9462,17 +9464,29 @@ function buildMenu() {
   const evB = evA ? EVENTS[EVENTS.indexOf(evA) + 1] : null;
   const nextStrip = (ev) => {
     const i = EVENTS.indexOf(ev);
-    const when = `${esc(ev.wd)} ${esc(ev.dm)} · ${ev.ablauf ? ev.ablauf.filter((a) => !a.abgesagt).map((a) => `${esc(a.zeit)} ${esc(a.kurz || a.was)}`).join(" · ") : `${esc(ev.time)} Uhr`}`;
+    /* Vorschau bewusst knapp: nur Tag, Datum und Beginn – der Ablauf steht auf der Abend-Seite */
+    const when = `${esc(ev.wd)} ${esc(ev.dm)} · ab ${esc(ev.time)} Uhr`;
+    const tage = Math.round((new Date(isoDay(ev.startDate)) - new Date(isoDay(tNow))) / 864e5);
+    const wann = tage <= 7 ? "Kommende Woche" : tage <= 14 ? "Übernächste Woche" : "Demnächst";
     const open = !isPast(ev);
     const sign = ev.banner && open ? `<div class="hm-sign"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4a5 5 0 0 1-10 0z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/><path d="M7 5H4v1.5A3.5 3.5 0 0 0 7.5 10M17 5h3v1.5a3.5 3.5 0 0 1-3.5 3.5" fill="none" stroke="#ffd23f" stroke-width="1.6"/><path d="M10.5 12h3v3.5h-3z" fill="#e6b52c"/><path d="M8 17h8l1 3H7z" fill="#ffd23f" stroke="#7a5200" stroke-width=".8"/></svg><span><b>${esc(ev.banner).replace("-", "-<br>")}</b>${ev.ablauf && ev.ablauf[0] ? `<small>ab ${esc(ev.ablauf[0].zeit)} Uhr</small>` : ""}</span></div>` : "";
     const reg = ev.anmeldung && open ? `<a class="hm-reg" href="${esc(ev.anmeldung.link)}" target="_blank" rel="noopener">${esc(ev.anmeldung.text || "Jetzt anmelden")} ${ICON_EXT}</a>` : "";
-    return `<div class="hm-card t-${ev.thema}" style="${themeStyle(ev.th)}"><div class="hm-next" role="link" tabindex="0" data-ev="${i}" aria-label="Kommende Woche: ${esc(ev.titel.join(" "))} – Infos öffnen">
+    return `<div class="hm-card t-${ev.thema}" style="${themeStyle(ev.th)}"><div class="hm-next" role="link" tabindex="0" data-ev="${i}" aria-label="${wann}: ${esc(ev.titel.join(" "))} – Infos öffnen">
       <div class="tile-scene" aria-hidden="true">${[0, 1, 2].map(() => `<svg viewBox="0 0 400 760" preserveAspectRatio="xMidYMid slice"></svg>`).join("")}</div>
       <div class="hm-next-txt">
-        <div class="tile-label">Kommende Woche</div>
+        <div class="tile-label">${wann}</div>
         <h3>${esc(ev.titel.join(" "))}</h3>
         <span>${when}</span>
       </div>
+      ${ev.thema === "tanke" ? `<svg class="hm-tank" viewBox="0 0 120 100" aria-hidden="true">
+        <text x="4" y="42" style="filter:blur(.9px)" fill="#fff" fill-opacity=".38" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="12">−10%</text>
+        <text x="9" y="61" style="filter:blur(.4px)" fill="#fff" fill-opacity=".62" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="14">−20%</text>
+        <text x="12" y="84" fill="#FF3B3B" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="18">−50%</text>
+        <g transform="translate(-26.5 -8) scale(1.22)"><rect x="88" y="80" width="8" height="12" fill="#3a3d44"/><rect x="88" y="84" width="8" height="8" fill="#FFD21F"/><path d="M88 86 l8 -2 M88 90 l8 -2" stroke="#141414" stroke-width="1.6"/>
+        <rect x="66" y="10" width="52" height="72" rx="4" fill="#2b2e34" stroke="#555a63" stroke-width="1.5"/>
+        <rect x="69" y="13" width="46" height="14" rx="2" fill="#FFD21F"/><text x="72" y="24.5" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="12" fill="#141414">ExMa</text><path d="M101 17 l10 0 M101 21 l10 0" stroke="#141414" stroke-width="1.4"/>
+        <rect x="69" y="30" width="46" height="15" rx="1.5" fill="#0d0e11"/><path d="M72 35 l4 0 l-2 4 z" fill="#FF3B3B"/><text x="112" y="42.5" text-anchor="end" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="13" fill="#FFD21F">1,00</text><rect x="69" y="47" width="46" height="15" rx="1.5" fill="#0d0e11"/><path d="M72 52 l4 0 l-2 4 z" fill="#FF3B3B"/><text x="112" y="59.5" text-anchor="end" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="13" fill="#FFD21F">2,00</text><rect x="69" y="64" width="46" height="15" rx="1.5" fill="#0d0e11"/><path d="M72 69 l4 0 l-2 4 z" fill="#FF3B3B"/><text x="112" y="76.5" text-anchor="end" font-family="Big Shoulders, Arial Narrow, sans-serif" font-weight="700" font-size="13" fill="#FFD21F">0,50</text></g>
+      </svg>` : ""}
       ${sign || `<i class="hm-go">${ICON_ARROW}</i>`}
     </div>${reg}</div>`;
   };
