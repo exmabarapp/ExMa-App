@@ -3177,7 +3177,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "154";
+const APP_V = "155";
 
 const EVENTS = [
   {
@@ -11661,7 +11661,8 @@ const Nutzung = (() => {
     : ["musik", "ranking", "wuensche", "advent", "awareness"].includes(id) ? id
     : EVENTS.some((e) => e.id === id) ? "abend" : "";
   let st = jget(), lastFlush = +store.get("exmaNutzLast") || 0;
-  /* st = { tag, sent: { g, neu, inst, m, h: [Stunden] }, pend: { p: {}, h: {}, g, neu, inst, m } } */
+  /* st = { tag, sent: { g, pu, h: [Stunden] }, pend: { p: {}, h: {}, g, neu, inst, m, pu, pk } }
+     pu = Gerät hat Benachrichtigungen an, pk = über eine Benachrichtigung in die App gekommen */
   function bucket() {
     const t = tag();
     if (st.tag !== t) {
@@ -11675,6 +11676,8 @@ const Nutzung = (() => {
       p.m = store.get("exmaMatrikel") || "x"; }
     const hr = String(+berlin({ hour: "2-digit", hourCycle: "h23" }).formatToParts(new Date()).find((x) => x.type === "hour").value);
     if (!s.h.includes(hr) && !(p.h && p.h[hr])) { p.h = p.h || {}; p.h[hr] = 1; }
+    /* Benachrichtigungen an: einmal pro Gerät und Tag (auch wenn erst im Lauf des Tages eingeschaltet) */
+    try { if (!s.pu && !p.pu && Push.stand() === "an") p.pu = 1; } catch {}
     return p;
   }
   function seite(id) {
@@ -11698,16 +11701,31 @@ const Nutzung = (() => {
       if (p.m) upd.m = { [p.m]: inc(1) };
       if (p.h && Object.keys(p.h).length) upd.h = Object.fromEntries(Object.entries(p.h).map(([k, v]) => [k, inc(v)]));
       if (p.p && Object.keys(p.p).length) upd.p = Object.fromEntries(Object.entries(p.p).map(([k, v]) => [k, inc(Math.min(v, 200))]));
+      /* Benachrichtigungs-Zahlen getrennt schreiben: fehlen die neuen Regeln noch, gehen die übrigen Zahlen trotzdem durch */
+      const ex = {};
+      if (p.pu) ex.pu = inc(1);
+      if (p.pk) ex.pk = inc(Math.min(p.pk, 20));
       try {
-        await FB.db.doc(`nutzung/${t}_${SH}`).set(upd, { merge: true });
+        const ref = FB.db.doc(`nutzung/${t}_${SH}`);
+        if (Object.keys(upd).length) await ref.set(upd, { merge: true });
+        if (Object.keys(ex).length) try { await ref.set(ex, { merge: true }); } catch (e2) { console.warn("Nutzung Push", e2); }
         if (alt) delete st.alt;
-        else { st.sent.g = st.sent.g || !!p.g; st.sent.h = [...new Set([...st.sent.h, ...Object.keys(p.h || {})])]; st.pend = {}; }
+        else { st.sent.g = st.sent.g || !!p.g; st.sent.pu = st.sent.pu || !!p.pu; st.sent.h = [...new Set([...st.sent.h, ...Object.keys(p.h || {})])]; st.pend = {}; }
         jset(st);
       } catch (e) { console.warn("Nutzung", e); if (alt && e && e.code === "permission-denied") { delete st.alt; jset(st); } }
     }
   }
   addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") senden(false); });
   addEventListener("pagehide", () => senden(false));
+  /* Über eine Benachrichtigung geöffnet (sw.js hängt ?von=push an): zählen und die Adresse wieder säubern */
+  try {
+    const q = new URLSearchParams(location.search);
+    if (q.get("von") === "push") {
+      q.delete("von");
+      history.replaceState(history.state, "", location.pathname + (q.toString() ? "?" + q : "") + location.hash);
+      if (!FB.off && !window.__zeitVorschau) { const p = bucket(); p.pk = (p.pk || 0) + 1; jset(st); setTimeout(() => senden(true), 5000); }
+    }
+  } catch {}
   return { seite, senden, tag };
 })();
 
@@ -11718,20 +11736,31 @@ async function nutzLaden(tage) {
   await Promise.all(tage.map(async (t) => {
     if (t !== heute) { try { const c = JSON.parse(sessionStorage.getItem(key(t))); if (c) { out[t] = c; return; } } catch {} }
     const docs = await Promise.all([0, 1, 2, 3, 4].map((i) => FB.db.doc(`nutzung/${t}_${i}`).get()));
-    const sum = { g: 0, neu: 0, inst: 0, p: {}, h: {}, m: {} };
+    const sum = { g: 0, neu: 0, inst: 0, pu: 0, pk: 0, p: {}, h: {}, m: {} };
     docs.forEach((d) => { if (!d.exists) return; const v = d.data();
-      sum.g += v.g || 0; sum.neu += v.neu || 0; sum.inst += v.inst || 0;
+      sum.g += v.g || 0; sum.neu += v.neu || 0; sum.inst += v.inst || 0; sum.pu += v.pu || 0; sum.pk += v.pk || 0;
       for (const f of ["p", "h", "m"]) for (const [k, x] of Object.entries(v[f] || {})) sum[f][k] = (sum[f][k] || 0) + x; });
     out[t] = sum; if (t !== heute) try { sessionStorage.setItem(key(t), JSON.stringify(sum)); } catch {}
   }));
   return out;
 }
+/* Insgesamt: alle gespeicherten Tage auf einmal laden (das Team darf die ganze Sammlung lesen) */
+async function nutzAlle() {
+  const snap = await FB.db.collection("nutzung").get(), out = {};
+  snap.docs.forEach((d) => {
+    const t = d.id.slice(0, 10), v = d.data();
+    const sum = out[t] || (out[t] = { g: 0, neu: 0, inst: 0, pu: 0, pk: 0, p: {}, h: {}, m: {} });
+    sum.g += v.g || 0; sum.neu += v.neu || 0; sum.inst += v.inst || 0; sum.pu += v.pu || 0; sum.pk += v.pk || 0;
+    for (const f of ["p", "h", "m"]) for (const [k, x] of Object.entries(v[f] || {})) sum[f][k] = (sum[f][k] || 0) + x;
+  });
+  return out;
+}
 function renderNutzungTeam() {
   if (!teamAuthed) { location.hash = "team"; return; }
   pageShell("nutz-team team-page", "Nutzung", `<section class="cbox team nz">
-    <div class="nz-tabs" role="group" aria-label="Zeitraum">${[["abend", "Letzter Abend"], ["heute", "Heute"], ["woche", "7 Tage"]].map(([k, t]) => `<button type="button" data-nz="${k}" class="${k === nutzSicht ? "on" : ""}">${t}</button>`).join("")}</div>
+    <div class="nz-tabs" role="group" aria-label="Zeitraum">${[["abend", "Letzter Abend"], ["heute", "Heute"], ["alle", "Insgesamt"]].map(([k, t]) => `<button type="button" data-nz="${k}" class="${k === nutzSicht ? "on" : ""}">${t}</button>`).join("")}</div>
     <div id="nzBox"><p class="prost-small">Lädt …</p></div>
-    <p class="nz-note">Gezählt werden nur Summen pro Tag (6 bis 6 Uhr) – keine Namen, keine Geräte-Kennungen. Das Team-Handy zählt nicht mit.</p></section>`);
+    <p class="nz-note">Gezählt werden nur Summen pro Tag (6 bis 6 Uhr) – keine Namen, keine Geräte-Kennungen. Das Team-Handy zählt nicht mit. Benachrichtigungs-Zahlen gibt es ab Version 155.</p></section>`);
   document.querySelectorAll("[data-nz]").forEach((b) => b.addEventListener("click", () => { nutzSicht = b.dataset.nz; document.querySelectorAll("[data-nz]").forEach((x) => x.classList.toggle("on", x === b)); nutzZeigen(); }));
   nutzZeigen();
 }
@@ -11744,12 +11773,18 @@ async function nutzZeigen() {
   let tage, titel;
   if (nutzSicht === "abend") { if (!letzter) { box.innerHTML = `<p class="prost-small">Noch kein Clubabend vorbei.</p>`; return; } tage = [letzter.t]; titel = `${letzter.e.titel.join(" ")} · ${letzter.e.wd} ${letzter.e.dm}`; }
   else if (nutzSicht === "heute") { tage = [heute]; titel = "Heute (seit 6 Uhr)"; }
-  else { tage = Array.from({ length: 7 }, (_, i) => Nutzung.tag(new Date(now.getTime() - i * 864e5))); titel = "Letzte 7 Tage"; }
   let data;
-  try { data = await nutzLaden([...new Set([...tage, ...abende.slice(-4).map((a) => a.t)])]); }
+  try {
+    if (nutzSicht === "alle") {
+      data = await nutzAlle();
+      tage = Object.keys(data).sort();
+      titel = tage.length ? `Insgesamt seit ${new Date(tage[0] + "T12:00:00").toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" })}` : "Insgesamt";
+    } else data = await nutzLaden([...new Set([...tage, ...abende.slice(-4).map((a) => a.t)])]);
+  }
   catch (e) { box.innerHTML = `<p class="prost-small">Fehler (${esc(e.code || e.message)}). Sind die neuen Firestore-Regeln veröffentlicht?</p>`; return; }
-  const sum = { g: 0, neu: 0, inst: 0, p: {}, h: {}, m: {} };
-  tage.forEach((t) => { const v = data[t]; if (!v) return; sum.g += v.g; sum.neu += v.neu; sum.inst += v.inst; for (const f of ["p", "h", "m"]) for (const [k, x] of Object.entries(v[f])) sum[f][k] = (sum[f][k] || 0) + x; });
+  const sum = { g: 0, gp: 0, neu: 0, inst: 0, pu: 0, pk: 0, p: {}, h: {}, m: {} };
+  tage.forEach((t) => { const v = data[t]; if (!v) return; sum.g += v.g; sum.neu += v.neu; sum.inst += v.inst; sum.pu += v.pu || 0; sum.pk += v.pk || 0;
+    if (t >= "2026-11-27" || v.pu || v.pk) sum.gp += v.g;   /* Anteil nur über Tage, an denen schon mitgezählt wurde (ab v155) */ for (const f of ["p", "h", "m"]) for (const [k, x] of Object.entries(v[f])) sum[f][k] = (sum[f][k] || 0) + x; });
   const pv = Object.values(sum.p).reduce((a, b) => a + b, 0);
   const NAMEN = { start: "Start", drinks: "Drinks", spiele: "Spiele", musik: "Musik", ranking: "Ranking", fotowand: "Fotowand", ich: "Ich", advent: "Advent", wuensche: "Wünsche", abend: "Abend-Infos" };
   const seiten = Object.entries(sum.p).sort((a, b) => b[1] - a[1]).slice(0, 8), pmax = seiten.length ? seiten[0][1] : 1;
@@ -11762,9 +11797,13 @@ async function nutzZeigen() {
   const MC = { 24: "#ff5ca8", 25: "#7cf3e4", 26: "#ffcf4a", andere: "rgba(255,255,255,.3)", x: "rgba(255,255,255,.18)" };
   const ms = Object.entries(sum.m).sort((a, b) => (a[0] > b[0] ? 1 : -1)), mtot = ms.reduce((a, [, v]) => a + v, 0) || 1;
   const vgl = abende.slice(-4).reverse().map((a) => [a, (data[a.t] || {}).g || 0]);
-  const tg = nutzSicht === "woche" ? "Geräte-Tage" : "Geräte";
+  const alle = nutzSicht === "alle", tg = alle ? "Besuche" : "Geräte";
+  const pct = (a, b) => (b ? Math.round(100 * a / b) : 0) + "&thinsp;%";
   box.innerHTML = `<h4>${esc(titel)}</h4>
-    <div class="nz-kpi"><div><b>${sum.g.toLocaleString("de-DE")}</b><small>${tg}${sum.neu ? ` <i>+${sum.neu} neu</i>` : ""}</small></div><div><b>${pv.toLocaleString("de-DE")}</b><small>Seiten­aufrufe</small></div><div><b>${sum.g ? Math.round(100 * sum.inst / sum.g) : 0}&thinsp;%</b><small>als App installiert</small></div></div>
+    ${alle ? `<div class="nz-kpi"><div><b>${sum.neu.toLocaleString("de-DE")}</b><small>verschiedene Geräte</small></div><div><b>${sum.g.toLocaleString("de-DE")}</b><small>Besuche (Geräte pro Tag)</small></div><div><b>${pct(sum.inst, sum.g)}</b><small>als App installiert</small></div></div>`
+      : `<div class="nz-kpi"><div><b>${sum.g.toLocaleString("de-DE")}</b><small>${tg}${sum.neu ? ` <i>+${sum.neu} neu</i>` : ""}</small></div><div><b>${pv.toLocaleString("de-DE")}</b><small>Seiten­aufrufe</small></div><div><b>${pct(sum.inst, sum.g)}</b><small>als App installiert</small></div></div>`}
+    <h4>Benachrichtigungen</h4>
+    <div class="nz-kpi" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><b>${alle ? pct(sum.pu, sum.gp) : sum.pu.toLocaleString("de-DE")}</b><small>${alle ? "der Besuche mit Benachrichtigungen an" : `Geräte mit Benachrichtigungen an · ${pct(sum.pu, sum.gp)}`}</small></div><div><b>${sum.pk.toLocaleString("de-DE")}</b><small>über eine Benachrichtigung geöffnet</small></div></div>
     ${hours.length ? `<h4>Geräte pro Stunde</h4><div class="nz-hours">${hours.map(([h, v]) => `<div><b>${v || ""}</b><span class="${v === hmax ? "pk" : ""}" style="height:${Math.max(3, Math.round(78 * v / hmax))}px"></span><em>${h}</em></div>`).join("")}</div>` : ""}
     ${seiten.length ? `<h4>Beliebteste Seiten <span>Aufrufe</span></h4><div class="nz-pages">${seiten.map(([k, v]) => `<div>${esc(NAMEN[k] || k)}<i style="--w:${(100 * v / pmax).toFixed(0)}%"></i><b>${v}</b></div>`).join("")}</div>` : `<p class="prost-small">Noch keine Daten für diesen Zeitraum.</p>`}
     ${ms.length ? `<h4>Matrikel <span>${tg}</span></h4><div class="nz-split">${ms.map(([k, v]) => `<span style="width:${(100 * v / mtot).toFixed(1)}%;background:${MC[k] || MC.x}"></span>`).join("")}</div>
