@@ -322,3 +322,8 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
   3. GitHub › Repository › Settings › Secrets and variables › Actions › New repository secret:
      Name FIREBASE_SA, Wert = kompletter Inhalt der JSON-Datei. Die Datei danach löschen, NIE ins Repository laden.
 - Probe: GitHub › Actions › Benachrichtigungen › Run workflow (Haken „Nur anzeigen“) zeigt, was gerade fällig wäre.
+
+=== Version 158 ===
+- Adventskalender: Wird die App direkt im Kalender geöffnet (z. B. über eine Benachrichtigung), wartet sie kurz auf die Verbindung –
+  vorher konnte dabei das Los fürs Türchen verloren gehen oder ein neues Handy sah seine Lose nicht.
+- GitHub › Actions › „Prüfung“: zeigt (nur lesend) den Stand der Türchen in der Datenbank.

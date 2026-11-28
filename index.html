@@ -3173,7 +3173,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "157";
+const APP_V = "158";
 
 const EVENTS = [
   {
@@ -11001,9 +11001,16 @@ const Advent = (() => {
   const markSeen = (n) => { const s = seen(); s.add(n); jset(K_SEEN, [...s]); };
   const lose = () => me.o.length + me.c.filter((n) => !(me.qf || []).includes(n)).length;
   const uid = () => FB.user && FB.user.uid;
+  /* Kurz auf die Verbindung warten (App direkt im Kalender geöffnet, z. B. über eine Benachrichtigung): sonst fehlen Lose und Inhalt */
+  const bereit = () => new Promise((res) => {
+    const t0 = Date.now();
+    (function w() { if ((Live.remote && uid()) || FB.off || Date.now() - t0 > 8000) res(); else setTimeout(w, 150); })();
+  });
 
   async function load() {
-    if (PV || !Live.remote || !uid() || loaded) return me;
+    if (PV || loaded) return me;
+    await bereit();
+    if (!Live.remote || !uid() || loaded) return me;
     try {
       const [t, nm] = await Promise.all([FB.db.doc("adventT/" + uid()).get(), FB.db.doc("adventName/" + uid()).get()]);
       if (t.exists) {
@@ -11029,6 +11036,7 @@ const Advent = (() => {
     }
     const c = jget(K_T(n), null);
     if (c && Date.now() - c.t < 2 * 3600e3) return c.d;
+    await bereit();
     if (!Live.remote) return c ? c.d : null;
     try {
       const s = await FB.db.doc("advent/t" + n).get();
@@ -11045,6 +11053,7 @@ const Advent = (() => {
   async function oeffnen(n) {
     markSeen(n);
     if (PV) { if (!me.name || n !== advHeute() || me.o.includes(n)) return false; me.o.push(n); jset(K_ME, me); return true; }
+    await bereit(); await load();
     if (!Live.remote || !uid() || !me.name || n !== advHeute() || me.o.includes(n)) return false;
     const ref = FB.db.doc("adventT/" + uid()), ts = FB.fv.serverTimestamp();
     try { await ref.update({ ["o." + n]: ts }); }
@@ -11215,7 +11224,12 @@ function renderAdvent() {
     <details class="adv-bed"><summary>Teilnahmebedingungen</summary><p>${esc(ADV_BED).replace(/\n/g, "<br>")}</p></details>`);
   document.querySelectorAll(".adv-bg svg").forEach((s) => s.pauseAnimations && s.pauseAnimations());
   document.querySelectorAll(".adv-grid .dr").forEach((b) => b.addEventListener("click", () => advTap(b)));
-  Advent.load().then(advProg);
+  const vorher = JSON.stringify([me.o, me.c, me.name]);
+  Advent.load().then((m) => {
+    advProg();
+    /* Daten kamen erst jetzt aus der Datenbank (neues Gerät): Türchen neu zeichnen, solange keine Karte offen ist */
+    if (JSON.stringify([m.o, m.c, m.name]) !== vorher && location.hash === "#advent" && !$("advSheet")) renderAdvent();
+  });
 }
 function advProg() {
   const me = Advent.me(), N = new Set([...Advent.seen(), ...me.o]).size, L = Advent.lose();
