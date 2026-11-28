@@ -304,3 +304,7 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
   Notruf, Polizei, Hilfetelefone und Heimwegtelefon zum Antippen; vertrauliche Meldung per E-Mail.
   · Erreichbar über eine Karte auf jeder Clubabend-Seite (unter „Sauf-Ranking & Wünsche“) und über „Awareness“ im Startmenü.
   · Der Satz für den Tresen steht im Code unter „const AWARENESS“ (aktuell: „Ich brauche Awareness“) – das ganze Team muss ihn kennen.
+
+=== Version 156 ===
+- Ich-Seite: Die Benachrichtigungs-Karte verschwindet, sobald Benachrichtigungen erlaubt sind – auch fürs Team.
+- Test-Knopf, „Code für Testnachricht kopieren“ und die Versionsanzeige sind entfernt.

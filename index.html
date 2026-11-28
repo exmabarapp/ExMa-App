@@ -2967,14 +2967,10 @@ s.abg { text-decoration-color: #ff3b3b; text-decoration-thickness: 2px; opacity:
 
 /* Benachrichtigungen auf der Ich-Seite */
 .tp-push { display: flex; gap: 12px; align-items: flex-start; margin: 10px 0 4px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #fff; }
-.tp-push.on { border-color: rgba(120,230,160,.45); background: rgba(120,230,160,.08); }
 .tp-push .ic { font-size: 22px; line-height: 1; }
 .tp-push b { display: block; font-size: 15px; }
 .tp-push p { margin: 3px 0 0; font-size: 13px; line-height: 1.4; color: rgba(255,255,255,.72); }
 .tp-push button { margin-top: 10px; padding: 9px 14px; border: 0; border-radius: 999px; background: #fff; color: #141414; font: 800 14px var(--f-body); }
-.tp-push button.tst { display: block; }
-.tp-push .pv { display: block; margin-top: 8px; font-size: 11px; color: rgba(255,255,255,.4); }
-.tp-push button.tok { background: none; padding: 4px 0 0; color: rgba(255,255,255,.55); font-size: 12px; font-weight: 700; text-decoration: underline; }
 
 /* Frage nach Benachrichtigungen (Aussehen wie der Installations-Hinweis) */
 .push-tip { width: min(330px, calc(100% - 20px)); right: 50%; margin-right: calc(min(330px, calc(100% - 20px)) / -2); }
@@ -3177,7 +3173,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "155";
+const APP_V = "156";
 
 const EVENTS = [
   {
@@ -5119,18 +5115,16 @@ const Push = {
   /* Karte auf der Ich-Seite */
   karte() {
     const st = this.stand();
-    if (st === "an" && !teamAuthed) return "";            /* Gäste: ist es an, verschwindet die Karte. Testknöpfe nur fürs Team */
+    if (st === "an") return "";            /* Ist es an, verschwindet die Karte */
     const txt = {
       ios: "Auf dem iPhone geht das nur, wenn die App auf dem Home-Bildschirm liegt: in Safari unten auf Teilen tippen, dann „Zum Home-Bildschirm“. Danach die App von dort öffnen und hier einschalten.",
       nein: "Dein Browser kann leider keine Benachrichtigungen empfangen.",
       blockiert: "Du hast Benachrichtigungen für die App blockiert. Einschalten kannst du sie in den Einstellungen deines Handys.",
-      an: "Ist an. Wir melden uns nur bei Wichtigem: Absagen, Happy Hour und Neues zum Clubabend.",
       aus: "Wir melden uns nur bei Wichtigem: Absagen, Happy Hour und Neues zum Clubabend."
     }[st];
     return `<div class="tp-push${st === "an" ? " on" : ""}"><span class="ic" aria-hidden="true">🔔</span><div><b>Benachrichtigungen</b><p>${txt}</p>
       ${st === "aus" ? `<button type="button" id="pushAn">Benachrichtigungen erlauben</button>` : ""}
-      ${st === "an" ? `<button type="button" class="tst" id="pushTest">Test auf diesem Handy</button><button type="button" class="tok" id="pushTok">Code für Testnachricht kopieren</button>` : ""}
-      ${teamAuthed ? `<small class="pv" id="pushVer">App ${APP_V}</small>` : ""}</div></div>`;
+</div></div>`;
   },
   binden(neu) {
     const b = $("pushAn");
@@ -5139,20 +5133,6 @@ const Push = {
       try { await this.an(true); } catch (e) { console.warn("Push", e); alert("Das hat nicht geklappt. Prüf deine Internetverbindung und versuch es nochmal."); }
       neu();
     });
-    /* Prüfen: Welche Version hat der Hintergrund-Dienst (sw.js) und kann er Benachrichtigungen empfangen? */
-    if ($("pushVer") && "serviceWorker" in navigator) navigator.serviceWorker.ready.then((r) => {
-      const ch = new MessageChannel();
-      ch.port1.onmessage = (e) => { const v = $("pushVer"); if (v) v.textContent = `App ${APP_V} · Dienst ${String(e.data.version || "?").replace("exma-v", "")}${e.data.push ? "" : " · veraltet, sw.js neu hochladen"}`; };
-      if (r.active) r.active.postMessage("version", [ch.port2]);
-      setTimeout(() => { const v = $("pushVer"); if (v && !/Dienst/.test(v.textContent)) v.textContent = `App ${APP_V} · Dienst alt – sw.js neu hochladen`; }, 1500);
-    }).catch(() => {});
-    const ts = $("pushTest");
-    if (ts) ts.addEventListener("click", async () => {
-      try { const r = await navigator.serviceWorker.ready; await r.showNotification("ExMa Bar", { body: "Test: So sehen Benachrichtigungen aus 🍻", icon: "icon-192.png", badge: "icon-192.png", data: { link: "./" } }); ts.textContent = "Gesendet – siehst du sie?"; }
-      catch (e) { alert("Anzeigen ging nicht: " + (e && e.message || e)); }
-    });
-    const t = $("pushTok");
-    if (t) t.addEventListener("click", async () => { try { await navigator.clipboard.writeText(store.get("exmaPushTok") || ""); t.textContent = "Kopiert ✓"; } catch { prompt("Code kopieren:", store.get("exmaPushTok") || ""); } });
   }
 };
 let prostTimer = null, changingMatrikel = false;
