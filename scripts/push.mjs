@@ -57,13 +57,20 @@ for (const ev of EVENTS) {
 }
 
 console.log(`Zeit ${now.toISOString()} – fällig: ${faellig.length ? faellig.map((m) => m.key).join(", ") : "nichts"}`);
-if (!faellig.length) process.exit(0);
-if (DRY) { faellig.forEach((m) => console.log(`[Probe] ${m.title}\n        ${m.body}\n        ${m.link}`)); process.exit(0); }
+if (DRY) faellig.forEach((m) => console.log(`[Probe] ${m.title}\n        ${m.body}\n        ${m.link}`));
+if (!faellig.length && !DRY) process.exit(0);
 if (!process.env.FIREBASE_SA) { console.log("Kein Schlüssel (Secret FIREBASE_SA) – nichts gesendet."); process.exit(0); }
 
 const { default: admin } = await import("firebase-admin");
 admin.initializeApp({ credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SA)) });
 const db = admin.firestore();
+/* Probelauf: nur Verbindung prüfen und Geräte zählen */
+if (DRY) {
+  const n = (await db.collection("push").get()).size;
+  const log = (await db.collection("pushlog").get()).docs.map((d) => `${d.id} (an ${d.get("ok") ?? "?"} Geräte)`);
+  console.log(`Verbindung zu Firebase ok – ${n} Geräte mit Benachrichtigungen. Bisher gesendet: ${log.length ? log.join(", ") : "noch nichts"}`);
+  process.exit(0);
+}
 let geraete = null;
 
 for (const m of faellig) {
