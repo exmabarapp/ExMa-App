@@ -327,3 +327,7 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
 - Adventskalender: Wird die App direkt im Kalender geöffnet (z. B. über eine Benachrichtigung), wartet sie kurz auf die Verbindung –
   vorher konnte dabei das Los fürs Türchen verloren gehen oder ein neues Handy sah seine Lose nicht.
 - GitHub › Actions › „Prüfung“: zeigt (nur lesend) den Stand der Türchen in der Datenbank.
+
+=== Version 159 ===
+- Adventskalender: Ist ein Türchen noch nicht in der Datenbank, zeigt die App die Vorlage statt „Hier kommt gleich noch was rein“.
+  Auch die Team-Ansichten (Gewinner des Tages, Lose zählen) nutzen dann die Vorlage. Eingespielte Türchen haben immer Vorrang.

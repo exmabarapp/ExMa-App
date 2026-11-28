@@ -3173,7 +3173,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "158";
+const APP_V = "159";
 
 const EVENTS = [
   {
@@ -10957,6 +10957,13 @@ const ADV_VORLAGE = {
   23: { art: "challenge", titel: "Das geheime Spiel", text: "In der App versteckt sich ein Spiel, das nirgends im Menü steht. Hinweis: Manchmal muss man einfach hartnäckig sein – tipp ein paar Mal ganz schnell auf etwas, das du oben auf fast jeder Seite siehst. Wer es heute findet, bekommt ein Extra-Los.", belohnung: "1 Extra-Los", ch: { spiel: "geheim", min: 0 } },
   24: { art: "finale", titel: "Frohe Weihnachten! 🌈", text: "Danke, dass ihr 24 Tage dabei wart. Als Geschenk gibt’s heute ein besonderes Abzeichen für alle, die dieses Türchen öffnen.\n\nUnd heute Abend ziehen wir den Gewinner des Airfryers – schau später nochmal rein!" },
 };
+/* Vorlage eines Türchens im Format der Datenbank (wie „Vorlage in leere Türchen einspielen“) */
+function advVorlage(n) {
+  if (!ADV_VORLAGE[n]) return null;
+  const v = JSON.parse(JSON.stringify(ADV_VORLAGE[n]));
+  if (v.ch) v.ch.feld = ADV_SPIEL[v.ch.spiel] ? ADV_SPIEL[v.ch.spiel][1] : "";
+  return v;
+}
 const ADV_BED = `Teilnahme: alle Gäste der ExMa Bar, ausgenommen das Clubteam. Für die Verlosung sind Name, Studiengang und Matrikel Pflicht. Pro Person zählt ein Konto – Anmeldungen mit gleichem Namen und gleicher Matrikel werden vor der Ziehung zusammengelegt.
 Lose: Jedes Türchen, das am Tag selbst (8 Uhr bis 8 Uhr am Folgetag) geöffnet wird, gibt 1 Los. Challenges geben Extra-Lose.
 Glückstürchen: Es gewinnen die Türchenöffner auf festgelegten Plätzen (z. B. der 3., 7. und 12.). Ob du gewonnen hast, siehst du direkt nach dem Öffnen.
@@ -11040,8 +11047,8 @@ const Advent = (() => {
     if (!Live.remote) return c ? c.d : null;
     try {
       const s = await FB.db.doc("advent/t" + n).get();
-      const d = s.exists ? s.data() : null;
-      jset(K_T(n), { t: Date.now(), d }); return d;
+      const d = s.exists ? s.data() : advVorlage(n);   /* noch nichts eingespielt: Vorlage zeigen statt „Hier kommt gleich noch was rein“ */
+      jset(K_T(n), { t: s.exists ? Date.now() : Date.now() - 105 * 60e3, d }); return d;
     } catch (e) { if (e && e.code === "permission-denied") return { zu: true }; return c ? c.d : null; }
   }
   async function anmelden(name, stg, mat) {
@@ -11569,7 +11576,7 @@ async function advSeed() {
 async function advErste5(n) {
   const box = $("advE5List"); box.innerHTML = `<p class="prost-small">Lädt …</p>`;
   try {
-    const ds = await FB.db.doc("advent/t" + n).get(), dv = ds.exists ? ds.data() : {};
+    const ds = await FB.db.doc("advent/t" + n).get(), dv = ds.exists ? ds.data() : advVorlage(n) || {};
     const pl = dv.art === "glueck" && dv.plaetze && dv.plaetze.length ? dv.plaetze.map(Number).sort((a, b) => a - b) : [1, 2, 3, 4, 5];
     const q = await FB.db.collection("adventT").orderBy("o." + n).limit(pl[pl.length - 1] || 5).get();
     if (!q.docs.length) { box.innerHTML = `<p class="prost-small">Türchen ${n} hat noch niemand geöffnet.</p>`; return; }
@@ -11629,7 +11636,9 @@ async function advTopf(boxId = "advTopf") {
   const box = $(boxId); if (box) box.innerHTML = `<p class="prost-small">Lädt …</p>`;
   try {
     const [ts, ns, ds] = await Promise.all([FB.db.collection("adventT").get(), FB.db.collection("adventName").get(), FB.db.collection("advent").get()]);
-    const qok = {}; ds.docs.forEach((d) => { const v = d.data(); if (v.quiz) qok[d.id.slice(1)] = "q:" + v.quiz.ok; });
+    const qok = {};
+    for (let k = 1; k <= 24; k++) { const v = advVorlage(k); if (v && v.quiz) qok[k] = "q:" + v.quiz.ok; }   /* nicht eingespielte Türchen: Vorlage */
+    ds.docs.forEach((d) => { const v = d.data(); if (v.quiz) qok[d.id.slice(1)] = "q:" + v.quiz.ok; });
     const names = Object.fromEntries(ns.docs.map((d) => [d.id, d.data()]));
     const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ").trim();
     const ex = new Set(($("advEx") ? $("advEx").value : "").split("\n").map(norm).filter(Boolean));
