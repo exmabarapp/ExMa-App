@@ -83,7 +83,10 @@ self.addEventListener("push", (e) => {
 });
 self.addEventListener("notificationclick", (e) => {
   e.notification.close();
-  const url = new URL((e.notification.data && e.notification.data.link) || "./", SCOPE).href;
+  /* ?von=push: die App zählt (anonym, nur als Summe), dass jemand über eine Benachrichtigung gekommen ist */
+  const u = new URL((e.notification.data && e.notification.data.link) || "./", SCOPE);
+  u.searchParams.set("von", "push");
+  const url = u.href;
   e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
     const c = list.find((w) => w.url.startsWith(SCOPE));
     if (c) return c.focus().then((f) => (f && f.navigate ? f.navigate(url) : f)).catch(() => self.clients.openWindow(url));
