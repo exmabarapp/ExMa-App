@@ -331,3 +331,6 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
 === Version 159 ===
 - Adventskalender: Ist ein Türchen noch nicht in der Datenbank, zeigt die App die Vorlage statt „Hier kommt gleich noch was rein“.
   Auch die Team-Ansichten (Gewinner des Tages, Lose zählen) nutzen dann die Vorlage. Eingespielte Türchen haben immer Vorrang.
+
+=== Version 160 ===
+- Datenschutz: Abschnitt Benachrichtigungen an den automatischen Versand angepasst (Empfangsadresse wird jetzt in Firebase gespeichert).
