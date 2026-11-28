@@ -62,7 +62,15 @@ if (!faellig.length && !DRY) process.exit(0);
 if (!process.env.FIREBASE_SA) { console.log("Kein Schlüssel (Secret FIREBASE_SA) – nichts gesendet."); process.exit(0); }
 
 const { default: admin } = await import("firebase-admin");
-admin.initializeApp({ credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SA)) });
+/* Schlüssel lesen – verträgt auch Text vor/hinter dem JSON (z. B. doppelt eingefügt) */
+function schluessel(roh) {
+  const t = roh.trim(), a = t.indexOf("{");
+  for (let i = t.indexOf("}", a); i >= 0; i = t.indexOf("}", i + 1)) {
+    try { const o = JSON.parse(t.slice(a, i + 1)); if (o.private_key) { if (i + 1 < t.length || a > 0) console.log("Hinweis: Im Secret steht außer dem Schlüssel noch weiterer Text."); return o; } } catch {}
+  }
+  throw new Error("FIREBASE_SA enthält keinen gültigen Dienstkonto-Schlüssel");
+}
+admin.initializeApp({ credential: admin.credential.cert(schluessel(process.env.FIREBASE_SA)) });
 const db = admin.firestore();
 /* Probelauf: nur Verbindung prüfen und Geräte zählen */
 if (DRY) {
