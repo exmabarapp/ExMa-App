@@ -3181,7 +3181,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "161";
+const APP_V = "162";
 
 const EVENTS = [
   {
@@ -3287,28 +3287,6 @@ const EVENTS = [
       { name: "Skinny Bitch", info: "Vodka, Wasser, Limettensaft", preis: 1.0, bild: "skinny" }
     ],
     happyHour: null              /* der Tankrabatt läuft über TANKE.rabatt */
-  },
-  {
-    id: "neujahr",
-    abzeichen: "neujahr",
-    thema: "neujahr",
-    titel: ["Vorsätze?", "Ab morgen."],
-    untertitel: "Die Neujahrsparty",
-    start: "2027-01-06T21:00:00+01:00",
-    ende: "2027-01-07T03:00:00+01:00",
-    ort: "ExMa-Bar",
-    mitbringen: null,
-    fotos: null,
-    specials: [
-      { name: "Limoncello Spritz", info: "Limoncello, Prosecco, Soda, Zitrone und Minze", preis: 2.0, bild: "limoncello" },
-      { name: "Vorsatz\u00adbrecher", info: "Mische aus Wodka, Mate und Limette", preis: 2.0, bild: "vorsatz" }
-    ],
-    happyHour: {
-      von: "22:00", bis: "23:00", platzhalter: false,
-      angebote: [
-        { name: "2 Mischen zum Preis von einer", info: "Die Rückfall-Stunde – nur während der Happy Hour", preis: 4.0, zusatz: "für 2 Mischen" }
-      ]
-    }
   }
 ];
 

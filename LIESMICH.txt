@@ -341,3 +341,6 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
   Happy Hour 22–23 Uhr: 2 Mischen zum Preis von einer (Rückfall-Stunde); neues Abzeichen „Ab morgen“.
 - Startseite: „Diese Woche“ nur noch, wenn der Abend wirklich in den nächsten Tagen ist (sonst „Nächste Woche“/„Nächster Abend“).
 - abzeichen.svg: fehlendes Abzeichen „Vollgetankt“ ergänzt (war im Repository nicht drin).
+
+=== Version 162 ===
+- Neujahrsparty wieder ausgetragen (noch nicht veröffentlichen). Look, Drinks und Abzeichen bleiben im Code vorbereitet.

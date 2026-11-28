@@ -6,7 +6,7 @@
    am Zwischenspeicher vorbei geladen (cache: "reload"/"no-store"/"no-cache"), sonst kommen Updates halb oder gar nicht an.
    Der Speichername enthält den Pfad der App: So stören sich Original und Testversion
    unter derselben Domain nicht gegenseitig. */
-const VERSION = "exma-v161";
+const VERSION = "exma-v162";
 const SCOPE = self.registration.scope;
 const CACHE = VERSION + "|" + SCOPE;
 const CORE = [
