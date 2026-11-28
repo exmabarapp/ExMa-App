@@ -308,3 +308,17 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
 === Version 156 ===
 - Ich-Seite: Die Benachrichtigungs-Karte verschwindet, sobald Benachrichtigungen erlaubt sind – auch fürs Team.
 - Test-Knopf, „Code für Testnachricht kopieren“ und die Versionsanzeige sind entfernt.
+
+=== Version 157 – automatische Benachrichtigungen ===
+- Die App legt den Code jedes Geräts mit erlaubten Benachrichtigungen in Firestore „push“ ab (nur der Code, keine Namen).
+- GitHub verschickt automatisch (scripts/push.mjs, Ablauf .github/workflows/benachrichtigungen.yml, alle 10 Minuten):
+  · am Tag des Clubabends um 16 Uhr: „Heute: <Motto>“
+  · zum Start der Happy Hour (Tank-Abend: Tankrabatt 22 Uhr)
+  · bei einer Absage (Feld „absage“ beim Abend), sobald sie eingetragen ist
+  Jede Nachricht geht nur einmal raus (Protokoll in Firestore „pushlog“).
+- EINMALIG EINRICHTEN:
+  1. firestore.rules in der Firebase-Konsole veröffentlichen (neu: Bereich „push“).
+  2. Firebase-Konsole › Zahnrad › Projekteinstellungen › Dienstkonten › „Neuen privaten Schlüssel generieren“ (JSON-Datei).
+  3. GitHub › Repository › Settings › Secrets and variables › Actions › New repository secret:
+     Name FIREBASE_SA, Wert = kompletter Inhalt der JSON-Datei. Die Datei danach löschen, NIE ins Repository laden.
+- Probe: GitHub › Actions › Benachrichtigungen › Run workflow (Haken „Nur anzeigen“) zeigt, was gerade fällig wäre.

@@ -3173,7 +3173,7 @@ const CLUB = {
 };
 
 /* App-Version: bei jedem Update zusammen mit VERSION in sw.js hochzählen (lädt dann z. B. abzeichen.svg frisch) */
-const APP_V = "156";
+const APP_V = "157";
 
 const EVENTS = [
   {
@@ -5110,7 +5110,20 @@ const Push = {
     const reg = await navigator.serviceWorker.ready;
     const tok = await firebase.messaging().getToken({ vapidKey: PUSH_VAPID, serviceWorkerRegistration: reg });
     if (!tok) return false;
-    store.set("exmaPushTok", tok); return true;
+    store.set("exmaPushTok", tok);
+    this.melden(tok).catch((e) => console.warn("Push melden", e));
+    return true;
+  },
+  /* Code des Geräts in Firebase ablegen (nur der Code, keine Namen), damit der automatische Versand alle erreicht.
+     Höchstens einmal im Monat oder wenn sich der Code ändert. */
+  async melden(tok) {
+    if (!FB.db || !FB.user || !window.crypto || !crypto.subtle) return;
+    const merk = tok.slice(-16) + isoDay(new Date()).slice(0, 7);
+    if (store.get("exmaPushGemeldet") === merk) return;
+    const h = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(tok)));
+    const id = [...h.slice(0, 16)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    await FB.db.doc(`push/${id}`).set({ t: tok, at: FB.fv.serverTimestamp() });
+    store.set("exmaPushGemeldet", merk);
   },
   /* Karte auf der Ich-Seite */
   karte() {

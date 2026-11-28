@@ -1,0 +1,39 @@
+# Automatische Benachrichtigungen (siehe scripts/push.mjs)
+# Läuft alle 10 Minuten und bei jeder Änderung an index.html (z. B. neue Absage).
+# Von Hand: Actions › Benachrichtigungen › Run workflow („Nur anzeigen“ angehakt = nichts wird gesendet)
+name: Benachrichtigungen
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  push:
+    branches: ["main"]
+    paths: ["index.html"]
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: "Nur anzeigen, nichts senden"
+        type: boolean
+        default: true
+
+concurrency:
+  group: benachrichtigungen
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  senden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save --no-package-lock --silent firebase-admin@12
+      - run: node scripts/push.mjs
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
+          DRY: ${{ github.event_name == 'workflow_dispatch' && inputs.probe && '1' || '0' }}

@@ -1,13 +1,21 @@
 rules_version = '2';
+// Bestenlisten: optionales Feld xl = true, wenn das Ergebnis mit einem Extraleben aus dem Adventskalender erspielt wurde
 // Sicherheitsregeln für die ExMa-Bar-App
 // Gäste: dürfen alle Zahlen lesen, alle 20 Sekunden genau einen Drink eintragen,
-//        sich in die Beerpong-Bestenliste eintragen und Wünsche abschicken.
-// Team (Konto club@ba-glauchau.de): darf alles zählen, zurücksetzen, Wünsche lesen und löschen.
+//        sich in die Bestenlisten der Minispiele eintragen und Wünsche abschicken.
+//        Am Clubabend: Musikwünsche abschicken, für Wünsche stimmen, bei der Stimmung abstimmen.
+// Adventskalender: Türchen ab 8 Uhr lesbar, Lose nur am Tag selbst (Serverzeit), Ziehung nur einmal.
+// Team (eigene Zugänge mit E-Mail + PIN, Liste in team/liste): darf alles zählen, zurücksetzen, Wünsche lesen und löschen, das Turnier verwalten,
+//        Musikwünsche als gespielt/aussortiert markieren und Songs oder Interpreten dauerhaft sperren.
 service cloud.firestore {
   match /databases/{database}/documents {
 
     function signedIn() { return request.auth != null; }
-    function isTeam() { return signedIn() && request.auth.token.email == "club@ba-glauchau.de"; }
+    // Team = mit E-Mail + PIN angemeldet UND die Adresse steht in team/liste (Feld „mails“, kleingeschrieben)
+    function isTeam() {
+      return signedIn() && request.auth.token.firebase.sign_in_provider == 'password'
+        && request.auth.token.email in get(/databases/$(database)/documents/team/liste).data.mails;
+    }
 
     function guestDoc() { return /databases/$(database)/documents/gaeste/$(request.auth.uid); }
 
@@ -48,10 +56,24 @@ service cloud.firestore {
         && (resource == null || resource.data.letzter + duration.value(20, 's') <= request.time);
     }
 
+    // Monats-Bestenlisten: neue Einträge tragen den Monat (deutsche Zeit, z. B. "2026-11").
+    // Erlaubt ist nur der aktuelle Monat nach MEZ (UTC+1) oder MESZ (UTC+2); ältere App-Versionen dürfen das Feld weglassen.
+    function monatVon(t) {
+      return int(t.year()) * 100 + int(t.month());
+    }
+    function monatOk(d) {
+      return !('monat' in d)
+        || (d.monat is string && d.monat.matches('^[0-9]{4}-[0-9]{2}$')
+            && (int(d.monat[0:4]) * 100 + int(d.monat[5:7]) == monatVon(request.time + duration.value(1, 'h'))
+             || int(d.monat[0:4]) * 100 + int(d.monat[5:7]) == monatVon(request.time + duration.value(2, 'h'))));
+    }
+
     match /beerpong/{id} {
       allow read: if true;
       allow create: if signedIn()
-        && request.resource.data.keys().hasOnly(['name', 'cups', 'ms', 'at', 'uid'])
+        && request.resource.data.keys().hasOnly(['name', 'cups', 'ms', 'at', 'uid', 'monat', 'xl'])
+        && (!('xl' in request.resource.data) || request.resource.data.xl == true)
+        && monatOk(request.resource.data)
         && request.resource.data.name is string
         && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 16
         && request.resource.data.cups is int && request.resource.data.cups >= 0 && request.resource.data.cups <= 300
@@ -64,7 +86,9 @@ service cloud.firestore {
     match /busfahrer/{id} {
       allow read: if true;
       allow create: if signedIn()
-        && request.resource.data.keys().hasOnly(['name', 'score', 'at', 'uid'])
+        && request.resource.data.keys().hasOnly(['name', 'score', 'at', 'uid', 'monat', 'xl'])
+        && (!('xl' in request.resource.data) || request.resource.data.xl == true)
+        && monatOk(request.resource.data)
         && request.resource.data.name is string
         && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 16
         && request.resource.data.score is int && request.resource.data.score >= 1 && request.resource.data.score <= 51
@@ -72,6 +96,201 @@ service cloud.firestore {
         && request.resource.data.uid == request.auth.uid;
       allow delete: if isTeam();
     }
+
+    match /zapfmeister/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['name', 'score', 'glasses', 'at', 'uid', 'monat', 'xl'])
+        && (!('xl' in request.resource.data) || request.resource.data.xl == true)
+        && monatOk(request.resource.data)
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 16
+        && request.resource.data.glasses is int && request.resource.data.glasses >= 1 && request.resource.data.glasses <= 2000
+        && request.resource.data.score is number && request.resource.data.score >= 90 * request.resource.data.glasses
+        && request.resource.data.score <= 100 * request.resource.data.glasses
+        && request.resource.data.at == request.time
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeam();
+    }
+
+    // Geheimes Minispiel „Polnischen“: Strecke in Dezimetern (dm), Zeit in Millisekunden (ms)
+    match /polnischen/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['name', 'dm', 'ms', 'at', 'uid'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 16
+        && request.resource.data.dm is int && request.resource.data.dm >= 100 && request.resource.data.dm <= 100000
+        && request.resource.data.ms is int && request.resource.data.ms >= request.resource.data.dm * 13
+        && request.resource.data.ms <= 7200000
+        && request.resource.data.at == request.time
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeam();
+    }
+
+    // Beerpong-Turnier: alle dürfen lesen (live), nur das Team trägt ein
+    match /turnier/{id} {
+      allow read: if true;
+      allow write: if isTeam();
+    }
+
+    // ---------- Musikwünsche: ein Dokument pro Clubabend ----------
+    // w = Wünsche { <Songschlüssel>: { t, a, c, by, at, v: [Geräte], st, ak } }, m = Stimmung { <Gerät>: 'techno' | ... }
+    // Gäste dürfen genau eines: einen neuen Wunsch anlegen ODER für einen Wunsch stimmen ODER ihre Stimmung setzen.
+    function sperre(h) { return exists(/databases/$(database)/documents/musikSperre/$(h)); }
+    function wishOk() {
+      let k = request.resource.data.last;
+      let ow = resource.data.w;
+      let nw = request.resource.data.w[k];
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['w', 'last'])
+        && request.resource.data.w.diff(ow).affectedKeys().hasOnly([k])
+        && (k in ow
+          ? (nw.diff(ow[k]).affectedKeys().hasOnly(['v'])
+             && !(request.auth.uid in ow[k].v)
+             && nw.v.size() == ow[k].v.size() + 1
+             && nw.v.hasAll(ow[k].v)
+             && request.auth.uid in nw.v)
+          : (nw.keys().hasOnly(['t', 'a', 'c', 'by', 'at', 'v', 'st', 'ak'])
+             && nw.by == request.auth.uid
+             && nw.v == [request.auth.uid]
+             && nw.st == 'neu'
+             && nw.t is string && nw.t.size() >= 1 && nw.t.size() <= 100
+             && nw.a is string && nw.a.size() <= 100
+             && nw.c is string && nw.c.size() <= 300
+             && nw.ak is string && nw.ak.size() <= 40
+             && nw.at == request.time
+             && !sperre(k) && !sperre(nw.ak)));
+    }
+    function moodOk() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['m'])
+        && request.resource.data.m.diff(resource.data.m).affectedKeys().hasOnly([request.auth.uid])
+        && request.resource.data.m[request.auth.uid] in ['techno', 'charts', 'hiphop', 'party'];
+    }
+    match /musik/{abend} {
+      allow read: if true;
+      allow create: if isTeam() || (signedIn()
+        && request.resource.data.keys().hasOnly(['w', 'm'])
+        && request.resource.data.w.size() == 0 && request.resource.data.m.size() == 0);
+      allow update: if isTeam() || (signedIn() && (moodOk() || wishOk()));
+      allow delete: if isTeam();
+    }
+    // Sperrliste: öffentlich nur der Schlüssel (für die Prüfung), die Namen sieht nur das Team
+    match /musikSperre/{h} {
+      allow read: if true;
+      allow write: if isTeam();
+    }
+    match /musikSperreInfo/{h} {
+      allow read, write: if isTeam();
+    }
+
+    // ---------- Adventskalender (Dezember 2026) ----------
+    // Türchen n ist ab 8 Uhr (MEZ = 7 Uhr UTC) seines Tages lesbar. Ein Los gibt es nur für das Türchen,
+    // dessen Zeitfenster gerade läuft (8 Uhr bis 8 Uhr am Folgetag) – Grundlage ist die Serverzeit.
+    function advTag() {
+      let t = request.time + duration.value(1, 'h') - duration.value(8, 'h');
+      return (t.year() == 2026 && t.month() == 12 && t.day() <= 24) ? t.day() : 0;
+    }
+    function advStart(n) { return timestamp.date(2026, 12, n) + duration.value(7, 'h'); }
+    function advMapOk(neu, alt, k) {
+      return neu.diff(alt).addedKeys().hasOnly([k]) && neu.diff(alt).changedKeys().size() == 0 && neu.diff(alt).removedKeys().size() == 0;
+    }
+    function advSpielOk(ch, ref) {
+      let sp = get(/databases/$(database)/documents/$(ch.spiel)/$(ref)).data;
+      return ch.spiel in ['beerpong', 'busfahrer', 'zapfmeister', 'polnischen']
+        && sp.uid == request.auth.uid && sp[ch.feld] >= ch.min && sp.at >= advStart(advTag());
+    }
+    // Aufgaben ohne Spielstand (Wunsch, Foto/App teilen, Abzeichen, geheimes Spiel, Quiz, Bingo) prüft die App; Spiel-Challenges prüfen die Regeln am Spielstand.
+    // Quiz: genau eine Antwort pro Türchen, da vorhandene Einträge nicht geändert werden dürfen.
+    function advChOk(c, k) {
+      let ch = get(/databases/$(database)/documents/advent/$('t' + k)).data.ch;
+      return c[k].keys().hasOnly(['at', 'ref']) && c[k].at == request.time && c[k].ref is string
+        && (ch.spiel in ['frei', 'wunsch', 'foto', 'teilen', 'abzeichen', 'geheim', 'quiz', 'bingo'] || advSpielOk(ch, c[k].ref));
+    }
+    function advAngemeldet() { return exists(/databases/$(database)/documents/adventName/$(request.auth.uid)); }
+    match /advent/{tag} {
+      allow read: if isTeam() || (tag.matches('t([1-9]|1[0-9]|2[0-4])') && request.time >= advStart(int(tag[1:tag.size()])));
+      allow write: if isTeam();
+    }
+    match /adventName/{uid} {
+      allow read: if isTeam() || (signedIn() && request.auth.uid == uid);
+      allow create, update: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'stg', 'mat'])
+        && request.resource.data.name is string && request.resource.data.name.size() >= 3 && request.resource.data.name.size() <= 30
+        && request.resource.data.stg is string && request.resource.data.stg.size() >= 2 && request.resource.data.stg.size() <= 40
+        && request.resource.data.mat in ['24', '25', '26', 'andere'];
+      allow delete: if isTeam();
+    }
+    // Lose: öffentlich lesbar (nur Zeiten, keine Namen) – nötig für „Erste 5“
+    match /adventT/{uid} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.auth.uid == uid && advTag() > 0 && advAngemeldet()
+        && request.resource.data.keys().hasOnly(['o', 'c'])
+        && request.resource.data.o.size() + request.resource.data.c.size() == 1
+        && (request.resource.data.o.size() == 0 || (string(advTag()) in request.resource.data.o && request.resource.data.o[string(advTag())] == request.time))
+        && (request.resource.data.c.size() == 0 || (string(advTag()) in request.resource.data.c && advChOk(request.resource.data.c, string(advTag()))));
+      allow update: if signedIn() && request.auth.uid == uid && advTag() > 0 && advAngemeldet()
+        && (
+          (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['o'])
+            && advMapOk(request.resource.data.o, resource.data.o, string(advTag()))
+            && request.resource.data.o[string(advTag())] == request.time)
+          ||
+          (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['c'])
+            && advMapOk(request.resource.data.c, resource.data.c, string(advTag()))
+            && advChOk(request.resource.data.c, string(advTag())))
+        );
+      allow delete: if isTeam();
+    }
+    // Gewinne der ersten 5: nur das Team hakt ab (Dokument-ID = <Konto>_<Tag>)
+    match /adventEinl/{id} {
+      allow read: if isTeam() || (signedIn() && id.split('_')[0] == request.auth.uid);
+      allow create, delete: if isTeam();
+    }
+    // Finale: Ergebnis kann nur einmal geschrieben werden (Testziehungen vor dem 24.12. darf das Team löschen)
+    match /adventZiehung/{id} {
+      allow read: if id == 'finale' || isTeam();
+      allow create: if isTeam() && !exists(/databases/$(database)/documents/adventZiehung/$(id));
+      allow delete: if isTeam() && request.time < advStart(24);
+    }
+    match /adventGewinn/{uid} {
+      allow read: if isTeam() || (signedIn() && request.auth.uid == uid);
+      allow create: if isTeam();
+      allow update: if isTeam() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['abgeholt']);
+      allow delete: if isTeam() && request.time < advStart(24);
+    }
+
+    // ---------- Nutzungszahlen: nur Summen, keine Namen (pu = Benachrichtigungen an, pk = über Benachrichtigung geöffnet) ----------
+    // Dokument nutzung/<JJJJ-MM-TT>_<0–4>; ein Tag läuft von 6 bis 6 Uhr (deutsche Zeit). Erlaubt sind nur „heute“ und „gestern“.
+    function zwei(n) { return n < 10 ? '0' + string(n) : string(n); }
+    function tagVon(t) { return string(t.year()) + '-' + zwei(t.month()) + '-' + zwei(t.day()); }
+    function nutzTagOk(id) {
+      let d = id[0:10];
+      let a = request.time + duration.value(1, 'h') - duration.value(6, 'h');
+      let b = request.time + duration.value(2, 'h') - duration.value(6, 'h');
+      return d == tagVon(a) || d == tagVon(b) || d == tagVon(a - duration.value(1, 'd')) || d == tagVon(b - duration.value(1, 'd'));
+    }
+    // Team-Liste: nur das Team darf sie lesen, ändern nur in der Firebase-Konsole
+    match /team/{id} {
+      allow read: if isTeam();
+      allow write: if false;
+    }
+
+    match /nutzung/{id} {
+      allow read: if isTeam();
+      allow create, update: if signedIn() && id.matches('20[0-9]{2}-[0-9]{2}-[0-9]{2}_[0-4]') && nutzTagOk(id)
+        && request.resource.data.keys().hasOnly(['g', 'neu', 'inst', 'p', 'h', 'm', 'pu', 'pk'])
+        && request.resource.data.size() <= 8;
+      allow delete: if isTeam();
+    }
+
+    // ---------- Benachrichtigungen: Code eines Geräts (keine Namen). Lesen/Löschen nur Team; der automatische Versand (GitHub) nutzt den Admin-Zugang ----------
+    match /push/{id} {
+      allow create, update: if signedIn() && id.matches('[0-9a-f]{32}')
+        && request.resource.data.keys().hasOnly(['t', 'at'])
+        && request.resource.data.t is string && request.resource.data.t.size() > 20 && request.resource.data.t.size() < 400
+        && request.resource.data.at == request.time;
+      allow read, delete: if isTeam();
+    }
+    // pushlog (was schon verschickt wurde) schreibt nur der automatische Versand – für die App gesperrt
 
     match /wuensche/{id} {
       allow create: if signedIn()
