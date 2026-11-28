@@ -343,4 +343,4 @@ Vorschau vorher: Link mit ?zeit=2026-12-05T20:00 öffnen.
 - abzeichen.svg: fehlendes Abzeichen „Vollgetankt“ ergänzt (war im Repository nicht drin).
 
 === Version 162 ===
-- Neujahrsparty wieder ausgetragen (noch nicht veröffentlichen). Look, Drinks und Abzeichen bleiben im Code vorbereitet.
+- Neujahrsparty wieder ausgetragen (noch nicht veröffentlichen). Look, Drinks und Abzeichen-Bild bleiben im Code vorbereitet (Abzeichen erscheint erst, wenn der Abend eingetragen ist).
